@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.Salelogic" table="salelogic" catalog="cmsdb">
+        <id name="salelogicId" type="long">
+            <column name="SALELOGIC_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="NAME" length="50" />
+        </property>
+        <property name="describe" type="string">
+            <column name="DESCRIBE" length="500" />
+        </property>
+        <property name="active" type="boolean">
+            <column name="ACTIVE" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.DomainProc" table="domain_proc" catalog="cmsdb">
+        <composite-id name="id" class="com.cbsinc.entity.DomainProcId">
+            <key-property name="domainProcId" type="long">
+                <column name="DOMAIN_PROC_ID" />
+            </key-property>
+            <key-property name="lastDate" type="timestamp">
+                <column name="LAST_DATE" length="19" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

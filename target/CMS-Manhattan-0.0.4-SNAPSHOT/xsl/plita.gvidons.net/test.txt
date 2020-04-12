@@ -1,0 +1,44 @@
+   <!-- Кнопки удаления  , начало -->
+	<xsl:if test="/document/admin/post_manager != ''">
+	<div class="footer">
+		<table>
+		    <tbody>
+		        <tr>
+			  <td>
+		                <form name="product_del"  action="Productlist.jsp">Удалить
+				<INPUT SIZE="0"  AUTOCOMPLETE="off" TYPE="HIDDEN" NAME="action" VALUE="del"  ></INPUT>
+				<INPUT SIZE="0"  AUTOCOMPLETE="off" TYPE="HIDDEN" NAME="product_id"><xsl:attribute name="value"><xsl:value-of select="product_id"/></xsl:attribute></INPUT>
+				<INPUT TYPE="submit" name="submit" value="Delete"></INPUT>
+		                </form>
+		         </td>
+		    </tbody>
+		</table>
+            </div>
+	</xsl:if>
+    <!-- Кнопки удаления  , конец  -->
+
+
+
+   <!-- Кнопки удаления  , начало -->
+	<xsl:if test="/document/admin/post_manager != ''">
+		                <form name="product_del"  action="Productlist.jsp">Удалить
+				<INPUT SIZE="0"  AUTOCOMPLETE="off" TYPE="HIDDEN" NAME="action" VALUE="del"  ></INPUT>
+				<INPUT SIZE="0"  AUTOCOMPLETE="off" TYPE="HIDDEN" NAME="product_id"><xsl:attribute name="value"><xsl:value-of select="product_id"/></xsl:attribute></INPUT>
+				<INPUT TYPE="submit" name="submit" value="Delete"></INPUT>
+		                </form>
+	</xsl:if>
+   <!-- Кнопки удаления  , конец  -->
+
+
+   <!-- Кнопки удаления  , начало 
+	<xsl:if test="/document/admin/post_manager != ''">
+-->
+		                <form name="product_del"  action="Productlist.jsp">Удалить
+				<INPUT SIZE="0"  AUTOCOMPLETE="off" TYPE="HIDDEN" NAME="action" VALUE="del"  ></INPUT>
+				<INPUT SIZE="0"  AUTOCOMPLETE="off" TYPE="HIDDEN" NAME="product_id"><xsl:attribute name="value"><xsl:value-of select="product_id"/></xsl:attribute></INPUT>
+				<INPUT TYPE="submit" name="submit" value="Delete"></INPUT>
+		                </form>
+   <!-- Кнопки удаления  , конец  
+	</xsl:if>
+
+-->

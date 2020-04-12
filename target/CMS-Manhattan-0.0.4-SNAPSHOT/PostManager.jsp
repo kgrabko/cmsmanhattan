@@ -1,0 +1,218 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
+<%@ page errorPage="error.jsp" %>
+<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<%
+  response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
+  response.setHeader("Pragma","no-cache"); //HTTP 1.0
+  response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+  request.setCharacterEncoding("UTF-8");
+%>
+<html>
+
+<head>
+     <title>GBS Portal</title>
+     <style type="text/css" media="screen"> @import url(style2.css);</style>
+
+</head>
+
+<body>
+<TABLE cellSpacing="0" cellPadding="0" width="100%"  border="0" rightmargin="0" leftmargin="0" topmargin="0" bordercolor="#ECEFF8" >
+<TR>
+<TD bgcolor="#ECEFF8" style="border: 1px solid #ECEFF8"></TD>
+<TD vAlign="top" Align="center" width="1030" style="border: 0px solid #ECEFF8" >
+
+
+<a class="skipnav" href="#documentContent">Skip to content</a>
+
+<div>
+
+
+
+        <div class="top">
+
+        </div>
+
+        <hr size="" class="netscape4" />
+
+
+        <div class="pathBar">
+                <font size="4"> <%=AuthorizationPageBeanId.getLocalization(application).getString("site_controll")%> </font>
+
+        </div>
+
+        <hr size="" class="netscape4" />
+
+    </div>
+
+
+
+<table class="columns">
+
+    <tbody>
+        <tr>
+            <td class="left">
+
+
+
+            </td>
+
+            <td class="main">
+
+            <!-- News part -->
+
+	    <h1><%=AuthorizationPageBeanId.getLocalization(application).getString("setup_page")%></h1><font color="red" size="3" ><%=AuthorizationPageBeanId.getStrMessage()%></font>
+<br/>
+
+
+		<div class="box">
+		  <div class="body">
+		    <div >
+		    <div >
+
+
+
+				<table width="670"    border="0" cellspacing="0" cellpadding="5" bgcolor="#DFE3EF">
+					<tr>
+						<td colspan="2">&nbsp;</td>
+                    </tr>
+					<tr>
+						<td width="500" align="left"><A HREF="ProductPostCre.jsp?parent_id=-1" ><img SRC="images/file.png" border="0" alt="Post Product center" ><%=AuthorizationPageBeanId.getLocalization(application).getString("post_news_description")%> </A></td>
+					</tr>
+					<tr>
+						<td colspan="2">&nbsp;</td>
+                    </tr>
+					<tr>
+						<td width="500" align="left"><A HREF="ProductPostCre.jsp?parent_id=0" ><img SRC="images/file.png" border="0" alt="Post Product center" ><%=AuthorizationPageBeanId.getLocalization(application).getString("post_product_description")%> </A></td>
+					</tr>
+
+					<tr>
+						<td colspan="2">  &nbsp;  </td>
+					</tr>
+
+
+
+					<tr>
+						<td width="500" align="left"><A HREF="Co1ProductPost.jsp" ><img SRC="images/file.png" border="0" alt="Post left" ><%=AuthorizationPageBeanId.getLocalization(application).getString("post_product_left_description")%> </A></td>
+					</tr>
+
+					<tr>
+						<td colspan="2">  &nbsp;  </td>
+					</tr>
+
+
+					<tr>
+						<td width="500" align="left"><A HREF="Co2ProductPost.jsp" ><img SRC="images/file.png" border="0" alt="Post right" ><%=AuthorizationPageBeanId.getLocalization(application).getString("post_product_right_description")%> </A></td>
+
+					</tr>
+
+<!-- 
+					<tr>
+						<td  colspan="2">&nbsp;</td>
+					</tr>
+
+					<tr>
+						<td width="500" align="left"><A HREF="XSLControl.jsp" ><img SRC="images/file.png" border="0" alt="Новый web дизайн" > <%= AuthorizationPageBeanId.getLocalization(application).getString("upload_new_design") %></A></td>
+
+					</tr>
+					
+					<tr>
+						<td  colspan="2">&nbsp;</td>
+					</tr>
+
+					<tr>
+						<td width="500" align="left"><A HREF="/uploadservletxsl" ><img SRC="images/file.png" border="0" alt=" Изменение web дизайна  " > <%= AuthorizationPageBeanId.getLocalization(application).getString("change_new_design") %> </A></td>
+
+					</tr>
+ -->					
+					<tr>
+						<td  colspan="2">&nbsp;</td>
+					</tr>
+					<tr>
+						<td width="500" align="left"><A HREF="NewLogo.jsp" ><img SRC="images/file.png" border="0" alt=" Закачать логотип  " > <%=AuthorizationPageBeanId.getLocalization(application).getString("upload_logo")%> </A></td>
+
+					</tr>
+					<tr>
+						<td  colspan="2">&nbsp;</td>
+					</tr>
+
+	
+					
+					<tr>
+						<td width="500" align="left"><A HREF="PayGatewayList.jsp" ><img SRC="images/file.png" border="0" alt="Payment page settings" ><%= AuthorizationPageBeanId.getLocalization(application).getString("payment_page_settings") %> </A></td>
+
+					</tr>
+ 					<tr>
+						<td  colspan="2">&nbsp;</td>
+					</tr>
+					<!-- 
+					<tr>
+						<td width="500" align="left"><A HREF="UserList.jsp" ><img SRC="images/file.png" border="0" alt="User list " ><%= AuthorizationPageBeanId.getLocalization(application).getString("use_list") %> </A></td>
+
+					</tr>
+ 					-->
+ 					
+ 					<tr>
+						<td width="500" align="left"><A HREF="SetDomain.jsp" ><img SRC="images/file.png" border="0" alt="Set up host name for your site" >Set up host name for your site </A></td>
+
+					</tr>
+ 					<tr>
+						<td  colspan="2">&nbsp;</td>
+					</tr>
+ 					
+ 					<tr>
+						<td width="500" align="left"><A HREF="BottomListPost.jsp" ><img SRC="images/file.png" border="0" alt="Make a bottom line" >Make a bottom line</A></td>
+					</tr>
+					<tr>
+						<td   height="500"  colspan="2">&nbsp;</td>
+					</tr>
+
+
+
+				</table>
+		    </div>
+		  </div>
+		</div>
+
+
+        <!-- Navigation -->
+        <div class="listingBar">
+  	    <span class="next"> <a HREF = "Productlist.jsp"  ><strong><%=AuthorizationPageBeanId.getLocalization(application).getString("back")%></strong></a> </span>
+	</div>
+
+
+            </td>
+
+            <td class="right">
+
+
+
+
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<hr size="" class="netscape4" />
+
+<div class="footer">
+
+
+<br />
+
+ <%=AuthorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
+
+<hr size="" class="netscape4" />
+
+<strong class="netscape4">
+for user netscape
+</strong>
+
+</div>
+</TD>
+<TD bgcolor="#ECEFF8" style="border: 1px solid #ECEFF8"></TD>
+</TR>
+</TABLE>
+
+</body>
+</html>

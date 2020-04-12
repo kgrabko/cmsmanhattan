@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.Licence" table="licence" catalog="cmsdb">
+        <id name="licenceId" type="long">
+            <column name="LICENCE_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="lable" type="string">
+            <column name="LABLE" length="50" />
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="1000" />
+        </property>
+        <property name="active" type="boolean">
+            <column name="ACTIVE" not-null="true" />
+        </property>
+        <property name="siteId" type="java.lang.Long">
+            <column name="SITE_ID" />
+        </property>
+        <property name="langId" type="java.lang.Long">
+            <column name="LANG_ID" />
+        </property>
+    </class>
+</hibernate-mapping>

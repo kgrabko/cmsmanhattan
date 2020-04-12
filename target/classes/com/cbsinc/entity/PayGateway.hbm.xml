@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.PayGateway" table="pay_gateway" catalog="cmsdb">
+        <composite-id name="id" class="com.cbsinc.entity.PayGatewayId">
+            <key-property name="payGatewayId" type="long">
+                <column name="PAY_GATEWAY_ID" />
+            </key-property>
+            <key-property name="nameGateway" type="string">
+                <column name="NAME_GATEWAY" length="50" />
+            </key-property>
+            <key-property name="fullnameGateway" type="string">
+                <column name="FULLNAME_GATEWAY" length="500" />
+            </key-property>
+            <key-property name="phone" type="string">
+                <column name="PHONE" length="15" />
+            </key-property>
+            <key-property name="fax" type="string">
+                <column name="FAX" length="15" />
+            </key-property>
+            <key-property name="siteUrl" type="string">
+                <column name="SITE_URL" length="500" />
+            </key-property>
+            <key-property name="active" type="boolean">
+                <column name="ACTIVE" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

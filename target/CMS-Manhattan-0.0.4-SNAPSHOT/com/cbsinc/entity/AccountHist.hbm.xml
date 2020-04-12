@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.AccountHist" table="account_hist" catalog="cmsdb">
+        <id name="id" type="long">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="userId" type="java.lang.Long">
+            <column name="USER_ID" />
+        </property>
+        <property name="addAmount" type="java.lang.Double">
+            <column name="ADD_AMOUNT" precision="22" scale="0" />
+        </property>
+        <property name="oldAmount" type="java.lang.Double">
+            <column name="OLD_AMOUNT" precision="22" scale="0" />
+        </property>
+        <property name="numDay" type="java.lang.Integer">
+            <column name="NUM_DAY" />
+        </property>
+        <property name="dateInput" type="timestamp">
+            <column name="DATE_INPUT" length="19" not-null="true" />
+        </property>
+        <property name="complete" type="java.lang.Boolean">
+            <column name="COMPLETE" />
+        </property>
+        <property name="decsription" type="string">
+            <column name="DECSRIPTION" length="200" />
+        </property>
+        <property name="active" type="boolean">
+            <column name="ACTIVE" not-null="true" />
+        </property>
+        <property name="rezultCd" type="string">
+            <column name="REZULT_CD" length="10" />
+        </property>
+        <property name="dateEnd" type="timestamp">
+            <column name="DATE_END" length="19" />
+        </property>
+        <property name="sysdate" type="timestamp">
+            <column name="SYSDATE" length="19" />
+        </property>
+        <property name="tax" type="java.lang.Double">
+            <column name="TAX" precision="22" scale="0" />
+        </property>
+        <property name="softId" type="java.lang.Long">
+            <column name="SOFT_ID" />
+        </property>
+        <property name="rate" type="double">
+            <column name="RATE" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="currencyIdAdd" type="java.lang.Integer">
+            <column name="CURRENCY_ID_ADD" />
+        </property>
+        <property name="currencyIdOld" type="java.lang.Integer">
+            <column name="CURRENCY_ID_OLD" />
+        </property>
+        <property name="currencyIdTotal" type="java.lang.Integer">
+            <column name="CURRENCY_ID_TOTAL" />
+        </property>
+        <property name="totalAmount" type="java.lang.Double">
+            <column name="TOTAL_AMOUNT" precision="22" scale="0" />
+        </property>
+        <property name="withtaxTotalAmount" type="java.lang.Double">
+            <column name="WITHTAX_TOTAL_AMOUNT" precision="22" scale="0" />
+        </property>
+        <property name="userIp" type="string">
+            <column name="USER_IP" length="15" />
+        </property>
+        <property name="userHeader" type="string">
+            <column name="USER_HEADER" length="500" />
+        </property>
+        <property name="userLocale" type="string">
+            <column name="USER_LOCALE" length="2" />
+        </property>
+        <property name="userOs" type="string">
+            <column name="USER_OS" length="10" />
+        </property>
+        <property name="userOsPack" type="string">
+            <column name="USER_OS_PACK" length="10" />
+        </property>
+        <property name="orderId" type="java.lang.Long">
+            <column name="ORDER_ID" />
+        </property>
+    </class>
+</hibernate-mapping>

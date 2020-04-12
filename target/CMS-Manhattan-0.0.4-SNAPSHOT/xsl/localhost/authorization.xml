@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='windows-1251' ?>
+<?xml-stylesheet type="text/xsl" href="authorization.xsl"?>
+<document>
+   <version>1.0</version>
+   <name>Authorization</name>
+
+   <title>Authorization page</title>
+
+   <login>guest</login>
+   <passwdord></passwdord>
+   <firstname></firstname>
+   <lastname></lastname>
+   <company></company>
+   <email></email>
+   <phone></phone>
+   <mphone></mphone>
+   <fax></fax>
+   <icq></icq>
+   <website></website>
+   <question></question>
+   <answer></answer>
+   <country></country>
+   <city></city>
+
+   <lang_cd>2</lang_cd>
+   <site>2</site>
+   <message>Welcom</message>
+
+   <!--  for members -->
+   <do_form_1>
+                <form-header>
+                <name>login</name>
+		<method>post</method>
+		<action>Authorization.jsp</action>
+                </form-header>
+
+                <fields>
+                <ref_1>/login</ref_1>
+                <ref_2>/passwdord</ref_2>
+                <ref_3>/lang_cd</ref_3>
+                <ref_4>product/currency_cd</ref_4>
+                </fields>
+   </do_form_1>
+
+
+   <do_form_2>
+   <!-- become new member -->
+                <form-header>
+                <name>registration</name>
+		<method>post</method>
+		<action>RegPage.jsp</action>
+                </form-header>
+   </do_form_2>
+
+
+<lang>
+<lang-item><item>Russian</item><code>1</code></lang-item>
+<lang-item><item>English</item><code>2</code></lang-item>
+<lang-item><item>American</item><code>23</code></lang-item>
+<lang-item><item>France</item><code>7</code></lang-item>
+<lang-item><item>Duche</item><code>4</code></lang-item>
+</lang>
+
+
+<site>
+<site-item><item>www.gvidons.com</item><code>1</code></site-item>
+<site-item><item>www.gbs.com</item><code>2</code></site-item>
+<site-item><item>www.im.com</item><code>3</code></site-item>
+</site>
+
+
+</document>

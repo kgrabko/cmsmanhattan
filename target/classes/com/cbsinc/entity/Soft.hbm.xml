@@ -1,0 +1,231 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.Soft" table="soft" catalog="cmsdb">
+        <id name="softId" type="long">
+            <column name="SOFT_ID" />
+            <generator class="assigned" />
+        </id>
+        <version name="version" type="string">
+            <column name="VERSION" length="10" />
+        </version>
+        <property name="name" type="string">
+            <column name="NAME" length="50" />
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="500" />
+        </property>
+        <property name="cost" type="double">
+            <column name="COST" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="currency" type="int">
+            <column name="CURRENCY" not-null="true" />
+        </property>
+        <property name="serialNubmer" type="string">
+            <column name="SERIAL_NUBMER" length="50" />
+        </property>
+        <property name="fileId" type="java.lang.Long">
+            <column name="FILE_ID" />
+        </property>
+        <property name="typeId" type="java.lang.Long">
+            <column name="TYPE_ID" />
+        </property>
+        <property name="levelup" type="java.lang.Long">
+            <column name="LEVELUP" />
+        </property>
+        <property name="active" type="boolean">
+            <column name="ACTIVE" not-null="true" />
+        </property>
+        <property name="userId" type="java.lang.Long">
+            <column name="USER_ID" />
+        </property>
+        <property name="phonetypeId" type="java.lang.Integer">
+            <column name="PHONETYPE_ID" />
+        </property>
+        <property name="prognameId" type="java.lang.Long">
+            <column name="PROGNAME_ID" />
+        </property>
+        <property name="imageId" type="java.lang.Long">
+            <column name="IMAGE_ID" />
+        </property>
+        <property name="bigimageId" type="java.lang.Long">
+            <column name="BIGIMAGE_ID" />
+        </property>
+        <property name="weight" type="java.lang.Double">
+            <column name="WEIGHT" precision="22" scale="0" />
+        </property>
+        <property name="count" type="java.lang.Integer">
+            <column name="COUNT" />
+        </property>
+        <property name="langId" type="java.lang.Long">
+            <column name="LANG_ID" />
+        </property>
+        <property name="phonemodelId" type="java.lang.Integer">
+            <column name="PHONEMODEL_ID" />
+        </property>
+        <property name="licenceId" type="java.lang.Long">
+            <column name="LICENCE_ID" />
+        </property>
+        <property name="catalogId" type="java.lang.Long">
+            <column name="CATALOG_ID" />
+        </property>
+        <property name="salelogicId" type="java.lang.Long">
+            <column name="SALELOGIC_ID" />
+        </property>
+        <property name="treeId" type="java.lang.Long">
+            <column name="TREE_ID" />
+        </property>
+        <property name="cardNumber" type="java.lang.Integer">
+            <column name="CARD_NUMBER" />
+        </property>
+        <property name="cardCode" type="java.lang.Integer">
+            <column name="CARD_CODE" />
+        </property>
+        <property name="startDialTime" type="timestamp">
+            <column name="START_DIAL_TIME" length="19" not-null="true" />
+        </property>
+        <property name="endDialTime" type="timestamp">
+            <column name="END_DIAL_TIME" length="19" />
+        </property>
+        <property name="startActivationCard" type="boolean">
+            <column name="START_ACTIVATION_CARD" not-null="true" />
+        </property>
+        <property name="endActivationCard" type="boolean">
+            <column name="END_ACTIVATION_CARD" not-null="true" />
+        </property>
+        <property name="typeCardId" type="java.lang.Integer">
+            <column name="TYPE_CARD_ID" />
+        </property>
+        <property name="productCode" type="java.lang.Integer">
+            <column name="PRODUCT_CODE" />
+        </property>
+        <property name="fulldescription" type="string">
+            <column name="FULLDESCRIPTION" length="5000" />
+        </property>
+        <property name="siteId" type="java.lang.Long">
+            <column name="SITE_ID" />
+        </property>
+        <property name="search" type="string">
+            <column name="SEARCH" length="1" />
+        </property>
+        <property name="portlettypeId" type="long">
+            <column name="PORTLETTYPE_ID" not-null="true" />
+        </property>
+        <property name="creteria1Id" type="java.lang.Long">
+            <column name="CRETERIA1_ID" />
+        </property>
+        <property name="creteria2Id" type="java.lang.Long">
+            <column name="CRETERIA2_ID" />
+        </property>
+        <property name="creteria3Id" type="java.lang.Long">
+            <column name="CRETERIA3_ID" />
+        </property>
+        <property name="creteria4Id" type="java.lang.Long">
+            <column name="CRETERIA4_ID" />
+        </property>
+        <property name="creteria5Id" type="java.lang.Long">
+            <column name="CRETERIA5_ID" />
+        </property>
+        <property name="creteria6Id" type="java.lang.Long">
+            <column name="CRETERIA6_ID" />
+        </property>
+        <property name="creteria7Id" type="java.lang.Long">
+            <column name="CRETERIA7_ID" />
+        </property>
+        <property name="creteria8Id" type="java.lang.Long">
+            <column name="CRETERIA8_ID" />
+        </property>
+        <property name="creteria9Id" type="java.lang.Long">
+            <column name="CRETERIA9_ID" />
+        </property>
+        <property name="creteria10Id" type="java.lang.Long">
+            <column name="CRETERIA10_ID" />
+        </property>
+        <property name="statisticId" type="long">
+            <column name="STATISTIC_ID" not-null="true" />
+        </property>
+        <property name="cdate" type="timestamp">
+            <column name="CDATE" length="19" not-null="true" />
+        </property>
+        <property name="creteria11Id" type="java.lang.Long">
+            <column name="CRETERIA11_ID" />
+        </property>
+        <property name="creteria12Id" type="java.lang.Long">
+            <column name="CRETERIA12_ID" />
+        </property>
+        <property name="creteria13Id" type="java.lang.Long">
+            <column name="CRETERIA13_ID" />
+        </property>
+        <property name="creteria14Id" type="java.lang.Long">
+            <column name="CRETERIA14_ID" />
+        </property>
+        <property name="creteria15Id" type="java.lang.Long">
+            <column name="CRETERIA15_ID" />
+        </property>
+        <property name="square" type="java.lang.Integer">
+            <column name="SQUARE" />
+        </property>
+        <property name="ratingSumm1" type="int">
+            <column name="RATING_SUMM1" not-null="true" />
+        </property>
+        <property name="ratingSumm2" type="int">
+            <column name="RATING_SUMM2" not-null="true" />
+        </property>
+        <property name="ratingSumm3" type="int">
+            <column name="RATING_SUMM3" not-null="true" />
+        </property>
+        <property name="countpostRating1" type="int">
+            <column name="COUNTPOST_RATING1" not-null="true" />
+        </property>
+        <property name="countpostRating2" type="int">
+            <column name="COUNTPOST_RATING2" not-null="true" />
+        </property>
+        <property name="countpostRating3" type="int">
+            <column name="COUNTPOST_RATING3" not-null="true" />
+        </property>
+        <property name="midleBal1" type="int">
+            <column name="MIDLE_BAL1" not-null="true" />
+        </property>
+        <property name="midleBal2" type="int">
+            <column name="MIDLE_BAL2" not-null="true" />
+        </property>
+        <property name="midleBal3" type="int">
+            <column name="MIDLE_BAL3" not-null="true" />
+        </property>
+        <property name="showRating1" type="boolean">
+            <column name="SHOW_RATING1" not-null="true" />
+        </property>
+        <property name="showRating2" type="boolean">
+            <column name="SHOW_RATING2" not-null="true" />
+        </property>
+        <property name="showRating3" type="boolean">
+            <column name="SHOW_RATING3" not-null="true" />
+        </property>
+        <property name="showBlog" type="boolean">
+            <column name="SHOW_BLOG" not-null="true" />
+        </property>
+        <property name="name2" type="string">
+            <column name="NAME2" length="50" />
+        </property>
+        <property name="search2" type="string">
+            <column name="SEARCH2" length="1" />
+        </property>
+        <property name="amount1" type="double">
+            <column name="AMOUNT1" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="amount2" type="double">
+            <column name="AMOUNT2" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="amount3" type="double">
+            <column name="AMOUNT3" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="jspUrl" type="string">
+            <column name="JSP_URL" length="100" />
+        </property>
+        <property name="color" type="string">
+            <column name="COLOR" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

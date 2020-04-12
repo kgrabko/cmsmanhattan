@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='windows-1251' ?>
+<?xml-stylesheet type="text/xsl" href="pay.xsl"?>
+<document>
+   <version>1.0</version>
+   <name>GBS ltd.</name>
+   <title>SELECT PAY SYSTEM</title>
+   <login>user</login>
+   <passwdord></passwdord>
+   <shoping_url>Productlist.jsp</shoping_url>
+   <message></message>
+   <shoping_url>Productlist.jsp</shoping_url>
+   <balans>1000.0</balans>
+   <to_navigator>wCatalog.jsp</to_navigator>
+   <to_navigator_location>NavigatorLocation.jsp</to_navigator_location>
+   <to_account_history>AccountHistory.jsp</to_account_history>
+   <to_login>Authorization.jsp</to_login>
+   <to_registration>RegPage.jsp</to_registration>
+   <to_order>Order.jsp</to_order>
+   <to_order_hist>OrderList.jsp</to_order_hist>
+   <to_pay>PrePay.jsp</to_pay>
+
+
+   <firstname>user</firstname>
+   <lastname>user</lastname>
+   <company>user</company>
+   <email>user@localhost</email>
+   <phone>1</phone>
+   <mphone>1</mphone>
+   <fax>1</fax>
+   <icq>1</icq>
+   <website>1</website>
+   <question>1</question>
+   <answer>1</answer>
+   <country></country>
+   <city></city>
+   <site>2</site>
+   <message></message>
+   <country_id>1</country_id>
+   <city_id>1</city_id>
+   <currency_id>3</currency_id>
+   <amount>60000</amount>
+   <currency_paysys_id>3</currency_paysys_id>
+   <account_history_id>5</account_history_id>
+   <shop_paysys_id>null</shop_paysys_id>
+   <card_payment>0</card_payment>
+   <wallet_payment>0</wallet_payment>
+   <webmoney_payment>0</webmoney_payment>
+   <papida_payment>0</papida_payment>
+   <paycash_payment>0</paycash_payment>
+   <eport_payment>0</eport_payment>
+   <kredit_pilotpayment>0</kredit_pilotpayment>
+   <url_rezalt_banking_ok>http://www.gvidons.com.udns.incru.net:80/AccountHistory.jsp</url_rezalt_banking_ok>
+   <url_rezalt_banking_no>http://www.gvidons.com.udns.incru.net:80/JspSendMail.jsp</url_rezalt_banking_no>
+   <decsription>It is inputing money in shop for client account</decsription>
+
+</document>

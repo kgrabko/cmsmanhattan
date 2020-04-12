@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='windows-1251' ?>
+<?xml-stylesheet type="text/xsl" href="orderlist.xsl"?>
+<document>
+   <version>1.0</version>
+   <name>GBS ltd.</name>
+
+   <title>OrderList</title>
+
+   <login>admin2</login>
+   <passwdord></passwdord>
+   <shoping_url>Productlist.jsp</shoping_url>
+   <message></message>
+
+<list>
+<order>
+<order_id>51</order_id>
+<end_amount>null</end_amount>
+<cdate>2003-12-29 05:06:49+03</cdate>
+<paystatus_id>null</paystatus_id>
+<paystatus_lable>null</paystatus_lable>
+<currency_lable>null</currency_lable>
+</order>
+<order>
+<order_id>52</order_id>
+<end_amount>null</end_amount>
+<cdate>2003-12-29 05:46:00+03</cdate>
+<paystatus_id>null</paystatus_id>
+<paystatus_lable>null</paystatus_lable>
+<currency_lable>null</currency_lable>
+</order>
+<order>
+<order_id>53</order_id>
+<end_amount>null</end_amount>
+<cdate>2003-12-29 05:57:18+03</cdate>
+<paystatus_id>null</paystatus_id>
+<paystatus_lable>null</paystatus_lable>
+<currency_lable>null</currency_lable>
+</order>
+<order>
+<order_id>54</order_id>
+<end_amount>null</end_amount>
+<cdate>2003-12-29 06:23:17+03</cdate>
+<paystatus_id>null</paystatus_id>
+<paystatus_lable>null</paystatus_lable>
+<currency_lable>null</currency_lable>
+</order>
+<order>
+<order_id>55</order_id>
+<end_amount>null</end_amount>
+<cdate>2003-12-29 06:25:47+03</cdate>
+<paystatus_id>null</paystatus_id>
+<paystatus_lable>null</paystatus_lable>
+<currency_lable>null</currency_lable>
+</order>
+<order>
+<order_id>56</order_id>
+<end_amount>null</end_amount>
+<cdate>2003-12-29 06:28:04+03</cdate>
+<paystatus_id>null</paystatus_id>
+<paystatus_lable>null</paystatus_lable>
+<currency_lable>null</currency_lable>
+</order>
+<order>
+<order_id>57</order_id>
+<end_amount>null</end_amount>
+<cdate>2003-12-29 14:06:32+03</cdate>
+<paystatus_id>null</paystatus_id>
+<paystatus_lable>null</paystatus_lable>
+<currency_lable>null</currency_lable>
+</order>
+<order>
+<order_id>58</order_id>
+<end_amount>null</end_amount>
+<cdate>2003-12-29 14:22:39+03</cdate>
+<paystatus_id>null</paystatus_id>
+<paystatus_lable>null</paystatus_lable>
+<currency_lable>null</currency_lable>
+</order>
+<order>
+<order_id>59</order_id>
+<end_amount>null</end_amount>
+<cdate>2003-12-29 14:54:33+03</cdate>
+<paystatus_id>null</paystatus_id>
+<paystatus_lable>null</paystatus_lable>
+<currency_lable>null</currency_lable>
+</order>
+<order>
+<order_id>60</order_id>
+<end_amount>null</end_amount>
+<cdate>2003-12-29 14:56:14+03</cdate>
+<paystatus_id>null</paystatus_id>
+<paystatus_lable>null</paystatus_lable>
+<currency_lable>null</currency_lable>
+</order>
+</list>
+
+
+<next>OrderList.jsp?offset=10</next>
+<prev>OrderList.jsp?offset=0</prev>
+
+   <!--  for members -->
+   <do_form_1>
+                <form-header>
+                <name>login</name>
+		<method>post</method>
+		<action>Authorization.jsp</action>
+                </form-header>
+
+                <fields>
+                <ref_1>/login</ref_1>
+                <ref_2>/passwdord</ref_2>
+                <ref_3>/lang_cd</ref_3>
+                <ref_4>product/currency_cd</ref_4>
+                </fields>
+   </do_form_1>
+
+   <do_form_2>
+   <!-- become new member -->
+                <form-header>
+                <name>registration</name>
+		<method>post</method>
+		<action>RegPage.jsp</action>
+                </form-header>
+   </do_form_2>
+
+</document>

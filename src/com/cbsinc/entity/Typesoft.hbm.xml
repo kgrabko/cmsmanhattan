@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.Typesoft" table="typesoft" catalog="cmsdb">
+        <id name="typeId" type="long">
+            <column name="TYPE_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="userId" type="java.lang.Long">
+            <column name="USER_ID" />
+        </property>
+        <property name="typeLable" type="string">
+            <column name="TYPE_LABLE" length="50" />
+        </property>
+        <property name="typeDesc" type="string">
+            <column name="TYPE_DESC" length="100" />
+        </property>
+        <property name="active" type="boolean">
+            <column name="ACTIVE" not-null="true" />
+        </property>
+        <property name="tax" type="double">
+            <column name="TAX" precision="22" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

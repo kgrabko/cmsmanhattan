@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='windows-1251' ?>
+<?xml-stylesheet type="text/xsl" href="accounthistory.xsl"?>
+<document>
+   <version>1.0</version>
+   <name>GBS ltd.</name>
+
+   <title>ACCOUNT HISTORY</title>
+
+   <login>admin2</login>
+   <passwdord></passwdord>
+   <shoping_url>Productlist.jsp</shoping_url>
+   <message></message>
+   <shoping_url>Productlist.jsp</shoping_url>
+   <balans>29.0</balans>
+   <to_navigator>wCatalog.jsp</to_navigator>
+   <to_navigator_location>NavigatorLocation.jsp</to_navigator_location>
+   <to_account_history>AccountHistory.jsp</to_account_history>
+   <to_login>Authorization.jsp</to_login>
+   <to_registration>RegPage.jsp</to_registration>
+   <to_order>Order.jsp</to_order>
+   <to_order_hist>OrderList.jsp</to_order_hist>
+   <to_pay>PrePay.jsp</to_pay>
+
+
+<list>
+
+<payment>
+<amount_id>126</amount_id>
+<currency_add_lable>dollar </currency_add_lable>
+<add_amount>1</add_amount>
+<old_amount>12</old_amount>
+<date_input>2003-09-30 12:34:48+04</date_input>
+<date_end>2003-09-30 12:34:48+04</date_end>
+<sysdate>2003-09-30 12:34:48+04</sysdate>
+<complete>t</complete>
+<decsription>Bought product MotoGP.jad, ?????????, version 1</decsription>
+<active>f</active>
+<amount_id>126</amount_id>
+</payment>
+
+<payment>
+<currency_add_lable>dollar </currency_add_lable>
+<amount_id>317</amount_id>
+<add_amount>20</add_amount>
+<old_amount>100</old_amount>
+<date_input>2003-12-10 14:28:09+03</date_input>
+<date_end>2003-12-10 14:28:09+03</date_end>
+<sysdate>2003-12-10 14:28:09+03</sysdate>
+<complete>t</complete>
+<decsription>Bought product DrivingGoGo, descr DrivingGoGo , version 1</decsription>
+<active>f</active>
+<amount_id>317</amount_id>
+</payment>
+
+<payment>
+<amount_id>318</amount_id>
+<currency_add_lable>Rubli </currency_add_lable>
+<add_amount>20</add_amount>
+<old_amount>80</old_amount>
+<date_input>2003-12-10 14:40:07+03</date_input>
+<date_end>2003-12-10 14:40:07+03</date_end>
+<sysdate>2003-12-10 14:40:07+03</sysdate>
+<complete>t</complete>
+<decsription>Bought product DrivingGoGo, descr DrivingGoGo , version 1</decsription>
+<active>f</active>
+<amount_id>318</amount_id>
+</payment>
+<payment>
+<amount_id>319</amount_id>
+<currency_add_lable>Rubli </currency_add_lable>
+<add_amount>1</add_amount>
+<old_amount>60</old_amount>
+<date_input>2003-12-18 18:03:52+03</date_input>
+<date_end>2003-12-18 18:03:52+03</date_end>
+<sysdate>2003-12-18 18:03:52+03</sysdate>
+<complete>t</complete>
+<decsription>Bought product MotoGP, MotoGP, version 1</decsription>
+<active>f</active>
+<amount_id>319</amount_id>
+</payment>
+<payment>
+<amount_id>320</amount_id>
+<add_amount>20</add_amount>
+<old_amount>59</old_amount>
+<date_input>2003-12-19 18:33:32+03</date_input>
+<date_end>2003-12-19 18:33:32+03</date_end>
+<sysdate>2003-12-19 18:33:32+03</sysdate>
+<complete>t</complete>
+<decsription>Bought product DrivingGoGo, descr DrivingGoGo , version 1</decsription>
+<active>f</active>
+<amount_id>320</amount_id>
+</payment>
+<payment>
+<amount_id>323</amount_id>
+<add_amount>10</add_amount>
+<old_amount>39</old_amount>
+<date_input>2004-01-07 17:59:00+03</date_input>
+<date_end>2004-01-07 17:59:00+03</date_end>
+<sysdate>2004-01-07 17:59:00+03</sysdate>
+<complete>t</complete>
+<decsription>Bought product music, sadfa
+as
+df
+asd
+f
+asdf
+as
+df
+asd
+fasdf
+, version </decsription>
+<active>f</active>
+<amount_id>323</amount_id>
+</payment>
+
+<payment>
+<amount_id>324</amount_id>
+<add_amount>15</add_amount>
+<old_amount>29</old_amount>
+<date_input>2004-01-07 18:24:23+03</date_input>
+<date_end>null</date_end>
+<sysdate>2004-01-07 18:24:23+03</sysdate>
+<complete>f</complete>
+<decsription>Accompaniment a money on Account</decsription>
+<active>t</active>
+<amount_id>324</amount_id>
+</payment>
+
+<payment>
+<amount_id>325</amount_id>
+<add_amount>0</add_amount>
+<old_amount>29</old_amount>
+<date_input>2004-01-12 16:44:16+03</date_input>
+<date_end>null</date_end>
+<sysdate>2004-01-12 16:44:16+03</sysdate>
+<complete>f</complete>
+<decsription>Accompaniment a money on Account</decsription>
+<active>t</active>
+<amount_id>325</amount_id>
+</payment>
+
+</list>
+
+
+<next>AccountHist.jsp?offset=10</next>
+<prev>AccountHist.jsp?offset=0</prev>
+
+   <!--  for members -->
+   <do_form_1>
+                <form-header>
+                <name>login</name>
+		<method>post</method>
+		<action>Authorization.jsp</action>
+                </form-header>
+
+                <fields>
+                <ref_1>/login</ref_1>
+                <ref_2>/passwdord</ref_2>
+                <ref_3>/lang_cd</ref_3>
+                <ref_4>product/currency_cd</ref_4>
+                </fields>
+   </do_form_1>
+
+   <do_form_2>
+   <!-- become new member -->
+                <form-header>
+                <name>registration</name>
+		<method>post</method>
+		<action>RegPage.jsp</action>
+                </form-header>
+   </do_form_2>
+
+</document>

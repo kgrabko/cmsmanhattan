@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.StoreSession" table="store_session" catalog="cmsdb">
+        <composite-id name="id" class="com.cbsinc.entity.StoreSessionId">
+            <key-property name="idsessionHash1" type="java.lang.Long">
+                <column name="IDSESSION_HASH1" />
+            </key-property>
+            <key-property name="idsessionHash2" type="java.lang.Long">
+                <column name="IDSESSION_HASH2" />
+            </key-property>
+            <key-property name="idsessionHash3" type="java.lang.Long">
+                <column name="IDSESSION_HASH3" />
+            </key-property>
+            <key-property name="idsessionHash4" type="java.lang.Long">
+                <column name="IDSESSION_HASH4" />
+            </key-property>
+            <key-property name="userId" type="java.lang.Long">
+                <column name="USER_ID" />
+            </key-property>
+            <key-property name="type" type="string">
+                <column name="TYPE" length="200" />
+            </key-property>
+            <key-property name="lasturl" type="string">
+                <column name="LASTURL" length="500" />
+            </key-property>
+            <key-property name="classbody" type="string">
+                <column name="CLASSBODY" length="250" />
+            </key-property>
+            <key-property name="bclassbody" type="binary">
+                <column name="BCLASSBODY" />
+            </key-property>
+            <key-property name="active" type="boolean">
+                <column name="ACTIVE" />
+            </key-property>
+            <key-property name="cdate" type="timestamp">
+                <column name="CDATE" length="19" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

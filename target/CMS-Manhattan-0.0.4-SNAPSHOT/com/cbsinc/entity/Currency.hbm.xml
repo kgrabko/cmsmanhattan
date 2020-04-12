@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.Currency" table="currency" catalog="cmsdb">
+        <id name="currencyId" type="long">
+            <column name="CURRENCY_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="rate" type="java.lang.Double">
+            <column name="RATE" precision="22" scale="0" />
+        </property>
+        <property name="currencyLable" type="string">
+            <column name="CURRENCY_LABLE" length="10" />
+        </property>
+        <property name="currencyDesc" type="string">
+            <column name="CURRENCY_DESC" length="100" />
+        </property>
+        <property name="active" type="java.lang.Boolean">
+            <column name="ACTIVE" />
+        </property>
+        <property name="currencyCd" type="string">
+            <column name="CURRENCY_CD" length="100" />
+        </property>
+        <property name="cursdate" type="string">
+            <column name="CURSDATE" length="100" />
+        </property>
+        <property name="changedate" type="timestamp">
+            <column name="CHANGEDATE" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

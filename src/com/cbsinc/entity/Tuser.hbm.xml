@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.Tuser" table="tuser" catalog="cmsdb">
+        <id name="userId" type="long">
+            <column name="USER_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="login" type="string">
+            <column name="LOGIN" length="50" />
+        </property>
+        <property name="passwd" type="string">
+            <column name="PASSWD" length="50" />
+        </property>
+        <property name="firstName" type="string">
+            <column name="FIRST_NAME" length="50" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="LAST_NAME" length="50" />
+        </property>
+        <property name="company" type="string">
+            <column name="COMPANY" length="50" />
+        </property>
+        <property name="EMail" type="string">
+            <column name="E_MAIL" length="50" />
+        </property>
+        <property name="phone" type="string">
+            <column name="PHONE" length="50" />
+        </property>
+        <property name="mobilPhone" type="string">
+            <column name="MOBIL_PHONE" length="50" />
+        </property>
+        <property name="fax" type="string">
+            <column name="FAX" length="50" />
+        </property>
+        <property name="icq" type="string">
+            <column name="ICQ" length="50" />
+        </property>
+        <property name="website" type="string">
+            <column name="WEBSITE" length="100" />
+        </property>
+        <property name="question" type="string">
+            <column name="QUESTION" length="200" />
+        </property>
+        <property name="answer" type="string">
+            <column name="ANSWER" length="200" />
+        </property>
+        <property name="idsession" type="string">
+            <column name="IDSESSION" length="50" />
+        </property>
+        <property name="birthday" type="timestamp">
+            <column name="BIRTHDAY" length="19" not-null="true" />
+        </property>
+        <property name="regdate" type="timestamp">
+            <column name="REGDATE" length="19" not-null="true" />
+        </property>
+        <property name="levelupCd" type="java.lang.Long">
+            <column name="LEVELUP_CD" />
+        </property>
+        <property name="bankCd" type="java.lang.Long">
+            <column name="BANK_CD" />
+        </property>
+        <property name="acviveSession" type="java.lang.Boolean">
+            <column name="ACVIVE_SESSION" />
+        </property>
+        <property name="active" type="boolean">
+            <column name="ACTIVE" not-null="true" />
+        </property>
+        <property name="country" type="string">
+            <column name="COUNTRY" length="20" />
+        </property>
+        <property name="city" type="string">
+            <column name="CITY" length="20" />
+        </property>
+        <property name="zip" type="string">
+            <column name="ZIP" length="10" />
+        </property>
+        <property name="state" type="string">
+            <column name="STATE" length="10" />
+        </property>
+        <property name="scountry" type="string">
+            <column name="SCOUNTRY" length="50" />
+        </property>
+        <property name="middlename" type="string">
+            <column name="MIDDLENAME" length="50" />
+        </property>
+        <property name="cityId" type="java.lang.Long">
+            <column name="CITY_ID" />
+        </property>
+        <property name="countryId" type="java.lang.Long">
+            <column name="COUNTRY_ID" />
+        </property>
+        <property name="currencyId" type="java.lang.Long">
+            <column name="CURRENCY_ID" />
+        </property>
+        <property name="treeId" type="java.lang.Long">
+            <column name="TREE_ID" />
+        </property>
+        <property name="siteId" type="long">
+            <column name="SITE_ID" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

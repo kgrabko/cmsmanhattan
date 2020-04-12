@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.OrdersHist" table="orders_hist" catalog="cmsdb">
+        <id name="orderHistId" type="long">
+            <column name="ORDER_HIST_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="orderHistCd" type="java.lang.Long">
+            <column name="ORDER_HIST_CD" />
+        </property>
+        <property name="userId" type="java.lang.Long">
+            <column name="USER_ID" />
+        </property>
+        <property name="positionId" type="java.lang.Integer">
+            <column name="POSITION_ID" />
+        </property>
+        <property name="deliveryTimeend" type="timestamp">
+            <column name="DELIVERY_TIMEEND" length="19" not-null="true" />
+        </property>
+        <property name="amount" type="java.lang.Double">
+            <column name="AMOUNT" precision="22" scale="0" />
+        </property>
+        <property name="tax" type="java.lang.Double">
+            <column name="TAX" precision="22" scale="0" />
+        </property>
+        <property name="endAmount" type="java.lang.Double">
+            <column name="END_AMOUNT" precision="22" scale="0" />
+        </property>
+        <property name="deliveryAmount" type="java.lang.Double">
+            <column name="DELIVERY_AMOUNT" precision="22" scale="0" />
+        </property>
+        <property name="cardId" type="java.lang.Integer">
+            <column name="CARD_ID" />
+        </property>
+        <property name="deliveryLong" type="java.lang.Integer">
+            <column name="DELIVERY_LONG" />
+        </property>
+        <property name="shipmentAddressId" type="java.lang.Integer">
+            <column name="SHIPMENT_ADDRESS_ID" />
+        </property>
+        <property name="serialNumber" type="string">
+            <column name="SERIAL_NUMBER" length="50" />
+        </property>
+        <property name="paystatusId" type="java.lang.Long">
+            <column name="PAYSTATUS_ID" />
+        </property>
+        <property name="deliverystatusId" type="java.lang.Long">
+            <column name="DELIVERYSTATUS_ID" />
+        </property>
+    </class>
+</hibernate-mapping>

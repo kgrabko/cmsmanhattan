@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.Account" table="account" catalog="cmsdb">
+        <id name="accountId" type="long">
+            <column name="ACCOUNT_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="userId" type="java.lang.Long">
+            <column name="USER_ID" />
+        </property>
+        <property name="amount" type="double">
+            <column name="AMOUNT" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="curr" type="java.lang.Integer">
+            <column name="CURR" />
+        </property>
+        <property name="dateInput" type="timestamp">
+            <column name="DATE_INPUT" length="19" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="200" />
+        </property>
+        <property name="complete" type="boolean">
+            <column name="COMPLETE" not-null="true" />
+        </property>
+        <property name="active" type="boolean">
+            <column name="ACTIVE" not-null="true" />
+        </property>
+        <property name="currencyId" type="java.lang.Long">
+            <column name="CURRENCY_ID" />
+        </property>
+        <property name="treeId" type="java.lang.Long">
+            <column name="TREE_ID" />
+        </property>
+    </class>
+</hibernate-mapping>

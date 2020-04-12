@@ -1,0 +1,12 @@
+Уважаемый  @FirstName @LastName!
+
+Ваш заказ под номером @NumberOfOrder поступил и будет обработан в ближайшее время.
+
+Заказ состоит из @ProductCount позиций на общую сумму @Amount @Currency.
+
+С Уважением, администрация интернет-магазина.
+ссылка на магазин  http://www.siteoneclick.com/Productlist.jsp?site=@SiteId
+контактный e-mail  @ShopEmail
+
+
+

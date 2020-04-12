@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.Creteria1" table="creteria1" catalog="cmsdb">
+        <id name="creteria1Id" type="long">
+            <column name="CRETERIA1_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="NAME" length="100" />
+        </property>
+        <property name="active" type="java.lang.Boolean">
+            <column name="ACTIVE" />
+        </property>
+        <property name="langId" type="java.lang.Long">
+            <column name="LANG_ID" />
+        </property>
+        <property name="linkId" type="long">
+            <column name="LINK_ID" not-null="true" />
+        </property>
+        <property name="catalogId" type="long">
+            <column name="CATALOG_ID" not-null="true" />
+        </property>
+        <property name="label" type="string">
+            <column name="LABEL" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

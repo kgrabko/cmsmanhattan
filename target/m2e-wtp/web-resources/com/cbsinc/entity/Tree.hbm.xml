@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.Tree" table="tree" catalog="cmsdb">
+        <id name="itemId" type="long">
+            <column name="ITEM_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="nodeId" type="java.lang.Long">
+            <column name="NODE_ID" />
+        </property>
+        <property name="folderName" type="string">
+            <column name="FOLDER_NAME" length="50" />
+        </property>
+        <property name="ownerId" type="java.lang.Long">
+            <column name="OWNER_ID" />
+        </property>
+        <property name="groupId" type="java.lang.Integer">
+            <column name="GROUP_ID" />
+        </property>
+        <property name="active" type="boolean">
+            <column name="ACTIVE" not-null="true" />
+        </property>
+        <property name="docId" type="java.lang.Integer">
+            <column name="DOC_ID" />
+        </property>
+        <property name="cdate" type="timestamp">
+            <column name="CDATE" length="19" not-null="true" />
+        </property>
+        <property name="lastTouchId" type="java.lang.Integer">
+            <column name="LAST_TOUCH_ID" />
+        </property>
+        <property name="lastTime" type="timestamp">
+            <column name="LAST_TIME" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

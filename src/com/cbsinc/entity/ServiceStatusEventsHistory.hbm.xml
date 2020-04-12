@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.ServiceStatusEventsHistory" table="service_status_events_history" catalog="cmsdb">
+        <composite-id name="id" class="com.cbsinc.entity.ServiceStatusEventsHistoryId">
+            <key-property name="siteId" type="java.lang.Long">
+                <column name="SITE_ID" />
+            </key-property>
+            <key-property name="dateSend" type="timestamp">
+                <column name="DATE_SEND" length="19" />
+            </key-property>
+            <key-property name="serviceStatus" type="java.lang.Integer">
+                <column name="SERVICE_STATUS" />
+            </key-property>
+            <key-property name="classbody" type="string">
+                <column name="CLASSBODY" length="250" />
+            </key-property>
+            <key-property name="isnotify" type="boolean">
+                <column name="ISNOTIFY" />
+            </key-property>
+            <key-property name="active" type="boolean">
+                <column name="ACTIVE" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

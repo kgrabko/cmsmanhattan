@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.Calendar" table="calendar" catalog="cmsdb">
+        <id name="calendarId" type="long">
+            <column name="CALENDAR_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="softId" type="java.lang.Long">
+            <column name="SOFT_ID" />
+        </property>
+        <property name="holddate" type="java.lang.Integer">
+            <column name="HOLDDATE" />
+        </property>
+        <property name="fistName" type="string">
+            <column name="FIST_NAME" length="50" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="LAST_NAME" length="50" />
+        </property>
+        <property name="fatherName" type="string">
+            <column name="FATHER_NAME" length="50" />
+        </property>
+        <property name="documentNumber" type="string">
+            <column name="DOCUMENT_NUMBER" length="50" />
+        </property>
+        <property name="documentType" type="string">
+            <column name="DOCUMENT_TYPE" length="50" />
+        </property>
+        <property name="age" type="string">
+            <column name="AGE" length="50" />
+        </property>
+        <property name="active" type="java.lang.Boolean">
+            <column name="ACTIVE" />
+        </property>
+        <property name="note" type="string">
+            <column name="NOTE" length="500" />
+        </property>
+        <property name="parentId" type="java.lang.Long">
+            <column name="PARENT_ID" />
+        </property>
+        <property name="nodeName" type="string">
+            <column name="NODE_NAME" length="500" />
+        </property>
+        <property name="siteId" type="long">
+            <column name="SITE_ID" not-null="true" />
+        </property>
+        <property name="basketId" type="java.lang.Long">
+            <column name="BASKET_ID" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.Basket" table="basket" catalog="cmsdb">
+        <id name="basketId" type="long">
+            <column name="BASKET_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="productId" type="java.lang.Long">
+            <column name="PRODUCT_ID" />
+        </property>
+        <property name="orderId" type="java.lang.Long">
+            <column name="ORDER_ID" />
+        </property>
+        <property name="quantity" type="java.lang.Integer">
+            <column name="QUANTITY" />
+        </property>
+    </class>
+</hibernate-mapping>

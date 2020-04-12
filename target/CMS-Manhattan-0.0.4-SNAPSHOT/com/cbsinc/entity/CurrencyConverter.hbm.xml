@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.CurrencyConverter" table="currency_converter" catalog="cmsdb">
+        <id name="currencyId" type="long">
+            <column name="CURRENCY_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="1" type="java.lang.Double">
+            <column name="1" precision="22" scale="0" />
+        </property>
+        <property name="2" type="java.lang.Double">
+            <column name="2" precision="22" scale="0" />
+        </property>
+        <property name="3" type="java.lang.Double">
+            <column name="3" precision="22" scale="0" />
+        </property>
+        <property name="4" type="java.lang.Double">
+            <column name="4" precision="22" scale="0" />
+        </property>
+        <property name="5" type="java.lang.Double">
+            <column name="5" precision="22" scale="0" />
+        </property>
+        <property name="6" type="java.lang.Double">
+            <column name="6" precision="22" scale="0" />
+        </property>
+        <property name="7" type="java.lang.Double">
+            <column name="7" precision="22" scale="0" />
+        </property>
+        <property name="8" type="java.lang.Double">
+            <column name="8" precision="22" scale="0" />
+        </property>
+        <property name="9" type="java.lang.Double">
+            <column name="9" precision="22" scale="0" />
+        </property>
+        <property name="10" type="java.lang.Double">
+            <column name="10" precision="22" scale="0" />
+        </property>
+        <property name="11" type="java.lang.Double">
+            <column name="11" precision="22" scale="0" />
+        </property>
+        <property name="12" type="java.lang.Double">
+            <column name="12" precision="22" scale="0" />
+        </property>
+        <property name="13" type="java.lang.Double">
+            <column name="13" precision="22" scale="0" />
+        </property>
+        <property name="14" type="java.lang.Double">
+            <column name="14" precision="22" scale="0" />
+        </property>
+        <property name="15" type="java.lang.Double">
+            <column name="15" precision="22" scale="0" />
+        </property>
+        <property name="16" type="java.lang.Double">
+            <column name="16" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

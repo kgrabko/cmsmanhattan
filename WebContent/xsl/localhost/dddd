@@ -1,0 +1,5 @@
+function search() 
+{ 
+alert('ssss') ;
+//document.forms['searchform'].search_value.value ;
+}

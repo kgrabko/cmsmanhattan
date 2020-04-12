@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.XslStyle" table="xsl_style" catalog="cmsdb">
+        <id name="xslStyleId" type="int">
+            <column name="XSL_STYLE_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="NAME" length="50" />
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="500" />
+        </property>
+        <property name="active" type="boolean">
+            <column name="ACTIVE" not-null="true" />
+        </property>
+        <property name="producerId" type="int">
+            <column name="PRODUCER_ID" not-null="true" />
+        </property>
+        <property name="ownerId" type="long">
+            <column name="OWNER_ID" not-null="true" />
+        </property>
+        <property name="cost" type="double">
+            <column name="COST" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="currencyId" type="long">
+            <column name="CURRENCY_ID" not-null="true" />
+        </property>
+        <property name="sysDate" type="timestamp">
+            <column name="SYS_DATE" length="19" not-null="true" />
+        </property>
+        <property name="siteId" type="long">
+            <column name="SITE_ID" not-null="true" />
+        </property>
+        <property name="dirname" type="string">
+            <column name="DIRNAME" length="200" />
+        </property>
+        <property name="xslSubjId" type="java.lang.Integer">
+            <column name="XSL_SUBJ_ID" />
+        </property>
+    </class>
+</hibernate-mapping>

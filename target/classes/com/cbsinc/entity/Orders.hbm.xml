@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.Orders" table="orders" catalog="cmsdb">
+        <id name="orderId" type="long">
+            <column name="ORDER_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="userId" type="java.lang.Long">
+            <column name="USER_ID" />
+        </property>
+        <property name="deliveryTimeend" type="timestamp">
+            <column name="DELIVERY_TIMEEND" length="19" not-null="true" />
+        </property>
+        <property name="amount" type="double">
+            <column name="AMOUNT" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="tax" type="java.lang.Double">
+            <column name="TAX" precision="22" scale="0" />
+        </property>
+        <property name="endAmount" type="java.lang.Double">
+            <column name="END_AMOUNT" precision="22" scale="0" />
+        </property>
+        <property name="deliveryAmount" type="java.lang.Double">
+            <column name="DELIVERY_AMOUNT" precision="22" scale="0" />
+        </property>
+        <property name="deliveryLong" type="java.lang.Integer">
+            <column name="DELIVERY_LONG" />
+        </property>
+        <property name="paystatusId" type="java.lang.Long">
+            <column name="PAYSTATUS_ID" />
+        </property>
+        <property name="deliveryStart" type="timestamp">
+            <column name="DELIVERY_START" length="19" />
+        </property>
+        <property name="cdate" type="timestamp">
+            <column name="CDATE" length="19" />
+        </property>
+        <property name="currencyId" type="java.lang.Long">
+            <column name="CURRENCY_ID" />
+        </property>
+        <property name="countryId" type="java.lang.Long">
+            <column name="COUNTRY_ID" />
+        </property>
+        <property name="cityId" type="java.lang.Long">
+            <column name="CITY_ID" />
+        </property>
+        <property name="address" type="string">
+            <column name="ADDRESS" length="200" />
+        </property>
+        <property name="phone" type="string">
+            <column name="PHONE" length="50" />
+        </property>
+        <property name="contactPerson" type="string">
+            <column name="CONTACT_PERSON" length="200" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="100" />
+        </property>
+        <property name="fax" type="string">
+            <column name="FAX" length="50" />
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="1000" />
+        </property>
+        <property name="zip" type="java.lang.Integer">
+            <column name="ZIP" />
+        </property>
+        <property name="treeId" type="java.lang.Integer">
+            <column name="TREE_ID" />
+        </property>
+        <property name="imei" type="java.lang.Integer">
+            <column name="IMEI" />
+        </property>
+        <property name="phonemodelId" type="java.lang.Integer">
+            <column name="PHONEMODEL_ID" />
+        </property>
+        <property name="deliverystatusId" type="java.lang.Long">
+            <column name="DELIVERYSTATUS_ID" />
+        </property>
+    </class>
+</hibernate-mapping>

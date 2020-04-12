@@ -1,0 +1,242 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<?xml-stylesheet type="text/xsl" href="Productlist.xsl"?>
+<document>
+   <version>1.0</version>
+   <name>Catalog</name>
+
+   <title>Catalog test </title>
+
+
+   <login>admin2</login>
+   <balans>29.0</balans>
+
+   <to_navigator>wCatalog.jsp</to_navigator>
+   <to_navigator_location>NavigatorLocation.jsp</to_navigator_location>
+   <to_account_history>wAccountHist.jsp</to_account_history>
+   <to_pay>PrePay.jsp</to_pay>
+   <to_order>Order.jsp</to_order>
+   <to_order_hist>OrderList.jsp</to_order_hist>
+   <to_login>Authorization.jsp</to_login>
+   <to_registration>RegPage.jsp</to_registration>
+
+   <admin>
+   <post_manager>PostManager.jsp</post_manager>
+   <post_manager_img>images/post.jpg</post_manager_img>
+   <post_manager_text>Post</post_manager_text>
+   </admin>
+
+   <xslstyle>
+<!-- javascript:window.open('xsl.html' ,'New','width=400,height=210,scrollbars=yes,screenX=100,screenY=100'); -->
+   <xsl_url>xsl.jsp</xsl_url>
+   <xsl_url_text>change style</xsl_url_text>
+   </xslstyle>
+
+   <!--  Next page -->
+   <do_form_1>
+                <form-header>
+                <name>policy</name>
+		<method>post</method>
+		<action>Productlist.jsp</action>
+                </form-header>
+
+                <fields>
+                <ref_1>product/amount</ref_1>
+                <ref_2>product/ProductName</ref_2>
+                <ref_3>product/desc</ref_3>
+                <ref_4>product/currency_cd</ref_4>
+                </fields>
+   </do_form_1>
+
+
+   <!--  Preview page -->
+   <do_form_2>
+                <form-header>
+                <name>ProductURL</name>
+		<method>post</method>
+		<action>http://localhost:8080/downloadservlet?row=9</action>
+                </form-header>
+
+                <fields>
+                <ref_1>product/product_url</ref_1>
+                <ref_2>product/ProductName</ref_2>
+                </fields>
+
+   </do_form_2>
+
+
+   <!-- This url product  for now download  file  -->
+   <do_form_3>
+                <form-header>
+                <name>ProductURL</name>
+		<method>post</method>
+		<action>http://localhost:8080/downloadservlet?row=9</action>
+                </form-header>
+
+                <fields>
+                <ref_1>product/product_url</ref_1>
+                <ref_2>product/ProductName</ref_2>
+                </fields>
+   </do_form_3>
+
+
+<list>
+
+<product>
+<rigth>
+<name>music</name>
+<icon></icon>
+<image></image>
+<policy_url>Policy.jsp?row=0</policy_url>
+<description><r>sadfa
+11111111111111111111111
+222222222222222222222222
+weqwe
+3333333333333333333333333</r>
+<r>444444444444444444444444
+555555555555555555555555555
+66666666666666666666666
+</r>
+<r>
+wqwew2
+</r>
+<r>
+qweqsssssq
+</r>
+</description>
+<amount>0</amount>
+<currency>
+<code>USD</code>
+<description>dollar us</description>
+</currency>
+<version>rubli russian</version>
+</rigth>
+<left>
+<name>dasdgs</name>
+<icon>imgpositions/171.gif</icon>
+<image></image>
+<policy_url>Policy.jsp?row=0</policy_url>
+<description>
+<r>444444444444444444444444
+555555555555555555555555555
+66666666666666666666666
+</r>
+<r>
+wqwew2
+</r>
+</description>
+<amount>10</amount>
+<currency>
+<code>RUB</code>
+<description>dollar us</description>
+</currency>
+<version>rubli russian</version>
+</left>
+</product>
+
+
+
+</list>
+
+
+<newslist>
+
+<news>
+<name>music</name>
+<icon>imgpositions/171.gif</icon>
+<image></image>
+<policy_url>Policy.jsp?row=0</policy_url>
+<description>
+<r>aaaaaaa
+555555555555555555555555555
+66666666666666666666666
+</r>
+<r>
+bbbbbbbbb
+</r>
+</description>
+<amount>0</amount>
+<currency>
+<code>USD</code>
+<description>dollar us</description>
+</currency>
+<version>rubli russian</version>
+</news>
+
+<news>
+<name>dasdgs</name>
+<icon>imgpositions/171.gif</icon>
+<image></image>
+<policy_url>Policy.jsp?row=0</policy_url>
+<description>
+<r>111
+555555555555555555555555555
+66666666666666666666666
+</r>
+<r>
+22222
+</r>
+
+</description>
+<amount>10</amount>
+<currency>
+<code>RUB</code>
+<description>dollar us</description>
+</currency>
+<version>rubli russian</version>
+</news>
+
+</newslist>
+
+<next>Productlist.jsp?offset=10</next>
+<prev>Productlist.jsp?offset=0</prev>
+
+<currencies>
+<currencies-item><selected>USD</selected><item>euro</item><code>EURO</code><url>Productlist.jsp?currency_cd=EURO</url></currencies-item>
+<currencies-item><selected>USD</selected><item>NONE</item><code>NONE</code><url>Productlist.jsp?currency_cd=NONE</url></currencies-item>
+<currencies-item><selected>USD</selected><item>dollar us</item><code>USD</code><url>Productlist.jsp?currency_cd=USD</url></currencies-item>
+<currencies-item><selected>USD</selected><item>rubli russian</item><code>RUR</code><url>Productlist.jsp?currency_cd=RUR</url></currencies-item>
+</currencies>
+
+<catalog>
+<catalog-item><selected></selected><item></item><code>11</code><url>Productlist.jsp?catalog_id=11</url></catalog-item>
+<catalog-item><selected>-1</selected><item>qqq</item><code>12</code><url>Productlist.jsp?catalog_id=12</url></catalog-item>
+<catalog-item><selected>12</selected><item>ddd</item><code>13</code><url>Productlist.jsp?catalog_id=13</url></catalog-item>
+<catalog-item><selected>12</selected><item>aaaa</item><code>10</code><url>Productlist.jsp?catalog_id=10</url></catalog-item>
+</catalog>
+
+<!--
+<catalog>
+<catalog-item><selected>12</selected><item>xxx</item><code>11</code><url>Productlist.jsp?catalog_id=11</url></catalog-item>
+<catalog-item><selected>12</selected><item>qqq</item><code>12</code><url>Productlist.jsp?catalog_id=12</url></catalog-item>
+<catalog-item><selected>12</selected><item>ddd</item><code>13</code><url>Productlist.jsp?catalog_id=13</url></catalog-item>
+<catalog-item><selected>12</selected><item>aaaa</item><code>10</code><url>Productlist.jsp?catalog_id=10</url></catalog-item>
+</catalog>
+-->
+
+<phonetype>
+<phonetype-item><selected>12</selected><item>Simens</item><code>7</code><url>Productlist.jsp?phonetype_id=7</url></phonetype-item>
+<phonetype-item><selected>12</selected><item>Sony-Ericson</item><code>8</code><url>Productlist.jsp?phonetype_id=8</url></phonetype-item>
+<phonetype-item><selected>12</selected><item>Sumsung</item><code>9</code><url>Productlist.jsp?phonetype_id=9</url></phonetype-item>
+<phonetype-item><selected>12</selected><item>Motorola</item><code>10</code><url>Productlist.jsp?phonetype_id=10</url></phonetype-item>
+<phonetype-item><selected>12</selected><item>Nokia</item><code>11</code><url>Productlist.jsp?phonetype_id=11</url></phonetype-item>
+<phonetype-item><selected>12</selected><item>Any producer</item><code>12</code><url>Productlist.jsp?phonetype_id=12</url></phonetype-item>
+</phonetype>
+
+<licence>
+<licence-item><selected>4</selected><item>Commercial</item><code>4</code><url>Productlist.jsp?licence_id=4</url></licence-item>
+<licence-item><selected>4</selected><item>Free</item><code>5</code><url>Productlist.jsp?licence_id=5</url></licence-item>
+<licence-item><selected>4</selected><item>Demo</item><code>6</code><url>Productlist.jsp?licence_id=6</url></licence-item>
+</licence>
+
+<phonemodel>
+<phonemodel-item><selected>1</selected><item>All models</item><code>1</code><url>Productlist.jsp?phonemodel_id=1</url></phonemodel-item>
+<phonemodel-item><selected>1</selected><item>nokia 7210</item><code>2</code><url>Productlist.jsp?phonemodel_id=2</url></phonemodel-item>
+<phonemodel-item><selected>1</selected><item>nokia 3510i</item><code>3</code><url>Productlist.jsp?phonemodel_id=3</url></phonemodel-item>
+<phonemodel-item><selected>1</selected><item>nokia 3300</item><code>4</code><url>Productlist.jsp?phonemodel_id=4</url></phonemodel-item>
+<phonemodel-item><selected>1</selected><item>nokia 8910i</item><code>5</code><url>Productlist.jsp?phonemodel_id=5</url></phonemodel-item>
+<phonemodel-item><selected>1</selected><item>nokia 8310</item><code>6</code><url>Productlist.jsp?phonemodel_id=6</url></phonemodel-item>
+</phonemodel>
+
+
+</document>
+

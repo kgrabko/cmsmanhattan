@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.Shop" table="shop" catalog="cmsdb">
+        <id name="shopId" type="java.lang.Long">
+            <column name="SHOP_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="shopCd" type="int">
+            <column name="SHOP_CD" not-null="true" />
+        </property>
+        <property name="ownerId" type="long">
+            <column name="OWNER_ID" not-null="true" />
+        </property>
+        <property name="login" type="string">
+            <column name="LOGIN" length="50" />
+        </property>
+        <property name="siteId" type="java.lang.Long">
+            <column name="SITE_ID" />
+        </property>
+        <property name="payGatewayId" type="java.lang.Long">
+            <column name="PAY_GATEWAY_ID" />
+        </property>
+        <property name="passwd" type="string">
+            <column name="PASSWD" length="50" />
+        </property>
+        <property name="cdate" type="timestamp">
+            <column name="CDATE" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.Site" table="site" catalog="cmsdb">
+        <id name="siteId" type="long">
+            <column name="SITE_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="host" type="string">
+            <column name="HOST" length="100" />
+        </property>
+        <property name="owner" type="java.lang.Long">
+            <column name="OWNER" />
+        </property>
+        <property name="active" type="boolean">
+            <column name="ACTIVE" not-null="true" />
+        </property>
+        <property name="homeDir" type="string">
+            <column name="HOME_DIR" length="100" />
+        </property>
+        <property name="siteDir" type="string">
+            <column name="SITE_DIR" length="100" />
+        </property>
+        <property name="person" type="string">
+            <column name="PERSON" length="200" />
+        </property>
+        <property name="phone" type="string">
+            <column name="PHONE" length="50" />
+        </property>
+        <property name="address" type="string">
+            <column name="ADDRESS" length="300" />
+        </property>
+        <property name="subjectSite" type="string">
+            <column name="SUBJECT_SITE" length="300" />
+        </property>
+        <property name="nickSite" type="string">
+            <column name="NICK_SITE" length="200" />
+        </property>
+        <property name="companyName" type="string">
+            <column name="COMPANY_NAME" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.03.2014 21:04:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cbsinc.entity.BigImages" table="big_images" catalog="cmsdb">
+        <id name="bigImagesId" type="long">
+            <column name="BIG_IMAGES_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="imgname" type="string">
+            <column name="IMGNAME" length="100" />
+        </property>
+        <property name="imgUrl" type="string">
+            <column name="IMG_URL" length="200" />
+        </property>
+        <property name="userId" type="java.lang.Long">
+            <column name="USER_ID" />
+        </property>
+    </class>
+</hibernate-mapping>
