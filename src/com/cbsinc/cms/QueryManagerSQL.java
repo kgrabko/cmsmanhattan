@@ -176,6 +176,8 @@ import org.apache.log4j.Logger;
 				Properties connProp = new Properties();
 				connProp.put("user", resources_ds.getString("user").trim());
 				connProp.put("password", resources_ds.getString("password").trim());
+				connProp.put("useSSL", resources_ds.getString("useSSL").trim());
+				connProp.put("autoReconnect", resources_ds.getString("autoReconnect").trim());
 			
 				return new GBSConnection(DriverManager.getConnection(resources_ds.getString("url").trim(), connProp));
 			} catch (SQLException ex1) {

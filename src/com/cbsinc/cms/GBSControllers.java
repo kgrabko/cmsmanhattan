@@ -122,7 +122,7 @@ public class GBSControllers implements Filter , ITransformationService {
 		setSessionDir( servletContext) ;
 		loadClassesApplicationScope(servletContext);
 		try {
-			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
+			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
