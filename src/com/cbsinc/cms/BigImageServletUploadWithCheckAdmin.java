@@ -19,7 +19,6 @@
  * @version 1.0
  */
 
-
 package com.cbsinc.cms;
 
 import java.io.File;
@@ -40,7 +39,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 import com.cbsinc.cms.ItemData;
 import com.cbsinc.cms.QueryManager;
@@ -69,9 +67,9 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	AuthorizationPageBean AuthorizationPageBeanId = null;
-	ProductPostAllFaced productPostAllFaced = null ;
-	transient ResourceBundle localization = null ;
-	ServletContext servletContext = null ;
+	ProductPostAllFaced productPostAllFaced = null;
+	transient ResourceBundle localization = null;
+	ServletContext servletContext = null;
 
 	public String filename = "";
 
@@ -80,21 +78,21 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 	FileOutputStream bs = null;
 
 	private final static int BUFFER_SIZE = 2048;
-	
-	boolean isExistCheckImage = false ;
+
+	boolean isExistCheckImage = false;
 
 	/**
 	 * Initializes the servlet.
 	 */
-	
-	transient ResourceBundle sequences_rs = null ;
-	
-	
+
+	transient ResourceBundle sequences_rs = null;
+
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
-		servletContext = config.getServletContext() ;
-		if( sequences_rs == null )  sequences_rs = PropertyResourceBundle.getBundle("sequence");
+		servletContext = config.getServletContext();
+		if (sequences_rs == null)
+			sequences_rs = PropertyResourceBundle.getBundle("sequence");
 	}
 
 	public void saveFile() {
@@ -118,14 +116,13 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 			if (FileName.length() == 0)
 				return null;
 			intID = saveImgURL(FileName, AuthorizationPageBeanId.getIntUserID());
-			FileName = "" + intID
-					+ FileName.substring(FileName.lastIndexOf("."));
+			FileName = "" + intID + FileName.substring(FileName.lastIndexOf("."));
 			String path = this.getClass().getResource("").getPath();
 			path = path.substring(0, path.indexOf("/WEB-INF/"));
 			File file = new File(path + "//big_imgpositions", FileName);
 			fis = new FileOutputStream(file);
 		} catch (java.lang.Exception e) {
-			log.error(e) ;
+			log.error(e);
 			System.out.println(e.toString());
 		}
 		return fis;
@@ -136,36 +133,27 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 		Adp.BeginTransaction();
 		String strID = null;
 		String query = sequences_rs.getString("big_images");
-		//String query = "SELECT NEXT VALUE FOR big_images_big_images_id_seq  AS ID  FROM ONE_SEQUENCES";
-		
+		// String query = "SELECT NEXT VALUE FOR big_images_big_images_id_seq AS ID FROM
+		// ONE_SEQUENCES";
+
 		try {
 			Adp.executeQuery(query);
-		
 
-		strID = Adp.getValueAt(0, 0);
+			strID = Adp.getValueAt(0, 0);
 
-		// product_id int4 NOT NULL,
-		query = "insert into big_images " + "(" + " big_images_id , "
-				+ " imgname , " + " img_url , " + " user_id  " + ")"
-				+ " VALUES " + "( " + strID + ", '" + FileName + "', '"
-				+ "big_imgpositions/" + strID
-				+ FileName.substring(FileName.lastIndexOf(".")) + "' , "
-				+ user_id + " )";
+			// product_id int4 NOT NULL,
+			query = "insert into big_images " + "(" + " big_images_id , " + " imgname , " + " img_url , " + " user_id  "
+					+ ")" + " VALUES " + "( " + strID + ", '" + FileName + "', '" + "big_imgpositions/" + strID
+					+ FileName.substring(FileName.lastIndexOf(".")) + "' , " + user_id + " )";
 
-		
 			Adp.executeUpdate(query);
 			Adp.commit();
-		}
-		catch (SQLException ex) 
-		{
-			log.error(query,ex);
+		} catch (SQLException ex) {
+			log.error(query, ex);
 			Adp.rollback();
+		} finally {
+			Adp.close();
 		}
-		finally
-		{
-			Adp.close();			
-		}
-
 
 		return Integer.parseInt(strID);
 	}
@@ -181,28 +169,25 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
 	 * methods.
 	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
+	 * @param request  servlet request
+	 * @param response servlet response
 	 */
-	protected void processRequest(HttpServletRequest req,
-			HttpServletResponse res) throws java.io.IOException {
+	protected void processRequest(HttpServletRequest req, HttpServletResponse res) throws java.io.IOException {
 
-		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession()
-				.getAttribute("AuthorizationPageBeanId");
-		
-		if( localization == null )   localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
-		else if( !localization.getLocale().getLanguage().equals(req.getLocale().getLanguage())  ) localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
+		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession().getAttribute("AuthorizationPageBeanId");
+
+		if (localization == null)
+			localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
+		else if (!localization.getLocale().getLanguage().equals(req.getLocale().getLanguage()))
+			localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
 
 		try {
-			productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
+			productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		
 		long start = System.currentTimeMillis();
 		String contentType = req.getContentType();
 		res.setContentType("text/html;charset=UTF8");
@@ -221,13 +206,12 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 			out.close();
 			return;
 		}
-		
-		if(productPostAllFaced.isLimmitPostedMessages(AuthorizationPageBeanId,true)  )
-		 {
-			 printResult(out, localization.getString("global_has_limmit_forsite"));
-			 out.close();
-			 return;
-		 }
+
+		if (productPostAllFaced.isLimmitPostedMessages(AuthorizationPageBeanId, true)) {
+			printResult(out, localization.getString("global_has_limmit_forsite"));
+			out.close();
+			return;
+		}
 
 		if (contentType == null) {
 			System.out.println("content type is null");
@@ -271,8 +255,7 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 
 			result = in.readLine(buffer, 0, BUFFER_SIZE);
 			if (result <= 0) {
-				System.out
-						.println("Upload : may be end boundary which has no contents");
+				System.out.println("Upload : may be end boundary which has no contents");
 				break;
 			}
 
@@ -281,14 +264,12 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 			String token = tokenizer.nextToken();
 			String upperToken = token.toUpperCase();
 			if (!upperToken.startsWith("CONTENT-DISPOSITION")) {
-				System.out
-						.println("Format error. Content-Disposition expected.");
+				System.out.println("Format error. Content-Disposition expected.");
 				break;
 			}
 			String disposition = upperToken.substring(21);
 			if (!disposition.equals("FORM-DATA")) {
-				System.out.println("Sorry, I don't know how to handle ["
-						+ disposition + "] disposition.");
+				System.out.println("Sorry, I don't know how to handle [" + disposition + "] disposition.");
 				break;
 			}
 			if (tokenizer.hasMoreElements()) {
@@ -346,10 +327,8 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 				if (fileContentType.toUpperCase().startsWith("CONTENT-TYPE:")) {
 					fileContentType = fileContentType.substring(13).trim();
 				} else {
-					System.out
-							.println("what should I read here ??? - result = "
-									+ result + ", and read ["
-									+ new String(buffer, 0, result) + "]");
+					System.out.println("what should I read here ??? - result = " + result + ", and read ["
+							+ new String(buffer, 0, result) + "]");
 				}
 
 				try {
@@ -359,11 +338,9 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 					int tmpbufferlen = 0;
 					boolean isFirst = true;
 					boolean odd = true;
-					inner: while ((result = in.readLine(buffer, 0, BUFFER_SIZE)) > 0) 
-					{
+					inner: while ((result = in.readLine(buffer, 0, BUFFER_SIZE)) > 0) {
 						if (isFirst) { // ignore all proceeding \r\n
-							if (result == 2 && buffer[0] == '\r'
-									&& buffer[1] == '\n') {
+							if (result == 2 && buffer[0] == '\r' && buffer[1] == '\n') {
 								continue;
 							}
 
@@ -397,15 +374,14 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 					}
 				} catch (IOException ie) {
 					log.error(ie);
-					System.out.println("IO Error while write to file : "+ ie.toString());
+					System.out.println("IO Error while write to file : " + ie.toString());
 				} finally {
 					System.out.println("finally Upload : size = " + size);
 					appendValue(map, name, filename, fileContentType, size);
 					saveFile();
 				}
 				result = in.readLine(buffer, 0, BUFFER_SIZE);
-				System.out.println("what should I read here? - result = "
-						+ result + ", and read ["
+				System.out.println("what should I read here? - result = " + result + ", and read ["
 						+ new String(buffer, 0, result) + "]");
 			} else { // no more elements
 				result = in.readLine(buffer, 0, BUFFER_SIZE);
@@ -420,16 +396,15 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 				}
 				String value = new String(buffer, 0, result - 2); // exclude
 																	// \r\n
-				
-				
-				//if (name.equals("") != 2) {
-				//	printResult(out, "User have low  access");
-				//	out.close();
-				//	return;
-				//}
-				
+
+				// if (name.equals("") != 2) {
+				// printResult(out, "User have low access");
+				// out.close();
+				// return;
+				// }
+
 				appendValue(map, name, value);
-				
+
 			}
 
 			result = in.readLine(buffer, 0, BUFFER_SIZE);
@@ -447,26 +422,20 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 	/**
 	 * Handles the HTTP <code>GET</code> method.
 	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
+	 * @param request  servlet request
+	 * @param response servlet response
 	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws java.io.IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws java.io.IOException {
 		processRequest(request, response);
 	}
 
 	/**
 	 * Handles the HTTP <code>POST</code> method.
 	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
+	 * @param request  servlet request
+	 * @param response servlet response
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws java.io.IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws java.io.IOException {
 		processRequest(request, response);
 	}
 
@@ -477,8 +446,7 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 		return "Short description";
 	}
 
-	boolean bytesStartsWith(byte[] bytes, int offset, int length,
-			String toCompare) {
+	boolean bytesStartsWith(byte[] bytes, int offset, int length, String toCompare) {
 		boolean result = true;
 		if (toCompare.length() > length) {
 			return false;
@@ -494,19 +462,16 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 		return result;
 	}
 
-	void appendValue(HashMap map, String name, String value,
-			String contentType, int size) {
-		ItemData data = new ItemData(name, value, contentType,
-				size, true);
+	void appendValue(HashMap map, String name, String value, String contentType, int size) {
+		ItemData data = new ItemData(name, value, contentType, size, true);
 		map.put(name, data);
 	}
 
-	void appendValue(HashMap map, String name, String value) 
-	{
+	void appendValue(HashMap map, String name, String value) {
 
-		//if(name.equals("")	)
-		
-		ItemData data = new ItemData(name, value, null, 0,	false);
+		// if(name.equals("") )
+
+		ItemData data = new ItemData(name, value, null, 0, false);
 		map.put(name, data);
 	}
 
@@ -555,8 +520,7 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 			case AMPERSHARP:
 				if (chars[i] == ';') {
 					try {
-						buffer.append((char) Integer.parseInt(escaped
-								.toString()));
+						buffer.append((char) Integer.parseInt(escaped.toString()));
 					} catch (NumberFormatException nfe) {
 						// I don't handle other Entities
 						buffer.append(escaped);
@@ -581,14 +545,14 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 	void printResult(PrintWriter out, Map map) throws IOException {
 		Iterator itr = map.values().iterator();
 		out.println("<HTML><HEAD>");
-		out.println("<TITLE>" + localization.getString("result_upload")   + "</TITLE>");
+		out.println("<TITLE>" + localization.getString("result_upload") + "</TITLE>");
 		out.println("<script language=\"JavaScript\">");
 		out.println("<!--");
 		out.println("function setData(){");
-		out.println("top.postsoftform.bigimagename.value = '"+ filename + "' ;");
+		out.println("top.postsoftform.bigimagename.value = '" + filename + "' ;");
 		// out.println("opener.parent.postsoftform.imagename.value =
 		// 'imgpositions/" + filename + "' ;" );
-		out.println("top.postsoftform.bigimage_id.value = '" + intID	+ "' ;");
+		out.println("top.postsoftform.bigimage_id.value = '" + intID + "' ;");
 		// out.println("top.close();");
 		out.println("return true ;");
 		out.println("}");
@@ -599,32 +563,32 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 		out.println("//-->");
 		out.println("</script>");
 		out.println("</HEAD><BODY onLoad=\"return  setData()\" >");
-		out.println("<H1>" + localization.getString("result_upload")   + "</H1>");
+		out.println("<H1>" + localization.getString("result_upload") + "</H1>");
 		out.println("<TABLE>");
 		out.println(localization.getString("header_result_loading"));
-		while (itr.hasNext()) 
-		{
+		while (itr.hasNext()) {
 			ItemData data = (ItemData) itr.next();
 			out.println("<TR>");
-			//out.println("<TD>" + (data.name == null ? "" : data.name) + "</TD>");
-			out.println("<TD>" + (data.value == null ? "" : data.value)	+ "</TD>");
-			out.println("<TD>" + (data.contentType == null ? "" : data.contentType)	+ "</TD>");
-			out.println("<TD>" + (data.isFile ? String.valueOf(data.size) : "")	+ "</TD>");
-			//out.println("<TD>" + (data.isFile ? "file" : "") + "</TD>");
+			// out.println("<TD>" + (data.name == null ? "" : data.name) + "</TD>");
+			out.println("<TD>" + (data.value == null ? "" : data.value) + "</TD>");
+			out.println("<TD>" + (data.contentType == null ? "" : data.contentType) + "</TD>");
+			out.println("<TD>" + (data.isFile ? String.valueOf(data.size) : "") + "</TD>");
+			// out.println("<TD>" + (data.isFile ? "file" : "") + "</TD>");
 			out.println("</TR>");
 		}
 		out.println("</TABLE>");
-		out.println("<FORM><input type=\"button\" value=\"" + localization.getString("close_window")   + "\" onClick=\"return setClose()\" ></FORM>");
+		out.println("<FORM><input type=\"button\" value=\"" + localization.getString("close_window")
+				+ "\" onClick=\"return setClose()\" ></FORM>");
 		out.println("</BODY></HTML>");
 	}
 
 	void printResult(PrintWriter out, String mess) throws IOException {
 		out.println("<HTML><HEAD>");
-		out.println("<TITLE>" + localization.getString("result_upload")   + "</TITLE>");
+		out.println("<TITLE>" + localization.getString("result_upload") + "</TITLE>");
 		out.println("<script language=\"JavaScript\">");
 		out.println("<!--");
 		out.println("function setData(){");
-		out.println("top.postsoftform.bigimagename.value = '" + localization.getString("file_not_uploaded")   + "' ;");
+		out.println("top.postsoftform.bigimagename.value = '" + localization.getString("file_not_uploaded") + "' ;");
 		out.println("top.postsoftform.bigimage_id.value = -1 ;");
 		out.println("return true ;");
 		out.println("}");
@@ -635,18 +599,19 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 		out.println("//-->");
 		out.println("</script>");
 		out.println("</HEAD><BODY onLoad=\"return  setData()\" >");
-		out.println("<H1>" + localization.getString("result_upload")   + "</H1>");
+		out.println("<H1>" + localization.getString("result_upload") + "</H1>");
 		out.println("<TABLE>");
 		out.println(localization.getString("header_result_loading"));
 		out.println("<TR>");
-		out.println("<TD>" + localization.getString("file_not_uploaded")   + "</TD>");
+		out.println("<TD>" + localization.getString("file_not_uploaded") + "</TD>");
 		out.println("<TD>value is null </TD>");
 		out.println("<TD>content is null</TD>");
 		out.println("<TD>size is null</TD>");
 		out.println("<TD>" + mess + "</TD>");
 		out.println("</TR>");
 		out.println("</TABLE>");
-		out.println("<FORM><input type=\"button\" value=\"" + localization.getString("close_window")   + "\" onClick=\"return setClose()\" ></FORM>");
+		out.println("<FORM><input type=\"button\" value=\"" + localization.getString("close_window")
+				+ "\" onClick=\"return setClose()\" ></FORM>");
 		out.println("</BODY></HTML>");
 	}
 
@@ -655,12 +620,11 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 		try {
 			i = Integer.parseInt(s);
 		} catch (NumberFormatException ex) {
-			
-			log.error(ex) ;
+
+			log.error(ex);
 			i = -1;
 		}
 		return i;
 	}
 
 }
-

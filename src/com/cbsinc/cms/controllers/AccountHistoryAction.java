@@ -1,5 +1,7 @@
 package com.cbsinc.cms.controllers;
 
+import java.util.Optional;
+
 /**
  * <p>
  * Title: Content Manager System
@@ -21,79 +23,57 @@ package com.cbsinc.cms.controllers;
  * @version 1.0
  */
 
-
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.cbsinc.cms.AccountHistoryBean;
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.faceds.OrderFaced;
 
-public class AccountHistoryAction  implements IAction
-{
+public class AccountHistoryAction extends TemplateAction {
 
-	
-	
-	OrderFaced orderFaced ;
-	
-	
-	
-	
+
 	public AccountHistoryAction() {
-		// TODO Auto-generated constructor stub
+
 	}
 	
-	
-	
-	public void doPost(HttpServletRequest request, HttpServletResponse response , ServletContext  servletContext) throws Exception
-	{
-		action( request,  response,  servletContext) ;
-	}
 
-
-
-	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) throws Exception 
-	{
-		action( request,  response,  servletContext) ;
-	}
-
-
-	public void action(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) throws Exception 
-	{
-		AuthorizationPageBean authorizationPageBeanId ;
-		AccountHistoryBean accountHistoryBeanId ;
-		HttpSession session ;
-		boolean isInternet = true ;
-		AccountHistoryBean accountHistoryBean = null ;
-		if(orderFaced == null) orderFaced = ServiceLocator.getInstance().getOrderFaced();
-		session = request.getSession();
-		accountHistoryBean = (AccountHistoryBean)session.getAttribute("accountHistoryBeanId");
-		authorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("AuthorizationPageBeanId");
-		if( authorizationPageBeanId == null ||  accountHistoryBean == null || orderFaced == null  ) return ;
-
-		request.setCharacterEncoding("UTF-8"); 
-		if( request.getParameter("searchquery") !=null && isNumber(request.getParameter("searchquery")) ) 
-		{
-			accountHistoryBean.setSearchquery(request.getParameter("searchquery"));
-			if( !accountHistoryBean.getSearchquery().equals(request.getParameter("searchquery")) ) accountHistoryBean.setOffset(0);
-		}
+	@Override
+	public void action(Optional<HttpServletRequest> requestOpts, Optional<HttpServletResponse> responseOpts, Optional<ServletContext> servletContextOpts)
+			throws Exception {
 		
-		if( accountHistoryBean.getSearchquery().equals("2") )
-		{
-			if(request.getParameter("datefrom") != null) accountHistoryBean.setStrDateFrom(request.getParameter("datefrom")) ;
-			if(request.getParameter("dateto")!= null) accountHistoryBean.setStrDateTo(request.getParameter("dateto")) ;
-			accountHistoryBean.setSelectAccountHistoryXML(orderFaced.getPaymentlistByDate(authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getIntLevelUp(),accountHistoryBean ));
-			//orderListBean.setSearchquery("0");
-			return ;
+		HttpServletRequest request  = requestOpts.get() ;
+		AuthorizationPageBean authorizationPageBeanId = this.getAuthorizationPageBean().get() ;
+		AccountHistoryBean accountHistoryBeanId = this.getAccountHistoryBean().get() ;
+		Optional <OrderFaced> 	orderFaced = ServiceLocator.getInstance().getOrderFaced();
+
+		if (this.getAuthorizationPageBean().isEmpty()  || this.getAccountHistoryBean().isEmpty() || orderFaced.isEmpty())
+			return;
+
+		request.setCharacterEncoding("UTF-8");
+		if (request.getParameter("searchquery") != null && isNumber(request.getParameter("searchquery"))) {
+			accountHistoryBeanId.setSearchquery(request.getParameter("searchquery"));
+			if (!accountHistoryBeanId.getSearchquery().equals(request.getParameter("searchquery")))
+				accountHistoryBeanId.setOffset(0);
 		}
-		
-		accountHistoryBean.setSelectAccountHistoryXML(orderFaced.getPaymentlist(authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getIntLevelUp(),accountHistoryBean ));
+
+		if (accountHistoryBeanId.getSearchquery().equals("2")) {
+			if (request.getParameter("datefrom") != null)
+				accountHistoryBeanId.setStrDateFrom(request.getParameter("datefrom"));
+			if (request.getParameter("dateto") != null)
+				accountHistoryBeanId.setStrDateTo(request.getParameter("dateto"));
+			accountHistoryBeanId
+					.setSelectAccountHistoryXML( orderFaced.get().getPaymentlistByDate(authorizationPageBeanId.getIntUserID(),
+							authorizationPageBeanId.getIntLevelUp(), accountHistoryBeanId));
+			// orderListBean.setSearchquery("0");
+			return;
+		}
+
+		accountHistoryBeanId.setSelectAccountHistoryXML(orderFaced.get().getPaymentlist(authorizationPageBeanId.getIntUserID(),
+				authorizationPageBeanId.getIntLevelUp(), accountHistoryBeanId));
 	}
 
-	
 	public boolean isNumber(String tmp) {
 		if (tmp == null)
 			return false;

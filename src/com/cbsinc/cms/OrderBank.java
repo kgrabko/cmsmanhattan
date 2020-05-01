@@ -5,10 +5,6 @@ import java.util.*;
 import org.apache.log4j.Logger;
 
 public class OrderBank implements java.io.Serializable {
-	/**
-	 * 
-	 */
-	 
 
 	/**
 	 * 
@@ -21,27 +17,23 @@ public class OrderBank implements java.io.Serializable {
 	 * </p>
 	 * <p>
 	 * Description: System building web application develop by Konstantin Grabko.
-	 * Konstantin Grabko is Owner and author this code.
-	 * You can not use it and you cannot change it without written permission from Konstantin Grabko
-	 * Email: konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
+	 * Konstantin Grabko is Owner and author this code. You can not use it and you
+	 * cannot change it without written permission from Konstantin Grabko Email:
+	 * konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
 	 * </p>
 	 * <p>
 	 * Copyright: Copyright (c) 2002-2014
 	 * </p>
 	 * <p>
-	 * Company: CENTER BUSINESS SOLUTIONS INC 
+	 * Company: CENTER BUSINESS SOLUTIONS INC
 	 * </p>
 	 * 
 	 * @author Konstantin Grabko
 	 * @version 1.0
 	 */
 
-
-
-	
-	
 	transient static private Logger log = Logger.getLogger(OrderBank.class);
-	
+
 	// Calendar startCalendar ;
 	transient Calendar endCalendar;
 
@@ -54,8 +46,7 @@ public class OrderBank implements java.io.Serializable {
 	private String endData;
 
 	public OrderBank() {
-		endCalendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+3:00"),
-				new Locale("ru"));
+		endCalendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+3:00"), new Locale("ru"));
 
 		// startCalendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+3:00")
 		// , new Locale("ru"));
@@ -100,19 +91,16 @@ public class OrderBank implements java.io.Serializable {
 		// endCalendar.set( getBeginData_intYear(), getBeginData_intMonth(),
 		// getBeginData_intDay() ) ;
 		// endCalendar.add(endCalendar.DATE , intDayPeriod);
-		try
-		{
-		intEDay = endCalendar.get(Calendar.DATE);
-		strEDay = "" + intEDay;
-		if (strEDay.length() == 1)
-			strEDay = "0" + strEDay;
-		// if(strEDay.length() = 1)strEDay = "0" + strEDay
+		try {
+			intEDay = endCalendar.get(Calendar.DATE);
+			strEDay = "" + intEDay;
+			if (strEDay.length() == 1)
+				strEDay = "0" + strEDay;
+			// if(strEDay.length() = 1)strEDay = "0" + strEDay
+		} catch (Exception e) {
+			log.error(e);
 		}
-		catch(Exception e )
-		{
-		 log.error(e);	
-		}
-		
+
 		return strEDay;
 	}
 
@@ -121,19 +109,16 @@ public class OrderBank implements java.io.Serializable {
 		String strEMonth = "0";
 		// endCalendar.set( getBeginData_intYear(), getBeginData_intMonth(),
 		// getBeginData_intDay() ) ;
-		try
-		{
-		int intEDay = endCalendar.get(Calendar.DATE);
-		if (intEDay > getBeginData_intDay())
-			endCalendar.add(Calendar.MONTH, 1);
-		intEMonth = endCalendar.get(Calendar.MONTH);
-		strEMonth = "" + intEMonth;
-		if (strEMonth.length() == 1)
-			strEMonth = "0" + strEMonth;
-		}
-		catch(Exception e) 
-		{
-		 log.error(e) ;	
+		try {
+			int intEDay = endCalendar.get(Calendar.DATE);
+			if (intEDay > getBeginData_intDay())
+				endCalendar.add(Calendar.MONTH, 1);
+			intEMonth = endCalendar.get(Calendar.MONTH);
+			strEMonth = "" + intEMonth;
+			if (strEMonth.length() == 1)
+				strEMonth = "0" + strEMonth;
+		} catch (Exception e) {
+			log.error(e);
 		}
 		return strEMonth;
 		// return getBeginData_Month() ;
@@ -142,8 +127,8 @@ public class OrderBank implements java.io.Serializable {
 	public String getEndData_Year() {
 		/*
 		 * int intEMonth = endCalendar.get(endCalendar.MONTH) ; if( intEMonth >
-		 * getBeginData_intMonth() ) endCalendar.add(endCalendar.YEAR , 1); int
-		 * intEYear = endCalendar.get(endCalendar.YEAR) ; return "" + intEYear ;
+		 * getBeginData_intMonth() ) endCalendar.add(endCalendar.YEAR , 1); int intEYear
+		 * = endCalendar.get(endCalendar.YEAR) ; return "" + intEYear ;
 		 */
 		return getBeginData_Year();
 	}
@@ -156,19 +141,16 @@ public class OrderBank implements java.io.Serializable {
 
 	public int getBeginData_intMonth() {
 		int intSMonth = 0;
-		
-		try
-		{
-		String strSMonth = (tokenize(beginData, "-")[1]).trim();
-		if (isNumber(strSMonth)) {
-			intSMonth = Integer.parseInt(strSMonth);
+
+		try {
+			String strSMonth = (tokenize(beginData, "-")[1]).trim();
+			if (isNumber(strSMonth)) {
+				intSMonth = Integer.parseInt(strSMonth);
+			}
+		} catch (Exception e) {
+			log.error(e);
 		}
-		}
-		catch(Exception e) 
-		{
-		log.error(e) ;	
-		}
-		
+
 		return intSMonth - 1;
 	}
 
@@ -179,31 +161,26 @@ public class OrderBank implements java.io.Serializable {
 
 	public int getBeginData_intYear() {
 		int intSYear = 0;
-		String strSYear = "0" ;
-		try
-		{
-		strSYear = (tokenize(beginData, "-")[0]).trim();
-		if (isNumber(strSYear)) {
-			intSYear = Integer.parseInt(strSYear);
-		}
-		}
-		catch(Exception e) 
-		{
-		log.error(e) ;	
+		String strSYear = "0";
+		try {
+			strSYear = (tokenize(beginData, "-")[0]).trim();
+			if (isNumber(strSYear)) {
+				intSYear = Integer.parseInt(strSYear);
+			}
+		} catch (Exception e) {
+			log.error(e);
 		}
 		return intSYear;
 	}
 
-	public void setBeginData(String beginData) { this.beginData = beginData.substring(0, 10);
+	public void setBeginData(String beginData) {
+		this.beginData = beginData.substring(0, 10);
 
-		try
-		{
-		endCalendar.set(getBeginData_intYear(), getBeginData_intMonth(), getBeginData_intDay());
-		endCalendar.add(Calendar.DATE, intDayPeriod);
-		}
-		catch(Exception e) 
-		{
-		log.error(e) ;	
+		try {
+			endCalendar.set(getBeginData_intYear(), getBeginData_intMonth(), getBeginData_intDay());
+			endCalendar.add(Calendar.DATE, intDayPeriod);
+		} catch (Exception e) {
+			log.error(e);
 		}
 	}
 
@@ -217,24 +194,20 @@ public class OrderBank implements java.io.Serializable {
 	}
 
 	public String[] tokenize(String s, String d) {
-		String[] as = null ;
-		try
-		{
-		Vector vector = new Vector();
-		for (StringTokenizer stringtokenizer = new StringTokenizer(s, d); stringtokenizer
-				.hasMoreTokens(); vector
-				.addElement(stringtokenizer.nextToken()))
-			;
+		String[] as = null;
+		try {
+			Vector vector = new Vector();
+			for (StringTokenizer stringtokenizer = new StringTokenizer(s, d); stringtokenizer.hasMoreTokens(); vector
+					.addElement(stringtokenizer.nextToken()))
+				;
 
-		as = new String[vector.size()];
-		for (int i = 0; i < as.length; i++)
-			as[i] = (String) vector.elementAt(i);
+			as = new String[vector.size()];
+			for (int i = 0; i < as.length; i++)
+				as[i] = (String) vector.elementAt(i);
+		} catch (Exception e) {
+			log.error(e);
 		}
-		catch(Exception e )
-		{
-		log.error(e) ;	
-		}
-		
+
 		return as;
 	}
 

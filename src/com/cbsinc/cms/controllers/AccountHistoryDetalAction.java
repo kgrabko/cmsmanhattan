@@ -1,5 +1,7 @@
 package com.cbsinc.cms.controllers;
 
+import java.util.Optional;
+
 /**
  * <p>
  * Title: Content Manager System
@@ -32,44 +34,24 @@ import com.cbsinc.cms.AccountHistoryDetalBean;
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.faceds.OrderFaced;
 
-public class AccountHistoryDetalAction  implements IAction
+public class AccountHistoryDetalAction  extends TemplateAction 
 {
 	
-	OrderFaced orderFaced ;
-	
 	public AccountHistoryDetalAction() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	
-	
-	public void doPost(HttpServletRequest request, HttpServletResponse response , ServletContext  servletContext) throws Exception
-	{
-		action( request,  response,  servletContext) ;
 	}
 
-
-
-	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) throws Exception 
+	@Override
+	public void action(Optional<HttpServletRequest> requestOpts, Optional<HttpServletResponse> responseOpts, Optional<ServletContext> servletContextOpts) throws Exception
 	{
-		action( request,  response,  servletContext) ;
-	}
-
-
-	public void action(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) throws Exception 
-	{
-		AuthorizationPageBean authorizationPageBeanId ;
-		AccountHistoryBean accountHistoryBeanId ;
-		HttpSession session ;
-		boolean isInternet = true ;
+		
+		HttpServletRequest request  = requestOpts.get() ;
+		AuthorizationPageBean authorizationPageBeanId = getAuthorizationPageBean().get() ;
 		AccountHistoryDetalBean accountHistoryDetalBean = null ;
-		if(orderFaced == null) orderFaced = ServiceLocator.getInstance().getOrderFaced();
-		session = request.getSession();
-		accountHistoryDetalBean = (AccountHistoryDetalBean)session.getAttribute("accountHistoryDetalBeanId");
-		authorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("AuthorizationPageBeanId");
+		OrderFaced orderFaced = ServiceLocator.getInstance().getOrderFaced().get();
+
 		if( authorizationPageBeanId == null ||  accountHistoryDetalBean == null || orderFaced == null  ) return ;
 		request.setCharacterEncoding("UTF-8"); 
-		if( request.getParameter("amount_id") !=null ) accountHistoryDetalBean.setAmount_id("" + request.getParameter("amount_id"));
+		if( request.getParameter("amount_id") !=null ) accountHistoryDetalBean.setAmount_id(request.getParameter("amount_id"));
 		accountHistoryDetalBean.setSelectAccountHistoryDetalXML(orderFaced.getPayment(authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getIntLevelUp(),accountHistoryDetalBean ));
 	}
 

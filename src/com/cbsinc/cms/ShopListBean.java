@@ -2,23 +2,9 @@ package com.cbsinc.cms;
 
 import java.sql.SQLException;
 
-import javax.servlet.ServletContext;
-
 import org.apache.log4j.Logger;
 
-import com.cbsinc.cms.faceds.ApplicationContext;
-
-
-public class ShopListBean implements java.io.Serializable  {
-
-	/**
-	 * 
-	 */
-	
-	/**
-	 * 
-	 */
-
+public class ShopListBean implements java.io.Serializable {
 
 	/**
 	 * 
@@ -32,22 +18,20 @@ public class ShopListBean implements java.io.Serializable  {
 	 * </p>
 	 * <p>
 	 * Description: System building web application develop by Konstantin Grabko.
-	 * Konstantin Grabko is Owner and author this code.
-	 * You can not use it and you cannot change it without written permission from Konstantin Grabko
-	 * Email: konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
+	 * Konstantin Grabko is Owner and author this code. You can not use it and you
+	 * cannot change it without written permission from Konstantin Grabko Email:
+	 * konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
 	 * </p>
 	 * <p>
 	 * Copyright: Copyright (c) 2002-2014
 	 * </p>
 	 * <p>
-	 * Company: CENTER BUSINESS SOLUTIONS INC 
+	 * Company: CENTER BUSINESS SOLUTIONS INC
 	 * </p>
 	 * 
 	 * @author Konstantin Grabko
 	 * @version 1.0
 	 */
-
-	
 
 	private Boolean searchquery = false;
 
@@ -98,8 +82,6 @@ public class ShopListBean implements java.io.Serializable  {
 	private String product_cost = "";
 
 	private String product_cost2 = "";
-	
-
 
 	public ShopListBean() {
 	}
@@ -145,29 +127,21 @@ public class ShopListBean implements java.io.Serializable  {
 
 		if (searchquery)
 			query = "SELECT  \"soft\".\"soft_id\", \"soft\".\"name\",\"soft\".\"description\", \"soft\".\"version\", \"soft\".\"cost\", \"soft\".\"currency\", \"soft\".\"serial_nubmer\", \"file\".\"file_id\", \"soft\".\"type_id\", \"soft\".\"active\" , \"soft\".\"phonetype_id\" , \"soft\".\"progname_id\"  , \"soft\".\"image_id\" , \"images\".\"img_url\" , \"soft\".\"fulldescription\" , \"big_images\".\"img_url\" FROM \"soft\" LEFT  JOIN \"images\" ON \"soft\".\"image_id\" = \"images\".\"image_id\"  LEFT  JOIN \"big_images\" ON \"soft\".\"bigimage_id\" = \"big_images\".\"big_images_id\"  LEFT  JOIN file  ON soft.file_id = file.file_id   WHERE  \"soft\".\"site_id\" = "
-					+ site_id
-					+ " and \"soft\".\"name\" LIKE '%"
-					+ searchValueArg
-					+ "' ORDER BY \"soft\".\"soft_id\" DESC limit 10 offset "
-					+ offset;
+					+ site_id + " and \"soft\".\"name\" LIKE '%" + searchValueArg
+					+ "' ORDER BY \"soft\".\"soft_id\" DESC limit 10 offset " + offset;
 		else
 			query = "SELECT  \"soft\".\"soft_id\", \"soft\".\"name\",\"soft\".\"description\", \"soft\".\"version\", \"soft\".\"cost\", \"soft\".\"currency\", \"soft\".\"serial_nubmer\", \"file\".\"file_id\", \"soft\".\"type_id\", \"soft\".\"active\" , \"soft\".\"phonetype_id\" , \"soft\".\"progname_id\"  , \"soft\".\"image_id\" , \"images\".\"img_url\" , \"soft\".\"fulldescription\" , \"big_images\".\"img_url\"  FROM \"soft\" LEFT  JOIN \"images\" ON \"soft\".\"image_id\" = \"images\".\"image_id\"  LEFT  JOIN \"big_images\" ON \"soft\".\"bigimage_id\" = \"big_images\".\"big_images_id\"  LEFT  JOIN file  ON soft.file_id = file.file_id  WHERE \"soft\".\"catalog_id\" = "
-					+ catalog_id
-					+ " and  \"soft\".\"active\" = true  and \"soft\".\"site_id\" = "
-					+ site_id
-					+ "   ORDER BY \"soft\".\"soft_id\" DESC limit 10 offset "
-					+ offset;
+					+ catalog_id + " and  \"soft\".\"active\" = true  and \"soft\".\"site_id\" = " + site_id
+					+ "   ORDER BY \"soft\".\"soft_id\" DESC limit 10 offset " + offset;
 
 		// "LEFT JOIN file ON soft.file_id = file.file_id " +
 
-		try 
-		{
+		try {
 			Adp.executeQuery(query);
-			
+
 			for (int i = 0; Adp.rows().size() > i; i = i + 2) {
 				rows[i][0] = (String) Adp.getValueAt(i, 0);
-				rows[i][1] = Adp.getValueAt(i, 7) == null ? "" : Adp.getValueAt(i,
-						7);
+				rows[i][1] = Adp.getValueAt(i, 7) == null ? "" : Adp.getValueAt(i, 7);
 				// rows[i][1] = Adp.getValueAt(i, 7) ; //== null
 				// ?"":Adp.getValueAt(i, 7) ;
 
@@ -184,7 +158,7 @@ public class ShopListBean implements java.io.Serializable  {
 				product_description = (String) Adp.getValueAt(i, 2);
 				product_cost = (String) Adp.getValueAt(i, 4);
 				currency_id = (String) Adp.getValueAt(i, 5);
-				CurrencyHash currencyHash = CurrencyHash.getInstance() ;
+				CurrencyHash currencyHash = CurrencyHash.getInstance();
 				currency_desc = currencyHash.getCurrency_decs(currency_id);
 				// Currency curr = CurrencyHash.getCurrency(currency_id);
 				// if(curr == null) throw new
@@ -203,8 +177,7 @@ public class ShopListBean implements java.io.Serializable  {
 				table.append("<image></image>\n");
 				// Referece to pruduct
 				table.append("<policy_url>" + product_url + "</policy_url>\n");
-				table.append("<description>" + product_description
-						+ "</description>\n");
+				table.append("<description>" + product_description + "</description>\n");
 				// table.append("<fulldescription>" + product_fulldescription +
 				// "</fulldescription>\n") ;
 				table.append("<amount>" + product_cost + "</amount>\n");
@@ -218,8 +191,7 @@ public class ShopListBean implements java.io.Serializable  {
 				if (Adp.rows().size() > (i + 1)) {
 					product_url2 = "Policy.jsp?row=" + (i + 1);
 					rows[i + 1][0] = (String) Adp.getValueAt(i + 1, 0);
-					rows[i + 1][1] = Adp.getValueAt(i + 1, 7) == null ? "" : Adp
-							.getValueAt(i + 1, 7);
+					rows[i + 1][1] = Adp.getValueAt(i + 1, 7) == null ? "" : Adp.getValueAt(i + 1, 7);
 					// rows[i+1][1] = (String)Adp.getValueAt(i+1,7) ;
 					product_name2 = (String) Adp.getValueAt(i + 1, 1);
 					img_url2 = (String) Adp.getValueAt(i + 1, 13);
@@ -232,15 +204,13 @@ public class ShopListBean implements java.io.Serializable  {
 					currency_id2 = (String) Adp.getValueAt(i + 1, 5);
 					currency_desc2 = currencyHash.getCurrency_decs(currency_id2);
 					table.append("<left>\n");
-					table.append("<product_id>" + rows[i + 1][0]
-							+ "</product_id>\n");
+					table.append("<product_id>" + rows[i + 1][0] + "</product_id>\n");
 					table.append("<row_id>" + (i + 1) + "</row_id>\n");
 					table.append("<name>" + product_name2 + "</name>\n");
 					table.append("<icon>" + product_iconurl2 + "</icon>\n");
 					table.append("<image></image>\n");
 					table.append("<policy_url>" + product_url2 + "</policy_url>\n");
-					table.append("<description>" + product_description2
-							+ "</description>\n");
+					table.append("<description>" + product_description2 + "</description>\n");
 					table.append("<amount>" + product_cost2 + "</amount>\n");
 					table.append("<currency>\n");
 					table.append("<code>" + currency_cd + "</code>\n");
@@ -255,25 +225,15 @@ public class ShopListBean implements java.io.Serializable  {
 
 			table.append("</list>\n");
 
-			
-		} 
-		catch (SQLException ex) 
-		{
-		log.error(query,ex);
-		}
-		catch (Exception ex) 
-		{
-		log.error(ex);
-		}
-		finally
-		{
+		} catch (SQLException ex) {
+			log.error(query, ex);
+		} catch (Exception ex) {
+			log.error(ex);
+		} finally {
 			Adp.close();
 		}
-
 
 		return table.toString();
 	}
 
-	
-	
 }

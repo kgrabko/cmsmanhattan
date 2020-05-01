@@ -25,6 +25,7 @@ package com.cbsinc.cms.controllers;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -41,7 +42,7 @@ import com.cbsinc.cms.MerchantBean;
 import com.cbsinc.cms.OrderBean;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.faceds.OrderFaced;
-import com.cbsinc.cms.jms.controllers.MQSender;
+import com.cbsinc.cms.jms.controllers.MessageSender;
 import com.cbsinc.cms.jms.controllers.Message;
 import com.cbsinc.cms.jms.controllers.SendMailMessageBean;
 
@@ -49,17 +50,14 @@ import com.cbsinc.cms.jms.controllers.SendMailMessageBean;
 public class MerchantAction  implements IAction
 {
 
-	AuthorizationPageFaced authorizationPageFaced ;
-	//ResourceBundle resources = null ;
-	OrderFaced orderFaced = null ;
+	private AuthorizationPageFaced authorizationPageFaced ;
+
+	private OrderFaced orderFaced = null ;
 	
 	public boolean isInternet = true ;
 	
-	
 	public MerchantAction() {
-		// TODO Auto-generated constructor stub
 	}
-	
 	   
 
 	public void mappingForm(HttpServletRequest request,  MerchantBean merchantBean) throws Exception
@@ -112,11 +110,9 @@ public class MerchantAction  implements IAction
 	public void doPost(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) throws Exception 
 	{
 		
-		
-		
 		MerchantBean merchantBean = null ;
-		HashMap messageMail ;
-		AuthorizationPageBean AuthorizationPageBeanId ;
+		Map messageMail ;
+		AuthorizationPageBean authorizationPageBeanId ;
 		AccountHistoryBean accountHistoryBeanId ;
 		HttpSession session ;
 		
@@ -124,17 +120,15 @@ public class MerchantAction  implements IAction
 		if(request.getRemoteAddr().startsWith("10."))isInternet = false ;
 		
 		session = request.getSession();
-		 if(orderFaced == null) orderFaced = ServiceLocator.getInstance().getOrderFaced();
-	    if(authorizationPageFaced == null)  authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
-		AuthorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("AuthorizationPageBeanId");
+		 if(orderFaced == null) orderFaced = ServiceLocator.getInstance().getOrderFaced().get();
+	    if(authorizationPageFaced == null)  authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
+		authorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("authorizationPageBeanId");
 		accountHistoryBeanId = (AccountHistoryBean)session.getAttribute("accountHistoryBeanId");
 		merchantBean = (MerchantBean) session.getAttribute("merchantBean") ;
-		//merchantBean = new MerchantBean();
-		//if(merchantBean == null)request.setAttribute("merchantBean", merchantBean);
 		
 		
-		messageMail = (HashMap)session.getAttribute("messageMail");
-		if( AuthorizationPageBeanId == null || accountHistoryBeanId == null  || merchantBean == null  ) return ;
+		messageMail = (Map)session.getAttribute("messageMail");
+		if( authorizationPageBeanId == null || accountHistoryBeanId == null  || merchantBean == null  ) return ;
 		
 		
 		request.setCharacterEncoding("UTF-8"); 
@@ -142,8 +136,8 @@ public class MerchantAction  implements IAction
 		mappingForm(request,  merchantBean) ;
 		
 		messageMail.clear();
-		messageMail.put("@FirstName", AuthorizationPageBeanId.getStrFirstName() ) ;
-		messageMail.put("@LastName", AuthorizationPageBeanId.getStrLastName() ) ;
+		messageMail.put("@FirstName", authorizationPageBeanId.getStrFirstName() ) ;
+		messageMail.put("@LastName", authorizationPageBeanId.getStrLastName() ) ;
 		messageMail.put("@CName",merchantBean.getcName()) ;
 		
 		messageMail.put("@TradeMark",merchantBean.getTradeMark());
@@ -190,10 +184,10 @@ public class MerchantAction  implements IAction
 
 		System.out.println("merchant path: "  + merchant   ) ; 
 		
-        AuthorizationPageBean ownerShop = authorizationPageFaced.getAuthorizationBeanOfRoleAdmin(AuthorizationPageBeanId.getSite_id());
+        AuthorizationPageBean ownerShop = authorizationPageFaced.getAuthorizationBeanOfRoleAdmin(authorizationPageBeanId.getSite_id());
        // messageMail.put("@ShopEmail", ownerShop.getStrEMail() ) ;
 		
-		MQSender mqSender = new MQSender( request.getSession(),SendMailMessageBean.messageQuery) ;
+		MessageSender mqSender = new MessageSender( request.getSession(),SendMailMessageBean.messageQuery) ;
 		Message message = new Message();
 		message.put("to" , ownerShop.getStrEMail()  ) ;
 		message.put("subject" , "Merchant appication") ;
@@ -201,7 +195,7 @@ public class MerchantAction  implements IAction
 		message.put("fields" , messageMail ) ;
 		mqSender.send(message);
 
-		AuthorizationPageBeanId.setStrMessage(" - Appication was sent to manager.");
+		authorizationPageBeanId.setStrMessage(" - Appication was sent to manager.");
 	}
 
 	

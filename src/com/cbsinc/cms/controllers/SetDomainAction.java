@@ -1,5 +1,7 @@
 package com.cbsinc.cms.controllers;
 
+import java.util.Optional;
+
 /**
  * <p>
  * Title: Content Manager System
@@ -29,49 +31,31 @@ import javax.servlet.http.HttpSession;
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 
+public class SetDomainAction  extends TemplateAction {
 
-public class SetDomainAction  implements IAction
-{
+	public boolean isInternet = true;
 
-	AuthorizationPageBean authorizationPageBean ;
-	AuthorizationPageFaced authorizationPageFaced ;
-	HttpSession session ;
-	public boolean isInternet = true ;
-	
 	public SetDomainAction() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	
-	
-	public void doPost(HttpServletRequest request, HttpServletResponse response , ServletContext  servletContext) throws Exception
-	{
-		action( request,  response,  servletContext) ;
 	}
 
 
+	@Override
+	public void action(Optional<HttpServletRequest> requestOpts, Optional<HttpServletResponse> responseOpts,
+			Optional<ServletContext> servletContextOpts) throws Exception {
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) throws Exception 
-	{
-		action( request,  response,  servletContext) ;
-	}
-
-
-	public void action(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) throws Exception 
-	{
-		session = request.getSession();
-		if(authorizationPageFaced == null)  authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
-		authorizationPageBean = (AuthorizationPageBean)session.getAttribute("AuthorizationPageBeanId");
-		if( authorizationPageBean == null  ) return ;
-		request.setCharacterEncoding("UTF-8"); 
-		String host = request.getParameter("domain") ;
-		if(host != null){
-		authorizationPageBean.setHost(host);
-		authorizationPageFaced.saveNewDomain(authorizationPageBean.getHost(),authorizationPageBean.getSite_id() ) ;
-		request.setAttribute("message","host name changed successfully.");
+		AuthorizationPageBean authorizationPageBean = getAuthorizationPageBean().get() ;
+		AuthorizationPageFaced authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
+		HttpServletRequest request  = requestOpts.get() ;
+		
+		if (authorizationPageBean == null) return;
+		request.setCharacterEncoding("UTF-8");
+		String host = request.getParameter("domain");
+		if (host != null) {
+			authorizationPageBean.setHost(host);
+			authorizationPageFaced.saveNewDomain(authorizationPageBean.getHost(), authorizationPageBean.getSite_id());
+			request.setAttribute("message", "host name changed successfully.");
 		}
 		
 	}
-	
-	
+
 }

@@ -1,5 +1,8 @@
 package com.cbsinc.cms;
 
+import java.io.CharArrayWriter;
+import java.io.File;
+
 /**
  * <p>
  * Title: Content Manager System
@@ -21,15 +24,10 @@ package com.cbsinc.cms;
  * @version 1.0
  */
 
-
-
 import java.io.IOException;
-import java.io.CharArrayWriter;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.StringReader;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -46,10 +44,8 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+
 import org.apache.log4j.Logger;
-
-import com.cbsinc.cms.AuthorizationPageBean;
-
 
 /**
  * Filter class
@@ -59,7 +55,7 @@ import com.cbsinc.cms.AuthorizationPageBean;
  * @web.filter-mapping url-pattern="/Shoplist.jsp"
  * @web.filter-init-param name="A parameter" value="A value"
  */
-public class ShoplistFilter  implements Filter {
+public class ShoplistFilter implements Filter {
 	/**
 	 * 
 	 */
@@ -76,33 +72,26 @@ public class ShoplistFilter  implements Filter {
 		this.filterConfig = filterConfig;
 
 		/*
-		 * // xsltPath should be something like "/WEB-INF/xslt/a.xslt" String
-		 * xsltPath = filterConfig.getInitParameter("xsltFileName"); if
-		 * (xsltPath == null) { throw new UnavailableException( "xsltPath is a
-		 * required parameter. Please " + "check the deployment descriptor."); }
-		 *  // convert the context-relative path to a physical path name
-		 * this.xsltFileName = filterConfig.getServletContext(
-		 * ).getRealPath(xsltPath);
-		 *  // verify that the file exists if (this.xsltFileName == null || !new
+		 * // xsltPath should be something like "/WEB-INF/xslt/a.xslt" String xsltPath =
+		 * filterConfig.getInitParameter("xsltFileName"); if (xsltPath == null) { throw
+		 * new UnavailableException( "xsltPath is a required parameter. Please
+		 * " + "check the deployment descriptor."); } // convert the context-relative
+		 * path to a physical path name this.xsltFileName =
+		 * filterConfig.getServletContext( ).getRealPath(xsltPath); // verify that the
+		 * file exists if (this.xsltFileName == null || !new
 		 * File(this.xsltFileName).exists( )) { throw new UnavailableException(
 		 * "Unable to locate stylesheet: " + this.xsltFileName, 30); }
 		 */
 	}
 
-	public void doFilter(ServletRequest request, ServletResponse response,
-				FilterChain chain) throws IOException, ServletException {
-			HttpSession hsession = ((HttpServletRequest) request).getSession(false);
-			AuthorizationPageBean authorizationPageBeanId;
-			if (hsession != null) {
-				if (hsession.getAttribute("AuthorizationPageBeanId") instanceof AuthorizationPageBean) {
-					authorizationPageBeanId = ((AuthorizationPageBean) hsession
-							.getAttribute("AuthorizationPageBeanId"));
-					if (authorizationPageBeanId.getStrLogin().length() == 0) {
-						((HttpServletResponse) response).sendRedirect("index.jsp");
-						return;
-					}
-
-				} else {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+		HttpSession hsession = ((HttpServletRequest) request).getSession(false);
+		AuthorizationPageBean authorizationPageBeanId;
+		if (hsession != null) {
+			if (hsession.getAttribute("AuthorizationPageBeanId") instanceof AuthorizationPageBean) {
+				authorizationPageBeanId = ((AuthorizationPageBean) hsession.getAttribute("AuthorizationPageBeanId"));
+				if (authorizationPageBeanId.getStrLogin().length() == 0) {
 					((HttpServletResponse) response).sendRedirect("index.jsp");
 					return;
 				}
@@ -112,55 +101,49 @@ public class ShoplistFilter  implements Filter {
 				return;
 			}
 
-			StringBuffer buffString = new StringBuffer("/xsl/");
-			buffString.append(authorizationPageBeanId.getSite_dir().trim());
-			buffString.append("/shoplist.xsl");
-			this.xsltFileName = filterConfig.getServletContext().getRealPath(
-					buffString.toString());
-			if (this.xsltFileName == null || !new File(this.xsltFileName).exists()) {
-				throw new UnavailableException("Unable to locate stylesheet: "
-						+ this.xsltFileName, 30);
-			}
+		} else {
+			((HttpServletResponse) response).sendRedirect("index.jsp");
+			return;
+		}
 
-			Source styleSource = new StreamSource(new File(xsltFileName));
-			byte[] htmlBytes ;
-			String htmlData = "";
-			ServletOutputStream out  = response.getOutputStream();
-			CharResponseWrapper responseWrapper = new CharResponseWrapper(
-					(HttpServletResponse) response);
-			chain.doFilter(request, responseWrapper);
-			// Get response from servlet
-			StringReader sr = new StringReader(
-					new String(responseWrapper.getData()).trim());
-			Source xmlSource = new StreamSource((Reader) sr);
+		StringBuffer buffString = new StringBuffer("/xsl/");
+		buffString.append(authorizationPageBeanId.getSite_dir().trim());
+		buffString.append("/shoplist.xsl");
+		this.xsltFileName = filterConfig.getServletContext().getRealPath(buffString.toString());
+		if (this.xsltFileName == null || !new File(this.xsltFileName).exists()) {
+			throw new UnavailableException("Unable to locate stylesheet: " + this.xsltFileName, 30);
+		}
 
-			try {
-				TransformerFactory transformerFactory = TransformerFactory.newInstance();
-				Transformer transformer = transformerFactory.newTransformer(styleSource);
-				CharArrayWriter caw = new CharArrayWriter();
-				StreamResult result = new StreamResult(caw);
-				transformer.transform(xmlSource, result);
-				htmlData = caw.toString();
-				htmlBytes = htmlData.getBytes("UTF-8") ;
-				response.setContentLength(htmlBytes.length);
-				out.write(htmlBytes);
-				out.flush();
-			}
-			catch (Exception ex) 
-			{
-				log.error(ex) ;
-				out.println(ex.toString());
-			}
-			finally
-			{
-				out.close();	
-			}
-			
-			
-		}  
-	    
-	
-	
+		Source styleSource = new StreamSource(new File(xsltFileName));
+		byte[] htmlBytes;
+		String htmlData = "";
+		ServletOutputStream out = response.getOutputStream();
+		CharResponseWrapper responseWrapper = new CharResponseWrapper((HttpServletResponse) response);
+		chain.doFilter(request, responseWrapper);
+		// Get response from servlet
+		StringReader sr = new StringReader(new String(responseWrapper.getData()).trim());
+		Source xmlSource = new StreamSource((Reader) sr);
+
+		try {
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			Transformer transformer = transformerFactory.newTransformer(styleSource);
+			CharArrayWriter caw = new CharArrayWriter();
+			StreamResult result = new StreamResult(caw);
+			transformer.transform(xmlSource, result);
+			htmlData = caw.toString();
+			htmlBytes = htmlData.getBytes("UTF-8");
+			response.setContentLength(htmlBytes.length);
+			out.write(htmlBytes);
+			out.flush();
+		} catch (Exception ex) {
+			log.error(ex);
+			out.println(ex.toString());
+		} finally {
+			out.close();
+		}
+
+	}
+
 	/**
 	 * The counterpart to the init( ) method.
 	 */

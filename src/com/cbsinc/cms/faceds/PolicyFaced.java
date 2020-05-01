@@ -30,7 +30,7 @@ import org.apache.log4j.Logger;
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.Currency;
 import com.cbsinc.cms.CurrencyHash;
-import com.cbsinc.cms.PolicyBean;
+import com.cbsinc.cms.ItemDescriptionBean;
 import com.cbsinc.cms.QueryManager;
 import com.cbsinc.cms.controllers.Layout;
 import com.cbsinc.cms.exceptions.LocalException;
@@ -80,7 +80,7 @@ public class PolicyFaced extends com.cbsinc.cms.WebControls implements
 	}
 
 	
-	final public long incrementShowPage(final PolicyBean policyBean ) throws SQLException {
+	final public long incrementShowPage(final ItemDescriptionBean policyBean ) throws SQLException {
 		QueryManager Adp = new QueryManager();
 		Adp.BeginTransaction();
 		long statictic = 0 ;
@@ -109,7 +109,7 @@ public class PolicyFaced extends com.cbsinc.cms.WebControls implements
 		return statictic ;
 	}
 	
-	final	public long payMoneyForShowPage(final PolicyBean policyBean , final AuthorizationPageBean authorizationPageBean  , final String userIPAddress  ) throws Exception {
+	final	public long payMoneyForShowPage(final ItemDescriptionBean policyBean , final AuthorizationPageBean authorizationPageBean  , final String userIPAddress  ) throws Exception {
 		
 		if( authorizationPageBean.getIntLevelUp() == 2 ) return 0 ;
 		
@@ -418,7 +418,7 @@ public class PolicyFaced extends com.cbsinc.cms.WebControls implements
 	 * @throws Exception 
 	 */
 
-	final public void  mergePolicyBean(final long user_id, final String productId	, final PolicyBean policyBeanId  ) 
+	final public void  mergePolicyBean(final long user_id, final String productId	, final ItemDescriptionBean policyBeanId  ) 
 	{
 		
 		QueryManager Adp = new QueryManager();
@@ -585,7 +585,7 @@ public class PolicyFaced extends com.cbsinc.cms.WebControls implements
 	 * @throws Exception 
 	 */
 
-	final public void  mergePolicyBeanForAboutPage(final String siteId	, final PolicyBean policyBeanId  ) 
+	final public void  mergePolicyBeanForAboutPage(final String siteId	, final ItemDescriptionBean policyBeanId  ) 
 	{
 		
 		QueryManager Adp = new QueryManager();
@@ -746,7 +746,7 @@ public class PolicyFaced extends com.cbsinc.cms.WebControls implements
 	 * @throws Exception 
 	 */
 
-	final public void  mergePolicyBeanForPayPageInfo(final String siteId	, final PolicyBean policyBeanId  ) 
+	final public void  mergePolicyBeanForPayPageInfo(final String siteId	, final ItemDescriptionBean policyBeanId  ) 
 	{
 		
 		QueryManager Adp = new QueryManager();

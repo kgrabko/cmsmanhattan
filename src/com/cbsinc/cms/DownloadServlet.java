@@ -21,8 +21,6 @@ package com.cbsinc.cms;
  * @version 1.0
  */
 
-
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -60,9 +58,8 @@ import com.cbsinc.cms.AuthorizationPageBean;
  */
 public class DownloadServlet extends HttpServlet {
 
-	
 	static private Logger log = Logger.getLogger(DownloadServlet.class);
-	
+
 	private static final long serialVersionUID = 1L;
 
 	String strDevice = "";
@@ -98,8 +95,8 @@ public class DownloadServlet extends HttpServlet {
 	Vector rows = new Vector();
 
 	String[] columnNames = {};
-	ResourceBundle localization = null ;
-	
+	ResourceBundle localization = null;
+
 	public static ResourceBundle resources_ds;
 
 	// Class[] columnTpyes = {};
@@ -112,318 +109,274 @@ public class DownloadServlet extends HttpServlet {
 	// application/zip
 	// application/x-zip-compressed
 	// Initialize global variables
-	public void init() throws ServletException 
-	{
+	public void init() throws ServletException {
 		if (resources_ds == null)
 			resources_ds = PropertyResourceBundle.getBundle("driver");
 	}
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException
-{
-    processRequest(request, response);
-}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		processRequest(request, response);
+	}
 
-protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException
-{
-    processRequest(request, response);
-}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		processRequest(request, response);
+	}
 
-protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException
-{
-   
-	if( localization == null )   localization = PropertyResourceBundle.getBundle("localization", request.getLocale());
-	else if( !localization.getLocale().getLanguage().equals(request.getLocale().getLanguage())  ) localization = PropertyResourceBundle.getBundle("localization", request.getLocale());
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-	
-	if(request.getSession().getAttribute("ProductlistBeanId") instanceof ProductlistBean)
-    {
-        strDevice = "xml";
-        ProductlistBeanId = (ProductlistBean)request.getSession().getAttribute("ProductlistBeanId");
-    }
-    AuthorizationPageBeanId = (AuthorizationPageBean)request.getSession().getAttribute("AuthorizationPageBeanId");
-    String strRow = request.getParameter("row");
-    if(strRow == null)
-        row = 0;
-    else
-        row = Integer.parseInt(strRow);
-    if(strDevice != null)
-    {
-        if("xml".compareTo(strDevice) == 0)
-        {
-            soft_id = ProductlistBeanId.rows[row][0];
-            file_id = ProductlistBeanId.rows[row][1];
-        }
-        if(file_id.length() == 0)
-        {
-            AuthorizationPageBeanId.setStrMessage("?\uFFFD???\uFFFD ?\uFFFD????????.");
-            response.sendRedirect("Policy.jsp");
-            return;
-        }
-        if(soft_id.length() == 0)
-        {
-            AuthorizationPageBeanId.setStrMessage("?\uFFFD???\uFFFD ?\uFFFD?????????? ???\uFFFD?????\uFFFD???\uFFFD??.");
-            response.sendRedirect("Policy.jsp");
-            return;
-        }
-    }
-    filename = setFileNameByFile_ID(file_id);
-    OpenConnection("jdbc:postgresql://127.0.0.1:5432/mobilsoftutf8");
-    String CONTENT_TYPE = "application/octet-stream";
-    String ext = "";
-    ext = filename.substring(filename.lastIndexOf(".") + 1, filename.length());
-    ext = ext.toLowerCase();
-    if(ext.compareTo("jar") == 0)
-        CONTENT_TYPE = "application/java-archive";
-    if(ext.compareTo("jad") == 0)
-        CONTENT_TYPE = "text/vnd.sun.j2me.app-descriptor";
-    if(ext.compareTo("wml") == 0)
-        CONTENT_TYPE = "text/vnd.wap.wml";
-    if(ext.compareTo("mid") == 0)
-        CONTENT_TYPE = "audio/x-midi";
-    if(ext.compareTo("midi") == 0)
-        CONTENT_TYPE = "audio/x-midi";
-    if(ext.compareTo("wbmp") == 0)
-        CONTENT_TYPE = "image/vnd.wap.wbmp";
-    if(ext.compareTo("wml") == 0)
-        CONTENT_TYPE = "text/vnd.wap.wml";
-    if(ext.compareTo("wmlc") == 0)
-        CONTENT_TYPE = "application/vnd.wap.wmlc";
-    if(ext.compareTo("wmlscriptc") == 0)
-        CONTENT_TYPE = "application/vnd.wap.wmlscriptc";
-    if(ext.compareTo("jpe") == 0)
-        CONTENT_TYPE = "image/jpeg";
-    if(ext.compareTo("jpeg") == 0)
-        CONTENT_TYPE = "image/jpeg";
-    if(ext.compareTo("jpg") == 0)
-        CONTENT_TYPE = "image/jpeg";
-    if(ext.compareTo("gif") == 0)
-        CONTENT_TYPE = "image/gif";
-    if(ext.compareTo("mov") == 0)
-        CONTENT_TYPE = "video/quicktime";
-    if(ext.compareTo("movie") == 0)
-        CONTENT_TYPE = "video/x-sgi-movie";
-    if(ext.compareTo("mp1") == 0)
-        CONTENT_TYPE = "audio/x-mpeg";
-    if(ext.compareTo("mp2") == 0)
-        CONTENT_TYPE = "audio/x-mpeg";
-    if(ext.compareTo("mp3") == 0)
-        CONTENT_TYPE = "audio/x-mpeg";
-    if(ext.compareTo("mp4") == 0)
-        CONTENT_TYPE = "audio/x-mpeg";
-    if(ext.compareTo("mpa") == 0)
-        CONTENT_TYPE = "audio/x-mpeg";
-    if(ext.compareTo("mpe") == 0)
-        CONTENT_TYPE = "video/mpeg";
-    if(ext.compareTo("mpeg") == 0)
-        CONTENT_TYPE = "video/mpeg";
-    if(ext.compareTo("mpega") == 0)
-        CONTENT_TYPE = "audio/x-mpeg";
-    if(ext.compareTo("mpg") == 0)
-        CONTENT_TYPE = "video/mpeg";
-    if(ext.compareTo("mpv2") == 0)
-        CONTENT_TYPE = "video/mpeg2";
-    if(ext.compareTo("divx") == 0)
-        CONTENT_TYPE = "video/mpeg4";
-    response.setContentType(CONTENT_TYPE);
-    response.setHeader("Content-disposition", (new StringBuilder("attachment;filename=")).append(filename).toString());
-    ServletOutputStream servletoutputstream = response.getOutputStream();
-    if(ext.compareTo("jad") == 0)
-    {
-        String jad = getBObj(servletoutputstream, false);
-        int sjad = jad.indexOf("MIDlet-Jar-URL:");
-        String jad1 = jad.substring(0, sjad + "MIDlet-Jar-URL:".length());
-        int ejad = jad.indexOf("MIDlet-Name:");
-        String jad2 = jad.substring(ejad);
-        String makejar = (new StringBuilder(String.valueOf(filename.substring(0, filename.length() - 1)))).append("r").toString();
-        String midl_jar_url = (new StringBuilder(" midlets/")).append(makejar).append("\n").toString();
-        jad = (new StringBuilder(String.valueOf(jad1))).append(midl_jar_url).append(jad2).toString();
-        servletoutputstream.write(jad.getBytes());
-    } else
-    {
-        getBObj(servletoutputstream, true);
-    }
-    servletoutputstream.flush();
-    servletoutputstream.close();
-    close();
-    setPassiveRow(soft_id);
-}
+		if (localization == null)
+			localization = PropertyResourceBundle.getBundle("localization", request.getLocale());
+		else if (!localization.getLocale().getLanguage().equals(request.getLocale().getLanguage()))
+			localization = PropertyResourceBundle.getBundle("localization", request.getLocale());
 
-public void destroy()
-{
-}
+		if (request.getSession().getAttribute("ProductlistBeanId") instanceof ProductlistBean) {
+			strDevice = "xml";
+			ProductlistBeanId = (ProductlistBean) request.getSession().getAttribute("ProductlistBeanId");
+		}
+		AuthorizationPageBeanId = (AuthorizationPageBean) request.getSession().getAttribute("AuthorizationPageBeanId");
+		String strRow = request.getParameter("row");
+		if (strRow == null)
+			row = 0;
+		else
+			row = Integer.parseInt(strRow);
+		if (strDevice != null) {
+			if ("xml".compareTo(strDevice) == 0) {
+				soft_id = ProductlistBeanId.rows[row][0];
+				file_id = ProductlistBeanId.rows[row][1];
+			}
+			if (file_id.length() == 0) {
+				AuthorizationPageBeanId.setStrMessage("?\uFFFD???\uFFFD ?\uFFFD????????.");
+				response.sendRedirect("Policy.jsp");
+				return;
+			}
+			if (soft_id.length() == 0) {
+				AuthorizationPageBeanId
+						.setStrMessage("?\uFFFD???\uFFFD ?\uFFFD?????????? ???\uFFFD?????\uFFFD???\uFFFD??.");
+				response.sendRedirect("Policy.jsp");
+				return;
+			}
+		}
+		filename = setFileNameByFile_ID(file_id);
+		OpenConnection("jdbc:postgresql://127.0.0.1:5432/mobilsoftutf8");
+		String CONTENT_TYPE = "application/octet-stream";
+		String ext = "";
+		ext = filename.substring(filename.lastIndexOf(".") + 1, filename.length());
+		ext = ext.toLowerCase();
+		if (ext.compareTo("jar") == 0)
+			CONTENT_TYPE = "application/java-archive";
+		if (ext.compareTo("jad") == 0)
+			CONTENT_TYPE = "text/vnd.sun.j2me.app-descriptor";
+		if (ext.compareTo("wml") == 0)
+			CONTENT_TYPE = "text/vnd.wap.wml";
+		if (ext.compareTo("mid") == 0)
+			CONTENT_TYPE = "audio/x-midi";
+		if (ext.compareTo("midi") == 0)
+			CONTENT_TYPE = "audio/x-midi";
+		if (ext.compareTo("wbmp") == 0)
+			CONTENT_TYPE = "image/vnd.wap.wbmp";
+		if (ext.compareTo("wml") == 0)
+			CONTENT_TYPE = "text/vnd.wap.wml";
+		if (ext.compareTo("wmlc") == 0)
+			CONTENT_TYPE = "application/vnd.wap.wmlc";
+		if (ext.compareTo("wmlscriptc") == 0)
+			CONTENT_TYPE = "application/vnd.wap.wmlscriptc";
+		if (ext.compareTo("jpe") == 0)
+			CONTENT_TYPE = "image/jpeg";
+		if (ext.compareTo("jpeg") == 0)
+			CONTENT_TYPE = "image/jpeg";
+		if (ext.compareTo("jpg") == 0)
+			CONTENT_TYPE = "image/jpeg";
+		if (ext.compareTo("gif") == 0)
+			CONTENT_TYPE = "image/gif";
+		if (ext.compareTo("mov") == 0)
+			CONTENT_TYPE = "video/quicktime";
+		if (ext.compareTo("movie") == 0)
+			CONTENT_TYPE = "video/x-sgi-movie";
+		if (ext.compareTo("mp1") == 0)
+			CONTENT_TYPE = "audio/x-mpeg";
+		if (ext.compareTo("mp2") == 0)
+			CONTENT_TYPE = "audio/x-mpeg";
+		if (ext.compareTo("mp3") == 0)
+			CONTENT_TYPE = "audio/x-mpeg";
+		if (ext.compareTo("mp4") == 0)
+			CONTENT_TYPE = "audio/x-mpeg";
+		if (ext.compareTo("mpa") == 0)
+			CONTENT_TYPE = "audio/x-mpeg";
+		if (ext.compareTo("mpe") == 0)
+			CONTENT_TYPE = "video/mpeg";
+		if (ext.compareTo("mpeg") == 0)
+			CONTENT_TYPE = "video/mpeg";
+		if (ext.compareTo("mpega") == 0)
+			CONTENT_TYPE = "audio/x-mpeg";
+		if (ext.compareTo("mpg") == 0)
+			CONTENT_TYPE = "video/mpeg";
+		if (ext.compareTo("mpv2") == 0)
+			CONTENT_TYPE = "video/mpeg2";
+		if (ext.compareTo("divx") == 0)
+			CONTENT_TYPE = "video/mpeg4";
+		response.setContentType(CONTENT_TYPE);
+		response.setHeader("Content-disposition",
+				(new StringBuilder("attachment;filename=")).append(filename).toString());
+		ServletOutputStream servletoutputstream = response.getOutputStream();
+		if (ext.compareTo("jad") == 0) {
+			String jad = getBObj(servletoutputstream, false);
+			int sjad = jad.indexOf("MIDlet-Jar-URL:");
+			String jad1 = jad.substring(0, sjad + "MIDlet-Jar-URL:".length());
+			int ejad = jad.indexOf("MIDlet-Name:");
+			String jad2 = jad.substring(ejad);
+			String makejar = (new StringBuilder(String.valueOf(filename.substring(0, filename.length() - 1))))
+					.append("r").toString();
+			String midl_jar_url = (new StringBuilder(" midlets/")).append(makejar).append("\n").toString();
+			jad = (new StringBuilder(String.valueOf(jad1))).append(midl_jar_url).append(jad2).toString();
+			servletoutputstream.write(jad.getBytes());
+		} else {
+			getBObj(servletoutputstream, true);
+		}
+		servletoutputstream.flush();
+		servletoutputstream.close();
+		close();
+		setPassiveRow(soft_id);
+	}
 
-public String getBObj(OutputStream out, boolean check)
-{
-    StringBuffer rez = new StringBuffer();
-    try
-    {
-        ByteArrayInputStream bs = null;
-        conn.setAutoCommit(false);
-        LargeObjectManager lobj = ((PGConnection)conn).getLargeObjectAPI();
-        PreparedStatement ps = conn.prepareStatement("SELECT filedata FROM file  WHERE  file_id=?");
-        ps.setString(1, file_id);
-        ResultSet rs = ps.executeQuery();
-        if(rs != null)
-        {
-            LargeObject obj;
-            for(; rs.next(); obj.close())
-            {
-                int oid = rs.getInt(1);
-                obj = lobj.open(oid, 0x40000);
-                byte buf[] = new byte[obj.size()];
-                obj.read(buf, 0, obj.size());
-                bs = new ByteArrayInputStream(buf);
-            }
+	public void destroy() {
+	}
 
-            rs.close();
-        }
-        ps.close();
-        conn.commit();
-        if(check)
-        {
-            byte buf[] = new byte[2048];
-            int tl = 0;
-            if(bs == null)
-                return null;
-            int s;
-            while((s = bs.read(buf, 0, 2048)) > 0) 
-            {
-                out.write(buf, 0, s);
-                tl += s;
-            }
-        } else
-        {
-            if(bs == null)
-                return null;
-            for(int b = 0; (b = bs.read()) != -1;)
-                rez.append(b);
+	public String getBObj(OutputStream out, boolean check) {
+		StringBuffer rez = new StringBuffer();
+		try {
+			ByteArrayInputStream bs = null;
+			conn.setAutoCommit(false);
+			LargeObjectManager lobj = ((PGConnection) conn).getLargeObjectAPI();
+			PreparedStatement ps = conn.prepareStatement("SELECT filedata FROM file  WHERE  file_id=?");
+			ps.setString(1, file_id);
+			ResultSet rs = ps.executeQuery();
+			if (rs != null) {
+				LargeObject obj;
+				for (; rs.next(); obj.close()) {
+					int oid = rs.getInt(1);
+					obj = lobj.open(oid, 0x40000);
+					byte buf[] = new byte[obj.size()];
+					obj.read(buf, 0, obj.size());
+					bs = new ByteArrayInputStream(buf);
+				}
 
-        }
-        bs.close();
-    }
-    catch(Exception e)
-    {
-        log.error(e);
-        System.out.println(e.toString());
-    }
-    return rez.substring(0);
-}
+				rs.close();
+			}
+			ps.close();
+			conn.commit();
+			if (check) {
+				byte buf[] = new byte[2048];
+				int tl = 0;
+				if (bs == null)
+					return null;
+				int s;
+				while ((s = bs.read(buf, 0, 2048)) > 0) {
+					out.write(buf, 0, s);
+					tl += s;
+				}
+			} else {
+				if (bs == null)
+					return null;
+				for (int b = 0; (b = bs.read()) != -1;)
+					rez.append(b);
 
-public void OpenConnection_old(String url)
-{
-    try
-    {
-        Class.forName("org.postgresql.Driver");
-        conn = DriverManager.getConnection(url, "postgres", "postgres");
-        stat = conn.createStatement();
-    }
-    catch(Exception e)
-    {
-        log.error(e);
-        System.err.println(e);
-        System.err.println((new StringBuilder()).append(getClass()).toString());
-        System.err.println("Method OpenConnection()");
-    }
-}
+			}
+			bs.close();
+		} catch (Exception e) {
+			log.error(e);
+			System.out.println(e.toString());
+		}
+		return rez.substring(0);
+	}
 
-public void OpenConnection(String url)
-{
-    try
-    {
-        Class.forName(resources_ds.getString("driver").trim());
-        Properties connProp = new Properties();
-        connProp.put("user", resources_ds.getString("user").trim());
-        connProp.put("password", resources_ds.getString("password").trim());
-        conn = DriverManager.getConnection(resources_ds.getString("url").trim(), connProp);
-        stat = conn.createStatement();
-    }
-    catch(Exception e)
-    {
-        log.error(e);
-        System.err.println((new StringBuilder("E: ")).append(e).toString());
-        close();
-    }
-}
+	public void OpenConnection_old(String url) {
+		try {
+			Class.forName("org.postgresql.Driver");
+			conn = DriverManager.getConnection(url, "postgres", "postgres");
+			stat = conn.createStatement();
+		} catch (Exception e) {
+			log.error(e);
+			System.err.println(e);
+			System.err.println((new StringBuilder()).append(getClass()).toString());
+			System.err.println("Method OpenConnection()");
+		}
+	}
 
-public void close()
-{
-    try
-    {
-        if(rs != null)
-            rs.close();
-        if(stat != null)
-            stat.close();
-        if(conn != null)
-            conn.close();
-    }
-    catch(SQLException ex)
-    {
-        log.error(ex);
-        System.err.println(ex);
-        System.err.println((new StringBuilder()).append(getClass()).toString());
-        System.err.println("Method close()");
-    }
-}
+	public void OpenConnection(String url) {
+		try {
+			Class.forName(resources_ds.getString("driver").trim());
+			Properties connProp = new Properties();
+			connProp.put("user", resources_ds.getString("user").trim());
+			connProp.put("password", resources_ds.getString("password").trim());
+			conn = DriverManager.getConnection(resources_ds.getString("url").trim(), connProp);
+			stat = conn.createStatement();
+		} catch (Exception e) {
+			log.error(e);
+			System.err.println((new StringBuilder("E: ")).append(e).toString());
+			close();
+		}
+	}
 
-public String getServletInfo()
-{
-    return "Short description";
-}
+	public void close() {
+		try {
+			if (rs != null)
+				rs.close();
+			if (stat != null)
+				stat.close();
+			if (conn != null)
+				conn.close();
+		} catch (SQLException ex) {
+			log.error(ex);
+			System.err.println(ex);
+			System.err.println((new StringBuilder()).append(getClass()).toString());
+			System.err.println("Method close()");
+		}
+	}
 
-public String setFileNameByFile_ID(String File_ID)
-{
-    String filename = "";
-    QueryManager Adp = new QueryManager();
-    String query = (new StringBuilder("select name  from file  where  file_id  = ")).append(File_ID).toString();
-    try
-    {
-        Adp.executeQuery(query);
-        if(Adp.rows().size() != 0) filename = Adp.getValueAt(0, 0);
-    }
-    catch(SQLException ex)
-    {
-        log.error(query,ex);
-        
-    }
-    catch(Exception ex)
-    {
-        log.error(ex);
-        
-    }
-    finally
-    {
-        Adp.close();    	
-    }
+	public String getServletInfo() {
+		return "Short description";
+	}
 
-    return filename;
-}
+	public String setFileNameByFile_ID(String File_ID) {
+		String filename = "";
+		QueryManager Adp = new QueryManager();
+		String query = (new StringBuilder("select name  from file  where  file_id  = ")).append(File_ID).toString();
+		try {
+			Adp.executeQuery(query);
+			if (Adp.rows().size() != 0)
+				filename = Adp.getValueAt(0, 0);
+		} catch (SQLException ex) {
+			log.error(query, ex);
 
-public void setPassiveRow(String soft_id)
-{
-    QueryManager Adp = new QueryManager();
-    String query = (new StringBuilder("UPDATE soft SET active = true  WHERE soft_id = ")).append(soft_id).toString();
-    try
-    {
-        Adp.executeUpdate(query);
-    }
-    catch(SQLException ex)
-    {
-        log.error(query,ex);
-        
-    }
-    catch(Exception ex)
-    {
-        log.error(ex);
-        
-    }
-    finally
-    {
-        Adp.close();    	
-    }
+		} catch (Exception ex) {
+			log.error(ex);
 
-}
+		} finally {
+			Adp.close();
+		}
+
+		return filename;
+	}
+
+	public void setPassiveRow(String soft_id) {
+		QueryManager Adp = new QueryManager();
+		String query = (new StringBuilder("UPDATE soft SET active = true  WHERE soft_id = ")).append(soft_id)
+				.toString();
+		try {
+			Adp.executeUpdate(query);
+		} catch (SQLException ex) {
+			log.error(query, ex);
+
+		} catch (Exception ex) {
+			log.error(ex);
+
+		} finally {
+			Adp.close();
+		}
+
+	}
 
 }

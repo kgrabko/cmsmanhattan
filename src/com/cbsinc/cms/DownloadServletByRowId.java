@@ -21,20 +21,17 @@ package com.cbsinc.cms;
  * @version 1.0
  */
 
-
-
 import java.sql.SQLException;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.Vector;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
-
-import com.cbsinc.cms.AuthorizationPageBean;
-
 
 /**
  * Servlet Class
@@ -69,7 +66,6 @@ public class DownloadServletByRowId extends HttpServlet {
 	// LargeObjectManager lobj = null ;
 	// int oid = 0 ;
 
-	
 	String Qtable = "";
 
 	Vector rows = new Vector();
@@ -77,10 +73,10 @@ public class DownloadServletByRowId extends HttpServlet {
 	String[] columnNames = {};
 
 	// Class[] columnTpyes = {};
-	
-	///////ProductlistBean ProductlistBeanId = null;
-	
-	String type_page = "" ;
+
+	/////// ProductlistBean ProductlistBeanId = null;
+
+	String type_page = "";
 
 	// private static final String CONTENT_TYPE = "text/html;
 	// charset=windows-1251";
@@ -90,49 +86,42 @@ public class DownloadServletByRowId extends HttpServlet {
 	// application/zip
 	// application/x-zip-compressed
 	// Initialize global variables
-	
-	transient ResourceBundle localization = null ;
-	
+
+	transient ResourceBundle localization = null;
+
 	public void init() throws ServletException {
 
 	}
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException,
-			java.io.IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, java.io.IOException {
 		processRequest(request, response);
 	}
 
 	/**
 	 * Handles the HTTP <code>POST</code> method.
 	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
+	 * @param request  servlet request
+	 * @param response servlet response
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException,
-			java.io.IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, java.io.IOException {
 		processRequest(request, response);
 	}
 
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, java.io.IOException {
 
-	
-	protected void processRequest(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException,
-			java.io.IOException {
+		if (localization == null)
+			localization = PropertyResourceBundle.getBundle("localization", request.getLocale());
+		else if (!localization.getLocale().getLanguage().equals(request.getLocale().getLanguage()))
+			localization = PropertyResourceBundle.getBundle("localization", request.getLocale());
 
-		
-		if( localization == null )   localization = PropertyResourceBundle.getBundle("localization", request.getLocale());
-		else if( !localization.getLocale().getLanguage().equals(request.getLocale().getLanguage())  ) localization = PropertyResourceBundle.getBundle("localization", request.getLocale());
-
-		
-		if(request.getParameter("productid") != null )  soft_id = request.getParameter("productid") ;
+		if (request.getParameter("productid") != null)
+			soft_id = request.getParameter("productid");
 		AuthorizationPageBeanId = (AuthorizationPageBean) request.getSession().getAttribute("AuthorizationPageBeanId");
 
-		if (strDevice != null) 
-		{
+		if (strDevice != null) {
 			if (soft_id == null || soft_id.length() == 0) {
 				AuthorizationPageBeanId.setStrMessage(localization.getString("user_not_autorization"));
 				response.sendRedirect("Policy.jsp");
@@ -140,7 +129,7 @@ public class DownloadServletByRowId extends HttpServlet {
 			}
 		}
 
-		//FileDownload fileDownload = setFileNameByFile_ID(file_id);
+		// FileDownload fileDownload = setFileNameByFile_ID(file_id);
 		FileDownload fileDownload = setFileNameByProductId(soft_id);
 		filename = fileDownload.getName();
 		// response.setContentType(CONTENT_TYPE);
@@ -207,66 +196,60 @@ public class DownloadServletByRowId extends HttpServlet {
 
 		response.setContentType(CONTENT_TYPE);
 		response.setHeader("Content-disposition", "attachment;filename=" + filename);
-		java.nio.channels.WritableByteChannel strout = java.nio.channels.Channels.newChannel(response.getOutputStream());
-		java.io.FileInputStream fInStreem = null ;
-		java.nio.channels.FileChannel infileChannel = null ;
-		java.nio.ByteBuffer buff = null ;
+		java.nio.channels.WritableByteChannel strout = java.nio.channels.Channels
+				.newChannel(response.getOutputStream());
+		java.io.FileInputStream fInStreem = null;
+		java.nio.channels.FileChannel infileChannel = null;
+		java.nio.ByteBuffer buff = null;
 		if (fileDownload.getPath() != null && fileDownload.getPath().length() > 0) {
-			
-			try
-			{
-			fInStreem  = new java.io.FileInputStream(fileDownload.getPath()) ; 
-			infileChannel = fInStreem.getChannel();
-			buff = java.nio.ByteBuffer.allocate(2048);
-			long count = infileChannel.size();
-			  while (count > 0) 
-			  {
-				// ///////if(limmit < downloadzise) break ;
-				count = count - 2048;
-				infileChannel.read(buff);
-				buff.rewind();
-				strout.write(buff);
-				buff.rewind();
-			  }
 
-			  ///setPassiveRow(soft_id);
-			  AuthorizationPageBeanId.setStrMessage(filename	+ " " + localization.getString("download_servlet_by_order.has_downloaded"));
-			}
-			catch( Exception e )
-			{
-			log.error(e);	
-			}	
-			finally
-			{
-				if (infileChannel != null)	infileChannel.close();
-				if (fInStreem != null)	fInStreem.close();
-				if (strout != null)	strout.close();
-				if( buff != null )  buff.clear() ;
+			try {
+				fInStreem = new java.io.FileInputStream(fileDownload.getPath());
+				infileChannel = fInStreem.getChannel();
+				buff = java.nio.ByteBuffer.allocate(2048);
+				long count = infileChannel.size();
+				while (count > 0) {
+					// ///////if(limmit < downloadzise) break ;
+					count = count - 2048;
+					infileChannel.read(buff);
+					buff.rewind();
+					strout.write(buff);
+					buff.rewind();
+				}
+
+				/// setPassiveRow(soft_id);
+				AuthorizationPageBeanId.setStrMessage(
+						filename + " " + localization.getString("download_servlet_by_order.has_downloaded"));
+			} catch (Exception e) {
+				log.error(e);
+			} finally {
+				if (infileChannel != null)
+					infileChannel.close();
+				if (fInStreem != null)
+					fInStreem.close();
+				if (strout != null)
+					strout.close();
+				if (buff != null)
+					buff.clear();
 			}
 			return;
 		}
 
 		/*
-		if (ext.compareTo("jad") == 0) {
-			String jad = getBObj(strout, false);
-			// servletoutputstream = response.getOutputStream();
-			int sjad = jad.indexOf("MIDlet-Jar-URL:");
-			String jad1 = jad.substring(0, sjad + "MIDlet-Jar-URL:".length());
-			int ejad = jad.indexOf("MIDlet-Name:");
-			String jad2 = jad.substring(ejad);
-			String makejar = filename.substring(0, filename.length() - 1) + "r";
-			String midl_jar_url = " midlets/" + makejar + "\n";
-			jad = jad1 + midl_jar_url + jad2;
-			java.nio.ByteBuffer buff = java.nio.ByteBuffer.wrap(jad.getBytes());
-			strout.write(buff);
-		} else {
-			getBObj(strout, true);
-
-		}
-		close();
-		setPassiveRow(soft_id);
-		AuthorizationPageBeanId.setStrMessage(filename	+ " " + setup_resources.getString("download_servlet_by_order.has_downloaded"));
-		*/
+		 * if (ext.compareTo("jad") == 0) { String jad = getBObj(strout, false); //
+		 * servletoutputstream = response.getOutputStream(); int sjad =
+		 * jad.indexOf("MIDlet-Jar-URL:"); String jad1 = jad.substring(0, sjad +
+		 * "MIDlet-Jar-URL:".length()); int ejad = jad.indexOf("MIDlet-Name:"); String
+		 * jad2 = jad.substring(ejad); String makejar = filename.substring(0,
+		 * filename.length() - 1) + "r"; String midl_jar_url = " midlets/" + makejar +
+		 * "\n"; jad = jad1 + midl_jar_url + jad2; java.nio.ByteBuffer buff =
+		 * java.nio.ByteBuffer.wrap(jad.getBytes()); strout.write(buff); } else {
+		 * getBObj(strout, true);
+		 * 
+		 * } close(); setPassiveRow(soft_id);
+		 * AuthorizationPageBeanId.setStrMessage(filename + " " +
+		 * setup_resources.getString("download_servlet_by_order.has_downloaded"));
+		 */
 		// response.sendRedirect("Order.jsp" );
 		// return ;
 	}
@@ -275,13 +258,6 @@ public class DownloadServletByRowId extends HttpServlet {
 	public void destroy() {
 
 	}
-
-	
-	
-
-	
-
-	
 
 	// protected void finalize() throws Throwable {
 	// close();
@@ -300,8 +276,7 @@ public class DownloadServletByRowId extends HttpServlet {
 		fileDownload.setFile_id(File_ID);
 		QueryManager Adp = new QueryManager();
 		String query = "select name , path  from file  where  file_id  = " + File_ID;
-		try 
-		{
+		try {
 			Adp.executeQuery(query);
 
 			if (Adp.rows().size() != 0) {
@@ -309,21 +284,14 @@ public class DownloadServletByRowId extends HttpServlet {
 				fileDownload.setPath(Adp.getValueAt(0, 1));
 			}
 
-		} 
-		catch (SQLException ex) 
-		{
+		} catch (SQLException ex) {
 
-			log.error(query,ex) ;
+			log.error(query, ex);
+		} catch (Exception ex) {
+			log.error(ex);
+		} finally {
+			Adp.close();
 		}
-		catch (Exception ex) 
-		{
-			log.error(ex) ;
-		}
-		finally 
-		{
-		  Adp.close();
-		}
-
 
 		return fileDownload;
 	}
@@ -331,61 +299,46 @@ public class DownloadServletByRowId extends HttpServlet {
 	public FileDownload setFileNameByProductId(String productId) {
 		FileDownload fileDownload = new FileDownload();
 		QueryManager Adp = new QueryManager();
-		String query = "select file.name , file.path , file.file_id from soft LEFT  JOIN file  ON  soft.file_id = file.file_id   where  soft.soft_id  = " + productId;
-		String path = "" ;
-		try 
-		{
+		String query = "select file.name , file.path , file.file_id from soft LEFT  JOIN file  ON  soft.file_id = file.file_id   where  soft.soft_id  = "
+				+ productId;
+		String path = "";
+		try {
 			Adp.executeQuery(query);
 
 			if (Adp.rows().size() != 0) {
 				fileDownload.setName(Adp.getValueAt(0, 0));
-				path = Adp.getValueAt(0, 1) ;
-				if(!path.startsWith("/"))  path = "/" + path ;
+				path = Adp.getValueAt(0, 1);
+				if (!path.startsWith("/"))
+					path = "/" + path;
 				fileDownload.setPath(path);
 				fileDownload.setFile_id(Adp.getValueAt(0, 2));
 			}
 
-		} 
-		catch (SQLException ex) 
-		{
+		} catch (SQLException ex) {
 
-			log.error(query,ex) ;
+			log.error(query, ex);
+		} catch (Exception ex) {
+			log.error(ex);
+		} finally {
+			Adp.close();
 		}
-		catch (Exception ex) 
-		{
-			log.error(ex) ;
-		}
-		finally 
-		{
-		  Adp.close();
-		}
-
 
 		return fileDownload;
 	}
 
-	
-	public void setPassiveRow(String soft_id)
-	{
+	public void setPassiveRow(String soft_id) {
 		QueryManager Adp = new QueryManager();
 		String query = "UPDATE soft SET active = true  WHERE soft_id = " + soft_id;
 		// select 0 AS test ;
-		try 
-		{
+		try {
 			Adp.executeUpdate(query);
-		}
-		catch (SQLException ex) 
-		{
+		} catch (SQLException ex) {
 
-			log.error(query,ex) ;
-		}
-		catch (Exception ex) 
-		{
-			log.error(ex) ;
-		}
-		finally 
-		{
-		  Adp.close();
+			log.error(query, ex);
+		} catch (Exception ex) {
+			log.error(ex);
+		} finally {
+			Adp.close();
 		}
 
 		return;

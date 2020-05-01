@@ -8,26 +8,24 @@ import java.text.NumberFormat;
  * </p>
  * <p>
  * Description: System building web application develop by Konstantin Grabko.
- * Konstantin Grabko is Owner and author this code.
- * You can not use it and you cannot change it without written permission from Konstantin Grabko
- * Email: konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
+ * Konstantin Grabko is Owner and author this code. You can not use it and you
+ * cannot change it without written permission from Konstantin Grabko Email:
+ * konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
  * </p>
  * <p>
  * Copyright: Copyright (c) 2002-2014
  * </p>
  * <p>
- * Company: CENTER BUSINESS SOLUTIONS INC 
+ * Company: CENTER BUSINESS SOLUTIONS INC
  * </p>
  * 
  * @author Konstantin Grabko
  * @version 1.0
  */
 
+public class OrderBean implements java.io.Serializable {
 
-public class OrderBean  implements	java.io.Serializable {
-	
 	transient private static final long serialVersionUID = 2520644735459719809L;
-
 
 	private String listup = "";
 
@@ -136,50 +134,48 @@ public class OrderBean  implements	java.io.Serializable {
 	private String phonemodel_id = "";
 
 	private Integer pagecount = 0;
-	
-	private Float balans = Float.valueOf(0) ;
-	
-	private String strBalans = "0" ;
-	private String productList = "" ;
-	private String select_country = "" ;
-	private String select_city = "" ;
-	private String select_paystatus= "" ;
-	
-	private Boolean  empty_basket = false ;
-	
-	private Integer  quantity_product = 0  ;
-	
-	public Boolean isInternet = true ;
-	
-	private String deliverystatus_id = "0" ;
-	
-	private String  select_deliverystatus = "" ;
-	
+
+	private Float balans = Float.valueOf(0);
+
+	private String strBalans = "0";
+	private String productList = "";
+	private String select_country = "";
+	private String select_city = "";
+	private String select_paystatus = "";
+
+	private Boolean empty_basket = false;
+
+	private Integer quantity_product = 0;
+
+	public Boolean isInternet = true;
+
+	private String deliverystatus_id = "0";
+
+	private String select_deliverystatus = "";
+
 	private String order_status = "";
-	
-	private String postOwnerId = "0" ;
-	
-	NumberFormat nf ;
-	 
+
+	private String postOwnerId = "0";
+
+	NumberFormat nf;
+
 	public OrderBean() {
 		nf = NumberFormat.getInstance();
 		nf.setGroupingUsed(true);
 	}
 
-	public int getPagecount() 
-	{
+	public int getPagecount() {
 		return pagecount;
 	}
 
-	public void setOffset(int offset) 
-	{
+	public void setOffset(int offset) {
 		this.offset = offset;
 	}
 
 	public int getOffset() {
 		return offset;
 	}
-	
+
 	public void setType_id(String type_id) {
 		this.type_id = type_id;
 	}
@@ -251,7 +247,6 @@ public class OrderBean  implements	java.io.Serializable {
 	public String getUser_ID() {
 		return user_id;
 	}
-
 
 	public String getCountry_id() {
 		return country_id;
@@ -644,7 +639,6 @@ public class OrderBean  implements	java.io.Serializable {
 		this.select_paystatus = select_paystatus;
 	}
 
-	
 	public String getProductList() {
 		return productList;
 	}
@@ -652,9 +646,6 @@ public class OrderBean  implements	java.io.Serializable {
 	public void setProductList(String productList) {
 		this.productList = productList;
 	}
-
-
-	
 
 	public int getQuantity_product() {
 		return quantity_product;
@@ -681,7 +672,7 @@ public class OrderBean  implements	java.io.Serializable {
 	}
 
 	public String getStrBalans() {
- 		strBalans = nf.format(balans) ;
+		strBalans = nf.format(balans);
 		return strBalans;
 	}
 
@@ -722,9 +713,8 @@ public class OrderBean  implements	java.io.Serializable {
 		this.postOwnerId = postOwnerId;
 	}
 
-	
-private String select_menu_catalog ;
-	
+	private String select_menu_catalog;
+
 	public String getSelect_menu_catalog() {
 		return select_menu_catalog;
 	}
@@ -732,5 +722,5 @@ private String select_menu_catalog ;
 	public void setSelect_menu_catalog(String select_menu_catalog) {
 		this.select_menu_catalog = select_menu_catalog;
 	}
-	
+
 }

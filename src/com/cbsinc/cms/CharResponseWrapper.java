@@ -21,15 +21,13 @@ package com.cbsinc.cms;
  * @version 1.0
  */
 
-
-
 import java.io.*;
 import javax.servlet.http.*;
 
 public class CharResponseWrapper extends HttpServletResponseWrapper {
 
 	private CharArrayWriter output;
-	private  PrintWriter printWriter ;
+	private PrintWriter printWriter;
 
 	public String toString() {
 		return output.toString();
@@ -48,24 +46,21 @@ public class CharResponseWrapper extends HttpServletResponseWrapper {
 		return output.toCharArray();
 	}
 
-	
 	// toCharArray()
 
 	public void close() {
-		 if(output != null )output.close() ;
-		 if(printWriter != null )printWriter.close() ;
+		if (output != null)
+			output.close();
+		if (printWriter != null)
+			printWriter.close();
 	}
 
-
-	
-	
-	
 	protected void finalize() throws Throwable {
-	    if(output != null )output.close() ;
-	    if(printWriter != null )printWriter.close() ;
+		if (output != null)
+			output.close();
+		if (printWriter != null)
+			printWriter.close();
 		super.finalize();
 	}
-	
-
 
 }

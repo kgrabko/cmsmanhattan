@@ -1,5 +1,7 @@
 package com.cbsinc.cms.controllers;
 
+import java.util.Optional;
+
 /**
  * <p>
  * Title: Content Manager System
@@ -28,50 +30,26 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.cbsinc.cms.AuthorizationPageBean;
-import com.cbsinc.cms.SoftPostBean;
+import com.cbsinc.cms.PublisherBean;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
 
 
-public class SelectBigImageAction implements IAction 
+public class SelectBigImageAction extends TemplateAction 
 {
 
 
-	
-	HttpSession session ;
-	//ResourceBundle resources = null ;
-	//ResourceBundle setup_resources = null ;
-	SoftPostBean softPostBeanId = null ; ;
-	ProductPostAllFaced productPostAllFaced = null ;
-	AuthorizationPageFaced authorizationPageFaced = null ;
-	AuthorizationPageBean AuthorizationPageBeanId = null ;
-	String  create_cabinet = "" ;
-	StringBuffer sbuff = new StringBuffer(); 
-	
-	   
-	public void doPost(HttpServletRequest request, HttpServletResponse response , ServletContext  servletContext) throws Exception 
-	{
-		action( request,  response,  servletContext) ;
-	}
-
-
-	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) throws Exception 
-	{
-		action( request,  response,  servletContext) ;
-	}
-
-	
-	public void action(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) throws Exception 
-	{
-
-		    session = request.getSession();
- 
-			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
-			AuthorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("AuthorizationPageBeanId");
-			softPostBeanId = (SoftPostBean)session.getAttribute("SoftPostBeanId");
-			productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
-	  	   // if( resources == null )  resources = PropertyResourceBundle.getBundle("localization", response.getLocale());
-	  		//if( setup_resources == null )  setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources" );
+	@Override
+	public void action(Optional<HttpServletRequest> requestOpts, Optional<HttpServletResponse> responseOpts,
+			Optional<ServletContext> servletContextOpts) throws Exception {
+		
+		PublisherBean publisherBeanId = getPublisherBean().get() ;
+		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+		AuthorizationPageBean authorizationPageBeanId = getAuthorizationPageBean().get() ;
+		StringBuffer sbuff = new StringBuffer(); 
+		
+		HttpServletResponse response = responseOpts.get() ;
+		HttpServletRequest request  = requestOpts.get() ;
 
 	  		request.setCharacterEncoding("UTF-8");
 			response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
@@ -81,25 +59,24 @@ public class SelectBigImageAction implements IAction
 	        if( request.getParameter("bigimage_id") != null) 
 	        {
 		        String  bigimage_id  = request.getParameter("bigimage_id");
-		        if ( bigimage_id != null ) {  softPostBeanId.setBigimage_id( bigimage_id );  productPostAllFaced.setBigImageNameByImage_ID(bigimage_id,softPostBeanId); }
+		        if ( bigimage_id != null ) {  publisherBeanId.setBigimage_id( bigimage_id );  productPostAllFaced.setBigImageNameByImage_ID(bigimage_id,publisherBeanId); }
 	        }
 	        
-	        softPostBeanId.setSelect_big_images(productPostAllFaced.getComboBoxWithJavaScriptBigImage("bigimage_id", softPostBeanId.getBigimage_id() ,"SELECT big_images_id,imgname FROM big_images WHERE user_id = "+ AuthorizationPageBeanId.getIntUserID()  + " ORDER BY big_images_id DESC ", "onChange=\"changeImage()\"" , softPostBeanId ) );
+	        publisherBeanId.setSelect_big_images(productPostAllFaced.getComboBoxWithJavaScriptBigImage("bigimage_id", publisherBeanId.getBigimage_id() ,"SELECT big_images_id,imgname FROM big_images WHERE user_id = "+ authorizationPageBeanId.getIntUserID()  + " ORDER BY big_images_id DESC ", "onChange=\"changeImage()\"" , publisherBeanId ) );
 
-	        if(softPostBeanId.getBigimgname().lastIndexOf(".") != -1){
+	        if(publisherBeanId.getBigimgname().lastIndexOf(".") != -1){
 	        sbuff = new StringBuffer(); 
 	        sbuff.append("big_imgpositions/") ;
-	        sbuff.append(softPostBeanId.getBigimage_id()) ;
-	        sbuff.append(softPostBeanId.getBigimgname().substring(softPostBeanId.getBigimgname().lastIndexOf("."))) ;
-	        softPostBeanId.setSelect_big_image_url(sbuff.toString());
+	        sbuff.append(publisherBeanId.getBigimage_id()) ;
+	        sbuff.append(publisherBeanId.getBigimgname().substring(publisherBeanId.getBigimgname().lastIndexOf("."))) ;
+	        publisherBeanId.setSelect_big_image_url(sbuff.toString());
 	        }
 	        else
 	        {
-	        	softPostBeanId.setSelect_big_image_url("big_imgpositions/empty.gif");
+	        	publisherBeanId.setSelect_big_image_url("big_imgpositions/empty.gif");
 	        }
 	        
-	        
-	        
+		
 	}
 
 	

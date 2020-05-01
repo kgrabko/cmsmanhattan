@@ -1,4 +1,5 @@
 package com.cbsinc.cms.aop.interceptors;
+
 /**
  * <p>
  * Title: Content Manager System
@@ -28,11 +29,9 @@ import java.lang.annotation.RetentionPolicy;
 
 import java.lang.annotation.Target;
 
-@Target({ElementType.METHOD, ElementType.FIELD})
+@Target({ ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 
-public @interface AuditPerfomence 
-{
-
+public @interface AuditPerfomence {
 
 }

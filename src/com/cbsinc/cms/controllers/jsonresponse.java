@@ -31,7 +31,6 @@ public class jsonresponse extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		    Object model =  request.getAttribute("model") ;
 		    String modelJsonString =  JSONObject.valueToString(model) ;
 	        PrintWriter out = response.getWriter();

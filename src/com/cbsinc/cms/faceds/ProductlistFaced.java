@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 import org.apache.log4j.Logger;
 
 import com.cbsinc.cms.AuthorizationPageBean;
-import com.cbsinc.cms.PolicyBean;
+import com.cbsinc.cms.ItemDescriptionBean;
 import com.cbsinc.cms.ProductlistBean;
 import com.cbsinc.cms.QueryManager;
 import com.cbsinc.cms.SearchBean;
@@ -371,7 +371,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 	 * @return
 	 */
 
-	final public List getExtPolicyOneProductlist(String strUser_id, final String site_id, final	String tree_id , final PolicyBean productlistBean ) {
+	final public List getExtPolicyOneProductlist(String strUser_id, final String site_id, final	String tree_id , final ItemDescriptionBean productlistBean ) {
 		if (strUser_id == null || strUser_id.length() == 0)	strUser_id = "0";
 		
 		List list  = new LinkedList();
@@ -416,7 +416,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 	 */
 
 	final public List getExtPolicyTwoProductlist( String strUser_id, final String site_id,
-			final String tree_id , final PolicyBean productlistBean  ) {
+			final String tree_id , final ItemDescriptionBean productlistBean  ) {
 		if (strUser_id == null || strUser_id.length() == 0)		strUser_id = "0";
 
 		List list  = new LinkedList();
@@ -465,7 +465,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 	 */
 
 	final	public List getExtPolicyFilesProductlist(String strUser_id, final String site_id,
-			final String tree_id , final PolicyBean productlistBean  ) {
+			final String tree_id , final ItemDescriptionBean productlistBean  ) {
 		if (strUser_id == null || strUser_id.length() == 0)		strUser_id = "0";
 
 		List list  = new LinkedList();
@@ -514,7 +514,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 	 */
 
 	final public List getExtPolicyTabsProductlist(String strUser_id, final String site_id,
-			final String tree_id , final PolicyBean productlistBean  ) {
+			final String tree_id , final ItemDescriptionBean productlistBean  ) {
 		if (strUser_id == null || strUser_id.length() == 0)		strUser_id = "0";
 
 		List list  = new LinkedList();
@@ -566,7 +566,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 	 */
 
 	final public List getBlogExtPolicyProductlist( String strUser_id, final String site_id,
-			final String tree_id , final PolicyBean productlistBean  ) {
+			final String tree_id , final ItemDescriptionBean productlistBean  ) {
 		if (strUser_id == null || strUser_id.length() == 0)		strUser_id = "0";
 
 		List list  = new LinkedList();

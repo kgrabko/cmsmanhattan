@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.postgresql.largeobject.LargeObject;
 import org.postgresql.largeobject.LargeObjectManager;
+
 /**
  * Servlet Class
  * 
@@ -35,24 +36,23 @@ public class ImageServlet extends HttpServlet {
 	 * </p>
 	 * <p>
 	 * Description: System building web application develop by Konstantin Grabko.
-	 * Konstantin Grabko is Owner and author this code.
-	 * You can not use it and you cannot change it without written permission from Konstantin Grabko
-	 * Email: konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
+	 * Konstantin Grabko is Owner and author this code. You can not use it and you
+	 * cannot change it without written permission from Konstantin Grabko Email:
+	 * konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
 	 * </p>
 	 * <p>
 	 * Copyright: Copyright (c) 2002-2014
 	 * </p>
 	 * <p>
-	 * Company: CENTER BUSINESS SOLUTIONS INC 
+	 * Company: CENTER BUSINESS SOLUTIONS INC
 	 * </p>
 	 * 
 	 * @author Konstantin Grabko
 	 * @version 1.0
 	 */
 
-
 	static private Logger log = Logger.getLogger(ImageServlet.class);
-	
+
 	private static final long serialVersionUID = 1L;
 
 	ProductlistBean productlistBeanId = null;
@@ -84,45 +84,41 @@ public class ImageServlet extends HttpServlet {
 	Vector rows = new Vector();
 
 	String[] columnNames = {};
-	transient ResourceBundle localization = null ;
+	transient ResourceBundle localization = null;
 
-	//DataSource ds = null;
+	// DataSource ds = null;
 
 	public void init() throws ServletException {
 	}
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException,
-			java.io.IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, java.io.IOException {
 		processRequest(request, response);
 	}
 
 	/**
 	 * Handles the HTTP <code>POST</code> method.
 	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
+	 * @param request  servlet request
+	 * @param response servlet response
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException,
-			java.io.IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, java.io.IOException {
 		processRequest(request, response);
 	}
 
 	// Process the HTTP Get request
 	// public void doGet(HttpServletRequest request, HttpServletResponse
 	// response) throws ServletException, IOException {
-	protected void processRequest(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException,
-			java.io.IOException {
-		
-		if( localization == null )   localization = PropertyResourceBundle.getBundle("localization", request.getLocale());
-		else if( !localization.getLocale().getLanguage().equals(request.getLocale().getLanguage())  ) localization = PropertyResourceBundle.getBundle("localization", request.getLocale());
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, java.io.IOException {
 
-		productlistBeanId = (ProductlistBean) request.getSession()
-				.getAttribute("ProductlistBeanId");
+		if (localization == null)
+			localization = PropertyResourceBundle.getBundle("localization", request.getLocale());
+		else if (!localization.getLocale().getLanguage().equals(request.getLocale().getLanguage()))
+			localization = PropertyResourceBundle.getBundle("localization", request.getLocale());
+
+		productlistBeanId = (ProductlistBean) request.getSession().getAttribute("ProductlistBeanId");
 		String strRow = request.getParameter("row");
 		if (strRow == null) {
 			row = 0;
@@ -137,10 +133,8 @@ public class ImageServlet extends HttpServlet {
 		OpenConnection("jdbc:postgresql://127.0.0.1:5432/mobilsoft");
 
 		response.setContentType("image/jpeg");
-		response.setHeader("Content-disposition", "attachment;filename="
-				+ filename);
-		javax.servlet.ServletOutputStream servletoutputstream = response
-				.getOutputStream();
+		response.setHeader("Content-disposition", "attachment;filename=" + filename);
+		javax.servlet.ServletOutputStream servletoutputstream = response.getOutputStream();
 		getBObj(servletoutputstream);
 		servletoutputstream.flush();
 		servletoutputstream.close();
@@ -152,8 +146,7 @@ public class ImageServlet extends HttpServlet {
 
 	public void getBObj(OutputStream out) {
 		try {
-			PreparedStatement ps = conn
-					.prepareStatement("SELECT img FROM images WHERE image_id=?");
+			PreparedStatement ps = conn.prepareStatement("SELECT img FROM images WHERE image_id=?");
 			ps.setString(1, file_id);
 			ResultSet rs = ps.executeQuery();
 			if (rs != null) {
@@ -166,7 +159,7 @@ public class ImageServlet extends HttpServlet {
 			ps.close();
 			// bs.close();
 		} catch (java.lang.Exception e) {
-			log.error(e) ;
+			log.error(e);
 			System.out.println(e.toString());
 		}
 	}
@@ -179,7 +172,7 @@ public class ImageServlet extends HttpServlet {
 			stat = conn.createStatement();
 
 		} catch (Exception e) {
-			log.error(e) ;
+			log.error(e);
 			System.err.println("E: " + e);
 		}
 	}
@@ -194,7 +187,7 @@ public class ImageServlet extends HttpServlet {
 			if (conn != null)
 				conn.close();
 		} catch (SQLException ex) {
-			log.error(ex) ;
+			log.error(ex);
 			System.err.println("Close DataBase :" + ex);
 		}
 
@@ -216,53 +209,38 @@ public class ImageServlet extends HttpServlet {
 		String filename = "";
 		QueryManager Adp = new QueryManager();
 		String query = "select name  from file  where  file_id  = " + File_ID;
-		try 
-		{
+		try {
 			Adp.executeQuery(query);
 			filename = Adp.getValueAt(0, 0);
-		}
-		catch (SQLException ex) 
-		{
+		} catch (SQLException ex) {
 
-			log.error(query,ex) ;
-		}
-		catch (Exception ex) 
-		{
+			log.error(query, ex);
+		} catch (Exception ex) {
 
-			log.error(ex) ;
+			log.error(ex);
+		} finally {
+			Adp.close();
 		}
-		finally 
-		{
-		  Adp.close();
-		}
-		
+
 		return filename;
 	}
 
-	public void setPassiveRow(String soft_id) 
-	{
+	public void setPassiveRow(String soft_id) {
 		QueryManager Adp = new QueryManager();
 		// String strID ;
-		String query = "UPDATE soft SET active = true  WHERE soft_id = "+ soft_id;
-		try 
-		{
+		String query = "UPDATE soft SET active = true  WHERE soft_id = " + soft_id;
+		try {
 			Adp.executeQuery(query);
-		}
-		catch (SQLException ex) 
-		{
+		} catch (SQLException ex) {
 
-			log.error(query,ex) ;
-		}
-		catch (Exception ex) 
-		{
+			log.error(query, ex);
+		} catch (Exception ex) {
 
-			log.error(ex) ;
+			log.error(ex);
+		} finally {
+			Adp.close();
 		}
-		finally 
-		{
-		  Adp.close();
-		}
-		
+
 		return;
 	}
 

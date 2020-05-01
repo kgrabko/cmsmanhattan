@@ -10,30 +10,26 @@ import org.apache.log4j.Logger;
  * </p>
  * <p>
  * Description: System building web application develop by Konstantin Grabko.
- * Konstantin Grabko is Owner and author this code.
- * You can not use it and you cannot change it without written permission from Konstantin Grabko
- * Email: konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
+ * Konstantin Grabko is Owner and author this code. You can not use it and you
+ * cannot change it without written permission from Konstantin Grabko Email:
+ * konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
  * </p>
  * <p>
  * Copyright: Copyright (c) 2002-2014
  * </p>
  * <p>
- * Company: CENTER BUSINESS SOLUTIONS INC 
+ * Company: CENTER BUSINESS SOLUTIONS INC
  * </p>
  * 
  * @author Konstantin Grabko
  * @version 1.0
  */
 
+public class PayBean extends com.cbsinc.cms.WebControls implements java.io.Serializable {
 
-
-public class PayBean extends com.cbsinc.cms.WebControls implements
-		java.io.Serializable {
-	
 	private static final long serialVersionUID = -5025445874531411579L;
 
 	static private Logger log = Logger.getLogger(PayBean.class);
-	
 
 	public String getCurrency_code(String currency_id) {
 		String currency_cd = "";
@@ -41,89 +37,65 @@ public class PayBean extends com.cbsinc.cms.WebControls implements
 		// currency.currency_desc FROM account LEFT OUTER JOIN public.currency
 		// ON account.currency_id = currency.currency_id WHERE account.user_id =
 		// " + currency_id ;
-		String query = "SELECT  currency.currency_cd FROM currency WHERE currency.currency_id = "
-				+ currency_id;
+		String query = "SELECT  currency.currency_cd FROM currency WHERE currency.currency_id = " + currency_id;
 		QueryManager Adp = new QueryManager();
-		try 
-		{
+		try {
 			Adp.executeQuery(query);
 			currency_cd = (String) Adp.getValueAt(0, 0);
-		} 
-		catch (SQLException ex) 
-		{
+		} catch (SQLException ex) {
 
-			log.error(query,ex) ;
-		}
-		catch (Exception ex) 
-		{
+			log.error(query, ex);
+		} catch (Exception ex) {
 
-			log.error(ex) ;
-		}
-		finally 
-		{
-		  Adp.close();
+			log.error(ex);
+		} finally {
+			Adp.close();
 		}
 
 		return currency_cd;
 	}
 
-	
 	public String getCurrency_lable(String currency_id) {
 		String currency_cd = "";
 		// String query = "SELECT account.amount, currency.currency_lable,
 		// currency.currency_desc FROM account LEFT OUTER JOIN public.currency
 		// ON account.currency_id = currency.currency_id WHERE account.user_id =
 		// " + currency_id ;
-		String query = "SELECT  currency.currency_lable FROM currency WHERE currency.currency_id = "
-				+ currency_id;
+		String query = "SELECT  currency.currency_lable FROM currency WHERE currency.currency_id = " + currency_id;
 		QueryManager Adp = new QueryManager();
-		try 
-		{
+		try {
 			Adp.executeQuery(query);
 			currency_cd = (String) Adp.getValueAt(0, 0);
-		}
-		catch (SQLException ex) 
-		{
+		} catch (SQLException ex) {
 
-			log.error(query,ex) ;
-		}
-		catch (Exception ex) 
-		{
+			log.error(query, ex);
+		} catch (Exception ex) {
 
-			log.error(ex) ;
-		}
-		finally 
-		{
-		  Adp.close();
+			log.error(ex);
+		} finally {
+			Adp.close();
 		}
 
 		return currency_cd;
 	}
-	
+
 	public String getPaySystem_code(String paysystem_id) {
 		String paysystem_cd = "";
-		String query = "SELECT  paysystem.paysystem_cd FROM paysystem WHERE paysystem.paysystem_id = "	+ paysystem_id;
+		String query = "SELECT  paysystem.paysystem_cd FROM paysystem WHERE paysystem.paysystem_id = " + paysystem_id;
 		QueryManager Adp = new QueryManager();
-		try
-		{
+		try {
 			Adp.executeQuery(query);
 			paysystem_cd = (String) Adp.getValueAt(0, 0);
-		} 
-		catch (SQLException ex) 
-		{
+		} catch (SQLException ex) {
 
-			log.error(query,ex) ;
-		}
-		catch (Exception ex) 
-		{
+			log.error(query, ex);
+		} catch (Exception ex) {
 
-			log.error(ex) ;
+			log.error(ex);
+		} finally {
+			Adp.close();
 		}
-		finally 
-		{
-		  Adp.close();
-		}
-		
+
 		setPaySystem(paysystem_cd);
 		return paysystem_cd;
 	}
@@ -209,35 +181,27 @@ public class PayBean extends com.cbsinc.cms.WebControls implements
 			kreditPilotPayment = "0";
 	}
 
-	
-	
-	
-	public void setStatusInrocess( String order_id	) throws Exception {
+	public void setStatusInrocess(String order_id) throws Exception {
 
-		   String query = "" ; 
-		   QueryManager Adp = new QueryManager();
+		String query = "";
+		QueryManager Adp = new QueryManager();
 		try {
 			Adp.BeginTransaction();
 
-			query = "update orders  set paystatus_id = 2 where order_id = " 	+ order_id;
+			query = "update orders  set paystatus_id = 2 where order_id = " + order_id;
 			Adp.executeUpdate(query);
 			Adp.commit();
-		} 
-		catch (SQLException ex) 
-		{
-			log.error(query,ex) ;
+		} catch (SQLException ex) {
+			log.error(query, ex);
 			Adp.rollback();
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error(ex);
 			Adp.rollback();
-		} 
-		finally 
-		{
+		} finally {
 			Adp.close();
 		}
 	}
-	
+
 	public void setDescription(String description) {
 		this.description = description;
 	}

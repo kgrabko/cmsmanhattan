@@ -1,5 +1,7 @@
 package com.cbsinc.cms.controllers;
 
+import java.util.Optional;
+
 /**
  * <p>
  * Title: Content Manager System
@@ -31,45 +33,22 @@ import com.cbsinc.cms.OrderBean;
 import com.cbsinc.cms.PrePayBean;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 
-public class PrePayAction  implements IAction
-{
-
-	
-	AuthorizationPageBean authorizationPageBeanId ;
-	AuthorizationPageFaced authorizationPageFaced ;
-	HttpSession session ;
+public class PrePayAction  extends TemplateAction {
 	
 	
 	public boolean isInternet = true ;
 	
 	public PrePayAction() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	
-	
-	public void doPost(HttpServletRequest request, HttpServletResponse response , ServletContext  servletContext) throws Exception
-	{
-		action( request,  response,  servletContext) ;
 	}
 
+	
+	public void action(Optional<HttpServletRequest> requestOpts, Optional<HttpServletResponse> responseOpts, Optional<ServletContext> servletContextOpts) throws Exception {
 
-
-	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) throws Exception 
-	{
-		action( request,  response,  servletContext) ;
-	}
-
-
-	public void action(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) throws Exception 
-	{
-		PrePayBean prePayBean = null ;
-		OrderBean orderBean = null ;
-		authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
-		session = request.getSession();
-		prePayBean = (PrePayBean)request.getAttribute("prePayBeanId");
-		orderBean = (OrderBean)request.getAttribute("orderBeanId");
-		authorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("AuthorizationPageBeanId");
+		PrePayBean prePayBean  = getPrePayBean().get() ;
+		OrderBean orderBean = getOrderBean().get() ;
+		AuthorizationPageFaced authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
+		HttpServletRequest request  = requestOpts.get() ;
+		
 		if( authorizationPageFaced == null ||  prePayBean == null || orderBean == null  ) return ;
 		request.setCharacterEncoding("UTF-8"); 
 		prePayBean.setSelectCurrencyListXML(authorizationPageFaced.getXMLDBList("Pay.jsp?currency_id","currency", orderBean.getOrder_currency_id()  ,"SELECT currency_id , currency_desc FROM currency  WHERE active = true")); 

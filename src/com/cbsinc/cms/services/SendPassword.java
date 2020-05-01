@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.QueryManager;
 import com.cbsinc.cms.controllers.ServiceLocator;
-import com.cbsinc.cms.jms.controllers.MQSender;
+import com.cbsinc.cms.jms.controllers.MessageSender;
 import com.cbsinc.cms.jms.controllers.Message;
 import com.cbsinc.cms.jms.controllers.SendMailMessageBean;
 import com.cbsinc.cms.services.smtp.SendMailAgent;
@@ -102,9 +102,9 @@ public class SendPassword extends HttpServlet {
 			if (getPassowrd(email, authorizationPageBean.getSite_id())) {
 				messageMail.put("@Password", strPasswd);
 				messageMail.put("@Login", strLogin);
-				MQSender mqSender = null;
+				MessageSender mqSender = null;
 				try {
-					mqSender = new MQSender( request.getSession(),SendMailMessageBean.messageQuery);
+					mqSender = new MessageSender( request.getSession(),SendMailMessageBean.messageQuery);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

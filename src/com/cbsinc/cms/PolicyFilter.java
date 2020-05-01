@@ -21,8 +21,6 @@ package com.cbsinc.cms;
  * @version 1.0
  */
 
-
-
 import java.io.CharArrayWriter;
 import java.io.File;
 import java.io.IOException;
@@ -69,15 +67,14 @@ public class PolicyFilter implements Filter {
 		this.filterConfig = filterConfig;
 	}
 
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
-		
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+
 		HttpSession hsession = ((HttpServletRequest) request).getSession(false);
 		AuthorizationPageBean authorizationPageBeanId;
 		if (hsession != null) {
 			if (hsession.getAttribute("AuthorizationPageBeanId") instanceof AuthorizationPageBean) {
-				authorizationPageBeanId = ((AuthorizationPageBean) hsession
-						.getAttribute("AuthorizationPageBeanId"));
+				authorizationPageBeanId = ((AuthorizationPageBean) hsession.getAttribute("AuthorizationPageBeanId"));
 				if (authorizationPageBeanId.getStrLogin().length() == 0) {
 					((HttpServletResponse) response).sendRedirect("index.jsp");
 					return;
@@ -96,23 +93,19 @@ public class PolicyFilter implements Filter {
 		StringBuffer buffString = new StringBuffer("/xsl/");
 		buffString.append(authorizationPageBeanId.getSite_dir().trim());
 		buffString.append("/policy.xsl");
-		this.xsltFileName = filterConfig.getServletContext().getRealPath(
-				buffString.toString());
+		this.xsltFileName = filterConfig.getServletContext().getRealPath(buffString.toString());
 		if (this.xsltFileName == null || !new File(this.xsltFileName).exists()) {
-			throw new UnavailableException("Unable to locate stylesheet: "
-					+ this.xsltFileName, 30);
+			throw new UnavailableException("Unable to locate stylesheet: " + this.xsltFileName, 30);
 		}
 
 		Source styleSource = new StreamSource(new File(xsltFileName));
-		byte[] htmlBytes ;
+		byte[] htmlBytes;
 		String htmlData = "";
-		ServletOutputStream out  = response.getOutputStream();
-		CharResponseWrapper responseWrapper = new CharResponseWrapper(
-				(HttpServletResponse) response);
+		ServletOutputStream out = response.getOutputStream();
+		CharResponseWrapper responseWrapper = new CharResponseWrapper((HttpServletResponse) response);
 		chain.doFilter(request, responseWrapper);
 		// Get response from servlet
-		StringReader sr = new StringReader(
-				new String(responseWrapper.getData()).trim());
+		StringReader sr = new StringReader(new String(responseWrapper.getData()).trim());
 		Source xmlSource = new StreamSource((Reader) sr);
 		CharArrayWriter caw = new CharArrayWriter();
 		try {
@@ -121,30 +114,24 @@ public class PolicyFilter implements Filter {
 			StreamResult result = new StreamResult(caw);
 			transformer.transform(xmlSource, result);
 			htmlData = caw.toString();
-			htmlData = htmlData.replaceAll("&lt;","//<") ;
-			htmlData = htmlData.replaceAll("&gt;","//>") ;
-			htmlBytes = htmlData.getBytes("UTF-8") ;
+			htmlData = htmlData.replaceAll("&lt;", "//<");
+			htmlData = htmlData.replaceAll("&gt;", "//>");
+			htmlBytes = htmlData.getBytes("UTF-8");
 			response.setContentLength(htmlBytes.length);
 			out.write(htmlBytes);
 			out.flush();
-		}
-		catch (Exception ex) 
-		{
-			log.error(ex) ;
+		} catch (Exception ex) {
+			log.error(ex);
 			out.println(ex.toString());
-		}
-		finally
-		{
+		} finally {
 			caw.close();
 			out.flush();
 			out.close();
-			responseWrapper.close() ;
+			responseWrapper.close();
 		}
-		
-		
+
 	}
-	
-	
+
 	/**
 	 * The counterpart to the init( ) method.
 	 */

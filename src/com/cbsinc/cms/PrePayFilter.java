@@ -21,13 +21,12 @@ package com.cbsinc.cms;
  * @version 1.0
  */
 
-
 import java.io.CharArrayWriter;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.StringReader;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -44,9 +43,8 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import org.apache.log4j.Logger;
 
-import com.cbsinc.cms.AuthorizationPageBean;
+import org.apache.log4j.Logger;
 
 /**
  * Filter class
@@ -57,25 +55,24 @@ import com.cbsinc.cms.AuthorizationPageBean;
  * @web.filter-init-param name="A parameter" value="A value"
  */
 public class PrePayFilter implements Filter {
-    private FilterConfig filterConfig;
-    private String xsltFileName;
+	private FilterConfig filterConfig;
+	private String xsltFileName;
 	static private Logger log = Logger.getLogger(PrePayFilter.class);
 
-    /**
+	/**
 	 * This method is called once when the filter is first loaded.
 	 */
-    public void init(FilterConfig filterConfig) throws ServletException {
-        this.filterConfig = filterConfig;
-    }
+	public void init(FilterConfig filterConfig) throws ServletException {
+		this.filterConfig = filterConfig;
+	}
 
-    public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
 		HttpSession hsession = ((HttpServletRequest) request).getSession(false);
 		AuthorizationPageBean authorizationPageBeanId;
 		if (hsession != null) {
 			if (hsession.getAttribute("AuthorizationPageBeanId") instanceof AuthorizationPageBean) {
-				authorizationPageBeanId = ((AuthorizationPageBean) hsession
-						.getAttribute("AuthorizationPageBeanId"));
+				authorizationPageBeanId = ((AuthorizationPageBean) hsession.getAttribute("AuthorizationPageBeanId"));
 				if (authorizationPageBeanId.getStrLogin().length() == 0) {
 					((HttpServletResponse) response).sendRedirect("index.jsp");
 					return;
@@ -94,23 +91,19 @@ public class PrePayFilter implements Filter {
 		StringBuffer buffString = new StringBuffer("/xsl/");
 		buffString.append(authorizationPageBeanId.getSite_dir().trim());
 		buffString.append("/prepay.xsl");
-		this.xsltFileName = filterConfig.getServletContext().getRealPath(
-				buffString.toString());
+		this.xsltFileName = filterConfig.getServletContext().getRealPath(buffString.toString());
 		if (this.xsltFileName == null || !new File(this.xsltFileName).exists()) {
-			throw new UnavailableException("Unable to locate stylesheet: "
-					+ this.xsltFileName, 30);
+			throw new UnavailableException("Unable to locate stylesheet: " + this.xsltFileName, 30);
 		}
 
 		Source styleSource = new StreamSource(new File(xsltFileName));
-		byte[] htmlBytes ;
+		byte[] htmlBytes;
 		String htmlData = "";
-		ServletOutputStream out  = response.getOutputStream();
-		CharResponseWrapper responseWrapper = new CharResponseWrapper(
-				(HttpServletResponse) response);
+		ServletOutputStream out = response.getOutputStream();
+		CharResponseWrapper responseWrapper = new CharResponseWrapper((HttpServletResponse) response);
 		chain.doFilter(request, responseWrapper);
 		// Get response from servlet
-		StringReader sr = new StringReader(
-				new String(responseWrapper.getData()).trim());
+		StringReader sr = new StringReader(new String(responseWrapper.getData()).trim());
 		Source xmlSource = new StreamSource((Reader) sr);
 
 		try {
@@ -120,29 +113,23 @@ public class PrePayFilter implements Filter {
 			StreamResult result = new StreamResult(caw);
 			transformer.transform(xmlSource, result);
 			htmlData = caw.toString();
-			htmlBytes = htmlData.getBytes("UTF-8") ;
+			htmlBytes = htmlData.getBytes("UTF-8");
 			response.setContentLength(htmlBytes.length);
 			out.write(htmlBytes);
 			out.flush();
-		}
-		catch (Exception ex) 
-		{
-			log.error(ex) ;
+		} catch (Exception ex) {
+			log.error(ex);
 			out.println(ex.toString());
+		} finally {
+			out.close();
 		}
-		finally
-		{
-			out.close();	
-		}
-		
-		
-	}  
-    
-    
-    /**
+
+	}
+
+	/**
 	 * The counterpart to the init( ) method.
 	 */
-    public void destroy( ) {
-        this.filterConfig = null;
-    }
+	public void destroy() {
+		this.filterConfig = null;
+	}
 }

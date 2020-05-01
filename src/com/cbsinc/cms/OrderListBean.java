@@ -12,26 +12,22 @@ import org.apache.log4j.Logger;
  * </p>
  * <p>
  * Description: System building web application develop by Konstantin Grabko.
- * Konstantin Grabko is Owner and author this code.
- * You can not use it and you cannot change it without written permission from Konstantin Grabko
- * Email: konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
+ * Konstantin Grabko is Owner and author this code. You can not use it and you
+ * cannot change it without written permission from Konstantin Grabko Email:
+ * konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
  * </p>
  * <p>
  * Copyright: Copyright (c) 2002-2014
  * </p>
  * <p>
- * Company: CENTER BUSINESS SOLUTIONS INC 
+ * Company: CENTER BUSINESS SOLUTIONS INC
  * </p>
  * 
  * @author Konstantin Grabko
  * @version 1.0
  */
 
-
-
-public class OrderListBean extends com.cbsinc.cms.WebControls implements
-		java.io.Serializable {
-
+public class OrderListBean extends com.cbsinc.cms.WebControls implements java.io.Serializable {
 
 	private static final long serialVersionUID = 5492657921346633911L;
 
@@ -50,75 +46,62 @@ public class OrderListBean extends com.cbsinc.cms.WebControls implements
 	private String user_id;
 
 	private String currency_lable = "0";
-	
-	
-	private String datePattern = "dd/MM/yyyy" ;
-	
+
+	private String datePattern = "dd/MM/yyyy";
 
 	java.util.Calendar calendar;
-	
-	long dateFrom = 0 ;  
-	long dateTo = 0 ;
-	
-	String selectOrderlistXML = "" ;
-	String searchquery = "0" ;
-	
-	
+
+	long dateFrom = 0;
+	long dateTo = 0;
+
+	String selectOrderlistXML = "";
+	String searchquery = "0";
+
 	public String getSelect_paystatus() {
-		//System.out.println(select_paystatus);
+		// System.out.println(select_paystatus);
 		return select_paystatus;
 	}
-
 
 	public void setSelect_paystatus(String select_paystatus) {
 		this.select_paystatus = select_paystatus;
 	}
 
-
 	public String getSelect_deliverystatus() {
-		//System.out.println(select_deliverystatus);
+		// System.out.println(select_deliverystatus);
 		return select_deliverystatus;
 	}
-
 
 	public void setSelect_deliverystatus(String select_deliverystatus) {
 		this.select_deliverystatus = select_deliverystatus;
 	}
 
-	private String select_paystatus= "" ;
-	private String select_deliverystatus = "" ;
-	private String deliverystatus_id = "" ;
-	private String order_paystatus_id = "" ;
-	
+	private String select_paystatus = "";
+	private String select_deliverystatus = "";
+	private String deliverystatus_id = "";
+	private String order_paystatus_id = "";
+
 	public String getDeliverystatus_id() {
 		return deliverystatus_id;
 	}
-
 
 	public void setDeliverystatus_id(String deliverystatus_id) {
 		this.deliverystatus_id = deliverystatus_id;
 	}
 
-
 	public String getOrder_paystatus_id() {
 		return order_paystatus_id;
 	}
-
 
 	public void setOrder_paystatus_id(String order_paystatus_id) {
 		this.order_paystatus_id = order_paystatus_id;
 	}
 
-	
-	public OrderListBean()
-	{
+	public OrderListBean() {
 		calendar = java.util.Calendar.getInstance();
 		dateFrom = calendar.getTimeInMillis();
 		dateTo = calendar.getTimeInMillis();
 	}
-	
-	
-	
+
 	public void setOffset(int offset) {
 		this.offset = offset;
 	}
@@ -217,79 +200,58 @@ public class OrderListBean extends com.cbsinc.cms.WebControls implements
 
 	public void setDateTo(long dateTo) {
 		this.dateTo = dateTo;
-		//getCalendar().setTimeInMillis(dateTo);
+		// getCalendar().setTimeInMillis(dateTo);
 	}
-	
+
 	/*
-	 *  String dateTo 
-	 *  Input format  is "dd/mm/yyyy" 
+	 * String dateTo Input format is "dd/mm/yyyy"
 	 */
-	public void setDateTo(String dateTo, String datePattern , Locale locale ) 
-	{
-		this.datePattern = datePattern ;
-		SimpleDateFormat formatter = new SimpleDateFormat(datePattern, locale );
-		try 
-		{
+	public void setDateTo(String dateTo, String datePattern, Locale locale) {
+		this.datePattern = datePattern;
+		SimpleDateFormat formatter = new SimpleDateFormat(datePattern, locale);
+		try {
 			this.dateTo = formatter.parse(dateTo).getTime();
+		} catch (ParseException e) {
+			log.error(e);
 		}
-		catch (ParseException e) 
-		{
-			log.error(e) ;
-		}
-		
+
 	}
 
-	
-	
-	
 	/*
-	 *  String dateFrom 
-	 *  Input format  is "dd/mm/yyyy" 
+	 * String dateFrom Input format is "dd/mm/yyyy"
 	 */
-	public void setDateFrom(String dateFrom , String datePattern , Locale locale ) 
-	{
-		this.datePattern = datePattern ;
-		SimpleDateFormat formatter = new SimpleDateFormat(datePattern, locale );
-		try 
-		{
+	public void setDateFrom(String dateFrom, String datePattern, Locale locale) {
+		this.datePattern = datePattern;
+		SimpleDateFormat formatter = new SimpleDateFormat(datePattern, locale);
+		try {
 			this.dateFrom = formatter.parse(dateFrom).getTime();
-		}
-		catch (ParseException e) 
-		{
-			log.error(e) ;
+		} catch (ParseException e) {
+			log.error(e);
 		}
 	}
 
-
-	public java.util.Date getSQLDateTo() 
-	{
-		return  new java.sql.Date(dateTo);
+	public java.util.Date getSQLDateTo() {
+		return new java.sql.Date(dateTo);
 	}
 
-
-	public java.sql.Date getSQLDateFrom() 
-	{
-		return  new java.sql.Date(dateFrom);
+	public java.sql.Date getSQLDateFrom() {
+		return new java.sql.Date(dateFrom);
 	}
 
-	public String getFormatedDateTo(Locale locale) 
-	{
-		SimpleDateFormat formatter = new SimpleDateFormat(datePattern, locale );
-		return  formatter.format(getSQLDateTo());
+	public String getFormatedDateTo(Locale locale) {
+		SimpleDateFormat formatter = new SimpleDateFormat(datePattern, locale);
+		return formatter.format(getSQLDateTo());
 	}
 
-
-	public String getFormatedDateFrom(Locale locale) 
-	{
-		SimpleDateFormat formatter = new SimpleDateFormat(datePattern, locale );
-		return  formatter.format(getSQLDateFrom());
+	public String getFormatedDateFrom(Locale locale) {
+		SimpleDateFormat formatter = new SimpleDateFormat(datePattern, locale);
+		return formatter.format(getSQLDateFrom());
 	}
 
-	public SimpleDateFormat getSimpleDateFormat(Locale locale) 
-	{
-		return  new SimpleDateFormat(datePattern, locale );
+	public SimpleDateFormat getSimpleDateFormat(Locale locale) {
+		return new SimpleDateFormat(datePattern, locale);
 	}
-	
+
 	public String getSelectOrderlistXML() {
 		return selectOrderlistXML;
 	}
@@ -310,8 +272,8 @@ public class OrderListBean extends com.cbsinc.cms.WebControls implements
 		return datePattern;
 	}
 
-	private String select_menu_catalog ;
-	
+	private String select_menu_catalog;
+
 	public String getSelect_menu_catalog() {
 		return select_menu_catalog;
 	}
