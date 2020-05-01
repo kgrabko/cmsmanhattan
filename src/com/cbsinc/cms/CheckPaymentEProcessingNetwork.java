@@ -9,47 +9,44 @@ import java.io.*;
 
 import org.apache.log4j.Logger;
 
-public class CheckPaymentEProcessingNetwork implements java.io.Serializable  { 
+public class CheckPaymentEProcessingNetwork implements java.io.Serializable {
 
+	private static final long serialVersionUID = 8160271389486247546L;
 
-	 private static final long serialVersionUID = 8160271389486247546L;
+	/**
+	 * <p>
+	 * Title: Content Manager System
+	 * </p>
+	 * <p>
+	 * Description: System building web application develop by Konstantin Grabko.
+	 * Konstantin Grabko is Owner and author this code. You can not use it and you
+	 * cannot change it without written permission from Konstantin Grabko Email:
+	 * konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
+	 * </p>
+	 * <p>
+	 * Copyright: Copyright (c) 2002-2014
+	 * </p>
+	 * <p>
+	 * Company: CENTER BUSINESS SOLUTIONS INC
+	 * </p>
+	 * 
+	 * @author Konstantin Grabko
+	 * @version 1.0
+	 */
 
-	 /**
-	  * <p>
-	  * Title: Content Manager System
-	  * </p>
-	  * <p>
-	  * Description: System building web application develop by Konstantin Grabko.
-	  * Konstantin Grabko is Owner and author this code.
-	  * You can not use it and you cannot change it without written permission from Konstantin Grabko
-	  * Email: konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
-	  * </p>
-	  * <p>
-	  * Copyright: Copyright (c) 2002-2014
-	  * </p>
-	  * <p>
-	  * Company: CENTER BUSINESS SOLUTIONS INC 
-	  * </p>
-	  * 
-	  * @author Konstantin Grabko
-	  * @version 1.0
-	  */
-
-
-	
-	
 	static private Logger log = Logger.getLogger(CheckPaymentResult.class);
 
 	private URL url1;
-	transient ResourceBundle setup_resources = null ;
-	transient long delay = 60000 ;
-	String strUrlServer = "https://www.eProcessingNetwork.Com/cgi-bin/tdbe/transact.pl" ;
+	transient ResourceBundle setup_resources = null;
+	transient long delay = 60000;
+	String strUrlServer = "https://www.eProcessingNetwork.Com/cgi-bin/tdbe/transact.pl";
 
 	public CheckPaymentEProcessingNetwork() {
 
-		if( setup_resources == null )  setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources");
-		delay = Long.parseLong(setup_resources.getString("checkpay.enp").trim()) ;
-		
+		if (setup_resources == null)
+			setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources");
+		delay = Long.parseLong(setup_resources.getString("checkpay.enp").trim());
+
 		try {
 			url1 = new URL(strUrlServer);
 		} catch (MalformedURLException e) {
@@ -60,12 +57,12 @@ public class CheckPaymentEProcessingNetwork implements java.io.Serializable  {
 	}
 
 	transient java.util.TimerTask t = new java.util.TimerTask() {
-		public void run() 
-		{
+		public void run() {
 			OrderBank objOrderBank = getOrder();
-			if (objOrderBank != null && objOrderBank.getOrder_ID() != null ) {
+			if (objOrderBank != null && objOrderBank.getOrder_ID() != null) {
 				System.out.println("Order : " + objOrderBank.getOrder_ID());
-				System.out.println("Send  request to " + strUrlServer + " pay gateway: " + new Date(scheduledExecutionTime()).toString());
+				System.out.println("Send  request to " + strUrlServer + " pay gateway: "
+						+ new Date(scheduledExecutionTime()).toString());
 				CheckOrder(objOrderBank);
 			}
 		}
@@ -75,38 +72,28 @@ public class CheckPaymentEProcessingNetwork implements java.io.Serializable  {
 		String query = "";
 		OrderBank objOrderBank = null;
 		QueryManager Adp = new QueryManager();
-		try
-		{
+		try {
 			query = "SELECT id, date_input FROM account_hist WHERE complete = false and active = true ORDER BY id ASC LIMIT 1  OFFSET 0";
 			Adp.executeQuery(query);
-		}
-		catch (SQLException ex) 
-		{
-			log.error(query,ex) ;
+		} catch (SQLException ex) {
+			log.error(query, ex);
 			return null;
-		}
-		catch (Exception ex) 
-		{
+		} catch (Exception ex) {
 			log.error(ex);
 			return null;
-		} 
-		finally 
-		{
+		} finally {
 			Adp.close();
 		}
 
 		if (Adp.rows().size() > 0) {
-			try 
-			{
+			try {
 				objOrderBank = new OrderBank();
 				objOrderBank.setOrder_ID((String) Adp.getValueAt(0, 0));
 				objOrderBank.setBeginData((String) Adp.getValueAt(0, 1));
-			}
-			catch (Exception ex) 
-			{
+			} catch (Exception ex) {
 				log.error(ex);
 				return null;
-			} 
+			}
 		}
 
 		return objOrderBank;
@@ -117,26 +104,17 @@ public class CheckPaymentEProcessingNetwork implements java.io.Serializable  {
 		try {
 			// URL url1 = new URL ("http://pgate.grabko.com:88");
 			InputStreamReader inputstreamreader = new InputStreamReader(url1.openStream());
-			String request = "ShopOrderNumber="
-					+ objOrderBank.getOrder_ID()
+			String request = "ShopOrderNumber=" + objOrderBank.getOrder_ID()
 					+ "&Shop_ID=84473&login=gvidon&password=231003&SUCCESS=2&STARTDAY="
-					+ objOrderBank.getBeginData_Day()
-					+ "&STARTMONTH="
-					+ objOrderBank.getBeginData_Month()
-					+ "&STARTYEAR="
-					+ objOrderBank.getBeginData_Year()
-					+ "&ENDDAY="
-					+ objOrderBank.getEndData_Day()
-					+ "&ENDMONTH="
-					+ objOrderBank.getEndData_Month()
-					+ "&ENDYEAR="
-					+ objOrderBank.getEndData_Year()
+					+ objOrderBank.getBeginData_Day() + "&STARTMONTH=" + objOrderBank.getBeginData_Month()
+					+ "&STARTYEAR=" + objOrderBank.getBeginData_Year() + "&ENDDAY=" + objOrderBank.getEndData_Day()
+					+ "&ENDMONTH=" + objOrderBank.getEndData_Month() + "&ENDYEAR=" + objOrderBank.getEndData_Year()
 					+ "&MEANTYPE=0&PAYMENTTYPE=0&FORMAT=1&ZIPFLAG=0&ENGLISH=0&HEADER1=0&Delimiter=;&RowDelimiter=13,10&S_FIELDS=ORDERNUMBER;RESPONSE_CODE;RECOMMENDATION;DATE;TOTAL";
 			BufferedReader bufferedreader = new BufferedReader(inputstreamreader);
 			// bufferedreader =
 			// postData("http://secure.assist.ru/results/results_long.cfm",
 			// request);
-			bufferedreader = postData(strUrlServer,request);
+			bufferedreader = postData(strUrlServer, request);
 			String nextLine = "";
 			while ((nextLine = bufferedreader.readLine()) != null) {
 				String tmp = java.net.URLDecoder.decode(nextLine, "UTF-8");
@@ -150,12 +128,10 @@ public class CheckPaymentEProcessingNetwork implements java.io.Serializable  {
 			System.out.println(ex.toString());
 		}
 
-
 		System.out.println("Answer from pay gateway: " + new Date(System.currentTimeMillis()).toString());
 	}
 
-	public void parserRequest(String i_strNumerOrder, String i_strRezult,String i_strDecsription) 
-	{
+	public void parserRequest(String i_strNumerOrder, String i_strRezult, String i_strDecsription) {
 		// final static int INPROCESS = 1 ;
 		// final static int SUCCESS = 2 ;
 		// final static int UNSUCCESS = 3 ;
@@ -164,38 +140,29 @@ public class CheckPaymentEProcessingNetwork implements java.io.Serializable  {
 		QueryManager Adp = new QueryManager();
 		Adp.BeginTransaction();
 		String query = "";
-		try 
-		{
-			if (Long.parseLong(i_strRezult) == PayStatus.SUCCESS) 
-			{
+		try {
+			if (Long.parseLong(i_strRezult) == PayStatus.SUCCESS) {
 				end_addmoney(Adp, i_strNumerOrder, i_strRezult, i_strRezult);
-			}
-			else if (Long.parseLong(i_strRezult) == PayStatus.UNSUCCESS) 
-			{
-				query = "UPDATE account_hist SET complete = ? , active = ? , rezult_cd = ? , decsription =  ?  WHERE  id =  "+ i_strNumerOrder + "";
+			} else if (Long.parseLong(i_strRezult) == PayStatus.UNSUCCESS) {
+				query = "UPDATE account_hist SET complete = ? , active = ? , rezult_cd = ? , decsription =  ?  WHERE  id =  "
+						+ i_strNumerOrder + "";
 				HashMap args = new HashMap();
-				args.put("complete" , false  );
-				args.put("active" , false  );
-				args.put("rezult_cd" , i_strRezult  );
-				args.put("decsription" , i_strDecsription  );
+				args.put("complete", false);
+				args.put("active", false);
+				args.put("rezult_cd", i_strRezult);
+				args.put("decsription", i_strDecsription);
 				Adp.executeUpdateWithArgs(query, args);
 			}
-			
+
 			Adp.commit();
-		} 
-		catch (SQLException ex) 
-		{
-			log.error(query,ex);
+		} catch (SQLException ex) {
+			log.error(query, ex);
 			Adp.rollback();
-		}
-		catch (Exception ex) 
-		{
+		} catch (Exception ex) {
 			log.error(ex);
 			Adp.rollback();
 			return;
-		}
-		finally 
-		{
+		} finally {
 			Adp.close();
 		}
 
@@ -203,8 +170,7 @@ public class CheckPaymentEProcessingNetwork implements java.io.Serializable  {
 
 	public String[] tokenize(String s, String d) {
 		Vector vector = new Vector();
-		for (StringTokenizer stringtokenizer = new StringTokenizer(s, d); stringtokenizer
-				.hasMoreTokens(); vector
+		for (StringTokenizer stringtokenizer = new StringTokenizer(s, d); stringtokenizer.hasMoreTokens(); vector
 				.addElement(stringtokenizer.nextToken()))
 			;
 
@@ -217,41 +183,30 @@ public class CheckPaymentEProcessingNetwork implements java.io.Serializable  {
 	public BufferedReader postData(String s, String s1) {
 		BufferedReader bufferedreader = null;
 		try {
-			System.setProperty("java.protocol.handler.pkgs",
-					"com.sun.net.ssl.internal.www.protocol");
+			System.setProperty("java.protocol.handler.pkgs", "com.sun.net.ssl.internal.www.protocol");
 			try {
-				Class clsFactory = Class
-						.forName("com.sun.net.ssl.internal.ssl.Provider");
-				if ((null != clsFactory)
-						&& (null == Security.getProvider("SunJSSE")))
+				Class clsFactory = Class.forName("com.sun.net.ssl.internal.ssl.Provider");
+				if ((null != clsFactory) && (null == Security.getProvider("SunJSSE")))
 					Security.addProvider((Provider) clsFactory.newInstance());
 			} catch (ClassNotFoundException cfe) {
 				log.error(cfe);
-				throw new Exception(
-						"Unable to load the JSSE SSL stream handler.  Check classpath."
-								+ cfe.toString());
+				throw new Exception("Unable to load the JSSE SSL stream handler.  Check classpath." + cfe.toString());
 			}
 
 			URL url1 = new URL(s);
-			java.net.HttpURLConnection urlconnection = (java.net.HttpURLConnection) url1
-					.openConnection();
+			java.net.HttpURLConnection urlconnection = (java.net.HttpURLConnection) url1.openConnection();
 			urlconnection.setUseCaches(false);
 			urlconnection.setDoOutput(true);
-			ByteArrayOutputStream bytearrayoutputstream = new ByteArrayOutputStream(
-					s1.length() * 2);
-			PrintWriter printwriter = new PrintWriter(bytearrayoutputstream,
-					true);
+			ByteArrayOutputStream bytearrayoutputstream = new ByteArrayOutputStream(s1.length() * 2);
+			PrintWriter printwriter = new PrintWriter(bytearrayoutputstream, true);
 			printwriter.print(s1);
 			printwriter.flush();
-			urlconnection.setRequestProperty("Content-Length", String
-					.valueOf(bytearrayoutputstream.size()));
-			urlconnection.setRequestProperty("Content-Type",
-					"application/x-www-form-urlencoded");
+			urlconnection.setRequestProperty("Content-Length", String.valueOf(bytearrayoutputstream.size()));
+			urlconnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			bytearrayoutputstream.writeTo(urlconnection.getOutputStream());
-			bufferedreader = new BufferedReader(new InputStreamReader(
-					urlconnection.getInputStream()));
+			bufferedreader = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
 		} catch (Exception e) {
-			log.error(e) ;
+			log.error(e);
 			e.printStackTrace();
 			return null;
 		}
@@ -262,8 +217,8 @@ public class CheckPaymentEProcessingNetwork implements java.io.Serializable  {
 
 	}
 
-	void end_addmoney(QueryManager Adp, String i_strAccountHistory_id,
-			String i_strRezult, String i_strDecsription) throws Exception {
+	void end_addmoney(QueryManager Adp, String i_strAccountHistory_id, String i_strRezult, String i_strDecsription)
+			throws Exception {
 
 		double add_amount = 0;
 		double old_amount = 0;
@@ -282,10 +237,8 @@ public class CheckPaymentEProcessingNetwork implements java.io.Serializable  {
 			Adp.BeginTransaction();
 			Adp.executeQuery(query);
 			if (Adp.rows().size() > 0) {
-				add_amount = new Double((String) Adp.getValueAt(0, 0))
-						.doubleValue();
-				old_amount = new Double((String) Adp.getValueAt(0, 1))
-						.doubleValue();
+				add_amount = new Double((String) Adp.getValueAt(0, 0)).doubleValue();
+				old_amount = new Double((String) Adp.getValueAt(0, 1)).doubleValue();
 				date_input = (String) Adp.getValueAt(0, 2);
 				rate = new Double((String) Adp.getValueAt(0, 3)).doubleValue();
 				user_id = (String) Adp.getValueAt(0, 5);
@@ -293,49 +246,38 @@ public class CheckPaymentEProcessingNetwork implements java.io.Serializable  {
 				total_amount = old_amount + add_amount;
 			}
 
-
-			query = "UPDATE account_hist SET complete = ? , active = ? , rezult_cd = ?  WHERE  id =  "+ i_strAccountHistory_id + "";
+			query = "UPDATE account_hist SET complete = ? , active = ? , rezult_cd = ?  WHERE  id =  "
+					+ i_strAccountHistory_id + "";
 			HashMap args = new HashMap();
-			args.put("complete" , true  );
-			args.put("active" , false  );
-			args.put("rezult_cd" , i_strRezult  );
+			args.put("complete", true);
+			args.put("active", false);
+			args.put("rezult_cd", i_strRezult);
 			Adp.executeUpdateWithArgs(query, args);
-			
+
 			total_amount = amount + (add_amount * rate);
 			query = "UPDATE account SET amount = ? , curr = ? , date_input = ? WHERE  user_id = " + user_id;
 			args = new HashMap();
-			args.put("amount" , Double.valueOf(total_amount));
-			args.put("curr" , (long)rate );
-			args.put("date_input" , new java.util.Date() );
+			args.put("amount", Double.valueOf(total_amount));
+			args.put("curr", (long) rate);
+			args.put("date_input", new java.util.Date());
 			Adp.executeUpdateWithArgs(query, args);
 
 			if (total_amount >= 0) {
-				query = "update orders  set paystatus_id = "+ PayStatus.SUCCESS +" where order_id = "+ order_id;
+				query = "update orders  set paystatus_id = " + PayStatus.SUCCESS + " where order_id = " + order_id;
 				Adp.executeUpdate(query);
 			}
 
-
 			Adp.commit();
-		} 
-		catch (SQLException ex) 
-		{
-			log.error(query,ex);
+		} catch (SQLException ex) {
+			log.error(query, ex);
 			Adp.rollback();
-		}
-		catch (Exception ex) 
-		{
+		} catch (Exception ex) {
 			log.error(ex);
 			Adp.rollback();
 			return;
-		}
-		finally 
-		{
+		} finally {
 			Adp.close();
 		}
 	}
 
-	
-	
-	
-	
 }

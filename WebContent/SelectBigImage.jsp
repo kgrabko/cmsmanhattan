@@ -8,15 +8,15 @@
 %>
 <html>
 <HEAD>
-<jsp:useBean id="SoftPostBeanId" scope="session" class="com.cbsinc.cms.SoftPostBean" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
-<jsp:setProperty name="SoftPostBeanId" property="*" />
-<title><%=AuthorizationPageBeanId.getLocalization(application).getString("title_select_big_image")%></title>
+<jsp:useBean id="publisherBeanId" scope="session" class="com.cbsinc.cms.PublisherBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:setProperty name="publisherBeanId" property="*" />
+<title><%=authorizationPageBeanId.getLocalization(application).getString("title_select_big_image")%></title>
 <script language="JavaScript">
         <!--
         function setData(){
-        	parent.postsoftform.bigimagename.value = '<%= SoftPostBeanId.getBigimgname() %>'  ;
-        	parent.postsoftform.bigimage_id.value =  '<%= SoftPostBeanId.getBigimage_id() %>'  ;
+        	parent.postsoftform.bigimagename.value = '<%= publisherBeanId.getBigimgname() %>'  ;
+        	parent.postsoftform.bigimage_id.value =  '<%= publisherBeanId.getBigimage_id() %>'  ;
         	parent.dwindow('SelectBigImage.jsp'); 
         return true ;
         }
@@ -44,11 +44,11 @@
 </HEAD><BODY>
 <form method="post" name="selectBigImage"   ACTION="SelectBigImage.jsp"  >
 <TABLE>
-<TR><TD colspan="3" ><%=AuthorizationPageBeanId.getLocalization(application).getString("title_select_big_image")%></TD></TR>
-<TR><TD colspan="3" ><%=SoftPostBeanId.getSelect_big_images()%></TD></TR>
-<TR><TD><input type="submit" name="Submit" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("apply") %>"  onclick="return setData()"  ></TD><TD><input type="button" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("select_with_out_pic") %>" onClick="return setEmpty()" ></TD></TR>
+<TR><TD colspan="3" ><%=authorizationPageBeanId.getLocalization(application).getString("title_select_big_image")%></TD></TR>
+<TR><TD colspan="3" ><%=publisherBeanId.getSelect_big_images()%></TD></TR>
+<TR><TD><input type="submit" name="Submit" value="<%= authorizationPageBeanId.getLocalization(application).getString("apply") %>"  onclick="return setData()"  ></TD><TD><input type="button" value="<%= authorizationPageBeanId.getLocalization(application).getString("select_with_out_pic") %>" onClick="return setEmpty()" ></TD></TR>
 </TABLE>
 </form>
-<img  id="bigimage"  height="160" alt="Current image" src="<%= SoftPostBeanId.getSelect_big_image_url() %>"  >
+<img  id="bigimage"  height="160" alt="Current image" src="<%= publisherBeanId.getSelect_big_image_url() %>"  >
 </body>
 </html>

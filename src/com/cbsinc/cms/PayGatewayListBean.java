@@ -21,14 +21,13 @@ package com.cbsinc.cms;
  * @version 1.0
  */
 
-
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 import org.apache.log4j.Logger;
 
-public class PayGatewayListBean implements  Serializable  {
-
+public class PayGatewayListBean implements Serializable {
 
 	private static final long serialVersionUID = -1197050877775233920L;
 
@@ -42,13 +41,12 @@ public class PayGatewayListBean implements  Serializable  {
 
 	private String site_id = "0";
 
-	private java.util.LinkedList listShopSetupBean = new java.util.LinkedList();
+	private LinkedList<PayGatewayBean> listShopSetupBean = new LinkedList<PayGatewayBean>();
 
 	private Integer indx_select = 0;
 
 	private Integer offset = 0;
 
-	// private int intLevelUp;
 	private String cururl;
 
 	private String listup;
@@ -78,24 +76,18 @@ public class PayGatewayListBean implements  Serializable  {
 				shopSetupBean.setPasswd((String) Adp.getValueAt(i, 4));
 				shopSetupBean.setPay_gateway_id((String) Adp.getValueAt(i, 5));
 				shopSetupBean.setName_gateway((String) Adp.getValueAt(i, 6));
-				shopSetupBean.setPay_url((String) Adp.getValueAt(i, 7)) ;
+				shopSetupBean.setPay_url((String) Adp.getValueAt(i, 7));
 				listShopSetupBean.add(shopSetupBean);
 			}
 
-		}
-		catch (SQLException ex) 
-		{
+		} catch (SQLException ex) {
 
-			log.error(query,ex) ;
-		}
-		catch (Exception ex) 
-		{
+			log.error(query, ex);
+		} catch (Exception ex) {
 
-			log.error(ex) ;
-		}
-		finally 
-		{
-		  Adp.close();
+			log.error(ex);
+		} finally {
+			Adp.close();
 		}
 	}
 
@@ -129,46 +121,36 @@ public class PayGatewayListBean implements  Serializable  {
 		if (intLevelUp == 2) {
 
 			if (listShopSetupBean.size() == 0) {
-				table.append("<TR BGCOLOR=\"#8CACBB\" >"
-								+ "<TD WIDTH=\"10%\" >ID </TD>"
-								+ "<TD WIDTH=\"70%\" >Paymant Gateway </TD>"
-								+ "<TD WIDTH=\"20%\" ><a href =\"PayGatewaySetup.jsp\">add</a> </TD>"
-								+ "</TR>\n");
-			} else {
-				table.append("<TR BGCOLOR=\"#808080\" >"
-						+ "<TD WIDTH=\"10%\" >ID </TD>"
+				table.append("<TR BGCOLOR=\"#8CACBB\" >" + "<TD WIDTH=\"10%\" >ID </TD>"
 						+ "<TD WIDTH=\"70%\" >Paymant Gateway </TD>"
-						+ "<TD WIDTH=\"20%\" ></TD>" + "</TR>\n");
+						+ "<TD WIDTH=\"20%\" ><a href =\"PayGatewaySetup.jsp\">add</a> </TD>" + "</TR>\n");
+			} else {
+				table.append("<TR BGCOLOR=\"#808080\" >" + "<TD WIDTH=\"10%\" >ID </TD>"
+						+ "<TD WIDTH=\"70%\" >Paymant Gateway </TD>" + "<TD WIDTH=\"20%\" ></TD>" + "</TR>\n");
 			}
 		} else {
-			table.append("<TR BGCOLOR=\"#808080\" >" + "<TD>ID</TD>"
-					+ "<TD>Paymant Gateway </TD>" + "<TD></TD>"
+			table.append("<TR BGCOLOR=\"#808080\" >" + "<TD>ID</TD>" + "<TD>Paymant Gateway </TD>" + "<TD></TD>"
 					+ "</TR>\n");
 		}
 
 		if (listShopSetupBean.size() < 10) {
-			//table.append("<TR>" + "<TD></TD>" + "<TD></TD>" + "<TD></TD>" + "</TR>\n");
+			// table.append("<TR>" + "<TD></TD>" + "<TD></TD>" + "<TD></TD>" + "</TR>\n");
 		} else {
-			table.append("<TR>" + "<TD></TD>" + "<TD></TD>" + "<TD><a href=\"" + listup + "\">up 10</a>  </TD>" + "</TR>\n");
+			table.append(
+					"<TR>" + "<TD></TD>" + "<TD></TD>" + "<TD><a href=\"" + listup + "\">up 10</a>  </TD>" + "</TR>\n");
 		}
 
 		for (int i = 0; listShopSetupBean.size() > i; i++) {
-			table.append("<TR>"
-					+ "<TD>"
-					+ (i + 1)
-					+ "</TD>"
-					+ "<TD>"
+			table.append("<TR>" + "<TD>" + (i + 1) + "</TD>" + "<TD>"
 					+ ((PayGatewayBean) listShopSetupBean.get(i)).getName_gateway() + "</TD>"
-					+ "<TD><a href =\"PayGatewaySetup.jsp?row=" + i
-					+ "\">edit</a> </TD>" + "</TR>\n");
+					+ "<TD><a href =\"PayGatewaySetup.jsp?row=" + i + "\">edit</a> </TD>" + "</TR>\n");
 		}
 
-		table.append("<TR>" + "<TD></TD>" + "<TD></TD>" + "<TD><a href=\""	+ listdown + "\">back 10</a>  </TD>" + "</TR>\n");
+		table.append(
+				"<TR>" + "<TD></TD>" + "<TD></TD>" + "<TD><a href=\"" + listdown + "\">back 10</a>  </TD>" + "</TR>\n");
 
 		table.append("</tbody>\n");
 		table.append("</TABLE>\n");
-
-	
 
 		return table.toString();
 	}
@@ -265,7 +247,4 @@ public class PayGatewayListBean implements  Serializable  {
 		return null;
 	}
 
-	
-	
-	
 }

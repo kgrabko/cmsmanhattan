@@ -36,57 +36,48 @@ import com.cbsinc.cms.faceds.AuthorizationPageFaced;
  * </p>
  * <p>
  * Description: System building web application develop by Konstantin Grabko.
- * Konstantin Grabko is Owner and author this code.
- * You can not use it and you cannot change it without written permission from Konstantin Grabko
- * Email: konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
+ * Konstantin Grabko is Owner and author this code. You can not use it and you
+ * cannot change it without written permission from Konstantin Grabko Email:
+ * konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
  * </p>
  * <p>
  * Copyright: Copyright (c) 2002-2014
  * </p>
  * <p>
- * Company: CENTER BUSINESS SOLUTIONS INC 
+ * Company: CENTER BUSINESS SOLUTIONS INC
  * </p>
  * 
  * @author Konstantin Grabko
  * @version 1.0
  */
 
-
-public class AuthorizationPageBean  implements 
-		java.io.Serializable {
-
+public class AuthorizationPageBean implements java.io.Serializable {
 
 	private static final long serialVersionUID = -7953240488409859679L;
 
-	private static  Logger log = Logger.getLogger(AuthorizationPageBean.class);
-	
-	transient private ResourceBundle localization  = null;
+	private static Logger log = Logger.getLogger(AuthorizationPageBean.class);
 
-	
+	transient private ResourceBundle localization = null;
 
 	public AuthorizationPageBean() {
-		try
-		{
-		calendar = java.util.Calendar.getInstance();
+		try {
+			calendar = java.util.Calendar.getInstance();
 
-		dayfrom_id =  calendar.get(java.util.Calendar.DAY_OF_MONTH);
-		mountfrom_id =  (calendar.get(java.util.Calendar.MONTH) + 1);
-		yearfrom_id =  calendar.get(java.util.Calendar.YEAR);
+			dayfrom_id = calendar.get(java.util.Calendar.DAY_OF_MONTH);
+			mountfrom_id = (calendar.get(java.util.Calendar.MONTH) + 1);
+			yearfrom_id = calendar.get(java.util.Calendar.YEAR);
 
-		dayto_id =  calendar.get(java.util.Calendar.DAY_OF_MONTH);
-		mountto_id =  (calendar.get(java.util.Calendar.MONTH) + 1);
-		yearto_id =  calendar.get(java.util.Calendar.YEAR);
+			dayto_id = calendar.get(java.util.Calendar.DAY_OF_MONTH);
+			mountto_id = (calendar.get(java.util.Calendar.MONTH) + 1);
+			yearto_id = calendar.get(java.util.Calendar.YEAR);
 
-		}
-		catch (Exception ex) 
-		{
-		 log.error(ex);
+		} catch (Exception ex) {
+			log.error(ex);
 		}
 	}
-	
-	
+
 	java.util.Calendar calendar;
-	
+
 	private String strLogin = "";
 
 	private String strPasswd = "";
@@ -107,7 +98,7 @@ public class AuthorizationPageBean  implements
 
 	private String site_id = "2";
 
-	private Integer  lang_id = Integer.valueOf(-1);
+	private Integer lang_id = Integer.valueOf(-1);
 
 	private String site_dir = "localhost";
 
@@ -152,75 +143,72 @@ public class AuthorizationPageBean  implements
 	private String company_name = "";
 
 	private String host = "";
-	
+
 	private String user_site = "-1";
-	
-	private String userList = "" ;
-	
-	
-	private String select_site = "" ;
-	private String select_country = "" ;
-	private String select_city = "" ;
-	private String select_currency = "" ;
-	
+
+	private String userList = "";
+
+	private String select_site = "";
+	private String select_country = "";
+	private String select_city = "";
+	private String select_currency = "";
+
 	private String catalog_id = "-2";
-	
+
 	private String catalog_parent_id = "0";
 
-	 private Long offsetLastPage = Long.valueOf(0);
-	
-	 private Long lastProductId = Long.valueOf(0);
-	
-	 private Long currentOrderId = Long.valueOf(0);
-	
-		
-	 private Long creteria1_id = Long.valueOf(0);
+	private Long offsetLastPage = Long.valueOf(0);
 
-	 private Long creteria2_id = Long.valueOf(0);
+	private Long lastProductId = Long.valueOf(0);
 
-	 private Long creteria3_id = Long.valueOf(0);
+	private Long currentOrderId = Long.valueOf(0);
 
-	 private Long creteria4_id = Long.valueOf(0);
+	private Long creteria1_id = Long.valueOf(0);
 
-	 private Long creteria5_id = Long.valueOf(0);
+	private Long creteria2_id = Long.valueOf(0);
 
-	 private Long creteria6_id = Long.valueOf(0);
+	private Long creteria3_id = Long.valueOf(0);
 
-	 private Long creteria7_id = Long.valueOf(0);
+	private Long creteria4_id = Long.valueOf(0);
 
-	 private Long creteria8_id = Long.valueOf(0);
+	private Long creteria5_id = Long.valueOf(0);
 
-	 private Long creteria9_id = Long.valueOf(0);
+	private Long creteria6_id = Long.valueOf(0);
 
-	 private Long creteria10_id = Long.valueOf(0);
+	private Long creteria7_id = Long.valueOf(0);
 
-	 private Integer dayfrom_id = Integer.valueOf(0);
+	private Long creteria8_id = Long.valueOf(0);
 
-	 private Integer mountfrom_id = Integer.valueOf(0);
+	private Long creteria9_id = Long.valueOf(0);
 
-	 private Integer yearfrom_id = Integer.valueOf(0);
+	private Long creteria10_id = Long.valueOf(0);
 
-	 private Integer dayto_id = Integer.valueOf(0);
+	private Integer dayfrom_id = Integer.valueOf(0);
 
-	 private Integer mountto_id = Integer.valueOf(0);
+	private Integer mountfrom_id = Integer.valueOf(0);
 
-	 private Integer yearto_id = Integer.valueOf(0);
-	 
-	 private Integer numberPostedMessages = Integer.valueOf(0);
-	
-	
-	 private BigDecimal fromCost = BigDecimal.valueOf(0);
-	 private BigDecimal toCost = BigDecimal.valueOf(0);
-	 
-	 private String locale = "en" ;
-	 
-	 private String lastSessionId = "";
-	 
-	 private String balance = "0" ;
-	 
+	private Integer yearfrom_id = Integer.valueOf(0);
+
+	private Integer dayto_id = Integer.valueOf(0);
+
+	private Integer mountto_id = Integer.valueOf(0);
+
+	private Integer yearto_id = Integer.valueOf(0);
+
+	private Integer numberPostedMessages = Integer.valueOf(0);
+
+	private BigDecimal fromCost = BigDecimal.valueOf(0);
+	private BigDecimal toCost = BigDecimal.valueOf(0);
+
+	private String locale = "en";
+
+	private String lastSessionId = "";
+
+	private String balance = "0";
+
 	// private String emailPassword = "" ;
-	 
-	 private String lastVisitedPage = ""; 
+
+	private String lastVisitedPage = "";
 
 	public void setStrLogin(String strLogin) {
 		this.strLogin = strLogin;
@@ -231,11 +219,10 @@ public class AuthorizationPageBean  implements
 	}
 
 	public String userToGuestLogin() {
-		
-		
-		return strLogin.equals("user")? "guest" :strLogin;
+
+		return strLogin.equals("user") ? "guest" : strLogin;
 	}
-	
+
 	public void setStrPasswd(String strPasswd) {
 		this.strPasswd = strPasswd;
 	}
@@ -259,9 +246,6 @@ public class AuthorizationPageBean  implements
 	public long getIntLevelUp() {
 		return intLevelUp;
 	}
-
-
-	
 
 	public void setStrFirstName(String strFirstName) {
 		this.strFirstName = strFirstName;
@@ -308,21 +292,16 @@ public class AuthorizationPageBean  implements
 	public String getSite_id() {
 		return site_id;
 	}
-	
-	public void setSite_id(String site_id )
-	{
+
+	public void setSite_id(String site_id) {
 		this.site_id = site_id;
 	}
 
-	public void setSite_id(String site_id ,AuthorizationPageFaced authorizationPageFaced  ) 
-	{
+	public void setSite_id(String site_id, AuthorizationPageFaced authorizationPageFaced) {
 		this.site_id = site_id;
-		try 
-		{
-			authorizationPageFaced.initSiteDir(this.site_id,this);
-		}
-		catch (Exception ex) 
-		{
+		try {
+			authorizationPageFaced.initSiteDir(this.site_id, this);
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 
@@ -344,8 +323,6 @@ public class AuthorizationPageBean  implements
 		this.site_dir = site_dir;
 	}
 
-	
-	
 	public int getRezalt_reg() {
 		return rezalt_reg;
 	}
@@ -442,10 +419,7 @@ public class AuthorizationPageBean  implements
 		this.strCPasswd = strCPasswd;
 	}
 
-	
-
-	public boolean isHttpSession(
-			javax.servlet.http.HttpServletResponse response,
+	public boolean isHttpSession(javax.servlet.http.HttpServletResponse response,
 			javax.servlet.http.HttpServletRequest request) {
 
 		javax.servlet.http.HttpSession hsession = request.getSession();
@@ -550,9 +524,9 @@ public class AuthorizationPageBean  implements
 	}
 
 	public String getUserList() {
-		return userList ;
+		return userList;
 	}
-	
+
 	public String getSelect_city() {
 		return select_city;
 	}
@@ -601,12 +575,10 @@ public class AuthorizationPageBean  implements
 		this.catalog_id = catalog_id;
 	}
 
-	
 	public String getCatalogParent_id() {
 		return catalog_parent_id;
 	}
 
-	
 	public void setCatalogParent_id(String catalog_parent_id) {
 		this.catalog_parent_id = catalog_parent_id;
 	}
@@ -638,7 +610,7 @@ public class AuthorizationPageBean  implements
 	public long getCreteria1_id() {
 		return creteria1_id;
 	}
-	
+
 //	public String getCreteria1_id() {
 //		return Long.toString(creteria1_id);
 //	}
@@ -646,7 +618,7 @@ public class AuthorizationPageBean  implements
 	public void setCreteria1_id(long creteria1_id) {
 		this.creteria1_id = creteria1_id;
 	}
-	
+
 	public void setStrCreteria1_id(String creteria1_id) {
 		this.creteria1_id = Long.parseLong(creteria1_id);
 	}
@@ -662,7 +634,7 @@ public class AuthorizationPageBean  implements
 	public void setStrCreteria10_id(String creteria10_id) {
 		this.creteria10_id = Long.parseLong(creteria10_id);
 	}
-	
+
 	public long getCreteria2_id() {
 		return creteria2_id;
 	}
@@ -674,8 +646,7 @@ public class AuthorizationPageBean  implements
 	public void setStrCreteria2_id(String creteria2_id) {
 		this.creteria2_id = Long.parseLong(creteria2_id);
 	}
-	
-	
+
 	public long getCreteria3_id() {
 		return creteria3_id;
 	}
@@ -683,7 +654,7 @@ public class AuthorizationPageBean  implements
 	public void setCreteria3_id(long creteria3_id) {
 		this.creteria3_id = creteria3_id;
 	}
-	
+
 	public void setStrCreteria3_id(String creteria3_id) {
 		this.creteria3_id = Long.parseLong(creteria3_id);
 	}
@@ -699,8 +670,7 @@ public class AuthorizationPageBean  implements
 	public void setStrCreteria4_id(String creteria4_id) {
 		this.creteria4_id = Long.parseLong(creteria4_id);
 	}
-	
-	
+
 	public long getCreteria5_id() {
 		return creteria5_id;
 	}
@@ -708,7 +678,7 @@ public class AuthorizationPageBean  implements
 	public void setCreteria5_id(long creteria5_id) {
 		this.creteria5_id = creteria5_id;
 	}
-	
+
 	public void setStrCreteria5_id(String creteria5_id) {
 		this.creteria5_id = Long.parseLong(creteria5_id);
 	}
@@ -724,7 +694,7 @@ public class AuthorizationPageBean  implements
 	public void setStrCreteria6_id(String creteria6_id) {
 		this.creteria6_id = Long.parseLong(creteria6_id);
 	}
-	
+
 	public long getCreteria7_id() {
 		return creteria7_id;
 	}
@@ -732,7 +702,7 @@ public class AuthorizationPageBean  implements
 	public void setCreteria7_id(long creteria7_id) {
 		this.creteria7_id = creteria7_id;
 	}
-	
+
 	public void setStrCreteria7_id(String creteria7_id) {
 		this.creteria7_id = Long.parseLong(creteria7_id);
 	}
@@ -744,7 +714,7 @@ public class AuthorizationPageBean  implements
 	public void setCreteria8_id(long creteria8_id) {
 		this.creteria8_id = creteria8_id;
 	}
-	
+
 	public void setStrCreteria8_id(String creteria8_id) {
 		this.creteria8_id = Long.parseLong(creteria8_id);
 	}
@@ -760,19 +730,15 @@ public class AuthorizationPageBean  implements
 	public void setStrCreteria9_id(String creteria9_id) {
 		this.creteria9_id = Long.parseLong(creteria9_id);
 	}
-	
-	
 
 	public BigDecimal getFromCost() {
 		return fromCost;
 	}
 
-	
-	
 	public void setFromCost(BigDecimal fromCost) {
 		this.fromCost = fromCost;
 	}
-	
+
 	public void setStrFromCost(String fromCost) {
 		this.fromCost = new BigDecimal(fromCost);
 	}
@@ -781,9 +747,6 @@ public class AuthorizationPageBean  implements
 		return mountfrom_id;
 	}
 
-	
-
-	
 	public BigDecimal getToCost() {
 		return toCost;
 	}
@@ -795,23 +758,21 @@ public class AuthorizationPageBean  implements
 	public void setStrToCost(String toCost) {
 		this.toCost = new BigDecimal(toCost);
 	}
-	
+
 	public Integer getYearfrom_id() {
 		return yearfrom_id;
 	}
 
-	
 	public Integer getYearto_id() {
 		return yearto_id;
 	}
 
 	public java.util.Calendar getCalendar() {
-	return calendar;
+		return calendar;
 	}
 
-	
 	public void setCalendar(java.util.Calendar calendar) {
-	this.calendar = calendar;
+		this.calendar = calendar;
 	}
 
 	@Deprecated
@@ -921,25 +882,28 @@ public class AuthorizationPageBean  implements
 	}
 
 	public String getEmailPassword() {
-		if(getStrPasswd().length() > 4 ) return getStrPasswd().substring(0,4).concat(getStrLogin()) ; 
-		else return "" ;
-		//return emailPassword;
+		if (getStrPasswd().length() > 4)
+			return getStrPasswd().substring(0, 4).concat(getStrLogin());
+		else
+			return "";
+		// return emailPassword;
 	}
 
 	public void setEmailPassword(String emailPassword) {
-		//this.emailPassword = emailPassword;
+		// this.emailPassword = emailPassword;
 	}
 
 	public ResourceBundle getLocalization(ServletContext applicationContext) {
-		
-		if( applicationContext != null ) localization = (ResourceBundle) applicationContext.getAttribute("user_locale_" + getLocale() ) ;
-		return localization ;
-		//return localization;
-	} 
-	
+
+		if (applicationContext != null)
+			localization = (ResourceBundle) applicationContext.getAttribute("user_locale_" + getLocale());
+		return localization;
+		// return localization;
+	}
+
 	public ResourceBundle getLocalization() {
-		return localization ;
-	} 
+		return localization;
+	}
 
 	public void setLocalization(ResourceBundle localization) {
 		this.localization = localization;
@@ -955,30 +919,27 @@ public class AuthorizationPageBean  implements
 //		
 //	}
 
-	
 	public String getLocale() {
 		return locale;
 	}
 
-	public void setLocale(String locale)
-	{
+	public void setLocale(String locale) {
 		this.locale = locale;
-	} 
+	}
 
-	public void setLocale(String locale, ServletContext applicationContext) 
-	{
+	public void setLocale(String locale, ServletContext applicationContext) {
 		this.locale = locale;
-		if(applicationContext == null) return ;
+		if (applicationContext == null)
+			return;
 		AuthorizationPageFaced authorizationPageFaced = null;
 		try {
-			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
+			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(authorizationPageFaced != null )
-		{
-		 setLang_id(authorizationPageFaced.getLengId(locale));
+		if (authorizationPageFaced != null) {
+			setLang_id(authorizationPageFaced.getLengId(locale));
 		}
 	}
 
@@ -1006,9 +967,8 @@ public class AuthorizationPageBean  implements
 		this.lastVisitedPage = lastVisitedPage;
 	}
 
+	private String select_menu_catalog;
 
-	private String select_menu_catalog ;
-	
 	public String getSelect_menu_catalog() {
 		return select_menu_catalog;
 	}
@@ -1016,5 +976,5 @@ public class AuthorizationPageBean  implements
 	public void setSelect_menu_catalog(String select_menu_catalog) {
 		this.select_menu_catalog = select_menu_catalog;
 	}
-	
+
 }

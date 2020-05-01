@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
-<jsp:useBean id="SoftPostBeanId" scope="session" class="com.cbsinc.cms.SoftPostBean" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="publisherBeanId" scope="session" class="com.cbsinc.cms.PublisherBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <%
   response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
   response.setHeader("Pragma","no-cache"); //HTTP 1.0
@@ -93,7 +93,7 @@ function switchWindowSearch()
 {
 				windowsearch_hide = !windowsearch_hide;
 				document.getElementById("search_cre").src =  (windowsearch_hide ? "images/expand.gif" : "images/collapse.gif");
-				document.getElementById("search_cre").title =  (windowsearch_hide ? "<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= AuthorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
+				document.getElementById("search_cre").title =  (windowsearch_hide ? "<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= authorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
 				document.getElementById("windowsearch").style.display = windowsearch_hide ? "none" : "";
 }
 
@@ -104,7 +104,7 @@ function switchWindowReport()
 {
 				window_urlreport_hide = !window_urlreport_hide;
 				document.getElementById("urlreport_cre").src =  (window_urlreport_hide ? "images/expand.gif" : "images/collapse.gif");
-				document.getElementById("urlreport_cre").title =  (window_urlreport_hide ? "<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= AuthorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
+				document.getElementById("urlreport_cre").title =  (window_urlreport_hide ? "<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= authorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
 				document.getElementById("window_urlreport").style.display = window_urlreport_hide ? "none" : "";
 }
 
@@ -115,7 +115,7 @@ function switchWindowInputForm()
 {
 				window_input_form_hide = !window_input_form_hide;
 				document.getElementById("input_form").src =  (window_input_form_hide ? "images/expand.gif" : "images/collapse.gif");
-				document.getElementById("input_form").title =  (window_input_form_hide ? "<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= AuthorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
+				document.getElementById("input_form").title =  (window_input_form_hide ? "<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= authorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
 				document.getElementById("window_input_form").style.display = window_input_form_hide ? "none" : "";
 				if(!windowsearch_hide)  switchWindowSearch();
 }
@@ -127,7 +127,7 @@ function switchWindowSwitchForum()
 {
 				window_forum_hide = !window_forum_hide;
 				document.getElementById("switch_forum").src =  (window_forum_hide ? "images/expand.gif" : "images/collapse.gif");
-				document.getElementById("switch_forum").title =  (window_forum_hide ? "<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= AuthorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
+				document.getElementById("switch_forum").title =  (window_forum_hide ? "<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= authorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
 				document.getElementById("window_switch_forum").style.display = window_forum_hide ? "none" : "";
 				if(!window_input_form_hide)switchWindowInputForm();
 }
@@ -138,7 +138,7 @@ function switchWindowGenCode()
 {
 				window_gencode_hide = !window_gencode_hide;
 				document.getElementById("gencode").src =  (window_gencode_hide ? "images/expand.gif" : "images/collapse.gif");
-				document.getElementById("gencode").title =  (window_gencode_hide ? "<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= AuthorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
+				document.getElementById("gencode").title =  (window_gencode_hide ? "<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= authorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
 				document.getElementById("window_gencode").style.display = window_gencode_hide ? "none" : "";
 				if(!window_forum_hide)switchWindowSwitchForum();
 }
@@ -820,8 +820,8 @@ function parseMessages(responseXML)
 		  <div class="body">
 		    <div >
 		    <DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left"  >
-				<A	onclick="switchWindowSearch()" href="#" > <IMG id='search_cre'  title="<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" src="images/expand.gif" align="right"/> </A>
-				<font color='white' size='2' >&nbsp; Шаг 1 .&nbsp; <%=AuthorizationPageBeanId.getLocalization(application).getString("title_search_criteria")%> </font>
+				<A	onclick="switchWindowSearch()" href="#" > <IMG id='search_cre'  title="<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" src="images/expand.gif" align="right"/> </A>
+				<font color='white' size='2' >&nbsp; Шаг 1 .&nbsp; <%=authorizationPageBeanId.getLocalization(application).getString("title_search_criteria")%> </font>
 			</DIV>
 			<br/>
 			<div id='windowsearch'  >
@@ -829,8 +829,8 @@ function parseMessages(responseXML)
                      <TR id='creteria1'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria1' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria1' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria1' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;1.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getCriteria1_label()%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getSelect_creteria1_id()%></TD>
+                     <TD width="180" ><%=publisherBeanId.getCriteria1_label()%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getSelect_creteria1_id()%></TD>
                      <TD align="right" width="90" ></TD>
 					 <TD width="20" >&nbsp;</TD>                     
                      </TR>
@@ -838,8 +838,8 @@ function parseMessages(responseXML)
                      <TR id='creteria2'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria2' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria2' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria2' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;2.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getCriteria2_label()%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getSelect_creteria2_id()%></TD>
+                     <TD width="180" ><%=publisherBeanId.getCriteria2_label()%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getSelect_creteria2_id()%></TD>
                      <TD align="right" width="90" ></TD>
 					 <TD width="20" >&nbsp;</TD>                     
                      </TR>
@@ -847,8 +847,8 @@ function parseMessages(responseXML)
                      <TR id='creteria3'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria3' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria3' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria3' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;3.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getCriteria3_label()%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getSelect_creteria3_id()%></TD>
+                     <TD width="180" ><%=publisherBeanId.getCriteria3_label()%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getSelect_creteria3_id()%></TD>
                      <TD align="right" width="90" ></TD>
 					 <TD width="20" >&nbsp;</TD>                     
                      </TR>
@@ -856,8 +856,8 @@ function parseMessages(responseXML)
                      <TR id='creteria4'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria4' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria4' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria4' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;4.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getCriteria4_label()%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getSelect_creteria4_id()%></TD>
+                     <TD width="180" ><%=publisherBeanId.getCriteria4_label()%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getSelect_creteria4_id()%></TD>
                      <TD align="right" width="90" ></TD>
 					 <TD width="20" >&nbsp;</TD>                    
                      </TR>
@@ -865,8 +865,8 @@ function parseMessages(responseXML)
                     <TR id='creteria5'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria5' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria5' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria5' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;5.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getCriteria5_label()%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getSelect_creteria5_id()%></TD>
+                     <TD width="180" ><%=publisherBeanId.getCriteria5_label()%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getSelect_creteria5_id()%></TD>
                      <TD align="right" width="90" ></TD>
 					 <TD width="20" >&nbsp;</TD>                    
                      </TR>
@@ -874,8 +874,8 @@ function parseMessages(responseXML)
                      <TR id='creteria6'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria6' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria6' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria6' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;6.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getCriteria6_label()%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getSelect_creteria6_id()%></TD>
+                     <TD width="180" ><%=publisherBeanId.getCriteria6_label()%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getSelect_creteria6_id()%></TD>
                      <TD align="right" width="90" ></TD>
    					 <TD width="20" >&nbsp;</TD>
                      </TR>
@@ -884,8 +884,8 @@ function parseMessages(responseXML)
                     <TR id='creteria7'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria7' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria7' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria7' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;7.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getCriteria7_label()%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getSelect_creteria7_id()%></TD>
+                     <TD width="180" ><%=publisherBeanId.getCriteria7_label()%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getSelect_creteria7_id()%></TD>
 					 <TD align="right" width="90" ></TD>
  					 <TD width="20" >&nbsp;</TD>
                    
@@ -894,8 +894,8 @@ function parseMessages(responseXML)
                     <TR id='creteria8'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria8' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria8' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria8' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;8.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getCriteria8_label()%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getSelect_creteria8_id()%></TD>
+                     <TD width="180" ><%=publisherBeanId.getCriteria8_label()%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getSelect_creteria8_id()%></TD>
                      <TD align="right" width="90" ></TD>
    					 <TD width="20" >&nbsp;</TD>
                      </TR>
@@ -904,8 +904,8 @@ function parseMessages(responseXML)
                     <TR id='creteria9'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria9' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria9' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria9' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;9.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getCriteria9_label()%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getSelect_creteria9_id()%></TD>
+                     <TD width="180" ><%=publisherBeanId.getCriteria9_label()%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getSelect_creteria9_id()%></TD>
                      <TD align="right" width="90" ></TD>
    					 <TD width="20" >&nbsp;</TD>
                      </TR>                                          
@@ -913,8 +913,8 @@ function parseMessages(responseXML)
                     <TR id='creteria10'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria10' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria10' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria10' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;10.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getCriteria10_label()%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getSelect_creteria10_id()%></TD>
+                     <TD width="180" ><%=publisherBeanId.getCriteria10_label()%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getSelect_creteria10_id()%></TD>
                      <TD align="right"  width="90" ></TD>
 					 <TD width="20" >&nbsp;</TD>                     
                      </TR>                                          
@@ -945,21 +945,21 @@ function parseMessages(responseXML)
 		    <div >
 
 				<DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left"  >
-				<A	onclick="switchWindowInputForm()" href="#" > <IMG id='input_form'  title="<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" src="images/expand.gif" align="right"/> </A>
+				<A	onclick="switchWindowInputForm()" href="#" > <IMG id='input_form'  title="<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" src="images/expand.gif" align="right"/> </A>
 					<font color='white' size='2' >&nbsp; Шаг 2 .&nbsp;&raquo; Форма для заведения или изменения этой информации на сайте </font>
 				</DIV>
 				
 				<br/>
 			    <div id='window_input_form' style="display:none;" >
                      <TABLE>
-                     <TR><TD>Заголовок:* </TD><TD> <input  name="softname" size="20"  value="<%= SoftPostBeanId.getStrSoftName() %>" onBlur="checkEmpty(this.value)" >
-                     <%=AuthorizationPageBeanId.getLocalization(application).getString("selected_section")%>:*<%=SoftPostBeanId.getComboBoxAutoSubmit("catalog_id", AuthorizationPageBeanId.getCatalog_id() ,"select catalog_id , lable   from catalog   where  active = true and parent_id = " + AuthorizationPageBeanId.getCatalogParent_id() )%>
-					 <input type="hidden"  name="softname2" size="40"  value="<%= SoftPostBeanId.getStrSoftName2() %>"  >
-                     <TR><TD>Закачать картинку:* </TD> <TD><input  name="imagename"  disabled="disabled" size="20" value="<%= SoftPostBeanId.getImgname() %>" ><input type="button" name="newimage" value="New Image"   onclick="dwindow('Image.html'); return false;"  ><input type="button" name="selectimage" value="select image" onclick="dwindow('SelectImage.jsp'); return false;" ><input type="hidden"  name="image_id" size="20" value="<%= SoftPostBeanId.getImage_id() %>" ></TD></TR>
+                     <TR><TD>Заголовок:* </TD><TD> <input  name="softname" size="20"  value="<%= publisherBeanId.getStrSoftName() %>" onBlur="checkEmpty(this.value)" >
+                     <%=authorizationPageBeanId.getLocalization(application).getString("selected_section")%>:*<%=publisherBeanId.getComboBoxAutoSubmit("catalog_id", authorizationPageBeanId.getCatalog_id() ,"select catalog_id , lable   from catalog   where  active = true and parent_id = " + authorizationPageBeanId.getCatalogParent_id() )%>
+					 <input type="hidden"  name="softname2" size="40"  value="<%= publisherBeanId.getStrSoftName2() %>"  >
+                     <TR><TD>Закачать картинку:* </TD> <TD><input  name="imagename"  disabled="disabled" size="20" value="<%= publisherBeanId.getImgname() %>" ><input type="button" name="newimage" value="New Image"   onclick="dwindow('Image.html'); return false;"  ><input type="button" name="selectimage" value="select image" onclick="dwindow('SelectImage.jsp'); return false;" ><input type="hidden"  name="image_id" size="20" value="<%= publisherBeanId.getImage_id() %>" ></TD></TR>
                      <!-- <TR><TD>Цена:* </TD> <TD><input  name="softcost" size="20" value="0" onBlur="checkNumber(this.value)"  ></TD></TR>  -->
-                     <TR><TD>Краткая информация :* </TD> <TD> <textarea name="description" rows="10" cols="70"  ><%=SoftPostBeanId.getStrSoftDescription()%></textarea></TD></TR>
-                     <TR><TD>Закачать большую картинку:* </TD> <TD><input  name="bigimagename" disabled="disabled" size="20" value="<%= SoftPostBeanId.getBigimgname() %>" ><input type="button" name="newbig_image" value="New Big Image"  onclick="dwindow('ImageBig.html'); return false;" ><input type="button" name="selectbig_image" value="select big image" image" onclick="dwindow('SelectBigImage.jsp'); return false;" ><input type="hidden"  name="bigimage_id" size="20" value="<%= SoftPostBeanId.getBigimage_id() %>" ></TD></TR>
-                     <TR><TD>Полная информация :* </TD> <TD> <textarea name="fulldescription" rows="10" cols="70"  ><%=SoftPostBeanId.getProduct_fulldescription()%></textarea></TD></TR>
+                     <TR><TD>Краткая информация :* </TD> <TD> <textarea name="description" rows="10" cols="70"  ><%=publisherBeanId.getStrSoftDescription()%></textarea></TD></TR>
+                     <TR><TD>Закачать большую картинку:* </TD> <TD><input  name="bigimagename" disabled="disabled" size="20" value="<%= publisherBeanId.getBigimgname() %>" ><input type="button" name="newbig_image" value="New Big Image"  onclick="dwindow('ImageBig.html'); return false;" ><input type="button" name="selectbig_image" value="select big image" image" onclick="dwindow('SelectBigImage.jsp'); return false;" ><input type="hidden"  name="bigimage_id" size="20" value="<%= publisherBeanId.getBigimage_id() %>" ></TD></TR>
+                     <TR><TD>Полная информация :* </TD> <TD> <textarea name="fulldescription" rows="10" cols="70"  ><%=publisherBeanId.getProduct_fulldescription()%></textarea></TD></TR>
                      <TR><TD colspan="2" >
                      <input type="hidden"  name="select_file"  value=""/>
                      <input type="hidden"  name="file_id"  value="-1"/>
@@ -979,13 +979,13 @@ function parseMessages(responseXML)
 		  <div class="body">
 		    <div >
 				<DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left"  >
-				<A	onclick="switchWindowSwitchForum()" href="#" > <IMG id='switch_forum'  title="<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" src="images/expand.gif" align="right"/> </A>
+				<A	onclick="switchWindowSwitchForum()" href="#" > <IMG id='switch_forum'  title="<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" src="images/expand.gif" align="right"/> </A>
 					<font color='white' size='2' >&nbsp; Шаг 3 .&nbsp;&raquo; Форум - вы можете включить систему общения с вашими клиентами  </font>
 				</DIV>
 				<br/>
 			    <div id='window_switch_forum' style="display:none;" >
                      <TABLE>
-                     <TR><TD></TD> <TD><input  type="checkbox" name="show_blog"  value="<%= SoftPostBeanId.getStrShow_forum() %>"  <%= SoftPostBeanId.getShow_forum_checked() %> > Влючить общение </TD></TR>
+                     <TR><TD></TD> <TD><input  type="checkbox" name="show_blog"  value="<%= publisherBeanId.getStrShow_forum() %>"  <%= publisherBeanId.getShow_forum_checked() %> > Влючить общение </TD></TR>
                      <TR><TD colspan="2" ></TD></TR>
                      <TR><TD></TD><TD><A	onclick="switchWindowGenCode()" href="#" >Перейти на шаг 4.</A></TD></TR>
                      </TABLE>
@@ -998,7 +998,7 @@ function parseMessages(responseXML)
 		  <div class="body">
 		    <div >
 				<DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left"  >
-				<A	onclick="switchWindowGenCode()" href="#" > <IMG id='gencode'  title="<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" src="images/expand.gif" align="right"/> </A>
+				<A	onclick="switchWindowGenCode()" href="#" > <IMG id='gencode'  title="<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" src="images/expand.gif" align="right"/> </A>
 					<font color='white' size='2' >&nbsp; Шаг 4 .&nbsp;&raquo; Подтверждение личной информации </font>
 				</DIV>
 				<br/>
@@ -1052,7 +1052,7 @@ function parseMessages(responseXML)
 
 <br />
 
- <%=AuthorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
+ <%=authorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
 
 <hr size="" class="netscape4" />
 
@@ -1065,7 +1065,7 @@ for user netscape
 <DIV id="vunet"  class="drag" style="position: absolute; top: 120px; left: 130px;display:none;"  >
 	<DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left" id="dtitle"  >
 	<A	onclick="dwindow('SelectImage.jsp')" href="#" >
-	 <IMG id=upshrink_ic  title="<%= AuthorizationPageBeanId.getLocalization(application).getString("close_window") %>" src="images/expand.gif" align="right"/> 
+	 <IMG id=upshrink_ic  title="<%= authorizationPageBeanId.getLocalization(application).getString("close_window") %>" src="images/expand.gif" align="right"/> 
 	</A>
 	<font  color='white' size='2' > <b id="title_name" >&nbsp;&raquo;&nbsp; GBS Portal</b> </font>
 	</DIV>
@@ -1075,7 +1075,7 @@ for user netscape
 			<TR>
 				<td>
 				<iframe id="dialog" src="SelectImage.jsp" width="390" height="400" align="center">
-				<%=AuthorizationPageBeanId.getLocalization(application).getString("browser_not_support_frame")%>
+				<%=authorizationPageBeanId.getLocalization(application).getString("browser_not_support_frame")%>
 				</iframe>
 				</td>
 			</TR>

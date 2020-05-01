@@ -15,29 +15,26 @@ import org.apache.log4j.Logger;
  * </p>
  * <p>
  * Description: System building web application develop by Konstantin Grabko.
- * Konstantin Grabko is Owner and author this code.
- * You can not use it and you cannot change it without written permission from Konstantin Grabko
- * Email: konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
+ * Konstantin Grabko is Owner and author this code. You can not use it and you
+ * cannot change it without written permission from Konstantin Grabko Email:
+ * konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
  * </p>
  * <p>
  * Copyright: Copyright (c) 2002-2014
  * </p>
  * <p>
- * Company: CENTER BUSINESS SOLUTIONS INC 
+ * Company: CENTER BUSINESS SOLUTIONS INC
  * </p>
  * 
  * @author Konstantin Grabko
  * @version 1.0
  */
 
+public class AccountHistoryBean extends com.cbsinc.cms.WebControls implements java.io.Serializable {
 
-public class AccountHistoryBean extends com.cbsinc.cms.WebControls implements
-		java.io.Serializable {
-	
-	 private static final long serialVersionUID = -5645998100032237469L;
+	private static final long serialVersionUID = -5645998100032237469L;
 
-
-	 static private Logger log = Logger.getLogger(AccountHistoryBean.class);
+	static private Logger log = Logger.getLogger(AccountHistoryBean.class);
 
 	private String[] array_amount_id = new String[10];
 
@@ -90,25 +87,23 @@ public class AccountHistoryBean extends com.cbsinc.cms.WebControls implements
 	private String currency_total_lable;
 
 	private String rezult_cd = "";
-	
-	
-	private NumberFormat nf ;
-	 
+
+	private NumberFormat nf;
+
 	private java.util.Calendar calendar;
-	
+
 	public AccountHistoryBean() {
 		nf = NumberFormat.getInstance();
 		nf.setGroupingUsed(true);
 		calendar = java.util.Calendar.getInstance();
 	}
 
-	
-	transient long dateFrom = 0 ;  
-	transient long dateTo = 0 ;
-	
-	String selectAccountHistoryXML = "" ;
-	String searchquery = "0" ;
-	
+	transient long dateFrom = 0;
+	transient long dateTo = 0;
+
+	String selectAccountHistoryXML = "";
+	String searchquery = "0";
+
 	public String getPaymentlist(int intUserID) {
 
 		cururl = "AccountHistory.jsp?offset=" + offset;
@@ -120,21 +115,17 @@ public class AccountHistoryBean extends com.cbsinc.cms.WebControls implements
 
 		StringBuffer table = new StringBuffer();
 		QueryManager Adp = new QueryManager();
-		
+
 		String query = "SELECT  account_hist.add_amount, account_hist.old_amount, account_hist.date_input, account_hist.date_end, account_hist.sysdate, account_hist.complete, account_hist.decsription, account_hist.active , account_hist.id  , account_hist.total_amount , "
 				+ " currency_add.currency_lable , currency_old.currency_lable ,currency_total.currency_lable , account_hist.rezult_cd"
 				+ " FROM account_hist  "
 				+ " LEFT OUTER   JOIN currency  currency_add ON account_hist.currency_id_add = currency_add.currency_id "
 				+ " LEFT OUTER   JOIN currency  currency_old ON account_hist.currency_id_old = currency_old.currency_id "
 				+ " LEFT OUTER   JOIN currency  currency_total ON account_hist.currency_id_total = currency_total.currency_id "
-				+ " WHERE account_hist.user_id = "
-				+ intUserID
-				+ " limit 10 offset " + offset;
+				+ " WHERE account_hist.user_id = " + intUserID + " limit 10 offset " + offset;
 
-		try 
-		{
+		try {
 			Adp.executeQuery(query);
-			
 
 			table.append("<list>\n");
 			for (int i = 0; Adp.rows().size() > i; i++) {
@@ -156,8 +147,7 @@ public class AccountHistoryBean extends com.cbsinc.cms.WebControls implements
 
 				table.append("<payment>\n");
 				table.append("<amount_id>" + amount_id + "</amount_id>\n");
-				table.append("<currency_add_lable>" + currency_add_lable
-						+ "</currency_add_lable>\n");
+				table.append("<currency_add_lable>" + currency_add_lable + "</currency_add_lable>\n");
 				table.append("<add_amount>" + add_amount + "</add_amount>\n");
 				table.append("<sysdate>" + sysdate + "</sysdate>\n");
 				table.append("<complete>" + complete + "</complete>\n");
@@ -167,27 +157,18 @@ public class AccountHistoryBean extends com.cbsinc.cms.WebControls implements
 
 			table.append("</list>\n");
 
-			
-			
-		} 
-		catch (SQLException ex) 
-		{
+		} catch (SQLException ex) {
 
-			log.error(query,ex) ;
-			
-		}
-		catch (Exception ex) 
-		{
+			log.error(query, ex);
 
-			log.error(ex) ;
-			
-		}
-		finally 
-		{
-		  Adp.close();
+		} catch (Exception ex) {
+
+			log.error(ex);
+
+		} finally {
+			Adp.close();
 		}
 
-		
 		return table.toString();
 
 	}
@@ -210,14 +191,12 @@ public class AccountHistoryBean extends com.cbsinc.cms.WebControls implements
 				+ " LEFT OUTER   JOIN currency  currency_add ON account_hist.currency_id_add = currency_add.currency_id "
 				+ " LEFT OUTER   JOIN currency  currency_old ON account_hist.currency_id_old = currency_old.currency_id "
 				+ " LEFT OUTER   JOIN currency  currency_total ON account_hist.currency_id_total = currency_total.currency_id "
-				+ " WHERE account_hist.user_id = "
-				+ intUserID
-				+ " ORDER BY account_hist.id DESC  limit 10 offset " + offset;
+				+ " WHERE account_hist.user_id = " + intUserID + " ORDER BY account_hist.id DESC  limit 10 offset "
+				+ offset;
 
-		try 
-		{
+		try {
 			Adp.executeQuery(query);
-			
+
 			table.append("<list>\n");
 			for (int i = 0; Adp.rows().size() > i; i++) {
 				add_amount = (String) Adp.getValueAt(i, 0);
@@ -238,8 +217,7 @@ public class AccountHistoryBean extends com.cbsinc.cms.WebControls implements
 
 				table.append("<payment>\n");
 				table.append("<amount_id>" + amount_id + "</amount_id>\n");
-				table.append("<currency_add_lable>" + currency_add_lable
-						+ "</currency_add_lable>\n");
+				table.append("<currency_add_lable>" + currency_add_lable + "</currency_add_lable>\n");
 				table.append("<add_amount>" + add_amount + "</add_amount>\n");
 				table.append("<sysdate>" + sysdate + "</sysdate>\n");
 				table.append("<complete>" + complete + "</complete>\n");
@@ -249,26 +227,18 @@ public class AccountHistoryBean extends com.cbsinc.cms.WebControls implements
 
 			table.append("</list>\n");
 
-			
-		}
-		catch (SQLException ex) 
-		{
+		} catch (SQLException ex) {
 
-			log.error(query,ex) ;
-			
-		}
-		catch (Exception ex) 
-		{
+			log.error(query, ex);
 
-			log.error(ex) ;
-			
-		}
-		finally 
-		{
-		  Adp.close();
+		} catch (Exception ex) {
+
+			log.error(ex);
+
+		} finally {
+			Adp.close();
 		}
 
-		
 		return table.toString();
 
 	}
@@ -279,11 +249,9 @@ public class AccountHistoryBean extends com.cbsinc.cms.WebControls implements
 		int i;
 		try {
 			i = Integer.parseInt(s);
-		}
-		catch (NumberFormatException ex) 
-		{
+		} catch (NumberFormatException ex) {
 			i = 0;
-			log.error(ex) ;
+			log.error(ex);
 		}
 		return i;
 	}
@@ -302,51 +270,43 @@ public class AccountHistoryBean extends com.cbsinc.cms.WebControls implements
 		float fltBalans = 0;
 		String strCurrency_ID = "1";
 		float floRate = 0;
-		String query = "SELECT  account.amount, currency.currency_id, currency.currency_desc FROM account LEFT OUTER JOIN currency ON account.currency_id = currency.currency_id WHERE account.user_id = "	+ strUser_id;
+		String query = "SELECT  account.amount, currency.currency_id, currency.currency_desc FROM account LEFT OUTER JOIN currency ON account.currency_id = currency.currency_id WHERE account.user_id = "
+				+ strUser_id;
 
 		QueryManager Adp = new QueryManager();
-		
-		try 
-		{
+
+		try {
 			Adp.executeQuery(query);
-			
+
 			strBalans = (String) Adp.getValueAt(0, 0);
-			///strBalans = "" + Float.parseFloat(strBalans);
-			//strBalans = nf.format(Double.parseDouble(strBalans)) ;
+			/// strBalans = "" + Float.parseFloat(strBalans);
+			// strBalans = nf.format(Double.parseDouble(strBalans)) ;
 			fltBalans = Float.parseFloat(strBalans);
 			strCurrency_ID = (String) Adp.getValueAt(0, 1);
 			Adp.close();
-			CurrencyHash currencyHash = CurrencyHash.getInstance() ;
+			CurrencyHash currencyHash = CurrencyHash.getInstance();
 			Currency curr = currencyHash.getCurrency(strCurrency_ID);
-			if (curr == null) 
-			{
+			if (curr == null) {
 				rezalt = false;
-				throw new java.lang.UnsupportedOperationException(
-						"Object Currency == null");
+				throw new java.lang.UnsupportedOperationException("Object Currency == null");
 			}
-			
+
 			floRate = curr.getRate();
-			if (floRate == 0) 
-			{
+			if (floRate == 0) {
 				rezalt = false;
 				throw new java.lang.UnsupportedOperationException("Currency rate = 0");
 			}
-			
-			if (fltCredit_limit < fltBalans * floRate)	rezalt = true;
-		}
-		catch (SQLException ex) 
-		{
 
-			log.error(query,ex) ;
-		}
-		catch (Exception ex) 
-		{
+			if (fltCredit_limit < fltBalans * floRate)
+				rezalt = true;
+		} catch (SQLException ex) {
 
-			log.error(ex) ;
-		}
-		finally 
-		{
-		  Adp.close();
+			log.error(query, ex);
+		} catch (Exception ex) {
+
+			log.error(ex);
+		} finally {
+			Adp.close();
 		}
 
 		return rezalt;
@@ -567,45 +527,36 @@ public class AccountHistoryBean extends com.cbsinc.cms.WebControls implements
 		this.dateTo = dateTo;
 	}
 
-	
 	/*
-	 *  String dateTo 
-	 *  Input format  is "dd/mm/yyyy" 
+	 * String dateTo Input format is "dd/mm/yyyy"
 	 */
-	public void setStrDateTo(String dateTo) 
-	{
-		if(dateTo.split("/").length > 2)
-		{	
-		getCalendar().set(Integer.parseInt(dateTo.split("/")[2]), Integer.parseInt(dateTo.split("/")[1]) - 1, Integer.parseInt(dateTo.split("/")[0]), 0, 1);
-		this.dateTo = getCalendar().getTimeInMillis();
+	public void setStrDateTo(String dateTo) {
+		if (dateTo.split("/").length > 2) {
+			getCalendar().set(Integer.parseInt(dateTo.split("/")[2]), Integer.parseInt(dateTo.split("/")[1]) - 1,
+					Integer.parseInt(dateTo.split("/")[0]), 0, 1);
+			this.dateTo = getCalendar().getTimeInMillis();
 		}
 	}
 
 	/*
-	 *  String dateFrom 
-	 *  Input format  is "dd/mm/yyyy" 
+	 * String dateFrom Input format is "dd/mm/yyyy"
 	 */
-	public void setStrDateFrom(String dateFrom) 
-	{
-		if(dateFrom.split("/").length > 2)
-		{
-		getCalendar().set(Integer.parseInt(dateFrom.split("/")[2]), Integer.parseInt(dateFrom.split("/")[1]) - 1, Integer.parseInt(dateFrom.split("/")[0]), 0, 1);
-		this.dateFrom = getCalendar().getTimeInMillis();
+	public void setStrDateFrom(String dateFrom) {
+		if (dateFrom.split("/").length > 2) {
+			getCalendar().set(Integer.parseInt(dateFrom.split("/")[2]), Integer.parseInt(dateFrom.split("/")[1]) - 1,
+					Integer.parseInt(dateFrom.split("/")[0]), 0, 1);
+			this.dateFrom = getCalendar().getTimeInMillis();
 		}
 	}
 
-
-	public java.util.Date getSQLDateTo() 
-	{
-		return  new java.sql.Date(dateTo);
+	public java.util.Date getSQLDateTo() {
+		return new java.sql.Date(dateTo);
 	}
 
-
-	public java.sql.Date getSQLDateFrom() 
-	{
-		return  new java.sql.Date(dateFrom);
+	public java.sql.Date getSQLDateFrom() {
+		return new java.sql.Date(dateFrom);
 	}
-	
+
 	public String getSearchquery() {
 		return searchquery;
 	}
@@ -621,7 +572,5 @@ public class AccountHistoryBean extends com.cbsinc.cms.WebControls implements
 	public void setSelectAccountHistoryXML(String selectAccountHistoryXML) {
 		this.selectAccountHistoryXML = selectAccountHistoryXML;
 	}
-
-	
 
 }

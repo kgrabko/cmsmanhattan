@@ -10,26 +10,26 @@
    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
    %>
 </head>
-<jsp:useBean id="catalog_listBean" scope="session" class="com.cbsinc.cms.Catalog_listBean" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
-<jsp:setProperty name="catalog_listBean" property="*" />
+<jsp:useBean id="catalogListBeanId" scope="session" class="com.cbsinc.cms.CatalogListBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:setProperty name="catalogListBeanId" property="*" />
 <%
-if( request.getParameter("parent_id") != null) AuthorizationPageBeanId.setCatalog_id(request.getParameter("parent_id"));
+if( request.getParameter("parent_id") != null) authorizationPageBeanId.setCatalog_id(request.getParameter("parent_id"));
 if( request.getParameter("row") != null)
 {
-int index =  catalog_listBean.stringToInt(request.getParameter("row")) ;
-catalog_listBean.setIndx_select(index);
+int index =  catalogListBeanId.stringToInt(request.getParameter("row")) ;
+catalogListBeanId.setIndx_select(index);
 }
 if( request.getParameter("del") != null)
 {
-int index =  catalog_listBean.stringToInt(request.getParameter("del")) ;
-//int g =  catalog_listBean.rows.length ;
-String catalog_id = catalog_listBean.rows[index][0] ;
-if(catalog_id != null)catalog_listBean.delete(catalog_id,AuthorizationPageBeanId) ;
+int index =  catalogListBeanId.stringToInt(request.getParameter("del")) ;
+//int g =  catalogListBeanId.rows.length ;
+String catalog_id = catalogListBeanId.rows[index][0] ;
+if(catalog_id != null)catalogListBeanId.delete(catalog_id,authorizationPageBeanId) ;
 request.setAttribute("del",null);
 }
 if( request.getParameter("offset") != null){
-catalog_listBean.setOffset(  catalog_listBean.stringToInt(request.getParameter("offset")));
+catalogListBeanId.setOffset(  catalogListBeanId.stringToInt(request.getParameter("offset")));
 }
 %>
 <body>
@@ -52,7 +52,7 @@ catalog_listBean.setOffset(  catalog_listBean.stringToInt(request.getParameter("
 
         <div class="pathBar">
             <span>
-                <span> <%=AuthorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
+                <span> <%=authorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
             </span>
 
         </div>
@@ -70,7 +70,7 @@ catalog_listBean.setOffset(  catalog_listBean.stringToInt(request.getParameter("
             <td class="left">
     <div class="box">
 
-        <h5><%=AuthorizationPageBeanId.getLocalization(application).getString("enter_on_site")%></h5>
+        <h5><%=authorizationPageBeanId.getLocalization(application).getString("enter_on_site")%></h5>
 
         <div class="body">
 
@@ -80,18 +80,18 @@ catalog_listBean.setOffset(  catalog_listBean.stringToInt(request.getParameter("
 
 
 
-                    <strong><%=AuthorizationPageBeanId.getLocalization(application).getString("username")%></strong> <br />
+                    <strong><%=authorizationPageBeanId.getLocalization(application).getString("username")%></strong> <br />
 
 
 
-                     <INPUT  title="<%= AuthorizationPageBeanId.getLocalization(application).getString("username") %>" tabindex="10001" SIZE="12" AUTOCOMPLETE="off" TYPE="TEXT" NAME="Login" >
+                     <INPUT  title="<%= authorizationPageBeanId.getLocalization(application).getString("username") %>" tabindex="10001" SIZE="12" AUTOCOMPLETE="off" TYPE="TEXT" NAME="Login" >
         	     </INPUT>
 
                     <br />
 
-                    <strong><%=AuthorizationPageBeanId.getLocalization(application).getString("password")%></strong>
+                    <strong><%=authorizationPageBeanId.getLocalization(application).getString("password")%></strong>
 		    <br />
-		    <INPUT title="<%= AuthorizationPageBeanId.getLocalization(application).getString("password") %>" tabindex="10002"  SIZE="12" AUTOCOMPLETE="off" TYPE="PASSWORD" NAME="Passwd1" ></INPUT>
+		    <INPUT title="<%= authorizationPageBeanId.getLocalization(application).getString("password") %>" tabindex="10002"  SIZE="12" AUTOCOMPLETE="off" TYPE="PASSWORD" NAME="Passwd1" ></INPUT>
                     <br />
                     <br />
 
@@ -104,7 +104,7 @@ catalog_listBean.setOffset(  catalog_listBean.stringToInt(request.getParameter("
             <div class="content even">
                 <a href="">
                    <img src="xsl/www.gvidons.com/img/user.gif" alt="Link icon" title="Link icon" height="15" width="10" border="0" />
-                   <%=AuthorizationPageBeanId.getLocalization(application).getString("send_password_by_email")%>
+                   <%=authorizationPageBeanId.getLocalization(application).getString("send_password_by_email")%>
                 </a>
             </div>
         </div>
@@ -113,13 +113,13 @@ catalog_listBean.setOffset(  catalog_listBean.stringToInt(request.getParameter("
 
 <div>
     <div class="portlet">
-    <h5><strong><%=AuthorizationPageBeanId.getLocalization(application).getString("help")%></strong></h5>
+    <h5><strong><%=authorizationPageBeanId.getLocalization(application).getString("help")%></strong></h5>
       <div class="body">
         <div class="portletContent odd">
-         <%=AuthorizationPageBeanId.getLocalization(application).getString("help_cataloglist_1")%>
+         <%=authorizationPageBeanId.getLocalization(application).getString("help_cataloglist_1")%>
         </div>
         <div class="portletContent even">
-	<%=AuthorizationPageBeanId.getLocalization(application).getString("help_cataloglist_2")%>
+	<%=authorizationPageBeanId.getLocalization(application).getString("help_cataloglist_2")%>
         </div>
       </div>
     </div>
@@ -137,13 +137,13 @@ catalog_listBean.setOffset(  catalog_listBean.stringToInt(request.getParameter("
             <!-- News part -->
 
 	    <h1>Список разделов</h1>
-		<br/><%=catalog_listBean.getCatalogPath(AuthorizationPageBeanId)%>
+		<br/><%=catalogListBeanId.getCatalogPath(authorizationPageBeanId)%>
 
 
 		<div class="box">
 		  <div class="body">
 		    <div >
-                       <%=catalog_listBean.getTable("" + AuthorizationPageBeanId.getSite_id(),AuthorizationPageBeanId,application)%>
+                       <%=catalogListBeanId.getTable("" + authorizationPageBeanId.getSite_id(),authorizationPageBeanId,application)%>
 		     </div>
 		  </div>
 		</div>
@@ -181,7 +181,7 @@ catalog_listBean.setOffset(  catalog_listBean.stringToInt(request.getParameter("
 
 <br />
 
- <%=AuthorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
+ <%=authorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
 
 <hr size="" class="netscape4" />
 

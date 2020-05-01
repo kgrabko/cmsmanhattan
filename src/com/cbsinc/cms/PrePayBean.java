@@ -1,8 +1,7 @@
 package com.cbsinc.cms;
 
-public class PrePayBean extends com.cbsinc.cms.WebControls implements
-		java.io.Serializable  {
-	
+public class PrePayBean extends com.cbsinc.cms.WebControls implements java.io.Serializable {
+
 	private static final long serialVersionUID = 6234842953899930459L;
 
 	/**
@@ -11,26 +10,23 @@ public class PrePayBean extends com.cbsinc.cms.WebControls implements
 	 * </p>
 	 * <p>
 	 * Description: System building web application develop by Konstantin Grabko.
-	 * Konstantin Grabko is Owner and author this code.
-	 * You can not use it and you cannot change it without written permission from Konstantin Grabko
-	 * Email: konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
+	 * Konstantin Grabko is Owner and author this code. You can not use it and you
+	 * cannot change it without written permission from Konstantin Grabko Email:
+	 * konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
 	 * </p>
 	 * <p>
 	 * Copyright: Copyright (c) 2002-2014
 	 * </p>
 	 * <p>
-	 * Company: CENTER BUSINESS SOLUTIONS INC 
+	 * Company: CENTER BUSINESS SOLUTIONS INC
 	 * </p>
 	 * 
 	 * @author Konstantin Grabko
 	 * @version 1.0
 	 */
 
+	private String selectCurrencyListXML = "";
 
-	
-
-	private String selectCurrencyListXML= "";
-	
 	private String selectPaysystemListXML = "";
 
 	public String getSelectCurrencyListXML() {

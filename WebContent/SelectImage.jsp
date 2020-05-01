@@ -8,15 +8,15 @@
 %>
 <html>
 <HEAD>
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
-<jsp:useBean id="SoftPostBeanId" scope="session" class="com.cbsinc.cms.SoftPostBean" />
-<jsp:setProperty name="SoftPostBeanId" property="*" />
-<title><%=AuthorizationPageBeanId.getLocalization(application).getString("title_select_small_image")%></title>
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="publisherBeanId" scope="session" class="com.cbsinc.cms.PublisherBean" />
+<jsp:setProperty name="publisherBeanId" property="*" />
+<title><%=authorizationPageBeanId.getLocalization(application).getString("title_select_small_image")%></title>
 <script language="JavaScript">
         <!--
         function setData(){
-        parent.postsoftform.imagename.value = '<%= SoftPostBeanId.getImgname() %>'  ;
-        parent.postsoftform.image_id.value =  '<%= SoftPostBeanId.getImage_id() %>'  ;
+        parent.postsoftform.imagename.value = '<%= publisherBeanId.getImgname() %>'  ;
+        parent.postsoftform.image_id.value =  '<%= publisherBeanId.getImage_id() %>'  ;
         parent.dwindow('SelectImage.jsp'); 
         return true ;
         }
@@ -45,13 +45,13 @@
 </HEAD><BODY>
 <form method="post" name="selectImage1"   ACTION="SelectImage.jsp"  >
 <TABLE>
-<TR><TD colspan="3" ><%=AuthorizationPageBeanId.getLocalization(application).getString("title_select_small_image")%></TD></TR>
-<TR><TD colspan="3" ><%=SoftPostBeanId.getSelect_small_images()%></TD></TR>
-<TR><TD><input type="submit" name="Submit" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("apply") %>"  onclick="return setData()"  ></TD><TD><input type="button" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("select_with_out_pic") %>" onClick="return setEmpty()" ></TD></TR>
+<TR><TD colspan="3" ><%=authorizationPageBeanId.getLocalization(application).getString("title_select_small_image")%></TD></TR>
+<TR><TD colspan="3" ><%=publisherBeanId.getSelect_small_images()%></TD></TR>
+<TR><TD><input type="submit" name="Submit" value="<%= authorizationPageBeanId.getLocalization(application).getString("apply") %>"  onclick="return setData()"  ></TD><TD><input type="button" value="<%= authorizationPageBeanId.getLocalization(application).getString("select_with_out_pic") %>" onClick="return setEmpty()" ></TD></TR>
 </TABLE>
 </form>
  
- <img  id="smalimage"   height="260" alt="Current image"  src="<%= SoftPostBeanId.getSelect_small_image_url() %>"  >
+ <img  id="smalimage"   height="260" alt="Current image"  src="<%= publisherBeanId.getSelect_small_image_url() %>"  >
 
 </body>
 </html>

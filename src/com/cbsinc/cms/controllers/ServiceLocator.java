@@ -1,25 +1,7 @@
 package com.cbsinc.cms.controllers;
-/**
- * <p>
- * Title: Content Manager System
- * </p>
- * <p>
- * Description: System building web application develop by Konstantin Grabko.
- * Konstantin Grabko is Owner and author this code.
- * You can not use it and you cannot change it without written permission from Konstantin Grabko
- * Email: konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
- * </p>
- * <p>
- * Copyright: Copyright (c) 2002-2014
- * </p>
- * <p>
- * Company: CENTER BUSINESS SOLUTIONS INC 
- * </p>
- * 
- * @author Konstantin Grabko
- * @version 1.0
- */
-import com.cbsinc.cms.CurrencyHash;
+
+import java.util.Optional;
+
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.faceds.OrderFaced;
 import com.cbsinc.cms.faceds.PolicyFaced;
@@ -27,70 +9,59 @@ import com.cbsinc.cms.faceds.ProductPostAllFaced;
 import com.cbsinc.cms.faceds.ProductlistFaced;
 
 public class ServiceLocator {
-	
-	
-		  private static ServiceLocator me;
-		  AuthorizationPageFaced authorizationPageFaced = null ;
-		  OrderFaced orderFaced = null ;
-		  PolicyFaced policyFaced = null ;
-		  ProductlistFaced productlistFaced = null ;
-		  ProductPostAllFaced productPostAllFaced = null ;
-		  //SendMailAgent sendMailAgent = null ;
-		    
-		  private ServiceLocator() {
-		 		      
-		      authorizationPageFaced = new AuthorizationPageFaced() ;
-		      orderFaced = new OrderFaced() ;
-		      policyFaced = new PolicyFaced() ;
-		      productlistFaced =  new ProductlistFaced() ;
-		      productPostAllFaced = new ProductPostAllFaced() ;
-		     // sendMailAgent = new SendMailAgent();
-		  }
-		    
-		  // Returns the instance of ServiceLocator class
-		  public static ServiceLocator getInstance() 
-		  throws Exception {
-			  
-			  synchronized (ServiceLocator.class) {
-				  if (me == null)   me = new ServiceLocator();
-				}
-			  
-		    return me;
-		  }
-		    
-		  // Converts the serialized string into EJBHandle 
-		  // then to EJBObject.
-		  public  AuthorizationPageFaced getAuthorizationPageFaced() 
-		  throws Exception {
-			  
-			return authorizationPageFaced;
-		  }
-		  
-		  public  OrderFaced getOrderFaced() 
-		  throws Exception {
-			 
-			return orderFaced;
-		  }
 
-		 
-		  
-		  public  PolicyFaced getPolicyFaced() 
-		  throws Exception {
-			  
-			return policyFaced;
-		  }
+	private static ServiceLocator me;
+	
+	private Optional<AuthorizationPageFaced> authorizationPageFaced = null;
+	private Optional<OrderFaced> orderFaced = null;
+	private Optional<PolicyFaced> policyFaced = null;
+	private Optional<ProductlistFaced> productlistFaced = null;
+	private Optional<ProductPostAllFaced> productPostAllFaced = null;
 
-		  
-		  public  ProductlistFaced getProductlistFaced() 
-		  throws Exception {
-	    
-			return productlistFaced;
-		  }
-		  
-		  public  ProductPostAllFaced getProductPostAllFaced() 
-		  throws Exception {
-			 
-			return productPostAllFaced;
-		  }
-		  
+	private ServiceLocator() {
+		authorizationPageFaced = Optional.of(new AuthorizationPageFaced());
+		orderFaced = Optional.of(new OrderFaced());
+		policyFaced = Optional.of(new PolicyFaced());
+		productlistFaced = Optional.of(new ProductlistFaced());
+		productPostAllFaced = Optional.of(new ProductPostAllFaced());
+	}
+
+	// Returns the instance of ServiceLocator class
+	public static ServiceLocator getInstance() throws Exception {
+
+		synchronized (ServiceLocator.class) {
+			if (me == null)
+				me = new ServiceLocator();
+		}
+
+		return me;
+	}
+
+	// Converts the serialized string into EJBHandle
+	// then to EJBObject.
+	public Optional<AuthorizationPageFaced> getAuthorizationPageFaced() throws Exception {
+
+		return authorizationPageFaced;
+	}
+
+	public Optional<OrderFaced> getOrderFaced() throws Exception {
+
+		return orderFaced;
+	}
+
+	public Optional<PolicyFaced> getPolicyFaced() throws Exception {
+
+		return policyFaced;
+	}
+
+	public Optional<ProductlistFaced> getProductlistFaced() throws Exception {
+
+		return productlistFaced;
+	}
+
+	public Optional<ProductPostAllFaced> getProductPostAllFaced() throws Exception {
+
+		return productPostAllFaced;
+	}
+
 }

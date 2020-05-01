@@ -542,10 +542,10 @@ function parseMessages(responseXML)
 </script>
 
 </head>
-<jsp:useBean id="SoftPostBeanId" scope="session" class="com.cbsinc.cms.SoftPostBean" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="publisherBeanId" scope="session" class="com.cbsinc.cms.PublisherBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <jsp:useBean id="authorizationPageFaced" scope="application" class="com.cbsinc.cms.faceds.AuthorizationPageFaced" />
-<jsp:useBean id="policyBeanId" scope="request" class="com.cbsinc.cms.PolicyBean" />
+<jsp:useBean id="itemDescriptionBeanId" scope="request" class="com.cbsinc.cms.ItemDescriptionBean" />
 <%
 request.setCharacterEncoding("UTF-8");
 %>
@@ -641,48 +641,48 @@ request.setCharacterEncoding("UTF-8");
                      <TR>
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;1.</TD>
-                     <TD width="180" ><%= SoftPostBeanId.getOneLabel("select  label   from creteria1   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  ) %> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getComboBoxAutoSubmitLocale("creteria1_id", SoftPostBeanId.getCreteria1_id() , AuthorizationPageBeanId.getLocalization(application).getString("notselected") , "select creteria1_id , name   from creteria1   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%></TD>
+                     <TD width="180" ><%= publisherBeanId.getOneLabel("select  label   from creteria1   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  ) %> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getComboBoxAutoSubmitLocale("creteria1_id", publisherBeanId.getCreteria1_id() , authorizationPageBeanId.getLocalization(application).getString("notselected") , "select creteria1_id , name   from creteria1   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%></TD>
 					 <TD width="20" >&nbsp;</TD>                     
                      </TR>
 
                      <TR>
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;2.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getOneLabel("select label   from creteria2   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getComboBoxAutoSubmitLocale("creteria2_id", SoftPostBeanId.getCreteria2_id() , AuthorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria2_id , name   from creteria2   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + SoftPostBeanId.getCreteria1_id()+ " ) "   )%></TD>
+                     <TD width="180" ><%=publisherBeanId.getOneLabel("select label   from creteria2   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getComboBoxAutoSubmitLocale("creteria2_id", publisherBeanId.getCreteria2_id() , authorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria2_id , name   from creteria2   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + publisherBeanId.getCreteria1_id()+ " ) "   )%></TD>
 					 <TD width="20" >&nbsp;</TD>                     
                      </TR>
                      
                      <TR>
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;3.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getOneLabel("select  label   from creteria3   where  active = true "  + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
-                     <TD align="left"  ><%=SoftPostBeanId.getComboBoxAutoSubmitLocale("creteria3_id", SoftPostBeanId.getCreteria3_id() , AuthorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria3_id , name   from creteria3   where  active = true "  + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + SoftPostBeanId.getCreteria2_id()+ " ) " )%></TD>
+                     <TD width="180" ><%=publisherBeanId.getOneLabel("select  label   from creteria3   where  active = true "  + publisherBeanId.getPartCriteria(authorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
+                     <TD align="left"  ><%=publisherBeanId.getComboBoxAutoSubmitLocale("creteria3_id", publisherBeanId.getCreteria3_id() , authorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria3_id , name   from creteria3   where  active = true "  + publisherBeanId.getPartCriteria(authorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + publisherBeanId.getCreteria2_id()+ " ) " )%></TD>
 					 <TD width="20" >&nbsp;</TD>                     
                      </TR>
 
                      <TR>
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;4.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getOneLabel("select  label   from creteria4   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
-                     <TD align="left"  ><%=SoftPostBeanId.getComboBoxAutoSubmitLocale("creteria4_id", SoftPostBeanId.getCreteria4_id() , AuthorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria4_id , name   from creteria4   where  active = true "  + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + SoftPostBeanId.getCreteria3_id()+ " ) " )%></TD>
+                     <TD width="180" ><%=publisherBeanId.getOneLabel("select  label   from creteria4   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
+                     <TD align="left"  ><%=publisherBeanId.getComboBoxAutoSubmitLocale("creteria4_id", publisherBeanId.getCreteria4_id() , authorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria4_id , name   from creteria4   where  active = true "  + publisherBeanId.getPartCriteria(authorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + publisherBeanId.getCreteria3_id()+ " ) " )%></TD>
 					 <TD width="20" >&nbsp;</TD>                    
                      </TR>
 
                      <TR>
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;5.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getOneLabel("select  label   from creteria5   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getComboBoxAutoSubmitLocale("creteria5_id", SoftPostBeanId.getCreteria5_id() , AuthorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria5_id , name   from creteria5   where  active = true "  + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + SoftPostBeanId.getCreteria4_id()+ " ) " )%></TD>
+                     <TD width="180" ><%=publisherBeanId.getOneLabel("select  label   from creteria5   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getComboBoxAutoSubmitLocale("creteria5_id", publisherBeanId.getCreteria5_id() , authorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria5_id , name   from creteria5   where  active = true "  + publisherBeanId.getPartCriteria(authorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + publisherBeanId.getCreteria4_id()+ " ) " )%></TD>
 					 <TD width="20" >&nbsp;</TD>                    
                      </TR>
 
                      <TR>
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;6.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getOneLabel("select  label   from creteria6   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getComboBoxAutoSubmitLocale("creteria6_id", SoftPostBeanId.getCreteria6_id() , AuthorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria6_id , name   from creteria6   where  active = true "  + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + SoftPostBeanId.getCreteria5_id()+ " ) " )%></TD>
+                     <TD width="180" ><%=publisherBeanId.getOneLabel("select  label   from creteria6   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getComboBoxAutoSubmitLocale("creteria6_id", publisherBeanId.getCreteria6_id() , authorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria6_id , name   from creteria6   where  active = true "  + publisherBeanId.getPartCriteria(authorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + publisherBeanId.getCreteria5_id()+ " ) " )%></TD>
    					 <TD width="20" >&nbsp;</TD>
                      </TR>
 
@@ -690,8 +690,8 @@ request.setCharacterEncoding("UTF-8");
                      <TR>
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;7.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getOneLabel("select  label   from creteria7   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD>
-                     <TD align="left" ><%=SoftPostBeanId.getComboBoxAutoSubmitLocale("creteria7_id", SoftPostBeanId.getCreteria7_id() , AuthorizationPageBeanId.getLocalization(application).getString("notselected")  ,"select creteria7_id , name   from creteria7   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + SoftPostBeanId.getCreteria6_id()+ " ) " )%></TD>
+                     <TD width="180" ><%=publisherBeanId.getOneLabel("select  label   from creteria7   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD>
+                     <TD align="left" ><%=publisherBeanId.getComboBoxAutoSubmitLocale("creteria7_id", publisherBeanId.getCreteria7_id() , authorizationPageBeanId.getLocalization(application).getString("notselected")  ,"select creteria7_id , name   from creteria7   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + publisherBeanId.getCreteria6_id()+ " ) " )%></TD>
  					 <TD width="20" >&nbsp;</TD>
                    
                      </TR>
@@ -699,8 +699,8 @@ request.setCharacterEncoding("UTF-8");
                      <TR>
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;8.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getOneLabel("select  label   from creteria8   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getComboBoxAutoSubmitLocale("creteria8_id", SoftPostBeanId.getCreteria8_id() , AuthorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria8_id , name   from creteria8   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + SoftPostBeanId.getCreteria7_id()+ " ) " )%></TD>
+                     <TD width="180" ><%=publisherBeanId.getOneLabel("select  label   from creteria8   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getComboBoxAutoSubmitLocale("creteria8_id", publisherBeanId.getCreteria8_id() , authorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria8_id , name   from creteria8   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + publisherBeanId.getCreteria7_id()+ " ) " )%></TD>
    					 <TD width="20" >&nbsp;</TD>
                      </TR>
 
@@ -708,16 +708,16 @@ request.setCharacterEncoding("UTF-8");
                      <TR>
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;9.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getOneLabel("select  label   from creteria9   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getComboBoxAutoSubmitLocale("creteria9_id", SoftPostBeanId.getCreteria9_id() , AuthorizationPageBeanId.getLocalization(application).getString("notselected")  ,"select creteria9_id , name   from creteria9   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + SoftPostBeanId.getCreteria8_id()+ " ) " )%></TD>
+                     <TD width="180" ><%=publisherBeanId.getOneLabel("select  label   from creteria9   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getComboBoxAutoSubmitLocale("creteria9_id", publisherBeanId.getCreteria9_id() , authorizationPageBeanId.getLocalization(application).getString("notselected")  ,"select creteria9_id , name   from creteria9   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + publisherBeanId.getCreteria8_id()+ " ) " )%></TD>
    					 <TD width="20" >&nbsp;</TD>
                      </TR>                                          
                      
                      <TR>
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;10.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getOneLabel("select  label   from creteria10   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
-                     <TD align="left"  ><%=SoftPostBeanId.getComboBoxAutoSubmitLocale("creteria10_id", SoftPostBeanId.getCreteria10_id() , AuthorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria10_id , name   from creteria10   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + SoftPostBeanId.getCreteria9_id()+ " ) " )%></TD>
+                     <TD width="180" ><%=publisherBeanId.getOneLabel("select  label   from creteria10   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
+                     <TD align="left"  ><%=publisherBeanId.getComboBoxAutoSubmitLocale("creteria10_id", publisherBeanId.getCreteria10_id() , authorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria10_id , name   from creteria10   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getCatalog_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + publisherBeanId.getCreteria9_id()+ " ) " )%></TD>
 					 <TD width="20" >&nbsp;</TD>                     
                      </TR>                                          
                      
@@ -744,10 +744,10 @@ request.setCharacterEncoding("UTF-8");
 					</DIV>  
 					 <div>          
                      <TABLE width="500" >
-                     <TR><TD>Заголовок:* </TD><TD> <input  name="softname" size="40"  value="<%= SoftPostBeanId.getStrSoftName() %>" onBlur="checkEmpty(this.value)" >
-                     <input type="hidden"  name="catalog_id"  value="<%= AuthorizationPageBeanId.getCatalog_id() %>"/></TR>
-                     <TR><TD>Закачать картинку:* </TD> <TD><input  name="imagename"  disabled="disabled" size="20" value="<%= SoftPostBeanId.getImgname() %>" ><input type="button" name="newimage" value="New Image"   onclick="dwindow('Image.html'); return false;"  ><input type="button" name="selectimage" value="select image" onclick="dwindow('SelectImage.jsp'); return false;" ><input type="hidden"  name="image_id" size="20" value="<%= SoftPostBeanId.getImage_id() %>" ></TD></TR>
-                     <TR><TD>Краткая информация :* </TD> <TD> <textarea name="description" rows="10" cols="140"  ><%= SoftPostBeanId.getStrSoftDescription() %></textarea></TD></TR>
+                     <TR><TD>Заголовок:* </TD><TD> <input  name="softname" size="40"  value="<%= publisherBeanId.getStrSoftName() %>" onBlur="checkEmpty(this.value)" >
+                     <input type="hidden"  name="catalog_id"  value="<%= authorizationPageBeanId.getCatalog_id() %>"/></TR>
+                     <TR><TD>Закачать картинку:* </TD> <TD><input  name="imagename"  disabled="disabled" size="20" value="<%= publisherBeanId.getImgname() %>" ><input type="button" name="newimage" value="New Image"   onclick="dwindow('Image.html'); return false;"  ><input type="button" name="selectimage" value="select image" onclick="dwindow('SelectImage.jsp'); return false;" ><input type="hidden"  name="image_id" size="20" value="<%= publisherBeanId.getImage_id() %>" ></TD></TR>
+                     <TR><TD>Краткая информация :* </TD> <TD> <textarea name="description" rows="10" cols="140"  ><%= publisherBeanId.getStrSoftDescription() %></textarea></TD></TR>
                      <TR><TD></TD> <TD><input type="submit" name="Submit" value="Сохранить"> <input type="reset" value="Сброс"></TD></TR>
                      </TABLE>
                      </div>
@@ -764,7 +764,7 @@ request.setCharacterEncoding("UTF-8");
 					 <input type="hidden"  name="type_id" size="20" value="0" >
 					 <input type="hidden"  name="file_id" size="20" value="-1" >
                      <input type="hidden"  name="portlettype_id"  value="3"/>
-                     <input type="hidden"  name="parent_id"  value="<%= policyBeanId.getProduct_id() %>"/>
+                     <input type="hidden"  name="parent_id"  value="<%= itemDescriptionBeanId.getProduct_id() %>"/>
 				     </div>
 				  	</div>
 					</div>

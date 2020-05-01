@@ -19,8 +19,6 @@
  * @version 1.0
  */
 
-
-
 package com.cbsinc.cms;
 
 import java.sql.SQLException;
@@ -29,14 +27,11 @@ import com.cbsinc.cms.QueryManager;
 
 import org.apache.log4j.Logger;
 
-public class AccountHistoryDetalBean extends com.cbsinc.cms.WebControls implements
-		java.io.Serializable {
+public class AccountHistoryDetalBean extends com.cbsinc.cms.WebControls implements java.io.Serializable {
 
+	private static final long serialVersionUID = -8230325849058152562L;
 
-	 private static final long serialVersionUID = -8230325849058152562L;
-
-
-	 private static  Logger log = Logger.getLogger(AccountHistoryDetalBean.class);
+	private static Logger log = Logger.getLogger(AccountHistoryDetalBean.class);
 
 	private Integer intUserID = 0;
 
@@ -85,15 +80,14 @@ public class AccountHistoryDetalBean extends com.cbsinc.cms.WebControls implemen
 	private String user_header = "";
 
 	private String rezult_cd = "";
-	
-	
-	String selectAccountHistoryDetalXML = "" ;
+
+	String selectAccountHistoryDetalXML = "";
 
 	public String getPayment(int intUserID) {
 
 		StringBuffer table = new StringBuffer();
 		QueryManager Adp = new QueryManager();
-		//Adp.BeginTransaction();
+		// Adp.BeginTransaction();
 		String query = "SELECT  account_hist.add_amount, account_hist.old_amount, account_hist.date_input, account_hist.date_end, account_hist.sysdate, account_hist.complete, account_hist.decsription, account_hist.active , account_hist.id  , account_hist.total_amount , "
 				+ " currency_add.currency_lable , currency_old.currency_lable ,currency_total.currency_lable , account_hist.user_ip , account_hist.user_header , account_hist.rezult_cd "
 				+ " FROM account_hist  "
@@ -104,59 +98,54 @@ public class AccountHistoryDetalBean extends com.cbsinc.cms.WebControls implemen
 
 		try {
 			Adp.executeQuery(query);
-		
-		add_amount = (String) Adp.getValueAt(0, 0);
-		old_amount = (String) Adp.getValueAt(0, 1);
-		date_input = (String) Adp.getValueAt(0, 2);
-		date_end = (String) Adp.getValueAt(0, 3);
-		sysdate = (String) Adp.getValueAt(0, 4);
-		complete = (String) Adp.getValueAt(0, 5);
-		decsription = (String) Adp.getValueAt(0, 6);
-		active = (String) Adp.getValueAt(0, 7);
-		amount_id = (String) Adp.getValueAt(0, 8);
-		total_amount = (String) Adp.getValueAt(0, 9);
-		currency_add_lable = (String) Adp.getValueAt(0, 10);
-		currency_old_lable = (String) Adp.getValueAt(0, 11);
-		currency_total_lable = (String) Adp.getValueAt(0, 12);
-		user_ip = (String) Adp.getValueAt(0, 13);
-		user_header = (String) Adp.getValueAt(0, 14);
-		rezult_cd = (String) Adp.getValueAt(0, 15);
 
-		table.append("<payment>\n");
+			add_amount = (String) Adp.getValueAt(0, 0);
+			old_amount = (String) Adp.getValueAt(0, 1);
+			date_input = (String) Adp.getValueAt(0, 2);
+			date_end = (String) Adp.getValueAt(0, 3);
+			sysdate = (String) Adp.getValueAt(0, 4);
+			complete = (String) Adp.getValueAt(0, 5);
+			decsription = (String) Adp.getValueAt(0, 6);
+			active = (String) Adp.getValueAt(0, 7);
+			amount_id = (String) Adp.getValueAt(0, 8);
+			total_amount = (String) Adp.getValueAt(0, 9);
+			currency_add_lable = (String) Adp.getValueAt(0, 10);
+			currency_old_lable = (String) Adp.getValueAt(0, 11);
+			currency_total_lable = (String) Adp.getValueAt(0, 12);
+			user_ip = (String) Adp.getValueAt(0, 13);
+			user_header = (String) Adp.getValueAt(0, 14);
+			rezult_cd = (String) Adp.getValueAt(0, 15);
 
-		table.append("<add_amount>" + add_amount + "</add_amount>\n");
-		table.append("<old_amount>" + old_amount + "</old_amount>\n");
-		table.append("<date_input>" + date_input + "</date_input>\n");
-		table.append("<date_end>" + date_end + "</date_end>\n");
-		table.append("<sysdate>" + sysdate + "</sysdate>\n");
-		table.append("<complete>" + complete + "</complete>\n");
-		table.append("<decsription>" + decsription + "</decsription>\n");
-		table.append("<active>" + active + "</active>\n");
-		table.append("<amount_id>" + amount_id + "</amount_id>\n");
-		table.append("<total_amount>" + total_amount + "</total_amount>\n");
-		table.append("<currency_add_lable>" + currency_add_lable
-				+ "</currency_add_lable>\n");
-		table.append("<currency_old_lable>" + currency_old_lable
-				+ "</currency_old_lable>\n");
-		table.append("<currency_total_lable>" + currency_total_lable
-				+ "</currency_total_lable>\n");
-		table.append("<user_ip>" + user_ip + "</user_ip>\n");
-		table.append("<user_header>" + user_header + "</user_header>\n");
-		table.append("<rezult_cd>" + rezult_cd + "</rezult_cd>\n");
-		table.append("</payment>\n");
-		//Adp.commit();
+			table.append("<payment>\n");
+
+			table.append("<add_amount>" + add_amount + "</add_amount>\n");
+			table.append("<old_amount>" + old_amount + "</old_amount>\n");
+			table.append("<date_input>" + date_input + "</date_input>\n");
+			table.append("<date_end>" + date_end + "</date_end>\n");
+			table.append("<sysdate>" + sysdate + "</sysdate>\n");
+			table.append("<complete>" + complete + "</complete>\n");
+			table.append("<decsription>" + decsription + "</decsription>\n");
+			table.append("<active>" + active + "</active>\n");
+			table.append("<amount_id>" + amount_id + "</amount_id>\n");
+			table.append("<total_amount>" + total_amount + "</total_amount>\n");
+			table.append("<currency_add_lable>" + currency_add_lable + "</currency_add_lable>\n");
+			table.append("<currency_old_lable>" + currency_old_lable + "</currency_old_lable>\n");
+			table.append("<currency_total_lable>" + currency_total_lable + "</currency_total_lable>\n");
+			table.append("<user_ip>" + user_ip + "</user_ip>\n");
+			table.append("<user_header>" + user_header + "</user_header>\n");
+			table.append("<rezult_cd>" + rezult_cd + "</rezult_cd>\n");
+			table.append("</payment>\n");
+			// Adp.commit();
 		} catch (SQLException ex) {
 			System.err.println(query);
 			System.err.println(ex);
 			System.err.println("" + this.getClass());
 			System.err.println("Method " + "getPayment()");
-			//Adp.rollback();
-			//Adp.close();
+			// Adp.rollback();
+			// Adp.close();
+		} finally {
+			Adp.close();
 		}
-        finally
-        {
-    		Adp.close();        	
-        }
 
 		return table.toString();
 
@@ -166,7 +155,7 @@ public class AccountHistoryDetalBean extends com.cbsinc.cms.WebControls implemen
 
 		StringBuffer table = new StringBuffer();
 		QueryManager Adp = new QueryManager();
-		//Adp.BeginTransaction();
+		// Adp.BeginTransaction();
 		String query = "SELECT  account_hist.add_amount, account_hist.old_amount, account_hist.date_input, account_hist.date_end, account_hist.sysdate, account_hist.complete, account_hist.decsription, account_hist.active , account_hist.id  , account_hist.total_amount , "
 				+ " currency_add.currency_lable , currency_old.currency_lable ,currency_total.currency_lable , account_hist.user_ip , account_hist.user_header , account_hist.rezult_cd "
 				+ " FROM account_hist  "
@@ -175,61 +164,53 @@ public class AccountHistoryDetalBean extends com.cbsinc.cms.WebControls implemen
 				+ " LEFT OUTER   JOIN currency  currency_total ON account_hist.currency_id_total = currency_total.currency_id "
 				+ " WHERE account_hist.id = " + amount_id;
 
-		try 
-		{
+		try {
 
-		Adp.executeQuery(query);
-		add_amount = (String) Adp.getValueAt(0, 0);
-		old_amount = (String) Adp.getValueAt(0, 1);
-		date_input = (String) Adp.getValueAt(0, 2);
-		date_end = (String) Adp.getValueAt(0, 3);
-		sysdate = (String) Adp.getValueAt(0, 4);
-		complete = (String) Adp.getValueAt(0, 5);
-		decsription = (String) Adp.getValueAt(0, 6);
-		active = (String) Adp.getValueAt(0, 7);
-		amount_id = (String) Adp.getValueAt(0, 8);
-		total_amount = (String) Adp.getValueAt(0, 9);
-		currency_add_lable = (String) Adp.getValueAt(0, 10);
-		currency_old_lable = (String) Adp.getValueAt(0, 11);
-		currency_total_lable = (String) Adp.getValueAt(0, 12);
-		user_ip = (String) Adp.getValueAt(0, 13);
-		user_header = (String) Adp.getValueAt(0, 14);
-		rezult_cd = (String) Adp.getValueAt(0, 15);
+			Adp.executeQuery(query);
+			add_amount = (String) Adp.getValueAt(0, 0);
+			old_amount = (String) Adp.getValueAt(0, 1);
+			date_input = (String) Adp.getValueAt(0, 2);
+			date_end = (String) Adp.getValueAt(0, 3);
+			sysdate = (String) Adp.getValueAt(0, 4);
+			complete = (String) Adp.getValueAt(0, 5);
+			decsription = (String) Adp.getValueAt(0, 6);
+			active = (String) Adp.getValueAt(0, 7);
+			amount_id = (String) Adp.getValueAt(0, 8);
+			total_amount = (String) Adp.getValueAt(0, 9);
+			currency_add_lable = (String) Adp.getValueAt(0, 10);
+			currency_old_lable = (String) Adp.getValueAt(0, 11);
+			currency_total_lable = (String) Adp.getValueAt(0, 12);
+			user_ip = (String) Adp.getValueAt(0, 13);
+			user_header = (String) Adp.getValueAt(0, 14);
+			rezult_cd = (String) Adp.getValueAt(0, 15);
 
-		table.append("<payment>\n");
+			table.append("<payment>\n");
 
-		table.append("<add_amount>" + getStrFormatNumberFloat(add_amount) + "</add_amount>\n");
-		table.append("<old_amount>" + getStrFormatNumberFloat(old_amount) + "</old_amount>\n");
-		table.append("<date_input>" + date_input + "</date_input>\n");
-		table.append("<date_end>" + date_end + "</date_end>\n");
-		table.append("<sysdate>" + sysdate + "</sysdate>\n");
-		table.append("<complete>" + complete + "</complete>\n");
-		table.append("<decsription>" + decsription + "</decsription>\n");
-		table.append("<active>" + active + "</active>\n");
-		table.append("<amount_id>" + amount_id + "</amount_id>\n");
-		table.append("<total_amount>" + getStrFormatNumberFloat(total_amount) + "</total_amount>\n");
-		table.append("<currency_add_lable>" + currency_add_lable
-				+ "</currency_add_lable>\n");
-		table.append("<currency_old_lable>" + currency_old_lable
-				+ "</currency_old_lable>\n");
-		table.append("<currency_total_lable>" + currency_total_lable
-				+ "</currency_total_lable>\n");
-		table.append("<user_ip>" + user_ip + "</user_ip>\n");
-		table.append("<user_header>" + user_header + "</user_header>\n");
-		table.append("<rezult_cd>" + rezult_cd + "</rezult_cd>\n");
-		table.append("</payment>\n");
+			table.append("<add_amount>" + getStrFormatNumberFloat(add_amount) + "</add_amount>\n");
+			table.append("<old_amount>" + getStrFormatNumberFloat(old_amount) + "</old_amount>\n");
+			table.append("<date_input>" + date_input + "</date_input>\n");
+			table.append("<date_end>" + date_end + "</date_end>\n");
+			table.append("<sysdate>" + sysdate + "</sysdate>\n");
+			table.append("<complete>" + complete + "</complete>\n");
+			table.append("<decsription>" + decsription + "</decsription>\n");
+			table.append("<active>" + active + "</active>\n");
+			table.append("<amount_id>" + amount_id + "</amount_id>\n");
+			table.append("<total_amount>" + getStrFormatNumberFloat(total_amount) + "</total_amount>\n");
+			table.append("<currency_add_lable>" + currency_add_lable + "</currency_add_lable>\n");
+			table.append("<currency_old_lable>" + currency_old_lable + "</currency_old_lable>\n");
+			table.append("<currency_total_lable>" + currency_total_lable + "</currency_total_lable>\n");
+			table.append("<user_ip>" + user_ip + "</user_ip>\n");
+			table.append("<user_header>" + user_header + "</user_header>\n");
+			table.append("<rezult_cd>" + rezult_cd + "</rezult_cd>\n");
+			table.append("</payment>\n");
 
-		} 
-		catch (SQLException ex) 
-		{
+		} catch (SQLException ex) {
 			System.err.println(query);
 			System.err.println(ex);
 			System.err.println("" + this.getClass());
 			System.err.println("Method " + "getPayment()");
-		}
-		finally
-		{
-			Adp.close();			
+		} finally {
+			Adp.close();
 		}
 
 		return table.toString();
@@ -242,10 +223,9 @@ public class AccountHistoryDetalBean extends com.cbsinc.cms.WebControls implemen
 		int i;
 		try {
 			i = Integer.parseInt(s);
-		} catch (NumberFormatException ex) 
-		{
+		} catch (NumberFormatException ex) {
 			i = 0;
-			log.error(ex) ;
+			log.error(ex);
 		}
 		return i;
 	}

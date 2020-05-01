@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
 <jsp:useBean id="productlistFaced" scope="application" class="com.cbsinc.cms.faceds.ProductlistFaced" />
-<jsp:useBean id="calendar_listBean" scope="session" class="com.cbsinc.cms.Calendar_listBean" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="calendarListBeanId" scope="session" class="com.cbsinc.cms.calendarListBeanId" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       lang="en">
@@ -12,38 +12,38 @@
 </head>
 
 <%
-if( request.getParameter("mount_id") != null)calendar_listBean.setMount_id( request.getParameter("mount_id"));
-if( request.getParameter("year_id") != null)calendar_listBean.setYear_id( request.getParameter("year_id"));
+if( request.getParameter("mount_id") != null)calendarListBeanId.setMount_id( request.getParameter("mount_id"));
+if( request.getParameter("year_id") != null)calendarListBeanId.setYear_id( request.getParameter("year_id"));
 if( request.getParameter("product_id") != null)
 {
-  calendar_listBean.setProduct_id( request.getParameter("product_id"));
-  calendar_listBean.setDescrition( productlistFaced.getProductName( request.getParameter("product_id")));
+  calendarListBeanId.setProduct_id( request.getParameter("product_id"));
+  calendarListBeanId.setDescrition( productlistFaced.getProductName( request.getParameter("product_id")));
 }
 //ProductlistBeanId.getProduct()
 
-calendar_listBean.setSite_id(AuthorizationPageBeanId.getSite_id());
+calendarListBeanId.setSite_id(authorizationPageBeanId.getSite_id());
 if( request.getParameter("row") != null)
 {
-int index =  calendar_listBean.stringToInt(request.getParameter("row")) ;
-calendar_listBean.setIndx_select(index);
+int index =  calendarListBeanId.stringToInt(request.getParameter("row")) ;
+calendarListBeanId.setIndx_select(index);
 }
 if( request.getParameter("del") != null)
 {
-int index =  calendar_listBean.stringToInt(request.getParameter("del")) ;
-int g =  calendar_listBean.rows.length ;
-String calendar_id = calendar_listBean.rows[index][0] ;
-if(calendar_id != null)calendar_listBean.delete(calendar_id) ;
+int index =  calendarListBeanId.stringToInt(request.getParameter("del")) ;
+int g =  calendarListBeanId.rows.length ;
+String calendar_id = calendarListBeanId.rows[index][0] ;
+if(calendar_id != null)calendarListBeanId.delete(calendar_id) ;
 request.setAttribute("del",null);
 }
 if( request.getParameter("offset") != null){
-calendar_listBean.setOffset(  calendar_listBean.stringToInt(request.getParameter("offset")));
+calendarListBeanId.setOffset(  calendarListBeanId.stringToInt(request.getParameter("offset")));
 }
 
 
 
 if(request.getMethod().toUpperCase().compareTo("POST") == 0)
 {
- calendar_listBean.calendar_change();
+ calendarListBeanId.calendar_change();
  response.sendRedirect("calendar_list.jsp" );
 }
 
@@ -148,7 +148,7 @@ if(request.getMethod().toUpperCase().compareTo("POST") == 0)
 
             <!-- News part -->
 
-	    <h1>Список брони для  <%= calendar_listBean.getDescrition() %> </h1>
+	    <h1>Список брони для  <%= calendarListBeanId.getDescrition() %> </h1>
         <br/>
 
 
@@ -157,11 +157,11 @@ if(request.getMethod().toUpperCase().compareTo("POST") == 0)
 		    <div >
 		    <form method="post"   name="calendar_list"  ACTION="calendar_list.jsp" >
                      <TABLE>
-                     <TR><TD></TD><TD><input type="hidden" name="calendar_id"  value = "<%= calendar_listBean.rows[calendar_listBean.getIndx_select()][0] %>"  />
-                     <TR><TD>На месяц:* </TD><TD><TABLE> <%= calendar_listBean.getComboBoxMount("mount_id", calendar_listBean.getMount_id()  ) %><%= calendar_listBean.getComboBoxYear("year_id", calendar_listBean.getYear_id()  ) %> <input type="submit" name="Submit" value="Выбрать"></TABLE><TD>
+                     <TR><TD></TD><TD><input type="hidden" name="calendar_id"  value = "<%= calendarListBeanId.rows[calendarListBeanId.getIndx_select()][0] %>"  />
+                     <TR><TD>На месяц:* </TD><TD><TABLE> <%= calendarListBeanId.getComboBoxMount("mount_id", calendarListBeanId.getMount_id()  ) %><%= calendarListBeanId.getComboBoxYear("year_id", calendarListBeanId.getYear_id()  ) %> <input type="submit" name="Submit" value="Выбрать"></TABLE><TD>
                      </TABLE>
              </form>
-              <%= calendar_listBean.getTable( AuthorizationPageBeanId.getIntLevelUp()) %>
+              <%= calendarListBeanId.getTable( authorizationPageBeanId.getIntLevelUp()) %>
 		     </div>
 		  </div>
 		</div>

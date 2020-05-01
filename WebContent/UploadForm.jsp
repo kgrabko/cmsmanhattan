@@ -11,14 +11,14 @@ UploadForm
 %>
 
 </head>
-<jsp:useBean id="SoftPostBeanId" scope="session" class="com.cbsinc.cms.SoftPostBean" />
-<jsp:setProperty name="SoftPostBeanId" property="*" />
+<jsp:useBean id="publisherBeanId" scope="session" class="com.cbsinc.cms.PublisherBean" />
+<jsp:setProperty name="publisherBeanId" property="*" />
 <body>
 
 <%
 String   filename  = request.getParameter("file_id");
-if ( filename != null ) {  SoftPostBeanId.setSample( filename ); }
-else{ SoftPostBeanId.setSample(""); }
+if ( filename != null ) {  publisherBeanId.setSample( filename ); }
+else{ publisherBeanId.setSample(""); }
 filename = null ;
 %>
 

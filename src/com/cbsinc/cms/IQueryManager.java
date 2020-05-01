@@ -29,76 +29,62 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public interface IQueryManager  {
+public interface IQueryManager {
 
-	
 	public Connection getCurrentConnection();
-	
-	public SimpleDateFormat getSimpleDateFormat() ;
-	
-	public List rows() ;
-	public void executeQuery(String query) throws SQLException ;	
-	
-	public ResultSet executeQueryResultSet(String query) throws SQLException ;	
 
-	public int executeInsertWithArgs(String query  , Object[] args ) throws SQLException ;	
-	
-	
-	public int executeInsertWithArgs(String query  , Map args ) throws SQLException ; 
-	
-	public int executeInsertWithJavaObject(String query  , Map args ) throws SQLException ; 
-	
-	
-	public int executeUpdateWithArgs(String query  , Map args ) throws SQLException ; 
-	
+	public SimpleDateFormat getSimpleDateFormat();
 
-	
-	
-	public void executeQueryWithArgs(String query  , Object[] args ) throws SQLException ;  
+	public List rows();
 
-	public ResultSet executeQueryResultSet(String query  , Object[] args ) throws SQLException ; 
-	
-	public void executeQueryWithArgs(String query  , Object[] args , int limmit , int offset ) throws SQLException ; 
-	
-	public List executeQueryWithArgsList(String query  , Object[] args , int limmit , int offset ) throws SQLException ; 
+	public void executeQuery(String query) throws SQLException;
 
-	
-	public List executeQueryList(String query) throws SQLException ;
-	
-	public List executeQueryList(String query , int limmit , int offset ) throws SQLException ;
-		
-	
-	public void executeUpdate(String query) throws SQLException ;
-	
-		
-	
-	
+	public ResultSet executeQueryResultSet(String query) throws SQLException;
 
-	public int getColumnCount() ;
+	public int executeInsertWithArgs(String query, Object[] args) throws SQLException;
 
-	public int getRowCount() ;
+	public int executeInsertWithArgs(String query, Map args) throws SQLException;
 
-	public String getValueAt(int aRow, int aColumn) throws SQLException ;
-	
+	public int executeInsertWithJavaObject(String query, Map args) throws SQLException;
+
+	public int executeUpdateWithArgs(String query, Map args) throws SQLException;
+
+	public void executeQueryWithArgs(String query, Object[] args) throws SQLException;
+
+	public ResultSet executeQueryResultSet(String query, Object[] args) throws SQLException;
+
+	public void executeQueryWithArgs(String query, Object[] args, int limmit, int offset) throws SQLException;
+
+	public List executeQueryWithArgsList(String query, Object[] args, int limmit, int offset) throws SQLException;
+
+	public List executeQueryList(String query) throws SQLException;
+
+	public List executeQueryList(String query, int limmit, int offset) throws SQLException;
+
+	public void executeUpdate(String query) throws SQLException;
+
+	public int getColumnCount();
+
+	public int getRowCount();
+
+	public String getValueAt(int aRow, int aColumn) throws SQLException;
+
 	public Object getValueObjectAt(int aRow, int aColumn);
-	
-	public void close() ;
 
-	public int string2Integer(String s) ;
+	public void close();
 
-	public double string2Double(String s) ;
-	
+	public int string2Integer(String s);
 
-	public void rollback() ;
-	public void commit() ;
-	public void BeginTransaction() ;
-	
-	public ResourceBundle getResources_localization() ;
+	public double string2Double(String s);
 
-	
-	
-	public Map getArgs() ;
+	public void rollback();
+
+	public void commit();
+
+	public void BeginTransaction();
+
+	public ResourceBundle getResources_localization();
+
+	public Map getArgs();
 
 }
-
-

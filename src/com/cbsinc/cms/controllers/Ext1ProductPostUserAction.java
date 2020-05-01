@@ -21,174 +21,177 @@ package com.cbsinc.cms.controllers;
  * @version 1.0
  */
 
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.cbsinc.cms.AuthorizationPageBean;
-import com.cbsinc.cms.SoftPostBean;
+import com.cbsinc.cms.PublisherBean;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
 
-public class Ext1ProductPostUserAction implements IAction  
-{
+public class Ext1ProductPostUserAction implements IAction {
 
-	
-	
-	
-	//ResourceBundle resources = null ;
-	ProductPostAllFaced productPostAllFaced ;
+	ProductPostAllFaced productPostAllFaced;
 
-	
-	public void doPost(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) throws Exception 
-	{
-		action( request,  response,  servletContext) ;
+	public void doPost(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
+			throws Exception {
+		action(request, response, servletContext);
 		HttpSession session = request.getSession();
-	    SoftPostBean SoftPostBeanId = (SoftPostBean)session.getAttribute("SoftPostBeanId");
-	    AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("AuthorizationPageBeanId");
-	    //AuthorizationPageBeanId.getLastProductId();
-		if ( request.getParameter("bigimage_id") == null ) {  SoftPostBeanId.setBigimage_id( "-1" ); }
-		if ( request.getParameter("image_id") == null ) {  SoftPostBeanId.setImage_id( "-1" ); }
-		SoftPostBeanId.setSite_id(AuthorizationPageBeanId.getSite_id());
-		if(SoftPostBeanId.getSoft_id().compareTo("-1")==0)
-		{
-			if(productPostAllFaced.isLimmitPostedMessages(AuthorizationPageBeanId,true))
-			{  
-			  AuthorizationPageBeanId.setStrMessage(AuthorizationPageBeanId.getLocalization(servletContext).getString("global_has_limmit_forsite")); 
-			  response.sendRedirect("PolicyManager.jsp");
-			  return ;
+		PublisherBean publisherBeanId = (PublisherBean) session.getAttribute("publisherBeanId");
+		AuthorizationPageBean authorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
+
+		if (request.getParameter("bigimage_id") == null) {
+			publisherBeanId.setBigimage_id("-1");
+		}
+		if (request.getParameter("image_id") == null) {
+			publisherBeanId.setImage_id("-1");
+		}
+		publisherBeanId.setSite_id(authorizationPageBeanId.getSite_id());
+		if (publisherBeanId.getSoft_id().compareTo("-1") == 0) {
+			if (productPostAllFaced.isLimmitPostedMessages(authorizationPageBeanId, true)) {
+				authorizationPageBeanId.setStrMessage(
+						authorizationPageBeanId.getLocalization(servletContext).getString("global_has_limmit_forsite"));
+				response.sendRedirect("PolicyManager.jsp");
+				return;
 			}
-			productPostAllFaced.insertRowWithParent("" + AuthorizationPageBeanId.getLastProductId(),SoftPostBeanId,AuthorizationPageBeanId);
-		}
-		else productPostAllFaced.updateRowWithParent("" + AuthorizationPageBeanId.getLastProductId(),SoftPostBeanId,AuthorizationPageBeanId);
-//		response.sendRedirect("Productlist.jsp?offset=" + 0 + "&catalog_id=" + AuthorizationPageBeanId.getCatalog_id()  );
-		response.sendRedirect("Policy.jsp?policy_byproductid=" + AuthorizationPageBeanId.getLastProductId());
+			productPostAllFaced.insertRowWithParent("" + authorizationPageBeanId.getLastProductId(), publisherBeanId,
+					authorizationPageBeanId);
+		} else
+			productPostAllFaced.updateRowWithParent("" + authorizationPageBeanId.getLastProductId(), publisherBeanId,
+					authorizationPageBeanId);
+
+		response.sendRedirect("Policy.jsp?policy_byproductid=" + authorizationPageBeanId.getLastProductId());
 	}
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) throws Exception 
-	{
-	
-		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();	
+	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
+			throws Exception {
 
-		
-		action( request,  response,  servletContext) ;
+		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+
+		action(request, response, servletContext);
 		HttpSession session = request.getSession();
-	    SoftPostBean SoftPostBeanId = (SoftPostBean)session.getAttribute("SoftPostBeanId");
+		PublisherBean publisherBeanId = (PublisherBean) session.getAttribute("publisherBeanId");
 
-//		if( request.getParameter("product_id") == null )
-//		{
-//			SoftPostBeanId.setSoft_id("-1");
-//			return ;
-//		}
-			
-	    AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("AuthorizationPageBeanId");
-    
-	    productPostAllFaced.initPage(request.getParameter("product_id"),  SoftPostBeanId , AuthorizationPageBeanId);
+
+
+		AuthorizationPageBean authorizationPageBeanId = (AuthorizationPageBean) session
+				.getAttribute("authorizationPageBeanId");
+
+		productPostAllFaced.initPage(request.getParameter("product_id"), publisherBeanId, authorizationPageBeanId);
 //		if insert and limmit not add message
-	    if(productPostAllFaced.isLimmitPostedMessages(AuthorizationPageBeanId,false) && SoftPostBeanId.getSoft_id().compareTo("-1")==0 )
-		 {
-			 AuthorizationPageBeanId.setStrMessage(AuthorizationPageBeanId.getLocalization(servletContext).getString("global_has_limmit_forsite")); 
-			 response.sendRedirect("PolicyManager.jsp");
-			 return ;
-		 }
-	    
-	    //AuthorizationPageBeanId.setCatalogParent_id("" + productlistFaced.getCatalogParentId(AuthorizationPageBeanId));
+		if (productPostAllFaced.isLimmitPostedMessages(authorizationPageBeanId, false)
+				&& publisherBeanId.getSoft_id().compareTo("-1") == 0) {
+			authorizationPageBeanId.setStrMessage(
+					authorizationPageBeanId.getLocalization(servletContext).getString("global_has_limmit_forsite"));
+			response.sendRedirect("PolicyManager.jsp");
+			return;
+		}
+
+
 
 	}
 
-	
-	public void action(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) throws Exception 
-	{
-		
-		SoftPostBean SoftPostBeanId  ;
-		//Catalog_listBean catalog_listBean ;
-		//PolicyBean policyBeanId ;
-		
+	public void action(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
+			throws Exception {
+
+		PublisherBean publisherBeanId;
+
+
 		HttpSession session = request.getSession();
-		SoftPostBeanId = (SoftPostBean)session.getAttribute("SoftPostBeanId");
-		//catalog_listBean = (Catalog_listBean)session.getAttribute("catalog_listBean");
-		//policyBeanId = (PolicyBean)session.getAttribute("policyBeanId");
-		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("AuthorizationPageBeanId");
-		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
-		
-		if(SoftPostBeanId == null  ||  AuthorizationPageBeanId == null || productPostAllFaced == null  ) return ;
-		//if( resources == null )  resources = PropertyResourceBundle.getBundle("localization", response.getLocale());
+		publisherBeanId = (PublisherBean) session.getAttribute("publisherBeanId");
+
+		AuthorizationPageBean authorizationPageBeanId = (AuthorizationPageBean) session
+				.getAttribute("authorizationPageBeanId");
+		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+
+		if (publisherBeanId == null || authorizationPageBeanId == null || productPostAllFaced == null)
+			return;
+
 		request.setCharacterEncoding("UTF-8");
-		response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
-		response.setHeader("Pragma","no-cache"); //HTTP 1.0
-		response.setDateHeader ("Expires", 0); 
-		
-		
-		String   softname  = request.getParameter("softname");
-		if ( softname != null ) {  SoftPostBeanId.setStrSoftName( softname ); }
- 
+		response.setHeader("Cache-Control", "no-cache"); // HTTP 1.1
+		response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+		response.setDateHeader("Expires", 0);
 
-
-		///if( policyBeanId.getCatalog_id() != null )AuthorizationPageBeanId.setCatalog_id( policyBeanId.getCatalog_id()) ;
-			
-		//String catalog_id  = request.getParameter("catalog_id") ;
-		//if(catalog_id  != null){ SoftPostBeanId.setCatalog_id( catalog_id) ; }
-
-		
-		
-		
-		if(request.getParameter("type_id")  != null){ SoftPostBeanId.setType_id( request.getParameter("type_id")) ; }
-
-
-		String softcost  = request.getParameter("softcost") ;
-		if(softcost  != null){ SoftPostBeanId.setStrSoftCost( softcost) ; }
-
-		String currency_id  = request.getParameter("currency_id") ;
-		if(currency_id  != null){ SoftPostBeanId.setStrCurrency( currency_id) ; }
-
-		String   description  = request.getParameter("description");
-		if ( description != null ) {  SoftPostBeanId.setStrSoftDescription( description ); }
-
-
-		String   fulldescription  = request.getParameter("fulldescription");
-		if ( fulldescription != null ) {  SoftPostBeanId.setProduct_fulldescription( fulldescription ); }
-
-
-		String   imagename  = request.getParameter("imagename");
-		if ( imagename != null ) {  SoftPostBeanId.setImgname( imagename ); }
-
-
-		String   image_id  = request.getParameter("image_id");
-		if ( image_id != null ) {  SoftPostBeanId.setImage_id( image_id ); }
-
-		if ( request.getParameter("portlettype_id") != null ) {  SoftPostBeanId.setPortlettype_id( request.getParameter("portlettype_id")); }
-
-		String   filename  = request.getParameter("filename");
-		if ( filename != null ) {  SoftPostBeanId.setSample( filename ); }
-		else{ SoftPostBeanId.setSample(""); }
-		filename = null ;
-
-
-
-		String   bigimagename  = request.getParameter("bigimagename");
-		if ( bigimagename != null ) {  SoftPostBeanId.setBigimgname( bigimagename ); }
-
-
-		String   bigimage_id  = request.getParameter("bigimage_id");
-		if ( bigimage_id != null ) {  SoftPostBeanId.setBigimage_id( bigimage_id ); }
-
-
-		if( request.getParameter("salelogic_id") !=null ) SoftPostBeanId.setProgname_id( request.getParameter("salelogic_id"));
-
-		if( AuthorizationPageBeanId.getIntUserID() == 0 ){
-			AuthorizationPageBeanId.setStrMessage(AuthorizationPageBeanId.getLocalization(servletContext).getString("session_time_out"));
-		response.sendRedirect("Authorization.jsp" );
-		}
-		else SoftPostBeanId.setUser_id("" + AuthorizationPageBeanId.getIntUserID()) ;
-
-		if( AuthorizationPageBeanId.getIntLevelUp() == 0 )
-		{
-			AuthorizationPageBeanId.setStrMessage(AuthorizationPageBeanId.getLocalization(servletContext).getString("post_message_notaccess_admin"));
-			response.sendRedirect("Authorization.jsp" );
+		String softname = request.getParameter("softname");
+		if (softname != null) {
+			publisherBeanId.setStrSoftName(softname);
 		}
 
-	
+
+
+		if (request.getParameter("type_id") != null) {
+			publisherBeanId.setType_id(request.getParameter("type_id"));
+		}
+
+		String softcost = request.getParameter("softcost");
+		if (softcost != null) {
+			publisherBeanId.setStrSoftCost(softcost);
+		}
+
+		String currency_id = request.getParameter("currency_id");
+		if (currency_id != null) {
+			publisherBeanId.setStrCurrency(currency_id);
+		}
+
+		String description = request.getParameter("description");
+		if (description != null) {
+			publisherBeanId.setStrSoftDescription(description);
+		}
+
+		String fulldescription = request.getParameter("fulldescription");
+		if (fulldescription != null) {
+			publisherBeanId.setProduct_fulldescription(fulldescription);
+		}
+
+		String imagename = request.getParameter("imagename");
+		if (imagename != null) {
+			publisherBeanId.setImgname(imagename);
+		}
+
+		String image_id = request.getParameter("image_id");
+		if (image_id != null) {
+			publisherBeanId.setImage_id(image_id);
+		}
+
+		if (request.getParameter("portlettype_id") != null) {
+			publisherBeanId.setPortlettype_id(request.getParameter("portlettype_id"));
+		}
+
+		String filename = request.getParameter("filename");
+		if (filename != null) {
+			publisherBeanId.setSample(filename);
+		} else {
+			publisherBeanId.setSample("");
+		}
+		filename = null;
+
+		String bigimagename = request.getParameter("bigimagename");
+		if (bigimagename != null) {
+			publisherBeanId.setBigimgname(bigimagename);
+		}
+
+		String bigimage_id = request.getParameter("bigimage_id");
+		if (bigimage_id != null) {
+			publisherBeanId.setBigimage_id(bigimage_id);
+		}
+
+		if (request.getParameter("salelogic_id") != null)
+			publisherBeanId.setProgname_id(request.getParameter("salelogic_id"));
+
+		if (authorizationPageBeanId.getIntUserID() == 0) {
+			authorizationPageBeanId.setStrMessage(
+					authorizationPageBeanId.getLocalization(servletContext).getString("session_time_out"));
+			response.sendRedirect("Authorization.jsp");
+		} else
+			publisherBeanId.setUser_id("" + authorizationPageBeanId.getIntUserID());
+
+		if (authorizationPageBeanId.getIntLevelUp() == 0) {
+			authorizationPageBeanId.setStrMessage(
+					authorizationPageBeanId.getLocalization(servletContext).getString("post_message_notaccess_admin"));
+			response.sendRedirect("Authorization.jsp");
+		}
+
 	}
-	
+
 }

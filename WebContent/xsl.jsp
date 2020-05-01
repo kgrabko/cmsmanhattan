@@ -23,9 +23,9 @@ return false ;
 
 </head>
 <jsp:useBean id="xslBeanId" scope="request" class="com.cbsinc.cms.XslBean" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <%
-xslBeanId.initFields(AuthorizationPageBeanId.getSite_id() );
+xslBeanId.initFields(authorizationPageBeanId.getSite_id() );
 if( request.getParameter("xsl_subj_id") != null) xslBeanId.setXsl_subj_id(  request.getParameter("xsl_subj_id"));
 if( request.getParameter("xsl_style_id") != null) xslBeanId.setXsl_style_id(  request.getParameter("xsl_style_id"));
 %>

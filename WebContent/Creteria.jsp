@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
-<jsp:useBean id="creteria_listBean" scope="session" class="com.cbsinc.cms.Creteria_listBean" />
-<jsp:useBean id="SoftPostBeanId" scope="session" class="com.cbsinc.cms.SoftPostBean" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="creteriaListBeanId" scope="session" class="com.cbsinc.cms.CreteriaListBean" />
+<jsp:useBean id="publisherBeanId" scope="session" class="com.cbsinc.cms.PublisherBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <jsp:useBean id="authorizationPageFaced" scope="application" class="com.cbsinc.cms.faceds.AuthorizationPageFaced" />
  <%
    request.setCharacterEncoding("UTF-8");
@@ -22,7 +22,7 @@
 	function setTitle() 
 	{
      //top.document.getElementById("title_name").value = 'Изменение значения в критерии' ; 
-          parent.document.getElementById("title_name").value = '<%= AuthorizationPageBeanId.getLocalization(application).getString("change_means_of_creteria") %>' ; 
+          parent.document.getElementById("title_name").value = '<%= authorizationPageBeanId.getLocalization(application).getString("change_means_of_creteria") %>' ; 
           
 	}
 
@@ -42,74 +42,74 @@
 </head>
 
 <%
-//creteria_listBean.setSite_id(AuthorizationPageBeanId.getSite_id());
-//if( request.getParameter("parent_id") != null) creteria_listBean.setParent_id(request.getParameter("parent_id"));
+//creteriaListBeanId.setSite_id(authorizationPageBeanId.getSite_id());
+//if( request.getParameter("parent_id") != null) creteriaListBeanId.setParent_id(request.getParameter("parent_id"));
 
-if( request.getParameter("table_name") != null) creteria_listBean.setTable_name(request.getParameter("table_name"));
+if( request.getParameter("table_name") != null) creteriaListBeanId.setTable_name(request.getParameter("table_name"));
 
 if( request.getParameter("table_name") != null  )
 {
-if( request.getParameter("table_name").compareTo("creteria1") == 0 ) creteria_listBean.setLink_id(0);
-else if( request.getParameter("table_name").compareTo("creteria2") == 0 ) creteria_listBean.setLink_id(Integer.parseInt(SoftPostBeanId.getCreteria1_id()));
-else if( request.getParameter("table_name").compareTo("creteria3") == 0 ) creteria_listBean.setLink_id(Integer.parseInt(SoftPostBeanId.getCreteria2_id()));
-else if( request.getParameter("table_name").compareTo("creteria4") == 0 ) creteria_listBean.setLink_id(Integer.parseInt(SoftPostBeanId.getCreteria3_id()));
-else if( request.getParameter("table_name").compareTo("creteria5") == 0 ) creteria_listBean.setLink_id(Integer.parseInt(SoftPostBeanId.getCreteria4_id()));
-else if( request.getParameter("table_name").compareTo("creteria6") == 0 ) creteria_listBean.setLink_id(Integer.parseInt(SoftPostBeanId.getCreteria5_id()));
-else if( request.getParameter("table_name").compareTo("creteria7") == 0 ) creteria_listBean.setLink_id(Integer.parseInt(SoftPostBeanId.getCreteria6_id()));
-else if( request.getParameter("table_name").compareTo("creteria8") == 0 ) creteria_listBean.setLink_id(Integer.parseInt(SoftPostBeanId.getCreteria7_id()));
-else if( request.getParameter("table_name").compareTo("creteria9") == 0 ) creteria_listBean.setLink_id(Integer.parseInt(SoftPostBeanId.getCreteria8_id()));
-else if( request.getParameter("table_name").compareTo("creteria10") == 0 ) creteria_listBean.setLink_id(Integer.parseInt(SoftPostBeanId.getCreteria9_id()));
+if( request.getParameter("table_name").compareTo("creteria1") == 0 ) creteriaListBeanId.setLink_id(0);
+else if( request.getParameter("table_name").compareTo("creteria2") == 0 ) creteriaListBeanId.setLink_id(Integer.parseInt(publisherBeanId.getCreteria1_id()));
+else if( request.getParameter("table_name").compareTo("creteria3") == 0 ) creteriaListBeanId.setLink_id(Integer.parseInt(publisherBeanId.getCreteria2_id()));
+else if( request.getParameter("table_name").compareTo("creteria4") == 0 ) creteriaListBeanId.setLink_id(Integer.parseInt(publisherBeanId.getCreteria3_id()));
+else if( request.getParameter("table_name").compareTo("creteria5") == 0 ) creteriaListBeanId.setLink_id(Integer.parseInt(publisherBeanId.getCreteria4_id()));
+else if( request.getParameter("table_name").compareTo("creteria6") == 0 ) creteriaListBeanId.setLink_id(Integer.parseInt(publisherBeanId.getCreteria5_id()));
+else if( request.getParameter("table_name").compareTo("creteria7") == 0 ) creteriaListBeanId.setLink_id(Integer.parseInt(publisherBeanId.getCreteria6_id()));
+else if( request.getParameter("table_name").compareTo("creteria8") == 0 ) creteriaListBeanId.setLink_id(Integer.parseInt(publisherBeanId.getCreteria7_id()));
+else if( request.getParameter("table_name").compareTo("creteria9") == 0 ) creteriaListBeanId.setLink_id(Integer.parseInt(publisherBeanId.getCreteria8_id()));
+else if( request.getParameter("table_name").compareTo("creteria10") == 0 ) creteriaListBeanId.setLink_id(Integer.parseInt(publisherBeanId.getCreteria9_id()));
 }
 
-if( request.getParameter("creteria_value") != null) creteria_listBean.setTitle(request.getParameter("creteria_value"), creteria_listBean.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")));
+if( request.getParameter("creteria_value") != null) creteriaListBeanId.setTitle(request.getParameter("creteria_value"), creteriaListBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")));
 
 
 if( request.getParameter("row") != null)
 {
-int index =  creteria_listBean.stringToInt(request.getParameter("row")) ;
-creteria_listBean.setIndx_select(index);
+int index =  creteriaListBeanId.stringToInt(request.getParameter("row")) ;
+creteriaListBeanId.setIndx_select(index);
 }
 if( request.getParameter("del") != null)
 {
-int index =  creteria_listBean.stringToInt(request.getParameter("del")) ;
-//int g =  creteria_listBean.rows.length ;
-String creteria_id = creteria_listBean.rows[index][0] ;
+int index =  creteriaListBeanId.stringToInt(request.getParameter("del")) ;
+//int g =  creteriaListBeanId.rows.length ;
+String creteria_id = creteriaListBeanId.rows[index][0] ;
   if(!creteria_id.equals("0"))
    { 
-   if(creteria_id != null)creteria_listBean.delete(creteria_id) ;
+   if(creteria_id != null)creteriaListBeanId.delete(creteria_id) ;
    request.setAttribute("del",null);
    }
 }
 if( request.getParameter("offset") != null){
-creteria_listBean.setOffset(  creteria_listBean.stringToInt(request.getParameter("offset")));
+creteriaListBeanId.setOffset(  creteriaListBeanId.stringToInt(request.getParameter("offset")));
 }
-creteria_listBean.initPage(creteria_listBean.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")));
+creteriaListBeanId.initPage(creteriaListBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")));
 %>
 <body onload="setTitle()"  >
 
-	   <h1><%=AuthorizationPageBeanId.getLocalization(application).getString("change_name_of_creteria")%> </h1>
+	   <h1><%=authorizationPageBeanId.getLocalization(application).getString("change_name_of_creteria")%> </h1>
 	   <div class="box">
 		  <div class="body">
 		     <div >
 		        <form method="post"  name="creteria"  action="Creteria.jsp">
-				<INPUT SIZE="40"  AUTOCOMPLETE="off" TYPE="TEXT" NAME="creteria_value" VALUE="<%= creteria_listBean.getTitle() %>"  ></INPUT>
-				<INPUT TYPE="submit" name="submit" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("edit") %>"></INPUT>
+				<INPUT SIZE="40"  AUTOCOMPLETE="off" TYPE="TEXT" NAME="creteria_value" VALUE="<%= creteriaListBeanId.getTitle() %>"  ></INPUT>
+				<INPUT TYPE="submit" name="submit" value="<%= authorizationPageBeanId.getLocalization(application).getString("edit") %>"></INPUT>
 		        </form>
 		       	        
 		       
 		     </div>
 		  </div>
 		</div>
-		<h1><%=AuthorizationPageBeanId.getLocalization(application).getString("add_keyword")%> </h1>
+		<h1><%=authorizationPageBeanId.getLocalization(application).getString("add_keyword")%> </h1>
 		<div class="box">
 		  <div class="body">
 		     <div>
-                   <%=creteria_listBean.getTable(request.getLocale())%>
+                   <%=creteriaListBeanId.getTable(request.getLocale())%>
 		     </div>
 		  </div>
 		</div>
 		<div class="listingBar">
-   	   	 	<a HREF = "Creteria.jsp?creteria_value="  ><%=AuthorizationPageBeanId.getLocalization(application).getString("hide")%></a>
+   	   	 	<a HREF = "Creteria.jsp?creteria_value="  ><%=authorizationPageBeanId.getLocalization(application).getString("hide")%></a>
 		</div>
 		
 </body>

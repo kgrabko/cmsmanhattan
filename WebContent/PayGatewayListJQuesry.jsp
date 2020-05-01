@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
-<jsp:useBean id="payGatewayListBean" scope="session" class="com.cbsinc.cms.PayGatewayListBean" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
-<jsp:setProperty name="payGatewayListBean" property="*" />
+<jsp:useBean id="payGatewayListBeanId" scope="session" class="com.cbsinc.cms.payGatewayListBeanId" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:setProperty name="payGatewayListBeanId" property="*" />
 
 <%
   response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
@@ -10,16 +10,16 @@
   response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
   request.setCharacterEncoding("UTF-8");
 
-  payGatewayListBean.setSite_id(AuthorizationPageBeanId.getSite_id());
+  payGatewayListBeanId.setSite_id(authorizationPageBeanId.getSite_id());
   if( request.getParameter("row") != null)
   {
-  int index =  payGatewayListBean.stringToInt(request.getParameter("row")) ;
-  payGatewayListBean.setIndx_select(index);
+  int index =  payGatewayListBeanId.stringToInt(request.getParameter("row")) ;
+  payGatewayListBeanId.setIndx_select(index);
   }
   if( request.getParameter("offset") != null){
-  payGatewayListBean.setOffset(  payGatewayListBean.stringToInt(request.getParameter("offset")));
+  payGatewayListBeanId.setOffset(  payGatewayListBeanId.stringToInt(request.getParameter("offset")));
   }
-  payGatewayListBean.mapmingShopBean(AuthorizationPageBeanId.getSite_id());
+  payGatewayListBeanId.mapmingShopBean(authorizationPageBeanId.getSite_id());
  
 %>
 
@@ -73,7 +73,7 @@
         <hr size="" class="netscape4" />
         <div class="pathBar">
             <span>
-                <span> <%=AuthorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
+                <span> <%=authorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
             </span>
         </div>
         <hr size="" class="netscape4" />
@@ -86,14 +86,14 @@
             <td class="left">
 		<div>
 		    <div class="portlet">
-		    <h5><strong><%=AuthorizationPageBeanId.getLocalization(application).getString("help")%></strong></h5>
+		    <h5><strong><%=authorizationPageBeanId.getLocalization(application).getString("help")%></strong></h5>
 		      <div class="body">
 		        <div class="portletContent odd">
-		        <%=AuthorizationPageBeanId.getLocalization(application).getString("help_list_gateways_productpost_1")%>
+		        <%=authorizationPageBeanId.getLocalization(application).getString("help_list_gateways_productpost_1")%>
 		        </div>
 		         
 		        <div class="portletContent even">
-		        <%= AuthorizationPageBeanId.getLocalization(application).getString("help_list_gateways_productpost_2") %>
+		        <%= authorizationPageBeanId.getLocalization(application).getString("help_list_gateways_productpost_2") %>
 		        </div>
 		        
 		      </div>
@@ -106,17 +106,17 @@
 
             <!-- News part -->
 
-	     <h1><%=AuthorizationPageBeanId.getLocalization(application).getString("title_payment_settings_of_form")%></h1>
+	     <h1><%=authorizationPageBeanId.getLocalization(application).getString("title_payment_settings_of_form")%></h1>
 
 		
 		
 		<br/>
 	    <DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left"  >
-				<font color='white' size='2' > &nbsp;&raquo; <%=AuthorizationPageBeanId.getLocalization(application).getString("selection_gateway_list_of_form")%></font>
+				<font color='white' size='2' > &nbsp;&raquo; <%=authorizationPageBeanId.getLocalization(application).getString("selection_gateway_list_of_form")%></font>
 		</DIV>
 		<div class='box'>
 		<div class='body'>
-		<div><%= payGatewayListBean.getTable(AuthorizationPageBeanId.getIntLevelUp()) %>
+		<div><%= payGatewayListBeanId.getTable(authorizationPageBeanId.getIntLevelUp()) %>
 		</div>
 		</div>
 		</div>
@@ -131,7 +131,7 @@
 	    <span class="next">
                 <a HREF = "PostManager.jsp"  >
 		<strong>
-		<%=AuthorizationPageBeanId.getLocalization(application).getString("back")%>
+		<%=authorizationPageBeanId.getLocalization(application).getString("back")%>
 		</strong>
 	        </a>
 	    </span>
@@ -155,7 +155,7 @@
 
 <br />
 
- <%=AuthorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
+ <%=authorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
 
 <hr size="" class="netscape4" />
 

@@ -1,5 +1,7 @@
 package com.cbsinc.cms.controllers;
 
+import java.util.Optional;
+
 /**
  * <p>
  * Title: Content Manager System
@@ -21,38 +23,20 @@ package com.cbsinc.cms.controllers;
  * @version 1.0
  */
 
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class EMainAction implements IAction 
-{
+public class EMainAction extends TemplateAction {
 
-
-	
 	public EMainAction() {
 
 	}
 
-	   
-	public void doPost(HttpServletRequest request, HttpServletResponse response , ServletContext  servletContext) throws Exception 
-	{
-		    
-	}
 
+	@Override
+	public void action(Optional<HttpServletRequest> request, Optional<HttpServletResponse> response, Optional<ServletContext> servletContext) {
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) throws Exception 
-	{
-			}
-
-
-	public void action(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) throws Exception 
-	{
-	
-		 
-  	      
-		
 	}
 
 }

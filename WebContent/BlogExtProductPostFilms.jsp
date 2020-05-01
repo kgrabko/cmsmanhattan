@@ -115,9 +115,9 @@ return true ;
 
 
 </head>
-<jsp:useBean id="SoftPostBeanId" scope="session" class="com.cbsinc.cms.SoftPostBean" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
-<jsp:useBean id="policyBeanId" scope="request" class="com.cbsinc.cms.PolicyBean" />
+<jsp:useBean id="publisherBeanId" scope="session" class="com.cbsinc.cms.PublisherBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="itemDescriptionBeanId" scope="request" class="com.cbsinc.cms.ItemDescriptionBean" />
 <%
 request.setCharacterEncoding("UTF-8");
 %>
@@ -199,9 +199,9 @@ request.setCharacterEncoding("UTF-8");
 					</DIV>
                      <div >
                      <TABLE width="500" >
-                     <TR><TD>Название фильма:* </TD><TD> <input  name="softname" size="40"  value="<%= SoftPostBeanId.getStrSoftName() %>" onBlur="checkEmpty(this.value)" >
-                     <input type="hidden"  name="catalog_id"  value="<%= AuthorizationPageBeanId.getCatalog_id() %>"/></TR>
-                     <TR><TD>Информация откуда скачать URL :* </TD> <TD> <textarea name="description" rows="10" cols="140"  ><%= SoftPostBeanId.getStrSoftDescription() %></textarea></TD></TR>
+                     <TR><TD>Название фильма:* </TD><TD> <input  name="softname" size="40"  value="<%= publisherBeanId.getStrSoftName() %>" onBlur="checkEmpty(this.value)" >
+                     <input type="hidden"  name="catalog_id"  value="<%= authorizationPageBeanId.getCatalog_id() %>"/></TR>
+                     <TR><TD>Информация откуда скачать URL :* </TD> <TD> <textarea name="description" rows="10" cols="140"  ><%= publisherBeanId.getStrSoftDescription() %></textarea></TD></TR>
                      <TR><TD></TD> <TD><input type="submit" name="Submit" value="Сохранить"> <input type="reset" value="Сброс"></TD></TR>
                      </TABLE>
                      </div >
@@ -218,7 +218,7 @@ request.setCharacterEncoding("UTF-8");
 					 <input type="hidden"  name="type_id" size="20" value="0" >
 					 <input type="hidden"  name="file_id" size="20" value="-1" >
                      <input type="hidden"  name="portlettype_id"  value="3"/>
-                     <input type="hidden"  name="parent_id"  value="<%= policyBeanId.getProduct_id() %>"/>
+                     <input type="hidden"  name="parent_id"  value="<%= itemDescriptionBeanId.getProduct_id() %>"/>
                    </form>
 		     </div>
 		  </div>

@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
-<jsp:useBean id="SoftPostBeanId" scope="session" class="com.cbsinc.cms.SoftPostBean" />
-<jsp:useBean id="catalog_listBean" scope="session" class="com.cbsinc.cms.Catalog_listBean" />
-<jsp:useBean id="catalog_editBean" scope="session" class="com.cbsinc.cms.Catalog_editBean" />
-<jsp:useBean id="catalog_addBean" scope="session" class="com.cbsinc.cms.Catalog_addBean" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="publisherBeanId" scope="session" class="com.cbsinc.cms.PublisherBean" />
+<jsp:useBean id="catalogListBeanId" scope="session" class="com.cbsinc.cms.CatalogListBean" />
+<jsp:useBean id="catalogEditBeanId" scope="session" class="com.cbsinc.cms.CatalogEditBean" />
+<jsp:useBean id="catalogAddBeanId" scope="session" class="com.cbsinc.cms.CatalogAddBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <jsp:useBean id="authorizationPageFaced" scope="application" class="com.cbsinc.cms.faceds.AuthorizationPageFaced" />
 <%
   response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
@@ -97,7 +97,7 @@ function switchWindoSearch()
 {
 				windowsearch_hide = !windowsearch_hide;
 				document.getElementById("search_cre").src =  (windowsearch_hide ? "images/expand.gif" : "images/collapse.gif");
-				document.getElementById("search_cre").title =  (windowsearch_hide ? "<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= AuthorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
+				document.getElementById("search_cre").title =  (windowsearch_hide ? "<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= authorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
 				document.getElementById("windowsearch").style.display = windowsearch_hide ? "none" : "";
 }
 
@@ -108,7 +108,7 @@ function switchWindowReport()
 {
 				window_urlreport_hide = !window_urlreport_hide;
 				document.getElementById("urlreport_cre").src =  (window_urlreport_hide ? "images/expand.gif" : "images/collapse.gif");
-				document.getElementById("urlreport_cre").title =  (window_urlreport_hide ? "<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= AuthorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
+				document.getElementById("urlreport_cre").title =  (window_urlreport_hide ? "<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= authorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
 				document.getElementById("window_urlreport").style.display = window_urlreport_hide ? "none" : "";
 }
 
@@ -378,7 +378,7 @@ function parseMessages(responseXML)
         <hr size="" class="netscape4" />
         <div class="pathBar">
             <span>
-                <span> <%=AuthorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
+                <span> <%=authorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
             </span>
         </div>
         <hr size="" class="netscape4" />
@@ -391,14 +391,14 @@ function parseMessages(responseXML)
             <td class="left">
 		<div>
 		    <div class="portlet">
-		    <h5><strong><%=AuthorizationPageBeanId.getLocalization(application).getString("help")%></strong></h5>
+		    <h5><strong><%=authorizationPageBeanId.getLocalization(application).getString("help")%></strong></h5>
 		      <div class="body">
 		        <div class="portletContent odd">
-		        <%=AuthorizationPageBeanId.getLocalization(application).getString("help_col1_productpost_1")%>
+		        <%=authorizationPageBeanId.getLocalization(application).getString("help_col1_productpost_1")%>
 		        </div>
 		        <!-- 
 		        <div class="portletContent even">
-		        <%= AuthorizationPageBeanId.getLocalization(application).getString("help_col1_productpost_2") %>
+		        <%= authorizationPageBeanId.getLocalization(application).getString("help_col1_productpost_2") %>
 		        </div>
 		         -->
 		      </div>
@@ -427,13 +427,13 @@ function parseMessages(responseXML)
 		  <div class="body">
 		    <div >
 					<DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left"  >
-					<font color='white' size='2' > &nbsp;&raquo; <%=AuthorizationPageBeanId.getLocalization(application).getString("title_form_post_info")%> </font>
+					<font color='white' size='2' > &nbsp;&raquo; <%=authorizationPageBeanId.getLocalization(application).getString("title_form_post_info")%> </font>
 					</DIV>
                      <TABLE>
-                     <TR><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("title_form")%>:* </TD><TD> <input  name="softname" size="20"  value="<%= SoftPostBeanId.getStrSoftName() %>" onBlur="checkEmpty(this.name,this.value);saveField(this.name,this.value)" >
-                     <TR><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("upload_big_image")%>:* </TD> <TD><input onChange="saveField(this.name,this.value)" name="bigimagename" disabled="disabled" size="20" value="<%= SoftPostBeanId.getBigimgname() %>" ><input type="button" name="newbig_image" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("new_big_image") %>"  onclick="dwindow('NewBigImage.jsp'); return false;" ><input type="button" name="selectbig_image" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("select_big_image") %>" image" onclick="dwindow('SelectBigImage.jsp'); return false;" ><input onChange="saveField(this.name,this.value)" type="hidden"  name="bigimage_id" size="20" value="<%= SoftPostBeanId.getBigimage_id() %>" ></TD></TR>
-                     <TR><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("full_information")%> :* </TD> <TD> <textarea name="fulldescription" rows="30" cols="70" onBlur="saveField(this.name,this.value)" ><%=SoftPostBeanId.getProduct_fulldescription()%></textarea></TD></TR>
-                     <TR><TD></TD> <TD><input type="button" name="button" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("save") %>"  onclick="do_save()" > <input type="button" name="button" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("save_as_new") %>"  onclick="do_insert()" > <input type="reset" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("clear") %>"></TD></TR>
+                     <TR><TD><%=authorizationPageBeanId.getLocalization(application).getString("title_form")%>:* </TD><TD> <input  name="softname" size="20"  value="<%= publisherBeanId.getStrSoftName() %>" onBlur="checkEmpty(this.name,this.value);saveField(this.name,this.value)" >
+                     <TR><TD><%=authorizationPageBeanId.getLocalization(application).getString("upload_big_image")%>:* </TD> <TD><input onChange="saveField(this.name,this.value)" name="bigimagename" disabled="disabled" size="20" value="<%= publisherBeanId.getBigimgname() %>" ><input type="button" name="newbig_image" value="<%= authorizationPageBeanId.getLocalization(application).getString("new_big_image") %>"  onclick="dwindow('NewBigImage.jsp'); return false;" ><input type="button" name="selectbig_image" value="<%= authorizationPageBeanId.getLocalization(application).getString("select_big_image") %>" image" onclick="dwindow('SelectBigImage.jsp'); return false;" ><input onChange="saveField(this.name,this.value)" type="hidden"  name="bigimage_id" size="20" value="<%= publisherBeanId.getBigimage_id() %>" ></TD></TR>
+                     <TR><TD><%=authorizationPageBeanId.getLocalization(application).getString("full_information")%> :* </TD> <TD> <textarea name="fulldescription" rows="30" cols="70" onBlur="saveField(this.name,this.value)" ><%=publisherBeanId.getProduct_fulldescription()%></textarea></TD></TR>
+                     <TR><TD></TD> <TD><input type="button" name="button" value="<%= authorizationPageBeanId.getLocalization(application).getString("save") %>"  onclick="do_save()" > <input type="button" name="button" value="<%= authorizationPageBeanId.getLocalization(application).getString("save_as_new") %>"  onclick="do_insert()" > <input type="reset" value="<%= authorizationPageBeanId.getLocalization(application).getString("clear") %>"></TD></TR>
                      </TABLE>
                       <input type="hidden"  name="type_id"  value="0"/>
                      <input type="hidden"  name="action"  value=""/>
@@ -450,7 +450,7 @@ function parseMessages(responseXML)
 	    <span class="next">
                 <a HREF = "PostManager.jsp"  >
 		<strong>
-		<%=AuthorizationPageBeanId.getLocalization(application).getString("back")%>
+		<%=authorizationPageBeanId.getLocalization(application).getString("back")%>
 		</strong>
 	        </a>
 	    </span>
@@ -477,7 +477,7 @@ function parseMessages(responseXML)
 
 <br />
 
- <%=AuthorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
+ <%=authorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
 
 <hr size="" class="netscape4" />
 
@@ -494,7 +494,7 @@ for user netscape
 <DIV id="vunet"  class="drag" style="position: absolute; top: 120px; left: 130px;display:none;"  >
 	<DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left" id="dtitle"  >
 	<A	onclick="dwindow('SelectBigImage.jsp')" href="#" >
-	 <IMG id=upshrink_ic  title="<%= AuthorizationPageBeanId.getLocalization(application).getString("close_window") %>" src="images/expand.gif" align="right"/> 
+	 <IMG id=upshrink_ic  title="<%= authorizationPageBeanId.getLocalization(application).getString("close_window") %>" src="images/expand.gif" align="right"/> 
 	</A>
 	<font  color='white' size='2' > <b id="title_name" >&nbsp;&raquo;&nbsp; GBS Portal</b> </font>
 	</DIV>
@@ -504,7 +504,7 @@ for user netscape
 			<TR>
 				<td>
 				<iframe id="dialog" src="SelectBigImage.jsp" width="390" height="400" align="center">
-				<%=AuthorizationPageBeanId.getLocalization(application).getString("browser_not_support_frame")%>
+				<%=authorizationPageBeanId.getLocalization(application).getString("browser_not_support_frame")%>
 				</iframe>
 				</td>
 			</TR>

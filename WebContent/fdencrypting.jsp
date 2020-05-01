@@ -22,9 +22,9 @@
 <%@ page import="javax.crypto.Mac" %>
 <%@ page import="javax.crypto.SecretKey" %>
 <%@ page import="javax.crypto.spec.SecretKeySpec" %>
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
-<jsp:useBean id="payGatewayListBean" scope="request" class="com.cbsinc.cms.PayGatewayListBean" />
-<jsp:useBean id="payGatewayBean" scope="request" class="com.cbsinc.cms.PayGatewayBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="payGatewayListBeanId" scope="request" class="com.cbsinc.cms.PayGatewayListBean" />
+<jsp:useBean id="payGatewayBeanId" scope="request" class="com.cbsinc.cms.PayGatewayBean" />
 <jsp:useBean id="orderBeanId" scope="request" class="com.cbsinc.cms.OrderBean" />
 <jsp:useBean id="operationAmountBeanId" scope="request" class="com.cbsinc.cms.OperationAmountBean" />
 
@@ -35,11 +35,11 @@ String x_login        = "HCO-CENTE-406"; // aka Payment Page ID
 String transactionKey = "uPm3HcbbR10dHL2WBok6"; // aka Transaction Key
 String x_amount       = "0";
 
-payGatewayListBean.mapmingShopBean(AuthorizationPageBeanId.getSite_id());
-payGatewayBean = payGatewayListBean.getPayGatewayBean(0);
+payGatewayListBeanId.mapmingShopBean(authorizationPageBeanId.getSite_id());
+payGatewayBeanId = payGatewayListBeanId.getPayGatewayBean(0);
 
-x_login = payGatewayBean.getLogin().trim();
-transactionKey = payGatewayBean.getPasswd().trim();
+x_login = payGatewayBeanId.getLogin().trim();
+transactionKey = payGatewayBeanId.getPasswd().trim();
 if(orderBeanId != null ) x_amount =  orderBeanId.getorder_amount().trim();
 //Generate a random sequence number
 Random generator = new Random();
@@ -76,7 +76,7 @@ String x_fp_hash = strbuf.toString();
 
 <!-- The form to do post by auto submit button -->
 <!--  <form  id="pay_form" action="https://demo.globalgatewaye4.firstdata.com/payment" method="post">  -->
-<form  id="pay_form" action="<%= payGatewayBean.getPay_url() %>" method="post">
+<form  id="pay_form" action="<%= payGatewayBeanId.getPay_url() %>" method="post">
  <input name="x_login" value="<%= x_login %>" type="hidden" />
  <input name="x_fp_sequence" value="<%= x_fp_sequence %>" type="hidden" />
  <input name="x_fp_timestamp" value="<%= x_fp_timestamp %>" type="hidden" />
@@ -84,9 +84,9 @@ String x_fp_hash = strbuf.toString();
  <input name="x_fp_hash" value="<%= x_fp_hash %>" size="40" type="hidden"  />
  <input name="x_show_form" value="PAYMENT_FORM" type="hidden" />
  <input name="x_relay_response" value="TRUE" type="hidden"> 
- <input name="x_relay_url" value="http://<%= AuthorizationPageBeanId.getHost()  %>/fdresponce.jsp" type="hidden"> 
- <input name="x_po_num" value="<%= AuthorizationPageBeanId.getSite_id() + "_" + orderBeanId.getOrder_id() %>" type="hidden"> 
- <input name="x_invoice_num" value="<%= operationAmountBeanId.addMoneyStart("Purchase" , new Double( orderBeanId.getorder_amount()) , orderBeanId.getOrder_currency_id() , AuthorizationPageBeanId.getIntUserID(),request.getRemoteAddr() , "" , orderBeanId.getOrder_id() )  %>" type="hidden"> 
+ <input name="x_relay_url" value="http://<%= authorizationPageBeanId.getHost()  %>/fdresponce.jsp" type="hidden"> 
+ <input name="x_po_num" value="<%= authorizationPageBeanId.getSite_id() + "_" + orderBeanId.getOrder_id() %>" type="hidden"> 
+ <input name="x_invoice_num" value="<%= operationAmountBeanId.addMoneyStart("Purchase" , new Double( orderBeanId.getorder_amount()) , orderBeanId.getOrder_currency_id() , authorizationPageBeanId.getIntUserID(),request.getRemoteAddr() , "" , orderBeanId.getOrder_id() )  %>" type="hidden"> 
  <!-- <input type="submit" value="Checkout"   /> -->
 </form>
 <TABLE cellSpacing="0" cellPadding="0" width="100%" height ="100%"  rightmargin="0" leftmargin="0" topmargin="0"  >

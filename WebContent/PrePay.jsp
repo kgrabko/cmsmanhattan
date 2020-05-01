@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
 <jsp:useBean id="prePayBeanId" scope="request" class="com.cbsinc.cms.PrePayBean" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <%
   response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
   response.setHeader("Pragma","no-cache"); //HTTP 1.0
@@ -12,15 +12,15 @@
    <version>1.0</version>
    <name>GBS ltd.</name>
    <title>SELECT PAY SYSTEM</title>
-   <subject_site><%=  AuthorizationPageBeanId.getNick_site() %></subject_site>
-   <site_name><%=  AuthorizationPageBeanId.getNick_site() %></site_name>
-   <host><%=  AuthorizationPageBeanId.getSite_dir() %></host>
-   <login><%= AuthorizationPageBeanId.getStrLogin() %></login>
+   <subject_site><%=  authorizationPageBeanId.getNick_site() %></subject_site>
+   <site_name><%=  authorizationPageBeanId.getNick_site() %></site_name>
+   <host><%=  authorizationPageBeanId.getSite_dir() %></host>
+   <login><%= authorizationPageBeanId.getStrLogin() %></login>
    <passwdord></passwdord>
    <shoping_url>Productlist.jsp</shoping_url>
-   <message><%= AuthorizationPageBeanId.getStrMessage() %></message>
+   <message><%= authorizationPageBeanId.getStrMessage() %></message>
    <shoping_url>Productlist.jsp</shoping_url>
-   <balans><%=  prePayBeanId.getStrBalans(AuthorizationPageBeanId.getIntUserID()) %></balans>
+   <balans><%=  prePayBeanId.getStrBalans(authorizationPageBeanId.getIntUserID()) %></balans>
    <to_navigator>wCatalog.jsp</to_navigator>
    <to_navigator_location>NavigatorLocation.jsp</to_navigator_location>
    <to_account_history>AccountHistory.jsp</to_account_history>

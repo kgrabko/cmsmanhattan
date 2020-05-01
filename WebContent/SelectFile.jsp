@@ -8,16 +8,16 @@
 %>
 <html>
 <HEAD>
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
-<jsp:useBean id="SoftPostBeanId" scope="session" class="com.cbsinc.cms.SoftPostBean" />
-<jsp:setProperty name="SoftPostBeanId" property="*" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="publisherBeanId" scope="session" class="com.cbsinc.cms.PublisherBean" />
+<jsp:setProperty name="publisherBeanId" property="*" />
 
-<title><%=AuthorizationPageBeanId.getLocalization(application).getString("title_select_file")%></title>
+<title><%=authorizationPageBeanId.getLocalization(application).getString("title_select_file")%></title>
 <script language="JavaScript">
         <!--
         function setData(){
-        	parent.postsoftform.filename.value = '<%= SoftPostBeanId.getFilename() %>'  ;
-        	parent.postsoftform.file_id.value =  '<%= SoftPostBeanId.getFile_id() %>'  ;
+        	parent.postsoftform.filename.value = '<%= publisherBeanId.getFilename() %>'  ;
+        	parent.postsoftform.file_id.value =  '<%= publisherBeanId.getFile_id() %>'  ;
         	parent.dwindow('SelectFile.jsp'); 
         return true ;
         }
@@ -45,9 +45,9 @@
 </HEAD><BODY  >
 <form method="post" name="selectfile1"   ACTION="SelectFile.jsp"  >
 <TABLE>
-<TR><TD colspan="3" ><%=AuthorizationPageBeanId.getLocalization(application).getString("title_select_file")%></TD></TR> 
-<TR><TD colspan="3" ><%=SoftPostBeanId.getSelect_files()%></TD></TR>
-<TR> <TD><input type="submit" name="Submit" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("apply") %>"  onclick="return setData()" ></TD><TD><input type="button" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("select_with_out_file") %>" onClick="return setEmpty()" ></TD></TR>
+<TR><TD colspan="3" ><%=authorizationPageBeanId.getLocalization(application).getString("title_select_file")%></TD></TR> 
+<TR><TD colspan="3" ><%=publisherBeanId.getSelect_files()%></TD></TR>
+<TR> <TD><input type="submit" name="Submit" value="<%= authorizationPageBeanId.getLocalization(application).getString("apply") %>"  onclick="return setData()" ></TD><TD><input type="button" value="<%= authorizationPageBeanId.getLocalization(application).getString("select_with_out_file") %>" onClick="return setEmpty()" ></TD></TR>
 </TABLE>
 </form>
 </body>

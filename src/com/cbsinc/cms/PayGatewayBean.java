@@ -21,15 +21,11 @@ package com.cbsinc.cms;
  * @version 1.0
  */
 
-
-
 import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
-public class PayGatewayBean extends com.cbsinc.cms.WebControls implements
-		java.io.Serializable {
-
+public class PayGatewayBean extends com.cbsinc.cms.WebControls implements java.io.Serializable {
 
 	private static final long serialVersionUID = 338258813101694289L;
 
@@ -50,7 +46,7 @@ public class PayGatewayBean extends com.cbsinc.cms.WebControls implements
 	private String name_gateway = "";
 
 	private String rertype_passwd = "";
-	
+
 	private String pay_url = "";
 
 	public String getPay_url() {
@@ -68,40 +64,33 @@ public class PayGatewayBean extends com.cbsinc.cms.WebControls implements
 		String query = "select shop_id , shop_cd ,  owner_id , login , passwd ,  pay_gateway.pay_gateway_id  , pay_gateway.name_gateway   from shop join pay_gateway on pay_gateway.pay_gateway_id = shop.pay_gateway_id  where active = true and  shop.site_id = "
 				+ site_id;
 		QueryManager Adp = new QueryManager();
-		try 
-		{
+		try {
 			Adp.executeQuery(query);
-		
-		if (Adp.rows().size() != 0) {
-			shop_id = (String) Adp.getValueAt(0, 0);
-			shop_cd = (String) Adp.getValueAt(0, 1);
-			owner_id = (String) Adp.getValueAt(0, 2);
-			login = (String) Adp.getValueAt(0, 3);
-			passwd = (String) Adp.getValueAt(0, 4);
-			pay_gateway_id = (String) Adp.getValueAt(0, 5);
-			name_gateway = (String) Adp.getValueAt(0, 6);
-		}
-		else 	log.error("ERROR: select shop_id , shop_cd ,  owner_id , login , passwd , pay_gateway_id  , pay_gateway.name_gateway   from shop join pay_gateway on pay_gateway.pay_gateway_id = shop.pay_gateway_id  where active = true and  shop.site_id = "
-									+ site_id + " \n   shop_cd = null ");
 
-		
-		} 
-		catch (SQLException ex) 
-		{
+			if (Adp.rows().size() != 0) {
+				shop_id = (String) Adp.getValueAt(0, 0);
+				shop_cd = (String) Adp.getValueAt(0, 1);
+				owner_id = (String) Adp.getValueAt(0, 2);
+				login = (String) Adp.getValueAt(0, 3);
+				passwd = (String) Adp.getValueAt(0, 4);
+				pay_gateway_id = (String) Adp.getValueAt(0, 5);
+				name_gateway = (String) Adp.getValueAt(0, 6);
+			} else
+				log.error(
+						"ERROR: select shop_id , shop_cd ,  owner_id , login , passwd , pay_gateway_id  , pay_gateway.name_gateway   from shop join pay_gateway on pay_gateway.pay_gateway_id = shop.pay_gateway_id  where active = true and  shop.site_id = "
+								+ site_id + " \n   shop_cd = null ");
 
-			log.error(query,ex) ;
-		}
-		catch (Exception ex) 
-		{
+		} catch (SQLException ex) {
 
-			log.error(ex) ;
-		}
-		finally 
-		{
-		  Adp.close();
+			log.error(query, ex);
+		} catch (Exception ex) {
+
+			log.error(ex);
+		} finally {
+			Adp.close();
 		}
 
-		}
+	}
 
 	public void saveShopBeanBySiteId(String site_id) {
 		StringBuffer buffquery = new StringBuffer();
@@ -116,32 +105,25 @@ public class PayGatewayBean extends com.cbsinc.cms.WebControls implements
 		QueryManager Adp = new QueryManager();
 		try {
 			Adp.executeUpdate(buffquery.toString());
-		
 
-		if (Adp.rows().size() != 0) {
-			shop_id = (String) Adp.getValueAt(0, 0);
-			shop_cd = (String) Adp.getValueAt(0, 1);
-			owner_id = (String) Adp.getValueAt(0, 2);
-			login = (String) Adp.getValueAt(0, 3);
-			passwd = (String) Adp.getValueAt(0, 4);
-			pay_gateway_id = (String) Adp.getValueAt(0, 5);
-		}
-		} 
-		catch (SQLException ex) 
-		{
+			if (Adp.rows().size() != 0) {
+				shop_id = (String) Adp.getValueAt(0, 0);
+				shop_cd = (String) Adp.getValueAt(0, 1);
+				owner_id = (String) Adp.getValueAt(0, 2);
+				login = (String) Adp.getValueAt(0, 3);
+				passwd = (String) Adp.getValueAt(0, 4);
+				pay_gateway_id = (String) Adp.getValueAt(0, 5);
+			}
+		} catch (SQLException ex) {
 
-			log.error(buffquery.toString(),ex) ;
-		}
-		catch (Exception ex) 
-		{
+			log.error(buffquery.toString(), ex);
+		} catch (Exception ex) {
 
-			log.error(ex) ;
+			log.error(ex);
+		} finally {
+			Adp.close();
 		}
-		finally 
-		{
-		  Adp.close();
-		}
-		
+
 	}
 
 	public void saveShopBean() {
@@ -158,30 +140,24 @@ public class PayGatewayBean extends com.cbsinc.cms.WebControls implements
 		Adp.BeginTransaction();
 		try {
 			Adp.executeUpdate(buffquery.toString());
-			Adp.commit() ;
-		
+			Adp.commit();
 
-		if (Adp.rows().size() != 0) {
-			shop_id = (String) Adp.getValueAt(0, 0);
-			shop_cd = (String) Adp.getValueAt(0, 1);
-			owner_id = (String) Adp.getValueAt(0, 2);
-			login = (String) Adp.getValueAt(0, 3);
-			passwd = (String) Adp.getValueAt(0, 4);
-			pay_gateway_id = (String) Adp.getValueAt(0, 5);
-		}
-		} 
-		catch (SQLException ex) 
-		{
-			log.error(buffquery.toString(),ex) ;
+			if (Adp.rows().size() != 0) {
+				shop_id = (String) Adp.getValueAt(0, 0);
+				shop_cd = (String) Adp.getValueAt(0, 1);
+				owner_id = (String) Adp.getValueAt(0, 2);
+				login = (String) Adp.getValueAt(0, 3);
+				passwd = (String) Adp.getValueAt(0, 4);
+				pay_gateway_id = (String) Adp.getValueAt(0, 5);
+			}
+		} catch (SQLException ex) {
+			log.error(buffquery.toString(), ex);
 			Adp.rollback();
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error(ex);
 			Adp.rollback();
-		}
-		finally 
-		{
-		  Adp.close();
+		} finally {
+			Adp.close();
 		}
 	}
 
@@ -198,33 +174,26 @@ public class PayGatewayBean extends com.cbsinc.cms.WebControls implements
 
 		QueryManager Adp = new QueryManager();
 		Adp.BeginTransaction();
-		try 
-		{
+		try {
 			Adp.executeUpdate(buffquery.toString());
-		
 
-		if (Adp.rows().size() != 0) {
-			shop_id = (String) Adp.getValueAt(0, 0);
-			shop_cd = (String) Adp.getValueAt(0, 1);
-			owner_id = (String) Adp.getValueAt(0, 2);
-			login = (String) Adp.getValueAt(0, 3);
-			passwd = (String) Adp.getValueAt(0, 4);
-			pay_gateway_id = (String) Adp.getValueAt(0, 5);
-		}
+			if (Adp.rows().size() != 0) {
+				shop_id = (String) Adp.getValueAt(0, 0);
+				shop_cd = (String) Adp.getValueAt(0, 1);
+				owner_id = (String) Adp.getValueAt(0, 2);
+				login = (String) Adp.getValueAt(0, 3);
+				passwd = (String) Adp.getValueAt(0, 4);
+				pay_gateway_id = (String) Adp.getValueAt(0, 5);
+			}
 
-		}
-		catch (SQLException ex) 
-		{
-			log.error(buffquery.toString(),ex) ;
+		} catch (SQLException ex) {
+			log.error(buffquery.toString(), ex);
 			Adp.rollback();
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error(ex);
 			Adp.rollback();
-		}
-		finally 
-		{
-		  Adp.close();
+		} finally {
+			Adp.close();
 		}
 	}
 

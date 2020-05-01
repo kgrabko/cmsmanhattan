@@ -1,6 +1,5 @@
 package com.cbsinc.cms;
 
-
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -46,15 +45,15 @@ public class ImageServletUpload extends HttpServlet {
 	 * </p>
 	 * <p>
 	 * Description: System building web application develop by Konstantin Grabko.
-	 * Konstantin Grabko is Owner and author this code.
-	 * You can not use it and you cannot change it without written permission from Konstantin Grabko
-	 * Email: konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
+	 * Konstantin Grabko is Owner and author this code. You can not use it and you
+	 * cannot change it without written permission from Konstantin Grabko Email:
+	 * konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
 	 * </p>
 	 * <p>
 	 * Copyright: Copyright (c) 2002-2014
 	 * </p>
 	 * <p>
-	 * Company: CENTER BUSINESS SOLUTIONS INC 
+	 * Company: CENTER BUSINESS SOLUTIONS INC
 	 * </p>
 	 * 
 	 * @author Konstantin Grabko
@@ -62,22 +61,22 @@ public class ImageServletUpload extends HttpServlet {
 	 */
 
 	private static final long serialVersionUID = 1L;
-	
+
 	static private Logger log = Logger.getLogger(ImageServletUpload.class);
 
-	// SoftPostBean SoftPostBeanId = null ;
+	// SoftPostBean publisherBeanId = null ;
 	AuthorizationPageBean AuthorizationPageBeanId = null;
-	ProductPostAllFaced productPostAllFaced = null ;
-	transient ResourceBundle resources = null ;
-	ServletContext servletContext = null ;
+	ProductPostAllFaced productPostAllFaced = null;
+	transient ResourceBundle resources = null;
+	ServletContext servletContext = null;
 
 	int scale_image_heigth = 0;
 	int scale_image_width = 0;
-	//long file_size = 0 ;
-	//1byte = 7
-	//long limmit_file_size = 11000000 ;
-	float limmit_file_size = 1570000 ;
-	
+	// long file_size = 0 ;
+	// 1byte = 7
+	// long limmit_file_size = 11000000 ;
+	float limmit_file_size = 1570000;
+
 	public String filename = "";
 
 	public long intID = 0;
@@ -97,26 +96,30 @@ public class ImageServletUpload extends HttpServlet {
 	/**
 	 * Initializes the servlet.
 	 */
-	
-	transient ResourceBundle sequences_rs = null ;
-	transient ResourceBundle setup_resources = null ;
-	transient ResourceBundle localization = null ;
-	
-	File createdFile = null ;
-	
-	public ImageServletUpload() 
-	{
+
+	transient ResourceBundle sequences_rs = null;
+	transient ResourceBundle setup_resources = null;
+	transient ResourceBundle localization = null;
+
+	File createdFile = null;
+
+	public ImageServletUpload() {
 
 	}
-	
+
 	public void init(ServletConfig config) throws ServletException {
-		if( sequences_rs == null )  sequences_rs = PropertyResourceBundle.getBundle("sequence");
-		if( setup_resources == null )  setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources");
-		
-		if( !setup_resources.getString("scale_image_heigth").equals("")) scale_image_heigth = Integer.parseInt(setup_resources.getString("scale_image_heigth"));
-		if( !setup_resources.getString("scale_image_width").equals(""))	scale_image_width = Integer.parseInt(setup_resources.getString("scale_image_width"));
-		if( !setup_resources.getString("limmit_image_size").equals(""))	limmit_file_size = Integer.parseInt(setup_resources.getString("limmit_image_size"));
-		servletContext = config.getServletContext() ;
+		if (sequences_rs == null)
+			sequences_rs = PropertyResourceBundle.getBundle("sequence");
+		if (setup_resources == null)
+			setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources");
+
+		if (!setup_resources.getString("scale_image_heigth").equals(""))
+			scale_image_heigth = Integer.parseInt(setup_resources.getString("scale_image_heigth"));
+		if (!setup_resources.getString("scale_image_width").equals(""))
+			scale_image_width = Integer.parseInt(setup_resources.getString("scale_image_width"));
+		if (!setup_resources.getString("limmit_image_size").equals(""))
+			limmit_file_size = Integer.parseInt(setup_resources.getString("limmit_image_size"));
+		servletContext = config.getServletContext();
 		super.init(config);
 	}
 
@@ -128,7 +131,7 @@ public class ImageServletUpload extends HttpServlet {
 			bs.close();
 			return;
 		} catch (java.lang.Exception e) {
-			log.error(e) ;
+			log.error(e);
 			System.out.println(e.toString());
 		}
 	}
@@ -142,7 +145,7 @@ public class ImageServletUpload extends HttpServlet {
 			if (FileName.length() == 0)
 				return null;
 			intID = saveImgURL(FileName, AuthorizationPageBeanId.getIntUserID());
-			FileName = "" + intID	+ FileName.substring(FileName.lastIndexOf("."));
+			FileName = "" + intID + FileName.substring(FileName.lastIndexOf("."));
 			// File file = new File("C:\\Documents and
 			// Settings\\Grabko\\jbproject\\mobilesoft\\defaultroot\\imgpositions"
 			// ,FileName);
@@ -150,7 +153,7 @@ public class ImageServletUpload extends HttpServlet {
 			path = path.substring(0, path.indexOf("/WEB-INF/"));
 			createdFile = new File(path + "//imgpositions", FileName);
 			fis = new FileOutputStream(createdFile);
-			//createdFile = file ;
+			// createdFile = file ;
 		} catch (java.lang.Exception e) {
 			log.error(e);
 			System.out.println(e.toString());
@@ -158,8 +161,6 @@ public class ImageServletUpload extends HttpServlet {
 		return fis;
 	}
 
-	
-	
 //	void scaleImage1()
 //	{
 //		
@@ -173,84 +174,69 @@ public class ImageServletUpload extends HttpServlet {
 //		response.getOutputStream().flush();
 //
 //	}
-	
-	void scaleImage(int width , int height , File inf ) 
-	{
-		
-		//File inf = new File("C:"+ File.separatorChar +"serega.jpg");
-		//File outf = new File("C:"+ File.separatorChar +"serega.jpg");
-		File outf = new File (inf.getPath()) ;
-		File backup = new File (inf.getPath() + "_bak") ;
-		FileOutputStream foutstream  = null ;
+
+	void scaleImage(int width, int height, File inf) {
+
+		// File inf = new File("C:"+ File.separatorChar +"serega.jpg");
+		// File outf = new File("C:"+ File.separatorChar +"serega.jpg");
+		File outf = new File(inf.getPath());
+		File backup = new File(inf.getPath() + "_bak");
+		FileOutputStream foutstream = null;
 		try {
-		inf.renameTo(backup);
-		outf.createNewFile();
-		foutstream = new FileOutputStream(outf);
-		BufferedImage image = ImageIO.read(backup);
-		BufferedImage bdest = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-		Graphics2D g = bdest.createGraphics();
-		AffineTransform at = AffineTransform.getScaleInstance((double)width/image.getWidth(),(double)height/image.getHeight());
-		g.drawRenderedImage(image,at);
-		ImageIO.write( bdest,"jpg",foutstream);
-		backup.delete();
-		} 
-		catch (Exception e) 
-		{
+			inf.renameTo(backup);
+			outf.createNewFile();
+			foutstream = new FileOutputStream(outf);
+			BufferedImage image = ImageIO.read(backup);
+			BufferedImage bdest = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+			Graphics2D g = bdest.createGraphics();
+			AffineTransform at = AffineTransform.getScaleInstance((double) width / image.getWidth(),
+					(double) height / image.getHeight());
+			g.drawRenderedImage(image, at);
+			ImageIO.write(bdest, "jpg", foutstream);
+			backup.delete();
+		} catch (Exception e) {
 			backup.renameTo(outf);
 			log.error(e);
-			
-		}
-		finally
-		{
-			try 
-			{
+
+		} finally {
+			try {
 				foutstream.close();
-			}
-			catch (IOException e) 
-			{
+			} catch (IOException e) {
 				log.error(e);
-			}	
+			}
 		}
 
 	}
-	
-	
+
 	public long saveImgURL(String FileName, long user_id) {
 		QueryManager Adp = new QueryManager();
 		Adp.BeginTransaction();
 		String strID = null;
-		//String query = "SELECT NEXT VALUE FOR images_image_id_seq  AS ID  FROM ONE_SEQUENCES";
+		// String query = "SELECT NEXT VALUE FOR images_image_id_seq AS ID FROM
+		// ONE_SEQUENCES";
 		String query = sequences_rs.getString("images");
-		try 
-		{
-		
-		Adp.executeQuery(query);
-		strID = Adp.getValueAt(0, 0);
-		query = "insert into images ( image_id ,  imgname , img_url ,  user_id ) VALUES " 
-			+ "( ? ,  ? , ? ,  ? )";
-		 Map args = new HashMap();
-			args.put("image_id" , Long.valueOf(strID)  );
-			args.put("imgname" ,  FileName  );
-			args.put("img_url" ,  "imgpositions/" + strID + FileName.substring(FileName.lastIndexOf("."))  );
-			args.put("user_id" ,  Long.valueOf(user_id)   );
+		try {
+
+			Adp.executeQuery(query);
+			strID = Adp.getValueAt(0, 0);
+			query = "insert into images ( image_id ,  imgname , img_url ,  user_id ) VALUES " + "( ? ,  ? , ? ,  ? )";
+			Map args = new HashMap();
+			args.put("image_id", Long.valueOf(strID));
+			args.put("imgname", FileName);
+			args.put("img_url", "imgpositions/" + strID + FileName.substring(FileName.lastIndexOf(".")));
+			args.put("user_id", Long.valueOf(user_id));
 			Adp.executeInsertWithArgs(query, args);
-		Adp.commit();
+			Adp.commit();
+		} catch (SQLException ex) {
+			log.error(query, ex);
+			Adp.rollback();
+		} catch (Exception ex) {
+			log.error(ex);
+			Adp.rollback();
+		} finally {
+			Adp.close();
 		}
-		catch (SQLException ex) 
-		{
-				log.error(query,ex);
-				Adp.rollback();
-		}
-		catch (Exception ex) 
-		{
-				log.error(ex);
-				Adp.rollback();
-		}
-		finally
-		{
-				Adp.close();
-		}
-			
+
 		return Long.parseLong(strID);
 	}
 
@@ -265,35 +251,34 @@ public class ImageServletUpload extends HttpServlet {
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
 	 * methods.
 	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
+	 * @param request  servlet request
+	 * @param response servlet response
 	 */
-	protected void processRequest(HttpServletRequest req,
-			HttpServletResponse res) throws ServletException,
-			java.io.IOException {
+	protected void processRequest(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, java.io.IOException {
 
-		if( localization == null )   localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
-		else if( !localization.getLocale().getLanguage().equals(req.getLocale().getLanguage())  ) localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
+		if (localization == null)
+			localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
+		else if (!localization.getLocale().getLanguage().equals(req.getLocale().getLanguage()))
+			localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
 
 		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession().getAttribute("AuthorizationPageBeanId");
 
-		if( resources == null )  resources = PropertyResourceBundle.getBundle("localization", res.getLocale());
+		if (resources == null)
+			resources = PropertyResourceBundle.getBundle("localization", res.getLocale());
 		try {
-			productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
+			productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		
 		long start = System.currentTimeMillis();
 		// RFC 1867
 		String contentType = req.getContentType();
 		res.setContentType("text/html;charset=UTF8");
 		PrintWriter out = res.getWriter();
-		
+
 		if (AuthorizationPageBeanId == null) {
 			printResult(out, "User not autorization");
 			return;
@@ -303,20 +288,16 @@ public class ImageServletUpload extends HttpServlet {
 			out.close();
 			return;
 		}
-		
-		if(productPostAllFaced.isLimmitPostedMessages(AuthorizationPageBeanId,true)  )
-		 {
-			 printResult(out, resources.getString("global_has_limmit_forsite"));
-			 out.close();
-			 return;
-		 }
-		/*
-		if (AuthorizationPageBeanId.getIntLevelUp() != 2) {
-			printResult(out, "User have low  access");
+
+		if (productPostAllFaced.isLimmitPostedMessages(AuthorizationPageBeanId, true)) {
+			printResult(out, resources.getString("global_has_limmit_forsite"));
 			out.close();
 			return;
 		}
-		*/
+		/*
+		 * if (AuthorizationPageBeanId.getIntLevelUp() != 2) { printResult(out,
+		 * "User have low  access"); out.close(); return; }
+		 */
 
 		if (contentType == null) {
 			System.out.println("content type is null");
@@ -343,10 +324,7 @@ public class ImageServletUpload extends HttpServlet {
 		int result = in.readLine(buffer, 0, BUFFER_SIZE);
 		int size = 0;
 		outer: while (true) {
-			
-			
-		
-			
+
 			if (result <= 0) {
 				System.out.println("Error. Stream truncated");
 				break;
@@ -366,8 +344,7 @@ public class ImageServletUpload extends HttpServlet {
 
 			result = in.readLine(buffer, 0, BUFFER_SIZE);
 			if (result <= 0) {
-				System.out
-						.println("Upload : may be end boundary which has no contents");
+				System.out.println("Upload : may be end boundary which has no contents");
 				break;
 			}
 
@@ -376,14 +353,12 @@ public class ImageServletUpload extends HttpServlet {
 			String token = tokenizer.nextToken();
 			String upperToken = token.toUpperCase();
 			if (!upperToken.startsWith("CONTENT-DISPOSITION")) {
-				System.out
-						.println("Format error. Content-Disposition expected.");
+				System.out.println("Format error. Content-Disposition expected.");
 				break;
 			}
 			String disposition = upperToken.substring(21);
 			if (!disposition.equals("FORM-DATA")) {
-				System.out.println("Sorry, I don't know how to handle ["
-						+ disposition + "] disposition.");
+				System.out.println("Sorry, I don't know how to handle [" + disposition + "] disposition.");
 				break;
 			}
 			if (tokenizer.hasMoreElements()) {
@@ -401,9 +376,7 @@ public class ImageServletUpload extends HttpServlet {
 			String name = token.substring(nameStart + 6, nameEnd);
 
 			if (tokenizer.hasMoreElements()) {
-				
-				
-				
+
 				filename = null;
 				int fnStart, fnEnd;
 				String fileContentType = null;
@@ -444,10 +417,8 @@ public class ImageServletUpload extends HttpServlet {
 				if (fileContentType.toUpperCase().startsWith("CONTENT-TYPE:")) {
 					fileContentType = fileContentType.substring(13).trim();
 				} else {
-					System.out
-							.println("what should I read here ??? - result = "
-									+ result + ", and read ["
-									+ new String(buffer, 0, result) + "]");
+					System.out.println("what should I read here ??? - result = " + result + ", and read ["
+							+ new String(buffer, 0, result) + "]");
 				}
 
 				try {
@@ -457,18 +428,16 @@ public class ImageServletUpload extends HttpServlet {
 					int tmpbufferlen = 0;
 					boolean isFirst = true;
 					boolean odd = true;
-					inner: while ((result = in.readLine(buffer, 0, BUFFER_SIZE)) > 0)
-					{
-						if( limmit_file_size < size )	
-						{
-							printResult( out, localization.getString("has_reached_limmit_file_size") + " " + (limmit_file_size - 70000) /1000000   + " Mb."  ) ;
+					inner: while ((result = in.readLine(buffer, 0, BUFFER_SIZE)) > 0) {
+						if (limmit_file_size < size) {
+							printResult(out, localization.getString("has_reached_limmit_file_size") + " "
+									+ (limmit_file_size - 70000) / 1000000 + " Mb.");
 							out.close();
-							return ;
+							return;
 						}
-						
+
 						if (isFirst) { // ignore all proceeding \r\n
-							if (result == 2 && buffer[0] == '\r'
-									&& buffer[1] == '\n') {
+							if (result == 2 && buffer[0] == '\r' && buffer[1] == '\n') {
 								continue;
 							}
 
@@ -502,22 +471,20 @@ public class ImageServletUpload extends HttpServlet {
 					}
 				} catch (IOException ie) {
 					log.error(ie);
-					System.out.println("IO Error while write to file : "
-							+ ie.toString());
+					System.out.println("IO Error while write to file : " + ie.toString());
 				} finally {
 					System.out.println("finally Upload : size = " + size);
 					appendValue(map, name, filename, fileContentType, size);
 					saveFile();
-					String lowerfile = createdFile.getPath().toLowerCase() ;
-					if(lowerfile.endsWith(".gif")||lowerfile.endsWith(".jpg")||lowerfile.endsWith(".png") || lowerfile.endsWith(".bmp")  )
-					{
-						if( scale_image_width > 0 && scale_image_heigth > 0 )
-						scaleImage(scale_image_width, scale_image_heigth , createdFile );
+					String lowerfile = createdFile.getPath().toLowerCase();
+					if (lowerfile.endsWith(".gif") || lowerfile.endsWith(".jpg") || lowerfile.endsWith(".png")
+							|| lowerfile.endsWith(".bmp")) {
+						if (scale_image_width > 0 && scale_image_heigth > 0)
+							scaleImage(scale_image_width, scale_image_heigth, createdFile);
 					}
 				}
 				result = in.readLine(buffer, 0, BUFFER_SIZE);
-				System.out.println("what should I read here? - result = "
-						+ result + ", and read ["
+				System.out.println("what should I read here? - result = " + result + ", and read ["
 						+ new String(buffer, 0, result) + "]");
 			} else { // no more elements
 				result = in.readLine(buffer, 0, BUFFER_SIZE);
@@ -536,23 +503,19 @@ public class ImageServletUpload extends HttpServlet {
 			}
 
 			result = in.readLine(buffer, 0, BUFFER_SIZE);
-			
-			
-			
 
 		} // end of while
 
-		
 		long end = System.currentTimeMillis();
 		System.out.println("Good! it took " + (end - start) + " (ms)");
 		// saveLObj(filename.trim() , bs) ;
 		// saveLObj(filename.trim() , size ) ;
 		saveFile();
-		String lowerfile = createdFile.getPath().toLowerCase() ;
-		if(lowerfile.endsWith(".gif")||lowerfile.endsWith(".jpg")||lowerfile.endsWith(".png") || lowerfile.endsWith(".bmp") )
-		{
-			if( scale_image_width > 0 && scale_image_heigth > 0 )
-				scaleImage(scale_image_width, scale_image_heigth , createdFile );
+		String lowerfile = createdFile.getPath().toLowerCase();
+		if (lowerfile.endsWith(".gif") || lowerfile.endsWith(".jpg") || lowerfile.endsWith(".png")
+				|| lowerfile.endsWith(".bmp")) {
+			if (scale_image_width > 0 && scale_image_heigth > 0)
+				scaleImage(scale_image_width, scale_image_heigth, createdFile);
 		}
 		// saveLObj(filename.trim() , size ) ;
 		printResult(out, map);
@@ -564,28 +527,22 @@ public class ImageServletUpload extends HttpServlet {
 	/**
 	 * Handles the HTTP <code>GET</code> method.
 	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
+	 * @param request  servlet request
+	 * @param response servlet response
 	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException,
-			java.io.IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, java.io.IOException {
 		processRequest(request, response);
 	}
 
 	/**
 	 * Handles the HTTP <code>POST</code> method.
 	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
+	 * @param request  servlet request
+	 * @param response servlet response
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException,
-			java.io.IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, java.io.IOException {
 		processRequest(request, response);
 	}
 
@@ -596,8 +553,7 @@ public class ImageServletUpload extends HttpServlet {
 		return "Short description";
 	}
 
-	boolean bytesStartsWith(byte[] bytes, int offset, int length,
-			String toCompare) {
+	boolean bytesStartsWith(byte[] bytes, int offset, int length, String toCompare) {
 		boolean result = true;
 		if (toCompare.length() > length) {
 			return false;
@@ -613,10 +569,8 @@ public class ImageServletUpload extends HttpServlet {
 		return result;
 	}
 
-	void appendValue(HashMap map, String name, String value,
-			String contentType, int size) {
-		ItemData data = new ItemData(name, value, contentType, size,
-				true);
+	void appendValue(HashMap map, String name, String value, String contentType, int size) {
+		ItemData data = new ItemData(name, value, contentType, size, true);
 		map.put(name, data);
 	}
 
@@ -670,8 +624,7 @@ public class ImageServletUpload extends HttpServlet {
 			case AMPERSHARP:
 				if (chars[i] == ';') {
 					try {
-						buffer.append((char) Integer.parseInt(escaped
-								.toString()));
+						buffer.append((char) Integer.parseInt(escaped.toString()));
 					} catch (NumberFormatException nfe) {
 						// I don't handle other Entities
 						buffer.append(escaped);
@@ -694,11 +647,11 @@ public class ImageServletUpload extends HttpServlet {
 	}
 
 	void printResult(PrintWriter out, Map map) throws IOException {
-		//file_size = 0 ;
+		// file_size = 0 ;
 		Iterator itr = map.values().iterator();
 		out.println("<HTML><HEAD>");
 		out.println("<META http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
-		out.println("<TITLE>" + localization.getString("new_small_image")   + "</TITLE>");
+		out.println("<TITLE>" + localization.getString("new_small_image") + "</TITLE>");
 		out.println("<script language=\"JavaScript\">");
 		out.println("<!--");
 		out.println("function setData(){");
@@ -716,35 +669,35 @@ public class ImageServletUpload extends HttpServlet {
 		out.println("//-->");
 		out.println("</script>");
 		out.println("</HEAD><BODY onLoad=\"return  setData()\" >");
-		out.println("<H3>" + localization.getString("result_upload")   + "</H3>");
+		out.println("<H3>" + localization.getString("result_upload") + "</H3>");
 		out.println("<TABLE>");
 		out.println(localization.getString("header_result_loading"));
-		while (itr.hasNext()) 
-		{
+		while (itr.hasNext()) {
 			ItemData data = (ItemData) itr.next();
 			out.println("<TR>");
-			//out.println("<TD>" + (data.name == null ? "" : data.name) + "</TD>");
-			out.println("<TD>" + (data.value == null ? "" : data.value)	+ "</TD>");
-			out.println("<TD>" + (data.contentType == null ? "" : data.contentType)	+ "</TD>");
-			out.println("<TD>" + (data.isFile ? String.valueOf(data.size) : "")	+ "</TD>");
-			//out.println("<TD>" + (data.isFile ? "file" : "") + "</TD>");
+			// out.println("<TD>" + (data.name == null ? "" : data.name) + "</TD>");
+			out.println("<TD>" + (data.value == null ? "" : data.value) + "</TD>");
+			out.println("<TD>" + (data.contentType == null ? "" : data.contentType) + "</TD>");
+			out.println("<TD>" + (data.isFile ? String.valueOf(data.size) : "") + "</TD>");
+			// out.println("<TD>" + (data.isFile ? "file" : "") + "</TD>");
 			out.println("</TR>");
 		}
 		out.println("</TABLE>");
-		out.println("<br/><b> " + localization.getString("file_uploaded")   + " </b><br/><br/>");
-		out.println("<FORM><input type=\"button\" value=\"" + localization.getString("close_window")   + "\" onClick=\"return setClose()\" ></FORM>");
+		out.println("<br/><b> " + localization.getString("file_uploaded") + " </b><br/><br/>");
+		out.println("<FORM><input type=\"button\" value=\"" + localization.getString("close_window")
+				+ "\" onClick=\"return setClose()\" ></FORM>");
 		out.println("</BODY></HTML>");
 	}
 
 	void printResult(PrintWriter out, String mess) throws IOException {
-		//file_size = 0 ;
+		// file_size = 0 ;
 		out.println("<HTML><HEAD>");
 		out.println("<META http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
-		out.println("<TITLE>" + localization.getString("new_small_image")   + "</TITLE>");
+		out.println("<TITLE>" + localization.getString("new_small_image") + "</TITLE>");
 		out.println("<script language=\"JavaScript\">");
 		out.println("<!--");
 		out.println("function setData(){");
-		out.println("top.postsoftform.imagename.value = '" + localization.getString("file_not_uploaded")   + "' ;");
+		out.println("top.postsoftform.imagename.value = '" + localization.getString("file_not_uploaded") + "' ;");
 		// out.println("opener.parent.postsoftform.filename.value = 'file not
 		// uploaded' ;" );
 		out.println("top.postsoftform.image_id.value = -1 ;");
@@ -758,10 +711,11 @@ public class ImageServletUpload extends HttpServlet {
 		out.println("//-->");
 		out.println("</script>");
 		out.println("</HEAD><BODY onLoad=\"return  setData()\" >");
-		out.println("<H3>" + localization.getString("result_upload")   + "</H3>");
-		out.println("<font size='3' >"+mess+" </font>");
-		out.println("<br/><b> " + localization.getString("file_not_uploaded")   + " </b><br/><br/>");
-		out	.println("<FORM><input type=\"button\" value=\"" + localization.getString("close_window")   + "\" onClick=\"return setClose()\" ></FORM>");
+		out.println("<H3>" + localization.getString("result_upload") + "</H3>");
+		out.println("<font size='3' >" + mess + " </font>");
+		out.println("<br/><b> " + localization.getString("file_not_uploaded") + " </b><br/><br/>");
+		out.println("<FORM><input type=\"button\" value=\"" + localization.getString("close_window")
+				+ "\" onClick=\"return setClose()\" ></FORM>");
 		out.println("</BODY></HTML>");
 	}
 
@@ -781,4 +735,3 @@ public class ImageServletUpload extends HttpServlet {
 	}
 
 }
-

@@ -21,13 +21,14 @@ package com.cbsinc.cms.controllers;
  * @version 1.0
  */
 
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public interface IAction 
-{
-  	void doPost(HttpServletRequest request, HttpServletResponse response , ServletContext  servletContext) throws Exception ;
-  	void doGet(HttpServletRequest request, HttpServletResponse response , ServletContext  servletContext) throws Exception ;
+public interface IAction {
+	void doPost(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
+			throws Exception;
+
+	void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
+			throws Exception;
 }

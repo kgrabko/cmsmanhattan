@@ -1,5 +1,5 @@
 <%@page contentType="text/html;charset=UTF-8" language="java"%>
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <jsp:useBean id="authorizationPageFaced" scope="application" class="com.cbsinc.cms.faceds.AuthorizationPageFaced" />
 <html>
 
@@ -30,7 +30,7 @@
 
 
         <div class="pathBar">
-                <font size="4"><%=AuthorizationPageBeanId.getLocalization(application).getString("control_of_site")%></font>
+                <font size="4"><%=authorizationPageBeanId.getLocalization(application).getString("control_of_site")%></font>
 
         </div>
 
@@ -52,7 +52,7 @@
 
             <!-- News part -->
 
-	    <h1><%=AuthorizationPageBeanId.getLocalization(application).getString("use_list")%></h1>
+	    <h1><%=authorizationPageBeanId.getLocalization(application).getString("use_list")%></h1>
 		<br/>
 
 
@@ -60,7 +60,7 @@
 		  <div class="body">
 		    <div >
 		    <div >
-	         <%=authorizationPageFaced.getUserList(AuthorizationPageBeanId)%>
+	         <%=authorizationPageFaced.getUserList(authorizationPageBeanId)%>
 			 </div>
 		  </div>
 		</div>
@@ -68,7 +68,7 @@
 
         <!-- Navigation -->
         <div class="listingBar">
-  	    <span class="next"> <a HREF = "Productlist.jsp"  ><strong> <%=AuthorizationPageBeanId.getLocalization(application).getString("back")%></strong></a> </span>
+  	    <span class="next"> <a HREF = "Productlist.jsp"  ><strong> <%=authorizationPageBeanId.getLocalization(application).getString("back")%></strong></a> </span>
 		</div>
 
 
@@ -92,7 +92,7 @@
 
 <br />
 
- <%=AuthorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
+ <%=authorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
 
 <hr size="" class="netscape4" />
 

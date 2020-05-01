@@ -21,7 +21,6 @@ package com.cbsinc.cms;
  * @version 1.0
  */
 
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -41,7 +40,6 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 import org.apache.log4j.Logger;
 
@@ -69,18 +67,17 @@ public class FileServletUpload extends HttpServlet {
 	 * 
 	 */
 
-	
 	static private Logger log = Logger.getLogger(FileServletUpload.class);
 
-	// SoftPostBean SoftPostBeanId = null ;
+	// SoftPostBean publisherBeanId = null ;
 	AuthorizationPageBean AuthorizationPageBeanId = null;
-	SoftPostBean SoftPostBeanId =  new SoftPostBean() ;
-	ProductPostAllFaced productPostAllFaced = null ;
-	ResourceBundle resources = null ;
-	ServletContext servletContext = null ;
+	PublisherBean publisherBeanId = new PublisherBean();
+	ProductPostAllFaced productPostAllFaced = null;
+	ResourceBundle resources = null;
+	ServletContext servletContext = null;
 
 	public String filename = "";
-	public String  fullpath_filename = "" ;
+	public String fullpath_filename = "";
 
 	public long intID = 0;
 
@@ -95,26 +92,27 @@ public class FileServletUpload extends HttpServlet {
 	// java.io.PipedOutputStream outs = null ;
 
 	private final static int BUFFER_SIZE = 2048;
-	float limmit_file_size = 1570000 ;
+	float limmit_file_size = 1570000;
 
 	/**
 	 * Initializes the servlet.
 	 */
-	
-	
-	transient ResourceBundle sequences_rs = null ;
-	transient ResourceBundle setup_resources = null ;
-	transient ResourceBundle localization = null ;
-	
-	public FileServletUpload() 
-	{
+
+	transient ResourceBundle sequences_rs = null;
+	transient ResourceBundle setup_resources = null;
+	transient ResourceBundle localization = null;
+
+	public FileServletUpload() {
 	}
-	
+
 	public void init(ServletConfig config) throws ServletException {
-		if( sequences_rs == null )  sequences_rs = PropertyResourceBundle.getBundle("sequence");
-		if( setup_resources == null )  setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources");
-		if( !setup_resources.getString("limmit_file_size").equals(""))	limmit_file_size = Integer.parseInt(setup_resources.getString("limmit_file_size"));
-		servletContext = config.getServletContext() ;
+		if (sequences_rs == null)
+			sequences_rs = PropertyResourceBundle.getBundle("sequence");
+		if (setup_resources == null)
+			setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources");
+		if (!setup_resources.getString("limmit_file_size").equals(""))
+			limmit_file_size = Integer.parseInt(setup_resources.getString("limmit_file_size"));
+		servletContext = config.getServletContext();
 	}
 
 	public void saveFile() {
@@ -125,7 +123,7 @@ public class FileServletUpload extends HttpServlet {
 			bs.close();
 			return;
 		} catch (java.lang.Exception e) {
-			log.error(e) ;
+			log.error(e);
 			System.out.println(e.toString());
 		}
 	}
@@ -139,8 +137,7 @@ public class FileServletUpload extends HttpServlet {
 			if (FileName.length() == 0)
 				return null;
 			intID = saveImgURL(FileName, AuthorizationPageBeanId.getIntUserID());
-			FileName = "" + intID
-					+ FileName.substring(FileName.lastIndexOf("."));
+			FileName = "" + intID + FileName.substring(FileName.lastIndexOf("."));
 			// File file = new File("C:\\Documents and
 			// Settings\\Grabko\\jbproject\\mobilesoft\\defaultroot\\imgpositions"
 			// ,FileName);
@@ -155,49 +152,40 @@ public class FileServletUpload extends HttpServlet {
 		return fis;
 	}
 
-	public long saveImgURL(String FileName, long user_id) 
-	{
+	public long saveImgURL(String FileName, long user_id) {
 		QueryManager Adp = new QueryManager();
 		Adp.BeginTransaction();
 		String strID = "-1";
-		String path ;
-		//String query = "SELECT NEXT VALUE FOR file_id_seq  AS ID  FROM ONE_SEQUENCES";
+		String path;
+		// String query = "SELECT NEXT VALUE FOR file_id_seq AS ID FROM ONE_SEQUENCES";
 		String query = sequences_rs.getString("file");
-		try 
-		{
-		
-		Adp.executeQuery(query);
+		try {
 
-		strID = Adp.getValueAt(0, 0);
-		
-		path = this.getClass().getResource("").getPath();
-		path = path.substring(0, path.indexOf("/WEB-INF/"));
-		path = path.substring(1) + "/files/"  + strID +  FileName.substring(FileName.lastIndexOf(".")) ;
-		//File file = new File(path + "//files", FileName);
-		//path = file.getPath().replaceAll("\\","\\\\") ;
-		//path = getServletContext().getRealPath("files/" + strID	+ FileName.substring(FileName.lastIndexOf(".")));
-		
-		query = "insert into file " + "(" + " file_id , " + " name , "
-				+ " path , " + " user_id " + ")" + " VALUES " + "( " + strID
-				+ ", '" + FileName + "', '" + path + "' , "
-				+ user_id + " )";
+			Adp.executeQuery(query);
+
+			strID = Adp.getValueAt(0, 0);
+
+			path = this.getClass().getResource("").getPath();
+			path = path.substring(0, path.indexOf("/WEB-INF/"));
+			path = path.substring(1) + "/files/" + strID + FileName.substring(FileName.lastIndexOf("."));
+			// File file = new File(path + "//files", FileName);
+			// path = file.getPath().replaceAll("\\","\\\\") ;
+			// path = getServletContext().getRealPath("files/" + strID +
+			// FileName.substring(FileName.lastIndexOf(".")));
+
+			query = "insert into file " + "(" + " file_id , " + " name , " + " path , " + " user_id " + ")" + " VALUES "
+					+ "( " + strID + ", '" + FileName + "', '" + path + "' , " + user_id + " )";
 
 			Adp.executeUpdate(query);
 			Adp.commit();
-		} 
-		catch (SQLException ex) 
-		{
+		} catch (SQLException ex) {
 			Adp.rollback();
-			log.error(query,ex) ;
-		}
-		catch (Exception ex) 
-		{
+			log.error(query, ex);
+		} catch (Exception ex) {
 			Adp.rollback();
-			log.error(ex) ;
-		}
-		finally 
-		{
-		  Adp.close();
+			log.error(ex);
+		} finally {
+			Adp.close();
 		}
 
 		return Long.parseLong(strID);
@@ -214,14 +202,11 @@ public class FileServletUpload extends HttpServlet {
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
 	 * methods.
 	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
+	 * @param request  servlet request
+	 * @param response servlet response
 	 */
-	protected void processRequest(HttpServletRequest req,
-			HttpServletResponse res) throws ServletException,
-			java.io.IOException {
+	protected void processRequest(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, java.io.IOException {
 		// OpenConnection("jdbc:postgresql://192.168.0.1:5432/mobilsoft") ;
 		// bs = new java.io.PipedOutputStream() ;
 		// pin = new java.io.PipedInputStream(bs);
@@ -231,32 +216,33 @@ public class FileServletUpload extends HttpServlet {
 		// req.
 		// SessionBean sessionBean = (SessionBean)
 		// request.getSession().getAttribute("sessionBean");
-		// SoftPostBeanId = (SoftPostBean)
-		// req.getSession().getAttribute("SoftPostBeanId");
-		if( localization == null )   localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
-		else if( !localization.getLocale().getLanguage().equals(req.getLocale().getLanguage())  ) localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
+		// publisherBeanId = (SoftPostBean)
+		// req.getSession().getAttribute("publisherBeanId");
+		if (localization == null)
+			localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
+		else if (!localization.getLocale().getLanguage().equals(req.getLocale().getLanguage()))
+			localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
 
-		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession()
-				.getAttribute("AuthorizationPageBeanId");
-		
-		SoftPostBeanId = (SoftPostBean) req.getSession().getAttribute("SoftPostBeanId");
+		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession().getAttribute("AuthorizationPageBeanId");
 
-		if( resources == null )  resources = PropertyResourceBundle.getBundle("localization", res.getLocale());
+		publisherBeanId = (PublisherBean) req.getSession().getAttribute("publisherBeanId");
+
+		if (resources == null)
+			resources = PropertyResourceBundle.getBundle("localization", res.getLocale());
 		try {
-			productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
+			productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		
 		long start = System.currentTimeMillis();
 		// RFC 1867
-		//req.setCharacterEncoding("UTF-8");
+		// req.setCharacterEncoding("UTF-8");
 		String contentType = req.getContentType();
-		//res.setContentType("text/html;charset=cp1251");
+		// res.setContentType("text/html;charset=cp1251");
 		res.setContentType("text/html;charset=UTF8");
-		
+
 		// // res.addHeader("Expires","Mon, 26 Jul 1997 05:00:00 GMT");
 		// res.addDateHeader("Last-Modified", new java.util.Date().getTime());
 		// res.addHeader("Cache-Control","no-cache, must-revalidate");
@@ -272,48 +258,40 @@ public class FileServletUpload extends HttpServlet {
 			out.close();
 			return;
 		}
-		
-		if(productPostAllFaced.isLimmitPostedMessages(AuthorizationPageBeanId,true)  )
-		 {
-			 printResultFail(out, resources.getString("global_has_limmit_forsite"));
-			 out.close();
-			 return;
-		 }
-		
-		/*
-		if (AuthorizationPageBeanId.getIntLevelUp() != 2) {
-			printResult(out, "User have low  access");
+
+		if (productPostAllFaced.isLimmitPostedMessages(AuthorizationPageBeanId, true)) {
+			printResultFail(out, resources.getString("global_has_limmit_forsite"));
 			out.close();
 			return;
 		}
-		*/
-		
+
+		/*
+		 * if (AuthorizationPageBeanId.getIntLevelUp() != 2) { printResult(out,
+		 * "User have low  access"); out.close(); return; }
+		 */
+
 		if (req.getParameter("filepath") != null) {
 			fullpath_filename = req.getParameter("filepath");
 			int lastindex = -1;
-			try
-			{
-			if ((lastindex = fullpath_filename.lastIndexOf('/')) < 0) {
-				lastindex = fullpath_filename.lastIndexOf('\\');
-			}
-			if (lastindex >= 0) {
-				filename = fullpath_filename.substring(lastindex + 1);
-			}
-			filename = processEscape(filename);
-			
-			//fullpath_filename = fullpath_filename.replaceAll("\\","/");
+			try {
+				if ((lastindex = fullpath_filename.lastIndexOf('/')) < 0) {
+					lastindex = fullpath_filename.lastIndexOf('\\');
+				}
+				if (lastindex >= 0) {
+					filename = fullpath_filename.substring(lastindex + 1);
+				}
+				filename = processEscape(filename);
 
-			int id = saveFileURL(filename, fullpath_filename);
-			printResultSaveFileURl(out, "URL: " + fullpath_filename , filename , "" + id );
+				// fullpath_filename = fullpath_filename.replaceAll("\\","/");
+
+				int id = saveFileURL(filename, fullpath_filename);
+				printResultSaveFileURl(out, "URL: " + fullpath_filename, filename, "" + id);
+			} finally {
+				out.close();
 			}
-            finally
-            {
-    		 out.close();            	
-            }
 			return;
 		}
 
-		
 		if (contentType == null) {
 			System.out.println("content type is null");
 			return;
@@ -358,8 +336,7 @@ public class FileServletUpload extends HttpServlet {
 
 			result = in.readLine(buffer, 0, BUFFER_SIZE);
 			if (result <= 0) {
-				System.out
-						.println("Upload : may be end boundary which has no contents");
+				System.out.println("Upload : may be end boundary which has no contents");
 				break;
 			}
 
@@ -368,14 +345,12 @@ public class FileServletUpload extends HttpServlet {
 			String token = tokenizer.nextToken();
 			String upperToken = token.toUpperCase();
 			if (!upperToken.startsWith("CONTENT-DISPOSITION")) {
-				System.out
-						.println("Format error. Content-Disposition expected.");
+				System.out.println("Format error. Content-Disposition expected.");
 				break;
 			}
 			String disposition = upperToken.substring(21);
 			if (!disposition.equals("FORM-DATA")) {
-				System.out.println("Sorry, I don't know how to handle ["
-						+ disposition + "] disposition.");
+				System.out.println("Sorry, I don't know how to handle [" + disposition + "] disposition.");
 				break;
 			}
 			if (tokenizer.hasMoreElements()) {
@@ -433,10 +408,8 @@ public class FileServletUpload extends HttpServlet {
 				if (fileContentType.toUpperCase().startsWith("CONTENT-TYPE:")) {
 					fileContentType = fileContentType.substring(13).trim();
 				} else {
-					System.out
-							.println("what should I read here ??? - result = "
-									+ result + ", and read ["
-									+ new String(buffer, 0, result) + "]");
+					System.out.println("what should I read here ??? - result = " + result + ", and read ["
+							+ new String(buffer, 0, result) + "]");
 				}
 
 				try {
@@ -447,17 +420,16 @@ public class FileServletUpload extends HttpServlet {
 					boolean isFirst = true;
 					boolean odd = true;
 					inner: while ((result = in.readLine(buffer, 0, BUFFER_SIZE)) > 0) {
-						
-						if( limmit_file_size < size )	
-						{
-							printResultFail( out, localization.getString("has_reached_limmit_file_size") + " " + (limmit_file_size - 70000) /1000000   + " Mb."  ) ;
+
+						if (limmit_file_size < size) {
+							printResultFail(out, localization.getString("has_reached_limmit_file_size") + " "
+									+ (limmit_file_size - 70000) / 1000000 + " Mb.");
 							out.close();
-							return ;
+							return;
 						}
-						
+
 						if (isFirst) { // ignore all proceeding \r\n
-							if (result == 2 && buffer[0] == '\r'
-									&& buffer[1] == '\n') {
+							if (result == 2 && buffer[0] == '\r' && buffer[1] == '\n') {
 								continue;
 							}
 
@@ -491,8 +463,7 @@ public class FileServletUpload extends HttpServlet {
 					}
 				} catch (IOException ie) {
 					log.error(ie);
-					System.out.println("IO Error while write to file : "
-							+ ie.toString());
+					System.out.println("IO Error while write to file : " + ie.toString());
 				} finally {
 					System.out.println("finally Upload : size = " + size);
 					appendValue(map, name, filename, fileContentType, size);
@@ -503,8 +474,7 @@ public class FileServletUpload extends HttpServlet {
 					// }
 				}
 				result = in.readLine(buffer, 0, BUFFER_SIZE);
-				System.out.println("what should I read here? - result = "
-						+ result + ", and read ["
+				System.out.println("what should I read here? - result = " + result + ", and read ["
 						+ new String(buffer, 0, result) + "]");
 			} else { // no more elements
 				result = in.readLine(buffer, 0, BUFFER_SIZE);
@@ -540,28 +510,22 @@ public class FileServletUpload extends HttpServlet {
 	/**
 	 * Handles the HTTP <code>GET</code> method.
 	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
+	 * @param request  servlet request
+	 * @param response servlet response
 	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException,
-			java.io.IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, java.io.IOException {
 		processRequest(request, response);
 	}
 
 	/**
 	 * Handles the HTTP <code>POST</code> method.
 	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
+	 * @param request  servlet request
+	 * @param response servlet response
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException,
-			java.io.IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, java.io.IOException {
 		processRequest(request, response);
 	}
 
@@ -572,8 +536,7 @@ public class FileServletUpload extends HttpServlet {
 		return "Short description";
 	}
 
-	boolean bytesStartsWith(byte[] bytes, int offset, int length,
-			String toCompare) {
+	boolean bytesStartsWith(byte[] bytes, int offset, int length, String toCompare) {
 		boolean result = true;
 		if (toCompare.length() > length) {
 			return false;
@@ -589,10 +552,8 @@ public class FileServletUpload extends HttpServlet {
 		return result;
 	}
 
-	void appendValue(HashMap map, String name, String value,
-			String contentType, int size) {
-		FileServletUploadData data = new FileServletUploadData(name, value, contentType, size,
-				true);
+	void appendValue(HashMap map, String name, String value, String contentType, int size) {
+		FileServletUploadData data = new FileServletUploadData(name, value, contentType, size, true);
 		map.put(name, data);
 	}
 
@@ -646,8 +607,7 @@ public class FileServletUpload extends HttpServlet {
 			case AMPERSHARP:
 				if (chars[i] == ';') {
 					try {
-						buffer.append((char) Integer.parseInt(escaped
-								.toString()));
+						buffer.append((char) Integer.parseInt(escaped.toString()));
 					} catch (NumberFormatException nfe) {
 						// I don't handle other Entities
 						buffer.append(escaped);
@@ -673,11 +633,11 @@ public class FileServletUpload extends HttpServlet {
 		Iterator itr = map.values().iterator();
 		out.println("<HTML><HEAD>");
 		out.println("<META http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
-		out.println("<TITLE>" + localization.getString("result_upload")   + "</TITLE>");
+		out.println("<TITLE>" + localization.getString("result_upload") + "</TITLE>");
 		out.println("<script language=\"JavaScript\">");
 		out.println("<!--");
 		out.println("function setData(){");
-		out.println("top.postsoftform.filename.value = '" + filename  + "' ;");
+		out.println("top.postsoftform.filename.value = '" + filename + "' ;");
 		out.println("top.postsoftform.file_id.value = '" + intID + "' ;");
 		out.println("return true ;");
 		out.println("}");
@@ -688,34 +648,34 @@ public class FileServletUpload extends HttpServlet {
 		out.println("//-->");
 		out.println("</script>");
 		out.println("</HEAD><BODY onLoad=\"return  setData()\" >");
-		out.println("<H3>" + localization.getString("result_upload")   + "</H3>");
+		out.println("<H3>" + localization.getString("result_upload") + "</H3>");
 		out.println("<TABLE>");
 		out.println(localization.getString("header_result_loading"));
-		while (itr.hasNext()) 
-		{
+		while (itr.hasNext()) {
 			FileServletUploadData data = (FileServletUploadData) itr.next();
 			out.println("<TR>");
-			//out.println("<TD>" + (data.name == null ? "" : data.name) + "</TD>");
-			out.println("<TD>" + (data.value == null ? "" : data.value)	+ "</TD>");
-			out.println("<TD>" + (data.contentType == null ? "" : data.contentType)	+ "</TD>");
-			out.println("<TD>" + (data.isFile ? String.valueOf(data.size) : "")	+ "</TD>");
-			//out.println("<TD>" + (data.isFile ? "file" : "") + "</TD>");
+			// out.println("<TD>" + (data.name == null ? "" : data.name) + "</TD>");
+			out.println("<TD>" + (data.value == null ? "" : data.value) + "</TD>");
+			out.println("<TD>" + (data.contentType == null ? "" : data.contentType) + "</TD>");
+			out.println("<TD>" + (data.isFile ? String.valueOf(data.size) : "") + "</TD>");
+			// out.println("<TD>" + (data.isFile ? "file" : "") + "</TD>");
 			out.println("</TR>");
 		}
-		out.println("</TABLE>"); 
-		out.println("<br/><b> " + localization.getString("file_uploaded")   + " </b><br/><br/>");
-		out.println("<FORM><input type=\"button\" value=\"" + localization.getString("close_window")   + "\" onClick=\"return setClose()\" ></FORM>");
+		out.println("</TABLE>");
+		out.println("<br/><b> " + localization.getString("file_uploaded") + " </b><br/><br/>");
+		out.println("<FORM><input type=\"button\" value=\"" + localization.getString("close_window")
+				+ "\" onClick=\"return setClose()\" ></FORM>");
 		out.println("</BODY></HTML>");
 	}
 
 	void printResultFail(PrintWriter out, String mess) throws IOException {
 		out.println("<HTML><HEAD>");
 		out.println("<META http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
-		out.println("<TITLE>" + localization.getString("result_upload")   + "</TITLE>");
+		out.println("<TITLE>" + localization.getString("result_upload") + "</TITLE>");
 		out.println("<script language=\"JavaScript\">");
 		out.println("<!--");
 		out.println("function setData(){");
-		out.println("top.postsoftform.filename.value = '" + localization.getString("file_not_uploaded")   + "' ;");
+		out.println("top.postsoftform.filename.value = '" + localization.getString("file_not_uploaded") + "' ;");
 		out.println("top.postsoftform.file_id.value = '-1' ;");
 		out.println("return true ;");
 		out.println("}");
@@ -726,10 +686,11 @@ public class FileServletUpload extends HttpServlet {
 		out.println("//-->");
 		out.println("</script>");
 		out.println("</HEAD><BODY onLoad=\"return  setData()\" >");
-		out.println("<H3>" + localization.getString("result_upload")   + "</H3>");
-		out.println("<font size='3' >"+mess+" </font>");
-		out.println("<br/><b> " + localization.getString("file_not_uploaded")   + " </b><br/><br/>");
-		out.println("<FORM><input type=\"button\" value=\"" + localization.getString("close_window")   + "\" onClick=\"return setClose()\" ></FORM>");
+		out.println("<H3>" + localization.getString("result_upload") + "</H3>");
+		out.println("<font size='3' >" + mess + " </font>");
+		out.println("<br/><b> " + localization.getString("file_not_uploaded") + " </b><br/><br/>");
+		out.println("<FORM><input type=\"button\" value=\"" + localization.getString("close_window")
+				+ "\" onClick=\"return setClose()\" ></FORM>");
 		out.println("</BODY></HTML>");
 	}
 
@@ -748,23 +709,19 @@ public class FileServletUpload extends HttpServlet {
 		return i;
 	}
 
-	
-	public int saveFileURL(String FileName, String path ) {
-		PreparedStatement ps = null ;
+	public int saveFileURL(String FileName, String path) {
+		PreparedStatement ps = null;
 		QueryManager Adp = new QueryManager();
 		Adp.BeginTransaction();
 		String strID;
-		//String query = "SELECT NEXT VALUE FOR file_id_seq  AS ID  FROM ONE_SEQUENCES";
+		// String query = "SELECT NEXT VALUE FOR file_id_seq AS ID FROM ONE_SEQUENCES";
 		String query = sequences_rs.getString("file");
-		try 
-		{
+		try {
 			Adp.executeQuery(query);
 			strID = Adp.getValueAt(0, 0);
 			intID = string2Integer(strID);
 
-		}
-		catch (SQLException ex) 
-		{
+		} catch (SQLException ex) {
 			log.error(ex);
 			System.err.println(query);
 			System.err.println(ex);
@@ -772,42 +729,36 @@ public class FileServletUpload extends HttpServlet {
 			System.err.println("Method " + "saveImgURL()");
 			Adp.rollback();
 			Adp.close();
-			return -1 ;
+			return -1;
 		}
 
-/*
-		query = "insert into file " + "(" + " file_id , " + " name , "
-				+ " path , " + " user_id " + ")" + " VALUES " + "( " + strID
-				+ ", '" + FileName + "', '" + path + "' , "
-				+ AuthorizationPageBeanId.getIntUserID() + " )";
-*/
+		/*
+		 * query = "insert into file " + "(" + " file_id , " + " name , " + " path , " +
+		 * " user_id " + ")" + " VALUES " + "( " + strID + ", '" + FileName + "', '" +
+		 * path + "' , " + AuthorizationPageBeanId.getIntUserID() + " )";
+		 */
 		try {
-			//Adp.executeUpdate(query);
-			ps = Adp.getCurrentConnection().prepareStatement("INSERT INTO file (file_id, name, user_id, path) VALUES (?, ? , ? , ?)");
+			// Adp.executeUpdate(query);
+			ps = Adp.getCurrentConnection()
+					.prepareStatement("INSERT INTO file (file_id, name, user_id, path) VALUES (?, ? , ? , ?)");
 			ps.setLong(1, intID);
 			ps.setString(2, FileName);
 			ps.setLong(3, AuthorizationPageBeanId.getIntUserID());
 			ps.setString(4, path);
-			SoftPostBeanId.setFile_id(strID);
+			publisherBeanId.setFile_id(strID);
 			ps.executeUpdate();
-			/////SoftPostBeanId.setFile_id("" + strID);
+			///// publisherBeanId.setFile_id("" + strID);
 			Adp.commit();
 		} catch (SQLException ex) {
-			log.error(query,ex);
+			log.error(query, ex);
 			Adp.rollback();
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error(ex);
 			Adp.rollback();
-		}
-		finally
-		{
-			try 
-			{
+		} finally {
+			try {
 				ps.close();
-			}
-			catch (SQLException e) 
-			{
+			} catch (SQLException e) {
 				e.printStackTrace();
 				log.error(e);
 			}
@@ -817,33 +768,29 @@ public class FileServletUpload extends HttpServlet {
 		return Integer.parseInt(strID);
 	}
 
-
-	
-	void printResultSaveFileURl(PrintWriter out, String mess , String filename , String  file_id)
-	throws IOException {
-out.println("<HTML><HEAD>");
-out.println("<META http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
-out.println("<TITLE>Upload Result</TITLE>");
-out.println("<script language=\"JavaScript\">");
-out.println("<!--");
-out.println("function setData(){");
-out.println("top.postsoftform.filename.value = '"+filename+"' ;");
-out.println("top.postsoftform.file_id.value = '" + file_id +"' ;");
-out.println("return true ;");
-out.println("}");
-out.println("function setClose(){");
-out.println("top.dwindow('SelectImage.jsp');");
-out.println("return true ;");
-out.println("}");
-out.println("//-->");
-out.println("</script>");
-out.println("</HEAD><BODY onLoad=\"return  setData()\" >");
-out.println("<H3>Результат загрузки</H3>");
-out.println("<font size='3' >"+mess+" </font>");
-out.println("<FORM><input type=\"button\" value=\"закрыть\" onClick=\"return setClose()\" ></FORM>");
-out.println("</BODY></HTML>");
-}
-
+	void printResultSaveFileURl(PrintWriter out, String mess, String filename, String file_id) throws IOException {
+		out.println("<HTML><HEAD>");
+		out.println("<META http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
+		out.println("<TITLE>Upload Result</TITLE>");
+		out.println("<script language=\"JavaScript\">");
+		out.println("<!--");
+		out.println("function setData(){");
+		out.println("top.postsoftform.filename.value = '" + filename + "' ;");
+		out.println("top.postsoftform.file_id.value = '" + file_id + "' ;");
+		out.println("return true ;");
+		out.println("}");
+		out.println("function setClose(){");
+		out.println("top.dwindow('SelectImage.jsp');");
+		out.println("return true ;");
+		out.println("}");
+		out.println("//-->");
+		out.println("</script>");
+		out.println("</HEAD><BODY onLoad=\"return  setData()\" >");
+		out.println("<H3>Результат загрузки</H3>");
+		out.println("<font size='3' >" + mess + " </font>");
+		out.println("<FORM><input type=\"button\" value=\"закрыть\" onClick=\"return setClose()\" ></FORM>");
+		out.println("</BODY></HTML>");
+	}
 
 }
 
@@ -858,8 +805,7 @@ class FileServletUploadData {
 
 	boolean isFile;
 
-	FileServletUploadData(String name, String value, String contentType, int size,
-			boolean isFile) {
+	FileServletUploadData(String name, String value, String contentType, int size, boolean isFile) {
 		this.name = name;
 		this.value = value;
 		this.contentType = contentType;

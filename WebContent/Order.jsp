@@ -1,6 +1,6 @@
 <%@ page errorPage="error.jsp" %>
 <jsp:useBean id="orderBeanId" scope="request" class="com.cbsinc.cms.OrderBean" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <jsp:useBean id="messageMail" scope="session" class="java.util.HashMap" type="java.util.HashMap"/>
 <%@page import="java.util.PropertyResourceBundle,java.util.ResourceBundle,java.io.*"%>
 
@@ -8,11 +8,11 @@
 response.setCharacterEncoding("UTF-8");
 response.setContentType("text/xml");
 String url ;
-String xsltUrl =  "http://" + request.getServerName() +  ":"+request.getServerPort() + request.getContextPath() + "/xsl/" +  AuthorizationPageBeanId.getSite_dir() + "/"  +  AuthorizationPageBeanId.getLocale() + "/" + "order.xsl" ; 
-String xsltUrl_default = "http://" + request.getServerName() +  ":"+request.getServerPort() + request.getContextPath() + "/xsl/" +  AuthorizationPageBeanId.getSite_dir() + "/" + "order.xsl" ; 
+String xsltUrl =  "http://" + request.getServerName() +  ":"+request.getServerPort() + request.getContextPath() + "/xsl/" +  authorizationPageBeanId.getSite_dir() + "/"  +  authorizationPageBeanId.getLocale() + "/" + "order.xsl" ; 
+String xsltUrl_default = "http://" + request.getServerName() +  ":"+request.getServerPort() + request.getContextPath() + "/xsl/" +  authorizationPageBeanId.getSite_dir() + "/" + "order.xsl" ; 
 
-String xsltpath =  "xsl/" +  AuthorizationPageBeanId.getSite_dir() + "/"  +  AuthorizationPageBeanId.getLocale() + "/" + "order.xsl" ; 
-String xsltpath_default = "xsl/" +  AuthorizationPageBeanId.getSite_dir() + "/" + "order.xsl" ; 
+String xsltpath =  "xsl/" +  authorizationPageBeanId.getSite_dir() + "/"  +  authorizationPageBeanId.getLocale() + "/" + "order.xsl" ; 
+String xsltpath_default = "xsl/" +  authorizationPageBeanId.getSite_dir() + "/" + "order.xsl" ; 
 
 xsltpath = request.getServletContext().getRealPath("/" +xsltpath);
 xsltpath_default = request.getServletContext().getRealPath("/" +xsltpath_default);
@@ -39,18 +39,18 @@ printWriter.println(tmp);
 <document>
    <version>1.0</version>
    <name>Authorization</name>
-   <role_id><%=  AuthorizationPageBeanId.getIntLevelUp() %></role_id>
-   <title><%=  AuthorizationPageBeanId.getHost() %></title>
+   <role_id><%=  authorizationPageBeanId.getIntLevelUp() %></role_id>
+   <title><%=  authorizationPageBeanId.getHost() %></title>
    <admin>
-   <post_manager><%=  orderBeanId.getTrueValue("PostManager.jsp","",AuthorizationPageBeanId.getIntLevelUp()==2) %></post_manager>
+   <post_manager><%=  orderBeanId.getTrueValue("PostManager.jsp","",authorizationPageBeanId.getIntLevelUp()==2) %></post_manager>
    </admin>
-   <subject_site><%=  AuthorizationPageBeanId.getNick_site() %></subject_site>
-   <site_name><%=  AuthorizationPageBeanId.getNick_site() %></site_name>
-   <host><%=  AuthorizationPageBeanId.getSite_dir() %></host>
-   <domain><%=  AuthorizationPageBeanId.getHost() %></domain>
-   <login><%= AuthorizationPageBeanId.getStrLogin() %></login>
+   <subject_site><%=  authorizationPageBeanId.getNick_site() %></subject_site>
+   <site_name><%=  authorizationPageBeanId.getNick_site() %></site_name>
+   <host><%=  authorizationPageBeanId.getSite_dir() %></host>
+   <domain><%=  authorizationPageBeanId.getHost() %></domain>
+   <login><%= authorizationPageBeanId.getStrLogin() %></login>
    <passwdord></passwdord>
-   <message><%= AuthorizationPageBeanId.getStrMessage() %></message>
+   <message><%= authorizationPageBeanId.getStrMessage() %></message>
    <shoping_url>Productlist.jsp</shoping_url>
    <balans><%=  orderBeanId.getStrBalans() %></balans>
    <to_navigator>wCatalog.jsp</to_navigator>
@@ -68,21 +68,21 @@ printWriter.println(tmp);
 
 
 
-   <firstname><%= AuthorizationPageBeanId.getStrFirstName() %></firstname>
-   <lastname><%= AuthorizationPageBeanId.getStrLastName() %></lastname>
-   <company><%= AuthorizationPageBeanId.getStrCompany() %></company>
-   <email><%= AuthorizationPageBeanId.getStrEMail() %></email>
-   <phone><%= AuthorizationPageBeanId.getStrPhone() %></phone>
-   <mphone><%= AuthorizationPageBeanId.getStrMPhone() %></mphone>
-   <fax><%= AuthorizationPageBeanId.getStrFax() %></fax>
-   <icq><%= AuthorizationPageBeanId.getStrIcq() %></icq>
-   <website><%= AuthorizationPageBeanId.getStrWebsite() %></website>
-   <question><%= AuthorizationPageBeanId.getStrQuestion() %></question>
-   <answer><%= AuthorizationPageBeanId.getStrAnswer() %></answer>
-   <country><%= AuthorizationPageBeanId.getStrCountry() %></country>
-   <city><%= AuthorizationPageBeanId.getStrCity() %></city>
-   <site><%= AuthorizationPageBeanId.getSite_id() %></site>
-   <message><%= AuthorizationPageBeanId.getStrMessage() %></message>
+   <firstname><%= authorizationPageBeanId.getStrFirstName() %></firstname>
+   <lastname><%= authorizationPageBeanId.getStrLastName() %></lastname>
+   <company><%= authorizationPageBeanId.getStrCompany() %></company>
+   <email><%= authorizationPageBeanId.getStrEMail() %></email>
+   <phone><%= authorizationPageBeanId.getStrPhone() %></phone>
+   <mphone><%= authorizationPageBeanId.getStrMPhone() %></mphone>
+   <fax><%= authorizationPageBeanId.getStrFax() %></fax>
+   <icq><%= authorizationPageBeanId.getStrIcq() %></icq>
+   <website><%= authorizationPageBeanId.getStrWebsite() %></website>
+   <question><%= authorizationPageBeanId.getStrQuestion() %></question>
+   <answer><%= authorizationPageBeanId.getStrAnswer() %></answer>
+   <country><%= authorizationPageBeanId.getStrCountry() %></country>
+   <city><%= authorizationPageBeanId.getStrCity() %></city>
+   <site><%= authorizationPageBeanId.getSite_id() %></site>
+   <message><%= authorizationPageBeanId.getStrMessage() %></message>
 
    <%=orderBeanId.getProductList()%>
 

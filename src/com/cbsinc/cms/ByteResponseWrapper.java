@@ -21,7 +21,6 @@ package com.cbsinc.cms;
  * @version 1.0
  */
 
-
 import java.io.*;
 
 import javax.servlet.http.*;
@@ -29,7 +28,7 @@ import javax.servlet.http.*;
 public class ByteResponseWrapper extends HttpServletResponseWrapper {
 
 	private ByteArrayOutputStream output;
-	private  PrintWriter printWriter ;
+	private PrintWriter printWriter;
 
 	public String toString() {
 		return output.toString();
@@ -51,24 +50,23 @@ public class ByteResponseWrapper extends HttpServletResponseWrapper {
 	// toCharArray()
 
 	public void close() {
-		 if(output != null )
+		if (output != null)
 			try {
-				output.close() ;
+				output.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		 if(printWriter != null )printWriter.close() ;
+		if (printWriter != null)
+			printWriter.close();
 	}
 
-
-	
 	protected void finalize() throws Throwable {
-	    if(output != null )output.close() ;
-	    if(printWriter != null )printWriter.close() ;
+		if (output != null)
+			output.close();
+		if (printWriter != null)
+			printWriter.close();
 		super.finalize();
 	}
-	
-
 
 }

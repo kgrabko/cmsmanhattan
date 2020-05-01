@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
-<jsp:useBean id="SoftPostBeanId" scope="session" class="com.cbsinc.cms.SoftPostBean" />
-<jsp:useBean id="policyBeanId" scope="request" class="com.cbsinc.cms.PolicyBean" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="publisherBeanId" scope="session" class="com.cbsinc.cms.PublisherBean" />
+<jsp:useBean id="itemDescriptionBeanId" scope="request" class="com.cbsinc.cms.ItemDescriptionBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <%
 response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
 response.setHeader("Pragma","no-cache"); //HTTP 1.0
@@ -212,7 +212,7 @@ document.onmouseup=new Function("dragapproved=false");
         <hr size="" class="netscape4" />
         <div class="pathBar">
             <span>
-                <span> <%=AuthorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
+                <span> <%=authorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
             </span>
 
         </div>
@@ -230,7 +230,7 @@ document.onmouseup=new Function("dragapproved=false");
 
             <!-- News part -->
 
-	     <h1><%=AuthorizationPageBeanId.getLocalization(application).getString("title_info_modul")%></h1>
+	     <h1><%=authorizationPageBeanId.getLocalization(application).getString("title_info_modul")%></h1>
 		<br/>
 		<div class="box">
 		  <div class="body">
@@ -239,16 +239,16 @@ document.onmouseup=new Function("dragapproved=false");
 
                      <form method="post" name="postsoftform"  ACTION="ExtOficeFilesProductPostUser.jsp" onSubmit="return  IsFormOk()"  >
 					<DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left"  >
-					<font color='white' size='2' > &nbsp;&raquo; <%=AuthorizationPageBeanId.getLocalization(application).getString("title_form_post_full_info_file")%>  </font>
+					<font color='white' size='2' > &nbsp;&raquo; <%=authorizationPageBeanId.getLocalization(application).getString("title_form_post_full_info_file")%>  </font>
 					</DIV>
 					 <TABLE>
-                     <TR><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("title_form")%>:* </TD><TD> <input  name="softname" size="20"  value="<%= SoftPostBeanId.getStrSoftName() %>" onBlur="checkEmpty(this.value)" >
-                     <TR><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("attach_file")%>:* </TD> <TD><input  name="filename" disabled="disabled"  size="20" value="<%= SoftPostBeanId.getFilename() %>" ><input type="button" name="newfile" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("new_file") %>" onclick="dwindow('NewFile.jsp')" ><input type="button" name="selectfile" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("select_file") %>" onclick="dwindow('SelectFile.jsp')" ><input type="hidden"  name="file_id" size="20" value="<%= SoftPostBeanId.getFile_id() %>" ></TD></TR>
+                     <TR><TD><%=authorizationPageBeanId.getLocalization(application).getString("title_form")%>:* </TD><TD> <input  name="softname" size="20"  value="<%= publisherBeanId.getStrSoftName() %>" onBlur="checkEmpty(this.value)" >
+                     <TR><TD><%=authorizationPageBeanId.getLocalization(application).getString("attach_file")%>:* </TD> <TD><input  name="filename" disabled="disabled"  size="20" value="<%= publisherBeanId.getFilename() %>" ><input type="button" name="newfile" value="<%= authorizationPageBeanId.getLocalization(application).getString("new_file") %>" onclick="dwindow('NewFile.jsp')" ><input type="button" name="selectfile" value="<%= authorizationPageBeanId.getLocalization(application).getString("select_file") %>" onclick="dwindow('SelectFile.jsp')" ><input type="hidden"  name="file_id" size="20" value="<%= publisherBeanId.getFile_id() %>" ></TD></TR>
 
-                     <TR><TD colspan="2" ><%=AuthorizationPageBeanId.getLocalization(application).getString("before_input_generator_code")%> </TD></TR>
-                     <TR><TD><img alt="<%= AuthorizationPageBeanId.getLocalization(application).getString("image_with_gen_numer") %>" src="/gennumberservlet"  /></TD> <TD><input type="text" name="gen_number"></TD></TR>
+                     <TR><TD colspan="2" ><%=authorizationPageBeanId.getLocalization(application).getString("before_input_generator_code")%> </TD></TR>
+                     <TR><TD><img alt="<%= authorizationPageBeanId.getLocalization(application).getString("image_with_gen_numer") %>" src="/gennumberservlet"  /></TD> <TD><input type="text" name="gen_number"></TD></TR>
                      <TR><TD colspan="2" ></TD></TR>
-                     <TR><TD></TD> <TD><input type="submit" name="Submit" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("save") %>"> <input type="reset" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("clear") %>"></TD></TR>
+                     <TR><TD></TD> <TD><input type="submit" name="Submit" value="<%= authorizationPageBeanId.getLocalization(application).getString("save") %>"> <input type="reset" value="<%= authorizationPageBeanId.getLocalization(application).getString("clear") %>"></TD></TR>
                      </TABLE>
 
 					 <input type="hidden"  name="currency_id" size="20" value="3" >
@@ -258,7 +258,7 @@ document.onmouseup=new Function("dragapproved=false");
 					 <input type="hidden"  name="type_id" size="20" value="0" >					 
 					 <input type="hidden"  name="save"  value="false"/>
                      <input type="hidden"  name="portlettype_id"  value="5"/>
-                     <input type="hidden"  name="parent_id"  value="<%= policyBeanId.getProduct_id() %>"/>
+                     <input type="hidden"  name="parent_id"  value="<%= itemDescriptionBeanId.getProduct_id() %>"/>
                      </form>
 
 		     </div>
@@ -270,7 +270,7 @@ document.onmouseup=new Function("dragapproved=false");
 	    <span class="next">
                 <a HREF = "Policy.jsp"  >
 		<strong>
-			<%=AuthorizationPageBeanId.getLocalization(application).getString("back")%>
+			<%=authorizationPageBeanId.getLocalization(application).getString("back")%>
 		</strong>
 	        </a>
 	    </span>
@@ -300,7 +300,7 @@ document.onmouseup=new Function("dragapproved=false");
 
 <br />
 
- <%=AuthorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
+ <%=authorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
 
 <hr size="" class="netscape4" />
 
@@ -327,7 +327,7 @@ for user netscape
 			<TR>
 				<td>
 				<iframe id="dialog" src="SelectImage.jsp" width="390" height="400" align="center">
-				<%=AuthorizationPageBeanId.getLocalization(application).getString("browser_not_support_frame")%>
+				<%=authorizationPageBeanId.getLocalization(application).getString("browser_not_support_frame")%>
 				</iframe>
 				</td>
 			</TR>

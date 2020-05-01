@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
-<jsp:useBean id="SoftPostBeanId" scope="session" class="com.cbsinc.cms.SoftPostBean" />
-<jsp:useBean id="catalog_listBean" scope="session" class="com.cbsinc.cms.Catalog_listBean" />
-<jsp:useBean id="catalog_editBean" scope="session" class="com.cbsinc.cms.Catalog_editBean" />
-<jsp:useBean id="catalog_addBean" scope="session" class="com.cbsinc.cms.Catalog_addBean" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="publisherBeanId" scope="session" class="com.cbsinc.cms.PublisherBean" />
+<jsp:useBean id="catalogListBeanId" scope="session" class="com.cbsinc.cms.CatalogListBean" />
+<jsp:useBean id="catalogEditBeanId" scope="session" class="com.cbsinc.cms.CatalogEditBean" />
+<jsp:useBean id="catalogAddBeanId" scope="session" class="com.cbsinc.cms.CatalogAddBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <jsp:useBean id="authorizationPageFaced" scope="application" class="com.cbsinc.cms.faceds.AuthorizationPageFaced" />
 <%
   response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
@@ -97,7 +97,7 @@ function switchWindoSearch()
 {
 				windowsearch_hide = !windowsearch_hide;
 				document.getElementById("search_cre").src =  (windowsearch_hide ? "images/expand.gif" : "images/collapse.gif");
-				document.getElementById("search_cre").title =  (windowsearch_hide ? "<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= AuthorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
+				document.getElementById("search_cre").title =  (windowsearch_hide ? "<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= authorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
 				document.getElementById("windowsearch").style.display = windowsearch_hide ? "none" : "";
 }
 
@@ -108,7 +108,7 @@ function switchWindowReport()
 {
 				window_urlreport_hide = !window_urlreport_hide;
 				document.getElementById("urlreport_cre").src =  (window_urlreport_hide ? "images/expand.gif" : "images/collapse.gif");
-				document.getElementById("urlreport_cre").title =  (window_urlreport_hide ? "<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= AuthorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
+				document.getElementById("urlreport_cre").title =  (window_urlreport_hide ? "<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= authorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
 				document.getElementById("window_urlreport").style.display = window_urlreport_hide ? "none" : "";
 }
 
@@ -813,7 +813,7 @@ function parseMessages(responseXML)
         <hr size="" class="netscape4" />
         <div class="pathBar">
             <span>
-                <span> <%=AuthorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
+                <span> <%=authorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
             </span>
         </div>
         <hr size="" class="netscape4" />
@@ -826,14 +826,14 @@ function parseMessages(responseXML)
             <td class="left">
 		<div>
 		    <div class="portlet">
-		    <h5><strong><%=AuthorizationPageBeanId.getLocalization(application).getString("help")%></strong></h5>
+		    <h5><strong><%=authorizationPageBeanId.getLocalization(application).getString("help")%></strong></h5>
 		      <div class="body">
 		        <div class="portletContent odd">
-		        <%=AuthorizationPageBeanId.getLocalization(application).getString("help_col1_productpost_1")%>
+		        <%=authorizationPageBeanId.getLocalization(application).getString("help_col1_productpost_1")%>
 		        </div>
 		        <!-- 
 		        <div class="portletContent even">
-		        <%= AuthorizationPageBeanId.getLocalization(application).getString("help_col1_productpost_2") %>
+		        <%= authorizationPageBeanId.getLocalization(application).getString("help_col1_productpost_2") %>
 		        </div>
 		         -->
 		      </div>
@@ -846,18 +846,18 @@ function parseMessages(responseXML)
 
             <!-- News part -->
 
-	     <h1><%=AuthorizationPageBeanId.getLocalization(application).getString("title_common_of_form")%></h1>
+	     <h1><%=authorizationPageBeanId.getLocalization(application).getString("title_common_of_form")%></h1>
 
 		
 		
 		<br/>
 	    <DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left"  >
-				<font color='white' size='2' > &nbsp;&raquo; <%=AuthorizationPageBeanId.getLocalization(application).getString("selection_common_of_form")%></font>
+				<font color='white' size='2' > &nbsp;&raquo; <%=authorizationPageBeanId.getLocalization(application).getString("selection_common_of_form")%></font>
 		</DIV>
 		<div class='box'>
 		<div class='body'>
-		<div>&nbsp; <%=AuthorizationPageBeanId.getLocalization(application).getString("pre_status_description")%> &raquo; 
-		<%=catalog_listBean.getCatalogUrlPath("Co1ProductPostUser.jsp",AuthorizationPageBeanId)%>
+		<div>&nbsp; <%=authorizationPageBeanId.getLocalization(application).getString("pre_status_description")%> &raquo; 
+		<%=catalogListBeanId.getCatalogUrlPath("Co1ProductPostUser.jsp",authorizationPageBeanId)%>
 		</div>
 		</div>
 		</div>
@@ -866,9 +866,9 @@ function parseMessages(responseXML)
 		<div class="box">
 		  <div class="body">
 		    <div >
-	         <%=SoftPostBeanId.getAction().equals("")?catalog_listBean.getNavigator("Co1ProductPostUser.jsp",AuthorizationPageBeanId):""%>
-     	     <%=SoftPostBeanId.getAction().equals("add")?catalog_addBean.getAddFormWithJsp("Co1ProductPostUser.jsp"):""%>
-	         <%=SoftPostBeanId.getAction().equals("edit")?catalog_editBean.getEditForm(catalog_listBean.rows[catalog_editBean.getIndx_select()][0] , catalog_listBean.rows[catalog_editBean.getIndx_select()][1],"Co1ProductPostUser.jsp"):""%>
+	         <%=publisherBeanId.getAction().equals("")?catalogListBeanId.getNavigator("Co1ProductPostUser.jsp",authorizationPageBeanId):""%>
+     	     <%=publisherBeanId.getAction().equals("add")?catalogAddBeanId.getAddFormWithJsp("Co1ProductPostUser.jsp"):""%>
+	         <%=publisherBeanId.getAction().equals("edit")?catalogEditBeanId.getEditForm(catalogListBeanId.rows[catalogEditBeanId.getIndx_select()][0] , catalogListBeanId.rows[catalogEditBeanId.getIndx_select()][1],"Co1ProductPostUser.jsp"):""%>
 
 		     </div>
 		  </div>
@@ -884,8 +884,8 @@ function parseMessages(responseXML)
 		  <div class="body">
 		    <div >
 		    <DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left"  >
-				<A	onclick="switchWindoSearch()" href="#" > <IMG id='search_cre'  title="<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" src="images/expand.gif" align="right"/> </A>
-				<font color='white' size='2' >&nbsp; <%=AuthorizationPageBeanId.getLocalization(application).getString("title_search_criteria")%> </font>
+				<A	onclick="switchWindoSearch()" href="#" > <IMG id='search_cre'  title="<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" src="images/expand.gif" align="right"/> </A>
+				<font color='white' size='2' >&nbsp; <%=authorizationPageBeanId.getLocalization(application).getString("title_search_criteria")%> </font>
 			</DIV>
 			<br/>
 			<div id='windowsearch' style="display:none;" >
@@ -893,54 +893,54 @@ function parseMessages(responseXML)
                      <TR id='creteria1'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria1' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria1' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria1' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;1.</TD>
-                     <TD width="180" id='creteria_lable_1'  ><%=SoftPostBeanId.getOneLabel("select  label   from creteria1   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getComboBoxAutoSubmitLocale("creteria1_id", SoftPostBeanId.getCreteria1_id() , AuthorizationPageBeanId.getLocalization(application).getString("notselected") , "select creteria1_id , name   from creteria1   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%></TD>
-                     <TD align="right" width="90" ><input type="button" name="change_creteria1" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("edit") %>" onclick="dwindow('Creteria.jsp?table_name=creteria1'); return false;" ></TD>
+                     <TD width="180" id='creteria_lable_1'  ><%=publisherBeanId.getOneLabel("select  label   from creteria1   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getComboBoxAutoSubmitLocale("creteria1_id", publisherBeanId.getCreteria1_id() , authorizationPageBeanId.getLocalization(application).getString("notselected") , "select creteria1_id , name   from creteria1   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%></TD>
+                     <TD align="right" width="90" ><input type="button" name="change_creteria1" value="<%= authorizationPageBeanId.getLocalization(application).getString("edit") %>" onclick="dwindow('Creteria.jsp?table_name=creteria1'); return false;" ></TD>
 					 <TD width="20" >&nbsp;</TD>                     
                      </TR>
 
                      <TR id='creteria2'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria2' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria2' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria2' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;2.</TD>
-                     <TD width="180" id='creteria_lable_2' ><%=SoftPostBeanId.getOneLabel("select label   from creteria2   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getComboBoxAutoSubmitLocale("creteria2_id", SoftPostBeanId.getCreteria2_id() , AuthorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria2_id , name   from creteria2   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + SoftPostBeanId.getCreteria1_id()+ " ) "   )%></TD>
-                     <TD align="right" width="90" ><input type="button" name="change_creteria2" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("edit") %>" onclick="dwindow('Creteria.jsp?table_name=creteria2'); return false;" ></TD>
+                     <TD width="180" id='creteria_lable_2' ><%=publisherBeanId.getOneLabel("select label   from creteria2   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getComboBoxAutoSubmitLocale("creteria2_id", publisherBeanId.getCreteria2_id() , authorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria2_id , name   from creteria2   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + publisherBeanId.getCreteria1_id()+ " ) "   )%></TD>
+                     <TD align="right" width="90" ><input type="button" name="change_creteria2" value="<%= authorizationPageBeanId.getLocalization(application).getString("edit") %>" onclick="dwindow('Creteria.jsp?table_name=creteria2'); return false;" ></TD>
 					 <TD width="20" >&nbsp;</TD>                     
                      </TR>
                      
                      <TR id='creteria3'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria3' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria3' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria3' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;3.</TD>
-                     <TD width="180" id='creteria_lable_3'  ><%=SoftPostBeanId.getOneLabel("select  label   from creteria3   where  active = true "  + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
-                     <TD align="left"  ><%=SoftPostBeanId.getComboBoxAutoSubmitLocale("creteria3_id", SoftPostBeanId.getCreteria3_id() , AuthorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria3_id , name   from creteria3   where  active = true "  + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + SoftPostBeanId.getCreteria2_id()+ " ) " )%></TD>
-                     <TD align="right" width="90" ><input type="button" name="change_creteria3" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("edit") %>" onclick="dwindow('Creteria.jsp?table_name=creteria3'); return false;" ></TD>
+                     <TD width="180" id='creteria_lable_3'  ><%=publisherBeanId.getOneLabel("select  label   from creteria3   where  active = true "  + publisherBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
+                     <TD align="left"  ><%=publisherBeanId.getComboBoxAutoSubmitLocale("creteria3_id", publisherBeanId.getCreteria3_id() , authorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria3_id , name   from creteria3   where  active = true "  + publisherBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + publisherBeanId.getCreteria2_id()+ " ) " )%></TD>
+                     <TD align="right" width="90" ><input type="button" name="change_creteria3" value="<%= authorizationPageBeanId.getLocalization(application).getString("edit") %>" onclick="dwindow('Creteria.jsp?table_name=creteria3'); return false;" ></TD>
 					 <TD width="20" >&nbsp;</TD>                     
                      </TR>
 
                      <TR id='creteria4'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria4' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria4' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria4' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;4.</TD>
-                     <TD width="180" id='creteria_lable_4'  ><%=SoftPostBeanId.getOneLabel("select  label   from creteria4   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
-                     <TD align="left"  ><%=SoftPostBeanId.getComboBoxAutoSubmitLocale("creteria4_id", SoftPostBeanId.getCreteria4_id() , AuthorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria4_id , name   from creteria4   where  active = true "  + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + SoftPostBeanId.getCreteria3_id()+ " ) " )%></TD>
-                     <TD align="right" width="90" ><input type="button" name="change_creteria4" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("edit") %>" onclick="dwindow('Creteria.jsp?table_name=creteria4'); return false;" ></TD>
+                     <TD width="180" id='creteria_lable_4'  ><%=publisherBeanId.getOneLabel("select  label   from creteria4   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
+                     <TD align="left"  ><%=publisherBeanId.getComboBoxAutoSubmitLocale("creteria4_id", publisherBeanId.getCreteria4_id() , authorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria4_id , name   from creteria4   where  active = true "  + publisherBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + publisherBeanId.getCreteria3_id()+ " ) " )%></TD>
+                     <TD align="right" width="90" ><input type="button" name="change_creteria4" value="<%= authorizationPageBeanId.getLocalization(application).getString("edit") %>" onclick="dwindow('Creteria.jsp?table_name=creteria4'); return false;" ></TD>
 					 <TD width="20" >&nbsp;</TD>                    
                      </TR>
 
                     <TR id='creteria5'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria5' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria5' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria5' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;5.</TD>
-                     <TD width="180"  id='creteria_lable_5' ><%=SoftPostBeanId.getOneLabel("select  label   from creteria5   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getComboBoxAutoSubmitLocale("creteria5_id", SoftPostBeanId.getCreteria5_id() , AuthorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria5_id , name   from creteria5   where  active = true "  + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + SoftPostBeanId.getCreteria4_id()+ " ) " )%></TD>
-                     <TD align="right" width="90" ><input type="button" name="change_creteria5" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("edit") %>" onclick="dwindow('Creteria.jsp?table_name=creteria5'); return false;" ></TD>
+                     <TD width="180"  id='creteria_lable_5' ><%=publisherBeanId.getOneLabel("select  label   from creteria5   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getComboBoxAutoSubmitLocale("creteria5_id", publisherBeanId.getCreteria5_id() , authorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria5_id , name   from creteria5   where  active = true "  + publisherBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + publisherBeanId.getCreteria4_id()+ " ) " )%></TD>
+                     <TD align="right" width="90" ><input type="button" name="change_creteria5" value="<%= authorizationPageBeanId.getLocalization(application).getString("edit") %>" onclick="dwindow('Creteria.jsp?table_name=creteria5'); return false;" ></TD>
 					 <TD width="20" >&nbsp;</TD>                    
                      </TR>
 
                      <TR id='creteria6'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria6' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria6' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria6' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;6.</TD>
-                     <TD width="180"  id='creteria_lable_6' ><%=SoftPostBeanId.getOneLabel("select  label   from creteria6   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getComboBoxAutoSubmitLocale("creteria6_id", SoftPostBeanId.getCreteria6_id() , AuthorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria6_id , name   from creteria6   where  active = true "  + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + SoftPostBeanId.getCreteria5_id()+ " ) " )%></TD>
-                     <TD align="right" width="90" ><input type="button" name="change_creteria6" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("edit") %>" onclick="dwindow('Creteria.jsp?table_name=creteria6'); return false;" ></TD>
+                     <TD width="180"  id='creteria_lable_6' ><%=publisherBeanId.getOneLabel("select  label   from creteria6   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getComboBoxAutoSubmitLocale("creteria6_id", publisherBeanId.getCreteria6_id() , authorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria6_id , name   from creteria6   where  active = true "  + publisherBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + publisherBeanId.getCreteria5_id()+ " ) " )%></TD>
+                     <TD align="right" width="90" ><input type="button" name="change_creteria6" value="<%= authorizationPageBeanId.getLocalization(application).getString("edit") %>" onclick="dwindow('Creteria.jsp?table_name=creteria6'); return false;" ></TD>
    					 <TD width="20" >&nbsp;</TD>
                      </TR>
 
@@ -948,9 +948,9 @@ function parseMessages(responseXML)
                     <TR id='creteria7'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria7' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria7' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria7' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;7.</TD>
-                     <TD width="180"  id='creteria_lable_7' ><%=SoftPostBeanId.getOneLabel("select  label   from creteria7   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD>
-                     <TD align="left" ><%=SoftPostBeanId.getComboBoxAutoSubmitLocale("creteria7_id", SoftPostBeanId.getCreteria7_id() , AuthorizationPageBeanId.getLocalization(application).getString("notselected")  ,"select creteria7_id , name   from creteria7   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + SoftPostBeanId.getCreteria6_id()+ " ) " )%></TD>
-					 <TD align="right" width="90" ><input type="button" name="change_creteria7" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("edit") %>" onclick="dwindow('Creteria.jsp?table_name=creteria7'); return false;" ></TD>
+                     <TD width="180"  id='creteria_lable_7' ><%=publisherBeanId.getOneLabel("select  label   from creteria7   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD>
+                     <TD align="left" ><%=publisherBeanId.getComboBoxAutoSubmitLocale("creteria7_id", publisherBeanId.getCreteria7_id() , authorizationPageBeanId.getLocalization(application).getString("notselected")  ,"select creteria7_id , name   from creteria7   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + publisherBeanId.getCreteria6_id()+ " ) " )%></TD>
+					 <TD align="right" width="90" ><input type="button" name="change_creteria7" value="<%= authorizationPageBeanId.getLocalization(application).getString("edit") %>" onclick="dwindow('Creteria.jsp?table_name=creteria7'); return false;" ></TD>
  					 <TD width="20" >&nbsp;</TD>
                    
                      </TR>
@@ -958,9 +958,9 @@ function parseMessages(responseXML)
                     <TR id='creteria8'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria8' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria8' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria8' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;8.</TD>
-                     <TD width="180"  id='creteria_lable_8' ><%=SoftPostBeanId.getOneLabel("select  label   from creteria8   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getComboBoxAutoSubmitLocale("creteria8_id", SoftPostBeanId.getCreteria8_id() , AuthorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria8_id , name   from creteria8   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + SoftPostBeanId.getCreteria7_id()+ " ) " )%></TD>
-                     <TD align="right" width="90" ><input type="button" name="change_creteria8" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("edit") %>" onclick="dwindow('Creteria.jsp?table_name=creteria8'); return false;" ></TD>
+                     <TD width="180"  id='creteria_lable_8' ><%=publisherBeanId.getOneLabel("select  label   from creteria8   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getComboBoxAutoSubmitLocale("creteria8_id", publisherBeanId.getCreteria8_id() , authorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria8_id , name   from creteria8   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + publisherBeanId.getCreteria7_id()+ " ) " )%></TD>
+                     <TD align="right" width="90" ><input type="button" name="change_creteria8" value="<%= authorizationPageBeanId.getLocalization(application).getString("edit") %>" onclick="dwindow('Creteria.jsp?table_name=creteria8'); return false;" ></TD>
    					 <TD width="20" >&nbsp;</TD>
                      </TR>
 
@@ -968,18 +968,18 @@ function parseMessages(responseXML)
                     <TR id='creteria9'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria9' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria9' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria9' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;9.</TD>
-                     <TD width="180" id='creteria_lable_9'  ><%=SoftPostBeanId.getOneLabel("select  label   from creteria9   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getComboBoxAutoSubmitLocale("creteria9_id", SoftPostBeanId.getCreteria9_id() , AuthorizationPageBeanId.getLocalization(application).getString("notselected")  ,"select creteria9_id , name   from creteria9   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + SoftPostBeanId.getCreteria8_id()+ " ) " )%></TD>
-                     <TD align="right" width="90" ><input type="button" name="change_creteria9" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("edit") %>" onclick="dwindow('Creteria.jsp?table_name=creteria9'); return false;" ></TD>
+                     <TD width="180" id='creteria_lable_9'  ><%=publisherBeanId.getOneLabel("select  label   from creteria9   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getComboBoxAutoSubmitLocale("creteria9_id", publisherBeanId.getCreteria9_id() , authorizationPageBeanId.getLocalization(application).getString("notselected")  ,"select creteria9_id , name   from creteria9   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + publisherBeanId.getCreteria8_id()+ " ) " )%></TD>
+                     <TD align="right" width="90" ><input type="button" name="change_creteria9" value="<%= authorizationPageBeanId.getLocalization(application).getString("edit") %>" onclick="dwindow('Creteria.jsp?table_name=creteria9'); return false;" ></TD>
    					 <TD width="20" >&nbsp;</TD>
                      </TR>                                          
                      
                     <TR id='creteria10'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria10' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria10' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria10' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;10.</TD>
-                     <TD width="180" id='creteria_lable_10'  ><%=SoftPostBeanId.getOneLabel("select  label   from creteria10   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
-                     <TD align="left"  ><%=SoftPostBeanId.getComboBoxAutoSubmitLocale("creteria10_id", SoftPostBeanId.getCreteria10_id() , AuthorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria10_id , name   from creteria10   where  active = true " + SoftPostBeanId.getPartCriteria(AuthorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + SoftPostBeanId.getCreteria9_id()+ " ) " )%></TD>
-                     <TD align="right"  width="90" ><input type="button" name="change_creteria10" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("edit") %>" onclick="dwindow('Creteria.jsp?table_name=creteria10'); return false;" ></TD>
+                     <TD width="180" id='creteria_lable_10'  ><%=publisherBeanId.getOneLabel("select  label   from creteria10   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true"))  )%> :* </TD> 
+                     <TD align="left"  ><%=publisherBeanId.getComboBoxAutoSubmitLocale("creteria10_id", publisherBeanId.getCreteria10_id() , authorizationPageBeanId.getLocalization(application).getString("notselected") ,"select creteria10_id , name   from creteria10   where  active = true " + publisherBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(), authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog").equals("true")) + " and ( link_id = 0 or link_id = " + publisherBeanId.getCreteria9_id()+ " ) " )%></TD>
+                     <TD align="right"  width="90" ><input type="button" name="change_creteria10" value="<%= authorizationPageBeanId.getLocalization(application).getString("edit") %>" onclick="dwindow('Creteria.jsp?table_name=creteria10'); return false;" ></TD>
 					 <TD width="20" >&nbsp;</TD>                     
                      </TR>                                          
                      
@@ -1003,21 +1003,21 @@ function parseMessages(responseXML)
 		  <div class="body">
 		    <div >
 					<DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left"  >
-					<font color='white' size='2' > &nbsp;&raquo; <%=AuthorizationPageBeanId.getLocalization(application).getString("title_form_post_info")%> </font>
+					<font color='white' size='2' > &nbsp;&raquo; <%=authorizationPageBeanId.getLocalization(application).getString("title_form_post_info")%> </font>
 					</DIV>
                      <TABLE>
-                     <TR><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("title_form")%>:* </TD><TD> <input  name="softname" size="20"  value="<%= SoftPostBeanId.getStrSoftName() %>" onBlur="checkEmpty(this.name,this.value);saveField(this.name,this.value)" >
-                     <%=AuthorizationPageBeanId.getLocalization(application).getString("selected_section")%>:*<%=SoftPostBeanId.getComboBoxAutoSubmit("catalog_id", AuthorizationPageBeanId.getCatalog_id() ,"select catalog_id , lable   from catalog   where  active = true and site_id = " + AuthorizationPageBeanId.getSite_id() + " and parent_id = " + AuthorizationPageBeanId.getCatalogParent_id() )%>
+                     <TR><TD><%=authorizationPageBeanId.getLocalization(application).getString("title_form")%>:* </TD><TD> <input  name="softname" size="20"  value="<%= publisherBeanId.getStrSoftName() %>" onBlur="checkEmpty(this.name,this.value);saveField(this.name,this.value)" >
+                     <%=authorizationPageBeanId.getLocalization(application).getString("selected_section")%>:*<%=publisherBeanId.getComboBoxAutoSubmit("catalog_id", authorizationPageBeanId.getCatalog_id() ,"select catalog_id , lable   from catalog   where  active = true and site_id = " + authorizationPageBeanId.getSite_id() + " and parent_id = " + authorizationPageBeanId.getCatalogParent_id() )%>
 					  <!-- 
-                     <TR><TD>Закачать картинку:* </TD> <TD><input  name="imagename"  disabled="disabled" size="20" value="<%= SoftPostBeanId.getImgname() %>" ><input type="button" name="newimage" value="New Image"   onclick="dwindow('Image.html'); return false;"  ><input type="button" name="selectimage" value="select image" onclick="dwindow('SelectImage.jsp'); return false;" ><input type="hidden"  name="image_id" size="20" value="<%= SoftPostBeanId.getImage_id() %>" ></TD></TR>
+                     <TR><TD>Закачать картинку:* </TD> <TD><input  name="imagename"  disabled="disabled" size="20" value="<%= publisherBeanId.getImgname() %>" ><input type="button" name="newimage" value="New Image"   onclick="dwindow('Image.html'); return false;"  ><input type="button" name="selectimage" value="select image" onclick="dwindow('SelectImage.jsp'); return false;" ><input type="hidden"  name="image_id" size="20" value="<%= publisherBeanId.getImage_id() %>" ></TD></TR>
 					  -->
-                     <TR><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("cost")%>:* </TD> <TD><input  name="softcost" size="20" value="<%= SoftPostBeanId.getStrSoftCost() %>" onBlur="checkNumber(this.value);saveField(this.name,this.value)"  ><%=SoftPostBeanId.getComboBox("currency_id", "3" ,"SELECT currency_id , currency_lable FROM currency  WHERE active = true")%></TD></TR>
-                     <TR><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("short_info")%> :* </TD> <TD> <textarea name="description" rows="10" cols="70" onBlur="saveField(this.name,this.value)" ><%=SoftPostBeanId.getStrSoftDescription()%></textarea></TD></TR>
-                     <TR><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("upload_big_image")%>:* </TD> <TD><input onChange="saveField(this.name,this.value)" name="bigimagename" disabled="disabled" size="20" value="<%= SoftPostBeanId.getBigimgname() %>" ><input type="button" name="newbig_image" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("new_big_image") %>"  onclick="dwindow('NewBigImage.jsp'); return false;" ><input type="button" name="selectbig_image" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("select_big_image") %>" image" onclick="dwindow('SelectBigImage.jsp'); return false;" ><input onChange="saveField(this.name,this.value)" type="hidden"  name="bigimage_id" size="20" value="<%= SoftPostBeanId.getBigimage_id() %>" ></TD></TR>
-                     <TR><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("full_information")%> :* </TD> <TD> <textarea name="fulldescription" rows="10" cols="70" onBlur="saveField(this.name,this.value)" ><%=SoftPostBeanId.getProduct_fulldescription()%></textarea></TD></TR>
-                     <TR><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("attach_file")%>:* </TD> <TD><input onChange="saveField(this.name,this.value)" name="filename" disabled="disabled"  size="20" value="<%= SoftPostBeanId.getFilename() %>" ><input type="button" name="newfile" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("new_file") %>" onclick="dwindow('NewFile.jsp')" ><input type="button" name="selectfile" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("select_file") %>" onclick="dwindow('SelectFile.jsp')" ><input onChange="saveField(this.name,this.value)" type="hidden"  name="file_id" size="20" value="<%= SoftPostBeanId.getFile_id() %>" ></TD></TR>
-                     <TR><TD  colspan="2" ><%=AuthorizationPageBeanId.getLocalization(application).getString("approve")%>:*<%=SoftPostBeanId.getComboBox("type_id", SoftPostBeanId.getType_id() ,"select type_id , type_lable from typesoft   where  active = true order by type_id asc " )%></TD></TR>
-                     <TR><TD></TD> <TD><input type="button" name="button" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("save") %>"  onclick="do_save()" > <input type="button" name="button" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("save_as_new") %>"  onclick="do_insert()" > <input type="reset" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("clear") %>"></TD></TR>
+                     <TR><TD><%=authorizationPageBeanId.getLocalization(application).getString("cost")%>:* </TD> <TD><input  name="softcost" size="20" value="<%= publisherBeanId.getStrSoftCost() %>" onBlur="checkNumber(this.value);saveField(this.name,this.value)"  ><%=publisherBeanId.getComboBox("currency_id", "3" ,"SELECT currency_id , currency_lable FROM currency  WHERE active = true")%></TD></TR>
+                     <TR><TD><%=authorizationPageBeanId.getLocalization(application).getString("short_info")%> :* </TD> <TD> <textarea name="description" rows="10" cols="70" onBlur="saveField(this.name,this.value)" ><%=publisherBeanId.getStrSoftDescription()%></textarea></TD></TR>
+                     <TR><TD><%=authorizationPageBeanId.getLocalization(application).getString("upload_big_image")%>:* </TD> <TD><input onChange="saveField(this.name,this.value)" name="bigimagename" disabled="disabled" size="20" value="<%= publisherBeanId.getBigimgname() %>" ><input type="button" name="newbig_image" value="<%= authorizationPageBeanId.getLocalization(application).getString("new_big_image") %>"  onclick="dwindow('NewBigImage.jsp'); return false;" ><input type="button" name="selectbig_image" value="<%= authorizationPageBeanId.getLocalization(application).getString("select_big_image") %>" image" onclick="dwindow('SelectBigImage.jsp'); return false;" ><input onChange="saveField(this.name,this.value)" type="hidden"  name="bigimage_id" size="20" value="<%= publisherBeanId.getBigimage_id() %>" ></TD></TR>
+                     <TR><TD><%=authorizationPageBeanId.getLocalization(application).getString("full_information")%> :* </TD> <TD> <textarea name="fulldescription" rows="10" cols="70" onBlur="saveField(this.name,this.value)" ><%=publisherBeanId.getProduct_fulldescription()%></textarea></TD></TR>
+                     <TR><TD><%=authorizationPageBeanId.getLocalization(application).getString("attach_file")%>:* </TD> <TD><input onChange="saveField(this.name,this.value)" name="filename" disabled="disabled"  size="20" value="<%= publisherBeanId.getFilename() %>" ><input type="button" name="newfile" value="<%= authorizationPageBeanId.getLocalization(application).getString("new_file") %>" onclick="dwindow('NewFile.jsp')" ><input type="button" name="selectfile" value="<%= authorizationPageBeanId.getLocalization(application).getString("select_file") %>" onclick="dwindow('SelectFile.jsp')" ><input onChange="saveField(this.name,this.value)" type="hidden"  name="file_id" size="20" value="<%= publisherBeanId.getFile_id() %>" ></TD></TR>
+                     <TR><TD  colspan="2" ><%=authorizationPageBeanId.getLocalization(application).getString("approve")%>:*<%=publisherBeanId.getComboBox("type_id", publisherBeanId.getType_id() ,"select type_id , type_lable from typesoft   where  active = true order by type_id asc " )%></TD></TR>
+                     <TR><TD></TD> <TD><input type="button" name="button" value="<%= authorizationPageBeanId.getLocalization(application).getString("save") %>"  onclick="do_save()" > <input type="button" name="button" value="<%= authorizationPageBeanId.getLocalization(application).getString("save_as_new") %>"  onclick="do_insert()" > <input type="reset" value="<%= authorizationPageBeanId.getLocalization(application).getString("clear") %>"></TD></TR>
                      </TABLE>
                      <input type="hidden"  name="action"  value=""/>
                      <input type="hidden"  name="insert"  value="false"/>
@@ -1033,7 +1033,7 @@ function parseMessages(responseXML)
 	    <span class="next">
                 <a HREF = "PostManager.jsp"  >
 		<strong>
-		<%=AuthorizationPageBeanId.getLocalization(application).getString("back")%>
+		<%=authorizationPageBeanId.getLocalization(application).getString("back")%>
 		</strong>
 	        </a>
 	    </span>
@@ -1060,7 +1060,7 @@ function parseMessages(responseXML)
 
 <br />
 
- <%=AuthorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
+ <%=authorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
 
 <hr size="" class="netscape4" />
 
@@ -1077,7 +1077,7 @@ for user netscape
 <DIV id="vunet"  class="drag" style="position: absolute; top: 120px; left: 130px;display:none;"  >
 	<DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left" id="dtitle"  >
 	<A	onclick="dwindow('SelectBigImage.jsp')" href="#" >
-	 <IMG id=upshrink_ic  title="<%= AuthorizationPageBeanId.getLocalization(application).getString("close_window") %>" src="images/expand.gif" align="right"/> 
+	 <IMG id=upshrink_ic  title="<%= authorizationPageBeanId.getLocalization(application).getString("close_window") %>" src="images/expand.gif" align="right"/> 
 	</A>
 	<font  color='white' size='2' > <b id="title_name" >&nbsp;&raquo;&nbsp; GBS Portal</b> </font>
 	</DIV>
@@ -1087,7 +1087,7 @@ for user netscape
 			<TR>
 				<td>
 				<iframe id="dialog" src="SelectBigImage.jsp" width="390" height="400" align="center">
-				<%=AuthorizationPageBeanId.getLocalization(application).getString("browser_not_support_frame")%>
+				<%=authorizationPageBeanId.getLocalization(application).getString("browser_not_support_frame")%>
 				</iframe>
 				</td>
 			</TR>

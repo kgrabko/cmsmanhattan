@@ -7,33 +7,33 @@
      <title>GBS Portal</title>
      <style type="text/css" media="screen"> @import url(style2.css);</style>
 </head>
-<jsp:useBean id="catalog_editBean" scope="session" class="com.cbsinc.cms.Catalog_editBean" />
-<jsp:useBean id="catalog_listBean" scope="session" class="com.cbsinc.cms.Catalog_listBean" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="catalogEditBeanId" scope="session" class="com.cbsinc.cms.CatalogEditBean" />
+<jsp:useBean id="catalogListBeanId" scope="session" class="com.cbsinc.cms.CatalogListBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <%
 request.setCharacterEncoding("UTF-8");
-//catalog_editBean.setParent_id(catalog_listBean.getParent_id());
-//catalog_editBean.setSite_id(AuthorizationPageBeanId.getSite_id());
+//catalogEditBeanId.setParent_id(catalogListBeanId.getParent_id());
+//catalogEditBeanId.setSite_id(authorizationPageBeanId.getSite_id());
 if( request.getParameter("row") != null)
 {
-int index  =  catalog_listBean.stringToInt(request.getParameter("row")) ;
-catalog_editBean.setIndx_select(index);
+int index  =  catalogListBeanId.stringToInt(request.getParameter("row")) ;
+catalogEditBeanId.setIndx_select(index);
 }
 if( request.getParameter("name") != null)
 {
-catalog_editBean.setName(  request.getParameter("name"));
+catalogEditBeanId.setName(  request.getParameter("name"));
 }
 
 if( request.getParameter("catalog_id") != null)
 {
-	AuthorizationPageBeanId.setCatalog_id(  request.getParameter("catalog_id"));
+	authorizationPageBeanId.setCatalog_id(  request.getParameter("catalog_id"));
 }
 
 
 
 if(request.getMethod().toUpperCase().compareTo("POST") == 0)
 {
-catalog_editBean.editCatalog(AuthorizationPageBeanId);
+catalogEditBeanId.editCatalog(authorizationPageBeanId);
 response.sendRedirect("catalog_list.jsp" );
 }
 %>
@@ -57,7 +57,7 @@ response.sendRedirect("catalog_list.jsp" );
 
         <div class="pathBar">
             <span>
-                <span> <%=AuthorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
+                <span> <%=authorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
             </span>
 
         </div>
@@ -75,7 +75,7 @@ response.sendRedirect("catalog_list.jsp" );
             <td class="left">
     <div class="box">
 
-        <h5><%=AuthorizationPageBeanId.getLocalization(application).getString("enter_on_site")%></h5>
+        <h5><%=authorizationPageBeanId.getLocalization(application).getString("enter_on_site")%></h5>
 
         <div class="body">
 
@@ -85,18 +85,18 @@ response.sendRedirect("catalog_list.jsp" );
 
 
 
-                    <strong><%=AuthorizationPageBeanId.getLocalization(application).getString("username")%></strong> <br />
+                    <strong><%=authorizationPageBeanId.getLocalization(application).getString("username")%></strong> <br />
 
 
 
-                     <INPUT  title="<%= AuthorizationPageBeanId.getLocalization(application).getString("username") %>" tabindex="10001" SIZE="12" AUTOCOMPLETE="off" TYPE="TEXT" NAME="Login" >
+                     <INPUT  title="<%= authorizationPageBeanId.getLocalization(application).getString("username") %>" tabindex="10001" SIZE="12" AUTOCOMPLETE="off" TYPE="TEXT" NAME="Login" >
         	     </INPUT>
 
                     <br />
 
-                    <strong><%=AuthorizationPageBeanId.getLocalization(application).getString("password")%></strong>
+                    <strong><%=authorizationPageBeanId.getLocalization(application).getString("password")%></strong>
 		    <br />
-		    <INPUT title="<%= AuthorizationPageBeanId.getLocalization(application).getString("password") %>" tabindex="10002"  SIZE="12" AUTOCOMPLETE="off" TYPE="PASSWORD" NAME="Passwd1" ></INPUT>
+		    <INPUT title="<%= authorizationPageBeanId.getLocalization(application).getString("password") %>" tabindex="10002"  SIZE="12" AUTOCOMPLETE="off" TYPE="PASSWORD" NAME="Passwd1" ></INPUT>
                     <br />
                     <br />
 
@@ -109,7 +109,7 @@ response.sendRedirect("catalog_list.jsp" );
             <div class="content even">
                 <a href="">
                    <img src="xsl/www.gvidons.com/img/user.gif" alt="Link icon" title="Link icon" height="15" width="10" border="0" />
-                   <%=AuthorizationPageBeanId.getLocalization(application).getString("send_password_by_email")%>
+                   <%=authorizationPageBeanId.getLocalization(application).getString("send_password_by_email")%>
                 </a>
             </div>
         </div>
@@ -139,8 +139,8 @@ response.sendRedirect("catalog_list.jsp" );
 
                      <form method="post"   name="catalog_edit"  ACTION="catalog_edit.jsp" >
                      <TABLE>
-                     <TR><TD></TD><TD><input type="hidden" name="catalog_id"  value = "<%= catalog_listBean.rows[catalog_editBean.getIndx_select()][0] %>"  />
-                     <TR><TD>Раздел:* </TD><TD> <input name="name" size="80" value = "<%= catalog_listBean.rows[catalog_editBean.getIndx_select()][1] %>"  onBlur="checkEmpty(this.value)" />
+                     <TR><TD></TD><TD><input type="hidden" name="catalog_id"  value = "<%= catalogListBeanId.rows[catalogEditBeanId.getIndx_select()][0] %>"  />
+                     <TR><TD>Раздел:* </TD><TD> <input name="name" size="80" value = "<%= catalogListBeanId.rows[catalogEditBeanId.getIndx_select()][1] %>"  onBlur="checkEmpty(this.value)" />
                      <TR><TD></TD> <TD><input type="submit" name="Submit" value="Сохранить"> <input type="reset" value="Сброс"></TD></TR>
                      </TABLE>
                      </form>
@@ -182,7 +182,7 @@ response.sendRedirect("catalog_list.jsp" );
 
 <br />
 
- <%=AuthorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
+ <%=authorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
 
 <hr size="" class="netscape4" />
 

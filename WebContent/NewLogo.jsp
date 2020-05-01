@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <%
   response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
   response.setHeader("Pragma","no-cache"); //HTTP 1.0
@@ -56,7 +56,7 @@
         <hr size="" class="netscape4" />
         <div class="pathBar">
             <span>
-                <span> <%=AuthorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
+                <span> <%=authorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
             </span>
         </div>
         <hr size="" class="netscape4" />
@@ -69,10 +69,10 @@
             <td class="left">
 		<div>
 		    <div class="portlet">
-		    <h5><strong><%=AuthorizationPageBeanId.getLocalization(application).getString("help")%></strong></h5>
+		    <h5><strong><%=authorizationPageBeanId.getLocalization(application).getString("help")%></strong></h5>
 		      <div class="body">
 		        <div class="portletContent odd">
-		        <%=AuthorizationPageBeanId.getLocalization(application).getString("commentariy_upload_new_logotype_on_site")%>
+		        <%=authorizationPageBeanId.getLocalization(application).getString("commentariy_upload_new_logotype_on_site")%>
 		        </div>
 		         
 		        <div class="portletContent even">
@@ -88,14 +88,14 @@
 
             <!-- News part -->
 
-	     <h1><%=AuthorizationPageBeanId.getLocalization(application).getString("title_upload_new_logotype_on_site")%></h1>
+	     <h1><%=authorizationPageBeanId.getLocalization(application).getString("title_upload_new_logotype_on_site")%></h1>
 
 		
 		
 		<br/>
  		 <form  name="uploadform"  action="logoservletupload" method="post" enctype="multipart/form-data">
  			 <input type="file" name="file"><br>
- 			 <input type="submit" value='<%= AuthorizationPageBeanId.getLocalization(application).getString("save") %>' ><input type="button" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("close_window") %>" onClick="return setClose()" >
+ 			 <input type="submit" value='<%= authorizationPageBeanId.getLocalization(application).getString("save") %>' ><input type="button" value="<%= authorizationPageBeanId.getLocalization(application).getString("close_window") %>" onClick="return setClose()" >
  		 </form>
 		</div>
 
@@ -109,7 +109,7 @@
 	    <span class="next">
                 <a HREF = "PostManager.jsp"  >
 		<strong>
-		<%=AuthorizationPageBeanId.getLocalization(application).getString("back")%>
+		<%=authorizationPageBeanId.getLocalization(application).getString("back")%>
 		</strong>
 	        </a>
 	    </span>
@@ -133,7 +133,7 @@
 
 <br />
 
- <%=AuthorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
+ <%=authorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
 
 <hr size="" class="netscape4" />
 

@@ -46,7 +46,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import org.apache.log4j.Logger;
 import org.postgresql.largeobject.LargeObject;
 import org.postgresql.largeobject.LargeObjectManager;
@@ -68,17 +67,17 @@ public class UploadServlet extends HttpServlet {
 	/**
 	 * 
 	 */
-	
+
 	static private Logger log = Logger.getLogger(UploadServlet.class);
-	
+
 	private static final long serialVersionUID = 1L;
 
-	SoftPostBean SoftPostBeanId = null;
+	PublisherBean publisherBeanId = null;
 
 	AuthorizationPageBean AuthorizationPageBeanId = null;
-	ProductPostAllFaced productPostAllFaced = null ;
-	transient ResourceBundle resources = null ;
-	ServletContext servletContext = null ;
+	ProductPostAllFaced productPostAllFaced = null;
+	transient ResourceBundle resources = null;
+	ServletContext servletContext = null;
 
 	public String filename = "";
 
@@ -105,12 +104,12 @@ public class UploadServlet extends HttpServlet {
 	Vector rows = new Vector();
 
 	String[] columnNames = {};
-	
-	transient ResourceBundle localization = null ;
-	transient ResourceBundle resources_ds = null ;
+
+	transient ResourceBundle localization = null;
+	transient ResourceBundle resources_ds = null;
 
 	// Class[] columnTpyes = {};
-	//DataSource ds = null;
+	// DataSource ds = null;
 
 	// private final static int BUFFER_SIZE = 2048;
 	private final static int BUFFER_SIZE = 20480;
@@ -118,17 +117,18 @@ public class UploadServlet extends HttpServlet {
 	/**
 	 * Initializes the servlet.
 	 */
-	
-	ResourceBundle sequences_rs = null ;
-	public UploadServlet() 
-	{
-		if( sequences_rs == null )  sequences_rs = PropertyResourceBundle.getBundle("sequence");
+
+	ResourceBundle sequences_rs = null;
+
+	public UploadServlet() {
+		if (sequences_rs == null)
+			sequences_rs = PropertyResourceBundle.getBundle("sequence");
 		if (resources_ds == null)
 			resources_ds = PropertyResourceBundle.getBundle("driver");
 	}
-	
+
 	public void init(ServletConfig config) throws ServletException {
-		servletContext = config.getServletContext() ;
+		servletContext = config.getServletContext();
 		super.init(config);
 	}
 
@@ -140,14 +140,13 @@ public class UploadServlet extends HttpServlet {
 			stat = conn.createStatement();
 
 		} catch (Exception e) {
-			log.error(e) ;
+			log.error(e);
 			System.err.println("E: " + e);
 			close();
 		}
 	}
 
-	public void OpenConnection(String url) 
-	{
+	public void OpenConnection(String url) {
 		try {
 			Class.forName(resources_ds.getString("driver").trim()); // PG7.0
 			Properties connProp = new Properties();
@@ -171,12 +170,11 @@ public class UploadServlet extends HttpServlet {
 			// Get the Large Object Manager to perform operations with
 			lobj = ((org.postgresql.PGConnection) conn).getLargeObjectAPI();
 			// create a new large object
-			oid = lobj.create(LargeObjectManager.READ
-					| LargeObjectManager.WRITE);
+			oid = lobj.create(LargeObjectManager.READ | LargeObjectManager.WRITE);
 			// open the large object for write
 			obj = lobj.open(oid, LargeObjectManager.WRITE);
 		} catch (java.lang.Exception e) {
-			log.error(e) ;
+			log.error(e);
 			System.out.println(e.toString());
 		}
 	}
@@ -200,27 +198,26 @@ public class UploadServlet extends HttpServlet {
 				return;
 			obj.close();
 			// int intID = 0 ;
-			//String query = "SELECT NEXT VALUE FOR file_id_seq  AS ID  FROM ONE_SEQUENCES";
+			// String query = "SELECT NEXT VALUE FOR file_id_seq AS ID FROM ONE_SEQUENCES";
 			String query = sequences_rs.getString("file");
 			executeQuery(query);
 			if (rows.size() != 0)
 				intID = string2Integer("" + getValueAt(0, 0));
 			// PreparedStatement ps = conn.prepareStatement("INSERT INTO file
 			// VALUES (?, ? , ?)");
-			PreparedStatement ps = conn
-					.prepareStatement("INSERT INTO  file  VALUES (?, ? , ? , ?)");
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO  file  VALUES (?, ? , ? , ?)");
 			ps.setInt(1, intID);
 			ps.setString(2, FileName);
 			ps.setInt(3, oid);
 			// +++
 			ps.setLong(4, AuthorizationPageBeanId.getIntUserID());
 			// ps.setInt(4,1);
-			SoftPostBeanId.setFile_id("" + intID);
+			publisherBeanId.setFile_id("" + intID);
 			// +++
 			ps.executeUpdate();
 			conn.commit();
 			ps.close();
-			// SoftPostBeanId = null
+			// publisherBeanId = null
 			return;
 		} catch (java.lang.Exception e) {
 			log.error(e);
@@ -236,7 +233,7 @@ public class UploadServlet extends HttpServlet {
 				return;
 			if (FileName.length() == 0)
 				return;
-			//String query = "SELECT NEXT VALUE FOR file_id_seq  AS ID  FROM ONE_SEQUENCES";
+			// String query = "SELECT NEXT VALUE FOR file_id_seq AS ID FROM ONE_SEQUENCES";
 			String query = sequences_rs.getString("file");
 			executeQuery(query);
 			if (rows.size() != 0)
@@ -247,13 +244,13 @@ public class UploadServlet extends HttpServlet {
 			ps.setString(2, FileName);
 			ps.setLong(3, AuthorizationPageBeanId.getIntUserID());
 			ps.setString(4, path);
-			SoftPostBeanId.setFile_id("" + intID);
+			publisherBeanId.setFile_id("" + intID);
 			ps.executeUpdate();
 			conn.commit();
 			ps.close();
 			return;
 		} catch (java.lang.Exception e) {
-			log.error(e) ;
+			log.error(e);
 			System.out.println(e.toString());
 		}
 	}
@@ -269,16 +266,15 @@ public class UploadServlet extends HttpServlet {
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
 	 * methods.
 	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
+	 * @param request  servlet request
+	 * @param response servlet response
 	 */
-	protected void processRequest(HttpServletRequest req,
-			HttpServletResponse res) throws ServletException,
-			java.io.IOException {
-		if( localization == null )   localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
-		else if( !localization.getLocale().getLanguage().equals(req.getLocale().getLanguage())  ) localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
+	protected void processRequest(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, java.io.IOException {
+		if (localization == null)
+			localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
+		else if (!localization.getLocale().getLanguage().equals(req.getLocale().getLanguage()))
+			localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
 
 		// OpenConnection("jdbc:postgresql://192.168.0.1:5432/mobilsoft") ;
 		// localhost/mobilsoftutf8
@@ -287,19 +283,17 @@ public class UploadServlet extends HttpServlet {
 		// req.
 		// SessionBean sessionBean = (SessionBean)
 		// request.getSession().getAttribute("sessionBean");
-		SoftPostBeanId = (SoftPostBean) req.getSession().getAttribute(
-				"SoftPostBeanId");
-		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession()
-				.getAttribute("AuthorizationPageBeanId");
-		
-		if( resources == null )  resources = PropertyResourceBundle.getBundle("localization", res.getLocale());
+		publisherBeanId = (PublisherBean) req.getSession().getAttribute("publisherBeanId");
+		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession().getAttribute("AuthorizationPageBeanId");
+
+		if (resources == null)
+			resources = PropertyResourceBundle.getBundle("localization", res.getLocale());
 		try {
-			productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
+			productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 
 		long start = System.currentTimeMillis();
 		// RFC 1867
@@ -326,13 +320,12 @@ public class UploadServlet extends HttpServlet {
 			out.close();
 			return;
 		}
-		
-		if(productPostAllFaced.isLimmitPostedMessages(AuthorizationPageBeanId,true)  )
-		 {
-			 printResult(out, resources.getString("global_has_limmit_forsite"));
-			 out.close();
-			 return;
-		 }
+
+		if (productPostAllFaced.isLimmitPostedMessages(AuthorizationPageBeanId, true)) {
+			printResult(out, resources.getString("global_has_limmit_forsite"));
+			out.close();
+			return;
+		}
 
 		if (req.getParameter("filepath") != null) {
 			fullpath_filename = req.getParameter("filepath");
@@ -405,8 +398,7 @@ public class UploadServlet extends HttpServlet {
 
 			result = in.readLine(buffer, 0, BUFFER_SIZE);
 			if (result <= 0) {
-				System.out
-						.println("Upload : may be end boundary which has no contents");
+				System.out.println("Upload : may be end boundary which has no contents");
 				break;
 			}
 
@@ -416,14 +408,12 @@ public class UploadServlet extends HttpServlet {
 			String token = tokenizer.nextToken();
 			String upperToken = token.toUpperCase();
 			if (!upperToken.startsWith("CONTENT-DISPOSITION")) {
-				System.out
-						.println("Format error. Content-Disposition expected.");
+				System.out.println("Format error. Content-Disposition expected.");
 				break;
 			}
 			String disposition = upperToken.substring(21);
 			if (!disposition.equals("FORM-DATA")) {
-				System.out.println("Sorry, I don't know how to handle ["
-						+ disposition + "] disposition.");
+				System.out.println("Sorry, I don't know how to handle [" + disposition + "] disposition.");
 				break;
 			}
 			if (tokenizer.hasMoreElements()) {
@@ -473,8 +463,7 @@ public class UploadServlet extends HttpServlet {
 
 				// System.out.println("receiving file named " + filename);
 				/*
-				 * if (filename != null) { String path = getValue(map,
-				 * PATH_KEY);
+				 * if (filename != null) { String path = getValue(map, PATH_KEY);
 				 * 
 				 * file = new File(path); if (path != null && file.exists() &&
 				 * file.isDirectory()) { file = new File(path, filename); } }
@@ -489,10 +478,8 @@ public class UploadServlet extends HttpServlet {
 				if (fileContentType.toUpperCase().startsWith("CONTENT-TYPE:")) {
 					fileContentType = fileContentType.substring(13).trim();
 				} else {
-					System.out
-							.println("what should I read here ??? - result = "
-									+ result + ", and read ["
-									+ new String(buffer, 0, result) + "]");
+					System.out.println("what should I read here ??? - result = " + result + ", and read ["
+							+ new String(buffer, 0, result) + "]");
 				}
 
 				try {
@@ -504,8 +491,7 @@ public class UploadServlet extends HttpServlet {
 					boolean odd = true;
 					inner: while ((result = in.readLine(buffer, 0, BUFFER_SIZE)) > 0) {
 						if (isFirst) { // ignore all proceeding \r\n
-							if (result == 2 && buffer[0] == '\r'
-									&& buffer[1] == '\n') {
+							if (result == 2 && buffer[0] == '\r' && buffer[1] == '\n') {
 								continue;
 							}
 
@@ -546,9 +532,8 @@ public class UploadServlet extends HttpServlet {
 						isFirst = false;
 					}
 				} catch (IOException ie) {
-					log.error(ie) ;
-					System.out.println("IO Error while write to file : "
-							+ ie.toString());
+					log.error(ie);
+					System.out.println("IO Error while write to file : " + ie.toString());
 				} finally {
 					System.out.println("Upload : size = " + size);
 					if (obj != null) {
@@ -560,8 +545,7 @@ public class UploadServlet extends HttpServlet {
 					}
 				}
 				result = in.readLine(buffer, 0, BUFFER_SIZE);
-				System.out.println("what should I read here? - result = "
-						+ result + ", and read ["
+				System.out.println("what should I read here? - result = " + result + ", and read ["
 						+ new String(buffer, 0, result) + "]");
 			} else { // no more elements
 				result = in.readLine(buffer, 0, BUFFER_SIZE);
@@ -603,28 +587,22 @@ public class UploadServlet extends HttpServlet {
 	/**
 	 * Handles the HTTP <code>GET</code> method.
 	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
+	 * @param request  servlet request
+	 * @param response servlet response
 	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException,
-			java.io.IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, java.io.IOException {
 		processRequest(request, response);
 	}
 
 	/**
 	 * Handles the HTTP <code>POST</code> method.
 	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
+	 * @param request  servlet request
+	 * @param response servlet response
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException,
-			java.io.IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, java.io.IOException {
 		processRequest(request, response);
 	}
 
@@ -635,8 +613,7 @@ public class UploadServlet extends HttpServlet {
 		return "Short description";
 	}
 
-	boolean bytesStartsWith(byte[] bytes, int offset, int length,
-			String toCompare) {
+	boolean bytesStartsWith(byte[] bytes, int offset, int length, String toCompare) {
 		boolean result = true;
 		if (toCompare.length() > length) {
 			return false;
@@ -652,8 +629,7 @@ public class UploadServlet extends HttpServlet {
 		return result;
 	}
 
-	void appendValue(HashMap map, String name, String value,
-			String contentType, int size) {
+	void appendValue(HashMap map, String name, String value, String contentType, int size) {
 		UploadData data = new UploadData(name, value, contentType, size, true);
 		map.put(name, data);
 	}
@@ -708,8 +684,7 @@ public class UploadServlet extends HttpServlet {
 			case AMPERSHARP:
 				if (chars[i] == ';') {
 					try {
-						buffer.append((char) Integer.parseInt(escaped
-								.toString()));
+						buffer.append((char) Integer.parseInt(escaped.toString()));
 					} catch (NumberFormatException nfe) {
 						// I don't handle other Entities
 						buffer.append(escaped);
@@ -735,11 +710,11 @@ public class UploadServlet extends HttpServlet {
 		Iterator itr = map.values().iterator();
 		out.println("<HTML><HEAD>");
 		out.println("<META http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
-		out.println("<TITLE>" + localization.getString("result_upload")   + "</TITLE>");
+		out.println("<TITLE>" + localization.getString("result_upload") + "</TITLE>");
 		out.println("<script language=\"JavaScript\">");
 		out.println("<!--");
 		out.println("function setData(){");
-		out.println("opener.parent.postsoftform.filename.value = '" + filename	+ "' ;");
+		out.println("opener.parent.postsoftform.filename.value = '" + filename + "' ;");
 		out.println("opener.parent.postsoftform.file_id.value = " + intID + " ;");
 		// out.println("top.close();");
 		out.println("return true ;");
@@ -751,33 +726,33 @@ public class UploadServlet extends HttpServlet {
 		out.println("//-->");
 		out.println("</script>");
 		out.println("</HEAD><BODY onLoad=\"return  setData()\" >");
-		out.println("<H1>" + localization.getString("result_upload")   + "</H1>");
+		out.println("<H1>" + localization.getString("result_upload") + "</H1>");
 		out.println("<TABLE>");
 		out.println(localization.getString("header_result_loading"));
-		while (itr.hasNext()) 
-		{
+		while (itr.hasNext()) {
 			ItemData data = (ItemData) itr.next();
 			out.println("<TR>");
-			//out.println("<TD>" + (data.name == null ? "" : data.name) + "</TD>");
-			out.println("<TD>" + (data.value == null ? "" : data.value)	+ "</TD>");
-			out.println("<TD>" + (data.contentType == null ? "" : data.contentType)	+ "</TD>");
-			out.println("<TD>" + (data.isFile ? String.valueOf(data.size) : "")	+ "</TD>");
-			//out.println("<TD>" + (data.isFile ? "file" : "") + "</TD>");
+			// out.println("<TD>" + (data.name == null ? "" : data.name) + "</TD>");
+			out.println("<TD>" + (data.value == null ? "" : data.value) + "</TD>");
+			out.println("<TD>" + (data.contentType == null ? "" : data.contentType) + "</TD>");
+			out.println("<TD>" + (data.isFile ? String.valueOf(data.size) : "") + "</TD>");
+			// out.println("<TD>" + (data.isFile ? "file" : "") + "</TD>");
 			out.println("</TR>");
 		}
 		out.println("</TABLE>");
-		out.println("<FORM><input type=\"button\" value=\"" + localization.getString("close_window")   + "\" onClick=\"return setClose()\" ></FORM>");
+		out.println("<FORM><input type=\"button\" value=\"" + localization.getString("close_window")
+				+ "\" onClick=\"return setClose()\" ></FORM>");
 		out.println("</BODY></HTML>");
 	}
 
 	void printResult(PrintWriter out, String mess) throws IOException {
 		out.println("<HTML><HEAD>");
 		out.println("<META http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
-		out.println("<TITLE>" + localization.getString("result_upload")   + "</TITLE>");
+		out.println("<TITLE>" + localization.getString("result_upload") + "</TITLE>");
 		out.println("<script language=\"JavaScript\">");
 		out.println("<!--");
 		out.println("function setData(){");
-		out.println("top.postsoftform.filename.value = '" + localization.getString("file_not_uploaded")   + "' ;");
+		out.println("top.postsoftform.filename.value = '" + localization.getString("file_not_uploaded") + "' ;");
 		// out.println("opener.parent.postsoftform.filename.value = 'file not
 		// uploaded' ;" );
 		out.println("top.postsoftform.file_id.value = -1 ;");
@@ -791,30 +766,30 @@ public class UploadServlet extends HttpServlet {
 		out.println("//-->");
 		out.println("</script>");
 		out.println("</HEAD><BODY onLoad=\"return  setData()\" >");
-		out.println("<H1>" + localization.getString("result_upload")   + "</H1>");
+		out.println("<H1>" + localization.getString("result_upload") + "</H1>");
 		out.println("<TABLE>");
 		out.println(localization.getString("header_result_loading"));
 		out.println("<TR>");
-		out.println("<TD>" + localization.getString("file_not_uploaded")   + "</TD>");
+		out.println("<TD>" + localization.getString("file_not_uploaded") + "</TD>");
 		out.println("<TD>value is null </TD>");
 		out.println("<TD>content is null</TD>");
 		out.println("<TD>size is null</TD>");
 		out.println("<TD>" + mess + "</TD>");
 		out.println("</TR>");
 		out.println("</TABLE>");
-		out.println("<FORM><input type=\"button\" value=\"" + localization.getString("close_window")   + "\" onClick=\"return setClose()\" ></FORM>");
+		out.println("<FORM><input type=\"button\" value=\"" + localization.getString("close_window")
+				+ "\" onClick=\"return setClose()\" ></FORM>");
 		out.println("</BODY></HTML>");
 	}
 
-	void printResultSaveFileURl(PrintWriter out, String mess)
-			throws IOException {
+	void printResultSaveFileURl(PrintWriter out, String mess) throws IOException {
 		out.println("<HTML><HEAD>");
 		out.println("<META http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
 		out.println("<TITLE>Upload Result</TITLE>");
 		out.println("<script language=\"JavaScript\">");
 		out.println("<!--");
 		out.println("function setData(){");
-		out.println("top.postsoftform.filename.value = '" + localization.getString("result_upload")   + "' ;");
+		out.println("top.postsoftform.filename.value = '" + localization.getString("result_upload") + "' ;");
 		// out.println("opener.parent.postsoftform.filename.value = 'file not
 		// uploaded' ;" );
 		out.println("top.postsoftform.file_id.value = -1 ;");
@@ -828,15 +803,15 @@ public class UploadServlet extends HttpServlet {
 		out.println("//-->");
 		out.println("</script>");
 		out.println("</HEAD><BODY onLoad=\"return  setData()\" >");
-		out.println("<H1>" + localization.getString("result_upload")   + "</H1>");
+		out.println("<H1>" + localization.getString("result_upload") + "</H1>");
 		out.println("<TABLE>");
-		out.println("<TR><TH> " + localization.getString("file_uploaded")   + " </TH></TR>");
+		out.println("<TR><TH> " + localization.getString("file_uploaded") + " </TH></TR>");
 		out.println("<TR>");
 		out.println("<TD>" + mess + "</TD>");
 		out.println("</TR>");
 		out.println("</TABLE>");
-		out
-				.println("<FORM><input type=\"button\" value=\"" + localization.getString("close_window")   + "\" onClick=\"return setClose()\" ></FORM>");
+		out.println("<FORM><input type=\"button\" value=\"" + localization.getString("close_window")
+				+ "\" onClick=\"return setClose()\" ></FORM>");
 		out.println("</BODY></HTML>");
 	}
 
@@ -855,7 +830,7 @@ public class UploadServlet extends HttpServlet {
 			if (conn != null)
 				conn.close();
 		} catch (SQLException ex) {
-			log.error(ex) ;
+			log.error(ex);
 			System.err.println("Close DataBase :" + ex);
 			// close() ;
 		}
@@ -913,7 +888,7 @@ public class UploadServlet extends HttpServlet {
 		try {
 			stat.executeUpdate(query);
 		} catch (SQLException ex) {
-			log.error(ex) ;
+			log.error(ex);
 			System.err.println(ex);
 			close();
 		}
@@ -955,8 +930,7 @@ class UploadData {
 
 	boolean isFile;
 
-	UploadData(String name, String value, String contentType, int size,
-			boolean isFile) {
+	UploadData(String name, String value, String contentType, int size, boolean isFile) {
 		this.name = name;
 		this.value = value;
 		this.contentType = contentType;

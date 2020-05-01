@@ -8,7 +8,7 @@
   request.setCharacterEncoding("UTF-8");
 %>
 <jsp:useBean id="domainList" scope="session" class="java.util.LinkedList" type="java.util.LinkedList"/>
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <html>
 
 <head>
@@ -37,7 +37,7 @@
 
 
         <div class="pathBar">
-                <font size="4"> <%=AuthorizationPageBeanId.getLocalization(application).getString("site_controll")%> </font>
+                <font size="4"> <%=authorizationPageBeanId.getLocalization(application).getString("site_controll")%> </font>
 
         </div>
 
@@ -83,7 +83,7 @@
 
             <!-- News part -->
 
-	    <h1><%=AuthorizationPageBeanId.getLocalization(application).getString("find_domain")%></h1>
+	    <h1><%=authorizationPageBeanId.getLocalization(application).getString("find_domain")%></h1>
 <br/>
 
 
@@ -102,7 +102,7 @@
 						<td width="500" align="center">
 						<form action="Domain.jsp"  method="post" >
 						<input type="text" size="70" name="domain" value="<%= request.getAttribute("domain") == null?"":request.getAttribute("domain") %>"  />  
-						<input type="submit"  name="submit" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("do_find") %>" />  						
+						<input type="submit"  name="submit" value="<%= authorizationPageBeanId.getLocalization(application).getString("do_find") %>" />  						
 						</form>
 						</td>
 					</tr>
@@ -122,7 +122,7 @@
 						<%
 						if(domainState.isFree()){
 						%>
-						<form action="Domain.jsp"  method="post" ><input type="hidden" name="regdomain" value="<%= request.getAttribute("domain") == null?"":request.getAttribute("domain") %>"  /><input type="submit"  name="submit" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("send_application") %>" /> </form>
+						<form action="Domain.jsp"  method="post" ><input type="hidden" name="regdomain" value="<%= request.getAttribute("domain") == null?"":request.getAttribute("domain") %>"  /><input type="submit"  name="submit" value="<%= authorizationPageBeanId.getLocalization(application).getString("send_application") %>" /> </form>
 						<% } %>
 						</td>
 					</tr>

@@ -16,10 +16,10 @@ import org.apache.log4j.Logger;
 
 
 import com.cbsinc.cms.AuthorizationPageBean;
-import com.cbsinc.cms.PolicyBean;
+import com.cbsinc.cms.ItemDescriptionBean;
 import com.cbsinc.cms.PostType;
 import com.cbsinc.cms.QueryManager;
-import com.cbsinc.cms.SoftPostBean;
+import com.cbsinc.cms.PublisherBean;
 
 /**
  * <p>
@@ -63,7 +63,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 	 */
 
 
-	 static private Logger log = Logger.getLogger(SoftPostBean.class);
+	 static private Logger log = Logger.getLogger(PublisherBean.class);
 
 	
 
@@ -71,31 +71,31 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 
 	
 
-	final public void initPage(final String _soft_id , final SoftPostBean softPostBean , final AuthorizationPageBean authorizationPageBeanId ) throws UnsupportedEncodingException {
+	final public void initPage(final String _soft_id , final PublisherBean publisherBeanId , final AuthorizationPageBean authorizationPageBeanId ) throws UnsupportedEncodingException {
 
 	
 		
 		/*
-		 * if( softPostBean.position_cd == 0 ) return false ; if( softPostBean.cost == 0 )
-		 * return false ; if( softPostBean.currency_cd == 0 ) return false ; if(
-		 * softPostBean.countposition == 0 ) return false ; if(
-		 * softPostBean.deliverylength_ofday == 0 ) return false ; if( softPostBean.producer_cd ==
+		 * if( publisherBeanId.position_cd == 0 ) return false ; if( publisherBeanId.cost == 0 )
+		 * return false ; if( publisherBeanId.currency_cd == 0 ) return false ; if(
+		 * publisherBeanId.countposition == 0 ) return false ; if(
+		 * publisherBeanId.deliverylength_ofday == 0 ) return false ; if( publisherBeanId.producer_cd ==
 		 * 0 ) return false ;
 		 */
 		
 		
 		/*
 		 * 
-		 * 	+ " amount1 = " + softPostBean.getAmount1() + " , "
-		 *	+ " amount2 = " + softPostBean.getAmount2() + " , "
-		 *	+ " amount3 = " + softPostBean.getAmount3() + " , "
+		 * 	+ " amount1 = " + publisherBeanId.getAmount1() + " , "
+		 *	+ " amount2 = " + publisherBeanId.getAmount2() + " , "
+		 *	+ " amount3 = " + publisherBeanId.getAmount3() + " , "
 		 *	+ " search2 = '" + search2 + "' , "
-		 *	+ " name2 = '" + softPostBean.getStrSoftName2() + "' , "
-		 *	+ " show_rating1 = " + softPostBean.getStrShow_ratimg1() + " , "
-		 *	+ " show_rating2 = " + softPostBean.getStrShow_ratimg1() + " , "
-		 *	+ " show_rating3 = " + softPostBean.getStrShow_ratimg1() + " , "
-		 *	+ " show_blog = " + softPostBean.getStrShow_forum() + " , "
-		 *	+ " jsp_url = '" + softPostBean.getJsp_url() + "' , "
+		 *	+ " name2 = '" + publisherBeanId.getStrSoftName2() + "' , "
+		 *	+ " show_rating1 = " + publisherBeanId.getStrShow_ratimg1() + " , "
+		 *	+ " show_rating2 = " + publisherBeanId.getStrShow_ratimg1() + " , "
+		 *	+ " show_rating3 = " + publisherBeanId.getStrShow_ratimg1() + " , "
+		 *	+ " show_blog = " + publisherBeanId.getStrShow_forum() + " , "
+		 *	+ " jsp_url = '" + publisherBeanId.getJsp_url() + "' , "
 		 * 
 		 */
 		
@@ -125,57 +125,57 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 		try {
 			Adp.executeQuery(query);
 			if (Adp.rows().size() > 0) {
-				softPostBean.setSoft_id((String) Adp.getValueAt(0, 0));
-				softPostBean.setStrSoftName((String) Adp.getValueAt(0, 1));
-				softPostBean.setStrSoftDescription((String) Adp.getValueAt(0, 2));
-				softPostBean.setProduct_fulldescription((String) Adp.getValueAt(0, 3));
-				softPostBean.setStrSoftVersion((String) Adp.getValueAt(0, 4));
-				softPostBean.setStrSoftCost((String) Adp.getValueAt(0, 5));
-				softPostBean.setStrCurrency((String) Adp.getValueAt(0, 6));
-				softPostBean.setSerial_nubmer((String) Adp.getValueAt(0, 7));
-				softPostBean.setFile_id((String) Adp.getValueAt(0, 8));
+				publisherBeanId.setSoft_id((String) Adp.getValueAt(0, 0));
+				publisherBeanId.setStrSoftName((String) Adp.getValueAt(0, 1));
+				publisherBeanId.setStrSoftDescription((String) Adp.getValueAt(0, 2));
+				publisherBeanId.setProduct_fulldescription((String) Adp.getValueAt(0, 3));
+				publisherBeanId.setStrSoftVersion((String) Adp.getValueAt(0, 4));
+				publisherBeanId.setStrSoftCost((String) Adp.getValueAt(0, 5));
+				publisherBeanId.setStrCurrency((String) Adp.getValueAt(0, 6));
+				publisherBeanId.setSerial_nubmer((String) Adp.getValueAt(0, 7));
+				publisherBeanId.setFile_id((String) Adp.getValueAt(0, 8));
 				authorizationPageBeanId.setCatalog_id((String) Adp.getValueAt(0, 9));
 				authorizationPageBeanId.setCatalogParent_id((String) Adp.getValueAt(0, 9));
 				//authorizationPageBeanId.setCatalog_parent_id(getCatalogParentId(authorizationPageBeanId)); // fixed for open editor in dir
-				softPostBean.setImage_id((String) Adp.getValueAt(0, 10));
-				softPostBean.setBigimage_id((String) Adp.getValueAt(0, 11));
-				softPostBean.setUser_id((String) Adp.getValueAt(0, 12));
-				softPostBean.setSalelogic_id((String) Adp.getValueAt(0, 14));
-				softPostBean.setSite_id((String) Adp.getValueAt(0, 15));
-				softPostBean.setProduct_code_id((String) Adp.getValueAt(0, 16));
-				softPostBean.setPortlettype_id((String) Adp.getValueAt(0, 17));
-				softPostBean.setCreteria1_id((String) Adp.getValueAt(0, 18));
-				softPostBean.setCreteria2_id((String) Adp.getValueAt(0, 19));
-				softPostBean.setCreteria3_id((String) Adp.getValueAt(0, 20));
-				softPostBean.setCreteria4_id((String) Adp.getValueAt(0, 21));
-				softPostBean.setCreteria5_id((String) Adp.getValueAt(0, 22));
-				softPostBean.setCreteria6_id((String) Adp.getValueAt(0, 23));
-				softPostBean.setCreteria7_id((String) Adp.getValueAt(0, 24));
-				softPostBean.setCreteria8_id((String) Adp.getValueAt(0, 25));
-				softPostBean.setCreteria9_id((String) Adp.getValueAt(0, 26));
-				softPostBean.setCreteria10_id((String) Adp.getValueAt(0, 27));
+				publisherBeanId.setImage_id((String) Adp.getValueAt(0, 10));
+				publisherBeanId.setBigimage_id((String) Adp.getValueAt(0, 11));
+				publisherBeanId.setUser_id((String) Adp.getValueAt(0, 12));
+				publisherBeanId.setSalelogic_id((String) Adp.getValueAt(0, 14));
+				publisherBeanId.setSite_id((String) Adp.getValueAt(0, 15));
+				publisherBeanId.setProduct_code_id((String) Adp.getValueAt(0, 16));
+				publisherBeanId.setPortlettype_id((String) Adp.getValueAt(0, 17));
+				publisherBeanId.setCreteria1_id((String) Adp.getValueAt(0, 18));
+				publisherBeanId.setCreteria2_id((String) Adp.getValueAt(0, 19));
+				publisherBeanId.setCreteria3_id((String) Adp.getValueAt(0, 20));
+				publisherBeanId.setCreteria4_id((String) Adp.getValueAt(0, 21));
+				publisherBeanId.setCreteria5_id((String) Adp.getValueAt(0, 22));
+				publisherBeanId.setCreteria6_id((String) Adp.getValueAt(0, 23));
+				publisherBeanId.setCreteria7_id((String) Adp.getValueAt(0, 24));
+				publisherBeanId.setCreteria8_id((String) Adp.getValueAt(0, 25));
+				publisherBeanId.setCreteria9_id((String) Adp.getValueAt(0, 26));
+				publisherBeanId.setCreteria10_id((String) Adp.getValueAt(0, 27));
 				
-				softPostBean.setAmount1((String) Adp.getValueAt(0, 28)) ;
-				softPostBean.setAmount2((String) Adp.getValueAt(0, 29)) ;
-				softPostBean.setAmount3((String) Adp.getValueAt(0, 30)) ;
-				softPostBean.setStrSearch2((String) Adp.getValueAt(0, 31));				
-				softPostBean.setStrSoftName2((String) Adp.getValueAt(0, 32)) ;
-				softPostBean.setStrShow_ratimg1((String) Adp.getValueAt(0, 33)) ;
-				softPostBean.setStrShow_ratimg2((String) Adp.getValueAt(0, 34)) ;
-				softPostBean.setStrShow_ratimg2((String) Adp.getValueAt(0, 35)) ;
-				softPostBean.setStrShow_forum((String) Adp.getValueAt(0, 36)) ;
-				softPostBean.setJsp_url((String) Adp.getValueAt(0, 37)) ;
+				publisherBeanId.setAmount1((String) Adp.getValueAt(0, 28)) ;
+				publisherBeanId.setAmount2((String) Adp.getValueAt(0, 29)) ;
+				publisherBeanId.setAmount3((String) Adp.getValueAt(0, 30)) ;
+				publisherBeanId.setStrSearch2((String) Adp.getValueAt(0, 31));				
+				publisherBeanId.setStrSoftName2((String) Adp.getValueAt(0, 32)) ;
+				publisherBeanId.setStrShow_ratimg1((String) Adp.getValueAt(0, 33)) ;
+				publisherBeanId.setStrShow_ratimg2((String) Adp.getValueAt(0, 34)) ;
+				publisherBeanId.setStrShow_ratimg2((String) Adp.getValueAt(0, 35)) ;
+				publisherBeanId.setStrShow_forum((String) Adp.getValueAt(0, 36)) ;
+				publisherBeanId.setJsp_url((String) Adp.getValueAt(0, 37)) ;
 
-				softPostBean.setImgname((String) Adp.getValueAt(0, 38)) ;
-				softPostBean.setBigimgname((String) Adp.getValueAt(0, 39)) ;
-				softPostBean.setFilename((String) Adp.getValueAt(0, 40)) ;
-				softPostBean.setType_id((String) Adp.getValueAt(0, 41));
-				softPostBean.setParent_portlettype_id((String) Adp.getValueAt(0, 42));
+				publisherBeanId.setImgname((String) Adp.getValueAt(0, 38)) ;
+				publisherBeanId.setBigimgname((String) Adp.getValueAt(0, 39)) ;
+				publisherBeanId.setFilename((String) Adp.getValueAt(0, 40)) ;
+				publisherBeanId.setType_id((String) Adp.getValueAt(0, 41));
+				publisherBeanId.setParent_portlettype_id((String) Adp.getValueAt(0, 42));
 			}
 			else 
 			{
 				// add current catalog
-				softPostBean.setSoft_id("-1");
+				publisherBeanId.setSoft_id("-1");
 				authorizationPageBeanId.setCatalogParent_id(authorizationPageBeanId.getCatalog_id());
 			}
 
@@ -196,12 +196,12 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 		}
 
 
-		if ( softPostBean.getImage_id().length() > 0)
-			setImageNameByImage_ID(softPostBean.getImage_id(),softPostBean);
-		if (softPostBean.getBigimage_id().length() > 0)
-			setBigImageNameByImage_ID(softPostBean.getBigimage_id(), softPostBean);
-		if (softPostBean.getFile_id().length() > 0)
-			setFileNameByFile_ID(softPostBean.getFile_id(),softPostBean);
+		if ( publisherBeanId.getImage_id().length() > 0)
+			setImageNameByImage_ID(publisherBeanId.getImage_id(),publisherBeanId);
+		if (publisherBeanId.getBigimage_id().length() > 0)
+			setBigImageNameByImage_ID(publisherBeanId.getBigimage_id(), publisherBeanId);
+		if (publisherBeanId.getFile_id().length() > 0)
+			setFileNameByFile_ID(publisherBeanId.getFile_id(),publisherBeanId);
 	}
 
 	
@@ -237,19 +237,19 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 		return _parent_id  ;
 	}
 	
-	final public String updateDescSoft(final SoftPostBean softPostBean, final AuthorizationPageBean authorizationPageBeanId) throws UnsupportedEncodingException {
+	final public String updateDescSoft(final PublisherBean publisherBeanId, final AuthorizationPageBean authorizationPageBeanId) throws UnsupportedEncodingException {
 		QueryManager Adp = new QueryManager();
 		Adp.BeginTransaction();
-		String id = softPostBean.getSoft_id();
+		String id = publisherBeanId.getSoft_id();
 		String query = "" ;
 		Map args = Adp.getArgs();
-		if (softPostBean.getSoft_id().compareTo("-1") == 0) return "";
+		if (publisherBeanId.getSoft_id().compareTo("-1") == 0) return "";
 		
-		if(softPostBean.getStrSoftName2() != null && softPostBean.getStrSoftName2().length() > 0 )  
-			softPostBean.setStrSearch2(softPostBean.getStrSoftName2().substring(0, 1));
+		if(publisherBeanId.getStrSoftName2() != null && publisherBeanId.getStrSoftName2().length() > 0 )  
+			publisherBeanId.setStrSearch2(publisherBeanId.getStrSoftName2().substring(0, 1));
 		
-		//if( softPostBean.getType_id().compareTo("0") == 0 || softPostBean.getType_id().length() == 0 
-		//		|| softPostBean.getType_id().compareTo("2") == 0   )
+		//if( publisherBeanId.getType_id().compareTo("0") == 0 || publisherBeanId.getType_id().length() == 0 
+		//		|| publisherBeanId.getType_id().compareTo("2") == 0   )
 		
 		try 
 		{
@@ -293,48 +293,48 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 				+ " lang_id = ? , "
 				+ " jsp_url = ? , "
 				+ " CDATE = ? "
-				+ " where soft_id = " + softPostBean.getSoft_id() ;
+				+ " where soft_id = " + publisherBeanId.getSoft_id() ;
 		
 		
 		args = Adp.getArgs();
-		args.put("soft_id" , Long.valueOf(softPostBean.getSoft_id()));
-		args.put("name" , softPostBean.getStrSoftName());
-		args.put("description" , softPostBean.strSoftDescription );
-		args.put("fulldescription", softPostBean.product_fulldescription );
-		args.put("version" , softPostBean.getStrSoftVersion() );
-		args.put("cost"	, Double.valueOf(softPostBean.getStrSoftCost()) );
-		args.put("currency" , Long.valueOf(softPostBean.getStrCurrency()) );
-		args.put("file_id" , Long.valueOf(softPostBean.getFile_id() ));
+		args.put("soft_id" , Long.valueOf(publisherBeanId.getSoft_id()));
+		args.put("name" , publisherBeanId.getStrSoftName());
+		args.put("description" , publisherBeanId.strSoftDescription );
+		args.put("fulldescription", publisherBeanId.product_fulldescription );
+		args.put("version" , publisherBeanId.getStrSoftVersion() );
+		args.put("cost"	, Double.valueOf(publisherBeanId.getStrSoftCost()) );
+		args.put("currency" , Long.valueOf(publisherBeanId.getStrCurrency()) );
+		args.put("file_id" , Long.valueOf(publisherBeanId.getFile_id() ));
 		args.put("catalog_id", Long.valueOf(authorizationPageBeanId.getCatalog_id()) );
-		args.put("image_id" , Long.valueOf(softPostBean.getImage_id()));
-		args.put("bigimage_id" , Long.valueOf(softPostBean.getBigimage_id() ));
-		args.put("salelogic_id" , Long.valueOf(softPostBean.getSalelogic_id()) );
-		args.put("site_id" , Long.parseLong(softPostBean.getSite_id()) ); 
-		args.put("product_code" , Long.valueOf(softPostBean.getProduct_code_id() )); 
-		args.put("search", softPostBean.getStrSoftName().substring(0, 1) );
-		args.put("type_id" , Long.valueOf(softPostBean.getType_id()) );
-		args.put("portlettype_id" ,Long.valueOf(softPostBean.getPortlettype_id()) );
-		args.put("creteria1_id" , Long.valueOf(softPostBean.getCreteria1_id()));
-		args.put("creteria2_id" , Long.valueOf(softPostBean.getCreteria2_id()));
-		args.put("creteria3_id" , Long.valueOf(softPostBean.getCreteria3_id()));
-		args.put("creteria4_id" , Long.valueOf(softPostBean.getCreteria4_id()));
-		args.put("creteria5_id" , Long.valueOf(softPostBean.getCreteria5_id()));
-		args.put("creteria6_id" , Long.valueOf(softPostBean.getCreteria6_id()));
-		args.put("creteria7_id" , Long.valueOf(softPostBean.getCreteria7_id()));
-		args.put("creteria8_id" , Long.valueOf(softPostBean.getCreteria8_id()));
-		args.put("creteria9_id" , Long.valueOf(softPostBean.getCreteria9_id()));
-		args.put("creteria10_id" , Long.valueOf(softPostBean.getCreteria10_id()));
-		args.put("amount1" , Double.parseDouble(softPostBean.getAmount1()));
-		args.put("amount2" , Double.parseDouble(softPostBean.getAmount2()));
-		args.put("amount3" , Double.parseDouble(softPostBean.getAmount3()));
-		args.put("search2" , softPostBean.getStrSearch2() );
-		args.put("name2" , softPostBean.getStrSoftName2() );
-		args.put("SHOW_RATING1" , Boolean.valueOf(softPostBean.getStrShow_ratimg1()));
-		args.put("SHOW_RATING2" , Boolean.valueOf(softPostBean.getStrShow_ratimg2()));
-		args.put("SHOW_RATING3" , Boolean.valueOf(softPostBean.getStrShow_ratimg3()));
-		args.put("SHOW_BLOG" , Boolean.valueOf(softPostBean.getStrShow_forum()));
+		args.put("image_id" , Long.valueOf(publisherBeanId.getImage_id()));
+		args.put("bigimage_id" , Long.valueOf(publisherBeanId.getBigimage_id() ));
+		args.put("salelogic_id" , Long.valueOf(publisherBeanId.getSalelogic_id()) );
+		args.put("site_id" , Long.parseLong(publisherBeanId.getSite_id()) ); 
+		args.put("product_code" , Long.valueOf(publisherBeanId.getProduct_code_id() )); 
+		args.put("search", publisherBeanId.getStrSoftName().substring(0, 1) );
+		args.put("type_id" , Long.valueOf(publisherBeanId.getType_id()) );
+		args.put("portlettype_id" ,Long.valueOf(publisherBeanId.getPortlettype_id()) );
+		args.put("creteria1_id" , Long.valueOf(publisherBeanId.getCreteria1_id()));
+		args.put("creteria2_id" , Long.valueOf(publisherBeanId.getCreteria2_id()));
+		args.put("creteria3_id" , Long.valueOf(publisherBeanId.getCreteria3_id()));
+		args.put("creteria4_id" , Long.valueOf(publisherBeanId.getCreteria4_id()));
+		args.put("creteria5_id" , Long.valueOf(publisherBeanId.getCreteria5_id()));
+		args.put("creteria6_id" , Long.valueOf(publisherBeanId.getCreteria6_id()));
+		args.put("creteria7_id" , Long.valueOf(publisherBeanId.getCreteria7_id()));
+		args.put("creteria8_id" , Long.valueOf(publisherBeanId.getCreteria8_id()));
+		args.put("creteria9_id" , Long.valueOf(publisherBeanId.getCreteria9_id()));
+		args.put("creteria10_id" , Long.valueOf(publisherBeanId.getCreteria10_id()));
+		args.put("amount1" , Double.parseDouble(publisherBeanId.getAmount1()));
+		args.put("amount2" , Double.parseDouble(publisherBeanId.getAmount2()));
+		args.put("amount3" , Double.parseDouble(publisherBeanId.getAmount3()));
+		args.put("search2" , publisherBeanId.getStrSearch2() );
+		args.put("name2" , publisherBeanId.getStrSoftName2() );
+		args.put("SHOW_RATING1" , Boolean.valueOf(publisherBeanId.getStrShow_ratimg1()));
+		args.put("SHOW_RATING2" , Boolean.valueOf(publisherBeanId.getStrShow_ratimg2()));
+		args.put("SHOW_RATING3" , Boolean.valueOf(publisherBeanId.getStrShow_ratimg3()));
+		args.put("SHOW_BLOG" , Boolean.valueOf(publisherBeanId.getStrShow_forum()));
 		args.put("lang_id" ,authorizationPageBeanId.getLang_id());
-		args.put("jsp_url" , softPostBean.getJsp_url() );
+		args.put("jsp_url" , publisherBeanId.getJsp_url() );
 		args.put("CDATE", new java.util.Date() );
 		
 			Adp.executeUpdateWithArgs(query, args);
@@ -355,25 +355,25 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 			Adp.close();
 		}
 		
-		softPostBean.setSoft_id("-1");
+		publisherBeanId.setSoft_id("-1");
 		return id;
 	}
 
 	
-	final public String updateRowWithParent(final String tree_id , final SoftPostBean softPostBean , final AuthorizationPageBean authorizationPageBeanId) throws UnsupportedEncodingException {
+	final public String updateRowWithParent(final String tree_id , final PublisherBean publisherBeanId , final AuthorizationPageBean authorizationPageBeanId) throws UnsupportedEncodingException {
 		QueryManager Adp = new QueryManager();
 		Adp.BeginTransaction();
-		String id = softPostBean.getSoft_id();
+		String id = publisherBeanId.getSoft_id();
 		String query = "" ;
 		Map args = Adp.getArgs();
-		if (softPostBean.getSoft_id().compareTo("-1") == 0) return "";
+		if (publisherBeanId.getSoft_id().compareTo("-1") == 0) return "";
 		
 		
-		if(softPostBean.getStrSoftName2() != null && softPostBean.getStrSoftName2().length() > 0 )  
-			softPostBean.setStrSearch2(softPostBean.getStrSoftName2().substring(0, 1));
+		if(publisherBeanId.getStrSoftName2() != null && publisherBeanId.getStrSoftName2().length() > 0 )  
+			publisherBeanId.setStrSearch2(publisherBeanId.getStrSoftName2().substring(0, 1));
 	
 		
-		//if( softPostBean.getType_id().compareTo("0") == 0 || softPostBean.getType_id().length() == 0 )
+		//if( publisherBeanId.getType_id().compareTo("0") == 0 || publisherBeanId.getType_id().length() == 0 )
 		//{
 		query = " update soft set soft_id = ?, " 
 			+ " name = ?, "
@@ -415,51 +415,51 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 			+ " lang_id = ? , "
 			+ " jsp_url = ? , "
 			+ " CDATE = ? "
-			+ " where soft_id = " + softPostBean.getSoft_id() ;
+			+ " where soft_id = " + publisherBeanId.getSoft_id() ;
 	
 	
-	args.put("soft_id" , Long.valueOf(softPostBean.getSoft_id()));
-	args.put("name" , softPostBean.getStrSoftName());
-	args.put("description" , softPostBean.strSoftDescription );
-	args.put("fulldescription", softPostBean.product_fulldescription );
-	args.put("version" , softPostBean.getStrSoftVersion() );
-	args.put("cost"	, Double.valueOf(softPostBean.getStrSoftCost()) );
-	args.put("currency" , Long.valueOf(softPostBean.getStrCurrency()) );
-	args.put("file_id" , Long.valueOf(softPostBean.getFile_id() ));
+	args.put("soft_id" , Long.valueOf(publisherBeanId.getSoft_id()));
+	args.put("name" , publisherBeanId.getStrSoftName());
+	args.put("description" , publisherBeanId.strSoftDescription );
+	args.put("fulldescription", publisherBeanId.product_fulldescription );
+	args.put("version" , publisherBeanId.getStrSoftVersion() );
+	args.put("cost"	, Double.valueOf(publisherBeanId.getStrSoftCost()) );
+	args.put("currency" , Long.valueOf(publisherBeanId.getStrCurrency()) );
+	args.put("file_id" , Long.valueOf(publisherBeanId.getFile_id() ));
 	args.put("catalog_id", Long.valueOf(authorizationPageBeanId.getCatalog_id()) );
-	args.put("image_id" , Long.valueOf(softPostBean.getImage_id()));
-	args.put("bigimage_id" , Long.valueOf(softPostBean.getBigimage_id() ));
-	args.put("salelogic_id" , Long.valueOf(softPostBean.getSalelogic_id()) );
-	args.put("site_id" , Long.parseLong(softPostBean.getSite_id()) ); 
-	args.put("product_code" , Long.valueOf(softPostBean.getProduct_code_id() )); 
-	args.put("search", softPostBean.getStrSoftName().substring(0, 1) );
-	args.put("type_id" , Long.valueOf(softPostBean.getType_id()) );
-	args.put("portlettype_id" ,Long.valueOf(softPostBean.getPortlettype_id()) );
+	args.put("image_id" , Long.valueOf(publisherBeanId.getImage_id()));
+	args.put("bigimage_id" , Long.valueOf(publisherBeanId.getBigimage_id() ));
+	args.put("salelogic_id" , Long.valueOf(publisherBeanId.getSalelogic_id()) );
+	args.put("site_id" , Long.parseLong(publisherBeanId.getSite_id()) ); 
+	args.put("product_code" , Long.valueOf(publisherBeanId.getProduct_code_id() )); 
+	args.put("search", publisherBeanId.getStrSoftName().substring(0, 1) );
+	args.put("type_id" , Long.valueOf(publisherBeanId.getType_id()) );
+	args.put("portlettype_id" ,Long.valueOf(publisherBeanId.getPortlettype_id()) );
 	args.put("tree_id" ,Long.valueOf(tree_id) );
-	args.put("creteria1_id" , Long.valueOf(softPostBean.getCreteria1_id()));
-	args.put("creteria2_id" , Long.valueOf(softPostBean.getCreteria2_id()));
-	args.put("creteria3_id" , Long.valueOf(softPostBean.getCreteria3_id()));
-	args.put("creteria4_id" , Long.valueOf(softPostBean.getCreteria4_id()));
-	args.put("creteria5_id" , Long.valueOf(softPostBean.getCreteria5_id()));
-	args.put("creteria6_id" , Long.valueOf(softPostBean.getCreteria6_id()));
-	args.put("creteria7_id" , Long.valueOf(softPostBean.getCreteria7_id()));
-	args.put("creteria8_id" , Long.valueOf(softPostBean.getCreteria8_id()));
-	args.put("creteria9_id" , Long.valueOf(softPostBean.getCreteria9_id()));
-	args.put("creteria10_id" , Long.valueOf(softPostBean.getCreteria10_id()));
-	args.put("amount1" , Double.parseDouble(softPostBean.getAmount1()));
-	args.put("amount2" , Double.parseDouble(softPostBean.getAmount2()));
-	args.put("amount3" , Double.parseDouble(softPostBean.getAmount3()));
-	args.put("search2" , softPostBean.getStrSearch2() );
-	args.put("name2" , softPostBean.getStrSoftName2() );
-	args.put("SHOW_RATING1" , Boolean.valueOf(softPostBean.getStrShow_ratimg1()));
-	args.put("SHOW_RATING2" , Boolean.valueOf(softPostBean.getStrShow_ratimg2()));
-	args.put("SHOW_RATING3" , Boolean.valueOf(softPostBean.getStrShow_ratimg3()));
-	args.put("SHOW_BLOG" , Boolean.valueOf(softPostBean.getStrShow_forum()));
+	args.put("creteria1_id" , Long.valueOf(publisherBeanId.getCreteria1_id()));
+	args.put("creteria2_id" , Long.valueOf(publisherBeanId.getCreteria2_id()));
+	args.put("creteria3_id" , Long.valueOf(publisherBeanId.getCreteria3_id()));
+	args.put("creteria4_id" , Long.valueOf(publisherBeanId.getCreteria4_id()));
+	args.put("creteria5_id" , Long.valueOf(publisherBeanId.getCreteria5_id()));
+	args.put("creteria6_id" , Long.valueOf(publisherBeanId.getCreteria6_id()));
+	args.put("creteria7_id" , Long.valueOf(publisherBeanId.getCreteria7_id()));
+	args.put("creteria8_id" , Long.valueOf(publisherBeanId.getCreteria8_id()));
+	args.put("creteria9_id" , Long.valueOf(publisherBeanId.getCreteria9_id()));
+	args.put("creteria10_id" , Long.valueOf(publisherBeanId.getCreteria10_id()));
+	args.put("amount1" , Double.parseDouble(publisherBeanId.getAmount1()));
+	args.put("amount2" , Double.parseDouble(publisherBeanId.getAmount2()));
+	args.put("amount3" , Double.parseDouble(publisherBeanId.getAmount3()));
+	args.put("search2" , publisherBeanId.getStrSearch2() );
+	args.put("name2" , publisherBeanId.getStrSoftName2() );
+	args.put("SHOW_RATING1" , Boolean.valueOf(publisherBeanId.getStrShow_ratimg1()));
+	args.put("SHOW_RATING2" , Boolean.valueOf(publisherBeanId.getStrShow_ratimg2()));
+	args.put("SHOW_RATING3" , Boolean.valueOf(publisherBeanId.getStrShow_ratimg3()));
+	args.put("SHOW_BLOG" , Boolean.valueOf(publisherBeanId.getStrShow_forum()));
 	args.put("lang_id" ,authorizationPageBeanId.getLang_id());
-	args.put("jsp_url" , softPostBean.getJsp_url() );
+	args.put("jsp_url" , publisherBeanId.getJsp_url() );
 	args.put("CDATE", new java.util.Date() );
 	//}	
-//	if( softPostBean.getType_id().compareTo("2") == 0  )
+//	if( publisherBeanId.getType_id().compareTo("2") == 0  )
 //	{
 //		query = " update soft set soft_id = ?, " 
 //			+ " name = ?, "
@@ -499,47 +499,47 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 //			+ " SHOW_BLOG = ? , "
 //			+ " jsp_url = ? , "
 //			+ " CDATE = ? "
-//			+ " where soft_id = " + softPostBean.getSoft_id() ;
+//			+ " where soft_id = " + publisherBeanId.getSoft_id() ;
 //	
 //	
 //	
-//	args.put("soft_id" , Long.valueOf(softPostBean.getSoft_id()));
-//	args.put("name" , softPostBean.getStrSoftName());
-//	args.put("description" , softPostBean.strSoftDescription );
-//	args.put("fulldescription", softPostBean.product_fulldescription );
-//	args.put("version" , softPostBean.getStrSoftVersion() );
-//	args.put("cost"	, Double.valueOf(softPostBean.getStrSoftCost()) );
-//	args.put("currency" , Long.valueOf(softPostBean.getStrCurrency()) );
-//	args.put("file_id" , Long.valueOf(softPostBean.getFile_id() ));
-//	args.put("catalog_id", Long.valueOf(softPostBean.getCatalog_id()) );
-//	args.put("image_id" , Long.valueOf(softPostBean.getImage_id()));
-//	args.put("bigimage_id" , Long.valueOf(softPostBean.getBigimage_id() ));
-//	args.put("salelogic_id" , Long.valueOf(softPostBean.getSalelogic_id()) );
-//	args.put("site_id" , Long.parseLong(softPostBean.getSite_id()) ); 
-//	args.put("product_code" , Long.valueOf(softPostBean.getProduct_code_id() )); 
-//	args.put("search", softPostBean.getStrSoftName().substring(0, 1) );
-//	args.put("type_id" , Long.valueOf(softPostBean.getType_id()) );
-//	args.put("portlettype_id" ,Long.valueOf(softPostBean.getPortlettype_id()) );
-//	args.put("creteria1_id" , Long.valueOf(softPostBean.getCreteria1_id()));
-//	args.put("creteria2_id" , Long.valueOf(softPostBean.getCreteria2_id()));
-//	args.put("creteria3_id" , Long.valueOf(softPostBean.getCreteria3_id()));
-//	args.put("creteria4_id" , Long.valueOf(softPostBean.getCreteria4_id()));
-//	args.put("creteria5_id" , Long.valueOf(softPostBean.getCreteria5_id()));
-//	args.put("creteria6_id" , Long.valueOf(softPostBean.getCreteria6_id()));
-//	args.put("creteria7_id" , Long.valueOf(softPostBean.getCreteria7_id()));
-//	args.put("creteria8_id" , Long.valueOf(softPostBean.getCreteria8_id()));
-//	args.put("creteria9_id" , Long.valueOf(softPostBean.getCreteria9_id()));
-//	args.put("creteria10_id" , Long.valueOf(softPostBean.getCreteria10_id()));
-//	args.put("amount1" , Double.parseDouble(softPostBean.getAmount1()));
-//	args.put("amount2" , Double.parseDouble(softPostBean.getAmount2()));
-//	args.put("amount3" , Double.parseDouble(softPostBean.getAmount3()));
-//	args.put("search2" , softPostBean.getStrSearch2() );
-//	args.put("name2" , softPostBean.getStrSoftName2() );
-//	args.put("SHOW_RATING1" , Boolean.valueOf(softPostBean.getStrShow_ratimg1()));
-//	args.put("SHOW_RATING2" , Boolean.valueOf(softPostBean.getStrShow_ratimg2()));
-//	args.put("SHOW_RATING3" , Boolean.valueOf(softPostBean.getStrShow_ratimg3()));
-//	args.put("SHOW_BLOG" , Boolean.valueOf(softPostBean.getStrShow_forum()));
-//	args.put("jsp_url" , softPostBean.getJsp_url() );
+//	args.put("soft_id" , Long.valueOf(publisherBeanId.getSoft_id()));
+//	args.put("name" , publisherBeanId.getStrSoftName());
+//	args.put("description" , publisherBeanId.strSoftDescription );
+//	args.put("fulldescription", publisherBeanId.product_fulldescription );
+//	args.put("version" , publisherBeanId.getStrSoftVersion() );
+//	args.put("cost"	, Double.valueOf(publisherBeanId.getStrSoftCost()) );
+//	args.put("currency" , Long.valueOf(publisherBeanId.getStrCurrency()) );
+//	args.put("file_id" , Long.valueOf(publisherBeanId.getFile_id() ));
+//	args.put("catalog_id", Long.valueOf(publisherBeanId.getCatalog_id()) );
+//	args.put("image_id" , Long.valueOf(publisherBeanId.getImage_id()));
+//	args.put("bigimage_id" , Long.valueOf(publisherBeanId.getBigimage_id() ));
+//	args.put("salelogic_id" , Long.valueOf(publisherBeanId.getSalelogic_id()) );
+//	args.put("site_id" , Long.parseLong(publisherBeanId.getSite_id()) ); 
+//	args.put("product_code" , Long.valueOf(publisherBeanId.getProduct_code_id() )); 
+//	args.put("search", publisherBeanId.getStrSoftName().substring(0, 1) );
+//	args.put("type_id" , Long.valueOf(publisherBeanId.getType_id()) );
+//	args.put("portlettype_id" ,Long.valueOf(publisherBeanId.getPortlettype_id()) );
+//	args.put("creteria1_id" , Long.valueOf(publisherBeanId.getCreteria1_id()));
+//	args.put("creteria2_id" , Long.valueOf(publisherBeanId.getCreteria2_id()));
+//	args.put("creteria3_id" , Long.valueOf(publisherBeanId.getCreteria3_id()));
+//	args.put("creteria4_id" , Long.valueOf(publisherBeanId.getCreteria4_id()));
+//	args.put("creteria5_id" , Long.valueOf(publisherBeanId.getCreteria5_id()));
+//	args.put("creteria6_id" , Long.valueOf(publisherBeanId.getCreteria6_id()));
+//	args.put("creteria7_id" , Long.valueOf(publisherBeanId.getCreteria7_id()));
+//	args.put("creteria8_id" , Long.valueOf(publisherBeanId.getCreteria8_id()));
+//	args.put("creteria9_id" , Long.valueOf(publisherBeanId.getCreteria9_id()));
+//	args.put("creteria10_id" , Long.valueOf(publisherBeanId.getCreteria10_id()));
+//	args.put("amount1" , Double.parseDouble(publisherBeanId.getAmount1()));
+//	args.put("amount2" , Double.parseDouble(publisherBeanId.getAmount2()));
+//	args.put("amount3" , Double.parseDouble(publisherBeanId.getAmount3()));
+//	args.put("search2" , publisherBeanId.getStrSearch2() );
+//	args.put("name2" , publisherBeanId.getStrSoftName2() );
+//	args.put("SHOW_RATING1" , Boolean.valueOf(publisherBeanId.getStrShow_ratimg1()));
+//	args.put("SHOW_RATING2" , Boolean.valueOf(publisherBeanId.getStrShow_ratimg2()));
+//	args.put("SHOW_RATING3" , Boolean.valueOf(publisherBeanId.getStrShow_ratimg3()));
+//	args.put("SHOW_BLOG" , Boolean.valueOf(publisherBeanId.getStrShow_forum()));
+//	args.put("jsp_url" , publisherBeanId.getJsp_url() );
 //	args.put("CDATE", new java.util.Date() );
 //	}
 		try 
@@ -562,15 +562,15 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 			Adp.close();
 		}
 
-		softPostBean.setSoft_id("-1");
+		publisherBeanId.setSoft_id("-1");
 		return id;
 	}
 
 	
-	final public String saveDescSoft(final SoftPostBean softPostBean , final AuthorizationPageBean authorizationPageBeanId) throws UnsupportedEncodingException {
+	final public String saveDescSoft(final PublisherBean publisherBeanId , final AuthorizationPageBean authorizationPageBeanId) throws UnsupportedEncodingException {
 		
-		if(softPostBean.getStrSoftName2() != null && softPostBean.getStrSoftName2().length() > 0 )  
-			softPostBean.setStrSearch2(softPostBean.getStrSoftName2().substring(0, 1));
+		if(publisherBeanId.getStrSoftName2() != null && publisherBeanId.getStrSoftName2().length() > 0 )  
+			publisherBeanId.setStrSearch2(publisherBeanId.getStrSoftName2().substring(0, 1));
 		
 		QueryManager Adp = new QueryManager();
 		Adp.BeginTransaction();
@@ -673,47 +673,47 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 		
 			Map args = Adp.getArgs();
 			args.put("soft_id",Long.valueOf(strID) );
-			args.put("name",softPostBean.getStrSoftName() );
-			args.put("description", softPostBean.strSoftDescription);
-			args.put("fulldescription",softPostBean.product_fulldescription );
-			args.put("version",softPostBean.getStrSoftVersion() );
-			args.put("cost", Double.valueOf(softPostBean.getStrSoftCost() ));
-			args.put("currency", Long.valueOf(softPostBean.getStrCurrency()) );
-			args.put("file_id", Long.valueOf(softPostBean.getFile_id()) );
+			args.put("name",publisherBeanId.getStrSoftName() );
+			args.put("description", publisherBeanId.strSoftDescription);
+			args.put("fulldescription",publisherBeanId.product_fulldescription );
+			args.put("version",publisherBeanId.getStrSoftVersion() );
+			args.put("cost", Double.valueOf(publisherBeanId.getStrSoftCost() ));
+			args.put("currency", Long.valueOf(publisherBeanId.getStrCurrency()) );
+			args.put("file_id", Long.valueOf(publisherBeanId.getFile_id()) );
 			args.put("catalog_id", Long.valueOf(authorizationPageBeanId.getCatalog_id()) );
 			args.put("active",true);
-			args.put("licence_id" ,Long.valueOf(softPostBean.getLicence_id()) );
-			args.put("image_id",Long.valueOf(softPostBean.getImage_id()) );
-			args.put("bigimage_id" ,Long.valueOf(softPostBean.getBigimage_id()));
-			args.put("user_id" ,Long.valueOf(softPostBean.getUser_id()));
-			args.put("salelogic_id" ,Long.valueOf(softPostBean.getSalelogic_id()));
+			args.put("licence_id" ,Long.valueOf(publisherBeanId.getLicence_id()) );
+			args.put("image_id",Long.valueOf(publisherBeanId.getImage_id()) );
+			args.put("bigimage_id" ,Long.valueOf(publisherBeanId.getBigimage_id()));
+			args.put("user_id" ,Long.valueOf(publisherBeanId.getUser_id()));
+			args.put("salelogic_id" ,Long.valueOf(publisherBeanId.getSalelogic_id()));
 			args.put("site_id" , Long.valueOf(authorizationPageBeanId.getSite_id()));
-			args.put("product_code",Long.valueOf(softPostBean.getProduct_code_id()));
-			args.put("search", softPostBean.getStrSoftName().substring(0, 1));
-			args.put("portlettype_id" ,Long.valueOf(softPostBean.getPortlettype_id()));
+			args.put("product_code",Long.valueOf(publisherBeanId.getProduct_code_id()));
+			args.put("search", publisherBeanId.getStrSoftName().substring(0, 1));
+			args.put("portlettype_id" ,Long.valueOf(publisherBeanId.getPortlettype_id()));
 			if(authorizationPageBeanId.getCatalog_id().equals("-2"))args.put("type_id" ,3);
-			else args.put("type_id" ,Long.valueOf(softPostBean.getType_id()));
-			args.put("creteria1_id",Long.valueOf(softPostBean.getCreteria1_id()));
-			args.put("creteria2_id" ,Long.valueOf(softPostBean.getCreteria2_id()));
-			args.put("creteria3_id",Long.valueOf(softPostBean.getCreteria3_id()));
-			args.put("creteria4_id" ,Long.valueOf(softPostBean.getCreteria4_id()));
-			args.put("creteria5_id",Long.valueOf(softPostBean.getCreteria5_id()));
-			args.put("creteria6_id" ,Long.valueOf(softPostBean.getCreteria6_id()));
-			args.put("creteria7_id",Long.valueOf(softPostBean.getCreteria7_id()));
-			args.put("creteria8_id" ,Long.valueOf(softPostBean.getCreteria8_id()));
-			args.put("creteria9_id",Long.valueOf(softPostBean.getCreteria9_id()));
-			args.put("creteria10_id" ,Long.valueOf(softPostBean.getCreteria10_id()));
-			args.put("show_rating1",Boolean.valueOf(softPostBean.getStrShow_ratimg1()));
-			args.put("show_rating2" ,Boolean.valueOf(softPostBean.getStrShow_ratimg2()));
-			args.put("show_rating3",Boolean.valueOf(softPostBean.getStrShow_ratimg3()));
-			args.put("show_blog" ,Boolean.valueOf(softPostBean.getStrShow_forum()) );
-			args.put("search2",softPostBean.getStrSearch2());
-			args.put("amount1" ,Double.valueOf(softPostBean.getAmount1()));
-			args.put("amount2",Double.valueOf(softPostBean.getAmount2()));
-			args.put("amount3" ,Double.valueOf(softPostBean.getAmount3()));
-			args.put("name2" ,softPostBean.getStrSoftName2());
+			else args.put("type_id" ,Long.valueOf(publisherBeanId.getType_id()));
+			args.put("creteria1_id",Long.valueOf(publisherBeanId.getCreteria1_id()));
+			args.put("creteria2_id" ,Long.valueOf(publisherBeanId.getCreteria2_id()));
+			args.put("creteria3_id",Long.valueOf(publisherBeanId.getCreteria3_id()));
+			args.put("creteria4_id" ,Long.valueOf(publisherBeanId.getCreteria4_id()));
+			args.put("creteria5_id",Long.valueOf(publisherBeanId.getCreteria5_id()));
+			args.put("creteria6_id" ,Long.valueOf(publisherBeanId.getCreteria6_id()));
+			args.put("creteria7_id",Long.valueOf(publisherBeanId.getCreteria7_id()));
+			args.put("creteria8_id" ,Long.valueOf(publisherBeanId.getCreteria8_id()));
+			args.put("creteria9_id",Long.valueOf(publisherBeanId.getCreteria9_id()));
+			args.put("creteria10_id" ,Long.valueOf(publisherBeanId.getCreteria10_id()));
+			args.put("show_rating1",Boolean.valueOf(publisherBeanId.getStrShow_ratimg1()));
+			args.put("show_rating2" ,Boolean.valueOf(publisherBeanId.getStrShow_ratimg2()));
+			args.put("show_rating3",Boolean.valueOf(publisherBeanId.getStrShow_ratimg3()));
+			args.put("show_blog" ,Boolean.valueOf(publisherBeanId.getStrShow_forum()) );
+			args.put("search2",publisherBeanId.getStrSearch2());
+			args.put("amount1" ,Double.valueOf(publisherBeanId.getAmount1()));
+			args.put("amount2",Double.valueOf(publisherBeanId.getAmount2()));
+			args.put("amount3" ,Double.valueOf(publisherBeanId.getAmount3()));
+			args.put("name2" ,publisherBeanId.getStrSoftName2());
 			args.put("lang_id" ,authorizationPageBeanId.getLang_id());
-			args.put("jsp_url" ,softPostBean.getJsp_url());
+			args.put("jsp_url" ,publisherBeanId.getJsp_url());
 		
 		
 		
@@ -739,7 +739,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 		return strID;
 	}
 
-	final public String insertRowWithParent(final String tree_id , final SoftPostBean softPostBean, final AuthorizationPageBean authorizationPageBeanId) throws UnsupportedEncodingException {
+	final public String insertRowWithParent(final String tree_id , final PublisherBean publisherBeanId, final AuthorizationPageBean authorizationPageBeanId) throws UnsupportedEncodingException {
 		
 		QueryManager Adp = new QueryManager();
 		Adp.BeginTransaction();
@@ -840,47 +840,47 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 	
 		Map args = Adp.getArgs();
 		args.put("soft_id",Long.valueOf(strID) );
-		args.put("name",softPostBean.getStrSoftName() );
-		args.put("description", softPostBean.strSoftDescription);
-		args.put("fulldescription",softPostBean.product_fulldescription );
-		args.put("version",softPostBean.getStrSoftVersion() );
-		args.put("cost", Double.valueOf(softPostBean.getStrSoftCost() ));
-		args.put("currency", Long.valueOf(softPostBean.getStrCurrency()) );
-		args.put("file_id", Long.valueOf(softPostBean.getFile_id()) );
+		args.put("name",publisherBeanId.getStrSoftName() );
+		args.put("description", publisherBeanId.strSoftDescription);
+		args.put("fulldescription",publisherBeanId.product_fulldescription );
+		args.put("version",publisherBeanId.getStrSoftVersion() );
+		args.put("cost", Double.valueOf(publisherBeanId.getStrSoftCost() ));
+		args.put("currency", Long.valueOf(publisherBeanId.getStrCurrency()) );
+		args.put("file_id", Long.valueOf(publisherBeanId.getFile_id()) );
 		args.put("catalog_id", Long.valueOf(authorizationPageBeanId.getCatalog_id()) );
 		args.put("active",true);
-		args.put("licence_id" ,Long.valueOf(softPostBean.getLicence_id()) );
-		args.put("image_id",Long.valueOf(softPostBean.getImage_id()) );
-		args.put("bigimage_id" ,Long.valueOf(softPostBean.getBigimage_id()));
-		args.put("user_id" ,Long.valueOf(softPostBean.getUser_id()));
-		args.put("salelogic_id" ,Long.valueOf(softPostBean.getSalelogic_id()));
-		args.put("site_id" , Long.valueOf(softPostBean.getSite_id()));
-		args.put("product_code",Long.valueOf(softPostBean.getProduct_code_id()));
-		args.put("search", softPostBean.getStrSoftName().substring(0, 1));
-		args.put("portlettype_id" ,Long.valueOf(softPostBean.getPortlettype_id()));
-		args.put("type_id" ,Long.valueOf(softPostBean.getType_id()));
+		args.put("licence_id" ,Long.valueOf(publisherBeanId.getLicence_id()) );
+		args.put("image_id",Long.valueOf(publisherBeanId.getImage_id()) );
+		args.put("bigimage_id" ,Long.valueOf(publisherBeanId.getBigimage_id()));
+		args.put("user_id" ,Long.valueOf(publisherBeanId.getUser_id()));
+		args.put("salelogic_id" ,Long.valueOf(publisherBeanId.getSalelogic_id()));
+		args.put("site_id" , Long.valueOf(publisherBeanId.getSite_id()));
+		args.put("product_code",Long.valueOf(publisherBeanId.getProduct_code_id()));
+		args.put("search", publisherBeanId.getStrSoftName().substring(0, 1));
+		args.put("portlettype_id" ,Long.valueOf(publisherBeanId.getPortlettype_id()));
+		args.put("type_id" ,Long.valueOf(publisherBeanId.getType_id()));
 		args.put("tree_id" ,Long.valueOf(tree_id));
-		args.put("creteria1_id",Long.valueOf(softPostBean.getCreteria1_id()));
-		args.put("creteria2_id" ,Long.valueOf(softPostBean.getCreteria2_id()));
-		args.put("creteria3_id",Long.valueOf(softPostBean.getCreteria3_id()));
-		args.put("creteria4_id" ,Long.valueOf(softPostBean.getCreteria4_id()));
-		args.put("creteria5_id",Long.valueOf(softPostBean.getCreteria5_id()));
-		args.put("creteria6_id" ,Long.valueOf(softPostBean.getCreteria6_id()));
-		args.put("creteria7_id",Long.valueOf(softPostBean.getCreteria7_id()));
-		args.put("creteria8_id" ,Long.valueOf(softPostBean.getCreteria8_id()));
-		args.put("creteria9_id",Long.valueOf(softPostBean.getCreteria9_id()));
-		args.put("creteria10_id" ,Long.valueOf(softPostBean.getCreteria10_id()));
-		args.put("show_rating1",Boolean.valueOf(softPostBean.getStrShow_ratimg1()));
-		args.put("show_rating2" ,Boolean.valueOf(softPostBean.getStrShow_ratimg2()));
-		args.put("show_rating3",Boolean.valueOf(softPostBean.getStrShow_ratimg3()));
-		args.put("show_blog" ,Boolean.valueOf(softPostBean.getStrShow_forum()) );
-		args.put("search2",softPostBean.getStrSearch2());
-		args.put("amount1" ,Double.valueOf(softPostBean.getAmount1()));
-		args.put("amount2",Double.valueOf(softPostBean.getAmount2()));
-		args.put("amount3" ,Double.valueOf(softPostBean.getAmount3()));
-		args.put("name2" ,softPostBean.getStrSoftName2());
+		args.put("creteria1_id",Long.valueOf(publisherBeanId.getCreteria1_id()));
+		args.put("creteria2_id" ,Long.valueOf(publisherBeanId.getCreteria2_id()));
+		args.put("creteria3_id",Long.valueOf(publisherBeanId.getCreteria3_id()));
+		args.put("creteria4_id" ,Long.valueOf(publisherBeanId.getCreteria4_id()));
+		args.put("creteria5_id",Long.valueOf(publisherBeanId.getCreteria5_id()));
+		args.put("creteria6_id" ,Long.valueOf(publisherBeanId.getCreteria6_id()));
+		args.put("creteria7_id",Long.valueOf(publisherBeanId.getCreteria7_id()));
+		args.put("creteria8_id" ,Long.valueOf(publisherBeanId.getCreteria8_id()));
+		args.put("creteria9_id",Long.valueOf(publisherBeanId.getCreteria9_id()));
+		args.put("creteria10_id" ,Long.valueOf(publisherBeanId.getCreteria10_id()));
+		args.put("show_rating1",Boolean.valueOf(publisherBeanId.getStrShow_ratimg1()));
+		args.put("show_rating2" ,Boolean.valueOf(publisherBeanId.getStrShow_ratimg2()));
+		args.put("show_rating3",Boolean.valueOf(publisherBeanId.getStrShow_ratimg3()));
+		args.put("show_blog" ,Boolean.valueOf(publisherBeanId.getStrShow_forum()) );
+		args.put("search2",publisherBeanId.getStrSearch2());
+		args.put("amount1" ,Double.valueOf(publisherBeanId.getAmount1()));
+		args.put("amount2",Double.valueOf(publisherBeanId.getAmount2()));
+		args.put("amount3" ,Double.valueOf(publisherBeanId.getAmount3()));
+		args.put("name2" ,publisherBeanId.getStrSoftName2());
 		args.put("lang_id" ,authorizationPageBeanId.getLang_id());
-		args.put("jsp_url" ,softPostBean.getJsp_url());
+		args.put("jsp_url" ,publisherBeanId.getJsp_url());
 		
 			Adp.executeInsertWithArgs(query, args);
 			Adp.commit();
@@ -917,7 +917,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 	 * @throws UnsupportedEncodingException
 	 */
 	
-	final public String saveInformationWithCheck(final SoftPostBean softPostBean, final AuthorizationPageBean authorizationPageBeanId) throws UnsupportedEncodingException {
+	final public String saveInformationWithCheck(final PublisherBean publisherBeanId, final AuthorizationPageBean authorizationPageBeanId) throws UnsupportedEncodingException {
 
 		QueryManager Adp = new QueryManager();
 		Adp.BeginTransaction();
@@ -1013,46 +1013,46 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 	
 		Map args = Adp.getArgs();
 		args.put("soft_id",Long.valueOf(strID) );
-		args.put("name",softPostBean.getStrSoftName() );
-		args.put("description", softPostBean.strSoftDescription);
-		args.put("fulldescription",softPostBean.product_fulldescription );
-		args.put("version",softPostBean.getStrSoftVersion() );
-		args.put("cost", Double.valueOf(softPostBean.getStrSoftCost() ));
-		args.put("currency", Long.valueOf(softPostBean.getStrCurrency()) );
-		args.put("file_id", Long.valueOf(softPostBean.getFile_id()) );
+		args.put("name",publisherBeanId.getStrSoftName() );
+		args.put("description", publisherBeanId.strSoftDescription);
+		args.put("fulldescription",publisherBeanId.product_fulldescription );
+		args.put("version",publisherBeanId.getStrSoftVersion() );
+		args.put("cost", Double.valueOf(publisherBeanId.getStrSoftCost() ));
+		args.put("currency", Long.valueOf(publisherBeanId.getStrCurrency()) );
+		args.put("file_id", Long.valueOf(publisherBeanId.getFile_id()) );
 		args.put("catalog_id", Long.valueOf(authorizationPageBeanId.getCatalog_id()) );
 		args.put("active",true);
-		args.put("licence_id" ,Long.valueOf(softPostBean.getLicence_id()) );
-		args.put("image_id",Long.valueOf(softPostBean.getImage_id()) );
-		args.put("bigimage_id" ,Long.valueOf(softPostBean.getBigimage_id()));
+		args.put("licence_id" ,Long.valueOf(publisherBeanId.getLicence_id()) );
+		args.put("image_id",Long.valueOf(publisherBeanId.getImage_id()) );
+		args.put("bigimage_id" ,Long.valueOf(publisherBeanId.getBigimage_id()));
 		args.put("user_id" , Long.valueOf(authorizationPageBeanId.getIntUserID()));
-		args.put("salelogic_id" ,Long.valueOf(softPostBean.getSalelogic_id()));
-		args.put("site_id" , Long.valueOf(softPostBean.getSite_id()));
-		args.put("product_code",Long.valueOf(softPostBean.getProduct_code_id()));
-		args.put("search", softPostBean.getStrSoftName().substring(0, 1));
-		args.put("portlettype_id" ,Long.valueOf(softPostBean.getPortlettype_id()));
+		args.put("salelogic_id" ,Long.valueOf(publisherBeanId.getSalelogic_id()));
+		args.put("site_id" , Long.valueOf(publisherBeanId.getSite_id()));
+		args.put("product_code",Long.valueOf(publisherBeanId.getProduct_code_id()));
+		args.put("search", publisherBeanId.getStrSoftName().substring(0, 1));
+		args.put("portlettype_id" ,Long.valueOf(publisherBeanId.getPortlettype_id()));
 		args.put("type_id" ,Long.valueOf(PostType.FOR_APROVE ));
-		args.put("creteria1_id",Long.valueOf(softPostBean.getCreteria1_id()));
-		args.put("creteria2_id" ,Long.valueOf(softPostBean.getCreteria2_id()));
-		args.put("creteria3_id",Long.valueOf(softPostBean.getCreteria3_id()));
-		args.put("creteria4_id" ,Long.valueOf(softPostBean.getCreteria4_id()));
-		args.put("creteria5_id",Long.valueOf(softPostBean.getCreteria5_id()));
-		args.put("creteria6_id" ,Long.valueOf(softPostBean.getCreteria6_id()));
-		args.put("creteria7_id",Long.valueOf(softPostBean.getCreteria7_id()));
-		args.put("creteria8_id" ,Long.valueOf(softPostBean.getCreteria8_id()));
-		args.put("creteria9_id",Long.valueOf(softPostBean.getCreteria9_id()));
-		args.put("creteria10_id" ,Long.valueOf(softPostBean.getCreteria10_id()));
-		args.put("show_rating1",Boolean.valueOf(softPostBean.getStrShow_ratimg1()));
-		args.put("show_rating2" ,Boolean.valueOf(softPostBean.getStrShow_ratimg2()));
-		args.put("show_rating3",Boolean.valueOf(softPostBean.getStrShow_ratimg3()));
-		args.put("show_blog" ,Boolean.valueOf(softPostBean.getStrShow_forum()) );
-		args.put("search2",softPostBean.getStrSearch2());
-		args.put("amount1" ,Double.valueOf(softPostBean.getAmount1()));
-		args.put("amount2",Double.valueOf(softPostBean.getAmount2()));
-		args.put("amount3" ,Double.valueOf(softPostBean.getAmount3()));
-		args.put("name2" ,softPostBean.getStrSoftName2());
+		args.put("creteria1_id",Long.valueOf(publisherBeanId.getCreteria1_id()));
+		args.put("creteria2_id" ,Long.valueOf(publisherBeanId.getCreteria2_id()));
+		args.put("creteria3_id",Long.valueOf(publisherBeanId.getCreteria3_id()));
+		args.put("creteria4_id" ,Long.valueOf(publisherBeanId.getCreteria4_id()));
+		args.put("creteria5_id",Long.valueOf(publisherBeanId.getCreteria5_id()));
+		args.put("creteria6_id" ,Long.valueOf(publisherBeanId.getCreteria6_id()));
+		args.put("creteria7_id",Long.valueOf(publisherBeanId.getCreteria7_id()));
+		args.put("creteria8_id" ,Long.valueOf(publisherBeanId.getCreteria8_id()));
+		args.put("creteria9_id",Long.valueOf(publisherBeanId.getCreteria9_id()));
+		args.put("creteria10_id" ,Long.valueOf(publisherBeanId.getCreteria10_id()));
+		args.put("show_rating1",Boolean.valueOf(publisherBeanId.getStrShow_ratimg1()));
+		args.put("show_rating2" ,Boolean.valueOf(publisherBeanId.getStrShow_ratimg2()));
+		args.put("show_rating3",Boolean.valueOf(publisherBeanId.getStrShow_ratimg3()));
+		args.put("show_blog" ,Boolean.valueOf(publisherBeanId.getStrShow_forum()) );
+		args.put("search2",publisherBeanId.getStrSearch2());
+		args.put("amount1" ,Double.valueOf(publisherBeanId.getAmount1()));
+		args.put("amount2",Double.valueOf(publisherBeanId.getAmount2()));
+		args.put("amount3" ,Double.valueOf(publisherBeanId.getAmount3()));
+		args.put("name2" ,publisherBeanId.getStrSoftName2());
 		args.put("lang_id" ,authorizationPageBeanId.getLang_id());
-		args.put("jsp_url" ,softPostBean.getJsp_url());
+		args.put("jsp_url" ,publisherBeanId.getJsp_url());
 		
 		Adp.executeInsertWithArgs(query, args);
 		Adp.commit();
@@ -1077,15 +1077,15 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 	}
 	
 	
-	final public String updateInformationWithCheck(final SoftPostBean softPostBean, final AuthorizationPageBean authorizationPageBeanId) throws UnsupportedEncodingException {
+	final public String updateInformationWithCheck(final PublisherBean publisherBeanId, final AuthorizationPageBean authorizationPageBeanId) throws UnsupportedEncodingException {
 		QueryManager Adp = new QueryManager();
 		Adp.BeginTransaction();
-		String id = softPostBean.getSoft_id();
+		String id = publisherBeanId.getSoft_id();
 		String query = "" ;
-		if (softPostBean.getSoft_id().compareTo("-1") == 0)	return "";
+		if (publisherBeanId.getSoft_id().compareTo("-1") == 0)	return "";
 		
-		if(softPostBean.getStrSoftName2() != null && softPostBean.getStrSoftName2().length() > 0 )  
-			softPostBean.setStrSearch2(softPostBean.getStrSoftName2().substring(0, 1));
+		if(publisherBeanId.getStrSoftName2() != null && publisherBeanId.getStrSoftName2().length() > 0 )  
+			publisherBeanId.setStrSearch2(publisherBeanId.getStrSoftName2().substring(0, 1));
 	
 		
 		query = " update soft set soft_id = ?, " 
@@ -1127,48 +1127,48 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 			+ " lang_id = ? , "
 			+ " jsp_url = ? , "
 			+ " CDATE = ? "
-			+ " where soft_id = " + softPostBean.getSoft_id() ;
+			+ " where soft_id = " + publisherBeanId.getSoft_id() ;
 	
 	
 	Map args = Adp.getArgs();
-	args.put("soft_id" , Long.valueOf(softPostBean.getSoft_id()));
-	args.put("name" , softPostBean.getStrSoftName());
-	args.put("description" , softPostBean.strSoftDescription );
-	args.put("fulldescription", softPostBean.product_fulldescription );
-	args.put("version" , softPostBean.getStrSoftVersion() );
-	args.put("cost"	, Double.valueOf(softPostBean.getStrSoftCost()) );
-	args.put("currency" , Long.valueOf(softPostBean.getStrCurrency()) );
-	args.put("file_id" , Long.valueOf(softPostBean.getFile_id() ));
+	args.put("soft_id" , Long.valueOf(publisherBeanId.getSoft_id()));
+	args.put("name" , publisherBeanId.getStrSoftName());
+	args.put("description" , publisherBeanId.strSoftDescription );
+	args.put("fulldescription", publisherBeanId.product_fulldescription );
+	args.put("version" , publisherBeanId.getStrSoftVersion() );
+	args.put("cost"	, Double.valueOf(publisherBeanId.getStrSoftCost()) );
+	args.put("currency" , Long.valueOf(publisherBeanId.getStrCurrency()) );
+	args.put("file_id" , Long.valueOf(publisherBeanId.getFile_id() ));
 	args.put("catalog_id", Long.valueOf( authorizationPageBeanId.getCatalog_id()) );
-	args.put("image_id" , Long.valueOf(softPostBean.getImage_id()));
-	args.put("bigimage_id" , Long.valueOf(softPostBean.getBigimage_id() ));
-	args.put("salelogic_id" , Long.valueOf(softPostBean.getSalelogic_id()) );
-	args.put("site_id" , Long.parseLong(softPostBean.getSite_id()) ); 
-	args.put("product_code" , Long.valueOf(softPostBean.getProduct_code_id() )); 
-	args.put("search", softPostBean.getStrSoftName().substring(0, 1) );
+	args.put("image_id" , Long.valueOf(publisherBeanId.getImage_id()));
+	args.put("bigimage_id" , Long.valueOf(publisherBeanId.getBigimage_id() ));
+	args.put("salelogic_id" , Long.valueOf(publisherBeanId.getSalelogic_id()) );
+	args.put("site_id" , Long.parseLong(publisherBeanId.getSite_id()) ); 
+	args.put("product_code" , Long.valueOf(publisherBeanId.getProduct_code_id() )); 
+	args.put("search", publisherBeanId.getStrSoftName().substring(0, 1) );
 	args.put("type_id" , PostType.FOR_APROVE );
-	args.put("portlettype_id" ,Long.valueOf(softPostBean.getPortlettype_id()) );
-	args.put("creteria1_id" , Long.valueOf(softPostBean.getCreteria1_id()));
-	args.put("creteria2_id" , Long.valueOf(softPostBean.getCreteria2_id()));
-	args.put("creteria3_id" , Long.valueOf(softPostBean.getCreteria3_id()));
-	args.put("creteria4_id" , Long.valueOf(softPostBean.getCreteria4_id()));
-	args.put("creteria5_id" , Long.valueOf(softPostBean.getCreteria5_id()));
-	args.put("creteria6_id" , Long.valueOf(softPostBean.getCreteria6_id()));
-	args.put("creteria7_id" , Long.valueOf(softPostBean.getCreteria7_id()));
-	args.put("creteria8_id" , Long.valueOf(softPostBean.getCreteria8_id()));
-	args.put("creteria9_id" , Long.valueOf(softPostBean.getCreteria9_id()));
-	args.put("creteria10_id" , Long.valueOf(softPostBean.getCreteria10_id()));
-	args.put("amount1" , Double.parseDouble(softPostBean.getAmount1()));
-	args.put("amount2" , Double.parseDouble(softPostBean.getAmount2()));
-	args.put("amount3" , Double.parseDouble(softPostBean.getAmount3()));
-	args.put("search2" , softPostBean.getStrSearch2() );
-	args.put("name2" , softPostBean.getStrSoftName2() );
-	args.put("SHOW_RATING1" , Boolean.valueOf(softPostBean.getStrShow_ratimg1()));
-	args.put("SHOW_RATING2" , Boolean.valueOf(softPostBean.getStrShow_ratimg2()));
-	args.put("SHOW_RATING3" , Boolean.valueOf(softPostBean.getStrShow_ratimg3()));
-	args.put("SHOW_BLOG" , Boolean.valueOf(softPostBean.getStrShow_forum()));
+	args.put("portlettype_id" ,Long.valueOf(publisherBeanId.getPortlettype_id()) );
+	args.put("creteria1_id" , Long.valueOf(publisherBeanId.getCreteria1_id()));
+	args.put("creteria2_id" , Long.valueOf(publisherBeanId.getCreteria2_id()));
+	args.put("creteria3_id" , Long.valueOf(publisherBeanId.getCreteria3_id()));
+	args.put("creteria4_id" , Long.valueOf(publisherBeanId.getCreteria4_id()));
+	args.put("creteria5_id" , Long.valueOf(publisherBeanId.getCreteria5_id()));
+	args.put("creteria6_id" , Long.valueOf(publisherBeanId.getCreteria6_id()));
+	args.put("creteria7_id" , Long.valueOf(publisherBeanId.getCreteria7_id()));
+	args.put("creteria8_id" , Long.valueOf(publisherBeanId.getCreteria8_id()));
+	args.put("creteria9_id" , Long.valueOf(publisherBeanId.getCreteria9_id()));
+	args.put("creteria10_id" , Long.valueOf(publisherBeanId.getCreteria10_id()));
+	args.put("amount1" , Double.parseDouble(publisherBeanId.getAmount1()));
+	args.put("amount2" , Double.parseDouble(publisherBeanId.getAmount2()));
+	args.put("amount3" , Double.parseDouble(publisherBeanId.getAmount3()));
+	args.put("search2" , publisherBeanId.getStrSearch2() );
+	args.put("name2" , publisherBeanId.getStrSoftName2() );
+	args.put("SHOW_RATING1" , Boolean.valueOf(publisherBeanId.getStrShow_ratimg1()));
+	args.put("SHOW_RATING2" , Boolean.valueOf(publisherBeanId.getStrShow_ratimg2()));
+	args.put("SHOW_RATING3" , Boolean.valueOf(publisherBeanId.getStrShow_ratimg3()));
+	args.put("SHOW_BLOG" , Boolean.valueOf(publisherBeanId.getStrShow_forum()));
 	args.put("lang_id" ,authorizationPageBeanId.getLang_id());
-	args.put("jsp_url" , softPostBean.getJsp_url() );
+	args.put("jsp_url" , publisherBeanId.getJsp_url() );
 	args.put("CDATE", new java.util.Date() );
 		
 		try {
@@ -1188,18 +1188,18 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 		}
 
 
-		softPostBean.setSoft_id("-1");
+		publisherBeanId.setSoft_id("-1");
 		return id;
 	}
 	
-//	public String saveDescSoft(String tree_id , SoftPostBean softPostBean)
+//	public String saveDescSoft(String tree_id , SoftPostBean publisherBeanId)
 //			throws UnsupportedEncodingException {
 //
 //		/*
-//		 * if( softPostBean.position_cd == 0 ) return false ; if( softPostBean.cost == 0 )
-//		 * return false ; if( softPostBean.currency_cd == 0 ) return false ; if(
-//		 * softPostBean.countposition == 0 ) return false ; if(
-//		 * softPostBean.deliverylength_ofday == 0 ) return false ; if( softPostBean.producer_cd ==
+//		 * if( publisherBeanId.position_cd == 0 ) return false ; if( publisherBeanId.cost == 0 )
+//		 * return false ; if( publisherBeanId.currency_cd == 0 ) return false ; if(
+//		 * publisherBeanId.countposition == 0 ) return false ; if(
+//		 * publisherBeanId.deliverylength_ofday == 0 ) return false ; if( publisherBeanId.producer_cd ==
 //		 * 0 ) return false ;
 //		 */
 //		QueryManager Adp = new QueryManager();
@@ -1300,45 +1300,45 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 //	
 //		HashMap args = new HashMap();
 //		args.put("soft_id",Long.valueOf(strID) );
-//		args.put("name",softPostBean.getStrSoftName() );
-//		args.put("description", softPostBean.strSoftDescription);
-//		args.put("fulldescription",softPostBean.product_fulldescription );
-//		args.put("version",softPostBean.getStrSoftVersion() );
-//		args.put("cost", Double.valueOf(softPostBean.getStrSoftCost() ));
-//		args.put("currency", Long.valueOf(softPostBean.getStrCurrency()) );
-//		args.put("file_id", Long.valueOf(softPostBean.getFile_id()) );
-//		args.put("catalog_id", Long.valueOf(softPostBean.getCatalog_id()) );
+//		args.put("name",publisherBeanId.getStrSoftName() );
+//		args.put("description", publisherBeanId.strSoftDescription);
+//		args.put("fulldescription",publisherBeanId.product_fulldescription );
+//		args.put("version",publisherBeanId.getStrSoftVersion() );
+//		args.put("cost", Double.valueOf(publisherBeanId.getStrSoftCost() ));
+//		args.put("currency", Long.valueOf(publisherBeanId.getStrCurrency()) );
+//		args.put("file_id", Long.valueOf(publisherBeanId.getFile_id()) );
+//		args.put("catalog_id", Long.valueOf(publisherBeanId.getCatalog_id()) );
 //		args.put("active",true);
-//		args.put("licence_id" ,Long.valueOf(softPostBean.getLicence_id()) );
-//		args.put("image_id",Long.valueOf(softPostBean.getImage_id()) );
-//		args.put("bigimage_id" ,Long.valueOf(softPostBean.getBigimage_id()));
-//		args.put("user_id" ,Long.valueOf(softPostBean.getUser_id()));
-//		args.put("salelogic_id" ,Long.valueOf(softPostBean.getSalelogic_id()));
-//		args.put("site_id" , Long.valueOf(softPostBean.getSite_id()));
-//		args.put("product_code",Long.valueOf(softPostBean.getProduct_code_id()));
-//		args.put("search", softPostBean.getStrSoftName().substring(0, 1));
-//		args.put("portlettype_id" ,Long.valueOf(softPostBean.getPortlettype_id()));
+//		args.put("licence_id" ,Long.valueOf(publisherBeanId.getLicence_id()) );
+//		args.put("image_id",Long.valueOf(publisherBeanId.getImage_id()) );
+//		args.put("bigimage_id" ,Long.valueOf(publisherBeanId.getBigimage_id()));
+//		args.put("user_id" ,Long.valueOf(publisherBeanId.getUser_id()));
+//		args.put("salelogic_id" ,Long.valueOf(publisherBeanId.getSalelogic_id()));
+//		args.put("site_id" , Long.valueOf(publisherBeanId.getSite_id()));
+//		args.put("product_code",Long.valueOf(publisherBeanId.getProduct_code_id()));
+//		args.put("search", publisherBeanId.getStrSoftName().substring(0, 1));
+//		args.put("portlettype_id" ,Long.valueOf(publisherBeanId.getPortlettype_id()));
 //		args.put("tree_id" ,Long.valueOf(tree_id));
-//		args.put("creteria1_id",Long.valueOf(softPostBean.getCreteria1_id()));
-//		args.put("creteria2_id" ,Long.valueOf(softPostBean.getCreteria2_id()));
-//		args.put("creteria3_id",Long.valueOf(softPostBean.getCreteria3_id()));
-//		args.put("creteria4_id" ,Long.valueOf(softPostBean.getCreteria4_id()));
-//		args.put("creteria5_id",Long.valueOf(softPostBean.getCreteria5_id()));
-//		args.put("creteria6_id" ,Long.valueOf(softPostBean.getCreteria6_id()));
-//		args.put("creteria7_id",Long.valueOf(softPostBean.getCreteria7_id()));
-//		args.put("creteria8_id" ,Long.valueOf(softPostBean.getCreteria8_id()));
-//		args.put("creteria9_id",Long.valueOf(softPostBean.getCreteria9_id()));
-//		args.put("creteria10_id" ,Long.valueOf(softPostBean.getCreteria10_id()));
-//		args.put("show_rating1",Boolean.valueOf(softPostBean.getStrShow_ratimg1()));
-//		args.put("show_rating2" ,Boolean.valueOf(softPostBean.getStrShow_ratimg2()));
-//		args.put("show_rating3",Boolean.valueOf(softPostBean.getStrShow_ratimg3()));
-//		args.put("show_blog" ,Boolean.valueOf(softPostBean.getStrShow_forum()) );
-//		args.put("search2",softPostBean.getStrSearch2());
-//		args.put("amount1" ,Double.valueOf(softPostBean.getAmount1()));
-//		args.put("amount2",Double.valueOf(softPostBean.getAmount2()));
-//		args.put("amount3" ,Double.valueOf(softPostBean.getAmount3()));
-//		args.put("name2" ,softPostBean.getStrSoftName2());
-//		args.put("jsp_url" ,softPostBean.getJsp_url());
+//		args.put("creteria1_id",Long.valueOf(publisherBeanId.getCreteria1_id()));
+//		args.put("creteria2_id" ,Long.valueOf(publisherBeanId.getCreteria2_id()));
+//		args.put("creteria3_id",Long.valueOf(publisherBeanId.getCreteria3_id()));
+//		args.put("creteria4_id" ,Long.valueOf(publisherBeanId.getCreteria4_id()));
+//		args.put("creteria5_id",Long.valueOf(publisherBeanId.getCreteria5_id()));
+//		args.put("creteria6_id" ,Long.valueOf(publisherBeanId.getCreteria6_id()));
+//		args.put("creteria7_id",Long.valueOf(publisherBeanId.getCreteria7_id()));
+//		args.put("creteria8_id" ,Long.valueOf(publisherBeanId.getCreteria8_id()));
+//		args.put("creteria9_id",Long.valueOf(publisherBeanId.getCreteria9_id()));
+//		args.put("creteria10_id" ,Long.valueOf(publisherBeanId.getCreteria10_id()));
+//		args.put("show_rating1",Boolean.valueOf(publisherBeanId.getStrShow_ratimg1()));
+//		args.put("show_rating2" ,Boolean.valueOf(publisherBeanId.getStrShow_ratimg2()));
+//		args.put("show_rating3",Boolean.valueOf(publisherBeanId.getStrShow_ratimg3()));
+//		args.put("show_blog" ,Boolean.valueOf(publisherBeanId.getStrShow_forum()) );
+//		args.put("search2",publisherBeanId.getStrSearch2());
+//		args.put("amount1" ,Double.valueOf(publisherBeanId.getAmount1()));
+//		args.put("amount2",Double.valueOf(publisherBeanId.getAmount2()));
+//		args.put("amount3" ,Double.valueOf(publisherBeanId.getAmount3()));
+//		args.put("name2" ,publisherBeanId.getStrSoftName2());
+//		args.put("jsp_url" ,publisherBeanId.getJsp_url());
 //		try 
 //		{
 //			Adp.executeInsertWithArgs(query, args);
@@ -1363,15 +1363,15 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 //	}
 //
 	
-	final public void setFileNameByFile_ID(final String File_ID , final SoftPostBean softPostBean) {
+	final public void setFileNameByFile_ID(final String File_ID , final PublisherBean publisherBeanId) {
 
 		QueryManager Adp = new QueryManager();
 		String query = "select name  from file  where  file_id  = " + File_ID;
 		try 
 		{
 			Adp.executeQuery(query);
-			if( Adp.rows().size() > 0 ) softPostBean.setFilename( Adp.getValueAt(0, 0));
-			else softPostBean.setFilename("") ;
+			if( Adp.rows().size() > 0 ) publisherBeanId.setFilename( Adp.getValueAt(0, 0));
+			else publisherBeanId.setFilename("") ;
 			
 		}
 		catch (SQLException ex) 
@@ -1389,7 +1389,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 
 	}
 
-	final public void setImageNameByImage_ID(final String Image_id , final SoftPostBean softPostBean) {
+	final public void setImageNameByImage_ID(final String Image_id , final PublisherBean publisherBeanId) {
 
 		QueryManager Adp = new QueryManager();
 		String query = "SELECT imgname FROM images WHERE image_id = "+ Image_id;
@@ -1397,7 +1397,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 		try 
 		{
 			Adp.executeQuery(query);
-			if (Adp.rows().size() > 0)softPostBean.setImgname(Adp.getValueAt(0, 0));
+			if (Adp.rows().size() > 0)publisherBeanId.setImgname(Adp.getValueAt(0, 0));
 		} 
 		catch (SQLException ex) 
 		{
@@ -1414,14 +1414,14 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 
 	}
 
-	final public void setBigImageNameByImage_ID(final String Image_id , final SoftPostBean softPostBean ) {
+	final public void setBigImageNameByImage_ID(final String Image_id , final PublisherBean publisherBeanId ) {
 
 		QueryManager Adp = new QueryManager();
 		String query = "SELECT imgname FROM big_images WHERE big_images_id = " + Image_id;
 		try 
 		{
 			Adp.executeQuery(query);
-			if (Adp.rows().size() > 0)softPostBean.setBigimgname(Adp.getValueAt(0, 0));
+			if (Adp.rows().size() > 0)publisherBeanId.setBigimgname(Adp.getValueAt(0, 0));
 		}
 		catch (SQLException ex) 
 		{
@@ -1437,7 +1437,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 		}
 	}
 
-//	public String getCountActiveRow( SoftPostBean softPostBean ) {
+//	public String getCountActiveRow( SoftPostBean publisherBeanId ) {
 //
 //
 //		QueryManager Adp = new QueryManager();
@@ -1445,7 +1445,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 //		String query = "SELECT count(soft_id) FROM soft WHERE catalog_id = ? and  active = ? ";
 //		
 //		Object[] args = new Object[2];
-//		args[0] =  Long.valueOf(softPostBean.getCatalog_id()) ;
+//		args[0] =  Long.valueOf(publisherBeanId.getCatalog_id()) ;
 //		args[1] =  true ; 
 //		
 //		try 
@@ -1471,7 +1471,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 //	
 	
 	
-	final public String getComboBoxWithJavaScriptBigImage(final String name,   String selected_cd, final String query , final String javascript_statment , final SoftPostBean softPostBean ) 
+	final public String getComboBoxWithJavaScriptBigImage(final String name,   String selected_cd, final String query , final String javascript_statment , final PublisherBean publisherBeanId ) 
 	{
 		String strCD = "0";
 		String strLable = "Other";
@@ -1488,8 +1488,8 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 		{
 			strCD = (String) Adp.getValueAt(0, 0);
 			strLable = (String) Adp.getValueAt(0, 1);
-			softPostBean.setBigimage_id(strCD) ;
-			softPostBean.setBigimgname(strLable) ;
+			publisherBeanId.setBigimage_id(strCD) ;
+			publisherBeanId.setBigimgname(strLable) ;
 		}
 		for (int i = 0; Adp.rows().size() > i; i++) {
 			// if(i==0) if(((String)selected_cd).length()==0 ) selected_cd =
@@ -1499,8 +1499,8 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 			if (selected_cd.compareTo(strCD) == 0)
 			{
 				table.append("<option value=\"" + strCD + "\" selected >"	+ strLable + "\n");
-				softPostBean.setBigimage_id(strCD) ;
-				softPostBean.setBigimgname(strLable) ;
+				publisherBeanId.setBigimage_id(strCD) ;
+				publisherBeanId.setBigimgname(strLable) ;
 			}
 			else
 				table.append("<option value=\"" + strCD + "\">" + strLable
@@ -1524,7 +1524,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 	
 	
 	
-	final public String getComboBoxWithJavaScriptSmallImage(final String name, String selected_cd, final String query , final String javascript_statment , final SoftPostBean softPostBean )
+	final public String getComboBoxWithJavaScriptSmallImage(final String name, String selected_cd, final String query , final String javascript_statment , final PublisherBean publisherBeanId )
 	{
 		String strCD = "0";
 		String strLable = "Other";
@@ -1545,8 +1545,8 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 		{
 			strCD = (String) Adp.getValueAt(0, 0);
 			strLable = (String) Adp.getValueAt(0, 1);
-			softPostBean.setImage_id(strCD) ;
-			softPostBean.setImgname(strLable) ;
+			publisherBeanId.setImage_id(strCD) ;
+			publisherBeanId.setImgname(strLable) ;
 		}
 		for (int i = 0; Adp.rows().size() > i; i++) 
 		{
@@ -1556,8 +1556,8 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
 			if (selected_cd.compareTo(strCD) == 0)
 			{
 				table.append("<option value=\"" + strCD + "\" selected >"	+ strLable + "\n");
-				softPostBean.setImage_id(strCD) ;
-				softPostBean.setImgname(strLable) ;
+				publisherBeanId.setImage_id(strCD) ;
+				publisherBeanId.setImgname(strLable) ;
 			}
 			else
 				table.append("<option value=\"" + strCD + "\">" + strLable + "\n");

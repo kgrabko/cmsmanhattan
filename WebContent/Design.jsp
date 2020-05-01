@@ -3,9 +3,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Находится в стадии разработки</title>
+<title>It is in development stage</title>
 </head>
 <body>
-Эта страница находится в стадии разработки
+It is in development stage
 </body>
 </html>

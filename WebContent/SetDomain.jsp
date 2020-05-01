@@ -6,7 +6,7 @@
   response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
   request.setCharacterEncoding("UTF-8");
 %>
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <html>
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -28,7 +28,7 @@
 <TD vAlign="top" Align="left" width="20%"></TD><TD vAlign="center" Align="right" width="80%">
 <form name="searchform" action="Productlist.jsp">
 <br>
-<input id="search_value" name="search_value" type="text" size="20" alt="<%= AuthorizationPageBeanId.getLocalization(application).getString("find_good_by_name") %>" title="<%= AuthorizationPageBeanId.getLocalization(application).getString("find_good_by_name") %>" tabindex="30001" value=""><input class="searchButton" type="submit" size="20" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("Search") %>" tabindex="30002">
+<input id="search_value" name="search_value" type="text" size="20" alt="<%= authorizationPageBeanId.getLocalization(application).getString("find_good_by_name") %>" title="<%= authorizationPageBeanId.getLocalization(application).getString("find_good_by_name") %>" tabindex="30001" value=""><input class="searchButton" type="submit" size="20" value="<%= authorizationPageBeanId.getLocalization(application).getString("Search") %>" tabindex="30002">
 </form>
 </TD>
 </TR>
@@ -37,11 +37,11 @@
 </div>
 <hr size="" class="netscape4">
 <div class="tabs">
-<A href="Productlist.jsp?catalog_id=-2" class="plain"><font size="2"><%=AuthorizationPageBeanId.getLocalization(application).getString("main_page")%></font></A><A href="Domain.jsp" class="plain"><font size="2">Registration of domains</font></A><a href="webmail/" class="plain"><font size="2">mail</font></a><A href="Productlist.jsp?action=logoff" class="plain"><font size="2"><%=AuthorizationPageBeanId.getLocalization(application).getString("exit")%></font></A>
+<A href="Productlist.jsp?catalog_id=-2" class="plain"><font size="2"><%=authorizationPageBeanId.getLocalization(application).getString("main_page")%></font></A><A href="Domain.jsp" class="plain"><font size="2">Registration of domains</font></A><a href="webmail/" class="plain"><font size="2">mail</font></a><A href="Productlist.jsp?action=logoff" class="plain"><font size="2"><%=authorizationPageBeanId.getLocalization(application).getString("exit")%></font></A>
 </div>
 <div class="personalBar">
 <a href="Authorization.jsp"><img src="images/user.gif" alt="Link icon" title="Link icon" height="15" width="10" border="0">
-					<%=AuthorizationPageBeanId.getLocalization(application).getString("login")%>: <%=AuthorizationPageBeanId.getStrLogin()%></a>
+					<%=authorizationPageBeanId.getLocalization(application).getString("login")%>: <%=authorizationPageBeanId.getStrLogin()%></a>
 </div>
 <hr size="" class="netscape4">
 </div>
@@ -60,21 +60,21 @@
 <div class="body">
 <div class="odd">
 <form action="Authorization.jsp" method="post">
-<strong><%=AuthorizationPageBeanId.getLocalization(application).getString("username")%></strong>
+<strong><%=authorizationPageBeanId.getLocalization(application).getString("username")%></strong>
 <br>
-<INPUT title="<%= AuthorizationPageBeanId.getLocalization(application).getString("username") %>" tabindex="10001" SIZE="16" AUTOCOMPLETE="off" TYPE="TEXT" NAME="Login" value="newuser">
+<INPUT title="<%= authorizationPageBeanId.getLocalization(application).getString("username") %>" tabindex="10001" SIZE="16" AUTOCOMPLETE="off" TYPE="TEXT" NAME="Login" value="newuser">
 <br>
-<strong><%=AuthorizationPageBeanId.getLocalization(application).getString("password")%></strong>
+<strong><%=authorizationPageBeanId.getLocalization(application).getString("password")%></strong>
 <br>
-<INPUT title="<%= AuthorizationPageBeanId.getLocalization(application).getString("password") %>" tabindex="10002" SIZE="16" AUTOCOMPLETE="off" TYPE="PASSWORD" NAME="Passwd1">
+<INPUT title="<%= authorizationPageBeanId.getLocalization(application).getString("password") %>" tabindex="10002" SIZE="16" AUTOCOMPLETE="off" TYPE="PASSWORD" NAME="Passwd1">
 <br>
 <br>
-<input type="submit" name="submit" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("login") %>" tabindex="10003" class="context searchButton">
+<input type="submit" name="submit" value="<%= authorizationPageBeanId.getLocalization(application).getString("login") %>" tabindex="10003" class="context searchButton">
 </form>
 </div>
 <div class="even">
 <a href=""><img src="xsl/shops.online-spb.com/images/linkTransparent.gif">
-                   <%=AuthorizationPageBeanId.getLocalization(application).getString("send_password_by_email")%>
+                   <%=authorizationPageBeanId.getLocalization(application).getString("send_password_by_email")%>
                 </a>
 </div>
 </div>
@@ -102,7 +102,7 @@
                     <tr>
 						<td width="400" align="center">
 						<form action="SetDomain.jsp"  method="post" >
-						<input type="text" size="50" name="domain" value="<%= AuthorizationPageBeanId.getHost() %>"  />  
+						<input type="text" size="50" name="domain" value="<%= authorizationPageBeanId.getHost() %>"  />  
 						<input type="submit"  name="submit" value="Save" />  						
 						</form>
 						</td>
@@ -120,7 +120,7 @@
 </div>
 <div class="listingBar">
 		<span class="next"><a HREF="#" onClick="javascript:history.back()"><strong>	
-		<%=AuthorizationPageBeanId.getLocalization(application).getString("back")%>
+		<%=authorizationPageBeanId.getLocalization(application).getString("back")%>
 		</strong></a></span>
 </div>
 </td><td class="right">
@@ -166,7 +166,7 @@
 <div class="footer">
 <br>
 Internet shop . Copyright 2010 FDIS Center Business Solutions Inc . 
- <%=AuthorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
+ <%=authorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
 <hr size="" class="netscape4">
 <strong class="netscape4">
 for user netscape </strong>

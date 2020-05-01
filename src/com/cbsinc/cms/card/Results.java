@@ -12,21 +12,11 @@ import org.apache.soap.transport.http.SOAPHTTPConnection;
 
 public class Results {
 	public static void main(String[] args) throws Exception {
-		// bufferedreader =
-		// postData("https://secure.assist.ru/results/results_long.cfm",
-		// request);
+
 		String encodingStyleURI = Constants.NS_URI_SOAP_ENC;
-		// bufferedreader =
-		// postData("http://secure.assist.ru/results/results_long.cfm",
-		// request);
-		URL url = new URL(
-				"http://secure.assist.ru/results/results.cfm?format=5");
-		// URL url = new URL
-		// ("http://secure.assist.ru/results/results_long.cfm?format=5");
-		// URL url = new URL
-		// ("https://secure.assist.ru/results/results.cfm?format=5");
-		// URL url = new URL
-		// ("https://secure.assist.ru/results/results_long.cfm");
+
+		URL url = new URL("http://secure.assist.ru/results/results.cfm?format=5");
+
 		String OBJECT_URI = "http://www.assist.ru/type/";
 
 		System.out.println(encodingStyleURI);
@@ -37,12 +27,10 @@ public class Results {
 		SOAPMappingRegistry smr = new SOAPMappingRegistry();
 
 		ArraySerializer sd = new ArraySerializer();
-		smr.mapTypes(Constants.NS_URI_SOAP_ENC,
-				new QName(OBJECT_URI, "return"), null, null, sd);
+		smr.mapTypes(Constants.NS_URI_SOAP_ENC, new QName(OBJECT_URI, "return"), null, null, sd);
 
 		Paymentinfoserializer sd1 = new Paymentinfoserializer();
-		smr.mapTypes(Constants.NS_URI_SOAP_ENC, new QName(OBJECT_URI,
-				"SOAPStruct"), Paymentinfo.class, null, sd1);
+		smr.mapTypes(Constants.NS_URI_SOAP_ENC, new QName(OBJECT_URI, "SOAPStruct"), Paymentinfo.class, null, sd1);
 
 		// create the transport and set parameters
 		SOAPHTTPConnection st = new SOAPHTTPConnection();
@@ -57,29 +45,19 @@ public class Results {
 		call.setEncodingStyleURI(encodingStyleURI);
 
 		Vector params = new Vector();
-		params
-				.addElement(new Parameter("shop_id", Integer.class, "84473",
-						null));
+		params.addElement(new Parameter("shop_id", Integer.class, "84473", null));
 		params.addElement(new Parameter("login", String.class, "gvidon", null));
-		params.addElement(new Parameter("password", String.class, "231003",
-				null));
-		params.addElement(new Parameter("shopordernumber", String.class, "193",
-				null));
+		params.addElement(new Parameter("password", String.class, "231003", null));
+		params.addElement(new Parameter("shopordernumber", String.class, "193", null));
 		params.addElement(new Parameter("success", String.class, "2", null));
 		params.addElement(new Parameter("startday", String.class, "24", null));
-		params
-				.addElement(new Parameter("startmonth", String.class, "01",
-						null));
-		params
-				.addElement(new Parameter("startyear", String.class, "2006",
-						null));
+		params.addElement(new Parameter("startmonth", String.class, "01", null));
+		params.addElement(new Parameter("startyear", String.class, "2006", null));
 		params.addElement(new Parameter("endday", String.class, "23", null));
 		params.addElement(new Parameter("endmonth", String.class, "01", null));
 		params.addElement(new Parameter("endyear", String.class, "2006", null));
 		params.addElement(new Parameter("meantype", String.class, "0", null));
-		params
-				.addElement(new Parameter("paymenttype", String.class, "16",
-						null));
+		params.addElement(new Parameter("paymenttype", String.class, "16", null));
 		params.addElement(new Parameter("english", String.class, "0", null));
 
 		call.setParams(params);

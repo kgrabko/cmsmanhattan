@@ -19,7 +19,6 @@
  * @version 1.0
  */
 
-
 package com.cbsinc.cms;
 
 import java.io.IOException;
@@ -35,11 +34,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
-
 /**
  * Filter class
  * 
- * @web.filter name="Auth" display-name="Name for Auth" description="Description  for Auth"
+ * @web.filter name="Auth" display-name="Name for Auth" description="Description
+ *             for Auth"
  * @web.filter-mapping url-pattern="/catalog_list.jsp"
  * @web.filter-mapping url-pattern="/catalog_add.jsp"
  * @web.filter-mapping url-pattern="/catalog_edit.jsp"
@@ -55,7 +54,7 @@ import org.apache.log4j.Logger;
  * @web.filter-mapping url-pattern="/bigimageservletupload"
  * @web.filter-mapping url-pattern="/downloadservlet"
  * @web.filter-mapping url-pattern="/downloadservletbyodrder"
- * @web.filter-mapping url-pattern="/imageservlet"  
+ * @web.filter-mapping url-pattern="/imageservlet"
  * @web.filter-mapping url-pattern="/imageservletupload"
  * @web.filter-mapping url-pattern="/midletservletupload"
  * @web.filter-mapping url-pattern="/uploadservletxsl"
@@ -77,20 +76,17 @@ public class AuthFilter implements Filter {
 		this.filterConfig = filterConfig;
 	}
 
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain filterChain) {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) {
 		try {
 
-			HttpSession hsession = ((HttpServletRequest) request)
-					.getSession(false);
+			HttpSession hsession = ((HttpServletRequest) request).getSession(false);
 			if (hsession != null) {
 				AuthorizationPageBean authorizationPageBeanId;
 				if (hsession.getAttribute("AuthorizationPageBeanId") instanceof AuthorizationPageBean) {
 					authorizationPageBeanId = ((AuthorizationPageBean) hsession
 							.getAttribute("AuthorizationPageBeanId"));
 					if (authorizationPageBeanId.getStrLogin().length() == 0) {
-						((HttpServletResponse) response)
-								.sendRedirect("index.jsp");
+						((HttpServletResponse) response).sendRedirect("index.jsp");
 						return;
 					}
 
@@ -106,10 +102,10 @@ public class AuthFilter implements Filter {
 
 			filterChain.doFilter(request, response);
 		} catch (ServletException sx) {
-			log.error(sx) ;
+			log.error(sx);
 			filterConfig.getServletContext().log(sx.getMessage());
 		} catch (IOException iox) {
-			log.error(iox) ;
+			log.error(iox);
 			filterConfig.getServletContext().log(iox.getMessage());
 		}
 	}

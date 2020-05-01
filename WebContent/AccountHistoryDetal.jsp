@@ -2,7 +2,7 @@
 <%@ page errorPage="error.jsp" %>
 <jsp:useBean id="accountHistoryDetalBeanId" scope="session" class="com.cbsinc.cms.AccountHistoryDetalBean" />
 <jsp:setProperty name="accountHistoryDetalBeanId" property="*" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <%  request.setCharacterEncoding("UTF-8"); %>
 
 
@@ -11,17 +11,17 @@
    <version>1.0</version>
    <name>GBS ltd.</name>
 
-   <title><%=  AuthorizationPageBeanId.getHost() %></title>
-   <subject_site><%=  AuthorizationPageBeanId.getSubject_site() %></subject_site>
-   <site_name><%=  AuthorizationPageBeanId.getNick_site() %></site_name>
-   <host><%=  AuthorizationPageBeanId.getSite_dir() %></host>
-   <domain><%=  AuthorizationPageBeanId.getHost() %></domain>
-   <login><%= AuthorizationPageBeanId.getStrLogin() %></login>
+   <title><%=  authorizationPageBeanId.getHost() %></title>
+   <subject_site><%=  authorizationPageBeanId.getSubject_site() %></subject_site>
+   <site_name><%=  authorizationPageBeanId.getNick_site() %></site_name>
+   <host><%=  authorizationPageBeanId.getSite_dir() %></host>
+   <domain><%=  authorizationPageBeanId.getHost() %></domain>
+   <login><%= authorizationPageBeanId.getStrLogin() %></login>
    <passwdord></passwdord>
    <shoping_url>Productlist.jsp</shoping_url>
-   <message><%= AuthorizationPageBeanId.getStrMessage() %></message>
+   <message><%= authorizationPageBeanId.getStrMessage() %></message>
    <shoping_url>Productlist.jsp</shoping_url>
-   <balans><%=  accountHistoryDetalBeanId.getStrBalans(AuthorizationPageBeanId.getIntUserID()) %></balans>
+   <balans><%=  accountHistoryDetalBeanId.getStrBalans(authorizationPageBeanId.getIntUserID()) %></balans>
    <to_navigator>wCatalog.jsp</to_navigator>
    <to_navigator_location>NavigatorLocation.jsp</to_navigator_location>
    <to_account_history>AccountHistory.jsp</to_account_history>

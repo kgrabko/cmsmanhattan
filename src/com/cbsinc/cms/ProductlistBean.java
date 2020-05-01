@@ -12,25 +12,23 @@ import org.apache.log4j.Logger;
  * </p>
  * <p>
  * Description: System building web application develop by Konstantin Grabko.
- * Konstantin Grabko is Owner and author this code.
- * You can not use it and you cannot change it without written permission from Konstantin Grabko
- * Email: konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
+ * Konstantin Grabko is Owner and author this code. You can not use it and you
+ * cannot change it without written permission from Konstantin Grabko Email:
+ * konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
  * </p>
  * <p>
  * Copyright: Copyright (c) 2002-2014
  * </p>
  * <p>
- * Company: CENTER BUSINESS SOLUTIONS INC 
+ * Company: CENTER BUSINESS SOLUTIONS INC
  * </p>
  * 
  * @author Konstantin Grabko
  * @version 1.0
  */
 
+public class ProductlistBean implements java.io.Serializable {
 
-public class ProductlistBean  implements java.io.Serializable {
-
-	
 	private static final long serialVersionUID = -7111281778620430929L;
 
 	static private Logger log = Logger.getLogger(ProductlistBean.class);
@@ -39,35 +37,30 @@ public class ProductlistBean  implements java.io.Serializable {
 
 	public String[][] rows = new String[10][2];
 
-	// public String[][] news_rows = new String[10][2] ;
 	public String[][] bottom_rows = new String[10][2];
-	
+
 	public String[][] co1_rows = new String[10][2];
 
 	public String[][] co2_rows = new String[10][2];
 
-	
-	
 	public String[][] blog_rows = new String[20][2];
 
 	public String[][] newsrows = new String[10][2];
-	
-	//public String[][] allquery_rows = new String[10][2];
 
 	private transient GetValueTool tool = new GetValueTool();
-	
+
 	public List allqueryAdp = new LinkedList();
-	
+
 	public List Adp = new LinkedList();
 
-	public List newsAdp  = new LinkedList();
+	public List newsAdp = new LinkedList();
 
 	public List co1Adp = new LinkedList();
 
-	public List co2Adp= new LinkedList();
+	public List co2Adp = new LinkedList();
 
 	public List bottomAdp = new LinkedList();
-	
+
 	private List tmpAdp = new LinkedList();
 
 	private String listup = "";
@@ -77,10 +70,9 @@ public class ProductlistBean  implements java.io.Serializable {
 	private Integer offset = 0;
 
 	private String type1_id = "1";
-	
+
 	private String type2_id = "1";
 
-	// private int type_id = 1 ;
 	private Long intLevelUp = new Long(0);
 
 	private String phonetype_id = "-1";
@@ -98,18 +90,14 @@ public class ProductlistBean  implements java.io.Serializable {
 	private String img_url;
 
 	private String img_url2;
-	
+
 	private String user1_id;
-	
+
 	private String user2_id;
 
 	private String cururl;
 
-	//private String catalog_id = "-2";
-	
 	private String catalog_parent_id = "0";
-
-	//private String site_id = "0";
 
 	private String post_manager = "";
 
@@ -163,110 +151,95 @@ public class ProductlistBean  implements java.io.Serializable {
 
 	private String portlettype_id = "0";
 
-	
-	
 	private Integer pagecount_blog = 0;
 
 	private Integer pagecount_co1 = 0;
 
 	private Integer pagecount_co2 = 0;
 
-	//private Integer pagecount_bottom = 0;
-	
 	private String query_productlist = "";
-	
-	private String criteria1_label = "" ;
-	private String criteria2_label = "" ;
-	private String criteria3_label = "" ;
-	private String criteria4_label = "" ;
-	private String criteria5_label = "" ;
-	private String criteria6_label = "" ;
-	private String criteria7_label = "" ;
-	private String criteria8_label = "" ;
-	private String criteria9_label = "" ;
-	private String criteria10_label = "" ;
-	
-	
-	private String creteria1_name = "" ;
-	private String creteria2_name = "" ;
-	private String creteria3_name = "" ;
-	private String creteria4_name = "" ;
-	private String creteria5_name = "" ;
-	private String creteria6_name = "" ;
-	private String creteria7_name = "" ;
-	private String creteria8_name = "" ;
-	private String creteria9_name = "" ;
-	private String creteria10_name = "" ;
-	
-	private String select_currency_cd = "" ;
-	private String select_tree_catalog = "" ;
-	private String select_menu_catalog = "" ;
-	
 
-	private String select_creteria1_id = "" ;
-	private String select_creteria2_id = "" ;
-	private String select_creteria3_id = "" ;
-	private String select_creteria4_id = "" ;
-	private String select_creteria5_id = "" ;
-	private String select_creteria6_id = "" ;
-	private String select_creteria7_id = "" ;
-	private String select_creteria8_id = "" ;
-	private String select_creteria9_id = "" ;
-	private String select_creteria10_id = "" ;
+	private String criteria1_label = "";
+	private String criteria2_label = "";
+	private String criteria3_label = "";
+	private String criteria4_label = "";
+	private String criteria5_label = "";
+	private String criteria6_label = "";
+	private String criteria7_label = "";
+	private String criteria8_label = "";
+	private String criteria9_label = "";
+	private String criteria10_label = "";
 
-	
-	private String select_dayfrom_id = "" ;
-	private String select_mountfrom_id = "" ;
-	private String select_yearfrom_id = "" ;
-	private String select_dayto_id = "" ;
-	private String select_mountto_id = "" ;
-	private String select_yearto_id = "" ;
-	
-	private String select_path= "" ;
-	
-	private String color = "" ;
-	
-	
-	
-	
-	
-	private String allFoundProducts = "" ;
-	
-	String dialog = "true" ; 
-	String advancedSearchOpen = "true" ;
-	String forumOpen = "true" ;
-	
-	public Boolean isInternet = true ;
-	
+	private String creteria1_name = "";
+	private String creteria2_name = "";
+	private String creteria3_name = "";
+	private String creteria4_name = "";
+	private String creteria5_name = "";
+	private String creteria6_name = "";
+	private String creteria7_name = "";
+	private String creteria8_name = "";
+	private String creteria9_name = "";
+	private String creteria10_name = "";
+
+	private String select_currency_cd = "";
+	private String select_tree_catalog = "";
+	private String select_menu_catalog = "";
+
+	private String select_creteria1_id = "";
+	private String select_creteria2_id = "";
+	private String select_creteria3_id = "";
+	private String select_creteria4_id = "";
+	private String select_creteria5_id = "";
+	private String select_creteria6_id = "";
+	private String select_creteria7_id = "";
+	private String select_creteria8_id = "";
+	private String select_creteria9_id = "";
+	private String select_creteria10_id = "";
+
+	private String select_dayfrom_id = "";
+	private String select_mountfrom_id = "";
+	private String select_yearfrom_id = "";
+	private String select_dayto_id = "";
+	private String select_mountto_id = "";
+	private String select_yearto_id = "";
+
+	private String select_path = "";
+
+	private String color = "";
+
+	private String allFoundProducts = "";
+
+	String dialog = "true";
+	String advancedSearchOpen = "true";
+	String forumOpen = "true";
+
+	public Boolean isInternet = true;
+
 	public List blogExtAdp = new LinkedList();
 
 	public ProductlistBean() {
 
-		
 	}
 
-	public  String getProductsIdlist(int count) {
+	public String getProductsIdlist(int count) {
 		String productsId = "";
-		try
-		{
+		try {
 			rows = new String[tool.getRowCount(Adp)][2];
-			if (rows.length < count)return "";
+			if (rows.length < count)
+				return "";
 			for (int i = 0; rows.length > i; i++) {
-			productsId = productsId + "_" + rows[i][0];
-			if (i == (count - 1))
-				break;
+				productsId = productsId + "_" + rows[i][0];
+				if (i == (count - 1))
+					break;
 			}
-		}
-		catch (Exception ex) 
-		{
+		} catch (Exception ex) {
 			log.error(ex);
 		}
 		return productsId.substring(1);
 	}
 
-	public String getQuantityProducts() 
-	{
-		return "" + tool.getRowCount(allqueryAdp) ;
+	public String getQuantityProducts() {
+		return "" + tool.getRowCount(allqueryAdp);
 	}
 
 	public String getProductlist(String strUser_id, String site_id) {
@@ -274,190 +247,80 @@ public class ProductlistBean  implements java.io.Serializable {
 			strUser_id = "0";
 
 		rows = new String[tool.getRowCount(Adp)][2];
-		
+
 		StringBuffer table = new StringBuffer();
 		table.append("<list>\n");
-		cururl = "Productlist.jsp?offset=" + offset; 
-		listup = "Productlist.jsp?offset=" + (offset + 10); 
+		cururl = "Productlist.jsp?offset=" + offset;
+		listup = "Productlist.jsp?offset=" + (offset + 10);
 		if (offset - 10 < 0)
-			listdown = "Productlist.jsp?offset=0"; 
+			listdown = "Productlist.jsp?offset=0";
 		else
-			listdown = "Productlist.jsp?offset=" + (offset - 10); 
-			
+			listdown = "Productlist.jsp?offset=" + (offset - 10);
 
-		try
-		{
-		if (intLevelUp == 2)setPost_manager("PostManager.jsp");
-		else setPost_manager("");
-		pagecount = tool.getRowCount(Adp) ;
-
-		for (int i = 0; tool.getRowCount(Adp) > i; i = i + 2) {
-			rows[i][0] = (String) tool.getValueAt(Adp,i, 0);
-			rows[i][1] = tool.getValueAt(Adp,i, 7) == null ? "" : tool.getValueAt(Adp,i,
-					7);
-			// rows[i][1] = Adp.getValueAt(i, 7) ; //== null
-			// ?"":Adp.getValueAt(i, 7) ;
-
-			product_name = (String) tool.getValueAt(Adp,i, 1);
-			// strSoftURL = "downloadservlet?row=" + i + "&dev=html" ;;
-			// strSoftURL = "downloadservlet?row=" + i ;
-			///////////////product_url = "Policy.jsp?row=" + i;
-			product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(Adp,i, 0) ;
-			//licy_byproductid
-
-			img_url = (String) tool.getValueAt(Adp,i, 13);
-			if (img_url != null)
-				product_iconurl = img_url;
+		try {
+			if (intLevelUp == 2)
+				setPost_manager("PostManager.jsp");
 			else
-				product_iconurl = "images/Folder.jpg";
-			product_description = (String) tool.getValueAt(Adp,i, 2);
-			product_version = (String) tool.getValueAt(Adp,i, 3);
-			product_cost = (String) tool.getValueAt(Adp,i, 4);
-			currency_id = (String) tool.getValueAt(Adp,i, 5);
-			
-			CurrencyHash currencyHash = CurrencyHash.getInstance() ;
-			
-			currency_desc = currencyHash.getCurrency_decs(currency_id);
-			// Currency curr = CurrencyHash.getCurrency(currency_id);
-			// if(curr == null) throw new
-			// java.lang.UnsupportedOperationException("Currency curr == null
-			// ");
-			// currency_cd = curr.getCode();
-			// currency_cd = curr.getCode();
+				setPost_manager("");
+			pagecount = tool.getRowCount(Adp);
 
-			// phonetype_id = (String)tool.getValueAt(Adp,i,10) ;
-			// phonetype_id2 = (String)tool.getValueAt(Adp,i,10) ;
-			// progname_id = (String)tool.getValueAt(Adp,i,11) ;
-			image_id = (String) tool.getValueAt(Adp,i, 12);
-			product_fulldescription = (String) tool.getValueAt(Adp,i, 14);
-			// product_bigimgurl = (String)tool.getValueAt(Adp,i,15) ;
-			user1_id = (String)tool.getValueAt(Adp,i,16) ;
-			//cdate = (Date)Adp.getValueObjectAt(i,17) ;
-			//statistic = (String)tool.getValueAt(Adp,i,18) ;
-			//user1_id = (String)tool.getValueAt(Adp,i,16) ;
-			//private String statistic = "0" ;
-			//private Date cdate =null ;
+			for (int i = 0; tool.getRowCount(Adp) > i; i = i + 2) {
+				rows[i][0] = (String) tool.getValueAt(Adp, i, 0);
+				rows[i][1] = tool.getValueAt(Adp, i, 7) == null ? "" : tool.getValueAt(Adp, i, 7);
 
-			
-			type1_id = (String)tool.getValueAt(Adp,i,8) ;
-			
-			creteria1_name = (String) tool.getValueAt(Adp,i, 30);
-			creteria2_name = (String) tool.getValueAt(Adp,i, 31);
-			creteria3_name = (String) tool.getValueAt(Adp,i, 32);
-			creteria4_name = (String) tool.getValueAt(Adp,i, 33);
-			creteria5_name = (String) tool.getValueAt(Adp,i, 34);
-			creteria6_name = (String) tool.getValueAt(Adp,i, 35);
-			creteria7_name = (String) tool.getValueAt(Adp,i, 36);
-			creteria8_name = (String) tool.getValueAt(Adp,i, 37);
-			creteria9_name = (String) tool.getValueAt(Adp,i, 38);
-			creteria10_name = (String) tool.getValueAt(Adp,i, 39);
-			color = (String) tool.getValueAt(Adp,i, 40);
-			
-			
-			//Date prev_time ;
-			//if(i -1  >= 0)  prev_time = (Date)tool.getValueAtObject(Adp,i-1,17) ;
-			//else prev_time = (Date)tool.getValueAtObject(Adp,i,17) ;
-			
-			//Date next_time ;
-			//if(i +1 < Adp.size())  next_time = (Date)tool.getValueAtObject(Adp,i+1,17) ;
-			//else next_time = (Date)tool.getValueAtObject(Adp,i,17) ; 
+				product_name = (String) tool.getValueAt(Adp, i, 1);
+				product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(Adp, i, 0);
 
-			table.append("<product>\n");
-
-			table.append("<rigth>\n");
-			table.append("<product_id>" + rows[i][0] + "</product_id>\n");
-			table.append("<row_id>" + i + "</row_id>\n");
-			table.append("<name>" + product_name + "</name>\n");
-			table.append("<type_id>" + type1_id + "</type_id>\n");
-			table.append("<icon>" + product_iconurl + "</icon>\n");
-			table.append("<image></image>\n");
-			table.append("<user_id>" + user1_id + "</user_id>\n");
-			// Referece to pruduct
-			table.append("<policy_url>" + product_url + "</policy_url>\n");
-			table.append("<description>" + product_description
-					+ "</description>\n");
-			// table.append("<fulldescription>" + product_fulldescription +
-			// "</fulldescription>\n") ;
-			table.append("<amount>" + product_cost + "</amount>\n");
-			table.append("<currency>\n");
-			table.append("<code>" + currency_cd + "</code>\n");
-			table.append("<description>dollar us</description>\n");
-			table.append("</currency>\n");
-			table.append("<version>" + currency_desc + "</version>\n");
-			table.append("<creteria1>" + creteria1_name + "</creteria1>\n");
-			table.append("<creteria2>" + creteria2_name + "</creteria2>\n");
-			table.append("<creteria3>" + creteria3_name + "</creteria3>\n");
-			table.append("<creteria4>" + creteria4_name + "</creteria4>\n");
-			table.append("<creteria5>" + creteria5_name + "</creteria5>\n");
-			table.append("<creteria6>" + creteria6_name + "</creteria6>\n");
-			table.append("<creteria7>" + creteria7_name + "</creteria7>\n");
-			table.append("<creteria8>" + creteria8_name + "</creteria8>\n");
-			table.append("<creteria9>" + creteria9_name + "</creteria9>\n");
-			table.append("<creteria10>" + creteria10_name + "</creteria10>\n");
-			table.append("<color>" + color + "</color>\n");
-			table.append("</rigth>\n");
-
-			if (tool.getRowCount(Adp) > (i + 1)) {
-				///product_url2 = "Policy.jsp?row=" + (i + 1);
-				product_url2 = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(Adp,i+1, 0) ;
-				
-				rows[i + 1][0] = (String) tool.getValueAt(Adp,i + 1, 0);
-				rows[i + 1][1] = tool.getValueAt(Adp,i + 1, 7) == null ? "" : tool.getValueAt(Adp,i + 1, 7);
-				// rows[i+1][1] = (String)tool.getValueAt(Adp,i+1,7) ;
-				product_name2 = (String) tool.getValueAt(Adp,i + 1, 1);
-				img_url2 = (String) tool.getValueAt(Adp,i + 1, 13);
-				if (img_url2 != null)
-					product_iconurl2 = img_url2;
+				img_url = (String) tool.getValueAt(Adp, i, 13);
+				if (img_url != null)
+					product_iconurl = img_url;
 				else
-					product_iconurl2 = "images/Folder.jpg";
-				product_description2 = (String) tool.getValueAt(Adp,i + 1, 2);
-				product_cost2 = (String) tool.getValueAt(Adp,i + 1, 4);
-				currency_id2 = (String) tool.getValueAt(Adp,i + 1, 5);
-				//CurrencyHash currencyHash = CurrencyHash.getInstance() ;
-				currency_desc2 = currencyHash.getCurrency_decs(currency_id2);
-				user2_id = (String)tool.getValueAt(Adp,i + 1,16) ;
-				type2_id = (String)tool.getValueAt(Adp,i+1,8) ;
-				creteria1_name = (String) tool.getValueAt(Adp,i+1, 30);
-				creteria2_name = (String) tool.getValueAt(Adp,i+1, 31);
-				creteria3_name = (String) tool.getValueAt(Adp,i+1, 32);
-				creteria4_name = (String) tool.getValueAt(Adp,i+1, 33);
-				creteria5_name = (String) tool.getValueAt(Adp,i+1, 34);
-				creteria6_name = (String) tool.getValueAt(Adp,i+1, 35);
-				creteria7_name = (String) tool.getValueAt(Adp,i+1, 36);
-				creteria8_name = (String) tool.getValueAt(Adp,i+1, 37);
-				creteria9_name = (String) tool.getValueAt(Adp,i+1, 38);
-				creteria10_name = (String) tool.getValueAt(Adp,i+1, 39);
-				color = (String) tool.getValueAt(Adp,i+1, 40);	
-				
-				//if(i -1  >= 0)  prev_time = (Date)tool.getValueAtObject(Adp,i,17) ;
-				//else prev_time = (Date)tool.getValueAtObject(Adp,i+1,17) ;
-				
-				
-				//if(i +1 < Adp.size())  next_time = (Date)tool.getValueAtObject(Adp,i+2,17) ;
-				//else next_time = (Date)tool.getValueAtObject(Adp,i+1,17) ; 
-				
-				table.append("<left>\n");
-				table.append("<product_id>" + rows[i + 1][0] + "</product_id>\n");
-				table.append("<row_id>" + (i + 1) + "</row_id>\n");
-				//table.append("<prev_time>" + ( prev_time.getTime() - 1 ) + "</prev_time>\n");
-				//table.append("<next_time>" + ( prev_time.getTime() + 1 ) + "</next_time>\n");
-				table.append("<name>" + product_name2 + "</name>\n");
-				table.append("<type_id>" + type2_id + "</type_id>\n");
-				table.append("<icon>" + product_iconurl2 + "</icon>\n");
+					product_iconurl = "images/Folder.jpg";
+				product_description = (String) tool.getValueAt(Adp, i, 2);
+				product_version = (String) tool.getValueAt(Adp, i, 3);
+				product_cost = (String) tool.getValueAt(Adp, i, 4);
+				currency_id = (String) tool.getValueAt(Adp, i, 5);
+
+				CurrencyHash currencyHash = CurrencyHash.getInstance();
+
+				currency_desc = currencyHash.getCurrency_decs(currency_id);
+				image_id = (String) tool.getValueAt(Adp, i, 12);
+				product_fulldescription = (String) tool.getValueAt(Adp, i, 14);
+				user1_id = (String) tool.getValueAt(Adp, i, 16);
+
+				type1_id = (String) tool.getValueAt(Adp, i, 8);
+
+				creteria1_name = (String) tool.getValueAt(Adp, i, 30);
+				creteria2_name = (String) tool.getValueAt(Adp, i, 31);
+				creteria3_name = (String) tool.getValueAt(Adp, i, 32);
+				creteria4_name = (String) tool.getValueAt(Adp, i, 33);
+				creteria5_name = (String) tool.getValueAt(Adp, i, 34);
+				creteria6_name = (String) tool.getValueAt(Adp, i, 35);
+				creteria7_name = (String) tool.getValueAt(Adp, i, 36);
+				creteria8_name = (String) tool.getValueAt(Adp, i, 37);
+				creteria9_name = (String) tool.getValueAt(Adp, i, 38);
+				creteria10_name = (String) tool.getValueAt(Adp, i, 39);
+				color = (String) tool.getValueAt(Adp, i, 40);
+
+				table.append("<product>\n");
+
+				table.append("<rigth>\n");
+				table.append("<product_id>" + rows[i][0] + "</product_id>\n");
+				table.append("<row_id>" + i + "</row_id>\n");
+				table.append("<name>" + product_name + "</name>\n");
+				table.append("<type_id>" + type1_id + "</type_id>\n");
+				table.append("<icon>" + product_iconurl + "</icon>\n");
 				table.append("<image></image>\n");
-				table.append("<user_id>" + user2_id + "</user_id>\n");
+				table.append("<user_id>" + user1_id + "</user_id>\n");
 				// Referece to pruduct
-				table.append("<policy_url>" + product_url2 + "</policy_url>\n");
-				table.append("<description>" + product_description2
-						+ "</description>\n");
-				// table.append("<fulldescription>" + product_fulldescription +
-				// "</fulldescription>\n") ;
-				table.append("<amount>" + product_cost2 + "</amount>\n");
+				table.append("<policy_url>" + product_url + "</policy_url>\n");
+				table.append("<description>" + product_description + "</description>\n");
+				table.append("<amount>" + product_cost + "</amount>\n");
 				table.append("<currency>\n");
 				table.append("<code>" + currency_cd + "</code>\n");
 				table.append("<description>dollar us</description>\n");
 				table.append("</currency>\n");
-				table.append("<version>" + currency_desc2 + "</version>\n");
+				table.append("<version>" + currency_desc + "</version>\n");
 				table.append("<creteria1>" + creteria1_name + "</creteria1>\n");
 				table.append("<creteria2>" + creteria2_name + "</creteria2>\n");
 				table.append("<creteria3>" + creteria3_name + "</creteria3>\n");
@@ -468,172 +331,182 @@ public class ProductlistBean  implements java.io.Serializable {
 				table.append("<creteria8>" + creteria8_name + "</creteria8>\n");
 				table.append("<creteria9>" + creteria9_name + "</creteria9>\n");
 				table.append("<creteria10>" + creteria10_name + "</creteria10>\n");
-				table.append("<color>" + color + "</color>\n");				
-				table.append("</left>\n");
-			}
+				table.append("<color>" + color + "</color>\n");
+				table.append("</rigth>\n");
 
-			table.append("</product>\n");
-		  }
-		  table.append("</list>\n");
+				if (tool.getRowCount(Adp) > (i + 1)) {
+					product_url2 = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(Adp, i + 1, 0);
+
+					rows[i + 1][0] = (String) tool.getValueAt(Adp, i + 1, 0);
+					rows[i + 1][1] = tool.getValueAt(Adp, i + 1, 7) == null ? "" : tool.getValueAt(Adp, i + 1, 7);
+					product_name2 = (String) tool.getValueAt(Adp, i + 1, 1);
+					img_url2 = (String) tool.getValueAt(Adp, i + 1, 13);
+					if (img_url2 != null)
+						product_iconurl2 = img_url2;
+					else
+						product_iconurl2 = "images/Folder.jpg";
+					product_description2 = (String) tool.getValueAt(Adp, i + 1, 2);
+					product_cost2 = (String) tool.getValueAt(Adp, i + 1, 4);
+					currency_id2 = (String) tool.getValueAt(Adp, i + 1, 5);
+					currency_desc2 = currencyHash.getCurrency_decs(currency_id2);
+					user2_id = (String) tool.getValueAt(Adp, i + 1, 16);
+					type2_id = (String) tool.getValueAt(Adp, i + 1, 8);
+					creteria1_name = (String) tool.getValueAt(Adp, i + 1, 30);
+					creteria2_name = (String) tool.getValueAt(Adp, i + 1, 31);
+					creteria3_name = (String) tool.getValueAt(Adp, i + 1, 32);
+					creteria4_name = (String) tool.getValueAt(Adp, i + 1, 33);
+					creteria5_name = (String) tool.getValueAt(Adp, i + 1, 34);
+					creteria6_name = (String) tool.getValueAt(Adp, i + 1, 35);
+					creteria7_name = (String) tool.getValueAt(Adp, i + 1, 36);
+					creteria8_name = (String) tool.getValueAt(Adp, i + 1, 37);
+					creteria9_name = (String) tool.getValueAt(Adp, i + 1, 38);
+					creteria10_name = (String) tool.getValueAt(Adp, i + 1, 39);
+					color = (String) tool.getValueAt(Adp, i + 1, 40);
+
+					table.append("<left>\n");
+					table.append("<product_id>" + rows[i + 1][0] + "</product_id>\n");
+					table.append("<row_id>" + (i + 1) + "</row_id>\n");
+					table.append("<name>" + product_name2 + "</name>\n");
+					table.append("<type_id>" + type2_id + "</type_id>\n");
+					table.append("<icon>" + product_iconurl2 + "</icon>\n");
+					table.append("<image></image>\n");
+					table.append("<user_id>" + user2_id + "</user_id>\n");
+					// Referece to pruduct
+					table.append("<policy_url>" + product_url2 + "</policy_url>\n");
+					table.append("<description>" + product_description2 + "</description>\n");
+					table.append("<amount>" + product_cost2 + "</amount>\n");
+					table.append("<currency>\n");
+					table.append("<code>" + currency_cd + "</code>\n");
+					table.append("<description>dollar us</description>\n");
+					table.append("</currency>\n");
+					table.append("<version>" + currency_desc2 + "</version>\n");
+					table.append("<creteria1>" + creteria1_name + "</creteria1>\n");
+					table.append("<creteria2>" + creteria2_name + "</creteria2>\n");
+					table.append("<creteria3>" + creteria3_name + "</creteria3>\n");
+					table.append("<creteria4>" + creteria4_name + "</creteria4>\n");
+					table.append("<creteria5>" + creteria5_name + "</creteria5>\n");
+					table.append("<creteria6>" + creteria6_name + "</creteria6>\n");
+					table.append("<creteria7>" + creteria7_name + "</creteria7>\n");
+					table.append("<creteria8>" + creteria8_name + "</creteria8>\n");
+					table.append("<creteria9>" + creteria9_name + "</creteria9>\n");
+					table.append("<creteria10>" + creteria10_name + "</creteria10>\n");
+					table.append("<color>" + color + "</color>\n");
+					table.append("</left>\n");
+				}
+
+				table.append("</product>\n");
+			}
+			table.append("</list>\n");
+		} catch (Exception ex) {
+			log.error(ex);
 		}
-		catch (Exception ex) 
-		{
-		log.error(ex);
-		}
-		
+
 		return table.toString();
 	}
 
-
-
-	
 	public String getProductSimpleList(String strUser_id, String site_id) {
 		if (strUser_id == null || strUser_id.length() == 0)
 			strUser_id = "0";
 
 		rows = new String[tool.getRowCount(Adp)][2];
-		
+
 		StringBuffer table = new StringBuffer();
 		table.append("<product_list>\n");
-		cururl = "Productlist.jsp?offset=" + offset; 
-		listup = "Productlist.jsp?offset=" + (offset + 10); 
+		cururl = "Productlist.jsp?offset=" + offset;
+		listup = "Productlist.jsp?offset=" + (offset + 10);
 		if (offset - 10 < 0)
-			listdown = "Productlist.jsp?offset=0"; 
+			listdown = "Productlist.jsp?offset=0";
 		else
-			listdown = "Productlist.jsp?offset=" + (offset - 10); 
-			
+			listdown = "Productlist.jsp?offset=" + (offset - 10);
 
-		try
-		{
-		if (intLevelUp == 2)setPost_manager("PostManager.jsp");
-		else setPost_manager("");
-		pagecount =  tool.getRowCount(Adp) ;
-
-		for (int i = 0; tool.getRowCount(Adp) > i; i++ ) {
-			rows[i][0] = (String) tool.getValueAt(Adp,i, 0);
-			rows[i][1] = tool.getValueAt(Adp,i, 7) == null ? "" : tool.getValueAt(Adp,i,7);
-			// rows[i][1] = tool.getValueAt(Adp,i, 7) ; //== null
-			// ?"":Adp.getValueAt(i, 7) ;
-
-			product_name = (String) tool.getValueAt(Adp,i, 1);
-			// strSoftURL = "downloadservlet?row=" + i + "&dev=html" ;;
-			// strSoftURL = "downloadservlet?row=" + i ;
-			/////product_url = "Policy.jsp?row=" + i;
-			product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(Adp,i, 0);
-
-			img_url = (String) tool.getValueAt(Adp,i, 13);
-			if (img_url != null)
-				product_iconurl = img_url;
+		try {
+			if (intLevelUp == 2)
+				setPost_manager("PostManager.jsp");
 			else
-				product_iconurl = "images/Folder.jpg";
-			product_description = (String) tool.getValueAt(Adp,i, 2);
-			product_version = (String) tool.getValueAt(Adp,i, 3);
-			product_cost = (String) tool.getValueAt(Adp,i, 4);
-			currency_id = (String) tool.getValueAt(Adp,i, 5);
-			CurrencyHash currencyHash = CurrencyHash.getInstance() ;
-			currency_desc = currencyHash.getCurrency_decs(currency_id);
-			// Currency curr = CurrencyHash.getCurrency(currency_id);
-			// if(curr == null) throw new
-			// java.lang.UnsupportedOperationException("Currency curr == null
-			// ");
-			// currency_cd = curr.getCode();
-			// currency_cd = curr.getCode();
+				setPost_manager("");
+			pagecount = tool.getRowCount(Adp);
 
-			// phonetype_id = (String)tool.getValueAt(Adp,i,10) ;
-			// phonetype_id2 = (String)tool.getValueAt(Adp,i,10) ;
-			// progname_id = (String)tool.getValueAt(Adp,i,11) ;
-			image_id = (String) tool.getValueAt(Adp,i, 12);
-			product_fulldescription = (String) tool.getValueAt(Adp,i, 14);
-			// product_bigimgurl = (String)tool.getValueAt(Adp,i,15) ;
-			user1_id = (String)tool.getValueAt(Adp,i,16) ;
-			//cdate = (Date)Adp.getValueObjectAt(i,17) ;
-			//statistic = (String)tool.getValueAt(Adp,i,18) ;
-			//user1_id = (String)tool.getValueAt(Adp,i,16) ;
-			//private String statistic = "0" ;
-			//private Date cdate =null ;
-			creteria1_name = (String) tool.getValueAt(Adp,i, 30);
-			creteria2_name = (String) tool.getValueAt(Adp,i, 31);
-			creteria3_name = (String) tool.getValueAt(Adp,i, 32);
-			creteria4_name = (String) tool.getValueAt(Adp,i, 33);
-			creteria5_name = (String) tool.getValueAt(Adp,i, 34);
-			creteria6_name = (String) tool.getValueAt(Adp,i, 35);
-			creteria7_name = (String) tool.getValueAt(Adp,i, 36);
-			creteria8_name = (String) tool.getValueAt(Adp,i, 37);
-			creteria9_name = (String) tool.getValueAt(Adp,i, 38);
-			creteria10_name = (String) tool.getValueAt(Adp,i, 39);
-			color = (String) tool.getValueAt(Adp,i, 40);
-			
-			type1_id = (String)tool.getValueAt(Adp,i,8) ;
+			for (int i = 0; tool.getRowCount(Adp) > i; i++) {
+				rows[i][0] = (String) tool.getValueAt(Adp, i, 0);
+				rows[i][1] = tool.getValueAt(Adp, i, 7) == null ? "" : tool.getValueAt(Adp, i, 7);
 
-			table.append("<product>\n");
-			table.append("<product_id>" + rows[i][0] + "</product_id>\n");
-			table.append("<row_id>" + i + "</row_id>\n");
-			
-			
-			// String prev_time ;
-			// if(i -1  >= 0)  prev_time = (String)tool.getValueAtObject(Adp,i-1,0) ;
-			// else prev_time = (String)tool.getValueAtObject(Adp,i,17) ;
-			
-			// String next_time ;
-			// if(i +1 < Adp.size())  next_time = (String)tool.getValueAtObject(Adp,i+1,0) ;
-			// else next_time = (String)tool.getValueAtObject(Adp,i,0) ; 
-			
-			//table.append("<prev_time>" + prev_time + "</prev_time>\n");
-			//table.append("<next_time>" + next_time + "</next_time>\n");
-			 
-			table.append("<name>" + product_name + "</name>\n");
-			table.append("<type_id>" + type1_id + "</type_id>\n");
-			table.append("<icon>" + product_iconurl + "</icon>\n");
-			table.append("<image></image>\n");
-			table.append("<user_id>" + user1_id + "</user_id>\n");
-			// Referece to pruduct
-			table.append("<policy_url>" + product_url + "</policy_url>\n");
-			table.append("<description>" + product_description
-					+ "</description>\n");
-			// table.append("<fulldescription>" + product_fulldescription +
-			// "</fulldescription>\n") ;
-			table.append("<amount>" + product_cost + "</amount>\n");
-			table.append("<currency>\n");
-			table.append("<code>" + currency_cd + "</code>\n");
-			table.append("<description>dollar us</description>\n");
-			table.append("</currency>\n");
-			table.append("<version>" + currency_desc + "</version>\n");
-			table.append("<creteria1>" + creteria1_name + "</creteria1>\n");
-			table.append("<creteria2>" + creteria2_name + "</creteria2>\n");
-			table.append("<creteria3>" + creteria3_name + "</creteria3>\n");
-			table.append("<creteria4>" + creteria4_name + "</creteria4>\n");
-			table.append("<creteria5>" + creteria5_name + "</creteria5>\n");
-			table.append("<creteria6>" + creteria6_name + "</creteria6>\n");
-			table.append("<creteria7>" + creteria7_name + "</creteria7>\n");
-			table.append("<creteria8>" + creteria8_name + "</creteria8>\n");
-			table.append("<creteria9>" + creteria9_name + "</creteria9>\n");
-			table.append("<creteria10>" + creteria10_name + "</creteria10>\n");
-			table.append("<color>" + color + "</color>\n");
-			table.append("</product>\n");
-		  }
-		  table.append("</product_list>\n");
+				product_name = (String) tool.getValueAt(Adp, i, 1);
+				product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(Adp, i, 0);
+
+				img_url = (String) tool.getValueAt(Adp, i, 13);
+				if (img_url != null)
+					product_iconurl = img_url;
+				else
+					product_iconurl = "images/Folder.jpg";
+				product_description = (String) tool.getValueAt(Adp, i, 2);
+				product_version = (String) tool.getValueAt(Adp, i, 3);
+				product_cost = (String) tool.getValueAt(Adp, i, 4);
+				currency_id = (String) tool.getValueAt(Adp, i, 5);
+				CurrencyHash currencyHash = CurrencyHash.getInstance();
+				currency_desc = currencyHash.getCurrency_decs(currency_id);
+				image_id = (String) tool.getValueAt(Adp, i, 12);
+				product_fulldescription = (String) tool.getValueAt(Adp, i, 14);
+				user1_id = (String) tool.getValueAt(Adp, i, 16);
+				creteria1_name = (String) tool.getValueAt(Adp, i, 30);
+				creteria2_name = (String) tool.getValueAt(Adp, i, 31);
+				creteria3_name = (String) tool.getValueAt(Adp, i, 32);
+				creteria4_name = (String) tool.getValueAt(Adp, i, 33);
+				creteria5_name = (String) tool.getValueAt(Adp, i, 34);
+				creteria6_name = (String) tool.getValueAt(Adp, i, 35);
+				creteria7_name = (String) tool.getValueAt(Adp, i, 36);
+				creteria8_name = (String) tool.getValueAt(Adp, i, 37);
+				creteria9_name = (String) tool.getValueAt(Adp, i, 38);
+				creteria10_name = (String) tool.getValueAt(Adp, i, 39);
+				color = (String) tool.getValueAt(Adp, i, 40);
+
+				type1_id = (String) tool.getValueAt(Adp, i, 8);
+
+				table.append("<product>\n");
+				table.append("<product_id>" + rows[i][0] + "</product_id>\n");
+				table.append("<row_id>" + i + "</row_id>\n");
+
+				table.append("<name>" + product_name + "</name>\n");
+				table.append("<type_id>" + type1_id + "</type_id>\n");
+				table.append("<icon>" + product_iconurl + "</icon>\n");
+				table.append("<image></image>\n");
+				table.append("<user_id>" + user1_id + "</user_id>\n");
+				// Referece to pruduct
+				table.append("<policy_url>" + product_url + "</policy_url>\n");
+				table.append("<description>" + product_description + "</description>\n");
+				table.append("<amount>" + product_cost + "</amount>\n");
+				table.append("<currency>\n");
+				table.append("<code>" + currency_cd + "</code>\n");
+				table.append("<description>dollar us</description>\n");
+				table.append("</currency>\n");
+				table.append("<version>" + currency_desc + "</version>\n");
+				table.append("<creteria1>" + creteria1_name + "</creteria1>\n");
+				table.append("<creteria2>" + creteria2_name + "</creteria2>\n");
+				table.append("<creteria3>" + creteria3_name + "</creteria3>\n");
+				table.append("<creteria4>" + creteria4_name + "</creteria4>\n");
+				table.append("<creteria5>" + creteria5_name + "</creteria5>\n");
+				table.append("<creteria6>" + creteria6_name + "</creteria6>\n");
+				table.append("<creteria7>" + creteria7_name + "</creteria7>\n");
+				table.append("<creteria8>" + creteria8_name + "</creteria8>\n");
+				table.append("<creteria9>" + creteria9_name + "</creteria9>\n");
+				table.append("<creteria10>" + creteria10_name + "</creteria10>\n");
+				table.append("<color>" + color + "</color>\n");
+				table.append("</product>\n");
+			}
+			table.append("</product_list>\n");
+		} catch (Exception ex) {
+			log.error(ex);
 		}
-		catch (Exception ex) 
-		{
-		log.error(ex);
-		}
-		
+
 		return table.toString();
 	}
 
-
-	
-	
-	String getEmptyProductList()
-	{
+	String getEmptyProductList() {
 		StringBuffer table = new StringBuffer();
 		table.append("<list>\n");
 		table.append("</list>\n");
 		return table.toString();
 	}
-	
-	
-	
+
 	public String getProduct(String _soft_id) throws SQLException {
 
 		StringBuffer table = new StringBuffer();
@@ -671,129 +544,47 @@ public class ProductlistBean  implements java.io.Serializable {
 																	// +
 																	// licence_id
 																	// ;
-		
 
-		try
-		{
-		if (intLevelUp == 2) setPost_manager("PostManager.jsp");
-		else setPost_manager("");
-		pagecount = tool.getRowCount(tmpAdp);
-
-		   for (int i = 0; tool.getRowCount(tmpAdp) > i; i++) 
-	  	   {
-			rows[i][0] = (String) tool.getValueAt( tmpAdp,i, 0);
-			rows[i][1] = tool.getValueAt( tmpAdp,i, 7) == null ? "" : tool.getValueAt( tmpAdp,i, 7);
-			product_name = (String) tool.getValueAt( tmpAdp,i, 1);
-			product_url = "Policy.jsp?row=" + i;
-
-			img_url = (String) tool.getValueAt( tmpAdp,i, 13);
-			if (img_url != null)
-				product_iconurl = img_url;
+		try {
+			if (intLevelUp == 2)
+				setPost_manager("PostManager.jsp");
 			else
-				product_iconurl = "images/Folder.jpg";
-			product_description = (String) tool.getValueAt( tmpAdp,i, 2);
-			product_version = (String) tool.getValueAt( tmpAdp,i, 3);
-			product_cost = (String) tool.getValueAt( tmpAdp,i, 4);
-			currency_id = (String) tool.getValueAt( tmpAdp,i, 5);
-			CurrencyHash currencyHash = CurrencyHash.getInstance() ;
-			currency_desc = currencyHash.getCurrency_decs(currency_id);
-			image_id = (String) tool.getValueAt( tmpAdp,i, 12);
-			product_fulldescription = (String) tool.getValueAt( tmpAdp,i, 14);
+				setPost_manager("");
+			pagecount = tool.getRowCount(tmpAdp);
+
+			for (int i = 0; tool.getRowCount(tmpAdp) > i; i++) {
+				rows[i][0] = (String) tool.getValueAt(tmpAdp, i, 0);
+				rows[i][1] = tool.getValueAt(tmpAdp, i, 7) == null ? "" : tool.getValueAt(tmpAdp, i, 7);
+				product_name = (String) tool.getValueAt(tmpAdp, i, 1);
+				product_url = "Policy.jsp?row=" + i;
+
+				img_url = (String) tool.getValueAt(tmpAdp, i, 13);
+				if (img_url != null)
+					product_iconurl = img_url;
+				else
+					product_iconurl = "images/Folder.jpg";
+				product_description = (String) tool.getValueAt(tmpAdp, i, 2);
+				product_version = (String) tool.getValueAt(tmpAdp, i, 3);
+				product_cost = (String) tool.getValueAt(tmpAdp, i, 4);
+				currency_id = (String) tool.getValueAt(tmpAdp, i, 5);
+				CurrencyHash currencyHash = CurrencyHash.getInstance();
+				currency_desc = currencyHash.getCurrency_decs(currency_id);
+				image_id = (String) tool.getValueAt(tmpAdp, i, 12);
+				product_fulldescription = (String) tool.getValueAt(tmpAdp, i, 14);
 			}
-		}
-		catch (Exception ex) 
-		{
+		} catch (Exception ex) {
 			log.error(ex);
 		}
 		return table.toString();
 
 	}
 
-	
-/* Здесь наверное ошибка
-	public String getProduct(String _soft_id) throws SQLException {
-
-		StringBuffer table = new StringBuffer();
-		table.append("<list>\n");
-		cururl = "Productlist.jsp?offset=" + offset; // + "&catalog_id=" +
-														// catalog_id +
-														// "&phonetype_id=" +
-														// phonetype_id +
-														// "&licence_id=" +
-														// licence_id ;
-		listup = "Productlist.jsp?offset=" + (offset + 10); // + "&catalog_id="
-															// + catalog_id +
-															// "&phonetype_id="
-															// + phonetype_id +
-															// "&licence_id=" +
-															// licence_id ;
-		if (offset - 10 < 0)
-			listdown = "Productlist.jsp?offset=0"; // &catalog_id=" +
-													// catalog_id +
-													// "&phonetype_id=" +
-													// phonetype_id +
-													// "&licence_id=" +
-													// licence_id ;
-		else
-			listdown = "Productlist.jsp?offset=" + (offset - 10); // +
-																	// "&catalog_id="
-																	// +
-																	// catalog_id
-																	// +
-																	// "&phonetype_id="
-																	// +
-																	// phonetype_id
-																	// +
-																	// "&licence_id="
-																	// +
-																	// licence_id
-																	// ;
-		
-
-		try
-		{
-		if (intLevelUp == 2) setPost_manager("PostManager.jsp");
-		else setPost_manager("");
-		pagecount = tool.getRowCount(tmpAdp);
-
-		   for (int i = 0; tool.getRowCount(tmpAdp) > i; i++) 
-	  	   {
-			ext1_rows[i][0] = (String) tool.getValueAt( tmpAdp,i, 0);
-			ext1_rows[i][1] = tool.getValueAt( tmpAdp,i, 7) == null ? "" : tool.getValueAt( tmpAdp,i, 7);
-			product_name = (String) tool.getValueAt( tmpAdp,i, 1);
-			product_url = "Policy.jsp?co1_row=" + i;
-
-			img_url = (String) tool.getValueAt( tmpAdp,i, 13);
-			if (img_url != null)
-				product_iconurl = img_url;
-			else
-				product_iconurl = "images/Folder.jpg";
-			product_description = (String) tool.getValueAt( tmpAdp,i, 2);
-			product_version = (String) tool.getValueAt( tmpAdp,i, 3);
-			product_cost = (String) tool.getValueAt( tmpAdp,i, 4);
-			currency_id = (String) tool.getValueAt( tmpAdp,i, 5);
-			currency_desc = CurrencyHash.getCurrency_decs(currency_id);
-			image_id = (String) tool.getValueAt( tmpAdp,i, 12);
-			product_fulldescription = (String) tool.getValueAt( tmpAdp,i, 14);
-			}
-		}
-		catch (Exception ex) 
-		{
-			log.error(ex);
-		}
-		return table.toString();
-
-	}
-
-*/
-	
 	public String getCoOneProductlist(String strUser_id, String site_id) {
 		if (strUser_id == null || strUser_id.length() == 0)
 			strUser_id = "0";
 
-		
 		co1_rows = new String[tool.getRowCount(co1Adp)][2];
-		
+
 		StringBuffer table = new StringBuffer();
 		table.append("<coproductlist1>\n");
 		cururl = "Productlist.jsp?offset=" + offset; // + "&catalog_id=" +
@@ -829,70 +620,68 @@ public class ProductlistBean  implements java.io.Serializable {
 																	// +
 																	// licence_id
 																	// ;
-		
 
-		try
-		{
-		if (intLevelUp == 2) setPost_manager("PostManager.jsp");
-		else setPost_manager("");
-		pagecount_co1 = tool.getRowCount(co1Adp);
+		try {
+			if (intLevelUp == 2)
+				setPost_manager("PostManager.jsp");
+			else
+				setPost_manager("");
+			pagecount_co1 = tool.getRowCount(co1Adp);
 
-		for (int i = 0; tool.getRowCount(co1Adp) > i; i++) {
-			co1_rows[i][0] = (String) tool.getValueAt( co1Adp,i, 0);
-			co1_rows[i][1] = tool.getValueAt( co1Adp,i, 7) == null ? "" : tool.getValueAt( co1Adp,i, 7);
-			product_name = (String) tool.getValueAt( co1Adp,i, 1);
-			String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt( co1Adp,i, 0);
-			//product_url = "Policy.jsp?co1_row=" + i;
-			product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt( co1Adp,i, 0);
-			
-			product_iconurl = (String) tool.getValueAt( co1Adp,i, 13);
-			if (product_iconurl == null ) product_iconurl = "images/Folder.jpg";
-			
-			img_url = (String) tool.getValueAt( co1Adp,i, 15);
-			if (img_url == null ) img_url = "images/Folder.jpg";
-			String file_exist1 = "" ;
-			if (co1_rows[i][1].length() > 0) file_exist1 = "true" ;
-			
-			product_description = (String) tool.getValueAt( co1Adp,i, 2);
-			product_version = (String) tool.getValueAt( co1Adp,i, 3);
-			product_cost = (String) tool.getValueAt( co1Adp,i, 4);
-			currency_id = (String) tool.getValueAt( co1Adp,i, 5);
-			CurrencyHash currencyHash = CurrencyHash.getInstance() ;
-			currency_desc = currencyHash.getCurrency_decs(currency_id);
-			image_id = (String) tool.getValueAt( co1Adp,i, 12);
-			product_fulldescription = (String) tool.getValueAt( co1Adp,i, 14);
-			user1_id = (String)tool.getValueAt( co1Adp,i,16) ;
-			
-			table.append("<coproduct1>\n");
-			table.append("<product_id>" + co1_rows[i][0] + "</product_id>\n");
-			table.append("<row_id>" + i + "</row_id>\n");
-			table.append("<file_exist>" + file_exist1 + "</file_exist>\n");
-			table.append("<name>" + product_name + "</name>\n");
-			table.append("<icon>" + product_iconurl + "</icon>\n");
-			table.append("<image>" + img_url + "</image>\n");
-			table.append("<big_image_type>"+  img_url.substring(img_url.indexOf(".") + 1 ) + "</big_image_type>\n");
-			table.append("<icon_type>"+  product_iconurl.substring(product_iconurl.indexOf(".") + 1 ) + "</icon_type>\n");
-			table.append("<user_id>" + user1_id + "</user_id>\n");
-			// Referece to pruduct
-			table.append("<policy_url>" + product_url + "</policy_url>\n");
-			table.append("<product_url>" + attache_file + "</product_url>\n");
-			table.append("<description>" + product_description
-					+ "</description>\n");
-			// table.append("<fulldescription>" + product_fulldescription +
-			// "</fulldescription>\n") ;
-			table.append("<amount>" + product_cost + "</amount>\n");
-			table.append("<currency>\n");
-			table.append("<code>" + currency_cd + "</code>\n");
-			table.append("<description>dollar us</description>\n");
-			table.append("</currency>\n");
-			table.append("<version>" + currency_desc + "</version>\n");
-			table.append("</coproduct1>\n");
-		  }
-		table.append("</coproductlist1>\n");
-		}
-		catch (Exception ex) 
-		{
-		log.error(ex);
+			for (int i = 0; tool.getRowCount(co1Adp) > i; i++) {
+				co1_rows[i][0] = (String) tool.getValueAt(co1Adp, i, 0);
+				co1_rows[i][1] = tool.getValueAt(co1Adp, i, 7) == null ? "" : tool.getValueAt(co1Adp, i, 7);
+				product_name = (String) tool.getValueAt(co1Adp, i, 1);
+				String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt(co1Adp, i, 0);
+				product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(co1Adp, i, 0);
+
+				product_iconurl = (String) tool.getValueAt(co1Adp, i, 13);
+				if (product_iconurl == null)
+					product_iconurl = "images/Folder.jpg";
+
+				img_url = (String) tool.getValueAt(co1Adp, i, 15);
+				if (img_url == null)
+					img_url = "images/Folder.jpg";
+				String file_exist1 = "";
+				if (co1_rows[i][1].length() > 0)
+					file_exist1 = "true";
+
+				product_description = (String) tool.getValueAt(co1Adp, i, 2);
+				product_version = (String) tool.getValueAt(co1Adp, i, 3);
+				product_cost = (String) tool.getValueAt(co1Adp, i, 4);
+				currency_id = (String) tool.getValueAt(co1Adp, i, 5);
+				CurrencyHash currencyHash = CurrencyHash.getInstance();
+				currency_desc = currencyHash.getCurrency_decs(currency_id);
+				image_id = (String) tool.getValueAt(co1Adp, i, 12);
+				product_fulldescription = (String) tool.getValueAt(co1Adp, i, 14);
+				user1_id = (String) tool.getValueAt(co1Adp, i, 16);
+
+				table.append("<coproduct1>\n");
+				table.append("<product_id>" + co1_rows[i][0] + "</product_id>\n");
+				table.append("<row_id>" + i + "</row_id>\n");
+				table.append("<file_exist>" + file_exist1 + "</file_exist>\n");
+				table.append("<name>" + product_name + "</name>\n");
+				table.append("<icon>" + product_iconurl + "</icon>\n");
+				table.append("<image>" + img_url + "</image>\n");
+				table.append("<big_image_type>" + img_url.substring(img_url.indexOf(".") + 1) + "</big_image_type>\n");
+				table.append(
+						"<icon_type>" + product_iconurl.substring(product_iconurl.indexOf(".") + 1) + "</icon_type>\n");
+				table.append("<user_id>" + user1_id + "</user_id>\n");
+				// Referece to pruduct
+				table.append("<policy_url>" + product_url + "</policy_url>\n");
+				table.append("<product_url>" + attache_file + "</product_url>\n");
+				table.append("<description>" + product_description + "</description>\n");
+				table.append("<amount>" + product_cost + "</amount>\n");
+				table.append("<currency>\n");
+				table.append("<code>" + currency_cd + "</code>\n");
+				table.append("<description>dollar us</description>\n");
+				table.append("</currency>\n");
+				table.append("<version>" + currency_desc + "</version>\n");
+				table.append("</coproduct1>\n");
+			}
+			table.append("</coproductlist1>\n");
+		} catch (Exception ex) {
+			log.error(ex);
 		}
 		return table.toString();
 	}
@@ -905,78 +694,76 @@ public class ProductlistBean  implements java.io.Serializable {
 		StringBuffer table = new StringBuffer();
 		table.append("<bottomlist>\n");
 
-		try
-		{
-		if (intLevelUp == 2) setPost_manager("PostManager.jsp");
-		else setPost_manager("");
-		//pagecount_bottom = tool.getRowCount(bottomAdp);
+		try {
+			if (intLevelUp == 2)
+				setPost_manager("PostManager.jsp");
+			else
+				setPost_manager("");
 
-		for (int i = 0; tool.getRowCount(bottomAdp) > i; i++) {
-			bottom_rows[i][0] = (String) tool.getValueAt( bottomAdp,i, 0);
-			bottom_rows[i][1] = tool.getValueAt( bottomAdp,i, 7) == null ? "" : tool.getValueAt( bottomAdp,i, 7);
-			product_name = (String) tool.getValueAt( bottomAdp,i, 1);
-			String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt( bottomAdp,i, 0);
-			//product_url = "Policy.jsp?co1_row=" + i;
-			product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt( bottomAdp,i, 0);
-			
-			product_iconurl = (String) tool.getValueAt( bottomAdp,i, 13);
-			if (product_iconurl == null ) product_iconurl = "images/Folder.jpg";
-			
-			img_url = (String) tool.getValueAt( bottomAdp,i, 15);
-			if (img_url == null ) img_url = "images/Folder.jpg";
-			String file_exist1 = "" ;
-			if (bottom_rows[i][1].length() > 0) file_exist1 = "true" ;
-			
-			product_description = (String) tool.getValueAt( bottomAdp,i, 2);
-			product_version = (String) tool.getValueAt( bottomAdp,i, 3);
-			product_cost = (String) tool.getValueAt( bottomAdp,i, 4);
-			currency_id = (String) tool.getValueAt( bottomAdp,i, 5);
-			CurrencyHash currencyHash = CurrencyHash.getInstance() ;
-			currency_desc = currencyHash.getCurrency_decs(currency_id);
-			image_id = (String) tool.getValueAt( bottomAdp,i, 12);
-			product_fulldescription = (String) tool.getValueAt( bottomAdp,i, 14);
-			user1_id = (String)tool.getValueAt( bottomAdp,i,16) ;
-			
-			table.append("<bottom>\n");
-			table.append("<product_id>" + bottom_rows[i][0] + "</product_id>\n");
-			table.append("<row_id>" + i + "</row_id>\n");
-			table.append("<file_exist>" + file_exist1 + "</file_exist>\n");
-			table.append("<name>" + product_name + "</name>\n");
-			table.append("<icon>" + product_iconurl + "</icon>\n");
-			table.append("<image>" + img_url + "</image>\n");
-			table.append("<big_image_type>"+  img_url.substring(img_url.indexOf(".") + 1 ) + "</big_image_type>\n");
-			table.append("<icon_type>"+  product_iconurl.substring(product_iconurl.indexOf(".") + 1 ) + "</icon_type>\n");
-			table.append("<user_id>" + user1_id + "</user_id>\n");
-			// Referece to pruduct
-			table.append("<policy_url>" + product_url + "</policy_url>\n");
-			table.append("<product_url>" + attache_file + "</product_url>\n");
-			table.append("<description>" + product_description
-					+ "</description>\n");
-			// table.append("<fulldescription>" + product_fulldescription +
-			// "</fulldescription>\n") ;
-			table.append("<amount>" + product_cost + "</amount>\n");
-			table.append("<currency>\n");
-			table.append("<code>" + currency_cd + "</code>\n");
-			table.append("<description>dollar us</description>\n");
-			table.append("</currency>\n");
-			table.append("<version>" + currency_desc + "</version>\n");
-			table.append("</bottom>\n");
-		  }
-		table.append("</bottomlist>\n");
-		}
-		catch (Exception ex) 
-		{
-		log.error(ex);
+			for (int i = 0; tool.getRowCount(bottomAdp) > i; i++) {
+				bottom_rows[i][0] = (String) tool.getValueAt(bottomAdp, i, 0);
+				bottom_rows[i][1] = tool.getValueAt(bottomAdp, i, 7) == null ? "" : tool.getValueAt(bottomAdp, i, 7);
+				product_name = (String) tool.getValueAt(bottomAdp, i, 1);
+				String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt(bottomAdp, i, 0);
+				product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(bottomAdp, i, 0);
+
+				product_iconurl = (String) tool.getValueAt(bottomAdp, i, 13);
+				if (product_iconurl == null)
+					product_iconurl = "images/Folder.jpg";
+
+				img_url = (String) tool.getValueAt(bottomAdp, i, 15);
+				if (img_url == null)
+					img_url = "images/Folder.jpg";
+				String file_exist1 = "";
+				if (bottom_rows[i][1].length() > 0)
+					file_exist1 = "true";
+
+				product_description = (String) tool.getValueAt(bottomAdp, i, 2);
+				product_version = (String) tool.getValueAt(bottomAdp, i, 3);
+				product_cost = (String) tool.getValueAt(bottomAdp, i, 4);
+				currency_id = (String) tool.getValueAt(bottomAdp, i, 5);
+				CurrencyHash currencyHash = CurrencyHash.getInstance();
+				currency_desc = currencyHash.getCurrency_decs(currency_id);
+				image_id = (String) tool.getValueAt(bottomAdp, i, 12);
+				product_fulldescription = (String) tool.getValueAt(bottomAdp, i, 14);
+				user1_id = (String) tool.getValueAt(bottomAdp, i, 16);
+
+				table.append("<bottom>\n");
+				table.append("<product_id>" + bottom_rows[i][0] + "</product_id>\n");
+				table.append("<row_id>" + i + "</row_id>\n");
+				table.append("<file_exist>" + file_exist1 + "</file_exist>\n");
+				table.append("<name>" + product_name + "</name>\n");
+				table.append("<icon>" + product_iconurl + "</icon>\n");
+				table.append("<image>" + img_url + "</image>\n");
+				table.append("<big_image_type>" + img_url.substring(img_url.indexOf(".") + 1) + "</big_image_type>\n");
+				table.append(
+						"<icon_type>" + product_iconurl.substring(product_iconurl.indexOf(".") + 1) + "</icon_type>\n");
+				table.append("<user_id>" + user1_id + "</user_id>\n");
+				// Referece to pruduct
+				table.append("<policy_url>" + product_url + "</policy_url>\n");
+				table.append("<product_url>" + attache_file + "</product_url>\n");
+				table.append("<description>" + product_description + "</description>\n");
+				table.append("<amount>" + product_cost + "</amount>\n");
+				table.append("<currency>\n");
+				table.append("<code>" + currency_cd + "</code>\n");
+				table.append("<description>dollar us</description>\n");
+				table.append("</currency>\n");
+				table.append("<version>" + currency_desc + "</version>\n");
+				table.append("</bottom>\n");
+			}
+			table.append("</bottomlist>\n");
+		} catch (Exception ex) {
+			log.error(ex);
 		}
 		return table.toString();
 	}
-	
+
 	public String getCoTwoProductlist(String strUser_id, String site_id) {
 		if (strUser_id == null || strUser_id.length() == 0)
 			strUser_id = "0";
 
 		co2_rows = new String[tool.getRowCount(co2Adp)][2];
-		
+
 		StringBuffer table = new StringBuffer();
 		table.append("<coproductlist2>\n");
 		cururl = "Productlist.jsp?offset=" + offset; // + "&catalog_id=" +
@@ -1012,78 +799,71 @@ public class ProductlistBean  implements java.io.Serializable {
 																	// +
 																	// licence_id
 																	// ;
-		
 
-		try
-		{
-		if (intLevelUp == 2) setPost_manager("PostManager.jsp");
-		else setPost_manager("");
-		pagecount_co2 = tool.getRowCount(co2Adp);
+		try {
+			if (intLevelUp == 2)
+				setPost_manager("PostManager.jsp");
+			else
+				setPost_manager("");
+			pagecount_co2 = tool.getRowCount(co2Adp);
 
-		for (int i = 0; tool.getRowCount(co2Adp) > i; i++) {
-			co2_rows[i][0] = (String) tool.getValueAt( co2Adp,i, 0);
-			co2_rows[i][1] = tool.getValueAt( co2Adp,i, 7) == null ? "" : tool.getValueAt( co2Adp,i, 7);
-			product_name = (String) tool.getValueAt( co2Adp,i, 1);
-			String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt( co2Adp,i, 0);
-			//product_url = "Policy.jsp?co2_row=" + i;
-			product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt( co2Adp,i, 0);
+			for (int i = 0; tool.getRowCount(co2Adp) > i; i++) {
+				co2_rows[i][0] = (String) tool.getValueAt(co2Adp, i, 0);
+				co2_rows[i][1] = tool.getValueAt(co2Adp, i, 7) == null ? "" : tool.getValueAt(co2Adp, i, 7);
+				product_name = (String) tool.getValueAt(co2Adp, i, 1);
+				String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt(co2Adp, i, 0);
+				product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(co2Adp, i, 0);
 
-			
-			product_iconurl = (String) tool.getValueAt( co2Adp,i, 13);
-			if (product_iconurl == null ) product_iconurl = "images/Folder.jpg";
-			
-			img_url = (String) tool.getValueAt( co2Adp,i, 15);
-			if (img_url == null ) img_url = "images/Folder.jpg";
-			
-			String file_exist1 = "" ;
-			if (co2_rows[i][1].length() > 0) file_exist1 = "true" ;
-			
-			product_description = (String) tool.getValueAt( co2Adp,i, 2);
-			product_version = (String) tool.getValueAt( co2Adp,i, 3);
-			product_cost = (String) tool.getValueAt( co2Adp,i, 4);
-			currency_id = (String) tool.getValueAt( co2Adp,i, 5);
-			CurrencyHash currencyHash = CurrencyHash.getInstance() ;
-			currency_desc = currencyHash.getCurrency_decs(currency_id);
-			image_id = (String) tool.getValueAt( co2Adp,i, 12);
-			product_fulldescription = (String) tool.getValueAt( co2Adp,i, 14);
-			user1_id = (String)tool.getValueAt( co2Adp,i,16) ;
-			table.append("<coproduct2>\n");
-			table.append("<product_id>" + co2_rows[i][0] + "</product_id>\n");
-			table.append("<row_id>" + i + "</row_id>\n");
-			table.append("<file_exist>" + file_exist1 + "</file_exist>\n");
-			table.append("<name>" + product_name + "</name>\n");
-			table.append("<icon>" + product_iconurl + "</icon>\n");
-			table.append("<image>" + img_url + "</image>\n");
-			table.append("<big_image_type>"+  img_url.substring(img_url.indexOf(".") + 1 ) + "</big_image_type>\n");
-			table.append("<icon_type>"+  product_iconurl.substring(product_iconurl.indexOf(".") + 1 ) + "</icon_type>\n");
-			table.append("<user_id>" + user1_id + "</user_id>\n");
-			// Referece to pruduct
-			table.append("<policy_url>" + product_url + "</policy_url>\n");
-			table.append("<product_url>" + attache_file + "</product_url>\n");
-			table.append("<description>" + product_description
-					+ "</description>\n");
-			table.append("<amount>" + product_cost + "</amount>\n");
-			table.append("<currency>\n");
-			table.append("<code>" + currency_cd + "</code>\n");
-			table.append("<description>dollar us</description>\n");
-			table.append("</currency>\n");
-			table.append("<version>" + currency_desc + "</version>\n");
-			table.append("</coproduct2>\n");
-		  }
-		table.append("</coproductlist2>\n");
-		}
-		catch (Exception ex) 
-		{
-		log.error(ex);
+				product_iconurl = (String) tool.getValueAt(co2Adp, i, 13);
+				if (product_iconurl == null)
+					product_iconurl = "images/Folder.jpg";
+
+				img_url = (String) tool.getValueAt(co2Adp, i, 15);
+				if (img_url == null)
+					img_url = "images/Folder.jpg";
+
+				String file_exist1 = "";
+				if (co2_rows[i][1].length() > 0)
+					file_exist1 = "true";
+
+				product_description = (String) tool.getValueAt(co2Adp, i, 2);
+				product_version = (String) tool.getValueAt(co2Adp, i, 3);
+				product_cost = (String) tool.getValueAt(co2Adp, i, 4);
+				currency_id = (String) tool.getValueAt(co2Adp, i, 5);
+				CurrencyHash currencyHash = CurrencyHash.getInstance();
+				currency_desc = currencyHash.getCurrency_decs(currency_id);
+				image_id = (String) tool.getValueAt(co2Adp, i, 12);
+				product_fulldescription = (String) tool.getValueAt(co2Adp, i, 14);
+				user1_id = (String) tool.getValueAt(co2Adp, i, 16);
+				table.append("<coproduct2>\n");
+				table.append("<product_id>" + co2_rows[i][0] + "</product_id>\n");
+				table.append("<row_id>" + i + "</row_id>\n");
+				table.append("<file_exist>" + file_exist1 + "</file_exist>\n");
+				table.append("<name>" + product_name + "</name>\n");
+				table.append("<icon>" + product_iconurl + "</icon>\n");
+				table.append("<image>" + img_url + "</image>\n");
+				table.append("<big_image_type>" + img_url.substring(img_url.indexOf(".") + 1) + "</big_image_type>\n");
+				table.append(
+						"<icon_type>" + product_iconurl.substring(product_iconurl.indexOf(".") + 1) + "</icon_type>\n");
+				table.append("<user_id>" + user1_id + "</user_id>\n");
+				table.append("<policy_url>" + product_url + "</policy_url>\n");
+				table.append("<product_url>" + attache_file + "</product_url>\n");
+				table.append("<description>" + product_description + "</description>\n");
+				table.append("<amount>" + product_cost + "</amount>\n");
+				table.append("<currency>\n");
+				table.append("<code>" + currency_cd + "</code>\n");
+				table.append("<description>dollar us</description>\n");
+				table.append("</currency>\n");
+				table.append("<version>" + currency_desc + "</version>\n");
+				table.append("</coproduct2>\n");
+			}
+			table.append("</coproductlist2>\n");
+		} catch (Exception ex) {
+			log.error(ex);
 		}
 		return table.toString();
 	}
 
-	
-	
-	
-	
-	
 	/**
 	 * Extention info 2 for policy page
 	 * 
@@ -1093,7 +873,7 @@ public class ProductlistBean  implements java.io.Serializable {
 	 * @return
 	 */
 
-	public String getBlogTopProductlist( String site_id	) {
+	public String getBlogTopProductlist(String site_id) {
 
 		blog_rows = new String[tool.getRowCount(blogExtAdp)][2];
 		StringBuilder table = new StringBuilder();
@@ -1131,147 +911,143 @@ public class ProductlistBean  implements java.io.Serializable {
 																	// +
 																	// licence_id
 																	// ;
-		
 
-		try
-		{
-		if (intLevelUp == 2)	setPost_manager("PostManager.jsp");
-		else setPost_manager("");
-
-		pagecount_blog = tool.getRowCount(blogExtAdp);
-		for (int i = 0; tool.getRowCount(blogExtAdp) > i; i++) 
-		{
-			blog_rows[i][0] = (String) tool.getValueAt( blogExtAdp,i, 0);
-			blog_rows[i][1] = tool.getValueAt( blogExtAdp,i, 7) == null ? "" : tool.getValueAt( blogExtAdp,i, 7);
-			product_name = (String) tool.getValueAt( blogExtAdp,i, 1);
-			String parent = (String) tool.getValueAt( blogExtAdp,i, 22);
-			String parent_title = (String) tool.getValueAt( blogExtAdp,i, 23);
-			product_url = "Policy.jsp?policy_byproductid=" + parent;
-
-
-			img_url = (String) tool.getValueAt( blogExtAdp,i, 13);
-			if (img_url != null)
-				product_iconurl = img_url;
+		try {
+			if (intLevelUp == 2)
+				setPost_manager("PostManager.jsp");
 			else
-				product_iconurl = "images/Folder.jpg";
-			
-			String file_exist1 = "" ;
-			if (blog_rows[i][1].length() > 0) file_exist1 = "true" ;
-			
-			product_description = (String) tool.getValueAt( blogExtAdp,i, 2);
-			product_version = (String) tool.getValueAt( blogExtAdp,i, 3);
-			product_cost = (String) tool.getValueAt( blogExtAdp,i, 4);
-			currency_id = (String) tool.getValueAt( blogExtAdp,i, 5);
-			CurrencyHash currencyHash = CurrencyHash.getInstance() ;
-			currency_desc = currencyHash.getCurrency_decs(currency_id);
-			image_id = (String) tool.getValueAt( blogExtAdp,i, 12);
-			product_fulldescription = (String) tool.getValueAt( blogExtAdp,i, 14);
-			user1_id = (String)tool.getValueAt( blogExtAdp,i,16) ;
-			
-			String strCDate = (String) tool.getValueAt( blogExtAdp,i, 17);
-			//if(strCDate.length() > 10) strCDate = strCDate.substring(0,10) ;
-			String statistic = (String) tool.getValueAt( blogExtAdp,i, 18);
-			String firstName = (String) tool.getValueAt( blogExtAdp,i, 19);
-			String lastName = (String) tool.getValueAt( blogExtAdp,i, 20);
-			String company = (String) tool.getValueAt( blogExtAdp,i, 21);
-			
-			
-			table.append("<product_blog>\n");
-			table.append("<product_id>" + blog_rows[i][0] + "</product_id>\n");
-			table.append("<row_id>" + i + "</row_id>\n");
-			table.append("<file_exist>" + file_exist1 + "</file_exist>\n");
-			table.append("<name>" + product_name + "</name>\n");
-			table.append("<parent_title>" + parent_title + "</parent_title>\n");
-			table.append("<product_parent_id>" + parent + "</product_parent_id>\n");
-			table.append("<icon>" + product_iconurl + "</icon>\n");
-			table.append("<image></image>\n");
-			table.append("<user_id>" + user1_id + "</user_id>\n");
-			table.append("<author>" + firstName + " " + lastName + "</author>\n");
-			table.append("<company>" + company + "</company>\n");
-			table.append("<policy_url>" + product_url + "</policy_url>\n");
-			table.append("<description>" + product_description
-					+ "</description>\n");
-			table.append("<amount>" + product_cost + "</amount>\n");
-			table.append("<currency>\n");
-			table.append("<code>" + currency_cd + "</code>\n");
-			table.append("<description>dollar us</description>\n");
-			table.append("</currency>\n");
-			table.append("<version>" + currency_desc + "</version>\n");
-			table.append("<statistic>" + statistic + "</statistic>\n");
-			table.append("<cdate>" + strCDate + "</cdate>\n");
-			table.append("</product_blog>\n");
+				setPost_manager("");
+
+			pagecount_blog = tool.getRowCount(blogExtAdp);
+			for (int i = 0; tool.getRowCount(blogExtAdp) > i; i++) {
+				blog_rows[i][0] = (String) tool.getValueAt(blogExtAdp, i, 0);
+				blog_rows[i][1] = tool.getValueAt(blogExtAdp, i, 7) == null ? "" : tool.getValueAt(blogExtAdp, i, 7);
+				product_name = (String) tool.getValueAt(blogExtAdp, i, 1);
+				String parent = (String) tool.getValueAt(blogExtAdp, i, 22);
+				String parent_title = (String) tool.getValueAt(blogExtAdp, i, 23);
+				product_url = "Policy.jsp?policy_byproductid=" + parent;
+
+				img_url = (String) tool.getValueAt(blogExtAdp, i, 13);
+				if (img_url != null)
+					product_iconurl = img_url;
+				else
+					product_iconurl = "images/Folder.jpg";
+
+				String file_exist1 = "";
+				if (blog_rows[i][1].length() > 0)
+					file_exist1 = "true";
+
+				product_description = (String) tool.getValueAt(blogExtAdp, i, 2);
+				product_version = (String) tool.getValueAt(blogExtAdp, i, 3);
+				product_cost = (String) tool.getValueAt(blogExtAdp, i, 4);
+				currency_id = (String) tool.getValueAt(blogExtAdp, i, 5);
+				CurrencyHash currencyHash = CurrencyHash.getInstance();
+				currency_desc = currencyHash.getCurrency_decs(currency_id);
+				image_id = (String) tool.getValueAt(blogExtAdp, i, 12);
+				product_fulldescription = (String) tool.getValueAt(blogExtAdp, i, 14);
+				user1_id = (String) tool.getValueAt(blogExtAdp, i, 16);
+
+				String strCDate = (String) tool.getValueAt(blogExtAdp, i, 17);
+				String statistic = (String) tool.getValueAt(blogExtAdp, i, 18);
+				String firstName = (String) tool.getValueAt(blogExtAdp, i, 19);
+				String lastName = (String) tool.getValueAt(blogExtAdp, i, 20);
+				String company = (String) tool.getValueAt(blogExtAdp, i, 21);
+
+				table.append("<product_blog>\n");
+				table.append("<product_id>" + blog_rows[i][0] + "</product_id>\n");
+				table.append("<row_id>" + i + "</row_id>\n");
+				table.append("<file_exist>" + file_exist1 + "</file_exist>\n");
+				table.append("<name>" + product_name + "</name>\n");
+				table.append("<parent_title>" + parent_title + "</parent_title>\n");
+				table.append("<product_parent_id>" + parent + "</product_parent_id>\n");
+				table.append("<icon>" + product_iconurl + "</icon>\n");
+				table.append("<image></image>\n");
+				table.append("<user_id>" + user1_id + "</user_id>\n");
+				table.append("<author>" + firstName + " " + lastName + "</author>\n");
+				table.append("<company>" + company + "</company>\n");
+				table.append("<policy_url>" + product_url + "</policy_url>\n");
+				table.append("<description>" + product_description + "</description>\n");
+				table.append("<amount>" + product_cost + "</amount>\n");
+				table.append("<currency>\n");
+				table.append("<code>" + currency_cd + "</code>\n");
+				table.append("<description>dollar us</description>\n");
+				table.append("</currency>\n");
+				table.append("<version>" + currency_desc + "</version>\n");
+				table.append("<statistic>" + statistic + "</statistic>\n");
+				table.append("<cdate>" + strCDate + "</cdate>\n");
+				table.append("</product_blog>\n");
 			}
-		table.append("</product_blog_list>\n");
+			table.append("</product_blog_list>\n");
+		} catch (Exception ex) {
+			log.error(ex);
 		}
-		catch (Exception ex) 
-		{
-		log.error(ex);
-		}
-		
+
 		return table.toString();
 	}
-	
+
 	public String getNewslist(String strUser_id, String site_id) {
-		if (strUser_id == null || strUser_id.length() == 0)	strUser_id = "0";
-		//this.site_id = site_id;
+		if (strUser_id == null || strUser_id.length() == 0)
+			strUser_id = "0";
+		// this.site_id = site_id;
 		newsrows = new String[tool.getRowCount(newsAdp)][2];
 		StringBuffer table = new StringBuffer();
 		table.append("<newslist>\n");
 
-		try
-		{
-		for (int i = 0; tool.getRowCount( newsAdp) > i; i++) {
-			newsrows[i][0] = (String)  tool.getValueAt(newsAdp,i, 0);
-			newsrows[i][1] =  tool.getValueAt(newsAdp,i, 7) == null ? "" : tool.getValueAt(newsAdp,i, 7);
+		try {
+			for (int i = 0; tool.getRowCount(newsAdp) > i; i++) {
+				newsrows[i][0] = (String) tool.getValueAt(newsAdp, i, 0);
+				newsrows[i][1] = tool.getValueAt(newsAdp, i, 7) == null ? "" : tool.getValueAt(newsAdp, i, 7);
 
-			product_name = (String)  tool.getValueAt(newsAdp,i, 1);
-			///product_url = "Policy.jsp?news=" + i;
-			product_url = "Policy.jsp?policy_byproductid=" + (String)  tool.getValueAt(newsAdp,i, 0);
-			
-			product_iconurl = (String)  tool.getValueAt(newsAdp,i, 13);
-			if (product_iconurl == null ) product_iconurl = "images/Folder.jpg";
-			
-			img_url = (String)  tool.getValueAt(newsAdp,i, 15);
-			if (img_url == null ) img_url = "images/Folder.jpg";
-			
-			String file_exist1 = "" ;
-			if (newsrows[i][1].length() > 0) file_exist1 = "true" ;
-			
-			product_description = (String)  tool.getValueAt(newsAdp,i, 2);
-			product_version = (String)  tool.getValueAt(newsAdp,i, 3);
-			product_cost = (String)  tool.getValueAt(newsAdp,i, 4);
-			currency_id = (String)  tool.getValueAt(newsAdp,i, 5);
-			CurrencyHash currencyHash = CurrencyHash.getInstance() ;
-			currency_desc = currencyHash.getCurrency_decs(currency_id);
-			image_id = (String)  tool.getValueAt(newsAdp,i, 12);
-			product_fulldescription = (String)  tool.getValueAt(newsAdp,i, 14);
-			user1_id = (String)tool.getValueAt(newsAdp,i,16) ;
+				product_name = (String) tool.getValueAt(newsAdp, i, 1);
 
-			table.append("<news>\n");
-			table.append("<product_id>" + newsrows[i][0] + "</product_id>\n");
-			table.append("<row_id>" + i + "</row_id>\n");
-			table.append("<file_exist>" + file_exist1 + "</file_exist>\n");
-			table.append("<name>" + product_name + "</name>\n");
-			table.append("<icon>" + product_iconurl + "</icon>\n");
-			table.append("<image>" + img_url + "</image>\n");
-			table.append("<big_image_type>"+  img_url.substring(img_url.indexOf(".") + 1 ) + "</big_image_type>\n");
-			table.append("<icon_type>"+  product_iconurl.substring(product_iconurl.indexOf(".") + 1 ) + "</icon_type>\n");
-			table.append("<user_id>" + user1_id + "</user_id>\n");
-			table.append("<policy_url>" + product_url + "</policy_url>\n");
-			table.append("<description>" + product_description + "</description>\n");
-			table.append("<amount>" + product_cost + "</amount>\n");
-			table.append("<currency>\n");
-			table.append("<code>" + currency_cd + "</code>\n");
-			table.append("<description>dollar us</description>\n");
-			table.append("</currency>\n");
-			table.append("<version>" + currency_desc + "</version>\n");
-			table.append("</news>\n");
-		  }
-		table.append("</newslist>\n");
-		}
-		catch (Exception ex) 
-		{
-		log.error(ex);
+				product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(newsAdp, i, 0);
+
+				product_iconurl = (String) tool.getValueAt(newsAdp, i, 13);
+				if (product_iconurl == null)
+					product_iconurl = "images/Folder.jpg";
+
+				img_url = (String) tool.getValueAt(newsAdp, i, 15);
+				if (img_url == null)
+					img_url = "images/Folder.jpg";
+
+				String file_exist1 = "";
+				if (newsrows[i][1].length() > 0)
+					file_exist1 = "true";
+
+				product_description = (String) tool.getValueAt(newsAdp, i, 2);
+				product_version = (String) tool.getValueAt(newsAdp, i, 3);
+				product_cost = (String) tool.getValueAt(newsAdp, i, 4);
+				currency_id = (String) tool.getValueAt(newsAdp, i, 5);
+				CurrencyHash currencyHash = CurrencyHash.getInstance();
+				currency_desc = currencyHash.getCurrency_decs(currency_id);
+				image_id = (String) tool.getValueAt(newsAdp, i, 12);
+				product_fulldescription = (String) tool.getValueAt(newsAdp, i, 14);
+				user1_id = (String) tool.getValueAt(newsAdp, i, 16);
+
+				table.append("<news>\n");
+				table.append("<product_id>" + newsrows[i][0] + "</product_id>\n");
+				table.append("<row_id>" + i + "</row_id>\n");
+				table.append("<file_exist>" + file_exist1 + "</file_exist>\n");
+				table.append("<name>" + product_name + "</name>\n");
+				table.append("<icon>" + product_iconurl + "</icon>\n");
+				table.append("<image>" + img_url + "</image>\n");
+				table.append("<big_image_type>" + img_url.substring(img_url.indexOf(".") + 1) + "</big_image_type>\n");
+				table.append(
+						"<icon_type>" + product_iconurl.substring(product_iconurl.indexOf(".") + 1) + "</icon_type>\n");
+				table.append("<user_id>" + user1_id + "</user_id>\n");
+				table.append("<policy_url>" + product_url + "</policy_url>\n");
+				table.append("<description>" + product_description + "</description>\n");
+				table.append("<amount>" + product_cost + "</amount>\n");
+				table.append("<currency>\n");
+				table.append("<code>" + currency_cd + "</code>\n");
+				table.append("<description>dollar us</description>\n");
+				table.append("</currency>\n");
+				table.append("<version>" + currency_desc + "</version>\n");
+				table.append("</news>\n");
+			}
+			table.append("</newslist>\n");
+		} catch (Exception ex) {
+			log.error(ex);
 		}
 		return table.toString();
 	}
@@ -1358,22 +1134,6 @@ public class ProductlistBean  implements java.io.Serializable {
 	public void setLicence_id(String licence_id) {
 		this.licence_id = licence_id;
 	}
-
-//	public String getCatalog_id() {
-//		return catalog_id;
-//	}
-//
-//	public void setCatalog_id(String catalog_id) {
-//		this.catalog_id = catalog_id;
-//	}
-
-//	public String getSite_id() {
-//		return site_id;
-//	}
-//
-//	public void setSite_id(String site_id) {
-//		this.site_id = site_id;
-//	}
 
 	public String getPost_manager() {
 		return post_manager;
@@ -1558,8 +1318,6 @@ public class ProductlistBean  implements java.io.Serializable {
 		this.portlettype_id = portlettype_id;
 	}
 
-	
-
 	public int getPagecount_co1() {
 		return pagecount_co1;
 	}
@@ -1575,134 +1333,6 @@ public class ProductlistBean  implements java.io.Serializable {
 	public void setPagecount_co2(int pagecount_co2) {
 		this.pagecount_co2 = pagecount_co2;
 	}
-
-//	public String getCreteria1_id() {
-//		return creteria1_id;
-//	}
-//
-//	public void setCreteria1_id(String creteria1_id) {
-//		this.creteria1_id = creteria1_id;
-//	}
-//
-//	public String getCreteria10_id() {
-//		return creteria10_id;
-//	}
-//
-//	public void setCreteria10_id(String creteria10_id) {
-//		this.creteria10_id = creteria10_id;
-//	}
-//
-//	public String getCreteria2_id() {
-//		return creteria2_id;
-//	}
-//
-//	public void setCreteria2_id(String creteria2_id) {
-//		this.creteria2_id = creteria2_id;
-//	}
-//
-//	public String getCreteria3_id() {
-//		return creteria3_id;
-//	}
-//
-//	public void setCreteria3_id(String creteria3_id) {
-//		this.creteria3_id = creteria3_id;
-//	}
-//
-//	public String getCreteria4_id() {
-//		return creteria4_id;
-//	}
-//
-//	public void setCreteria4_id(String creteria4_id) {
-//		this.creteria4_id = creteria4_id;
-//	}
-//
-//	public String getCreteria5_id() {
-//		return creteria5_id;
-//	}
-//
-//	public void setCreteria5_id(String creteria5_id) {
-//		this.creteria5_id = creteria5_id;
-//	}
-//
-//	public String getCreteria6_id() {
-//		return creteria6_id;
-//	}
-//
-//	public void setCreteria6_id(String creteria6_id) {
-//		this.creteria6_id = creteria6_id;
-//	}
-//
-//	public String getCreteria7_id() {
-//		return creteria7_id;
-//	}
-//
-//	public void setCreteria7_id(String creteria7_id) {
-//		this.creteria7_id = creteria7_id;
-//	}
-//
-//	public String getCreteria8_id() {
-//		return creteria8_id;
-//	}
-//
-//	public void setCreteria8_id(String creteria8_id) {
-//		this.creteria8_id = creteria8_id;
-//	}
-//
-//	public String getCreteria9_id() {
-//		return creteria9_id;
-//	}
-//
-//	public void setCreteria9_id(String creteria9_id) {
-//		this.creteria9_id = creteria9_id;
-//	}
-//
-//	public String getDayfrom_id() {
-//		return dayfrom_id;
-//	}
-//
-//	public void setDayfrom_id(String dayfrom_id) {
-//		this.dayfrom_id = dayfrom_id;
-//	}
-//
-//	public String getDayto_id() {
-//		return dayto_id;
-//	}
-//
-//	public void setDayto_id(String dayto_id) {
-//		this.dayto_id = dayto_id;
-//	}
-//
-//	public String getMountfrom_id() {
-//		return mountfrom_id;
-//	}
-//
-//	public void setMountfrom_id(String mountfrom_id) {
-//		this.mountfrom_id = mountfrom_id;
-//	}
-//
-//	public String getMountto_id() {
-//		return mountto_id;
-//	}
-//
-//	public void setMountto_id(String mountto_id) {
-//		this.mountto_id = mountto_id;
-//	}
-//
-//	public String getYearfrom_id() {
-//		return yearfrom_id;
-//	}
-//
-//	public void setYearfrom_id(String yearfrom_id) {
-//		this.yearfrom_id = yearfrom_id;
-//	}
-//
-//	public String getYearto_id() {
-//		return yearto_id;
-//	}
-//
-//	public void setYearto_id(String yearto_id) {
-//		this.yearto_id = yearto_id;
-//	}
 
 	public String getUser1_id() {
 		return user1_id;
@@ -1728,22 +1358,19 @@ public class ProductlistBean  implements java.io.Serializable {
 		this.catalog_parent_id = catalog_parent_id;
 	}
 
-	public String getPartCriteria(String _criteriaId , boolean  isSpace )
-	{
-		
-		try
-		{
-		if( Long.parseLong(_criteriaId)  < 0 )   _criteriaId = "0" ;
-		}
-		catch (Exception ex) 
-		{
+	public String getPartCriteria(String _criteriaId, boolean isSpace) {
+
+		try {
+			if (Long.parseLong(_criteriaId) < 0)
+				_criteriaId = "0";
+		} catch (Exception ex) {
 			log.error(ex);
 		}
-		
-		return !isSpace?"":" and catalog_id = " + _criteriaId ;	
+
+		return !isSpace ? "" : " and catalog_id = " + _criteriaId;
 	}
-	
-    public String getType1_id() {
+
+	public String getType1_id() {
 		return type1_id;
 	}
 
@@ -1758,30 +1385,6 @@ public class ProductlistBean  implements java.io.Serializable {
 	public void setType2_id(String type2_id) {
 		this.type2_id = type2_id;
 	}
-
-//	public String getFromCost() {
-//		return fromCost;
-//	}
-//
-//	public void setFromCost(String fromCost) {
-//		this.fromCost = fromCost;
-//	}
-//
-//	public String getToCost() {
-//		return toCost;
-//	}
-//
-//	public void setToCost(String toCost) {
-//		this.toCost = toCost;
-//	}
-//
-//	public java.util.Calendar getCalendar() {
-//		return calendar;
-//	}
-//
-//	public void setCalendar(java.util.Calendar calendar) {
-//		this.calendar = calendar;
-//	}
 
 	public String getQuery_productlist() {
 		return query_productlist;
@@ -2014,7 +1617,7 @@ public class ProductlistBean  implements java.io.Serializable {
 	public void setSelect_menu_catalog(String select_menu_catalog) {
 		this.select_menu_catalog = select_menu_catalog;
 	}
-	
+
 	public String getSelect_yearfrom_id() {
 		return select_yearfrom_id;
 	}
@@ -2055,9 +1658,6 @@ public class ProductlistBean  implements java.io.Serializable {
 		this.dialog = dialog;
 	}
 
-	
-
-	
 	public String getAdvancedSearchOpen() {
 		return advancedSearchOpen;
 	}

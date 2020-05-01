@@ -1,5 +1,7 @@
 package com.cbsinc.cms.controllers;
 
+import java.util.Optional;
+
 /**
  * <p>
  * Title: Content Manager System
@@ -28,83 +30,53 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.cbsinc.cms.AuthorizationPageBean;
-import com.cbsinc.cms.SoftPostBean;
+import com.cbsinc.cms.PublisherBean;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
 
 
-public class SelectSmallImageAction implements IAction 
+public class SelectSmallImageAction extends TemplateAction 
 {
+	
+	
+	@Override
+	public void action(Optional<HttpServletRequest> requestOpts, Optional<HttpServletResponse> responseOpts,
+			Optional<ServletContext> servletContextOpts) throws Exception {
 
 
-	
-	HttpSession session ;
-	//ResourceBundle resources = null ;
-	//ResourceBundle setup_resources = null ;
-	SoftPostBean softPostBeanId = null ; ;
-	ProductPostAllFaced productPostAllFaced = null ;
-	AuthorizationPageFaced authorizationPageFaced = null ;
-	AuthorizationPageBean AuthorizationPageBeanId = null ;
-	String  create_cabinet = "" ;
-	StringBuffer sbuff = new StringBuffer(); 
-	
-	   
-	public void doPost(HttpServletRequest request, HttpServletResponse response , ServletContext  servletContext) throws Exception 
-	{
-		action( request,  response,  servletContext) ;
+		HttpServletResponse response = responseOpts.get() ;
+		HttpServletRequest request  = requestOpts.get() ;
+		
+		PublisherBean publisherBeanId = getPublisherBean().get() ;
+		ProductPostAllFaced productPostAllFaced =  ServiceLocator.getInstance().getProductPostAllFaced().get() ;
+		AuthorizationPageBean authorizationPageBeanId = getAuthorizationPageBean().get() ;
+		StringBuffer sbuff = new StringBuffer(); 
+
+  		request.setCharacterEncoding("UTF-8");
+		response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
+		response.setHeader("Pragma","no-cache"); //HTTP 1.0
+		response.setDateHeader ("Expires", 0); 
+  		
+        if( request.getParameter("image_id") != null) 
+        {
+	        String  image_id  = request.getParameter("image_id");
+	        if ( image_id != null ) {  publisherBeanId.setImage_id( image_id );  productPostAllFaced.setImageNameByImage_ID(image_id,publisherBeanId); }
+        }
+        
+        publisherBeanId.setSelect_small_images(productPostAllFaced.getComboBoxWithJavaScriptSmallImage("image_id", publisherBeanId.getImage_id() ,"SELECT image_id,imgname FROM images WHERE user_id = "+ authorizationPageBeanId.getIntUserID() + " ORDER BY image_id DESC ", "onChange=\"changeImage()\"" , publisherBeanId ) );
+        
+        if(publisherBeanId.getImgname().lastIndexOf(".") != -1){
+        sbuff = new StringBuffer(); 
+        sbuff.append("imgpositions/") ;
+        sbuff.append(publisherBeanId.getImage_id()) ;
+        sbuff.append(publisherBeanId.getImgname().substring(publisherBeanId.getImgname().lastIndexOf("."))) ;
+        publisherBeanId.setSelect_small_image_url(sbuff.toString());
+        }
+        else
+        {
+        	publisherBeanId.setSelect_small_image_url("imgpositions/empty.gif");
+        }
+		
 	}
-
-
-	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) throws Exception 
-	{
-		action( request,  response,  servletContext) ;
-	}
-
-	
-	public void action(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) throws Exception 
-	{
-
-		    session = request.getSession();
- 
-			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
-			AuthorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("AuthorizationPageBeanId");
-			softPostBeanId = (SoftPostBean)session.getAttribute("SoftPostBeanId");
-			productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
-	  	    //if( resources == null )  resources = PropertyResourceBundle.getBundle("localization", response.getLocale());
-	  		//if( setup_resources == null )  setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources" );
-
-	  		request.setCharacterEncoding("UTF-8");
-			response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
-			response.setHeader("Pragma","no-cache"); //HTTP 1.0
-			response.setDateHeader ("Expires", 0); 
-	  		
-	        if( request.getParameter("image_id") != null) 
-	        {
-		        String  image_id  = request.getParameter("image_id");
-		        if ( image_id != null ) {  softPostBeanId.setImage_id( image_id );  productPostAllFaced.setImageNameByImage_ID(image_id,softPostBeanId); }
-	        }
-	        
-	        softPostBeanId.setSelect_small_images(productPostAllFaced.getComboBoxWithJavaScriptSmallImage("image_id", softPostBeanId.getImage_id() ,"SELECT image_id,imgname FROM images WHERE user_id = "+ AuthorizationPageBeanId.getIntUserID() + " ORDER BY image_id DESC ", "onChange=\"changeImage()\"" , softPostBeanId ) );
-
-	        //"SELECT image_id,imgname FROM images WHERE user_id = "+ AuthorizationPageBeanId.getIntUserID() + " ORDER BY image_id DESC ", "onChange=\"changeImage()\""
-	        //"SELECT images_id,imgname FROM images WHERE user_id = "+ AuthorizationPageBeanId.getIntUserID()  + " ORDER BY images_id DESC ", "onChange=\"changeImage()\""
-	        
-	        if(softPostBeanId.getImgname().lastIndexOf(".") != -1){
-	        sbuff = new StringBuffer(); 
-	        sbuff.append("imgpositions/") ;
-	        sbuff.append(softPostBeanId.getImage_id()) ;
-	        sbuff.append(softPostBeanId.getImgname().substring(softPostBeanId.getImgname().lastIndexOf("."))) ;
-	        softPostBeanId.setSelect_small_image_url(sbuff.toString());
-	        }
-	        else
-	        {
-	        	softPostBeanId.setSelect_small_image_url("imgpositions/empty.gif");
-	        }
-	        
-	        
-	        
-	}
-
-	
 
 }

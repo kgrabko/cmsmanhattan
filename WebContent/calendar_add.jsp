@@ -77,34 +77,34 @@ return true ;
 </script>
 
 </head>
-<jsp:useBean id="calendar_listBean" scope="request" class="com.cbsinc.cms.Calendar_listBean" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
-<jsp:useBean id="calendar_addBean" scope="session" class="com.cbsinc.cms.Calendar_addBean" />
+<jsp:useBean id="calendarListBeanId" scope="request" class="com.cbsinc.cms.CalendarListBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="calendarAddBeanId" scope="session" class="com.cbsinc.cms.CalendarAddBean" />
 <%
 request.setCharacterEncoding("UTF-8");
-calendar_addBean.setSite_id(AuthorizationPageBeanId.getSite_id());
+calendarAddBeanId.setSite_id(authorizationPageBeanId.getSite_id());
 //if( request.getParameter("holddate") != null)
 //{
-//	calendar_addBean.setHolddate( request.getParameter("holddate"));
+//	calendarAddBeanId.setHolddate( request.getParameter("holddate"));
 //}
 
-if( request.getParameter("day_id") != null)calendar_addBean.setDay_id( request.getParameter("day_id"));
-if( request.getParameter("mount_id") != null)calendar_addBean.setMount_id( request.getParameter("mount_id"));
-if( request.getParameter("year_id") != null)calendar_addBean.setYear_id( request.getParameter("year_id"));
-if( request.getParameter("product_id") != null)calendar_addBean.setProduct_id( request.getParameter("product_id"));
+if( request.getParameter("day_id") != null)calendarAddBeanId.setDay_id( request.getParameter("day_id"));
+if( request.getParameter("mount_id") != null)calendarAddBeanId.setMount_id( request.getParameter("mount_id"));
+if( request.getParameter("year_id") != null)calendarAddBeanId.setYear_id( request.getParameter("year_id"));
+if( request.getParameter("product_id") != null)calendarAddBeanId.setProduct_id( request.getParameter("product_id"));
 
-if( request.getParameter("first_name") != null)calendar_addBean.setFirst_name( request.getParameter("first_name"));
-if( request.getParameter("last_name") != null)calendar_addBean.setLast_name( request.getParameter("last_name"));
-if( request.getParameter("father_name") != null)calendar_addBean.setFather_name( request.getParameter("father_name"));
-if( request.getParameter("document_number") != null)calendar_addBean.setDocument_number( request.getParameter("document_number"));
-if( request.getParameter("document_type") != null)calendar_addBean.setDocument_type( request.getParameter("document_type"));
-if( request.getParameter("age") != null)calendar_addBean.setAge( request.getParameter("age"));
-if( request.getParameter("note") != null)calendar_addBean.setNote( request.getParameter("note"));
+if( request.getParameter("first_name") != null)calendarAddBeanId.setFirst_name( request.getParameter("first_name"));
+if( request.getParameter("last_name") != null)calendarAddBeanId.setLast_name( request.getParameter("last_name"));
+if( request.getParameter("father_name") != null)calendarAddBeanId.setFather_name( request.getParameter("father_name"));
+if( request.getParameter("document_number") != null)calendarAddBeanId.setDocument_number( request.getParameter("document_number"));
+if( request.getParameter("document_type") != null)calendarAddBeanId.setDocument_type( request.getParameter("document_type"));
+if( request.getParameter("age") != null)calendarAddBeanId.setAge( request.getParameter("age"));
+if( request.getParameter("note") != null)calendarAddBeanId.setNote( request.getParameter("note"));
 
 
 if(request.getMethod().toUpperCase().compareTo("POST") == 0)
 {
-calendar_addBean.addCalendar();
+calendarAddBeanId.addCalendar();
 response.sendRedirect("calendar_list.jsp" );
 }
 %>
@@ -212,16 +212,16 @@ response.sendRedirect("calendar_list.jsp" );
 		    <div >
 
                      <form method="post"   name="calendar_add"  ACTION="calendar_add.jsp" >
-                      <input type="hidden"  name="product_id" value="<%= calendar_listBean.getProduct_id()%>" >
+                      <input type="hidden"  name="product_id" value="<%= calendarListBeanId.getProduct_id()%>" >
                      <TABLE>
-                     <TR><TD>Дата:* </TD><TD><TABLE> <%= calendar_addBean.getComboBoxDay("day_id", calendar_addBean.getDay_id()  ) %><%= calendar_addBean.getComboBoxMount("mount_id", calendar_addBean.getMount_id()  ) %><%= calendar_addBean.getComboBoxYear("year_id", calendar_addBean.getYear_id()  ) %> </TABLE><TD>
-                     <TR><TD width="40" >Имя</TD> <TD><input type="text" name="first_name" value="<%= calendar_addBean.getFirst_name()%>"> </TD></TR>
-                     <TR><TD width="40" >Фамилия</TD> <TD><input type="text" name="last_name" value="<%= calendar_addBean.getLast_name()%>"> </TD></TR>
-                     <TR><TD width="40" >Отчество</TD> <TD><input type="text" name="father_name" value="<%= calendar_addBean.getFather_name()%>"> </TD></TR> 
-                     <TR><TD width="40" >Номер документа</TD> <TD><input type="text" name="document_number" value="<%= calendar_addBean.getDocument_number()%>"> </TD></TR>
-                     <TR><TD width="40" >Тип документа</TD> <TD><input type="text" name="document_type" value="<%= calendar_addBean.getDocument_type()%>"> </TD></TR>
-                     <TR><TD width="40" >Возраст</TD> <TD><input type="text" name="age" value="<%= calendar_addBean.getAge()%>"> </TD></TR> 
-                     <TR><TD width="40" >Дополнительная информация</TD> <TD><input type="text" name="note" value="<%= calendar_addBean.getNote()%>"> </TD></TR>
+                     <TR><TD>Дата:* </TD><TD><TABLE> <%= calendarAddBeanId.getComboBoxDay("day_id", calendarAddBeanId.getDay_id()  ) %><%= calendarAddBeanId.getComboBoxMount("mount_id", calendarAddBeanId.getMount_id()  ) %><%= calendarAddBeanId.getComboBoxYear("year_id", calendarAddBeanId.getYear_id()  ) %> </TABLE><TD>
+                     <TR><TD width="40" >Имя</TD> <TD><input type="text" name="first_name" value="<%= calendarAddBeanId.getFirst_name()%>"> </TD></TR>
+                     <TR><TD width="40" >Фамилия</TD> <TD><input type="text" name="last_name" value="<%= calendarAddBeanId.getLast_name()%>"> </TD></TR>
+                     <TR><TD width="40" >Отчество</TD> <TD><input type="text" name="father_name" value="<%= calendarAddBeanId.getFather_name()%>"> </TD></TR> 
+                     <TR><TD width="40" >Номер документа</TD> <TD><input type="text" name="document_number" value="<%= calendarAddBeanId.getDocument_number()%>"> </TD></TR>
+                     <TR><TD width="40" >Тип документа</TD> <TD><input type="text" name="document_type" value="<%= calendarAddBeanId.getDocument_type()%>"> </TD></TR>
+                     <TR><TD width="40" >Возраст</TD> <TD><input type="text" name="age" value="<%= calendarAddBeanId.getAge()%>"> </TD></TR> 
+                     <TR><TD width="40" >Дополнительная информация</TD> <TD><input type="text" name="note" value="<%= calendarAddBeanId.getNote()%>"> </TD></TR>
                                                                                     
                      <TR><TD></TD> <TD><input type="submit" name="Submit" value="Сохранить"> <input type="reset" value="Сброс"></TD></TR>
                      </TABLE>

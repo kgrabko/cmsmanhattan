@@ -21,8 +21,6 @@ package com.cbsinc.cms;
  * @version 1.0
  */
 
-
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -41,7 +39,6 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 import org.apache.log4j.Logger;
 
@@ -62,17 +59,17 @@ public class MidletServletUpload extends HttpServlet {
 	/**
 	 * 
 	 */
-	
+
 	static private Logger log = Logger.getLogger(MidletServletUpload.class);
-	
+
 	private static final long serialVersionUID = 1L;
 
-	SoftPostBean SoftPostBeanId = null;
+	PublisherBean publisherBeanId = null;
 
 	AuthorizationPageBean AuthorizationPageBeanId = null;
-	ProductPostAllFaced productPostAllFaced = null ;
-	transient ResourceBundle resources = null ;
-	ServletContext servletContext = null ;
+	ProductPostAllFaced productPostAllFaced = null;
+	transient ResourceBundle resources = null;
+	ServletContext servletContext = null;
 
 	public String filename = "";
 
@@ -93,13 +90,13 @@ public class MidletServletUpload extends HttpServlet {
 	/**
 	 * Initializes the servlet.
 	 */
-	
-	transient ResourceBundle sequences_rs = null ;
-	
-	
+
+	transient ResourceBundle sequences_rs = null;
+
 	public void init(ServletConfig config) throws ServletException {
-		if( sequences_rs == null )  sequences_rs = PropertyResourceBundle.getBundle("sequence");
-		servletContext = config.getServletContext() ;
+		if (sequences_rs == null)
+			sequences_rs = PropertyResourceBundle.getBundle("sequence");
+		servletContext = config.getServletContext();
 		super.init(config);
 	}
 
@@ -133,42 +130,33 @@ public class MidletServletUpload extends HttpServlet {
 		return fis;
 	}
 
-	public int saveImgURL(String FileName, int user_id) 
-	{
+	public int saveImgURL(String FileName, int user_id) {
 		QueryManager Adp = new QueryManager();
 		String strID = "-1";
-		//String query = "SELECT NEXT VALUE FOR images_image_id_seq  AS ID  FROM ONE_SEQUENCES";
+		// String query = "SELECT NEXT VALUE FOR images_image_id_seq AS ID FROM
+		// ONE_SEQUENCES";
 		String query = sequences_rs.getString("images");
-		
-		try 
-		{
-		
+
+		try {
+
 			Adp.executeQuery(query);
 
 			strID = Adp.getValueAt(0, 0);
-			query = "insert into images " + "(" + " image_id , " + " imgname , "
-				+ " img_url , " + " user_id " + ")" + " VALUES " + "( " + strID
-				+ ", '" + FileName + "', '" + "imgpositions/" + strID
-				+ FileName.substring(FileName.lastIndexOf(".")) + "' , "
-				+ user_id + " )";
+			query = "insert into images " + "(" + " image_id , " + " imgname , " + " img_url , " + " user_id " + ")"
+					+ " VALUES " + "( " + strID + ", '" + FileName + "', '" + "imgpositions/" + strID
+					+ FileName.substring(FileName.lastIndexOf(".")) + "' , " + user_id + " )";
 
 			Adp.executeUpdate(query);
-		} 
-		catch (SQLException ex) 
-		{
+		} catch (SQLException ex) {
 
-			log.error(query,ex) ;
-		}
-		catch (Exception ex) 
-		{
+			log.error(query, ex);
+		} catch (Exception ex) {
 
-			log.error(ex) ;
+			log.error(ex);
+		} finally {
+			Adp.close();
 		}
-		finally 
-		{
-		  Adp.close();
-		}
-		
+
 		return Integer.parseInt(strID);
 	}
 
@@ -183,14 +171,11 @@ public class MidletServletUpload extends HttpServlet {
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
 	 * methods.
 	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
+	 * @param request  servlet request
+	 * @param response servlet response
 	 */
-	protected void processRequest(HttpServletRequest req,
-			HttpServletResponse res) throws ServletException,
-			java.io.IOException {
+	protected void processRequest(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, java.io.IOException {
 
 		// mobilesoft.MidletServletUpload.
 
@@ -204,19 +189,17 @@ public class MidletServletUpload extends HttpServlet {
 		// req.
 		// SessionBean sessionBean = (SessionBean)
 		// request.getSession().getAttribute("sessionBean");
-		SoftPostBeanId = (SoftPostBean) req.getSession().getAttribute(
-				"SoftPostBeanId");
-		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession()
-				.getAttribute("AuthorizationPageBeanId");
-		
-		if( resources == null )  resources = PropertyResourceBundle.getBundle("localization", res.getLocale());
+		publisherBeanId = (PublisherBean) req.getSession().getAttribute("publisherBeanId");
+		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession().getAttribute("AuthorizationPageBeanId");
+
+		if (resources == null)
+			resources = PropertyResourceBundle.getBundle("localization", res.getLocale());
 		try {
-			productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
+			productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 
 		long start = System.currentTimeMillis();
 		// RFC 1867
@@ -244,13 +227,12 @@ public class MidletServletUpload extends HttpServlet {
 			return;
 		}
 
-		if(productPostAllFaced.isLimmitPostedMessages(AuthorizationPageBeanId,true)  )
-		 {
-			 printResult(out, resources.getString("global_has_limmit_forsite"));
-			 out.close();
-			 return;
-		 }
-		
+		if (productPostAllFaced.isLimmitPostedMessages(AuthorizationPageBeanId, true)) {
+			printResult(out, resources.getString("global_has_limmit_forsite"));
+			out.close();
+			return;
+		}
+
 		if (contentType == null) {
 			System.out.println("content type is null");
 			return;
@@ -295,8 +277,7 @@ public class MidletServletUpload extends HttpServlet {
 
 			result = in.readLine(buffer, 0, BUFFER_SIZE);
 			if (result <= 0) {
-				System.out
-						.println("Upload : may be end boundary which has no contents");
+				System.out.println("Upload : may be end boundary which has no contents");
 				break;
 			}
 
@@ -305,14 +286,12 @@ public class MidletServletUpload extends HttpServlet {
 			String token = tokenizer.nextToken();
 			String upperToken = token.toUpperCase();
 			if (!upperToken.startsWith("CONTENT-DISPOSITION")) {
-				System.out
-						.println("Format error. Content-Disposition expected.");
+				System.out.println("Format error. Content-Disposition expected.");
 				break;
 			}
 			String disposition = upperToken.substring(21);
 			if (!disposition.equals("FORM-DATA")) {
-				System.out.println("Sorry, I don't know how to handle ["
-						+ disposition + "] disposition.");
+				System.out.println("Sorry, I don't know how to handle [" + disposition + "] disposition.");
 				break;
 			}
 			if (tokenizer.hasMoreElements()) {
@@ -370,10 +349,8 @@ public class MidletServletUpload extends HttpServlet {
 				if (fileContentType.toUpperCase().startsWith("CONTENT-TYPE:")) {
 					fileContentType = fileContentType.substring(13).trim();
 				} else {
-					System.out
-							.println("what should I read here ??? - result = "
-									+ result + ", and read ["
-									+ new String(buffer, 0, result) + "]");
+					System.out.println("what should I read here ??? - result = " + result + ", and read ["
+							+ new String(buffer, 0, result) + "]");
 				}
 
 				try {
@@ -385,8 +362,7 @@ public class MidletServletUpload extends HttpServlet {
 					boolean odd = true;
 					inner: while ((result = in.readLine(buffer, 0, BUFFER_SIZE)) > 0) {
 						if (isFirst) { // ignore all proceeding \r\n
-							if (result == 2 && buffer[0] == '\r'
-									&& buffer[1] == '\n') {
+							if (result == 2 && buffer[0] == '\r' && buffer[1] == '\n') {
 								continue;
 							}
 
@@ -419,8 +395,7 @@ public class MidletServletUpload extends HttpServlet {
 						isFirst = false;
 					}
 				} catch (IOException ie) {
-					System.out.println("IO Error while write to file : "
-							+ ie.toString());
+					System.out.println("IO Error while write to file : " + ie.toString());
 				} finally {
 					System.out.println("finally Upload : size = " + size);
 					saveFile();
@@ -430,8 +405,7 @@ public class MidletServletUpload extends HttpServlet {
 					// }
 				}
 				result = in.readLine(buffer, 0, BUFFER_SIZE);
-				System.out.println("what should I read here? - result = "
-						+ result + ", and read ["
+				System.out.println("what should I read here? - result = " + result + ", and read ["
 						+ new String(buffer, 0, result) + "]");
 			} else { // no more elements
 				result = in.readLine(buffer, 0, BUFFER_SIZE);
@@ -467,28 +441,22 @@ public class MidletServletUpload extends HttpServlet {
 	/**
 	 * Handles the HTTP <code>GET</code> method.
 	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
+	 * @param request  servlet request
+	 * @param response servlet response
 	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException,
-			java.io.IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, java.io.IOException {
 		processRequest(request, response);
 	}
 
 	/**
 	 * Handles the HTTP <code>POST</code> method.
 	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
+	 * @param request  servlet request
+	 * @param response servlet response
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException,
-			java.io.IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, java.io.IOException {
 		processRequest(request, response);
 	}
 
@@ -499,8 +467,7 @@ public class MidletServletUpload extends HttpServlet {
 		return "Short description";
 	}
 
-	boolean bytesStartsWith(byte[] bytes, int offset, int length,
-			String toCompare) {
+	boolean bytesStartsWith(byte[] bytes, int offset, int length, String toCompare) {
 		boolean result = true;
 		if (toCompare.length() > length) {
 			return false;
@@ -516,16 +483,13 @@ public class MidletServletUpload extends HttpServlet {
 		return result;
 	}
 
-	void appendValue(HashMap map, String name, String value,
-			String contentType, int size) {
-		MidletUploadData data = new MidletUploadData(name, value, contentType,
-				size, true);
+	void appendValue(HashMap map, String name, String value, String contentType, int size) {
+		MidletUploadData data = new MidletUploadData(name, value, contentType, size, true);
 		map.put(name, data);
 	}
 
 	void appendValue(HashMap map, String name, String value) {
-		MidletUploadData data = new MidletUploadData(name, value, null, 0,
-				false);
+		MidletUploadData data = new MidletUploadData(name, value, null, 0, false);
 		map.put(name, data);
 	}
 
@@ -574,8 +538,7 @@ public class MidletServletUpload extends HttpServlet {
 			case AMPERSHARP:
 				if (chars[i] == ';') {
 					try {
-						buffer.append((char) Integer.parseInt(escaped
-								.toString()));
+						buffer.append((char) Integer.parseInt(escaped.toString()));
 					} catch (NumberFormatException nfe) {
 						// I don't handle other Entities
 						buffer.append(escaped);
@@ -605,14 +568,12 @@ public class MidletServletUpload extends HttpServlet {
 		out.println("<!--");
 		out.println("function setData(){");
 
-		out.println("opener.parent.postsoftform.midletname.value = '"
-				+ filename + "' ;");
+		out.println("opener.parent.postsoftform.midletname.value = '" + filename + "' ;");
 		// out.println("opener.parent.postsoftform.imagename.value =
 		// 'imgpositions/" + filename + "' ;" );
 		// out.println("opener.parent.postsoftform.image_id.value = " + intID +
 		// " ;" );
-		out
-				.println("opener.parent.postsoftform.midlet_uploaded.value = true  ;");
+		out.println("opener.parent.postsoftform.midlet_uploaded.value = true  ;");
 		// out.println("top.close();");
 		out.println("return true ;");
 		out.println("}");
@@ -625,27 +586,19 @@ public class MidletServletUpload extends HttpServlet {
 		out.println("</HEAD><BODY onLoad=\"return  setData()\" >");
 		out.println("<H1>Upload Result</H1>");
 		out.println("<TABLE>");
-		out
-				.println("<TR><TH>NAME</TH><TH>VALUE</TH><TH>CONTENT TYPE</TH><TH>SIZE</TH><TH>FILE</TH></TR>");
+		out.println("<TR><TH>NAME</TH><TH>VALUE</TH><TH>CONTENT TYPE</TH><TH>SIZE</TH><TH>FILE</TH></TR>");
 		while (itr.hasNext()) {
 			MidletUploadData data = (MidletUploadData) itr.next();
 			out.println("<TR>");
-			out
-					.println("<TD>" + (data.name == null ? "" : data.name)
-							+ "</TD>");
-			out.println("<TD>" + (data.value == null ? "" : data.value)
-					+ "</TD>");
-			out.println("<TD>"
-					+ (data.contentType == null ? "" : data.contentType)
-					+ "</TD>");
-			out.println("<TD>" + (data.isFile ? String.valueOf(data.size) : "")
-					+ "</TD>");
+			out.println("<TD>" + (data.name == null ? "" : data.name) + "</TD>");
+			out.println("<TD>" + (data.value == null ? "" : data.value) + "</TD>");
+			out.println("<TD>" + (data.contentType == null ? "" : data.contentType) + "</TD>");
+			out.println("<TD>" + (data.isFile ? String.valueOf(data.size) : "") + "</TD>");
 			out.println("<TD>" + (data.isFile ? "file" : "") + "</TD>");
 			out.println("</TR>");
 		}
 		out.println("</TABLE>");
-		out
-				.println("<FORM><input type=\"button\" value=\"Close\" onClick=\"return setClose()\" ></FORM>");
+		out.println("<FORM><input type=\"button\" value=\"Close\" onClick=\"return setClose()\" ></FORM>");
 		out.println("</BODY></HTML>");
 	}
 
@@ -672,8 +625,7 @@ public class MidletServletUpload extends HttpServlet {
 		out.println("</HEAD><BODY onLoad=\"return  setData()\" >");
 		out.println("<H1>Upload Result</H1>");
 		out.println("<TABLE>");
-		out
-				.println("<TR><TH>NAME</TH><TH>VALUE</TH><TH>CONTENT TYPE</TH><TH>SIZE</TH><TH>FILE</TH></TR>");
+		out.println("<TR><TH>NAME</TH><TH>VALUE</TH><TH>CONTENT TYPE</TH><TH>SIZE</TH><TH>FILE</TH></TR>");
 		out.println("<TR>");
 		out.println("<TD>file not uploaded</TD>");
 		out.println("<TD>value is null </TD>");
@@ -682,8 +634,7 @@ public class MidletServletUpload extends HttpServlet {
 		out.println("<TD>" + mess + "</TD>");
 		out.println("</TR>");
 		out.println("</TABLE>");
-		out
-				.println("<FORM><input type=\"button\" value=\"Close\" onClick=\"return setClose()\" ></FORM>");
+		out.println("<FORM><input type=\"button\" value=\"Close\" onClick=\"return setClose()\" ></FORM>");
 		out.println("</BODY></HTML>");
 	}
 
@@ -696,7 +647,7 @@ public class MidletServletUpload extends HttpServlet {
 		try {
 			i = Integer.parseInt(s);
 		} catch (NumberFormatException ex) {
-			log.error(ex) ;
+			log.error(ex);
 			i = -1;
 		}
 		return i;
@@ -715,8 +666,7 @@ class MidletUploadData {
 
 	boolean isFile;
 
-	MidletUploadData(String name, String value, String contentType, int size,
-			boolean isFile) {
+	MidletUploadData(String name, String value, String contentType, int size, boolean isFile) {
 		this.name = name;
 		this.value = value;
 		this.contentType = contentType;

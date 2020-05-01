@@ -1,4 +1,4 @@
-<%@page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page errorPage="error.jsp" %>
 <%@ page import="java.util.LinkedList,java.util.Iterator"%>
 <%
@@ -7,9 +7,9 @@
   response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
   request.setCharacterEncoding("UTF-8");
 %>
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
-<jsp:useBean id="payGatewayListBean" scope="request" class="com.cbsinc.cms.PayGatewayListBean" />
-<jsp:useBean id="payGatewayBean" scope="request" class="com.cbsinc.cms.PayGatewayBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="payGatewayListBeanId" scope="request" class="com.cbsinc.cms.PayGatewayListBean" />
+<jsp:useBean id="payGatewayBeanId" scope="request" class="com.cbsinc.cms.PayGatewayBean" />
 <html>
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -29,7 +29,7 @@
 <TD vAlign="top" Align="left" width="20%"></TD><TD vAlign="center" Align="right" width="80%">
 <form name="searchform" action="Productlist.jsp">
 <br>
-<input id="search_value" name="search_value" type="text" size="20" alt="<%= AuthorizationPageBeanId.getLocalization(application).getString("find_good_by_name") %>" title="<%= AuthorizationPageBeanId.getLocalization(application).getString("find_good_by_name") %>" tabindex="30001" value=""><input class="searchButton" type="submit" size="20" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("Search") %>" tabindex="30002">
+<input id="search_value" name="search_value" type="text" size="20" alt="<%= authorizationPageBeanId.getLocalization(application).getString("find_good_by_name") %>" title="<%= authorizationPageBeanId.getLocalization(application).getString("find_good_by_name") %>" tabindex="30001" value=""><input class="searchButton" type="submit" size="20" value="<%= authorizationPageBeanId.getLocalization(application).getString("Search") %>" tabindex="30002">
 </form>
 </TD>
 </TR>
@@ -38,11 +38,11 @@
 </div>
 <hr size="" class="netscape4">
 <div class="tabs">
-<A href="Productlist.jsp?catalog_id=-2" class="plain"><font size="2"><%=AuthorizationPageBeanId.getLocalization(application).getString("main_page")%></font></A><A href="Productlist.jsp?catalog_id=-10" class="plain"><font size="2"><%=AuthorizationPageBeanId.getLocalization(application).getString("populyar_page")%></font></A><a href="Policy.jsp?page=about" class="plain"><font size="2"><%=AuthorizationPageBeanId.getLocalization(application).getString("about_company")%></font></a><A href="Productlist.jsp?action=logoff" class="plain"><font size="2"><%=AuthorizationPageBeanId.getLocalization(application).getString("exit")%></font></A>
+<A href="Productlist.jsp?catalog_id=-2" class="plain"><font size="2"><%=authorizationPageBeanId.getLocalization(application).getString("main_page")%></font></A><A href="Productlist.jsp?catalog_id=-10" class="plain"><font size="2"><%=authorizationPageBeanId.getLocalization(application).getString("populyar_page")%></font></A><a href="Policy.jsp?page=about" class="plain"><font size="2"><%=authorizationPageBeanId.getLocalization(application).getString("about_company")%></font></a><A href="Productlist.jsp?action=logoff" class="plain"><font size="2"><%=authorizationPageBeanId.getLocalization(application).getString("exit")%></font></A>
 </div>
 <div class="personalBar">
 <a href="Authorization.jsp"><img src="images/user.gif" alt="Link icon" title="Link icon" height="15" width="10" border="0">
-					<%=AuthorizationPageBeanId.getLocalization(application).getString("login")%>: <%=AuthorizationPageBeanId.getStrLogin()%></a>
+					<%=authorizationPageBeanId.getLocalization(application).getString("login")%>: <%=authorizationPageBeanId.getStrLogin()%></a>
 </div>
 <hr size="" class="netscape4">
 </div>
@@ -112,7 +112,7 @@
 </div>
 <div class="listingBar">
 <span class="next"><a HREF="#" onClick="javascript:history.back()"><strong>	
-		<%=AuthorizationPageBeanId.getLocalization(application).getString("back")%>
+		<%=authorizationPageBeanId.getLocalization(application).getString("back")%>
 		</strong></a></span>
 </div>
 </td><td class="right">
@@ -144,7 +144,7 @@
 <div class="footer">
 <br>
 
- <%=AuthorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
+ <%=authorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
 
 <hr size="" class="netscape4">
 <strong class="netscape4">

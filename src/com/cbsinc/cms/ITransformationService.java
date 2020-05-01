@@ -1,4 +1,5 @@
 package com.cbsinc.cms;
+
 /**
  * <p>
  * Title: Content Manager System
@@ -22,7 +23,6 @@ package com.cbsinc.cms;
 
 import java.io.Serializable;
 
-public interface ITransformationService extends Serializable
-{
-public void clearAllXSLTemplates();
+public interface ITransformationService extends Serializable {
+	public void clearAllXSLTemplates();
 }

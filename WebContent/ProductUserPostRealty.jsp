@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
-<jsp:useBean id="SoftPostBeanId" scope="session" class="com.cbsinc.cms.SoftPostBean" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="publisherBeanId" scope="session" class="com.cbsinc.cms.PublisherBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <%
   response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
   response.setHeader("Pragma","no-cache"); //HTTP 1.0
@@ -93,7 +93,7 @@ function switchWindowSearch()
 {
 				windowsearch_hide = !windowsearch_hide;
 				document.getElementById("search_cre").src =  (windowsearch_hide ? "images/expand.gif" : "images/collapse.gif");
-				document.getElementById("search_cre").title =  (windowsearch_hide ? "<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= AuthorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
+				document.getElementById("search_cre").title =  (windowsearch_hide ? "<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= authorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
 				document.getElementById("windowsearch").style.display = windowsearch_hide ? "none" : "";
 }
 
@@ -104,7 +104,7 @@ function switchWindowReport()
 {
 				window_urlreport_hide = !window_urlreport_hide;
 				document.getElementById("urlreport_cre").src =  (window_urlreport_hide ? "images/expand.gif" : "images/collapse.gif");
-				document.getElementById("urlreport_cre").title =  (window_urlreport_hide ? "<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= AuthorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
+				document.getElementById("urlreport_cre").title =  (window_urlreport_hide ? "<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= authorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
 				document.getElementById("window_urlreport").style.display = window_urlreport_hide ? "none" : "";
 }
 
@@ -115,7 +115,7 @@ function switchWindowInputForm()
 {
 				window_input_form_hide = !window_input_form_hide;
 				document.getElementById("input_form").src =  (window_input_form_hide ? "images/expand.gif" : "images/collapse.gif");
-				document.getElementById("input_form").title =  (window_input_form_hide ? "<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= AuthorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
+				document.getElementById("input_form").title =  (window_input_form_hide ? "<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= authorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
 				document.getElementById("window_input_form").style.display = window_input_form_hide ? "none" : "";
 				if(!windowsearch_hide)  switchWindowSearch();
 }
@@ -127,7 +127,7 @@ function switchWindowSwitchForum()
 {
 				window_forum_hide = !window_forum_hide;
 				document.getElementById("switch_forum").src =  (window_forum_hide ? "images/expand.gif" : "images/collapse.gif");
-				document.getElementById("switch_forum").title =  (window_forum_hide ? "<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= AuthorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
+				document.getElementById("switch_forum").title =  (window_forum_hide ? "<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= authorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
 				document.getElementById("window_switch_forum").style.display = window_forum_hide ? "none" : "";
 				if(!window_input_form_hide)switchWindowInputForm();
 }
@@ -138,7 +138,7 @@ function switchWindowGenCode()
 {
 				window_gencode_hide = !window_gencode_hide;
 				document.getElementById("gencode").src =  (window_gencode_hide ? "images/expand.gif" : "images/collapse.gif");
-				document.getElementById("gencode").title =  (window_gencode_hide ? "<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= AuthorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
+				document.getElementById("gencode").title =  (window_gencode_hide ? "<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= authorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
 				document.getElementById("window_gencode").style.display = window_gencode_hide ? "none" : "";
 				if(!window_forum_hide)switchWindowSwitchForum();
 }
@@ -787,7 +787,7 @@ function parseMessages(responseXML)
 
         <div class="pathBar">
             <span>
-                <span> <%=AuthorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
+                <span> <%=authorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
             </span>
 
         </div>
@@ -810,7 +810,7 @@ function parseMessages(responseXML)
 
             <!-- News part -->
 
-	    <h1><%=AuthorizationPageBeanId.getLocalization(application).getString("title_common_of_form")%></h1>
+	    <h1><%=authorizationPageBeanId.getLocalization(application).getString("title_common_of_form")%></h1>
 		<br/>
 
         <form method="post" name="postsoftform"  ACTION="ProductUserPostRealty.jsp" onSubmit="return  IsFormOk()"  >
@@ -820,8 +820,8 @@ function parseMessages(responseXML)
 		  <div class="body">
 		    <div >
 		    <DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left"  >
-				<A	onclick="switchWindowSearch()" href="#" > <IMG id='search_cre'  title="<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" src="images/expand.gif" align="right"/> </A>
-				<font color='white' size='2' >&nbsp;<%=AuthorizationPageBeanId.getLocalization(application).getString("step1")%> .&nbsp; <%=AuthorizationPageBeanId.getLocalization(application).getString("title_search_criteria")%> </font>
+				<A	onclick="switchWindowSearch()" href="#" > <IMG id='search_cre'  title="<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" src="images/expand.gif" align="right"/> </A>
+				<font color='white' size='2' >&nbsp;<%=authorizationPageBeanId.getLocalization(application).getString("step1")%> .&nbsp; <%=authorizationPageBeanId.getLocalization(application).getString("title_search_criteria")%> </font>
 			</DIV>
 			<br/>
 			<div id='windowsearch'  >
@@ -829,8 +829,8 @@ function parseMessages(responseXML)
                      <TR id='creteria1'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria1' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria1' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria1' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;1.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getCriteria1_label()%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getSelect_creteria1_id()%></TD>
+                     <TD width="180" ><%=publisherBeanId.getCriteria1_label()%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getSelect_creteria1_id()%></TD>
                      <TD align="right" width="90" ></TD>
 					 <TD width="20" >&nbsp;</TD>                     
                      </TR>
@@ -838,8 +838,8 @@ function parseMessages(responseXML)
                      <TR id='creteria2'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria2' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria2' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria2' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;2.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getCriteria2_label()%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getSelect_creteria2_id()%></TD>
+                     <TD width="180" ><%=publisherBeanId.getCriteria2_label()%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getSelect_creteria2_id()%></TD>
                      <TD align="right" width="90" ></TD>
 					 <TD width="20" >&nbsp;</TD>                     
                      </TR>
@@ -847,8 +847,8 @@ function parseMessages(responseXML)
                      <TR id='creteria3'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria3' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria3' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria3' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;3.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getCriteria3_label()%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getSelect_creteria3_id()%></TD>
+                     <TD width="180" ><%=publisherBeanId.getCriteria3_label()%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getSelect_creteria3_id()%></TD>
                      <TD align="right" width="90" ></TD>
 					 <TD width="20" >&nbsp;</TD>                     
                      </TR>
@@ -856,8 +856,8 @@ function parseMessages(responseXML)
                      <TR id='creteria4'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria4' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria4' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria4' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;4.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getCriteria4_label()%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getSelect_creteria4_id()%></TD>
+                     <TD width="180" ><%=publisherBeanId.getCriteria4_label()%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getSelect_creteria4_id()%></TD>
                      <TD align="right" width="90" ></TD>
 					 <TD width="20" >&nbsp;</TD>                    
                      </TR>
@@ -865,8 +865,8 @@ function parseMessages(responseXML)
                     <TR id='creteria5'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria5' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria5' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria5' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;5.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getCriteria5_label()%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getSelect_creteria5_id()%></TD>
+                     <TD width="180" ><%=publisherBeanId.getCriteria5_label()%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getSelect_creteria5_id()%></TD>
                      <TD align="right" width="90" ></TD>
 					 <TD width="20" >&nbsp;</TD>                    
                      </TR>
@@ -874,8 +874,8 @@ function parseMessages(responseXML)
                      <TR id='creteria6'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria6' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria6' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria6' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;6.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getCriteria6_label()%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getSelect_creteria6_id()%></TD>
+                     <TD width="180" ><%=publisherBeanId.getCriteria6_label()%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getSelect_creteria6_id()%></TD>
                      <TD align="right" width="90" ></TD>
    					 <TD width="20" >&nbsp;</TD>
                      </TR>
@@ -884,8 +884,8 @@ function parseMessages(responseXML)
                     <TR id='creteria7'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria7' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria7' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria7' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;7.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getCriteria7_label()%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getSelect_creteria7_id()%></TD>
+                     <TD width="180" ><%=publisherBeanId.getCriteria7_label()%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getSelect_creteria7_id()%></TD>
 					 <TD align="right" width="90" ></TD>
  					 <TD width="20" >&nbsp;</TD>
                    
@@ -894,8 +894,8 @@ function parseMessages(responseXML)
                     <TR id='creteria8'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria8' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria8' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria8' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;8.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getCriteria8_label()%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getSelect_creteria8_id()%></TD>
+                     <TD width="180" ><%=publisherBeanId.getCriteria8_label()%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getSelect_creteria8_id()%></TD>
                      <TD align="right" width="90" ></TD>
    					 <TD width="20" >&nbsp;</TD>
                      </TR>
@@ -904,8 +904,8 @@ function parseMessages(responseXML)
                     <TR id='creteria9'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria9' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria9' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria9' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;9.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getCriteria9_label()%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getSelect_creteria9_id()%></TD>
+                     <TD width="180" ><%=publisherBeanId.getCriteria9_label()%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getSelect_creteria9_id()%></TD>
                      <TD align="right" width="90" ></TD>
    					 <TD width="20" >&nbsp;</TD>
                      </TR>                                          
@@ -913,8 +913,8 @@ function parseMessages(responseXML)
                     <TR id='creteria10'  onMouseOver="setCreteriaColor( '#DFE3EF' , 'creteria10' )"  onMouseOut="setCreteriaColor( 'white' , 'creteria10' )"   onMouseDown="creteriaSelected( '#FFEFFF' , 'creteria10' )"  >
 					 <TD width="20" >&nbsp;</TD>
                      <TD width="20" >&nbsp;10.</TD>
-                     <TD width="180" ><%=SoftPostBeanId.getCriteria10_label()%> :* </TD> 
-                     <TD align="left" ><%=SoftPostBeanId.getSelect_creteria10_id()%></TD>
+                     <TD width="180" ><%=publisherBeanId.getCriteria10_label()%> :* </TD> 
+                     <TD align="left" ><%=publisherBeanId.getSelect_creteria10_id()%></TD>
                      <TD align="right"  width="90" ></TD>
 					 <TD width="20" >&nbsp;</TD>                     
                      </TR>                                          
@@ -931,7 +931,7 @@ function parseMessages(responseXML)
 			   <br/>
 			   <DIV align="right" >
 				<A	class="menu" onclick="switchWindowInputForm()" href="#" > <IMG  title="далее" src="images/next.gif" align="right"/> 
-				&nbsp; <%=AuthorizationPageBeanId.getLocalization(application).getString("goto_on")%> <%=AuthorizationPageBeanId.getLocalization(application).getString("step2")%>.&nbsp;&nbsp;</A>
+				&nbsp; <%=authorizationPageBeanId.getLocalization(application).getString("goto_on")%> <%=authorizationPageBeanId.getLocalization(application).getString("step2")%>.&nbsp;&nbsp;</A>
 	 		  </DIV>
 			   </div>
 			<br/>
@@ -945,19 +945,19 @@ function parseMessages(responseXML)
 		    <div >
 
 				<DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left"  >
-				<A  onclick="switchWindowInputForm()" href="#" > <IMG id='input_form'  title="<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" src="images/expand.gif" align="right"/> </A>
-					<font color='white' size='2' >&nbsp; <%=AuthorizationPageBeanId.getLocalization(application).getString("step2")%> .&nbsp;&raquo; Форма для заведения или изменения этой информации на сайте </font>
+				<A  onclick="switchWindowInputForm()" href="#" > <IMG id='input_form'  title="<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" src="images/expand.gif" align="right"/> </A>
+					<font color='white' size='2' >&nbsp; <%=authorizationPageBeanId.getLocalization(application).getString("step2")%> .&nbsp;&raquo; Форма для заведения или изменения этой информации на сайте </font>
 				</DIV>
 				<br/>
 			    <div id='window_input_form' style="display:none;" >
                      <TABLE>
-                     <TR><TD width="10" >&nbsp;</TD><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("title_form")%>:* </TD><TD> <input  name="softname" size="70"  value="<%= SoftPostBeanId.getStrSoftName() %>" onBlur="checkEmpty(this.value)" >
-					 <input type="hidden"  name="softname2" size="40"  value="<%= SoftPostBeanId.getStrSoftName2() %>"  >
-                     <TR><TD width="10" >&nbsp;</TD><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("upload_small_image")%>:* </TD> <TD><input  name="imagename"  disabled="disabled" size="20" value="<%= SoftPostBeanId.getImgname() %>" ><input type="button" name="newimage" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("new_small_image") %>"   onclick="dwindow('NewSmallImage.jsp'); return false;"  ><input type="button" name="selectimage" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("select_small_image") %>" onclick="dwindow('SelectImage.jsp'); return false;" ><input type="hidden"  name="image_id" size="20" value="<%= SoftPostBeanId.getImage_id() %>" ></TD></TR>
-                     <TR><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("cost")%>:* </TD> <TD><input  name="softcost" size="20" value="<%= SoftPostBeanId.getStrSoftCost() %>" onBlur="checkNumber(this.value)"  ><%=SoftPostBeanId.getComboBox("currency_id", "3" ,"SELECT currency_id , currency_lable FROM currency  WHERE active = true")%></TD></TR>
-                     <TR><TD width="10" >&nbsp;</TD><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("short_info")%> :* </TD> <TD> <textarea width="500" name="description" rows="10" cols="120"  id="shortdescription" ><%=SoftPostBeanId.getStrSoftDescription()%></textarea></TD></TR>
-                     <TR><TD width="10" >&nbsp;</TD><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("upload_big_image")%>:* </TD> <TD><input  name="bigimagename" disabled="disabled" size="20" value="<%= SoftPostBeanId.getBigimgname() %>" ><input type="button" name="newbig_image" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("new_big_image") %>"  onclick="dwindow('ImageBig.html'); return false;" ><input type="button" name="selectbig_image" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("select_big_image") %>" image" onclick="dwindow('SelectBigImage.jsp'); return false;" ><input type="hidden"  name="bigimage_id" size="20" value="<%= SoftPostBeanId.getBigimage_id() %>" ></TD></TR>
-                     <TR><TD width="10" >&nbsp;</TD><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("full_information")%>:* </TD> <TD> <textarea width="500" name="fulldescription" rows="10" cols="120"  id="fulldescription"  ><%=SoftPostBeanId.getProduct_fulldescription()%></textarea></TD></TR>
+                     <TR><TD width="10" >&nbsp;</TD><TD><%=authorizationPageBeanId.getLocalization(application).getString("title_form")%>:* </TD><TD> <input  name="softname" size="70"  value="<%= publisherBeanId.getStrSoftName() %>" onBlur="checkEmpty(this.value)" >
+					 <input type="hidden"  name="softname2" size="40"  value="<%= publisherBeanId.getStrSoftName2() %>"  >
+                     <TR><TD width="10" >&nbsp;</TD><TD><%=authorizationPageBeanId.getLocalization(application).getString("upload_small_image")%>:* </TD> <TD><input  name="imagename"  disabled="disabled" size="20" value="<%= publisherBeanId.getImgname() %>" ><input type="button" name="newimage" value="<%= authorizationPageBeanId.getLocalization(application).getString("new_small_image") %>"   onclick="dwindow('NewSmallImage.jsp'); return false;"  ><input type="button" name="selectimage" value="<%= authorizationPageBeanId.getLocalization(application).getString("select_small_image") %>" onclick="dwindow('SelectImage.jsp'); return false;" ><input type="hidden"  name="image_id" size="20" value="<%= publisherBeanId.getImage_id() %>" ></TD></TR>
+                     <TR><TD><%=authorizationPageBeanId.getLocalization(application).getString("cost")%>:* </TD> <TD><input  name="softcost" size="20" value="<%= publisherBeanId.getStrSoftCost() %>" onBlur="checkNumber(this.value)"  ><%=publisherBeanId.getComboBox("currency_id", "3" ,"SELECT currency_id , currency_lable FROM currency  WHERE active = true")%></TD></TR>
+                     <TR><TD width="10" >&nbsp;</TD><TD><%=authorizationPageBeanId.getLocalization(application).getString("short_info")%> :* </TD> <TD> <textarea width="500" name="description" rows="10" cols="120"  id="shortdescription" ><%=publisherBeanId.getStrSoftDescription()%></textarea></TD></TR>
+                     <TR><TD width="10" >&nbsp;</TD><TD><%=authorizationPageBeanId.getLocalization(application).getString("upload_big_image")%>:* </TD> <TD><input  name="bigimagename" disabled="disabled" size="20" value="<%= publisherBeanId.getBigimgname() %>" ><input type="button" name="newbig_image" value="<%= authorizationPageBeanId.getLocalization(application).getString("new_big_image") %>"  onclick="dwindow('ImageBig.html'); return false;" ><input type="button" name="selectbig_image" value="<%= authorizationPageBeanId.getLocalization(application).getString("select_big_image") %>" image" onclick="dwindow('SelectBigImage.jsp'); return false;" ><input type="hidden"  name="bigimage_id" size="20" value="<%= publisherBeanId.getBigimage_id() %>" ></TD></TR>
+                     <TR><TD width="10" >&nbsp;</TD><TD><%=authorizationPageBeanId.getLocalization(application).getString("full_information")%>:* </TD> <TD> <textarea width="500" name="fulldescription" rows="10" cols="120"  id="fulldescription"  ><%=publisherBeanId.getProduct_fulldescription()%></textarea></TD></TR>
 				     <TR><TD width="10" >&nbsp;</TD><TD colspan="2" >
                      <input type="hidden"  name="catalog_id"  value="-2"/>
                      <input type="hidden"  name="select_file"  value=""/>
@@ -970,7 +970,7 @@ function parseMessages(responseXML)
 			    <br/>
 			    <DIV align="right" >
 				<A	class="menu" onclick="switchWindowSwitchForum()" href="#" > <IMG  title="далее" src="images/next.gif" align="right"/> 
-				&nbsp; <%=AuthorizationPageBeanId.getLocalization(application).getString("goto_on")%> <%=AuthorizationPageBeanId.getLocalization(application).getString("step3")%>.&nbsp;&nbsp;</A>
+				&nbsp; <%=authorizationPageBeanId.getLocalization(application).getString("goto_on")%> <%=authorizationPageBeanId.getLocalization(application).getString("step3")%>.&nbsp;&nbsp;</A>
 	 		    </DIV>
  		        </div>
  		        <br/>
@@ -982,19 +982,19 @@ function parseMessages(responseXML)
 		  <div class="body">
 		    <div >
 				<DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left"  >
-				<A	onclick="switchWindowSwitchForum()" href="#" > <IMG id='switch_forum'  title="<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" src="images/expand.gif" align="right"/> </A>
-					<font color='white' size='2' >&nbsp; <%=AuthorizationPageBeanId.getLocalization(application).getString("step3")%> .&nbsp;&raquo; <%=AuthorizationPageBeanId.getLocalization(application).getString("title_section_forum")%> </font>
+				<A	onclick="switchWindowSwitchForum()" href="#" > <IMG id='switch_forum'  title="<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" src="images/expand.gif" align="right"/> </A>
+					<font color='white' size='2' >&nbsp; <%=authorizationPageBeanId.getLocalization(application).getString("step3")%> .&nbsp;&raquo; <%=authorizationPageBeanId.getLocalization(application).getString("title_section_forum")%> </font>
 				</DIV>
 				<br/>
 			    <div id='window_switch_forum' style="display:none;" >
                      <TABLE>
-                     <TR><TD></TD> <TD><input  type="checkbox" name="show_blog"  value="<%= SoftPostBeanId.getStrShow_forum() %>"  <%= SoftPostBeanId.getShow_forum_checked() %> > Влючить общение </TD></TR>
+                     <TR><TD></TD> <TD><input  type="checkbox" name="show_blog"  value="<%= publisherBeanId.getStrShow_forum() %>"  <%= publisherBeanId.getShow_forum_checked() %> > Влючить общение </TD></TR>
                      <TR><TD colspan="2" ></TD></TR>
                      </TABLE>
 			   <br/>
 			    <DIV align="right" >
 				 <A	class="menu" onclick="switchWindowGenCode()" href="#" > <IMG  title="далее" src="images/next.gif" align="right"/> 
-				 &nbsp; <%=AuthorizationPageBeanId.getLocalization(application).getString("goto_on")%> <%=AuthorizationPageBeanId.getLocalization(application).getString("step4")%>.&nbsp;&nbsp;</A>
+				 &nbsp; <%=authorizationPageBeanId.getLocalization(application).getString("goto_on")%> <%=authorizationPageBeanId.getLocalization(application).getString("step4")%>.&nbsp;&nbsp;</A>
 	 		    </DIV>
  		        </div>
  		        <br/>
@@ -1006,16 +1006,16 @@ function parseMessages(responseXML)
 		  <div class="body">
 		    <div >
 				<DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left"  >
-				<A	onclick="switchWindowGenCode()" href="#" > <IMG id='gencode'  title="<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" src="images/expand.gif" align="right"/> </A>
-					<font color='white' size='2' >&nbsp; <%=AuthorizationPageBeanId.getLocalization(application).getString("step4")%>.&nbsp;&raquo; <%=AuthorizationPageBeanId.getLocalization(application).getString("title_aprove_privat_info")%></font>
+				<A	onclick="switchWindowGenCode()" href="#" > <IMG id='gencode'  title="<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" src="images/expand.gif" align="right"/> </A>
+					<font color='white' size='2' >&nbsp; <%=authorizationPageBeanId.getLocalization(application).getString("step4")%>.&nbsp;&raquo; <%=authorizationPageBeanId.getLocalization(application).getString("title_aprove_privat_info")%></font>
 				</DIV>
 				<br/>
 			    <div id='window_gencode' style="display:none;" >
                      <TABLE>
-                     <TR><TD colspan="2" ><%=AuthorizationPageBeanId.getLocalization(application).getString("before_input_generator_code")%> </TD></TR>
-                     <TR><TD><img alt="<%= AuthorizationPageBeanId.getLocalization(application).getString("image_with_gen_numer") %>" src="/gennumberservlet"  /></TD> <TD><input type="text" name="gen_number"></TD></TR>
+                     <TR><TD colspan="2" ><%=authorizationPageBeanId.getLocalization(application).getString("before_input_generator_code")%> </TD></TR>
+                     <TR><TD><img alt="<%= authorizationPageBeanId.getLocalization(application).getString("image_with_gen_numer") %>" src="/gennumberservlet"  /></TD> <TD><input type="text" name="gen_number"></TD></TR>
                      <TR><TD colspan="2" ></TD></TR>
-                     <TR><TD></TD> <TD><input type="button" name="button" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("save") %>"  onclick="do_save()" > <input type="reset" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("clear") %>"></TD></TR>
+                     <TR><TD></TD> <TD><input type="button" name="button" value="<%= authorizationPageBeanId.getLocalization(application).getString("save") %>"  onclick="do_save()" > <input type="reset" value="<%= authorizationPageBeanId.getLocalization(application).getString("clear") %>"></TD></TR>
                      </TABLE>
  		        </div>
 		     </div>
@@ -1033,7 +1033,7 @@ function parseMessages(responseXML)
 	    <span class="next">
                 <a HREF = "Productlist.jsp"  >
 		<strong>
-		<%=AuthorizationPageBeanId.getLocalization(application).getString("back")%>
+		<%=authorizationPageBeanId.getLocalization(application).getString("back")%>
 		</strong>
 	        </a>
 	    </span>
@@ -1060,7 +1060,7 @@ function parseMessages(responseXML)
 
 <br />
 
- <%=AuthorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
+ <%=authorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
 
 <hr size="" class="netscape4" />
 
@@ -1073,7 +1073,7 @@ for user netscape
 <DIV id="vunet"  class="drag" style="position: absolute; top: 120px; left: 130px;display:none;"  >
 	<DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left" id="dtitle"  >
 	<A	onclick="dwindow('SelectImage.jsp')" href="#" >
-	 <IMG id=upshrink_ic  title="<%= AuthorizationPageBeanId.getLocalization(application).getString("close_window") %>" src="images/expand.gif" align="right"/> 
+	 <IMG id=upshrink_ic  title="<%= authorizationPageBeanId.getLocalization(application).getString("close_window") %>" src="images/expand.gif" align="right"/> 
 	</A>
 	<font  color='white' size='2' > <b id="title_name" >&nbsp;&raquo;&nbsp; GBS Portal</b> </font>
 	</DIV>
@@ -1083,7 +1083,7 @@ for user netscape
 			<TR>
 				<td>
 				<iframe id="dialog" src="SelectImage.jsp" width="390" height="400" align="center">
-				<%=AuthorizationPageBeanId.getLocalization(application).getString("browser_not_support_frame")%>
+				<%=authorizationPageBeanId.getLocalization(application).getString("browser_not_support_frame")%>
 				</iframe>
 				</td>
 			</TR>

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ page import="java.util.PropertyResourceBundle,java.util.ResourceBundle"%>
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="mobilesoft.AuthorizationPageBean" />
-<jsp:useBean id="OperationAmountBeanId" scope="session" class="mobilesoft.OperationAmountBean" />
+<jsp:useBean id="authorizationPageBean" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="OperationAmountBeanId" scope="session" class="com.cbsinc.cms.OperationAmountBean" />
 <jsp:useBean id="messageMail" scope="session" class="java.util.HashMap" type="java.util.HashMap"/>
-<jsp:setProperty name="AuthorizationPageBeanId" property="*" />
+<jsp:setProperty name="authorizationPageBean" property="*" />
 <%
 
 
@@ -15,29 +15,29 @@
    <name>Authorization</name>
 
    <title>Authorization page</title>
-   <subject_site><%=  AuthorizationPageBeanId.getSubject_site() %></subject_site>
-   <site_name><%=  AuthorizationPageBeanId.getNick_site() %></site_name>
-   <host><%=  AuthorizationPageBeanId.getSite_dir() %></host>
-   <login><%= AuthorizationPageBeanId.getStrLogin() %></login>
-   <passwdord><%=  AuthorizationPageBeanId.getStrCPasswd() %></passwdord>
-   <firstname><%= AuthorizationPageBeanId.getStrFirstName() %></firstname>
-   <lastname><%= AuthorizationPageBeanId.getStrLastName() %></lastname>
-   <company><%= AuthorizationPageBeanId.getStrCompany() %></company>
-   <email><%= AuthorizationPageBeanId.getStrEMail() %></email>
-   <phone><%= AuthorizationPageBeanId.getStrPhone() %></phone>
-   <mphone><%= AuthorizationPageBeanId.getStrMPhone() %></mphone>
-   <fax><%= AuthorizationPageBeanId.getStrFax() %></fax>
-   <icq><%= AuthorizationPageBeanId.getStrIcq() %></icq>
-   <website><%= AuthorizationPageBeanId.getStrWebsite() %></website>
-   <question><%= AuthorizationPageBeanId.getStrQuestion() %></question>
-   <answer><%= AuthorizationPageBeanId.getStrAnswer() %></answer>
-   <country><%= AuthorizationPageBeanId.getStrCountry() %></country>
-   <city><%= AuthorizationPageBeanId.getStrCity() %></city>
-   <site><%= AuthorizationPageBeanId.getSite_id() %></site>
-   <message><%= AuthorizationPageBeanId.getStrMessage() %></message>
-   <country_id><%= AuthorizationPageBeanId.getCountry_id() %></country_id>
-   <city_id><%= AuthorizationPageBeanId.getCity_id() %></city_id>
-   <currency_id><%= AuthorizationPageBeanId.getCurrency_id() %></currency_id>
+   <subject_site><%=  authorizationPageBean.getSubject_site() %></subject_site>
+   <site_name><%=  authorizationPageBean.getNick_site() %></site_name>
+   <host><%=  authorizationPageBean.getSite_dir() %></host>
+   <login><%= authorizationPageBean.getStrLogin() %></login>
+   <passwdord><%=  authorizationPageBean.getStrCPasswd() %></passwdord>
+   <firstname><%= authorizationPageBean.getStrFirstName() %></firstname>
+   <lastname><%= authorizationPageBean.getStrLastName() %></lastname>
+   <company><%= authorizationPageBean.getStrCompany() %></company>
+   <email><%= authorizationPageBean.getStrEMail() %></email>
+   <phone><%= authorizationPageBean.getStrPhone() %></phone>
+   <mphone><%= authorizationPageBean.getStrMPhone() %></mphone>
+   <fax><%= authorizationPageBean.getStrFax() %></fax>
+   <icq><%= authorizationPageBean.getStrIcq() %></icq>
+   <website><%= authorizationPageBean.getStrWebsite() %></website>
+   <question><%= authorizationPageBean.getStrQuestion() %></question>
+   <answer><%= authorizationPageBean.getStrAnswer() %></answer>
+   <country><%= authorizationPageBean.getStrCountry() %></country>
+   <city><%= authorizationPageBean.getStrCity() %></city>
+   <site><%= authorizationPageBean.getSite_id() %></site>
+   <message><%= authorizationPageBean.getStrMessage() %></message>
+   <country_id><%= authorizationPageBean.getCountry_id() %></country_id>
+   <city_id><%= authorizationPageBean.getCity_id() %></city_id>
+   <currency_id><%= authorizationPageBean.getCurrency_id() %></currency_id>
 
    <!--  for members -->
    <do_form_1>
@@ -65,10 +65,10 @@
                 </form-header>
    </do_form_2>
 
-<%=  AuthorizationPageBeanId.getSelect_site() %>
-<%=  AuthorizationPageBeanId.getSelect_country() %>
-<%=  AuthorizationPageBeanId.getSelect_city() %>
-<%=  AuthorizationPageBeanId.getSelect_currency() %>
-<!--  AuthorizationPageBeanId.getXMLDBList("Authorization.jsp?currency_id","currency", AuthorizationPageBeanId.getCurrency_id()  ,"SELECT currency_id , currency_desc FROM currency  WHERE active = true") -->
+<%=  authorizationPageBean.getSelect_site() %>
+<%=  authorizationPageBean.getSelect_country() %>
+<%=  authorizationPageBean.getSelect_city() %>
+<%=  authorizationPageBean.getSelect_currency() %>
+<!--  authorizationPageBean.getXMLDBList("Authorization.jsp?currency_id","currency", authorizationPageBean.getCurrency_id()  ,"SELECT currency_id , currency_desc FROM currency  WHERE active = true") -->
 
 </document>

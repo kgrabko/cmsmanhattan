@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <%
   response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
   response.setHeader("Pragma","no-cache"); //HTTP 1.0
@@ -36,7 +36,7 @@
 
 
         <div class="pathBar">
-                <font size="4"> <%=AuthorizationPageBeanId.getLocalization(application).getString("site_controll")%> </font>
+                <font size="4"> <%=authorizationPageBeanId.getLocalization(application).getString("site_controll")%> </font>
         </div>
 
         <hr size="" class="netscape4" />
@@ -78,7 +78,7 @@
 
             <!-- News part -->
 
-  	    <h1><%=AuthorizationPageBeanId.getLocalization(application).getString("setup_page_detail")%></h1><font color="red" size="3" ><%=AuthorizationPageBeanId.getStrMessage()%></font>
+  	    <h1><%=authorizationPageBeanId.getLocalization(application).getString("setup_page_detail")%></h1><font color="red" size="3" ><%=authorizationPageBeanId.getStrMessage()%></font>
 <br/>
 
 
@@ -94,7 +94,7 @@
 						<td colspan="2">&nbsp;</td>
                       			</tr>
 					<tr>
-						<td width="500" align="left"><A HREF="Ext1ProductPost.jsp" ><img SRC="images/file.png" border="0" alt="Post CoProduct" ><%=AuthorizationPageBeanId.getLocalization(application).getString("post_product_right_description")%></A></td>
+						<td width="500" align="left"><A HREF="Ext1ProductPost.jsp" ><img SRC="images/file.png" border="0" alt="Post CoProduct" ><%=authorizationPageBeanId.getLocalization(application).getString("post_product_right_description")%></A></td>
 					</tr>
 
 					<tr>
@@ -102,14 +102,14 @@
                      </tr>
 
 					<tr>
-						<td width="500" align="left"><A HREF="Ext2ProductPost.jsp" ><img SRC="images/file.png" border="0" alt="Post CoProduct" ><%=AuthorizationPageBeanId.getLocalization(application).getString("post_product_left_description")%> </A></td>
+						<td width="500" align="left"><A HREF="Ext2ProductPost.jsp" ><img SRC="images/file.png" border="0" alt="Post CoProduct" ><%=authorizationPageBeanId.getLocalization(application).getString("post_product_left_description")%> </A></td>
 					</tr>
 
 					<tr>
 						<td colspan="2">&nbsp;</td>
                     </tr>
 					<tr>
-						<td width="500" align="left"><A HREF="BlogExtProductPost.jsp" ><img SRC="images/file.png" border="0" alt="Post Blog" ><%=AuthorizationPageBeanId.getLocalization(application).getString("leave_message_onpage")%> </A></td>
+						<td width="500" align="left"><A HREF="BlogExtProductPost.jsp" ><img SRC="images/file.png" border="0" alt="Post Blog" ><%=authorizationPageBeanId.getLocalization(application).getString("leave_message_onpage")%> </A></td>
 					</tr>
 
 					<tr>
@@ -117,14 +117,14 @@
                     </tr>
 					<!-- 
 					<tr>
-						<td width="500" align="left"><A HREF="ExtFilesProductPost.jsp" ><img SRC="images/file.png" border="0" alt="Post file" ><%= AuthorizationPageBeanId.getLocalization(application).getString("add_file_onpage") %> </A></td>
+						<td width="500" align="left"><A HREF="ExtFilesProductPost.jsp" ><img SRC="images/file.png" border="0" alt="Post file" ><%= authorizationPageBeanId.getLocalization(application).getString("add_file_onpage") %> </A></td>
 					</tr>
 
 					<tr>
 						<td colspan="2">&nbsp;</td>
                     </tr>
 					<tr>
-						<td width="500" align="left"><A HREF="ExtTabsProductPost.jsp" ><img SRC="images/file.png" border="0" alt="Post tab" ><%= AuthorizationPageBeanId.getLocalization(application).getString("add_tab_onpage") %></A></td>
+						<td width="500" align="left"><A HREF="ExtTabsProductPost.jsp" ><img SRC="images/file.png" border="0" alt="Post tab" ><%= authorizationPageBeanId.getLocalization(application).getString("add_tab_onpage") %></A></td>
 					</tr>
 
 					<tr>
@@ -132,14 +132,14 @@
                     </tr>
                     
 					<tr>
-						<td width="500" align="left"><A HREF="Productlist.jsp?element=ext_service_page&action=edit&product_id=<%= ((com.cbsinc.cms.AuthorizationPageBean)session.getAttribute("AuthorizationPageBeanId")).getLastProductId() %>" ><img SRC="images/file.png" border="0" alt="Post about company" ><%=AuthorizationPageBeanId.getLocalization(application).getString("change_page_about_company")%> </A></td>
+						<td width="500" align="left"><A HREF="Productlist.jsp?element=ext_service_page&action=edit&product_id=<%= ((com.cbsinc.cms.AuthorizationPageBean)session.getAttribute("authorizationPageBeanId")).getLastProductId() %>" ><img SRC="images/file.png" border="0" alt="Post about company" ><%=authorizationPageBeanId.getLocalization(application).getString("change_page_about_company")%> </A></td>
 					</tr>
 
 					<tr>
 						<td colspan="2">&nbsp;</td>
                     </tr>
 					<tr>
-						<td width="500" align="left"><A HREF="Productlist.jsp?element=ext_service_page&action=edit&product_id=<%= ((com.cbsinc.cms.AuthorizationPageBean)session.getAttribute("AuthorizationPageBeanId")).getLastProductId() %>" ><img SRC="images/file.png" border="0" alt="Post CoProduct" ><%=AuthorizationPageBeanId.getLocalization(application).getString("change_page_how_pay")%></A></td>
+						<td width="500" align="left"><A HREF="Productlist.jsp?element=ext_service_page&action=edit&product_id=<%= ((com.cbsinc.cms.AuthorizationPageBean)session.getAttribute("authorizationPageBeanId")).getLastProductId() %>" ><img SRC="images/file.png" border="0" alt="Post CoProduct" ><%=authorizationPageBeanId.getLocalization(application).getString("change_page_how_pay")%></A></td>
 					</tr>
 					
  					-->
@@ -154,7 +154,7 @@
 
         <!-- Navigation -->
         <div class="listingBar">
-	    <span class="next"> <a HREF = "Productlist.jsp"  ><strong><%=AuthorizationPageBeanId.getLocalization(application).getString("back")%></strong></a> </span>
+	    <span class="next"> <a HREF = "Productlist.jsp"  ><strong><%=authorizationPageBeanId.getLocalization(application).getString("back")%></strong></a> </span>
 	</div>
 
 
@@ -178,7 +178,7 @@
 
 <br />
 
- <%=AuthorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
+ <%=authorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
 
 <hr size="" class="netscape4" />
 

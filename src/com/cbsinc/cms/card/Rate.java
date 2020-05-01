@@ -30,8 +30,8 @@ public class Rate {
 		}
 	}
 
-	public RateInfo getRateInfo(String shop_id, String login, String password,
-			String currency, String date) throws Exception {
+	public RateInfo getRateInfo(String shop_id, String login, String password, String currency, String date)
+			throws Exception {
 		// public RateInfo getRateInfo (String shop_id ,String login, String
 		// password ,String currency ,String date ) {
 		RateInfo answer = null;
@@ -47,8 +47,7 @@ public class Rate {
 
 		SOAPMappingRegistry smr = new SOAPMappingRegistry();
 		RateinfoSerializer sd = new RateinfoSerializer();
-		smr.mapTypes(Constants.NS_URI_SOAP_ENC, new QName(OBJECT_URI,
-				"SOAPStruct"), RateInfo.class, null, sd);
+		smr.mapTypes(Constants.NS_URI_SOAP_ENC, new QName(OBJECT_URI, "SOAPStruct"), RateInfo.class, null, sd);
 
 		// create the transport and set parameters
 		SOAPHTTPConnection st = new SOAPHTTPConnection();
@@ -63,14 +62,10 @@ public class Rate {
 		call.setEncodingStyleURI(encodingStyleURI);
 
 		Vector params = new Vector();
-		params
-				.addElement(new Parameter("shop_id", Integer.class, shop_id,
-						null));
+		params.addElement(new Parameter("shop_id", Integer.class, shop_id, null));
 		params.addElement(new Parameter("login", String.class, login, null));
-		params.addElement(new Parameter("password", String.class, password,
-				null));
-		params.addElement(new Parameter("currency", String.class, currency,
-				null));
+		params.addElement(new Parameter("password", String.class, password, null));
+		params.addElement(new Parameter("currency", String.class, currency, null));
 		params.addElement(new Parameter("date", String.class, date, null));
 		call.setParams(params);
 

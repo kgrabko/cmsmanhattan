@@ -32,92 +32,87 @@ public class QueryManager implements IQueryManager {
 
 	// uncomment it if you like use JDBC
 	final IQueryManager iQueryManager = new QueryManagerSQL();
-	// uncomment it if you like use Hibernate 
-	//final IQueryManager iQueryManager = new QueryManagerHibernate();
-	
-	
+	// uncomment it if you like use Hibernate
+	// final IQueryManager iQueryManager = new QueryManagerHibernate();
+
 	public QueryManager() {
-		//iQueryManager = new QueryManagerSQL();
-		//iQueryManager = new QueryManagerDS();
+		// iQueryManager = new QueryManagerSQL();
+		// iQueryManager = new QueryManagerDS();
 	}
-	
-	final public void BeginTransaction() 
-	{
+
+	final public void BeginTransaction() {
 		iQueryManager.BeginTransaction();
 	}
 
-	final public void close() 
-	{
+	final public void close() {
 		iQueryManager.close();
 	}
 
-	final public void commit() 
-	{
+	final public void commit() {
 		iQueryManager.commit();
 	}
 
-	final public int executeInsertWithArgs(String query, Object[] args) throws SQLException 
-	{
-		return iQueryManager.executeInsertWithArgs(query,  args) ;
+	final public int executeInsertWithArgs(String query, Object[] args) throws SQLException {
+		return iQueryManager.executeInsertWithArgs(query, args);
 	}
 
 	final public int executeInsertWithArgs(String query, Map args) throws SQLException {
 		// TODO Auto-generated method stub
-		return iQueryManager.executeInsertWithArgs( query,  args) ;
+		return iQueryManager.executeInsertWithArgs(query, args);
 	}
 
 	final public int executeInsertWithJavaObject(String query, Map args) throws SQLException {
 		// TODO Auto-generated method stub
-		return iQueryManager.executeInsertWithJavaObject( query,  args) ;
+		return iQueryManager.executeInsertWithJavaObject(query, args);
 	}
 
 	final public void executeQuery(String query) throws SQLException {
-		iQueryManager.executeQuery( query) ;
+		iQueryManager.executeQuery(query);
 	}
 
 	final public List executeQueryList(String query) throws SQLException {
 		// TODO Auto-generated method stub
-		return iQueryManager.executeQueryList( query) ;
+		return iQueryManager.executeQueryList(query);
 	}
 
-	final public List executeQueryList(String query, int limmit, int offset) throws SQLException 
-	{
-		return iQueryManager.executeQueryList( query,  limmit,  offset) ;
+	final public List executeQueryList(String query, int limmit, int offset) throws SQLException {
+		return iQueryManager.executeQueryList(query, limmit, offset);
 	}
 
 	final public ResultSet executeQueryResultSet(String query) throws SQLException {
 		// TODO Auto-generated method stub
-		return iQueryManager.executeQueryResultSet(query) ;
+		return iQueryManager.executeQueryResultSet(query);
 	}
 
 	final public ResultSet executeQueryResultSet(String query, Object[] args) throws SQLException {
 		// TODO Auto-generated method stub
-		return iQueryManager.executeQueryResultSet( query, args) ;
+		return iQueryManager.executeQueryResultSet(query, args);
 	}
 
 	final public void executeQueryWithArgs(String query, Object[] args) throws SQLException {
-		iQueryManager.executeQueryWithArgs( query,  args) ;
-		
+		iQueryManager.executeQueryWithArgs(query, args);
+
 	}
 
 	final public void executeQueryWithArgs(String query, Object[] args, int limmit, int offset) throws SQLException {
-		iQueryManager.executeQueryWithArgs( query,  args) ;
-		
+		iQueryManager.executeQueryWithArgs(query, args);
+
 	}
 
-	final public List executeQueryWithArgsList(String query, Object[] args, int limmit, int offset) throws SQLException {
+	final public List executeQueryWithArgsList(String query, Object[] args, int limmit, int offset)
+			throws SQLException {
 		// TODO Auto-generated method stub
-		return iQueryManager.executeQueryWithArgsList( query,  args,  limmit,  offset);
+		return iQueryManager.executeQueryWithArgsList(query, args, limmit, offset);
 	}
 
 	final public void executeUpdate(String query) throws SQLException {
-		iQueryManager.executeUpdate( query) ;
-		
+		iQueryManager.executeUpdate(query);
+
 	}
 
 	final public int executeUpdateWithArgs(String query, Map args) throws SQLException {
 		// TODO Auto-generated method stub
-		return iQueryManager.executeUpdateWithArgs( query,  args);
+		return iQueryManager.executeUpdateWithArgs(query, args);
 	}
 
 	final public Map getArgs() {
@@ -142,41 +137,36 @@ public class QueryManager implements IQueryManager {
 
 	final public String getValueAt(int aRow, int aColumn) throws SQLException {
 		// TODO Auto-generated method stub
-		return iQueryManager.getValueAt( aRow,  aColumn);
+		return iQueryManager.getValueAt(aRow, aColumn);
 	}
 
 	final public Object getValueObjectAt(int aRow, int aColumn) {
 		// TODO Auto-generated method stub
-		return iQueryManager.getValueObjectAt( aRow,  aColumn);
+		return iQueryManager.getValueObjectAt(aRow, aColumn);
 	}
 
-	final public void rollback() 
-	{
-		iQueryManager.rollback() ;
-		
+	final public void rollback() {
+		iQueryManager.rollback();
+
 	}
 
 //	final public void setResources_localization(ResourceBundle resources_localization) 
 //	{
 //		iQueryManager.setResources_localization( resources_localization) ;
 //	}
-	
 
-	final public double string2Double(String s) 
-	{
+	final public double string2Double(String s) {
 		return iQueryManager.string2Double(s);
 	}
 
-	final public int string2Integer(String s) 
-	{
-		return iQueryManager.string2Integer(s) ;
+	final public int string2Integer(String s) {
+		return iQueryManager.string2Integer(s);
 	}
 
 	final public List rows() {
 		// TODO Auto-generated method stub
 		return iQueryManager.rows();
 	}
-
 
 	final public Connection getCurrentConnection() {
 		// TODO Auto-generated method stub
@@ -187,7 +177,5 @@ public class QueryManager implements IQueryManager {
 		// TODO Auto-generated method stub
 		return iQueryManager.getSimpleDateFormat();
 	}
-
-	
 
 }

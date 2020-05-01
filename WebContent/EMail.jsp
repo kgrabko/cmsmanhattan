@@ -6,7 +6,7 @@
   response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
   request.setCharacterEncoding("UTF-8");
 %>
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <html>
 <head>
 <META HTTP-EQUIV="no-cache">
@@ -26,8 +26,8 @@ document.getElementById('webmail').submit();
 <body>
 <DIV style="display:none;"  >
 <form  id="webmail"  name="webmail" method="post"  action="webmail/login.jsp"   >
-	<input type="text"  name="user" value="<%= AuthorizationPageBeanId.getStrLogin() %>"  ></input>
-    <input type="text"  name="pass" value="<%= AuthorizationPageBeanId.getEmailPassword()  %>"  ></input>
+	<input type="text"  name="user" value="<%= authorizationPageBeanId.getStrLogin() %>"  ></input>
+    <input type="text"  name="pass" value="<%= authorizationPageBeanId.getEmailPassword()  %>"  ></input>
     
 </form >
 </DIV>

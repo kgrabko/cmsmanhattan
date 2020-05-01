@@ -189,10 +189,10 @@ document.onmouseup=new Function("dragapproved=false");
 
 
 </head>
-<jsp:useBean id="SoftPostBeanId" scope="session" class="com.cbsinc.cms.SoftPostBean" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
-<jsp:useBean id="policyBeanId" scope="session" class="com.cbsinc.cms.PolicyBean" />
-<jsp:useBean id="ProductlistBeanId" scope="session" class="com.cbsinc.cms.ProductlistBean" />
+<jsp:useBean id="publisherBeanId" scope="session" class="com.cbsinc.cms.PublisherBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="policyBeanId" scope="session" class="com.cbsinc.cms.ItemDescriptionBean" />
+<jsp:useBean id="productlistBeanId" scope="session" class="com.cbsinc.cms.ProductlistBean" />
 
 <%
 response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
@@ -215,7 +215,7 @@ request.setCharacterEncoding("UTF-8");
         <hr size="" class="netscape4" />
         <div class="pathBar">
             <span>
-               <span> <%=AuthorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
+               <span> <%=authorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
             </span>
 
         </div>
@@ -230,7 +230,7 @@ request.setCharacterEncoding("UTF-8");
     
 	<div>
     	<div class="portlet">
-	    <h5><strong><%=AuthorizationPageBeanId.getLocalization(application).getString("help")%></strong></h5>
+	    <h5><strong><%=authorizationPageBeanId.getLocalization(application).getString("help")%></strong></h5>
 	      <div class="body">
 	        <div class="portletContent odd">
 	         Эта форма для редактирования служебных страниц
@@ -253,25 +253,25 @@ request.setCharacterEncoding("UTF-8");
 
             <!-- News part -->
 
-	     <h1><%=AuthorizationPageBeanId.getLocalization(application).getString("title_common_of_form")%></h1>
+	     <h1><%=authorizationPageBeanId.getLocalization(application).getString("title_common_of_form")%></h1>
 		<br/>
 		<div class="box">
 		  <div class="body">
 		    <div >
                      <form method="post" name="postsoftform"  ACTION="Ext1ProductPost.jsp" onSubmit="return  IsFormOk()"  >
 					<DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left"  >
-					<font color='white' size='2' > &nbsp;&raquo; <%=AuthorizationPageBeanId.getLocalization(application).getString("title_form_post_full_info")%>  </font>
+					<font color='white' size='2' > &nbsp;&raquo; <%=authorizationPageBeanId.getLocalization(application).getString("title_form_post_full_info")%>  </font>
 					</DIV>
 					 <TABLE>
-                     <TR><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("title_form")%>:* </TD><TD> <input  name="softname" size="70"  value="<%= SoftPostBeanId.getStrSoftName() %>" onBlur="checkEmpty(this.value)" >
-                     <TR><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("full_information")%>:* </TD> <TD> <textarea name="fulldescription" rows="15" cols="150"  ><%=SoftPostBeanId.getProduct_fulldescription()%></textarea></TD></TR>
-                     <TR><TD></TD> <TD><input type="submit" name="Submit" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("save") %>"> <input type="reset" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("clear") %>"></TD></TR>
+                     <TR><TD><%=authorizationPageBeanId.getLocalization(application).getString("title_form")%>:* </TD><TD> <input  name="softname" size="70"  value="<%= publisherBeanId.getStrSoftName() %>" onBlur="checkEmpty(this.value)" >
+                     <TR><TD><%=authorizationPageBeanId.getLocalization(application).getString("full_information")%>:* </TD> <TD> <textarea name="fulldescription" rows="15" cols="150"  ><%=publisherBeanId.getProduct_fulldescription()%></textarea></TD></TR>
+                     <TR><TD></TD> <TD><input type="submit" name="Submit" value="<%= authorizationPageBeanId.getLocalization(application).getString("save") %>"> <input type="reset" value="<%= authorizationPageBeanId.getLocalization(application).getString("clear") %>"></TD></TR>
                      </TABLE>
 					 <input type="hidden"  name="catalog_id"  value="-11"/>
 					  <input type="hidden"  name="description"  value=""/>
   					  <input type="hidden"  name="type_id"  value="0"/>
 					 <input type="hidden"  name="save"  value="false"/>
-                     <input type="hidden"  name="portlettype_id"  value="<%= SoftPostBeanId.getPortlettype_id() %>"/>
+                     <input type="hidden"  name="portlettype_id"  value="<%= publisherBeanId.getPortlettype_id() %>"/>
                      <input type="hidden"  name="parent_id"  value="<%= policyBeanId.getProduct_id() %>"/>
                      </form>
 
@@ -284,7 +284,7 @@ request.setCharacterEncoding("UTF-8");
 	    <span class="next">
                 <a HREF = "Policy.jsp"  >
 		<strong>
-		<%=AuthorizationPageBeanId.getLocalization(application).getString("back")%>
+		<%=authorizationPageBeanId.getLocalization(application).getString("back")%>
 		</strong>
 	        </a>
 	    </span>
@@ -316,7 +316,7 @@ request.setCharacterEncoding("UTF-8");
 
 <br />
 
- <%=AuthorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
+ <%=authorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
 
 <hr size="" class="netscape4" />
 
@@ -343,7 +343,7 @@ for user netscape
 			<TR>
 				<td>
 				<iframe id="dialog" src="SelectImage.jsp" width="390" height="400" align="center">
-				<%=AuthorizationPageBeanId.getLocalization(application).getString("browser_not_support_frame")%>
+				<%=authorizationPageBeanId.getLocalization(application).getString("browser_not_support_frame")%>
 				</iframe>
 				</td>
 			</TR>

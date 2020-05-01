@@ -9,7 +9,6 @@ import com.cbsinc.cms.card.RateInfo;
 
 public class CkeckCurrency implements java.io.Serializable {
 
-	
 	transient private static final long serialVersionUID = 8904811168576411593L;
 
 	/**
@@ -18,23 +17,20 @@ public class CkeckCurrency implements java.io.Serializable {
 	 * </p>
 	 * <p>
 	 * Description: System building web application develop by Konstantin Grabko.
-	 * Konstantin Grabko is Owner and author this code.
-	 * You can not use it and you cannot change it without written permission from Konstantin Grabko
-	 * Email: konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
+	 * Konstantin Grabko is Owner and author this code. You can not use it and you
+	 * cannot change it without written permission from Konstantin Grabko Email:
+	 * konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
 	 * </p>
 	 * <p>
 	 * Copyright: Copyright (c) 2002-2014
 	 * </p>
 	 * <p>
-	 * Company: CENTER BUSINESS SOLUTIONS INC 
+	 * Company: CENTER BUSINESS SOLUTIONS INC
 	 * </p>
 	 * 
 	 * @author Konstantin Grabko
 	 * @version 1.0
 	 */
-
-
-
 
 	static private Logger log = Logger.getLogger(CkeckCurrency.class);
 
@@ -46,32 +42,23 @@ public class CkeckCurrency implements java.io.Serializable {
 
 	public CkeckCurrency() {
 		java.util.Timer timer = new java.util.Timer();
-		////////////////////timer.scheduleAtFixedRate(t, 0, 600000);
+		//////////////////// timer.scheduleAtFixedRate(t, 0, 600000);
 	}
 
-/*
-	public void initCurrencyHash() {
-		CurrencyHash.set("USD", getCurrency(getStrFullDate(), "USD"));
-		CurrencyHash.set("EURO", getCurrency(getStrFullDate(), "EURO"));
-	}
-
-	java.util.TimerTask t = new java.util.TimerTask() {
-		public void run() {
-			try {
-				CurrencyHash.set("USD", getCurrency(getStrFullDate(), "USD"));
-				CurrencyHash.set("EURO", getCurrency(getStrFullDate(), "EURO"));
-			} catch (Exception ex1) {
-				System.err.println("qq");
-				log.error(ex1);
-				log.debug(ex1);
-			}
-
-		}
-	};
-*/
+	/*
+	 * public void initCurrencyHash() { CurrencyHash.set("USD",
+	 * getCurrency(getStrFullDate(), "USD")); CurrencyHash.set("EURO",
+	 * getCurrency(getStrFullDate(), "EURO")); }
+	 * 
+	 * java.util.TimerTask t = new java.util.TimerTask() { public void run() { try {
+	 * CurrencyHash.set("USD", getCurrency(getStrFullDate(), "USD"));
+	 * CurrencyHash.set("EURO", getCurrency(getStrFullDate(), "EURO")); } catch
+	 * (Exception ex1) { System.err.println("qq"); log.error(ex1); log.debug(ex1); }
+	 * 
+	 * } };
+	 */
 	java.util.Date getShortDate() {
-		Calendar objCalendar1 = Calendar.getInstance(TimeZone
-				.getTimeZone("GMT+3:00"), new Locale("ru"));
+		Calendar objCalendar1 = Calendar.getInstance(TimeZone.getTimeZone("GMT+3:00"), new Locale("ru"));
 		int intDay = objCalendar1.get(Calendar.DATE);
 		int intEMonth = objCalendar1.get(Calendar.MONTH);
 		int intYear = objCalendar1.get(Calendar.YEAR);
@@ -80,8 +67,7 @@ public class CkeckCurrency implements java.io.Serializable {
 	}
 
 	String getStrFullDate() {
-		Calendar objCalendar = Calendar.getInstance(TimeZone
-				.getTimeZone("GMT+3:00"), new Locale("ru"));
+		Calendar objCalendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+3:00"), new Locale("ru"));
 		int intDay = objCalendar.get(Calendar.DATE);
 		String strDay = "" + intDay;
 		if (strDay.length() == 1)
@@ -104,8 +90,7 @@ public class CkeckCurrency implements java.io.Serializable {
 		Rate rate = new Rate();
 		RateInfo rateInfo;
 		try {
-			rateInfo = rate.getRateInfo(const_strSHOP_ID, const_strLOGIN,
-					const_strPASSWORD, strCURRENCY, strDATE);
+			rateInfo = rate.getRateInfo(const_strSHOP_ID, const_strLOGIN, const_strPASSWORD, strCURRENCY, strDATE);
 			if (rateInfo == null)
 				return objCur;
 			objCur.setCode(strCURRENCY);

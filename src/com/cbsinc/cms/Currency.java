@@ -10,25 +10,21 @@ public class Currency implements java.io.Serializable {
 	 * </p>
 	 * <p>
 	 * Description: System building web application develop by Konstantin Grabko.
-	 * Konstantin Grabko is Owner and author this code.
-	 * You can not use it and you cannot change it without written permission from Konstantin Grabko
-	 * Email: konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
+	 * Konstantin Grabko is Owner and author this code. You can not use it and you
+	 * cannot change it without written permission from Konstantin Grabko Email:
+	 * konstantin.grabko@yahoo.com or konstantin.grabko@gmail.com
 	 * </p>
 	 * <p>
 	 * Copyright: Copyright (c) 2002-2014
 	 * </p>
 	 * <p>
-	 * Company: CENTER BUSINESS SOLUTIONS INC 
+	 * Company: CENTER BUSINESS SOLUTIONS INC
 	 * </p>
 	 * 
 	 * @author Konstantin Grabko
 	 * @version 1.0
 	 */
 
-
-	
-	
-	
 	public String getCurrency_id() {
 		return currency_id;
 	}
@@ -53,12 +49,12 @@ public class Currency implements java.io.Serializable {
 		this.currency_desc = currency_desc;
 	}
 
-	private String currency_id = "" ;
-	
-	private String currency_labe = "" ;
-	
-	private String currency_desc = "" ;
- 
+	private String currency_id = "";
+
+	private String currency_labe = "";
+
+	private String currency_desc = "";
+
 	private Float rate = Float.valueOf(0);
 
 	private String code = "";
@@ -68,21 +64,22 @@ public class Currency implements java.io.Serializable {
 	public Currency() {
 	}
 
-	public Currency(String currency_id, String currency_labe , String currency_desc ,  float rate, String code, String date) {
+	public Currency(String currency_id, String currency_labe, String currency_desc, float rate, String code,
+			String date) {
 		this.rate = rate;
 		this.code = code;
 		this.date = date;
-		this.currency_id = currency_id ;
-		this.currency_labe = currency_labe ;
-		this.currency_desc = currency_desc ;
+		this.currency_id = currency_id;
+		this.currency_labe = currency_labe;
+		this.currency_desc = currency_desc;
 	}
 
-	public Currency(float rate, String code, String date ) {
+	public Currency(float rate, String code, String date) {
 		this.rate = rate;
 		this.code = code;
 		this.date = date;
 	}
-	
+
 	public float getRate() {
 		return rate;
 	}

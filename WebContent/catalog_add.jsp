@@ -81,20 +81,20 @@ return true ;
 
 
 </head>
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
-<jsp:useBean id="catalog_addBean" scope="session" class="com.cbsinc.cms.Catalog_addBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="catalogAddBeanId" scope="session" class="com.cbsinc.cms.CatalogAddBean" />
 <%
 request.setCharacterEncoding("UTF-8");
-//catalog_addBean.setParent_id(catalog_listBean.getParent_id());
-//catalog_addBean.setSite_id(AuthorizationPageBeanId.getSite_id());
+//catalogAddBeanId.setParent_id(catalog_listBean.getParent_id());
+//catalogAddBeanId.setSite_id(authorizationPageBeanId.getSite_id());
 if( request.getParameter("name") != null)
 {
-catalog_addBean.setName(  request.getParameter("name"));
+catalogAddBeanId.setName(  request.getParameter("name"));
 }
 
 if(request.getMethod().toUpperCase().compareTo("POST") == 0)
 {
-catalog_addBean.addCatalog(AuthorizationPageBeanId);
+catalogAddBeanId.addCatalog(authorizationPageBeanId);
 response.sendRedirect("catalog_list.jsp" );
 }
 %>
@@ -112,7 +112,7 @@ response.sendRedirect("catalog_list.jsp" );
         <hr size="" class="netscape4" />
         <div class="pathBar">
             <span>
-                <span> <%=AuthorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
+                <span> <%=authorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
             </span>
 
         </div>
@@ -126,23 +126,23 @@ response.sendRedirect("catalog_list.jsp" );
             <td class="left">
     <div class="box">
 
-        <h5><%=AuthorizationPageBeanId.getLocalization(application).getString("enter_on_site")%></h5>
+        <h5><%=authorizationPageBeanId.getLocalization(application).getString("enter_on_site")%></h5>
 
         <div class="body">
 
             <div class="content odd">
                 <form action="Authorization.jsp"   method="post">
 
-                    <strong><%=AuthorizationPageBeanId.getLocalization(application).getString("username")%></strong> <br />
+                    <strong><%=authorizationPageBeanId.getLocalization(application).getString("username")%></strong> <br />
 
-                     <INPUT  title="<%= AuthorizationPageBeanId.getLocalization(application).getString("username") %>" tabindex="10001" SIZE="12" AUTOCOMPLETE="off" TYPE="TEXT" NAME="Login" >
+                     <INPUT  title="<%= authorizationPageBeanId.getLocalization(application).getString("username") %>" tabindex="10001" SIZE="12" AUTOCOMPLETE="off" TYPE="TEXT" NAME="Login" >
         	     </INPUT>
 
                     <br />
 
-                    <strong><%=AuthorizationPageBeanId.getLocalization(application).getString("password")%></strong>
+                    <strong><%=authorizationPageBeanId.getLocalization(application).getString("password")%></strong>
 		    <br />
-		    <INPUT title="<%= AuthorizationPageBeanId.getLocalization(application).getString("password") %>" tabindex="10002"  SIZE="12" AUTOCOMPLETE="off" TYPE="PASSWORD" NAME="Passwd1" ></INPUT>
+		    <INPUT title="<%= authorizationPageBeanId.getLocalization(application).getString("password") %>" tabindex="10002"  SIZE="12" AUTOCOMPLETE="off" TYPE="PASSWORD" NAME="Passwd1" ></INPUT>
                     <br />
                     <br />
 
@@ -155,7 +155,7 @@ response.sendRedirect("catalog_list.jsp" );
             <div class="content even">
                 <a href="">
                    <img src="xsl/www.gvidons.com/img/user.gif" alt="Link icon" title="Link icon" height="15" width="10" border="0" />
-                   <%=AuthorizationPageBeanId.getLocalization(application).getString("send_password_by_email")%>
+                   <%=authorizationPageBeanId.getLocalization(application).getString("send_password_by_email")%>
                 </a>
             </div>
         </div>
@@ -195,7 +195,7 @@ response.sendRedirect("catalog_list.jsp" );
 	    <span class="next">
                 <a HREF = "#" onClick="javascript:history.back()"  >
 		<strong>
-		<%=AuthorizationPageBeanId.getLocalization(application).getString("back")%>
+		<%=authorizationPageBeanId.getLocalization(application).getString("back")%>
 		</strong>
 	        </a>
 	    </span>
@@ -215,7 +215,7 @@ response.sendRedirect("catalog_list.jsp" );
 <div class="footer">
 <br />
 
- <%=AuthorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
+ <%=authorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
 
 <hr size="" class="netscape4" />
 

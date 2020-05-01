@@ -9,11 +9,11 @@
   request.setCharacterEncoding("UTF-8");
 %>
 <jsp:useBean id="domainList" scope="request" class="java.util.LinkedList" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <html>
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><%=AuthorizationPageBeanId.getLocalization(application).getString("find_domain")%></title>
+<title><%=authorizationPageBeanId.getLocalization(application).getString("find_domain")%></title>
 <LINK id="style2" rel="stylesheet" type="text/css" href="xsl/shops.online-spb.com/style2.css">
 <SCRIPT type="text/javascript" src="xsl/shops.online-spb.com/common.js"></SCRIPT>
 </head>
@@ -32,7 +32,7 @@
 <TD vAlign="top" Align="left" width="20%"></TD><TD vAlign="center" Align="right" width="80%">
 <form name="searchform" action="Productlist.jsp">
 <br>
-<input id="search_value" name="search_value" type="text" size="20" alt="<%= AuthorizationPageBeanId.getLocalization(application).getString("find_good_by_name") %>" title="<%= AuthorizationPageBeanId.getLocalization(application).getString("find_good_by_name") %>" tabindex="30001" value=""><input class="searchButton" type="submit" size="20" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("Search") %>" tabindex="30002">
+<input id="search_value" name="search_value" type="text" size="20" alt="<%= authorizationPageBeanId.getLocalization(application).getString("find_good_by_name") %>" title="<%= authorizationPageBeanId.getLocalization(application).getString("find_good_by_name") %>" tabindex="30001" value=""><input class="searchButton" type="submit" size="20" value="<%= authorizationPageBeanId.getLocalization(application).getString("Search") %>" tabindex="30002">
 </form>
 </TD>
 </TR>
@@ -41,11 +41,11 @@
 </div>
 <hr size="" class="netscape4">
 <div class="tabs">
-<A href="Productlist.jsp?catalog_id=-2" class="plain"><font size="2"><%=AuthorizationPageBeanId.getLocalization(application).getString("main_page")%></font></A><A href="Productlist.jsp?catalog_id=-2" class="plain"><font size="2"><%=AuthorizationPageBeanId.getLocalization(application).getString("populyar_page")%></font></A><a href="webmail/" class="plain"><font size="2">mail</font></a><A href="Productlist.jsp?action=logoff" class="plain"><font size="2"><%=AuthorizationPageBeanId.getLocalization(application).getString("exit")%></font></A>
+<A href="Productlist.jsp?catalog_id=-2" class="plain"><font size="2"><%=authorizationPageBeanId.getLocalization(application).getString("main_page")%></font></A><A href="Productlist.jsp?catalog_id=-2" class="plain"><font size="2"><%=authorizationPageBeanId.getLocalization(application).getString("populyar_page")%></font></A><a href="webmail/" class="plain"><font size="2">mail</font></a><A href="Productlist.jsp?action=logoff" class="plain"><font size="2"><%=authorizationPageBeanId.getLocalization(application).getString("exit")%></font></A>
 </div>
 <div class="personalBar">
 <a href="Authorization.jsp"><img src="images/user.gif" alt="Link icon" title="Link icon" height="15" width="10" border="0">
-					<%=AuthorizationPageBeanId.getLocalization(application).getString("login")%>: <%=AuthorizationPageBeanId.getStrLogin()%></a>
+					<%=authorizationPageBeanId.getLocalization(application).getString("login")%>: <%=authorizationPageBeanId.getStrLogin()%></a>
 </div>
 <hr size="" class="netscape4">
 </div>
@@ -64,21 +64,21 @@
 <div class="body">
 <div class="odd">
 <form action="Authorization.jsp" method="post">
-<strong><%=AuthorizationPageBeanId.getLocalization(application).getString("username")%></strong>
+<strong><%=authorizationPageBeanId.getLocalization(application).getString("username")%></strong>
 <br>
-<INPUT title="<%= AuthorizationPageBeanId.getLocalization(application).getString("username") %>" tabindex="10001" SIZE="12" AUTOCOMPLETE="off" TYPE="TEXT" NAME="Login" value="newuser">
+<INPUT title="<%= authorizationPageBeanId.getLocalization(application).getString("username") %>" tabindex="10001" SIZE="12" AUTOCOMPLETE="off" TYPE="TEXT" NAME="Login" value="newuser">
 <br>
-<strong><%=AuthorizationPageBeanId.getLocalization(application).getString("password")%></strong>
+<strong><%=authorizationPageBeanId.getLocalization(application).getString("password")%></strong>
 <br>
-<INPUT title="<%= AuthorizationPageBeanId.getLocalization(application).getString("password") %>" tabindex="10002" SIZE="12" AUTOCOMPLETE="off" TYPE="PASSWORD" NAME="Passwd1">
+<INPUT title="<%= authorizationPageBeanId.getLocalization(application).getString("password") %>" tabindex="10002" SIZE="12" AUTOCOMPLETE="off" TYPE="PASSWORD" NAME="Passwd1">
 <br>
 <br>
-<input type="submit" name="submit" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("login") %>" tabindex="10003" class="context searchButton">
+<input type="submit" name="submit" value="<%= authorizationPageBeanId.getLocalization(application).getString("login") %>" tabindex="10003" class="context searchButton">
 </form>
 </div>
 <div class="even">
 <a href=""><img src="xsl/shops.online-spb.com/images/linkTransparent.gif">
-                   <%=AuthorizationPageBeanId.getLocalization(application).getString("send_password_by_email")%>
+                   <%=authorizationPageBeanId.getLocalization(application).getString("send_password_by_email")%>
                 </a>
 </div>
 </div>
@@ -99,7 +99,7 @@
 <center>
 <table    border="0" cellspacing="0" cellpadding="5" >
 					<tr>
-						<td colspan="2">&nbsp;<br/><font size="3"><b> <%=AuthorizationPageBeanId.getLocalization(application).getString("find_domain")%> </b></font><font size="2"></font></td>
+						<td colspan="2">&nbsp;<br/><font size="3"><b> <%=authorizationPageBeanId.getLocalization(application).getString("find_domain")%> </b></font><font size="2"></font></td>
                     </tr>
                     <tr>
 						<td colspan="2">&nbsp;<br/><font color="red"><%=request.getAttribute("message") == null?"":request.getAttribute("message")%></font></td>
@@ -108,7 +108,7 @@
 						<td width="400" align="center">
 						<form action="Domain.jsp"  method="post" >
 						<input type="text" size="45" name="domain" value="<%= request.getAttribute("domain") == null?"":request.getAttribute("domain") %>"  />  
-						<input type="submit"  name="submit" class="context searchButton" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("do_find") %>" />  						
+						<input type="submit"  name="submit" class="context searchButton" value="<%= authorizationPageBeanId.getLocalization(application).getString("do_find") %>" />  						
 						</form>
 						</td>
 					</tr>
@@ -130,14 +130,14 @@
 						%>
 						
 						<%
-												if(AuthorizationPageBeanId.getIntLevelUp() != 0){
+												if(authorizationPageBeanId.getIntLevelUp() != 0){
 												%>
-						<form action="Domain.jsp"  method="post" ><input type="hidden" name="regdomain" value="<%= request.getAttribute("domain") == null?"":request.getAttribute("domain") %>"  /><input type="submit"  name="submit" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("send_application") %>" /> </form>
+						<form action="Domain.jsp"  method="post" ><input type="hidden" name="regdomain" value="<%= request.getAttribute("domain") == null?"":request.getAttribute("domain") %>"  /><input type="submit"  name="submit" value="<%= authorizationPageBeanId.getLocalization(application).getString("send_application") %>" /> </form>
 						<%
 						} else {
 						%>
-						<font size="3" color="red" ><%=AuthorizationPageBeanId.getLocalization(application).getString("user_not_autorization")%></font>
-						<form action="Domain.jsp"  method="post" ><input type="hidden" name="regdomain" value="<%= request.getAttribute("domain") == null?"":request.getAttribute("domain") %>"  /><input type="submit" disabled="disabled"  name="submit" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("send_application") %>" /> </form>
+						<font size="3" color="red" ><%=authorizationPageBeanId.getLocalization(application).getString("user_not_autorization")%></font>
+						<form action="Domain.jsp"  method="post" ><input type="hidden" name="regdomain" value="<%= request.getAttribute("domain") == null?"":request.getAttribute("domain") %>"  /><input type="submit" disabled="disabled"  name="submit" value="<%= authorizationPageBeanId.getLocalization(application).getString("send_application") %>" /> </form>
 						<%
 						}
 						%>
@@ -166,14 +166,14 @@
 </div>
 <div class="listingBar">
 		<span class="next"><a HREF="#" onClick="javascript:history.back()"><strong>	
-		<%=AuthorizationPageBeanId.getLocalization(application).getString("back")%>
+		<%=authorizationPageBeanId.getLocalization(application).getString("back")%>
 		</strong></a></span>
 </div>
 </td><td class="right">
 <TABLE style="height: 20px" cellSpacing="4" cellPadding="0" width="159" class="bacgraundBoxTitle">
 <TBODY>
 <TR>
-<TD vAlign="center"><FONT color="white"><B><%=AuthorizationPageBeanId.getLocalization(application).getString("price_of_zone")%></B></FONT></TD>
+<TD vAlign="center"><FONT color="white"><B><%=authorizationPageBeanId.getLocalization(application).getString("price_of_zone")%></B></FONT></TD>
 </TR>
 </TBODY>
 </TABLE>
@@ -183,7 +183,7 @@
 <TABLE >
 <TBODY>
 <TR>
-<TD > <!-- <%=AuthorizationPageBeanId.getLocalization(application).getString("zone_of_domain")%>  --> all domain zones </TD>   <TD ><!-- <%=AuthorizationPageBeanId.getLocalization(application).getString("rub_and_year")%>  --> </TD>
+<TD > <!-- <%=authorizationPageBeanId.getLocalization(application).getString("zone_of_domain")%>  --> all domain zones </TD>   <TD ><!-- <%=authorizationPageBeanId.getLocalization(application).getString("rub_and_year")%>  --> </TD>
 </TR>
 <TR>
 <TD >.com </TD> <TD ></TD>

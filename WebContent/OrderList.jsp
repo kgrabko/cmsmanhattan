@@ -1,17 +1,17 @@
 <%@ page errorPage="error.jsp" %>
 <jsp:useBean id="orderListBeanId" scope="session" class="com.cbsinc.cms.OrderListBean" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <%@page import="java.util.PropertyResourceBundle,java.util.ResourceBundle,java.io.*"%>
 
 <%
 response.setCharacterEncoding("UTF-8");
 response.setContentType("text/xml");
 String url ;
-String xsltUrl =  "http://" + request.getServerName() +  ":"+request.getServerPort() + request.getContextPath() + "/xsl/" +  AuthorizationPageBeanId.getSite_dir() + "/"  +  AuthorizationPageBeanId.getLocale() + "/" + "orderlist.xsl" ; 
-String xsltUrl_default = "http://" + request.getServerName() +  ":"+request.getServerPort() + request.getContextPath() + "/xsl/" +  AuthorizationPageBeanId.getSite_dir() + "/" + "orderlist.xsl" ; 
+String xsltUrl =  "http://" + request.getServerName() +  ":"+request.getServerPort() + request.getContextPath() + "/xsl/" +  authorizationPageBeanId.getSite_dir() + "/"  +  authorizationPageBeanId.getLocale() + "/" + "orderlist.xsl" ; 
+String xsltUrl_default = "http://" + request.getServerName() +  ":"+request.getServerPort() + request.getContextPath() + "/xsl/" +  authorizationPageBeanId.getSite_dir() + "/" + "orderlist.xsl" ; 
 
-String xsltpath =  "xsl/" +  AuthorizationPageBeanId.getSite_dir() + "/"  +  AuthorizationPageBeanId.getLocale() + "/" + "orderlist.xsl" ; 
-String xsltpath_default = "xsl/" +  AuthorizationPageBeanId.getSite_dir() + "/" + "orderlist.xsl" ; 
+String xsltpath =  "xsl/" +  authorizationPageBeanId.getSite_dir() + "/"  +  authorizationPageBeanId.getLocale() + "/" + "orderlist.xsl" ; 
+String xsltpath_default = "xsl/" +  authorizationPageBeanId.getSite_dir() + "/" + "orderlist.xsl" ; 
 
 xsltpath = request.getServletContext().getRealPath("/" +xsltpath);
 xsltpath_default = request.getServletContext().getRealPath("/" +xsltpath_default);
@@ -39,18 +39,18 @@ printWriter.println(tmp);
    <version>1.0</version>
    <name>GBS ltd.</name>
 
-   <title><%=  AuthorizationPageBeanId.getHost() %></title>
-   <subject_site><%=  AuthorizationPageBeanId.getNick_site() %></subject_site>
-   <site_name><%=  AuthorizationPageBeanId.getNick_site() %></site_name>
-   <host><%=  AuthorizationPageBeanId.getSite_dir() %></host>
-   <domain><%=  AuthorizationPageBeanId.getHost() %></domain>
-   <login><%= AuthorizationPageBeanId.getStrLogin() %></login>
-   <role_id><%=  AuthorizationPageBeanId.getIntLevelUp() %></role_id>
+   <title><%=  authorizationPageBeanId.getHost() %></title>
+   <subject_site><%=  authorizationPageBeanId.getNick_site() %></subject_site>
+   <site_name><%=  authorizationPageBeanId.getNick_site() %></site_name>
+   <host><%=  authorizationPageBeanId.getSite_dir() %></host>
+   <domain><%=  authorizationPageBeanId.getHost() %></domain>
+   <login><%= authorizationPageBeanId.getStrLogin() %></login>
+   <role_id><%=  authorizationPageBeanId.getIntLevelUp() %></role_id>
    <passwdord></passwdord>
    <shoping_url>Productlist.jsp</shoping_url>
-   <message><%= AuthorizationPageBeanId.getStrMessage() %></message>
+   <message><%= authorizationPageBeanId.getStrMessage() %></message>
    <shoping_url>Productlist.jsp</shoping_url>
-   <balans><%=  orderListBeanId.getStrBalans(AuthorizationPageBeanId.getIntUserID()) %></balans>
+   <balans><%=  orderListBeanId.getStrBalans(authorizationPageBeanId.getIntUserID()) %></balans>
    <to_navigator>wCatalog.jsp</to_navigator>
    <to_navigator_location>NavigatorLocation.jsp</to_navigator_location>
    <to_account_history>AccountHistory.jsp</to_account_history>

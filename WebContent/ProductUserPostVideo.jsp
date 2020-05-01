@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
-<jsp:useBean id="SoftPostBeanId" scope="session" class="com.cbsinc.cms.SoftPostBean" />
-<jsp:useBean id="catalog_listBean" scope="session" class="com.cbsinc.cms.Catalog_listBean" />
-<jsp:useBean id="AuthorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<jsp:useBean id="publisherBeanId" scope="session" class="com.cbsinc.cms.PublisherBean" />
+<jsp:useBean id="catalogListBeanId" scope="session" class="com.cbsinc.cms.CatalogListBean" />
+<jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <%
   response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
   response.setHeader("Pragma","no-cache"); //HTTP 1.0
@@ -93,7 +93,7 @@ function switchWindowSearch()
 {
 				windowsearch_hide = !windowsearch_hide;
 				document.getElementById("search_cre").src =  (windowsearch_hide ? "images/expand.gif" : "images/collapse.gif");
-				document.getElementById("search_cre").title =  (windowsearch_hide ? "<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= AuthorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
+				document.getElementById("search_cre").title =  (windowsearch_hide ? "<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= authorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
 				document.getElementById("windowsearch").style.display = windowsearch_hide ? "none" : "";
 }
 
@@ -104,7 +104,7 @@ function switchWindowReport()
 {
 				window_urlreport_hide = !window_urlreport_hide;
 				document.getElementById("urlreport_cre").src =  (window_urlreport_hide ? "images/expand.gif" : "images/collapse.gif");
-				document.getElementById("urlreport_cre").title =  (window_urlreport_hide ? "<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= AuthorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
+				document.getElementById("urlreport_cre").title =  (window_urlreport_hide ? "<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= authorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
 				document.getElementById("window_urlreport").style.display = window_urlreport_hide ? "none" : "";
 }
 
@@ -115,7 +115,7 @@ function switchWindowInputForm()
 {
 				window_input_form_hide = !window_input_form_hide;
 				document.getElementById("input_form").src =  (window_input_form_hide ? "images/expand.gif" : "images/collapse.gif");
-				document.getElementById("input_form").title =  (window_input_form_hide ? "<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= AuthorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
+				document.getElementById("input_form").title =  (window_input_form_hide ? "<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= authorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
 				document.getElementById("window_input_form").style.display = window_input_form_hide ? "none" : "";
 				if(!windowsearch_hide)  switchWindowSearch();
 }
@@ -127,7 +127,7 @@ function switchWindowSwitchForum()
 {
 				window_forum_hide = !window_forum_hide;
 				document.getElementById("switch_forum").src =  (window_forum_hide ? "images/expand.gif" : "images/collapse.gif");
-				document.getElementById("switch_forum").title =  (window_forum_hide ? "<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= AuthorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
+				document.getElementById("switch_forum").title =  (window_forum_hide ? "<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= authorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
 				document.getElementById("window_switch_forum").style.display = window_forum_hide ? "none" : "";
 				if(!window_input_form_hide)switchWindowInputForm();
 }
@@ -138,7 +138,7 @@ function switchWindowGenCode()
 {
 				window_gencode_hide = !window_gencode_hide;
 				document.getElementById("gencode").src =  (window_gencode_hide ? "images/expand.gif" : "images/collapse.gif");
-				document.getElementById("gencode").title =  (window_gencode_hide ? "<%= AuthorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= AuthorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
+				document.getElementById("gencode").title =  (window_gencode_hide ? "<%= authorizationPageBeanId.getLocalization(application).getString("Expand") %>" : "<%= authorizationPageBeanId.getLocalization(application).getString("Collapse") %>");
 				document.getElementById("window_gencode").style.display = window_gencode_hide ? "none" : "";
 				if(!window_forum_hide)switchWindowSwitchForum();
 }
@@ -789,7 +789,7 @@ function parseMessages(responseXML)
 
         <div class="pathBar">
             <span>
-                <span> <%=AuthorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
+                <span> <%=authorizationPageBeanId.getLocalization(application).getString("control_of_site")%> </span>
             </span>
 
         </div>
@@ -812,22 +812,22 @@ function parseMessages(responseXML)
 
             <!-- News part -->
 
-	    <h1><%=AuthorizationPageBeanId.getLocalization(application).getString("music_form_for_upload")%> </h1>
+	    <h1><%=authorizationPageBeanId.getLocalization(application).getString("music_form_for_upload")%> </h1>
 
 		
 		<br/>
 	    <DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left"  >
-				<font color='white' size='2' > &nbsp;&raquo; <%=AuthorizationPageBeanId.getLocalization(application).getString("music_from_your_info_will_save_in_current_section")%> </font>
+				<font color='white' size='2' > &nbsp;&raquo; <%=authorizationPageBeanId.getLocalization(application).getString("music_from_your_info_will_save_in_current_section")%> </font>
 		</DIV>
 		<div class='box'>
 		<div class='body'>
-		<div>&nbsp; <%=AuthorizationPageBeanId.getLocalization(application).getString("pre_status_description")%>&raquo; 
-		<%=catalog_listBean.getCatalogUrlPathMain(AuthorizationPageBeanId)%>
+		<div>&nbsp; <%=authorizationPageBeanId.getLocalization(application).getString("pre_status_description")%>&raquo; 
+		<%=catalogListBeanId.getCatalogUrlPathMain(authorizationPageBeanId)%>
 		</div>
 		</div>
 		</div>
 		<br/>
-		<h1><%=AuthorizationPageBeanId.getLocalization(application).getString("music_form_describe_extend_info_for_music")%></h1>
+		<h1><%=authorizationPageBeanId.getLocalization(application).getString("music_form_describe_extend_info_for_music")%></h1>
 		<br/>
         <form method="post" name="postsoftform"  ACTION="ProductUserPostVideo.jsp" onSubmit="return  IsFormOk()"  >
 		<br/>
@@ -836,26 +836,26 @@ function parseMessages(responseXML)
 		  <div class="body">
 		    <div >
 		    <DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left"  >
-				<font color='white' size='2' > &nbsp;&raquo; <%=AuthorizationPageBeanId.getLocalization(application).getString("music_form_describe_extend_field_for_music_info")%> </font>
+				<font color='white' size='2' > &nbsp;&raquo; <%=authorizationPageBeanId.getLocalization(application).getString("music_form_describe_extend_field_for_music_info")%> </font>
 			</DIV>
                      <TABLE>
-		             <TR><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("title_form")%>:* </TD><TD> <input  name="softname" size="20"  value="<%= SoftPostBeanId.getStrSoftName() %>" onBlur="checkEmpty(this.value)" >
-                     <%=AuthorizationPageBeanId.getLocalization(application).getString("selected_section")%>:*<%=SoftPostBeanId.getComboBoxAutoSubmit("catalog_id", AuthorizationPageBeanId.getCatalog_id() ,"select catalog_id , lable   from catalog   where  active = true and parent_id = " + AuthorizationPageBeanId.getCatalogParent_id() )%>
-					 <input type="hidden"  name="softname2" size="40"  value="<%= SoftPostBeanId.getStrSoftName2() %>"  >
-                     <TR><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("upload_small_image")%>:* </TD> <TD><input  name="imagename"  disabled="disabled" size="20" value="<%= SoftPostBeanId.getImgname() %>" ><input type="button" name="newimage" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("new_small_image") %>"   onclick="dwindow('NewSmallImage.jsp'); return false;"  ><input type="button" name="selectimage" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("select_small_image") %>" onclick="dwindow('SelectImage.jsp'); return false;" ><input type="hidden"  name="image_id" size="20" value="<%= SoftPostBeanId.getImage_id() %>" ></TD></TR>
+		             <TR><TD><%=authorizationPageBeanId.getLocalization(application).getString("title_form")%>:* </TD><TD> <input  name="softname" size="20"  value="<%= publisherBeanId.getStrSoftName() %>" onBlur="checkEmpty(this.value)" >
+                     <%=authorizationPageBeanId.getLocalization(application).getString("selected_section")%>:*<%=publisherBeanId.getComboBoxAutoSubmit("catalog_id", authorizationPageBeanId.getCatalog_id() ,"select catalog_id , lable   from catalog   where  active = true and parent_id = " + authorizationPageBeanId.getCatalogParent_id() )%>
+					 <input type="hidden"  name="softname2" size="40"  value="<%= publisherBeanId.getStrSoftName2() %>"  >
+                     <TR><TD><%=authorizationPageBeanId.getLocalization(application).getString("upload_small_image")%>:* </TD> <TD><input  name="imagename"  disabled="disabled" size="20" value="<%= publisherBeanId.getImgname() %>" ><input type="button" name="newimage" value="<%= authorizationPageBeanId.getLocalization(application).getString("new_small_image") %>"   onclick="dwindow('NewSmallImage.jsp'); return false;"  ><input type="button" name="selectimage" value="<%= authorizationPageBeanId.getLocalization(application).getString("select_small_image") %>" onclick="dwindow('SelectImage.jsp'); return false;" ><input type="hidden"  name="image_id" size="20" value="<%= publisherBeanId.getImage_id() %>" ></TD></TR>
                      <!-- <TR><TD>Цена:* </TD> <TD><input  name="softcost" size="20" value="0" onBlur="checkNumber(this.value)"  ></TD></TR>  -->
-                     <TR><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("short_info")%> :* </TD> <TD> <textarea name="description" rows="10" cols="70"  ><%=SoftPostBeanId.getStrSoftDescription()%></textarea></TD></TR>
-                     <TR><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("video_in_flv_format")%>: :* </TD> <TD><input  name="bigimagename" disabled="disabled" size="20" value="<%= SoftPostBeanId.getBigimgname() %>" ><input type="button" name="newbig_image" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("upload") %>"  onclick="dwindow('NewVideoClip.jsp'); return false;" ><input type="button" name="selectbig_image" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("select_uploaded_video") %>" image" onclick="dwindow('SelectBigImage.jsp'); return false;" ><input type="hidden"  name="bigimage_id" size="20" value="<%= SoftPostBeanId.getBigimage_id() %>" ></TD></TR>
-                     <TR><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("full_information")%>:* </TD> <TD> <textarea name="fulldescription" rows="10" cols="70"  ><%=SoftPostBeanId.getProduct_fulldescription()%></textarea></TD></TR>
-                     <TR><TD><%=AuthorizationPageBeanId.getLocalization(application).getString("attache_video_file")%>: :* </TD> <TD><input  name="filename" disabled="disabled"  size="20" value="<%= SoftPostBeanId.getFilename() %>" ><input type="button" name="newfile" value="New File" onclick="dwindow('File1.html')" ><input type="button" name="selectfile" value="select file" onclick="dwindow('SelectFile.jsp')" ><input type="hidden"  name="file_id" size="20" value="<%= SoftPostBeanId.getFile_id() %>" ></TD></TR>
+                     <TR><TD><%=authorizationPageBeanId.getLocalization(application).getString("short_info")%> :* </TD> <TD> <textarea name="description" rows="10" cols="70"  ><%=publisherBeanId.getStrSoftDescription()%></textarea></TD></TR>
+                     <TR><TD><%=authorizationPageBeanId.getLocalization(application).getString("video_in_flv_format")%>: :* </TD> <TD><input  name="bigimagename" disabled="disabled" size="20" value="<%= publisherBeanId.getBigimgname() %>" ><input type="button" name="newbig_image" value="<%= authorizationPageBeanId.getLocalization(application).getString("upload") %>"  onclick="dwindow('NewVideoClip.jsp'); return false;" ><input type="button" name="selectbig_image" value="<%= authorizationPageBeanId.getLocalization(application).getString("select_uploaded_video") %>" image" onclick="dwindow('SelectBigImage.jsp'); return false;" ><input type="hidden"  name="bigimage_id" size="20" value="<%= publisherBeanId.getBigimage_id() %>" ></TD></TR>
+                     <TR><TD><%=authorizationPageBeanId.getLocalization(application).getString("full_information")%>:* </TD> <TD> <textarea name="fulldescription" rows="10" cols="70"  ><%=publisherBeanId.getProduct_fulldescription()%></textarea></TD></TR>
+                     <TR><TD><%=authorizationPageBeanId.getLocalization(application).getString("attache_video_file")%>: :* </TD> <TD><input  name="filename" disabled="disabled"  size="20" value="<%= publisherBeanId.getFilename() %>" ><input type="button" name="newfile" value="New File" onclick="dwindow('File1.html')" ><input type="button" name="selectfile" value="select file" onclick="dwindow('SelectFile.jsp')" ><input type="hidden"  name="file_id" size="20" value="<%= publisherBeanId.getFile_id() %>" ></TD></TR>
                      
-                     <TR><TD></TD> <TD><input  type="checkbox" name="show_rating1"  value="<%= SoftPostBeanId.getStrShow_ratimg1() %>"    <%= SoftPostBeanId.getStrShow_ratimg1_checked() %> > <%=AuthorizationPageBeanId.getLocalization(application).getString("open_rate")%></TD></TR>
-                     <TR><TD></TD> <TD><input  type="checkbox" name="show_blog"  value="<%= SoftPostBeanId.getStrShow_forum() %>"  <%= SoftPostBeanId.getShow_forum_checked() %> > <%=AuthorizationPageBeanId.getLocalization(application).getString("open_blog")%></TD></TR>
-                     <TR><TD colspan="2" ><%=AuthorizationPageBeanId.getLocalization(application).getString("before_input_generator_code")%> </TD></TR>
-                     <TR><TD><img alt="<%= AuthorizationPageBeanId.getLocalization(application).getString("image_with_gen_numer") %>" src="/gennumberservlet"  /></TD> <TD><input type="text" name="gen_number"></TD></TR>
+                     <TR><TD></TD> <TD><input  type="checkbox" name="show_rating1"  value="<%= publisherBeanId.getStrShow_ratimg1() %>"    <%= publisherBeanId.getStrShow_ratimg1_checked() %> > <%=authorizationPageBeanId.getLocalization(application).getString("open_rate")%></TD></TR>
+                     <TR><TD></TD> <TD><input  type="checkbox" name="show_blog"  value="<%= publisherBeanId.getStrShow_forum() %>"  <%= publisherBeanId.getShow_forum_checked() %> > <%=authorizationPageBeanId.getLocalization(application).getString("open_blog")%></TD></TR>
+                     <TR><TD colspan="2" ><%=authorizationPageBeanId.getLocalization(application).getString("before_input_generator_code")%> </TD></TR>
+                     <TR><TD><img alt="<%= authorizationPageBeanId.getLocalization(application).getString("image_with_gen_numer") %>" src="/gennumberservlet"  /></TD> <TD><input type="text" name="gen_number"></TD></TR>
                      <TR><TD colspan="2" ></TD></TR>
                     
-                     <TR><TD></TD> <TD><input type="button" name="button" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("save") %>"  onclick="do_save()" > <input type="reset" value="<%= AuthorizationPageBeanId.getLocalization(application).getString("clear") %>"></TD></TR>
+                     <TR><TD></TD> <TD><input type="button" name="button" value="<%= authorizationPageBeanId.getLocalization(application).getString("save") %>"  onclick="do_save()" > <input type="reset" value="<%= authorizationPageBeanId.getLocalization(application).getString("clear") %>"></TD></TR>
                      </TABLE>
                      <input type="hidden"  name="save"  value="false"/>
                      <input type="hidden"  name="portlettype_id"  value="0"/>
@@ -871,7 +871,7 @@ function parseMessages(responseXML)
 	    <span class="next">
                 <a HREF = "Productlist.jsp"  >
 		<strong>
-					<%=AuthorizationPageBeanId.getLocalization(application).getString("back")%>
+					<%=authorizationPageBeanId.getLocalization(application).getString("back")%>
 		</strong>
 	        </a>
 	    </span>
@@ -898,7 +898,7 @@ function parseMessages(responseXML)
 
 <br />
 
- <%=AuthorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
+ <%=authorizationPageBeanId.getLocalization(application).getString("all_rights_reserved")%>
 
 <hr size="" class="netscape4" />
 
@@ -911,7 +911,7 @@ for user netscape
 <DIV id="vunet"  class="drag" style="position: absolute; top: 120px; left: 130px;display:none;"  >
 	<DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left" id="dtitle"  >
 	<A	onclick="dwindow('SelectImage.jsp')" href="#" >
-	 <IMG id=upshrink_ic  title="<%= AuthorizationPageBeanId.getLocalization(application).getString("close_window") %>" src="images/expand.gif" align="right"/> 
+	 <IMG id=upshrink_ic  title="<%= authorizationPageBeanId.getLocalization(application).getString("close_window") %>" src="images/expand.gif" align="right"/> 
 	</A>
 	<font  color='white' size='2' > <b id="title_name" >&nbsp;&raquo;&nbsp; GBS Portal</b> </font>
 	</DIV>
@@ -921,7 +921,7 @@ for user netscape
 			<TR>
 				<td>
 				<iframe id="dialog" src="SelectImage.jsp" width="390" height="400" align="center">
-				<%=AuthorizationPageBeanId.getLocalization(application).getString("browser_not_support_frame")%>
+				<%=authorizationPageBeanId.getLocalization(application).getString("browser_not_support_frame")%>
 				</iframe>
 				</td>
 			</TR>
