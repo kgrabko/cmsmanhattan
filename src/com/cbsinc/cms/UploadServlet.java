@@ -284,7 +284,7 @@ public class UploadServlet extends HttpServlet {
 		// SessionBean sessionBean = (SessionBean)
 		// request.getSession().getAttribute("sessionBean");
 		publisherBeanId = (PublisherBean) req.getSession().getAttribute("publisherBeanId");
-		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession().getAttribute("AuthorizationPageBeanId");
+		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession().getAttribute("authorizationPageBeanId");
 
 		if (resources == null)
 			resources = PropertyResourceBundle.getBundle("localization", res.getLocale());

@@ -163,9 +163,9 @@ public class GBSControllers implements Filter , ITransformationService {
 			isTransformble = authorizationPageFaced.getXslt_resources().containsKey(path);
 		    isActions =  authorizationPageFaced.getActions_resources().containsKey(path);
 
-				if (hsession.getAttribute("AuthorizationPageBeanId") instanceof AuthorizationPageBean) 
+				if (hsession.getAttribute("authorizationPageBeanId") instanceof AuthorizationPageBean) 
 				{
-					 authorizationPageBeanId = ((AuthorizationPageBean) hsession.getAttribute("AuthorizationPageBeanId"));
+					 authorizationPageBeanId = ((AuthorizationPageBean) hsession.getAttribute("authorizationPageBeanId"));
 
 					 if (authorizationPageBeanId.getStrLogin().length() == 0 || (authorizationPageBeanId.getIntLevelUp() == 0 && !authorizationPageBeanId.getStrLogin().equals("user") ) ) 
 					 {
@@ -185,12 +185,12 @@ public class GBSControllers implements Filter , ITransformationService {
 						if(authorizationPageFaced.isCokieSessionIdExists((HttpServletRequest) request, (HttpServletResponse)response) &&  authorizationPageFaced.isLoginFromCookie_new1( session_id ,  hsession , authorizationPageFaced.getSession_scope() ) )
 //						//if( authorizationPageFaced.isLoginFromCookieFromDir( session_id ,  hsession , servletContext , session_scope ) )
 						{
-							authorizationPageBeanId = ((AuthorizationPageBean) hsession.getAttribute("AuthorizationPageBeanId"));
+							authorizationPageBeanId = ((AuthorizationPageBean) hsession.getAttribute("authorizationPageBeanId"));
 						}
 						else
 						{ 
 							loadClassesSessionScope(hsession) ;
-							authorizationPageBeanId = ((AuthorizationPageBean) hsession.getAttribute("AuthorizationPageBeanId"));
+							authorizationPageBeanId = ((AuthorizationPageBean) hsession.getAttribute("authorizationPageBeanId"));
 							
 							String host = ((HttpServletRequest) request).getServerName() ;
 							String siteId =  authorizationPageFaced.getSiteIdByHost( host);
@@ -748,7 +748,7 @@ public class GBSControllers implements Filter , ITransformationService {
 	{
 		HttpSession hsession =  request.getSession(false);
 		ProductlistBean  productlistBeanId = null ;
-		AuthorizationPageBean	authorizationPageBeanId = ((AuthorizationPageBean) hsession.getAttribute("AuthorizationPageBeanId"));
+		AuthorizationPageBean	authorizationPageBeanId = ((AuthorizationPageBean) hsession.getAttribute("authorizationPageBeanId"));
 		StringBuffer buff = new StringBuffer();
 		if(path.equals("Productlist.jsp"))
 		{

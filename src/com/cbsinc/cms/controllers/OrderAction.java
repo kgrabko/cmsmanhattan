@@ -154,7 +154,7 @@ public class OrderAction implements IAction {
 			orderFaced = ServiceLocator.getInstance().getOrderFaced().get();
 		if (authorizationPageFaced == null)
 			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
-		AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("AuthorizationPageBeanId");
+		AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
 		accountHistoryBeanId = (AccountHistoryBean) session.getAttribute("accountHistoryBeanId");
 		orderBeanId = new OrderBean();
 		request.setAttribute("orderBeanId", orderBeanId);

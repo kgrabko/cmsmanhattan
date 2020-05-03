@@ -94,7 +94,7 @@ public class ServletSiteEvent extends HttpServlet implements HttpSessionListener
 //		QueryManager Adp = new QueryManager();
 //		String query = "" ;
 //		String key = "";
-//		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("AuthorizationPageBeanId");
+//		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
 //		try {
 //		query = "select USER_ID , TYPE , CLASSBODY  from STORE_SESSION WHERE where USER_ID = " + AuthorizationPageBeanId.getIntUserID() ;
 //		ResultSet rs  = Adp.executeQueryResultSet(query);
@@ -157,7 +157,7 @@ public class ServletSiteEvent extends HttpServlet implements HttpSessionListener
 
 		String cookiesDir = getCookiesDir(servletContext);
 		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session
-				.getAttribute("AuthorizationPageBeanId");
+				.getAttribute("authorizationPageBeanId");
 		if (AuthorizationPageBeanId == null)
 			return;
 
@@ -216,7 +216,7 @@ public class ServletSiteEvent extends HttpServlet implements HttpSessionListener
 //		//if( authorizationPageFaced.isLoginFromCookieFromDir( session_id ,  hsession , servletContext , session_scope ) )
 		{
 			// authorizationPageBeanId = ((AuthorizationPageBean)
-			// hsession.getAttribute("AuthorizationPageBeanId"));
+			// hsession.getAttribute("authorizationPageBeanId"));
 			System.out.println("A session was loaded");
 		}
 
@@ -250,10 +250,10 @@ public class ServletSiteEvent extends HttpServlet implements HttpSessionListener
 		//////////// saveSession( httpSession ) ;
 
 		ServletContext servletContext = httpSession.getServletContext();
-		if (!(se.getSession().getAttribute("AuthorizationPageBeanId") instanceof AuthorizationPageBean))
+		if (!(se.getSession().getAttribute("authorizationPageBeanId") instanceof AuthorizationPageBean))
 			return;
 		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) se.getSession()
-				.getAttribute("AuthorizationPageBeanId");
+				.getAttribute("authorizationPageBeanId");
 
 		// saveClassesSessionScopeFromDir(httpSession , servletContext) ;
 		if (AuthorizationPageBeanId.getIntLevelUp() == SiteRole.ADMINISTRATOR_ROLE_ID

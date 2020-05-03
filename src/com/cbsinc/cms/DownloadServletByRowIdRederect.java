@@ -118,7 +118,7 @@ public class DownloadServletByRowIdRederect extends HttpServlet {
 
 		if (request.getParameter("productid") != null)
 			soft_id = request.getParameter("productid");
-		AuthorizationPageBeanId = (AuthorizationPageBean) request.getSession().getAttribute("AuthorizationPageBeanId");
+		AuthorizationPageBeanId = (AuthorizationPageBean) request.getSession().getAttribute("authorizationPageBeanId");
 
 		if (strDevice != null) {
 			if (soft_id == null || soft_id.length() == 0) {

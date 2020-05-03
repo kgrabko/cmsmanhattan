@@ -77,7 +77,7 @@ public class ChatClient extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		//StringBuffer buff = (StringBuffer)getServletContext().getAttribute("messages");
 		HttpSession session  = request.getSession();
-		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("AuthorizationPageBeanId");
+		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("authorizationPageBeanId");
 		StringBuffer buff  = new StringBuffer() ;
 		if(getServletContext() == null) return ;
 		if(getServletContext().getAttribute("messages") != null)  buff = (StringBuffer)getServletContext().getAttribute("messages");

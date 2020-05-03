@@ -246,7 +246,7 @@ public class BigImageServletUpload extends HttpServlet {
 		else if (!localization.getLocale().getLanguage().equals(req.getLocale().getLanguage()))
 			localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
 
-		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession().getAttribute("AuthorizationPageBeanId");
+		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession().getAttribute("authorizationPageBeanId");
 
 		if (resources == null)
 			resources = PropertyResourceBundle.getBundle("localization", req.getLocale());

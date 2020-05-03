@@ -46,7 +46,7 @@ public class SipClientSettings extends HttpServlet {
 
 		
 		HttpSession session  = req.getSession();
-		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("AuthorizationPageBeanId");
+		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("authorizationPageBeanId");
 		//String full_name = AuthorizationPageBeanId.getStrFirstName() +  " " + AuthorizationPageBeanId.getStrLastName() ;
 		String ipAdress =  req.getRemoteAddr() ;
 		String  user = AuthorizationPageBeanId.getStrLogin() ;
