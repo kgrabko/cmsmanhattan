@@ -138,7 +138,7 @@ public class DownloadServletByOdrder extends HttpServlet {
 		}
 
 		OperationAmountBeanId = (OperationAmountBean) request.getSession().getAttribute("OperationAmountBeanId");
-		AuthorizationPageBeanId = (AuthorizationPageBean) request.getSession().getAttribute("AuthorizationPageBeanId");
+		AuthorizationPageBeanId = (AuthorizationPageBean) request.getSession().getAttribute("authorizationPageBeanId");
 
 		if (authorizationPageFaced == null)
 			try {

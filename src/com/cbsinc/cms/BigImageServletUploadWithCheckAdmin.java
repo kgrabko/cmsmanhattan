@@ -174,7 +174,7 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest req, HttpServletResponse res) throws java.io.IOException {
 
-		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession().getAttribute("AuthorizationPageBeanId");
+		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession().getAttribute("authorizationPageBeanId");
 
 		if (localization == null)
 			localization = PropertyResourceBundle.getBundle("localization", req.getLocale());

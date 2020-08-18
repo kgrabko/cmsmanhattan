@@ -238,7 +238,7 @@ public class AuthorizationPageFaced extends com.cbsinc.cms.WebControls implement
 		QueryManager Adp = new QueryManager();
 		String query = "" ;
 		String key = "";
-		//AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("AuthorizationPageBeanId");
+		//AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
 		try {
 		query = "select USER_ID , TYPE , CLASSBODY  from store_session WHERE  USER_ID = " + user_id ;
 		ResultSet rs  = Adp.executeQueryResultSet(query);
@@ -1463,7 +1463,7 @@ final	public AuthorizationPageBean getFromMainSiteUserAuthorizationBean(final St
 	
 	final void saveClassesSessionScope(final HttpSession  session  ) 
 	{
-		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("AuthorizationPageBeanId");
+		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
 		if( AuthorizationPageBeanId == null ) return ;
 		//if( AuthorizationPageBeanId.getStrLogin().equals(SiteRole.GUEST)) return ;
 		//if( AuthorizationPageBeanId.getIntLevelUp() == 0 ) return ;
@@ -1556,7 +1556,7 @@ final	long getIdsessionHash4(final String id_session )
 	
 final	public void saveClassesSessionScope_new(final HttpSession  session  ) 
 	{
-		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("AuthorizationPageBeanId");
+		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
 		if( AuthorizationPageBeanId == null ) return ;
 		//if( AuthorizationPageBeanId.getStrLogin().equals(SiteRole.GUEST)) return ;
 		//if( AuthorizationPageBeanId.getIntLevelUp() == 0 ) return ;
@@ -1630,7 +1630,7 @@ final	public void saveClassesSessionScope_new(final HttpSession  session  )
 
 final	public void saveClassesSessionScope_new1(final HttpSession  session  ) 
 {
-	AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("AuthorizationPageBeanId");
+	AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
 	if( AuthorizationPageBeanId == null ) return ;
 	//if( AuthorizationPageBeanId.getStrLogin().equals(SiteRole.GUEST)) return ;
 	//if( AuthorizationPageBeanId.getIntLevelUp() == 0 ) return ;
@@ -1737,7 +1737,7 @@ final	public void saveClassesSessionScopeByLogin(final HttpSession  session  )
 {
 	
 	
-	AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("AuthorizationPageBeanId");
+	AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
 	if( AuthorizationPageBeanId == null ) return ;
 	//if( AuthorizationPageBeanId.getStrLogin().equals(SiteRole.GUEST)) return ;
 	//if( AuthorizationPageBeanId.getIntLevelUp() == 0 ) return ;

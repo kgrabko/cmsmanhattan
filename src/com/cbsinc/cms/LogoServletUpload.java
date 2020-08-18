@@ -169,7 +169,7 @@ public class LogoServletUpload extends HttpServlet {
 		// req.getSession().getAttribute("publisherBeanId");
 		HttpSession httpsession = req.getSession();
 
-		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession().getAttribute("AuthorizationPageBeanId");
+		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession().getAttribute("authorizationPageBeanId");
 
 		if (resources == null)
 			resources = PropertyResourceBundle.getBundle("localization", res.getLocale());

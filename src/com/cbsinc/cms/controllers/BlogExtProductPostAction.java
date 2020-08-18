@@ -42,7 +42,7 @@ public class BlogExtProductPostAction implements IAction {
 		String gen_code = (String) request.getSession().getAttribute("gen_number");
 		PublisherBean publisherBeanId = (PublisherBean) session.getAttribute("publisherBeanId");
 		AuthorizationPageBean authorizationPageBeanId = (AuthorizationPageBean) session
-				.getAttribute("AuthorizationPageBeanId");
+				.getAttribute("authorizationPageBeanId");
 		if (publisherBeanId == null || authorizationPageBeanId == null || gen_code == null)
 			return;
 

@@ -2,11 +2,18 @@ package com.cbsinc.cms.jms.controllers;
 
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+
+import javax.management.MBeanServerConnection;
+import javax.management.MBeanServerInvocationHandler;
+import javax.management.ObjectName;
+import javax.management.remote.JMXConnectorFactory;
+import javax.management.remote.JMXServiceURL;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 
-import com.cbsinc.cms.services.mailserver.AddUserInMail;
+import org.apache.james.domainlist.api.DomainListManagementMBean;
+import org.apache.james.user.api.UsersRepositoryManagementMBean;
+import org.apache.log4j.Logger;
 
 
 public class AddUserToMailMessageBean extends AbstractMessageBean {
@@ -52,8 +59,8 @@ public class AddUserToMailMessageBean extends AbstractMessageBean {
 		try 
 		{
 			
-  		  AddUserInMail mailSettingsSession = new AddUserInMail();
-  		  mailSettingsSession.exec(login ,password ,user_login ,user_password.substring(0,4)+ user_login,host);	   
+  		  //mailSettingsSession.exec(login ,password ,user_login ,user_password.substring(0,4)+ user_login,host);	 
+  		  addUser(login ,password ,user_login ,user_password.substring(0,4)+ user_login,host , "9999") ;
 		} 
 		catch (Exception e) 
 		{
@@ -62,6 +69,34 @@ public class AddUserToMailMessageBean extends AbstractMessageBean {
 		}
 		
 		
+	}
+	
+	
+	
+	 void addUser(String jlogin , String jpassword,  String email , String password, String host , String port  ){
+	    try{
+	        String serverUrl = "service:jmx:rmi:///jndi/rmi://"+host+":"+port+"/jmxrmi"; // default port 9999
+	        String beanNameUser = "org.apache.james:type=component,name=usersrepository";
+	        String beanNameDomain = "org.apache.james:type=component,name=domainlist";
+
+	        MBeanServerConnection server = JMXConnectorFactory.connect(new JMXServiceURL(serverUrl)).getMBeanServerConnection();
+
+	        UsersRepositoryManagementMBean userBean =  MBeanServerInvocationHandler.newProxyInstance(server, new ObjectName(beanNameUser), UsersRepositoryManagementMBean.class, false);
+	        DomainListManagementMBean domainBean =  MBeanServerInvocationHandler.newProxyInstance(server, new ObjectName(beanNameDomain), DomainListManagementMBean.class, false);
+
+	        if(domainBean.containsDomain(email.split("@")[1])
+	                && !userBean.verifyExists(email)){
+	            System.out.println("creating email : "+email );
+	            userBean.addUser(email,password);
+	            System.out.println(" email : "+email + "was created" );
+	        }else{
+	            log.error("domain does not exist or user already exists !!");
+	        }
+
+	    }catch (Exception e){
+	        e.printStackTrace();
+			log.error("Something went wrong",e);
+	    }
 	}
 	
 

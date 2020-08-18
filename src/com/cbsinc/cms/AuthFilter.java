@@ -82,9 +82,9 @@ public class AuthFilter implements Filter {
 			HttpSession hsession = ((HttpServletRequest) request).getSession(false);
 			if (hsession != null) {
 				AuthorizationPageBean authorizationPageBeanId;
-				if (hsession.getAttribute("AuthorizationPageBeanId") instanceof AuthorizationPageBean) {
+				if (hsession.getAttribute("authorizationPageBeanId") instanceof AuthorizationPageBean) {
 					authorizationPageBeanId = ((AuthorizationPageBean) hsession
-							.getAttribute("AuthorizationPageBeanId"));
+							.getAttribute("authorizationPageBeanId"));
 					if (authorizationPageBeanId.getStrLogin().length() == 0) {
 						((HttpServletResponse) response).sendRedirect("index.jsp");
 						return;

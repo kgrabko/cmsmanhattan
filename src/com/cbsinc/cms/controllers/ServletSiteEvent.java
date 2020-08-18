@@ -41,6 +41,9 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletRequestEvent;
+import javax.servlet.ServletRequestListener;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -60,7 +63,7 @@ import com.cbsinc.cms.faceds.AuthorizationPageFaced;
  *
  */
 
-public class ServletSiteEvent extends HttpServlet implements HttpSessionListener, ServletContextListener {
+public class ServletSiteEvent extends HttpServlet implements HttpSessionListener, ServletContextListener ,  ServletRequestListener{
 
 	private static final long serialVersionUID = -2594377223913825222L;
 	transient private Logger log = Logger.getLogger(ServletSiteEvent.class);
@@ -91,7 +94,7 @@ public class ServletSiteEvent extends HttpServlet implements HttpSessionListener
 //		QueryManager Adp = new QueryManager();
 //		String query = "" ;
 //		String key = "";
-//		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("AuthorizationPageBeanId");
+//		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
 //		try {
 //		query = "select USER_ID , TYPE , CLASSBODY  from STORE_SESSION WHERE where USER_ID = " + AuthorizationPageBeanId.getIntUserID() ;
 //		ResultSet rs  = Adp.executeQueryResultSet(query);
@@ -154,7 +157,7 @@ public class ServletSiteEvent extends HttpServlet implements HttpSessionListener
 
 		String cookiesDir = getCookiesDir(servletContext);
 		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session
-				.getAttribute("AuthorizationPageBeanId");
+				.getAttribute("authorizationPageBeanId");
 		if (AuthorizationPageBeanId == null)
 			return;
 
@@ -213,7 +216,7 @@ public class ServletSiteEvent extends HttpServlet implements HttpSessionListener
 //		//if( authorizationPageFaced.isLoginFromCookieFromDir( session_id ,  hsession , servletContext , session_scope ) )
 		{
 			// authorizationPageBeanId = ((AuthorizationPageBean)
-			// hsession.getAttribute("AuthorizationPageBeanId"));
+			// hsession.getAttribute("authorizationPageBeanId"));
 			System.out.println("A session was loaded");
 		}
 
@@ -247,10 +250,10 @@ public class ServletSiteEvent extends HttpServlet implements HttpSessionListener
 		//////////// saveSession( httpSession ) ;
 
 		ServletContext servletContext = httpSession.getServletContext();
-		if (!(se.getSession().getAttribute("AuthorizationPageBeanId") instanceof AuthorizationPageBean))
+		if (!(se.getSession().getAttribute("authorizationPageBeanId") instanceof AuthorizationPageBean))
 			return;
 		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) se.getSession()
-				.getAttribute("AuthorizationPageBeanId");
+				.getAttribute("authorizationPageBeanId");
 
 		// saveClassesSessionScopeFromDir(httpSession , servletContext) ;
 		if (AuthorizationPageBeanId.getIntLevelUp() == SiteRole.ADMINISTRATOR_ROLE_ID
@@ -393,6 +396,19 @@ public class ServletSiteEvent extends HttpServlet implements HttpSessionListener
 		/// Uncoment if you like hibernate
 		///// new Configuration().configure().buildSessionFactory() ;
 
+	}
+
+	@Override
+	public void requestDestroyed(ServletRequestEvent sre) {
+		ServletRequest servletRequest = sre.getServletRequest();
+		//servletRequest.getServletContext().
+		 System.out.println("ServletRequest requestDestroyed. Remote IP="+servletRequest.getRemoteAddr());
+	}
+
+	@Override
+	public void requestInitialized(ServletRequestEvent sre) {
+		ServletRequest servletRequest = sre.getServletRequest();
+		System.out.println("ServletRequest initialized. Remote IP="+servletRequest.getRemoteAddr());
 	}
 
 }

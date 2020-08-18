@@ -46,8 +46,6 @@ import org.postgresql.PGConnection;
 import org.postgresql.largeobject.LargeObject;
 import org.postgresql.largeobject.LargeObjectManager;
 
-import com.cbsinc.cms.AuthorizationPageBean;
-
 /**
  * Servlet Class
  * 
@@ -136,7 +134,7 @@ public class DownloadServlet extends HttpServlet {
 			strDevice = "xml";
 			ProductlistBeanId = (ProductlistBean) request.getSession().getAttribute("ProductlistBeanId");
 		}
-		AuthorizationPageBeanId = (AuthorizationPageBean) request.getSession().getAttribute("AuthorizationPageBeanId");
+		AuthorizationPageBeanId = (AuthorizationPageBean) request.getSession().getAttribute("authorizationPageBeanId");
 		String strRow = request.getParameter("row");
 		if (strRow == null)
 			row = 0;

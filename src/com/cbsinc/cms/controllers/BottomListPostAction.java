@@ -56,7 +56,7 @@ public class BottomListPostAction implements IAction {
 		HttpSession session = request.getSession();
 		PublisherBean publisherBeanId = (PublisherBean) session.getAttribute("publisherBeanId");
 		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session
-				.getAttribute("AuthorizationPageBeanId");
+				.getAttribute("authorizationPageBeanId");
 
 		if (request.getParameter("action") != null) {
 			publisherBeanId.setAction(request.getParameter("action"));

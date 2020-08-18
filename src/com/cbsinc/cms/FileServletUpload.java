@@ -223,7 +223,7 @@ public class FileServletUpload extends HttpServlet {
 		else if (!localization.getLocale().getLanguage().equals(req.getLocale().getLanguage()))
 			localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
 
-		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession().getAttribute("AuthorizationPageBeanId");
+		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession().getAttribute("authorizationPageBeanId");
 
 		publisherBeanId = (PublisherBean) req.getSession().getAttribute("publisherBeanId");
 

@@ -200,8 +200,8 @@ public class UploadServletXSL extends HttpServlet {
 
 		AuthorizationPageBean authorizationPageBeanId = null;
 		HttpSession hsession = ((HttpServletRequest) request).getSession(false);
-		if (hsession.getAttribute("AuthorizationPageBeanId") instanceof AuthorizationPageBean) {
-			authorizationPageBeanId = ((AuthorizationPageBean) hsession.getAttribute("AuthorizationPageBeanId"));
+		if (hsession.getAttribute("authorizationPageBeanId") instanceof AuthorizationPageBean) {
+			authorizationPageBeanId = ((AuthorizationPageBean) hsession.getAttribute("authorizationPageBeanId"));
 			siteDir = authorizationPageBeanId.getSite_dir();
 		}
 
@@ -225,7 +225,7 @@ public class UploadServletXSL extends HttpServlet {
 	protected void processRequest(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, java.io.IOException {
 
-		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession().getAttribute("AuthorizationPageBeanId");
+		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession().getAttribute("authorizationPageBeanId");
 
 		if (resources == null)
 			resources = PropertyResourceBundle.getBundle("localization", res.getLocale());

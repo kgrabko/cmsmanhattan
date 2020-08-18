@@ -158,8 +158,8 @@ public class FrontControllers implements Filter, ITransformationService {
 			isTransformble = authorizationPageFaced.getXslt_resources().containsKey(path);
 			isActions = authorizationPageFaced.getActions_resources().containsKey(path);
 
-			if (hsession.getAttribute("AuthorizationPageBeanId") instanceof AuthorizationPageBean) {
-				authorizationPageBeanId = ((AuthorizationPageBean) hsession.getAttribute("AuthorizationPageBeanId"));
+			if (hsession.getAttribute("authorizationPageBeanId") instanceof AuthorizationPageBean) {
+				authorizationPageBeanId = ((AuthorizationPageBean) hsession.getAttribute("authorizationPageBeanId"));
 
 				if (authorizationPageBeanId.getStrLogin().length() == 0 || (authorizationPageBeanId.getIntLevelUp() == 0
 						&& !authorizationPageBeanId.getStrLogin().equals("user"))) {
@@ -182,11 +182,11 @@ public class FrontControllers implements Filter, ITransformationService {
 //						//if( authorizationPageFaced.isLoginFromCookieFromDir( session_id ,  hsession , servletContext , session_scope ) )
 				{
 					authorizationPageBeanId = ((AuthorizationPageBean) hsession
-							.getAttribute("AuthorizationPageBeanId"));
+							.getAttribute("authorizationPageBeanId"));
 				} else {
 					loadClassesSessionScope(hsession);
 					authorizationPageBeanId = ((AuthorizationPageBean) hsession
-							.getAttribute("AuthorizationPageBeanId"));
+							.getAttribute("authorizationPageBeanId"));
 
 					String host = ((HttpServletRequest) request).getServerName();
 					String siteId = authorizationPageFaced.getSiteIdByHost(host);
@@ -680,7 +680,7 @@ public class FrontControllers implements Filter, ITransformationService {
 		HttpSession hsession = request.getSession(false);
 		ProductlistBean productlistBeanId = null;
 		AuthorizationPageBean authorizationPageBeanId = ((AuthorizationPageBean) hsession
-				.getAttribute("AuthorizationPageBeanId"));
+				.getAttribute("authorizationPageBeanId"));
 		StringBuffer buff = new StringBuffer();
 		if (path.equals("Productlist.jsp")) {
 

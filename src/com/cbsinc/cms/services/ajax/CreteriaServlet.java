@@ -82,7 +82,7 @@ public class CreteriaServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		ProductlistBean ProductlistBeanId = (ProductlistBean)session.getAttribute("ProductlistBeanId");
-		AuthorizationPageBean authorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("AuthorizationPageBeanId");
+		AuthorizationPageBean authorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("authorizationPageBeanId");
 		if(ProductlistBeanId == null )ProductlistBeanId = new ProductlistBean();
 		if(authorizationPageBeanId == null )authorizationPageBeanId = new AuthorizationPageBean();
 		

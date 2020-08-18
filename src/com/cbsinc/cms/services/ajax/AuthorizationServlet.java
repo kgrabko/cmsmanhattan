@@ -82,7 +82,7 @@ public class AuthorizationServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("AuthorizationPageBeanId");
+		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("authorizationPageBeanId");
 		
 		if(request.getParameter("Login") != null) AuthorizationPageBeanId.setStrLogin(request.getParameter("Login"));
 	    if(request.getParameter("Passwd1") != null)AuthorizationPageBeanId.setStrPasswd(request.getParameter("Passwd1"));

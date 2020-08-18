@@ -73,8 +73,8 @@ public class PolicyFilter implements Filter {
 		HttpSession hsession = ((HttpServletRequest) request).getSession(false);
 		AuthorizationPageBean authorizationPageBeanId;
 		if (hsession != null) {
-			if (hsession.getAttribute("AuthorizationPageBeanId") instanceof AuthorizationPageBean) {
-				authorizationPageBeanId = ((AuthorizationPageBean) hsession.getAttribute("AuthorizationPageBeanId"));
+			if (hsession.getAttribute("authorizationPageBeanId") instanceof AuthorizationPageBean) {
+				authorizationPageBeanId = ((AuthorizationPageBean) hsession.getAttribute("authorizationPageBeanId"));
 				if (authorizationPageBeanId.getStrLogin().length() == 0) {
 					((HttpServletResponse) response).sendRedirect("index.jsp");
 					return;

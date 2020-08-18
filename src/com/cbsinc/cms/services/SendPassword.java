@@ -76,7 +76,7 @@ public class SendPassword extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (request.getSession().getAttribute("AuthorizationPageBeanId") instanceof AuthorizationPageBean) {
+		if (request.getSession().getAttribute("authorizationPageBeanId") instanceof AuthorizationPageBean) {
 
 			if (resources == null)
 				resources = PropertyResourceBundle.getBundle("localization",
@@ -90,7 +90,7 @@ public class SendPassword extends HttpServlet {
 
 			String email = request.getParameter("email");
 			authorizationPageBean = (AuthorizationPageBean) request
-					.getSession().getAttribute("AuthorizationPageBeanId");
+					.getSession().getAttribute("authorizationPageBeanId");
 
 			//Object object = getServletContext().getAttribute("sendMailAgent");
 //			if (object instanceof SendMailAgent) {
