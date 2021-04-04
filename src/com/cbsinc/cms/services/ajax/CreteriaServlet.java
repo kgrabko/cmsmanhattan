@@ -81,7 +81,7 @@ public class CreteriaServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ProductlistBean ProductlistBeanId = (ProductlistBean)session.getAttribute("ProductlistBeanId");
+		ProductlistBean ProductlistBeanId = (ProductlistBean)session.getAttribute("productlistBeanId");
 		AuthorizationPageBean authorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("authorizationPageBeanId");
 		if(ProductlistBeanId == null )ProductlistBeanId = new ProductlistBean();
 		if(authorizationPageBeanId == null )authorizationPageBeanId = new AuthorizationPageBean();

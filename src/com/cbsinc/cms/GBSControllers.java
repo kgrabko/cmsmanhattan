@@ -755,10 +755,10 @@ public class GBSControllers implements Filter , ITransformationService {
 			
 			
 			
-			if (hsession.getAttribute("ProductlistBeanId") instanceof ProductlistBean) 
+			if (hsession.getAttribute("productlistBeanId") instanceof ProductlistBean) 
 			{
 			
-			productlistBeanId =  (ProductlistBean)hsession.getAttribute("ProductlistBeanId")  ;	
+			productlistBeanId =  (ProductlistBean)hsession.getAttribute("productlistBeanId")  ;	
 			String  dayfrom_id = "" ;
 			String  mountfrom_id = "" ;
 			String  yearfrom_id = "" ;

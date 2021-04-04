@@ -144,7 +144,7 @@ public class ProductUserPostMusicAction implements IAction
 		authorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("authorizationPageBeanId");
 		messageMail = (Map)session.getAttribute("messageMail");
 		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
-		productlistBeanId = (ProductlistBean)session.getAttribute("ProductlistBeanId");
+		productlistBeanId = (ProductlistBean)session.getAttribute("productlistBeanId");
 		if(publisherBeanId == null || catalogListBeanId == null || catalogEditBeanId == null || catalogAddBeanId == null || authorizationPageBeanId == null || messageMail == null ||  productPostAllFaced == null ) return ;
 	
 		//if( resources == null )  resources = PropertyResourceBundle.getBundle("localization", response.getLocale());

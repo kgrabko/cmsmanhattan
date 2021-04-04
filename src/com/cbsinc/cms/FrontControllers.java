@@ -684,9 +684,9 @@ public class FrontControllers implements Filter, ITransformationService {
 		StringBuffer buff = new StringBuffer();
 		if (path.equals("Productlist.jsp")) {
 
-			if (hsession.getAttribute("ProductlistBeanId") instanceof ProductlistBean) {
+			if (hsession.getAttribute("productlistBeanId") instanceof ProductlistBean) {
 
-				productlistBeanId = (ProductlistBean) hsession.getAttribute("ProductlistBeanId");
+				productlistBeanId = (ProductlistBean) hsession.getAttribute("productlistBeanId");
 				String dayfrom_id = "";
 				String mountfrom_id = "";
 				String yearfrom_id = "";

@@ -133,11 +133,11 @@ public class DownloadServletByOdrder extends HttpServlet {
 		else if (!setup_resources.getLocale().getLanguage().equals(response.getLocale().getLanguage()))
 			setup_resources = PropertyResourceBundle.getBundle("ApplicationResources", request.getLocale());
 
-		if (request.getSession().getAttribute("ProductlistBeanId") instanceof ProductlistBean) {
+		if (request.getSession().getAttribute("productlistBeanId") instanceof ProductlistBean) {
 			strDevice = "xml";
 		}
 
-		OperationAmountBeanId = (OperationAmountBean) request.getSession().getAttribute("OperationAmountBeanId");
+		OperationAmountBeanId = (OperationAmountBean) request.getSession().getAttribute("operationAmountBeanId");
 		AuthorizationPageBeanId = (AuthorizationPageBean) request.getSession().getAttribute("authorizationPageBeanId");
 
 		if (authorizationPageFaced == null)

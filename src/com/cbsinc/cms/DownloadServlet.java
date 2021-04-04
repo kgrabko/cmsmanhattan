@@ -130,9 +130,9 @@ public class DownloadServlet extends HttpServlet {
 		else if (!localization.getLocale().getLanguage().equals(request.getLocale().getLanguage()))
 			localization = PropertyResourceBundle.getBundle("localization", request.getLocale());
 
-		if (request.getSession().getAttribute("ProductlistBeanId") instanceof ProductlistBean) {
+		if (request.getSession().getAttribute("productlistBeanId") instanceof ProductlistBean) {
 			strDevice = "xml";
-			ProductlistBeanId = (ProductlistBean) request.getSession().getAttribute("ProductlistBeanId");
+			ProductlistBeanId = (ProductlistBean) request.getSession().getAttribute("productlistBeanId");
 		}
 		AuthorizationPageBeanId = (AuthorizationPageBean) request.getSession().getAttribute("authorizationPageBeanId");
 		String strRow = request.getParameter("row");

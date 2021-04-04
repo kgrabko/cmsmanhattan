@@ -118,7 +118,7 @@ public class ImageServlet extends HttpServlet {
 		else if (!localization.getLocale().getLanguage().equals(request.getLocale().getLanguage()))
 			localization = PropertyResourceBundle.getBundle("localization", request.getLocale());
 
-		productlistBeanId = (ProductlistBean) request.getSession().getAttribute("ProductlistBeanId");
+		productlistBeanId = (ProductlistBean) request.getSession().getAttribute("productlistBeanId");
 		String strRow = request.getParameter("row");
 		if (strRow == null) {
 			row = 0;
