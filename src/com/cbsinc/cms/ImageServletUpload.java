@@ -257,6 +257,10 @@ public class ImageServletUpload extends HttpServlet {
 	protected void processRequest(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, java.io.IOException {
 
+		PrintWriter out = null ;
+		try {
+			
+		
 		if (localization == null)
 			localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
 		else if (!localization.getLocale().getLanguage().equals(req.getLocale().getLanguage()))
@@ -277,7 +281,7 @@ public class ImageServletUpload extends HttpServlet {
 		// RFC 1867
 		String contentType = req.getContentType();
 		res.setContentType("text/html;charset=UTF8");
-		PrintWriter out = res.getWriter();
+		out = res.getWriter();
 
 		if (AuthorizationPageBeanId == null) {
 			printResult(out, "User not autorization");
@@ -519,8 +523,15 @@ public class ImageServletUpload extends HttpServlet {
 		}
 		// saveLObj(filename.trim() , size ) ;
 		printResult(out, map);
-
-		out.close();
+		
+		}
+		catch (Exception e) {
+			log.error(e);
+			System.out.println(e);
+		}
+		finally {
+			out.close();
+		}
 
 	}
 

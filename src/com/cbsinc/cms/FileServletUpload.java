@@ -218,6 +218,8 @@ public class FileServletUpload extends HttpServlet {
 		// request.getSession().getAttribute("sessionBean");
 		// publisherBeanId = (SoftPostBean)
 		// req.getSession().getAttribute("publisherBeanId");
+		try 
+		{
 		if (localization == null)
 			localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
 		else if (!localization.getLocale().getLanguage().equals(req.getLocale().getLanguage()))
@@ -503,7 +505,13 @@ public class FileServletUpload extends HttpServlet {
 		// saveLObj(filename.trim() , size ) ;
 		printResult(out, map);
 
-		out.close();
+		}
+		catch (Exception e) {
+			log.error(e);
+		}finally {
+			if(out != null )out.close();
+		}
+
 
 	}
 

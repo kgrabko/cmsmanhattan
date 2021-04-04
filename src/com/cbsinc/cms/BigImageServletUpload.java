@@ -241,6 +241,10 @@ public class BigImageServletUpload extends HttpServlet {
 	 * @param response servlet response
 	 */
 	protected void processRequest(HttpServletRequest req, HttpServletResponse res) throws java.io.IOException {
+		
+		PrintWriter out = null ;
+		try {
+		
 		if (localization == null)
 			localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
 		else if (!localization.getLocale().getLanguage().equals(req.getLocale().getLanguage()))
@@ -263,7 +267,7 @@ public class BigImageServletUpload extends HttpServlet {
 		String contentType = req.getContentType();
 		res.setContentType("text/html;charset=UTF8");
 		// res.setContentType("text/html;charset=cp1251");
-		PrintWriter out = res.getWriter();
+		 out = res.getWriter();
 		if (AuthorizationPageBeanId == null) {
 			printResult(out, "User not autorization");
 			return;
@@ -512,7 +516,13 @@ public class BigImageServletUpload extends HttpServlet {
 		}
 		printResult(out, map);
 		isExistCheckImage = false;
-		out.close();
+		
+		}
+		catch (Exception e) {
+			log.error(e);
+		}finally {
+			if(out != null )out.close();
+		}
 
 	}
 

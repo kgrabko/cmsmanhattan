@@ -173,7 +173,10 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 	 * @param response servlet response
 	 */
 	protected void processRequest(HttpServletRequest req, HttpServletResponse res) throws java.io.IOException {
-
+		
+		PrintWriter out = null ;
+		try {
+		
 		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession().getAttribute("authorizationPageBeanId");
 
 		if (localization == null)
@@ -191,7 +194,7 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 		long start = System.currentTimeMillis();
 		String contentType = req.getContentType();
 		res.setContentType("text/html;charset=UTF8");
-		PrintWriter out = res.getWriter();
+		out = res.getWriter();
 		if (AuthorizationPageBeanId == null) {
 			printResult(out, localization.getString("user_not_autorization"));
 			return;
@@ -415,7 +418,13 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 		saveFile();
 		printResult(out, map);
 
-		out.close();
+	}
+	catch (Exception e) {
+		log.error(e);
+	}finally {
+		if(out != null )out.close();
+	}
+
 
 	}
 
