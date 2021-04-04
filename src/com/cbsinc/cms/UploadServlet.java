@@ -271,6 +271,10 @@ public class UploadServlet extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, java.io.IOException {
+		
+		PrintWriter out = null ;
+		try {
+		
 		if (localization == null)
 			localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
 		else if (!localization.getLocale().getLanguage().equals(req.getLocale().getLanguage()))
@@ -305,7 +309,7 @@ public class UploadServlet extends HttpServlet {
 		// res.addHeader("Cache-Control","no-cache, must-revalidate");
 		// res.addHeader("Pragma","no-cache");
 
-		PrintWriter out = res.getWriter();
+		 out = res.getWriter();
 		if (AuthorizationPageBeanId == null) {
 			printResult(out, resources.getString("user_not_autorization"));
 			return;
@@ -570,8 +574,8 @@ public class UploadServlet extends HttpServlet {
 		System.out.println("Good! it took " + (end - start) + " (ms)");
 
 		printResult(out, map);
-		out.close();
-		close();
+		//out.close();
+		
 		// response.setContentType("text/html");
 		// java.io.PrintWriter out = response.getWriter();
 		/*
@@ -582,6 +586,15 @@ public class UploadServlet extends HttpServlet {
 		 * out.println("</body>"); out.println("</html>");
 		 */
 		// out.close();
+		
+		}
+		catch (Exception e) {
+			log.error(e);
+		}finally {
+			if(out != null )out.close();
+			close();
+		}
+
 	}
 
 	/**

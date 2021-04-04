@@ -224,7 +224,10 @@ public class UploadServletXSL extends HttpServlet {
 
 	protected void processRequest(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, java.io.IOException {
-
+		
+		PrintWriter out = null ;
+		try {
+		
 		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession().getAttribute("authorizationPageBeanId");
 
 		if (resources == null)
@@ -240,7 +243,7 @@ public class UploadServletXSL extends HttpServlet {
 		String contentType = req.getContentType();
 		// res.setContentType("text/html;charset=cp1251");
 		res.setContentType("text/html;charset=UTF8");
-		PrintWriter out = res.getWriter();
+		out = res.getWriter();
 
 		if (productPostAllFaced.isLimmitPostedMessages(AuthorizationPageBeanId, true)) {
 			printResult(out, resources.getString("global_has_limmit_forsite"));
@@ -464,7 +467,13 @@ public class UploadServletXSL extends HttpServlet {
 		System.out.println("Good! it took " + (end - start) + " (ms)");
 		saveFile();
 		printResult(out, map);
-		out.close();
+		
+		}
+		catch (Exception e) {
+			log.error(e);
+		}finally {
+			if(out != null )out.close();
+		}
 
 	}
 

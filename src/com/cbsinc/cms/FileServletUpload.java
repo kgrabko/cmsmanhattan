@@ -218,6 +218,9 @@ public class FileServletUpload extends HttpServlet {
 		// request.getSession().getAttribute("sessionBean");
 		// publisherBeanId = (SoftPostBean)
 		// req.getSession().getAttribute("publisherBeanId");
+		PrintWriter out = null;
+		try 
+		{
 		if (localization == null)
 			localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
 		else if (!localization.getLocale().getLanguage().equals(req.getLocale().getLanguage()))
@@ -248,7 +251,7 @@ public class FileServletUpload extends HttpServlet {
 		// res.addHeader("Cache-Control","no-cache, must-revalidate");
 		// res.addHeader("Pragma","no-cache");
 
-		PrintWriter out = res.getWriter();
+		out = res.getWriter();
 		if (AuthorizationPageBeanId == null) {
 			printResultFail(out, "User not autorization");
 			return;
@@ -503,7 +506,13 @@ public class FileServletUpload extends HttpServlet {
 		// saveLObj(filename.trim() , size ) ;
 		printResult(out, map);
 
-		out.close();
+		}
+		catch (Exception e) {
+			log.error(e);
+		}finally {
+			if(out != null )out.close();
+		}
+
 
 	}
 

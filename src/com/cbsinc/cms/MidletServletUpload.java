@@ -189,6 +189,10 @@ public class MidletServletUpload extends HttpServlet {
 		// req.
 		// SessionBean sessionBean = (SessionBean)
 		// request.getSession().getAttribute("sessionBean");
+		PrintWriter out = null ;
+		
+		try {
+		
 		publisherBeanId = (PublisherBean) req.getSession().getAttribute("publisherBeanId");
 		AuthorizationPageBeanId = (AuthorizationPageBean) req.getSession().getAttribute("authorizationPageBeanId");
 
@@ -211,7 +215,7 @@ public class MidletServletUpload extends HttpServlet {
 		// res.addHeader("Cache-Control","no-cache, must-revalidate");
 		// res.addHeader("Pragma","no-cache");
 
-		PrintWriter out = res.getWriter();
+		out = res.getWriter();
 		if (AuthorizationPageBeanId == null) {
 			printResult(out, "User not autorization");
 			return;
@@ -434,7 +438,13 @@ public class MidletServletUpload extends HttpServlet {
 		// saveLObj(filename.trim() , size ) ;
 		printResult(out, map);
 
-		out.close();
+	}
+	catch (Exception e) {
+		log.error(e);
+	}finally {
+		if(out != null )out.close();
+		//close();
+	}
 
 	}
 
