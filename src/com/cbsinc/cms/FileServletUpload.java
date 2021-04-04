@@ -219,6 +219,7 @@ public class FileServletUpload extends HttpServlet {
 		// publisherBeanId = (SoftPostBean)
 		// req.getSession().getAttribute("publisherBeanId");
 		PrintWriter out = null;
+
 		try 
 		{
 		if (localization == null)
