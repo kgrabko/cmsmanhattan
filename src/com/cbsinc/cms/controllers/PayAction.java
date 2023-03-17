@@ -60,9 +60,8 @@ public class PayAction extends TemplateAction {
 		OperationAmountBean operationAmountBeanId = getOperationAmountBean().get();
 		
 
-		if (getAuthorizationPageBean().isEmpty()  || getPayBean().isEmpty()  || orderFaced.isEmpty())
-			return;
-		
+		//if (getAuthorizationPageBean().empty()  || getPayBean().empty()  || orderFaced.empty())return;
+		 
 		request.setCharacterEncoding("UTF-8");
 
 		ResourceBundle resources = null;

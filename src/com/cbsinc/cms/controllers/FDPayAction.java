@@ -57,8 +57,7 @@ public class FDPayAction extends TemplateAction {
 		ResourceBundle	resources = PropertyResourceBundle.getBundle("localization", response.getLocale());
 
 		
-		if (authorizationPageBean.isEmpty() || payBeanId.isEmpty() || orderFaced.isEmpty())
-			return;
+		//if (authorizationPageBean.empty() || payBeanId.empty() || orderFaced.empty())return;
 		
 		request.setCharacterEncoding("UTF-8");
 		payBeanId.get().setDescription(resources.getString("Purchase"));

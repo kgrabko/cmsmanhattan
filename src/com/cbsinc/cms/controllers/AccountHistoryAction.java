@@ -48,8 +48,8 @@ public class AccountHistoryAction extends TemplateAction {
 		AccountHistoryBean accountHistoryBeanId = this.getAccountHistoryBean().get() ;
 		Optional <OrderFaced> 	orderFaced = ServiceLocator.getInstance().getOrderFaced();
 
-		if (this.getAuthorizationPageBean().isEmpty()  || this.getAccountHistoryBean().isEmpty() || orderFaced.isEmpty())
-			return;
+		//if (authorizationPageBeanId == null || accountHistoryBeanId == null || orderFaced.empty()) return;
+		if( authorizationPageBeanId == null ||  accountHistoryBeanId == null || orderFaced == null  ) return ;
 
 		request.setCharacterEncoding("UTF-8");
 		if (request.getParameter("searchquery") != null && isNumber(request.getParameter("searchquery"))) {

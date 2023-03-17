@@ -2,13 +2,14 @@
   <modelVersion>4.0.0</modelVersion>
   
   <groupId>CMS-Manhattan</groupId>
-  <artifactId>CMS-Manhattan</artifactId>
-  <version>0.0.4-SNAPSHOT</version>
+  <artifactId>cms-manhattan-one</artifactId>
+  <version>0.0.5</version>
   <packaging>war</packaging>
   <name>cms</name>
   <description>CMS-Manhattan. It is xslt template CMS .  Author is Konstantin Grabko . konstantin.grabko@yahoo.com </description>
   <build>
-    <sourceDirectory>/src</sourceDirectory>
+    <sourceDirectory>src</sourceDirectory>
+    <testSourceDirectory>test</testSourceDirectory>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -20,14 +21,26 @@
       </plugin>
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
-        <version>2.4</version>
+        <version>3.3.1</version>
         <configuration>
+		
+		<archive>
+            <manifest>
+                <addClasspath>true</addClasspath>
+            </manifest>
+        </archive>	
+			
           <warSourceDirectory>WebContent</warSourceDirectory>
           <failOnMissingWebXml>false</failOnMissingWebXml>
             <webResources>
             <resource>
               <!-- this is relative to the pom.xml directory -->
+              <!-- <directory>WebContent</directory> -->
               <directory>src</directory>
+              <targetPath>WEB-INF/classes</targetPath>
+              <includes>
+                <include>**/*.properties</include>
+              </includes>
             </resource>
           </webResources>
         </configuration>
@@ -42,6 +55,45 @@
           <artifactId>tomcat7-maven-plugin</artifactId>
           <version>2.2</version>
         </plugin>
+        
+        <plugin>
+            <groupId>com.spotify</groupId>
+            <artifactId>dockerfile-maven-plugin</artifactId>
+            <version>1.4.10</version>
+            <executions>
+                <execution>
+                    <id>tag-latest</id>
+                    <goals>
+                        <goal>build</goal>
+                        <goal>tag</goal>
+                        <goal>push</goal>
+                    </goals>
+                    <configuration>
+                        <tag>latest</tag>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>tag-version</id>
+                    <goals>
+                        <goal>build</goal>
+                        <goal>tag</goal>
+                        <goal>push</goal>
+                    </goals>
+                    <configuration>
+                        <tag>${project.version}</tag>
+                    </configuration>
+                </execution>
+            </executions>
+            <configuration>
+			    <repository>cmsmanhattan/cmsone</repository>
+			    <tag>${project.version}</tag>
+			    <buildArgs>
+			      <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+			    </buildArgs>
+			  </configuration>
+        </plugin>
+      
+        
     </plugins>
   </build>
    <repositories>

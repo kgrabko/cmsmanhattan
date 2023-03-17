@@ -171,9 +171,26 @@ import org.apache.log4j.Logger;
 			try 
 			{
 				//Class.forName(resources_ds.getString("driver").trim()); // PG7.0
+				if(resources_ds.getString("driver") != null)
 				Class.forName( resources_ds.getString("driver").trim(), true, Thread.currentThread().getContextClassLoader() );
 
 				Properties connProp = new Properties();
+				
+				String user =  System.getenv("CMS_DB_USER");
+				String password = System.getenv("CMS_DB_PASSWORD");
+				String url = System.getenv("CMS_DB_JDBC_URL");
+				String useSSL = System.getenv("CMS_DB_USE_SSL");
+				String autoReconnect = System.getenv("CMS_DB_AUTO_RECONECT");
+				
+				if( user != null && password != null && url != null   ) 
+				{
+					connProp.put("user", user.trim());
+					connProp.put("password", password.trim());
+					connProp.put("useSSL", useSSL.trim());
+					connProp.put("autoReconnect", autoReconnect.trim());
+					return new GBSConnection(DriverManager.getConnection(url.trim(), connProp));
+				}
+				
 				connProp.put("user", resources_ds.getString("user").trim());
 				connProp.put("password", resources_ds.getString("password").trim());
 				connProp.put("useSSL", resources_ds.getString("useSSL").trim());
