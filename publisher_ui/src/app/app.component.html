@@ -1,0 +1,79 @@
+
+<div>
+  <!-- Resources -->
+  <mat-divider></mat-divider>
+
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>dialpad</mat-icon>
+    <span><a  routerLink="/HeaderLogo">Header Logo</a></span>
+
+  </button>
+  <button mat-menu-item >
+    <mat-icon>voicemail</mat-icon>
+    <span><a  routerLink="/ItemPageCenter">Item on Page at Center</a></span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>notifications_off</mat-icon>
+    <a   routerLink="/ItemPageTopLeft">Item on Page at top left</a>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>notifications_off</mat-icon>
+    <a  routerLink="/ItemPageTopRigth">Item on Page at top rigth</a>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>notifications_off</mat-icon>
+    <a  routerLink="/ItemPageBottomLeft">Item on Page at botom left</a>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>notifications_off</mat-icon>
+    <a  routerLink="/ItemPageBottomRigth">Item on Page at botton  rigth</a>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>notifications_off</mat-icon>
+    <a   routerLink="/ItemPageFooter">Item on Page at footer</a>
+  </button>
+
+</mat-menu>
+
+<mat-toolbar>
+  <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>CMS change data mode</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-divider></mat-divider>
+
+  <mat-grid-list cols="8" rowHeight="800px"   >
+    <mat-grid-tile [style.background] = "color" >
+
+    </mat-grid-tile >
+
+    <mat-grid-tile [style.background] = "color"    colspan="6" >
+      <router-outlet></router-outlet>
+    </mat-grid-tile>
+
+    <mat-grid-tile [style.background] = "color" >
+
+    </mat-grid-tile   >
+
+  </mat-grid-list>
+
+
+  <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page">
+  </mat-paginator>
+
+
+</div>

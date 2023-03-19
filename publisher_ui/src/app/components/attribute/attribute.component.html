@@ -1,0 +1,57 @@
+
+ <mat-grid-list cols="1" rowHeight="50px"   >
+  <mat-grid-tile  >
+
+<form class="example-form">
+  <mat-form-field class="example-full-width" appearance="legacy">
+    <mat-label>search key word</mat-label>
+    <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option.name}}
+      </mat-option>
+    </mat-autocomplete>
+
+    <button *ngIf="myControl" matSuffix mat-icon-button aria-label="Clear" (click)="myControl">
+    <mat-icon>close</mat-icon>
+  </button>
+
+
+  </mat-form-field>
+
+
+</form>
+<mat-menu   #menu="matMenu">
+
+  <button mat-menu-item   >
+    <mat-icon>dialpad</mat-icon>
+    <span><a  routerLink="/HeaderLogo">add new keyword to list</a></span>
+  </button>
+  <button mat-menu-item   >
+    <mat-icon>dialpad</mat-icon>
+    <span><a  routerLink="/HeaderLogo">add one more a keyword field</a></span>
+  </button>
+  <button mat-menu-item  >
+    <mat-icon>voicemail</mat-icon>
+    <span><a  routerLink="/ItemPageCenter"> add linked a field to previous</a></span>
+  </button>
+  <button mat-menu-item  >
+    <mat-icon>voicemail</mat-icon>
+    <span><a  routerLink="/ItemPageCenter"> delete the keyword field </a></span>
+  </button>
+  <button mat-menu-item  >
+    <mat-icon>close</mat-icon>
+    <span><a  routerLink="/ItemPageCenter"> close </a></span>
+  </button>
+</mat-menu>
+
+<button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon" aria-label="Example icon-button with menu icon">
+  <mat-icon>menu</mat-icon>
+</button>
+
+</mat-grid-tile>
+
+
+
+</mat-grid-list>
+

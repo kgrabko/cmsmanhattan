@@ -1,0 +1,14 @@
+.product-form {
+  min-width: 550px;
+  max-width: 800px;
+  width: 100%;
+}
+
+.product-full-width {
+  width: 100%;
+}
+
+
+.input_fileupload--hidden{
+  display:none;
+}

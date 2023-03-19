@@ -109,7 +109,7 @@
                 <configuration>
                     <executable>ng</executable>
                     <!--  out js script folber -->
-                    <workingDirectory>WebContent/ui</workingDirectory>
+                    <workingDirectory>publisher_ui</workingDirectory>
                     <arguments>
                         <argument>build</argument>
                     </arguments>

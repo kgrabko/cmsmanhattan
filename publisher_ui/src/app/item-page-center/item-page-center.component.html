@@ -1,0 +1,142 @@
+<h1>Add new item at central space of a page</h1>
+
+<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="descriptionFormGroup">
+    <form class="product-form" [formGroup]="descriptionFormGroup">
+      <ng-template matStepLabel>Product description</ng-template>
+      <br/>
+      <mat-form-field  class="product-full-width" appearance="fill">
+        <mat-label>Short Name</mat-label>
+        <input matInput placeholder="beer" formControlName="shortNameCtrl" required>
+      </mat-form-field>
+      <br/>
+      <mat-form-field  class="product-full-width" appearance="fill">
+        <mat-label> Name</mat-label>
+        <input matInput placeholder="beer budweiser" formControlName="nameCtrl" required>
+      </mat-form-field>
+      <br/>
+      <mat-form-field  class="product-full-width" appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput placeholder="Ligth beer 0.33 cans" formControlName="descriptionCtrl" required></textarea>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="imagesFormGroup">
+    <form [formGroup]="imagesFormGroup">
+      <ng-template matStepLabel>Add images</ng-template>
+      <br/>
+      <mat-accordion>
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              upload images
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+
+      <mat-form-field  class="input_fileupload--hidden" appearance="fill">
+        <mat-label>head image</mat-label>
+        <input matInput formControlName="imageNameCtrl" placeholder="Ex. 1 Main St, New York, NY"  required>
+      </mat-form-field>
+      <mat-form-field  class="input_fileupload--hidden" appearance="fill">
+        <input matInput formControlName="imageIdCtrl" placeholder="Ex. 1 Main St, New York, NY"  required>
+      </mat-form-field>
+      <br/>
+      <mat-form-field class="input_fileupload--hidden" appearance="fill">
+        <mat-label>big image</mat-label>
+        <input matInput formControlName="bigimageNameCtrl" placeholder="Ex. 1 Main St, New York, NY"  required>
+      </mat-form-field>
+      <mat-form-field  class="input_fileupload--hidden" appearance="fill">
+        <input matInput formControlName="bigimageIdCtrl" placeholder="Ex. 1 Main St, New York, NY"  required>
+      </mat-form-field>
+      <br/>
+
+<app-file-upload></app-file-upload>
+<br>
+<br>
+<button mat-raised-button color="primary" (click)="onClick($event)">
+  <mat-icon>add</mat-icon>
+  Choose file </button>
+  <br>
+<input id="singleFile" #fileUpload   class="input_fileupload--hidden" type="file" [fileUploadInputFor]= "fileUploadQueue"/>
+<br>
+
+<mat-file-upload-queue #fileUploadQueue
+    [fileAlias]="'file'"
+    [httpUrl]="'http://localhost:8180/jax-rs-jersey-application-sample'">
+
+   <mat-file-upload [file]="file" [id]="i" *ngFor="let file of fileUploadQueue.files; let i = index">
+    <img  src ="{{file.url}}" alt="Place image title">
+    </mat-file-upload>
+</mat-file-upload-queue>
+<br>
+<br>
+
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Select images from your list
+            </mat-panel-title>
+
+          </mat-expansion-panel-header>
+          <img  src ="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png" alt="Place image title">
+
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <!-- https://www.npmjs.com/package/angular-material-fileupload-->
+      <!-- https://www.bezkoder.com/angular-12-file-upload/ -->
+      <!--<app-file-upload></app-file-upload> -->
+      <br>
+      <br>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Select catalog</ng-template>
+      <br>
+      <app-catalog></app-catalog>
+      <br>
+      <br>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Select search product keywords</ng-template>
+      <br>
+      <app-attribute></app-attribute>
+      <app-attribute></app-attribute>
+      <app-attribute></app-attribute>
+      <app-attribute></app-attribute>
+      <app-attribute></app-attribute>
+      <app-attribute></app-attribute>
+      <br>
+
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-stepper>
