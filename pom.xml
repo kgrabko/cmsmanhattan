@@ -94,10 +94,11 @@
         </plugin>
       <!--  It works before String boot compile phase  --> 
       <!--  https://www.youtube.com/watch?v=JJoBUdMJf1I-->
+      <!-- https://sterl.org/2019/02/angular-spring-boot/ -->
         <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
+                <version>3.0.0</version>
                 <executions>
                     <execution>
                         <phase>validate</phase>
