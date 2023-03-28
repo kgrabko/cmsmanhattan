@@ -108,7 +108,7 @@ public class BlogExtProductPostAction implements IAction {
 			jsf_admin = jsf_admin_key.equals("true");
 			publisherBeanId.setNameOfPage("BlogExtProductPost.jsp");
 			if (jsf_admin)
-				response.sendRedirect("admin.jsf");
+				response.sendRedirect("publisher/index.hrml");
 
 		}
 	}

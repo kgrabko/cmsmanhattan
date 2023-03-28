@@ -94,7 +94,7 @@ public class ServicePagePostUserAction implements IAction {
 		jsf_admin = jsf_admin_key.equals("true");
 		publisherBeanId.setNameOfPage("ServicePagePost.jsp");
 		if (jsf_admin)
-			response.sendRedirect("admin.jsf");
+			response.sendRedirect("publisher/index.hrml");
 	}
 
 	public void action(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)

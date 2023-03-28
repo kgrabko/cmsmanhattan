@@ -132,7 +132,7 @@ public class BottomListPostAction implements IAction {
 		jsf_admin = jsf_admin_key.equals("true");
 		publisherBeanId.setNameOfPage("BottomListPost.jsp");
 		if (jsf_admin)
-			response.sendRedirect("admin.jsf");
+			response.sendRedirect("publisher/index.hrml");
 
 	}
 

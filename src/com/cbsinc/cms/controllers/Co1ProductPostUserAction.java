@@ -294,7 +294,7 @@ public class Co1ProductPostUserAction implements IAction {
 		jsf_admin = jsf_admin_key.equals("true");
 		publisherBeanId.setNameOfPage("Co1ProductPost.jsp");
 		if (jsf_admin)
-			response.sendRedirect("admin.jsf");
+			response.sendRedirect("publisher/index.hrml");
 
 	}
 

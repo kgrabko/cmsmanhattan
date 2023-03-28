@@ -315,7 +315,7 @@ public class ProductPostCreAction implements IAction {
 		jsf_admin = jsf_admin_key.equals("true");
 		publisherBeanId.setNameOfPage("ProductPostCre.jsp");
 		if (jsf_admin)
-			response.sendRedirect("admin.jsf");
+			response.sendRedirect("publisher/index.hrml");
 	}
 
 	public void action(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)

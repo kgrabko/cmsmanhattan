@@ -97,7 +97,7 @@ public class Ext1ProductPostAction implements IAction {
 		jsf_admin = jsf_admin_key.equals("true");
 		publisherBeanId.setNameOfPage("Ext1ProductPost.jsp");
 		if (jsf_admin)
-			response.sendRedirect("admin.jsf");
+			response.sendRedirect("publisher/index.hrml");
 
 	}
 
