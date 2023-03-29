@@ -1,3 +1,23 @@
+Deploy CMS on Docker 
+
+1. Download code
+git clone https://cmsmanhattan@bitbucket.org/cmsmanhattan/cmsmanhattan.git
+
+2. Go to dist folder
+cd cmsmanhattan\distr
+
+3. Run Docker deployment script 
+docker compose up -d
+
+4. Check images
+docker ps 
+
+4. Go to web browser then type URL 
+http://localhost/cms/
+
+
+
+
 **Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
 
 When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
