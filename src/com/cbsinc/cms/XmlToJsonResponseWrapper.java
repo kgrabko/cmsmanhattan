@@ -4,17 +4,13 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
- 
+
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
- 
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.DocumentHelper;
+
 //import org.dom4j.io.JSONFormat;
-//import org.dom4j.io.JSONWriter;
-import org.dom4j.*;
+import org.json.XML;
 
 
 public class XmlToJsonResponseWrapper extends HttpServletResponseWrapper {
@@ -70,14 +66,12 @@ public class XmlToJsonResponseWrapper extends HttpServletResponseWrapper {
                 _printWriter.flush();
             }
             try {
-                Document document = DocumentHelper.parseText(new String(
-                        _servletOutputStream.getBytes(), getResponse()
-                                .getCharacterEncoding()));
-               // JSONWriter writer = new JSONWriter(getResponse().getWriter(),JSONFormat.RABBIT_FISH);
-                //writer.write(document);
-                //writer.flush();
+            	String xmlText = new String(_servletOutputStream.getBytes(), getResponse().getCharacterEncoding()) ;
+            	String jsonText =  XML.toJSONObject(xmlText).toString();
+            	getResponse().getWriter().write(jsonText);
                 getResponse().getWriter().write("\n");
-            } catch (DocumentException e) {
+
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
