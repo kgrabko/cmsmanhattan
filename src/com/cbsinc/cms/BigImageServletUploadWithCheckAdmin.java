@@ -182,7 +182,7 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 			localization = PropertyResourceBundle.getBundle("localization", req.getLocale());
 
 		try {
-			productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+			productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

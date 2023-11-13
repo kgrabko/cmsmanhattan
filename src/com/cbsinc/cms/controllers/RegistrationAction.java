@@ -174,7 +174,7 @@ public class RegistrationAction implements IAction {
 
 		session = request.getSession();
 		gen_code = (String) request.getSession().getAttribute("gen_number");
-		authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
+		authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
 		authorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
 
 		request.setCharacterEncoding("UTF-8");

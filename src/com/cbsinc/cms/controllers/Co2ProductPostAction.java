@@ -68,7 +68,7 @@ public class Co2ProductPostAction implements IAction {
 		// (Catalog_editBean)session.getAttribute("catalog_editBean");
 		// catalog_addBean = (Catalog_addBean)session.getAttribute("catalog_addBean");
 		authorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
-		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 		// if( resources == null ) resources =
 		// PropertyResourceBundle.getBundle("localization", response.getLocale());
 
@@ -228,7 +228,7 @@ public class Co2ProductPostAction implements IAction {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
 			throws Exception {
-		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 		HttpSession session = request.getSession();
 		PublisherBean publisherBeanId = (PublisherBean) session.getAttribute("publisherBeanId");
 		AuthorizationPageBean authorizationPageBeanId = (AuthorizationPageBean) session
@@ -382,7 +382,7 @@ public class Co2ProductPostAction implements IAction {
 			publisherBeanId.setAction("");
 
 		boolean jsf_admin = false;
-		AuthorizationPageFaced authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
+		AuthorizationPageFaced authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
 		String jsf_admin_key = authorizationPageFaced.getResources_cms_settings().getString("jsf_admin");
 		if (jsf_admin_key == null || jsf_admin_key.equals(""))
 			jsf_admin = false;

@@ -59,8 +59,8 @@ public class SearchAction implements IAction {
 		HttpSession session;
 		String notselected = "";
 		boolean isInternet = true;
-		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
-		authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
+		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
+		authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
 
 		if (request.getRemoteAddr().startsWith("192."))
 			isInternet = false;
@@ -72,8 +72,8 @@ public class SearchAction implements IAction {
 		if (notselected.length() == 0)
 			notselected = authorizationPageBeanId.getLocalization(servletContext).getString("notselected");
 
-		ProductlistFaced productlistFaced = ServiceLocator.getInstance().getProductlistFaced().get();
-		PolicyFaced policyFaced = ServiceLocator.getInstance().getPolicyFaced().get();
+		ProductlistFaced productlistFaced = ServiceLocator.getInstance().getProductlistFaced();
+		PolicyFaced policyFaced = ServiceLocator.getInstance().getPolicyFaced();
 		searchBeanId = new SearchBean();
 		request.setAttribute("searchBeanId", searchBeanId);
 
@@ -84,7 +84,7 @@ public class SearchAction implements IAction {
 		request.setCharacterEncoding("UTF-8");
 
 		searchBeanId.isInternet = isInternet;
-		authorizationPageBeanId.setBalance(ServiceLocator.getInstance().getAuthorizationPageFaced().get()
+		authorizationPageBeanId.setBalance(ServiceLocator.getInstance().getAuthorizationPageFaced()
 				.getStrBalans(authorizationPageBeanId.getIntUserID()));
 
 		if (request.getParameter("offset") != null && isNumber(request.getParameter("offset"))) {

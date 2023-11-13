@@ -63,7 +63,7 @@ public class AccountHistoryDetalBean extends com.cbsinc.cms.WebControls implemen
 
 	private String active = "";
 
-	private String amount_id = "";
+	private String accountId = "";
 
 	private String catalog_id = "1";
 
@@ -94,7 +94,7 @@ public class AccountHistoryDetalBean extends com.cbsinc.cms.WebControls implemen
 				+ " LEFT OUTER   JOIN currency  currency_add ON account_hist.currency_id_add = currency_add.currency_id "
 				+ " LEFT OUTER   JOIN currency  currency_old ON account_hist.currency_id_old = currency_old.currency_id "
 				+ " LEFT OUTER   JOIN currency  currency_total ON account_hist.currency_id_total = currency_total.currency_id "
-				+ " WHERE account_hist.id = " + amount_id;
+				+ " WHERE account_hist.id = " + accountId;
 
 		try {
 			Adp.executeQuery(query);
@@ -107,7 +107,7 @@ public class AccountHistoryDetalBean extends com.cbsinc.cms.WebControls implemen
 			complete = (String) Adp.getValueAt(0, 5);
 			decsription = (String) Adp.getValueAt(0, 6);
 			active = (String) Adp.getValueAt(0, 7);
-			amount_id = (String) Adp.getValueAt(0, 8);
+			accountId = (String) Adp.getValueAt(0, 8);
 			total_amount = (String) Adp.getValueAt(0, 9);
 			currency_add_lable = (String) Adp.getValueAt(0, 10);
 			currency_old_lable = (String) Adp.getValueAt(0, 11);
@@ -126,7 +126,7 @@ public class AccountHistoryDetalBean extends com.cbsinc.cms.WebControls implemen
 			table.append("<complete>" + complete + "</complete>\n");
 			table.append("<decsription>" + decsription + "</decsription>\n");
 			table.append("<active>" + active + "</active>\n");
-			table.append("<amount_id>" + amount_id + "</amount_id>\n");
+			table.append("<amount_id>" + accountId + "</amount_id>\n");
 			table.append("<total_amount>" + total_amount + "</total_amount>\n");
 			table.append("<currency_add_lable>" + currency_add_lable + "</currency_add_lable>\n");
 			table.append("<currency_old_lable>" + currency_old_lable + "</currency_old_lable>\n");
@@ -162,7 +162,7 @@ public class AccountHistoryDetalBean extends com.cbsinc.cms.WebControls implemen
 				+ " LEFT OUTER   JOIN currency  currency_add ON account_hist.currency_id_add = currency_add.currency_id "
 				+ " LEFT OUTER   JOIN currency  currency_old ON account_hist.currency_id_old = currency_old.currency_id "
 				+ " LEFT OUTER   JOIN currency  currency_total ON account_hist.currency_id_total = currency_total.currency_id "
-				+ " WHERE account_hist.id = " + amount_id;
+				+ " WHERE account_hist.id = " + accountId;
 
 		try {
 
@@ -175,7 +175,7 @@ public class AccountHistoryDetalBean extends com.cbsinc.cms.WebControls implemen
 			complete = (String) Adp.getValueAt(0, 5);
 			decsription = (String) Adp.getValueAt(0, 6);
 			active = (String) Adp.getValueAt(0, 7);
-			amount_id = (String) Adp.getValueAt(0, 8);
+			accountId = (String) Adp.getValueAt(0, 8);
 			total_amount = (String) Adp.getValueAt(0, 9);
 			currency_add_lable = (String) Adp.getValueAt(0, 10);
 			currency_old_lable = (String) Adp.getValueAt(0, 11);
@@ -194,7 +194,7 @@ public class AccountHistoryDetalBean extends com.cbsinc.cms.WebControls implemen
 			table.append("<complete>" + complete + "</complete>\n");
 			table.append("<decsription>" + decsription + "</decsription>\n");
 			table.append("<active>" + active + "</active>\n");
-			table.append("<amount_id>" + amount_id + "</amount_id>\n");
+			table.append("<amount_id>" + accountId + "</amount_id>\n");
 			table.append("<total_amount>" + getStrFormatNumberFloat(total_amount) + "</total_amount>\n");
 			table.append("<currency_add_lable>" + currency_add_lable + "</currency_add_lable>\n");
 			table.append("<currency_old_lable>" + currency_old_lable + "</currency_old_lable>\n");
@@ -398,11 +398,11 @@ public class AccountHistoryDetalBean extends com.cbsinc.cms.WebControls implemen
 	}
 
 	public String getAmount_id() {
-		return amount_id;
+		return accountId;
 	}
 
 	public void setAmount_id(String amount_id) {
-		this.amount_id = amount_id;
+		this.accountId = amount_id;
 	}
 
 	public String getUser_header() {

@@ -1,0 +1,54 @@
+version: "3.8"
+
+ services:
+  db:
+    # We use a mariadb image which supports both amd64 & arm64 architecture
+    image: mariadb:10.6.4-focal
+    # If you really want to use MySQL, uncomment the following line
+    #image: mysql:8.0.27
+    # image: cmsmanhattan/cmsone:last
+    command: '--default-authentication-plugin=mysql_native_password'
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      #- ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+    networks:
+      network:
+        ipv4_address: 10.5.0.5  
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=grabfix
+      - MYSQL_DATABASE=cmsdb
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=grabfix
+    expose:
+      - 3306
+      - 33060
+  cmsmanhattan:
+    image: cmsmanhattan/cmsone:0.0.6
+    ports:
+      - 80:8080
+    restart: always
+    environment:
+      - CMS_DB_JDBC_URL=jdbc:mysql://10.5.0.5:3306/cmsdb
+      - CMS_DB_USER=root
+      - CMS_DB_PASSWORD=grabfix
+      - CMS_DB_USE_SSL=false
+      - CMS_DB_AUTO_RECONECT=false
+    networks:
+      network:
+        ipv4_address: 10.5.0.4  
+
+volumes:
+  db_data:
+  
+  
+networks:
+  network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1  
+           

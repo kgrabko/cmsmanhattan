@@ -51,13 +51,11 @@ public class FDResponceAction extends TemplateAction {
 	}
 
 
-	public void action(Optional<HttpServletRequest> requestOpts, Optional<HttpServletResponse> responseOpts, Optional<ServletContext> servletContextOpts) throws Exception {
+	@Override
+	public  void action(HttpServletRequest request , HttpServletResponse  response , ServletContext servletContextOpts) throws Exception {
 
-
-		HttpServletResponse response = responseOpts.get() ;
-		HttpServletRequest request  = requestOpts.get() ;
-		AuthorizationPageBean authorizationPageBean = getAuthorizationPageBean().get() ;
-		AuthorizationPageFaced authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get() ;
+		AuthorizationPageBean authorizationPageBean = getAuthorizationPageBean();
+		AuthorizationPageFaced authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
 		String x_invoice_num = request.getParameter("x_invoice_num");
 		String x_response_code = request.getParameter("x_response_code");
 		String x_po_num = request.getParameter("x_po_num");
@@ -94,7 +92,7 @@ public class FDResponceAction extends TemplateAction {
 		// final static int SUCCESS = 2 ;
 		// final static int UNSUCCESS = 3 ;
 
-		// dfis codes is 1 for “Approved”, 2 for “Declined”, 3 for “Error”
+		// dfis codes is 1 for â€œApprovedâ€�, 2 for â€œDeclinedâ€�, 3 for â€œErrorâ€�
 		int approved = 1;
 		int declined = 2;
 		int error = 3;
@@ -108,7 +106,8 @@ public class FDResponceAction extends TemplateAction {
 
 			if (Long.parseLong(i_strRezult) == approved) {
 				end_addmoney(Adp, i_strNumerOrder, i_strRezult, i_strRezult);
-				getAuthorizationPageBean().ifPresent(action -> action.setStrMessage("Thank you, your order has been placed"));
+				getAuthorizationPageBean().setStrMessage("Thank you, your order has been placed");
+				
 			} else if (Long.parseLong(i_strRezult) == declined) {
 				query = "UPDATE account_hist SET complete = ? , active = ? , rezult_cd = ? , decsription =  ?  WHERE  id =  "
 						+ i_strNumerOrder + "";
@@ -147,7 +146,7 @@ public class FDResponceAction extends TemplateAction {
 	private void end_addmoney(QueryManager Adp, String i_strAccountHistory_id, String i_strRezult,
 			String i_strDecsription) throws Exception {
 
-		getAuthorizationPageBean().ifPresent(action -> action.setStrEMail("Your order was processed successfully. Here is your receipt."));
+		getAuthorizationPageBean().setStrEMail("Your order was processed successfully. Here is your receipt.");
 
 		double add_amount = 0;
 		double old_amount = 0;
@@ -187,7 +186,7 @@ public class FDResponceAction extends TemplateAction {
 		query = "UPDATE account SET amount = ? , curr = ? , date_input = ? WHERE  user_id = " + user_id;
 		args = new HashMap();
 		args.put("amount", Double.valueOf(total_amount));
-		args.put("curr", Integer.valueOf(getAuthorizationPageBean().get().getCurrency_id()));
+		args.put("curr", Integer.valueOf(getAuthorizationPageBean().getCurrency_id()));
 		args.put("date_input", new java.util.Date());
 		Adp.executeUpdateWithArgs(query, args);
 

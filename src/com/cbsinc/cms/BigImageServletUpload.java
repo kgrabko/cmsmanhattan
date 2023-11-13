@@ -251,7 +251,7 @@ public class BigImageServletUpload extends HttpServlet {
 		if (resources == null)
 			resources = PropertyResourceBundle.getBundle("localization", req.getLocale());
 		try {
-			productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+			productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

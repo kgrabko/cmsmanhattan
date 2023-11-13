@@ -128,7 +128,7 @@ public class ProductUserPostRealtyAction implements IAction {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
 			throws Exception {
-		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 		action(request, response, servletContext);
 		productPostAllFaced.initPage(request.getParameter("product_id"), publisherBeanId, authorizationPageBeanId);
 		if (productPostAllFaced.isLimmitPostedMessages(authorizationPageBeanId, false)
@@ -232,7 +232,7 @@ public class ProductUserPostRealtyAction implements IAction {
 		catalogAddBeanId = (CatalogAddBean) session.getAttribute("catalogAddBeanId");
 		authorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
 		messageMail = (Map) session.getAttribute("messageMail");
-		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 		productlistBeanId = (ProductlistBean) session.getAttribute("productlistBeanId");
 		if (publisherBeanId == null || catalogListBeanId == null || catalogEditBeanId == null || catalogAddBeanId == null
 				|| authorizationPageBeanId == null || messageMail == null || productPostAllFaced == null) return;

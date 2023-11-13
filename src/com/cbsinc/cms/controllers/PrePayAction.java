@@ -42,12 +42,12 @@ public class PrePayAction  extends TemplateAction {
 	}
 
 	
-	public void action(Optional<HttpServletRequest> requestOpts, Optional<HttpServletResponse> responseOpts, Optional<ServletContext> servletContextOpts) throws Exception {
+	@Override
+	public  void action(HttpServletRequest request , HttpServletResponse  response , ServletContext servletContextOpts) throws Exception {
 
-		PrePayBean prePayBean  = getPrePayBean().get() ;
-		OrderBean orderBean = getOrderBean().get() ;
-		AuthorizationPageFaced authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
-		HttpServletRequest request  = requestOpts.get() ;
+		PrePayBean prePayBean  = getPrePayBean();
+		OrderBean orderBean = getOrderBean();
+		AuthorizationPageFaced authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
 		
 		if( authorizationPageFaced == null ||  prePayBean == null || orderBean == null  ) return ;
 		request.setCharacterEncoding("UTF-8"); 

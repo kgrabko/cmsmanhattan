@@ -41,13 +41,13 @@ public class AccountHistoryDetalAction  extends TemplateAction
 	}
 
 	@Override
-	public void action(Optional<HttpServletRequest> requestOpts, Optional<HttpServletResponse> responseOpts, Optional<ServletContext> servletContextOpts) throws Exception
-	{
+	public  void action(HttpServletRequest request , HttpServletResponse  response , ServletContext servletContextOpts) throws Exception {
+
 		
-		HttpServletRequest request  = requestOpts.get() ;
-		AuthorizationPageBean authorizationPageBeanId = getAuthorizationPageBean().get() ;
+
+		AuthorizationPageBean authorizationPageBeanId = getAuthorizationPageBean();
 		AccountHistoryDetalBean accountHistoryDetalBean = null ;
-		OrderFaced orderFaced = ServiceLocator.getInstance().getOrderFaced().get();
+		OrderFaced orderFaced = ServiceLocator.getInstance().getOrderFaced();
 
 		if( authorizationPageBeanId == null ||  accountHistoryDetalBean == null || orderFaced == null  ) return ;
 		request.setCharacterEncoding("UTF-8"); 

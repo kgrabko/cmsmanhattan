@@ -40,12 +40,12 @@ public class SetDomainAction  extends TemplateAction {
 
 
 	@Override
-	public void action(Optional<HttpServletRequest> requestOpts, Optional<HttpServletResponse> responseOpts,
-			Optional<ServletContext> servletContextOpts) throws Exception {
+	public  void action(HttpServletRequest request , HttpServletResponse  response , ServletContext servletContextOpts) throws Exception {
 
-		AuthorizationPageBean authorizationPageBean = getAuthorizationPageBean().get() ;
-		AuthorizationPageFaced authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
-		HttpServletRequest request  = requestOpts.get() ;
+
+		AuthorizationPageBean authorizationPageBean = getAuthorizationPageBean();
+		AuthorizationPageFaced authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
+
 		
 		if (authorizationPageBean == null) return;
 		request.setCharacterEncoding("UTF-8");

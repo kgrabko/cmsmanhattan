@@ -73,7 +73,7 @@ public class PostCreteriaServlet extends HttpServlet {
 
 		ProductPostAllFaced productPostAllFaced = null;
 		try {
-			productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+			productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

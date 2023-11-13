@@ -195,7 +195,7 @@ public class MidletServletUpload extends HttpServlet {
 		if (resources == null)
 			resources = PropertyResourceBundle.getBundle("localization", res.getLocale());
 		try {
-			productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+			productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

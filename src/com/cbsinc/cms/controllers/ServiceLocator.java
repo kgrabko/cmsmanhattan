@@ -1,7 +1,5 @@
 package com.cbsinc.cms.controllers;
 
-import java.util.Optional;
-
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.faceds.OrderFaced;
 import com.cbsinc.cms.faceds.PolicyFaced;
@@ -12,18 +10,18 @@ public class ServiceLocator {
 
 	private static ServiceLocator me;
 	
-	private Optional<AuthorizationPageFaced> authorizationPageFaced = null;
-	private Optional<OrderFaced> orderFaced = null;
-	private Optional<PolicyFaced> policyFaced = null;
-	private Optional<ProductlistFaced> productlistFaced = null;
-	private Optional<ProductPostAllFaced> productPostAllFaced = null;
+	private AuthorizationPageFaced authorizationPageFaced = null;
+	private OrderFaced orderFaced = null;
+	private PolicyFaced policyFaced = null;
+	private ProductlistFaced productlistFaced = null;
+	private ProductPostAllFaced productPostAllFaced = null;
 
 	private ServiceLocator() {
-		authorizationPageFaced = Optional.of(new AuthorizationPageFaced());
-		orderFaced = Optional.of(new OrderFaced());
-		policyFaced = Optional.of(new PolicyFaced());
-		productlistFaced = Optional.of(new ProductlistFaced());
-		productPostAllFaced = Optional.of(new ProductPostAllFaced());
+		authorizationPageFaced = new AuthorizationPageFaced() ;
+		orderFaced = new OrderFaced() ;
+		policyFaced = new PolicyFaced() ;
+		productlistFaced = new ProductlistFaced() ;
+		productPostAllFaced = new ProductPostAllFaced() ;
 	}
 
 	// Returns the instance of ServiceLocator class
@@ -39,27 +37,27 @@ public class ServiceLocator {
 
 	// Converts the serialized string into EJBHandle
 	// then to EJBObject.
-	public Optional<AuthorizationPageFaced> getAuthorizationPageFaced() throws Exception {
+	public AuthorizationPageFaced getAuthorizationPageFaced() throws Exception {
 
 		return authorizationPageFaced;
 	}
 
-	public Optional<OrderFaced> getOrderFaced() throws Exception {
+	public OrderFaced getOrderFaced() throws Exception {
 
 		return orderFaced;
 	}
 
-	public Optional<PolicyFaced> getPolicyFaced() throws Exception {
+	public PolicyFaced getPolicyFaced() throws Exception {
 
 		return policyFaced;
 	}
 
-	public Optional<ProductlistFaced> getProductlistFaced() throws Exception {
+	public ProductlistFaced getProductlistFaced() throws Exception {
 
 		return productlistFaced;
 	}
 
-	public Optional<ProductPostAllFaced> getProductPostAllFaced() throws Exception {
+	public ProductPostAllFaced getProductPostAllFaced() throws Exception {
 
 		return productPostAllFaced;
 	}

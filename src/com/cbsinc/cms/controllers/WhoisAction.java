@@ -64,7 +64,7 @@ public class WhoisAction implements IAction {
 		domainList = (List<DomainState>) session.getAttribute("domainList");
 		authorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
 		if (authorizationPageFaced == null)
-			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
+			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
 	}
 
 	public void action(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
@@ -79,7 +79,7 @@ public class WhoisAction implements IAction {
 
 		session = request.getSession();
 		if (authorizationPageFaced == null)
-			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
+			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
 
 		domainList = (java.util.LinkedList) request.getAttribute("domainList");
 		if (domainList == null) {

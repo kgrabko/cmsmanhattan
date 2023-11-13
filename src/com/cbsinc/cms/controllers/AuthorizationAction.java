@@ -41,14 +41,12 @@ public class AuthorizationAction extends TemplateAction {
 
 
 	@Override
-	public void action(Optional<HttpServletRequest> requestOpts, Optional<HttpServletResponse> responseOpts, Optional<ServletContext> servletContextOpts) throws Exception {
+	public  void action(HttpServletRequest request , HttpServletResponse  response , ServletContext servletContextOpts) throws Exception {
 
 
-		HttpServletResponse response = responseOpts.get() ;
-		HttpServletRequest request  = requestOpts.get() ;
-		AuthorizationPageFaced authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get() ;
-		AuthorizationPageBean authorizationPageBeanId = getAuthorizationPageBean().get() ;
-		Map messageMail = getMessageMail().get() ;
+		AuthorizationPageFaced authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
+		AuthorizationPageBean authorizationPageBeanId = getAuthorizationPageBean();
+		Map messageMail = getMessageMail();
 		ResourceBundle	locale_resource = PropertyResourceBundle.getBundle("localization", response.getLocale());
 
 		

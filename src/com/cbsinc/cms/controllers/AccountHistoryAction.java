@@ -1,7 +1,5 @@
 package com.cbsinc.cms.controllers;
 
-import java.util.Optional;
-
 /**
  * <p>
  * Title: Content Manager System
@@ -31,7 +29,7 @@ import com.cbsinc.cms.AccountHistoryBean;
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.faceds.OrderFaced;
 
-public class AccountHistoryAction extends TemplateAction {
+public abstract class AccountHistoryAction extends TemplateAction {
 
 
 	public AccountHistoryAction() {
@@ -40,13 +38,13 @@ public class AccountHistoryAction extends TemplateAction {
 	
 
 	@Override
-	public void action(Optional<HttpServletRequest> requestOpts, Optional<HttpServletResponse> responseOpts, Optional<ServletContext> servletContextOpts)
+	public  void action(HttpServletRequest request , HttpServletResponse  response , ServletContext servletContextOpts) 
 			throws Exception {
 		
-		HttpServletRequest request  = requestOpts.get() ;
-		AuthorizationPageBean authorizationPageBeanId = this.getAuthorizationPageBean().get() ;
-		AccountHistoryBean accountHistoryBeanId = this.getAccountHistoryBean().get() ;
-		Optional <OrderFaced> 	orderFaced = ServiceLocator.getInstance().getOrderFaced();
+
+		AuthorizationPageBean authorizationPageBeanId = this.getAuthorizationPageBean() ;
+		AccountHistoryBean accountHistoryBeanId = this.getAccountHistoryBean() ;
+		OrderFaced 	orderFaced = ServiceLocator.getInstance().getOrderFaced();
 
 		//if (authorizationPageBeanId == null || accountHistoryBeanId == null || orderFaced.empty()) return;
 		if( authorizationPageBeanId == null ||  accountHistoryBeanId == null || orderFaced == null  ) return ;
@@ -64,13 +62,13 @@ public class AccountHistoryAction extends TemplateAction {
 			if (request.getParameter("dateto") != null)
 				accountHistoryBeanId.setStrDateTo(request.getParameter("dateto"));
 			accountHistoryBeanId
-					.setSelectAccountHistoryXML( orderFaced.get().getPaymentlistByDate(authorizationPageBeanId.getIntUserID(),
+					.setSelectAccountHistoryXML( orderFaced.getPaymentlistByDate(authorizationPageBeanId.getIntUserID(),
 							authorizationPageBeanId.getIntLevelUp(), accountHistoryBeanId));
 			// orderListBean.setSearchquery("0");
 			return;
 		}
 
-		accountHistoryBeanId.setSelectAccountHistoryXML(orderFaced.get().getPaymentlist(authorizationPageBeanId.getIntUserID(),
+		accountHistoryBeanId.setSelectAccountHistoryXML(orderFaced.getPaymentlist(authorizationPageBeanId.getIntUserID(),
 				authorizationPageBeanId.getIntLevelUp(), accountHistoryBeanId));
 	}
 

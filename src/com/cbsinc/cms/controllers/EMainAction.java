@@ -1,7 +1,5 @@
 package com.cbsinc.cms.controllers;
 
-import java.util.Optional;
-
 /**
  * <p>
  * Title: Content Manager System
@@ -35,8 +33,7 @@ public class EMainAction extends TemplateAction {
 
 
 	@Override
-	public void action(Optional<HttpServletRequest> request, Optional<HttpServletResponse> response, Optional<ServletContext> servletContext) {
-
+	public  void action(HttpServletRequest request , HttpServletResponse  response , ServletContext servletContextOpts) throws Exception {
 	}
 
 }

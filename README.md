@@ -16,6 +16,7 @@ docker ps
 http://localhost/cms/
 
 
+-X clean package dockerfile:push
 
 
 **Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**

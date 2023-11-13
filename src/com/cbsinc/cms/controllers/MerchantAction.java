@@ -120,8 +120,8 @@ public class MerchantAction  implements IAction
 		if(request.getRemoteAddr().startsWith("10."))isInternet = false ;
 		
 		session = request.getSession();
-		 if(orderFaced == null) orderFaced = ServiceLocator.getInstance().getOrderFaced().get();
-	    if(authorizationPageFaced == null)  authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
+		 if(orderFaced == null) orderFaced = ServiceLocator.getInstance().getOrderFaced();
+	    if(authorizationPageFaced == null)  authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
 		authorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("authorizationPageBeanId");
 		accountHistoryBeanId = (AccountHistoryBean)session.getAttribute("accountHistoryBeanId");
 		merchantBean = (MerchantBean) session.getAttribute("merchantBean") ;

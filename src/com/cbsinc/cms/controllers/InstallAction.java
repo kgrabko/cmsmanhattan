@@ -56,7 +56,7 @@ public class InstallAction implements IAction {
 		messageMail = (Map) session.getAttribute("messageMail");
 		authorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
 		if (authorizationPageFaced == null)
-			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
+			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
 
 		authorizationPageBeanId.setSelect_city(authorizationPageFaced.getXMLDBList("Authorization.jsp?city_id", "city",
 				authorizationPageBeanId.getCity_id(),
@@ -74,7 +74,7 @@ public class InstallAction implements IAction {
 		messageMail = (Map) session.getAttribute("messageMail");
 		authorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
 		if (authorizationPageFaced == null)
-			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
+			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
 
 		request.setCharacterEncoding("UTF-8");
 		response.setHeader("Cache-Control", "no-cache"); // HTTP 1.1

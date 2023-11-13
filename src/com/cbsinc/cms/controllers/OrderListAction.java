@@ -52,7 +52,7 @@ public class OrderListAction implements IAction {
 		AuthorizationPageBean authorizationPageBeanId;
 		HttpSession session;
 		OrderListBean orderListBean = null;
-		orderFaced = ServiceLocator.getInstance().getOrderFaced().get();
+		orderFaced = ServiceLocator.getInstance().getOrderFaced();
 		session = request.getSession();
 		orderListBean = (OrderListBean) session.getAttribute("orderListBeanId");
 		authorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");

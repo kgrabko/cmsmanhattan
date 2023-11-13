@@ -49,7 +49,7 @@ public class SupportAction implements IAction {
 		AuthorizationPageBean authorizationPageBeanId = null;
 
 		if (authorizationPageFaced == null)
-			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
+			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
 		action(request, response, servletContext);
 	}
 
@@ -60,7 +60,7 @@ public class SupportAction implements IAction {
 		AuthorizationPageBean authorizationPageBeanId = null;
 
 		if (authorizationPageFaced == null)
-			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
+			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
 		session = request.getSession();
 		domainList = (List<String>) session.getAttribute("domainList");
 		authorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");

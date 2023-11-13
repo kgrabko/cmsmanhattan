@@ -140,7 +140,7 @@ public class Co1ProductPostAction implements IAction {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
 			throws Exception {
-		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 		HttpSession session = request.getSession();
 		PublisherBean publisherBeanId = (PublisherBean) session.getAttribute("publisherBeanId");
 		AuthorizationPageBean authorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
@@ -288,7 +288,7 @@ public class Co1ProductPostAction implements IAction {
 			publisherBeanId.setAction("");
 
 		boolean jsf_admin = false;
-		AuthorizationPageFaced authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
+		AuthorizationPageFaced authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
 		String jsf_admin_key = authorizationPageFaced.getResources_cms_settings().getString("jsf_admin");
 		if (jsf_admin_key == null || jsf_admin_key.equals(""))
 			jsf_admin = false;
@@ -312,7 +312,7 @@ public class Co1ProductPostAction implements IAction {
 		publisherBeanId = (PublisherBean) session.getAttribute("publisherBeanId");
 		catalogListBeanId = (CatalogListBean) session.getAttribute("catalogListBeanId");
 		authorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
-		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 
 		if (publisherBeanId == null || catalogListBeanId == null || authorizationPageBeanId == null
 				|| productPostAllFaced == null) return;

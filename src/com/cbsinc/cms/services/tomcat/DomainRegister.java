@@ -39,7 +39,7 @@ public class DomainRegister {
 		
 		AuthorizationPageFaced authorizationPageFaced = null;
 		try {
-			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
+			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

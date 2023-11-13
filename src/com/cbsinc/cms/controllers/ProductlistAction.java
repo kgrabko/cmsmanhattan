@@ -72,7 +72,7 @@ public class ProductlistAction implements IAction {
 		String notselected = "";
 		boolean isInternet = true;
 		ServiceLocator.getInstance().getProductPostAllFaced();
-		authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
+		authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
 
 		is_criteria_by_catalog = authorizationPageFaced.getResources_cms_settings().getString("is_criteria_by_catalog")
 				.equals("true");
@@ -87,8 +87,8 @@ public class ProductlistAction implements IAction {
 		if (notselected.length() == 0)
 			notselected = authorizationPageBeanId.getLocalization(servletContext).getString("notselected");
 
-		ProductlistFaced productlistFaced = ServiceLocator.getInstance().getProductlistFaced().get();
-		PolicyFaced policyFaced = ServiceLocator.getInstance().getPolicyFaced().get();
+		ProductlistFaced productlistFaced = ServiceLocator.getInstance().getProductlistFaced();
+		PolicyFaced policyFaced = ServiceLocator.getInstance().getPolicyFaced();
 		productlistBeanId = new ProductlistBean();
 		request.setAttribute("productlistBeanId", productlistBeanId);
 
@@ -99,7 +99,7 @@ public class ProductlistAction implements IAction {
 		request.setCharacterEncoding("UTF-8");
 
 		productlistBeanId.isInternet = isInternet;
-		authorizationPageBeanId.setBalance(ServiceLocator.getInstance().getAuthorizationPageFaced().get()
+		authorizationPageBeanId.setBalance(ServiceLocator.getInstance().getAuthorizationPageFaced()
 				.getStrBalans(authorizationPageBeanId.getIntUserID()));
 
 		if (request.getParameter("offset") != null && isNumber(request.getParameter("offset"))) {

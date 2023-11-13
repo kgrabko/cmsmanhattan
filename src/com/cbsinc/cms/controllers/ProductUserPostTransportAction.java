@@ -125,7 +125,7 @@ public class ProductUserPostTransportAction implements IAction {
 	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
 			throws Exception {
 
-		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 
 		action(request, response, servletContext);
 		productPostAllFaced.initPage(request.getParameter("product_id"), publisherBeanId, authorizationPageBeanId);
@@ -230,7 +230,7 @@ public class ProductUserPostTransportAction implements IAction {
 		catalogAddBeanId = (CatalogAddBean) session.getAttribute("catalogAddBeanId");
 		authorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
 		messageMail = (Map) session.getAttribute("messageMail");
-		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 		if (notselected.length() == 0)
 			notselected = authorizationPageBeanId.getLocalization(servletContext).getString("notselected");
 

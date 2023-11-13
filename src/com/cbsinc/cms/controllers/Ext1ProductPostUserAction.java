@@ -67,7 +67,7 @@ public class Ext1ProductPostUserAction implements IAction {
 	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
 			throws Exception {
 
-		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 
 		action(request, response, servletContext);
 		HttpSession session = request.getSession();
@@ -101,9 +101,8 @@ public class Ext1ProductPostUserAction implements IAction {
 		HttpSession session = request.getSession();
 		publisherBeanId = (PublisherBean) session.getAttribute("publisherBeanId");
 
-		AuthorizationPageBean authorizationPageBeanId = (AuthorizationPageBean) session
-				.getAttribute("authorizationPageBeanId");
-		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+		AuthorizationPageBean authorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
+		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 
 		if (publisherBeanId == null || authorizationPageBeanId == null || productPostAllFaced == null)
 			return;

@@ -75,7 +75,7 @@ public class CreteriaServlet extends HttpServlet {
 		//AuthorizationPageFaced authorizationPageFaced = null ;
 		ProductlistFaced productlistFaced = null;
 		try {
-			productlistFaced = ServiceLocator.getInstance().getProductlistFaced().get();
+			productlistFaced = ServiceLocator.getInstance().getProductlistFaced();
 			//authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

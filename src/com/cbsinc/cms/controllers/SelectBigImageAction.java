@@ -1,7 +1,5 @@
 package com.cbsinc.cms.controllers;
 
-import java.util.Optional;
-
 /**
  * <p>
  * Title: Content Manager System
@@ -27,11 +25,9 @@ import java.util.Optional;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.PublisherBean;
-import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
 
 
@@ -40,16 +36,14 @@ public class SelectBigImageAction extends TemplateAction
 
 
 	@Override
-	public void action(Optional<HttpServletRequest> requestOpts, Optional<HttpServletResponse> responseOpts,
-			Optional<ServletContext> servletContextOpts) throws Exception {
+	public  void action(HttpServletRequest request , HttpServletResponse  response , ServletContext servletContextOpts) 
+			throws Exception {
+
 		
-		PublisherBean publisherBeanId = getPublisherBean().get() ;
-		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
-		AuthorizationPageBean authorizationPageBeanId = getAuthorizationPageBean().get() ;
+		PublisherBean publisherBeanId = getPublisherBean();
+		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
+		AuthorizationPageBean authorizationPageBeanId = getAuthorizationPageBean();;
 		StringBuffer sbuff = new StringBuffer(); 
-		
-		HttpServletResponse response = responseOpts.get() ;
-		HttpServletRequest request  = requestOpts.get() ;
 
 	  		request.setCharacterEncoding("UTF-8");
 			response.setHeader("Cache-Control","no-cache"); //HTTP 1.1

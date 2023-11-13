@@ -170,7 +170,7 @@ import org.apache.log4j.Logger;
 		{
 			try 
 			{
-				//Class.forName(resources_ds.getString("driver").trim()); // PG7.0
+				Class.forName(resources_ds.getString("driver").trim()); // PG7.0
 				if(resources_ds.getString("driver") != null)
 				Class.forName( resources_ds.getString("driver").trim(), true, Thread.currentThread().getContextClassLoader() );
 

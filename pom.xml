@@ -3,10 +3,16 @@
   
   <groupId>CMS-Manhattan</groupId>
   <artifactId>cms-manhattan-one</artifactId>
-  <version>0.0.5</version>
+  <version>0.0.6</version>
   <packaging>war</packaging>
   <name>cms</name>
   <description>CMS-Manhattan. It is xslt template CMS .  Author is Konstantin Grabko . konstantin.grabko@yahoo.com </description>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+</properties>
+  
   <build>
     <sourceDirectory>src</sourceDirectory>
     <testSourceDirectory>test</testSourceDirectory>
@@ -59,8 +65,9 @@
         <plugin>
             <groupId>com.spotify</groupId>
             <artifactId>dockerfile-maven-plugin</artifactId>
-            <version>1.4.10</version>
+            <version>1.4.13</version>
             <executions>
+				<!--
                 <execution>
                     <id>tag-latest</id>
                     <goals>
@@ -72,6 +79,7 @@
                         <tag>latest</tag>
                     </configuration>
                 </execution>
+                -->
                 <execution>
                     <id>tag-version</id>
                     <goals>
@@ -95,6 +103,8 @@
       <!--  It works before String boot compile phase  --> 
       <!--  https://www.youtube.com/watch?v=JJoBUdMJf1I-->
       <!-- https://sterl.org/2019/02/angular-spring-boot/ -->
+      <!-- https://www.springcloud.io/post/2022-03/springboot-docker/#gsc.tab=0 -->
+
         <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -109,13 +119,14 @@
                 </executions>
                 <configuration>
                     <executable>ng</executable>
-                    <!--  out js script folber -->
+
                     <workingDirectory>publisher_ui</workingDirectory>
                     <arguments>
                         <argument>build</argument>
                     </arguments>
                 </configuration>
             </plugin>
+
         
     </plugins>
   </build>
@@ -285,21 +296,22 @@
 		<version>8.1-404.jdbc3</version>
 	</dependency>
 
-<!-- 
+
 <dependency>
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
     <version>5.1.45</version>
     <scope>runtime</scope>
 </dependency>
- --> 
+
  
-    	 
+    <!--	 
    	 <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.11</version>
      </dependency>
+     -->
     	
    	 
    	<!-- com.cbsinc.cms.card -->
@@ -348,6 +360,12 @@
 	<scope>provided</scope>
 </dependency>
 
+<dependency>
+	<groupId>org.dom4j</groupId>
+	<artifactId>dom4j</artifactId>
+	<version>2.1.4</version>
+</dependency>
+<!-- Thanks for using https://jar-download.com -->
 
 
 <dependency>
@@ -361,10 +379,26 @@
 	<version>1.2</version>
 </dependency>
 
+<!--
 <dependency>
     <groupId>org.json</groupId>
     <artifactId>json</artifactId>
     <version>20190722</version>
+</dependency>
+-->
+
+<dependency>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20231013</version>
+</dependency>
+
+
+        
+        <dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.13.3</version>
 </dependency>
 
 

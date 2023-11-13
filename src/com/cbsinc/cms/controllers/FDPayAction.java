@@ -45,22 +45,21 @@ public class FDPayAction extends TemplateAction {
 	}
 
 	@Override
-	public void action(Optional<HttpServletRequest> requestOpts, Optional<HttpServletResponse> responseOpts, Optional<ServletContext> servletContextOpts) throws Exception {
+	public  void action(HttpServletRequest request , HttpServletResponse  response , ServletContext servletContextOpts) throws Exception {
 
-		HttpServletResponse response = responseOpts.get() ;
-		HttpServletRequest request  = requestOpts.get() ;
-		Optional<AuthorizationPageBean> authorizationPageBean = getAuthorizationPageBean() ;
-		Optional<OrderBean> orderBeanId = getOrderBean() ;
-		Optional<OperationAmountBean> operationAmountBean = getOperationAmountBean();
-		Optional<PayBean> payBeanId = getPayBean();
-		Optional<OrderFaced> orderFaced = ServiceLocator.getInstance().getOrderFaced();
+
+		AuthorizationPageBean authorizationPageBean = getAuthorizationPageBean() ;
+		OrderBean orderBeanId = getOrderBean() ;
+		OperationAmountBean operationAmountBean = getOperationAmountBean();
+		PayBean payBeanId = getPayBean();
+		OrderFaced orderFaced = ServiceLocator.getInstance().getOrderFaced();
 		ResourceBundle	resources = PropertyResourceBundle.getBundle("localization", response.getLocale());
 
 		
 		//if (authorizationPageBean.empty() || payBeanId.empty() || orderFaced.empty())return;
 		
 		request.setCharacterEncoding("UTF-8");
-		payBeanId.get().setDescription(resources.getString("Purchase"));
+		payBeanId.setDescription(resources.getString("Purchase"));
 
 		String user_os = "";
 		String header_name = "";
@@ -71,10 +70,10 @@ public class FDPayAction extends TemplateAction {
 			header_value = request.getHeader(header_name);
 			user_os = user_os.concat(header_name + "=" + header_value + "\n");
 		}
-		payBeanId.get().setAccount_hist_id(operationAmountBean.get().addMoneyStart("Purchase",
-				Double.parseDouble(orderBeanId.get().getorder_amount()), orderBeanId.get().getOrder_currency_id(),
-				authorizationPageBean.get().getIntUserID(), request.getRemoteAddr(), user_os, orderBeanId.get().getOrder_id()));
-		payBeanId.get().setStatusInrocess(orderBeanId.get().getOrder_id());
+		payBeanId.setAccount_hist_id(operationAmountBean.addMoneyStart("Purchase",
+				Double.parseDouble(orderBeanId.getorder_amount()), orderBeanId.getOrder_currency_id(),
+				authorizationPageBean.getIntUserID(), request.getRemoteAddr(), user_os, orderBeanId.getOrder_id()));
+		payBeanId.setStatusInrocess(orderBeanId.getOrder_id());
 	}
 
 }

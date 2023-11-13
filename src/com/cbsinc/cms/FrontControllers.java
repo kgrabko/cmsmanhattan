@@ -115,7 +115,7 @@ public class FrontControllers implements Filter, ITransformationService {
 		setSessionDir(servletContext);
 		loadClassesApplicationScope(servletContext);
 		try {
-			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
+			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

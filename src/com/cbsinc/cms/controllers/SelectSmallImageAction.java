@@ -40,16 +40,12 @@ public class SelectSmallImageAction extends TemplateAction
 	
 	
 	@Override
-	public void action(Optional<HttpServletRequest> requestOpts, Optional<HttpServletResponse> responseOpts,
-			Optional<ServletContext> servletContextOpts) throws Exception {
+	public  void action(HttpServletRequest request , HttpServletResponse  response , ServletContext servletContextOpts) 
+			throws Exception {
 
-
-		HttpServletResponse response = responseOpts.get() ;
-		HttpServletRequest request  = requestOpts.get() ;
-		
-		PublisherBean publisherBeanId = getPublisherBean().get() ;
-		ProductPostAllFaced productPostAllFaced =  ServiceLocator.getInstance().getProductPostAllFaced().get() ;
-		AuthorizationPageBean authorizationPageBeanId = getAuthorizationPageBean().get() ;
+		PublisherBean publisherBeanId = getPublisherBean();
+		ProductPostAllFaced productPostAllFaced =  ServiceLocator.getInstance().getProductPostAllFaced();
+		AuthorizationPageBean authorizationPageBeanId = getAuthorizationPageBean();
 		StringBuffer sbuff = new StringBuffer(); 
 
   		request.setCharacterEncoding("UTF-8");

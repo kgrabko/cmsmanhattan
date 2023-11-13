@@ -59,7 +59,7 @@ public class ProductUserPostAction implements IAction
 		CatalogAddBean catalogAddBeanId  = (CatalogAddBean)session.getAttribute("catalogAddBeanId");
 		AuthorizationPageBean authorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("authorizationPageBeanId");
 		messageMail = (Map)session.getAttribute("messageMail");
-		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 		if(publisherBeanId == null || catalogListBeanId == null || catalogEditBeanId == null || catalogAddBeanId == null || authorizationPageBeanId == null || messageMail == null || productPostAllFaced == null ) return ;
 	
 
@@ -131,12 +131,12 @@ public class ProductUserPostAction implements IAction
 		CatalogAddBean catalogAddBeanId = (CatalogAddBean)session.getAttribute("catalogAddBeanId");
 		AuthorizationPageBean authorizationPageBeanId  = (AuthorizationPageBean)session.getAttribute("authorizationPageBeanId");
 		messageMail = (Map)session.getAttribute("messageMail");
-		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 		if(publisherBeanId == null || catalogListBeanId == null || catalogEditBeanId == null || catalogAddBeanId == null || authorizationPageBeanId == null || messageMail == null || productPostAllFaced == null ) return ;
 	
 
-		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();	
-	    ProductlistFaced productlistFaced = ServiceLocator.getInstance().getProductlistFaced().get();
+		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();	
+	    ProductlistFaced productlistFaced = ServiceLocator.getInstance().getProductlistFaced();
 		//if insert and limmit not add message
 	    
 	    
@@ -163,7 +163,7 @@ public class ProductUserPostAction implements IAction
 		CatalogAddBean catalogAddBeanId  = (CatalogAddBean)session.getAttribute("catalogAddBeanId");
 		AuthorizationPageBean authorizationPageBeanId  = (AuthorizationPageBean)session.getAttribute("authorizationPageBeanId");
 		messageMail = (Map)session.getAttribute("messageMail");
-		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 		if(publisherBeanId == null || catalogListBeanId == null || catalogEditBeanId == null || catalogAddBeanId == null || authorizationPageBeanId == null || messageMail == null || productPostAllFaced == null ) return ;
 	
 		request.setCharacterEncoding("UTF-8");

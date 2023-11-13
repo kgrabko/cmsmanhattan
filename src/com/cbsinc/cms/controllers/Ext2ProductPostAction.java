@@ -67,7 +67,7 @@ public class Ext2ProductPostAction implements IAction {
 	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
 			throws Exception {
 
-		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 
 		action(request, response, servletContext);
 		HttpSession session = request.getSession();
@@ -86,7 +86,7 @@ public class Ext2ProductPostAction implements IAction {
 		}
 
 		boolean jsf_admin = false;
-		AuthorizationPageFaced authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
+		AuthorizationPageFaced authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
 		String jsf_admin_key = authorizationPageFaced.getResources_cms_settings().getString("jsf_admin");
 		if (jsf_admin_key == null || jsf_admin_key.equals(""))
 			jsf_admin = false;
@@ -106,7 +106,7 @@ public class Ext2ProductPostAction implements IAction {
 		publisherBeanId = (PublisherBean) session.getAttribute("publisherBeanId");
 		AuthorizationPageBean authorizationPageBeanId = (AuthorizationPageBean) session
 				.getAttribute("authorizationPageBeanId");
-		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 
 		if (publisherBeanId == null || authorizationPageBeanId == null || productPostAllFaced == null)
 			return;

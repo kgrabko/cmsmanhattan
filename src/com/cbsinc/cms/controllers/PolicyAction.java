@@ -54,9 +54,9 @@ public class PolicyAction implements IAction {
 		boolean isInternet = true;
 
 		if (policyFaced == null)
-			policyFaced = ServiceLocator.getInstance().getPolicyFaced().get();
+			policyFaced = ServiceLocator.getInstance().getPolicyFaced();
 		if (productlistFaced == null)
-			productlistFaced = ServiceLocator.getInstance().getProductlistFaced().get();
+			productlistFaced = ServiceLocator.getInstance().getProductlistFaced();
 		itemDescriptionBeanId = new ItemDescriptionBean();
 		session = request.getSession();
 

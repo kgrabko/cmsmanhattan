@@ -131,7 +131,7 @@ public class QueryManager_last implements java.io.Serializable {
 
 	GBSConnection newInstanceConnection() {
 		try {
-			//Class.forName(resources_ds.getString("driver").trim()); // PG7.0
+			Class.forName(resources_ds.getString("driver").trim()); // PG7.0
 			Properties connProp = new Properties();
 			
 			String user =  System.getenv("CMS_DB_USER");
@@ -152,11 +152,11 @@ public class QueryManager_last implements java.io.Serializable {
 			log.debug(ex1);
 			return null;
 		} 
-//			catch (ClassNotFoundException ex) {
-//			log.error(ex);
-//			log.debug(ex);
-//			return null;
-//		}
+			catch (ClassNotFoundException ex) {
+			log.error(ex);
+			log.debug(ex);
+			return null;
+		}
 
 	}
 

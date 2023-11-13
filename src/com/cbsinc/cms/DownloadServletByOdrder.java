@@ -142,7 +142,7 @@ public class DownloadServletByOdrder extends HttpServlet {
 
 		if (authorizationPageFaced == null)
 			try {
-				authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
+				authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

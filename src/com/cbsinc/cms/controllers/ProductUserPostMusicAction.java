@@ -119,7 +119,7 @@ public class ProductUserPostMusicAction implements IAction
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) throws Exception 
 	{
-		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();	
+		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();	
 	    action( request,  response,  servletContext) ;
 		productPostAllFaced.initPage(request.getParameter("product_id"),  publisherBeanId , authorizationPageBeanId);
 		if(productPostAllFaced.isLimmitPostedMessages(authorizationPageBeanId,false) && publisherBeanId.getSoft_id().compareTo("-1")==0 )
@@ -143,7 +143,7 @@ public class ProductUserPostMusicAction implements IAction
 		catalogAddBeanId = (CatalogAddBean)session.getAttribute("catalogAddBeanId");
 		authorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("authorizationPageBeanId");
 		messageMail = (Map)session.getAttribute("messageMail");
-		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced().get();
+		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 		productlistBeanId = (ProductlistBean)session.getAttribute("ProductlistBeanId");
 		if(publisherBeanId == null || catalogListBeanId == null || catalogEditBeanId == null || catalogAddBeanId == null || authorizationPageBeanId == null || messageMail == null ||  productPostAllFaced == null ) return ;
 	

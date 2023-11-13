@@ -47,17 +47,17 @@ public class PayAction extends TemplateAction {
 
 	
 
-	public void action(Optional<HttpServletRequest> requestOpts, Optional<HttpServletResponse> responseOpts, Optional<ServletContext> servletContextOpts) throws Exception {
+	@Override
+	public  void action(HttpServletRequest request , HttpServletResponse  response , ServletContext servletContextOpts) throws Exception {
 
-		HttpServletResponse response = responseOpts.get() ;
-		HttpServletRequest request  = requestOpts.get() ;
-		AuthorizationPageBean authorizationPageBean = getAuthorizationPageBean().get() ;
-		AuthorizationPageFaced authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced().get();
-		Optional<OrderFaced> orderFaced = ServiceLocator.getInstance().getOrderFaced() ;
-		PayBean payBeanId = getPayBean().get() ;
-		Map messageMail = getMessageMail().get() ;
-		OrderBean orderBeanId = getOrderBean().get() ;
-		OperationAmountBean operationAmountBeanId = getOperationAmountBean().get();
+
+		AuthorizationPageBean authorizationPageBean = getAuthorizationPageBean();
+		AuthorizationPageFaced authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
+		OrderFaced orderFaced = ServiceLocator.getInstance().getOrderFaced() ;
+		PayBean payBeanId = getPayBean();
+		Map messageMail = getMessageMail();
+		OrderBean orderBeanId = getOrderBean();
+		OperationAmountBean operationAmountBeanId = getOperationAmountBean();
 		
 
 		//if (getAuthorizationPageBean().empty()  || getPayBean().empty()  || orderFaced.empty())return;
@@ -116,7 +116,7 @@ public class PayAction extends TemplateAction {
 		messageMail.put("@LastName", authorizationPageBean.getStrLastName());
 		messageMail.put("@NumberOfOrder", orderBeanId.getOrder_id());
 		messageMail.put("@ContactPerson", orderBeanId.getContact_person());
-		messageMail.put("@Balans", "" + orderFaced.get().getBalans(authorizationPageBean.getIntUserID()));
+		messageMail.put("@Balans", "" + orderFaced.getBalans(authorizationPageBean.getIntUserID()));
 		messageMail.put("@Phone", orderBeanId.getshipment_phone());
 		messageMail.put("@Address", orderBeanId.getshipment_address());
 		messageMail.put("@City", orderBeanId.getcity_fullname());
@@ -124,7 +124,7 @@ public class PayAction extends TemplateAction {
 		messageMail.put("@CustomerEmail", orderBeanId.getshipment_email());
 		messageMail.put("@CustomerFax", orderBeanId.getshipment_fax());
 		messageMail.put("@CustomerCommentariy", orderBeanId.getshipment_description());
-		messageMail.put("@ProductCount", "" + orderFaced.get().getProductsListSize(request, orderBeanId));
+		messageMail.put("@ProductCount", "" + orderFaced.getProductsListSize(request, orderBeanId));
 		messageMail.put("@IPAddress", "" + request.getRemoteAddr());
 		messageMail.put("@HTTPHEAD", "" + user_os);
 

@@ -37,16 +37,14 @@ public class SelectFileAction extends TemplateAction
 
 
 	@Override
-	public void action(Optional<HttpServletRequest> requestOpts, Optional<HttpServletResponse> responseOpts,
-			Optional<ServletContext> servletContextOpts) throws Exception {
+	public  void action(HttpServletRequest request , HttpServletResponse  response , ServletContext servletContextOpts) 
+			throws Exception {
+
 		
 		
-		PublisherBean publisherBeanId = getPublisherBean().get() ;
-		ProductPostAllFaced productPostAllFaced =  ServiceLocator.getInstance().getProductPostAllFaced().get() ;
-		AuthorizationPageBean authorizationPageBeanId = getAuthorizationPageBean().get() ;
-		
-		HttpServletResponse response = responseOpts.get() ;
-		HttpServletRequest request  = requestOpts.get() ;
+		PublisherBean publisherBeanId = getPublisherBean();
+		ProductPostAllFaced productPostAllFaced =  ServiceLocator.getInstance().getProductPostAllFaced();
+		AuthorizationPageBean authorizationPageBeanId = getAuthorizationPageBean();
 
   		request.setCharacterEncoding("UTF-8");
 		response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
