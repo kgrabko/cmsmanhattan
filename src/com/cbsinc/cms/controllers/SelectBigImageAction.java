@@ -28,9 +28,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.PublisherBean;
+import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
 
 
+@PageController( jspName = "SelectBigImage.jsp" )
 public class SelectBigImageAction extends TemplateAction 
 {
 

@@ -40,13 +40,14 @@ import com.cbsinc.cms.Currency;
 import com.cbsinc.cms.CurrencyHash;
 import com.cbsinc.cms.MerchantBean;
 import com.cbsinc.cms.OrderBean;
+import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.faceds.OrderFaced;
 import com.cbsinc.cms.jms.controllers.MessageSender;
 import com.cbsinc.cms.jms.controllers.Message;
 import com.cbsinc.cms.jms.controllers.SendMailMessageBean;
 
-
+@PageController( jspName = "Merchant.jsp" )
 public class MerchantAction  implements IAction
 {
 

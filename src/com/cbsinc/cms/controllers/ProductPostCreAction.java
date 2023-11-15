@@ -33,9 +33,11 @@ import com.cbsinc.cms.CatalogAddBean;
 import com.cbsinc.cms.CatalogEditBean;
 import com.cbsinc.cms.CatalogListBean;
 import com.cbsinc.cms.PublisherBean;
+import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
 
+@PageController( jspName = "ProductPostCre.jsp" )
 public class ProductPostCreAction implements IAction {
 
 	private ProductPostAllFaced productPostAllFaced;

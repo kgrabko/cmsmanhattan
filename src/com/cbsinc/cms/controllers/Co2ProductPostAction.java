@@ -33,9 +33,11 @@ import com.cbsinc.cms.CatalogAddBean;
 import com.cbsinc.cms.CatalogEditBean;
 import com.cbsinc.cms.CatalogListBean;
 import com.cbsinc.cms.PublisherBean;
+import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
 
+@PageController( jspName = "Co1ProductPost.jsp" )
 public class Co2ProductPostAction implements IAction {
 
 	boolean is_criteria_by_catalog = false;

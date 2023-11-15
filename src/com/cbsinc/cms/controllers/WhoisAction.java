@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.cbsinc.cms.AuthorizationPageBean;
+import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.jms.controllers.MessageSender;
 import com.cbsinc.cms.jms.controllers.Message;
@@ -38,6 +39,7 @@ import com.cbsinc.cms.jms.controllers.SendMailMessageBean;
 import com.cbsinc.cms.services.net.FingerClient;
 import com.cbsinc.cms.services.whois.DomainState;
 
+@PageController( jspName = "Domain.jsp" )
 public class WhoisAction implements IAction {
 
 	String[] hight_domains = { ".org.uk", ".net", ".us", ".tel", ".biz", ".org", ".de", ".net.uk", ".or.at", ".info",

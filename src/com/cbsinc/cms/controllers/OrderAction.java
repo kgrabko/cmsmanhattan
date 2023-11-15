@@ -35,12 +35,14 @@ import javax.servlet.http.HttpSession;
 import com.cbsinc.cms.AccountHistoryBean;
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.OrderBean;
+import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.faceds.OrderFaced;
 import com.cbsinc.cms.jms.controllers.Message;
 import com.cbsinc.cms.jms.controllers.MessageSender;
 import com.cbsinc.cms.jms.controllers.SendMailMessageBean;
 
+@PageController( jspName = "Order.jsp" )
 public class OrderAction implements IAction {
 
 	AuthorizationPageFaced authorizationPageFaced;

@@ -33,9 +33,11 @@ import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.OperationAmountBean;
 import com.cbsinc.cms.OrderBean;
 import com.cbsinc.cms.PayBean;
+import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.faceds.OrderFaced;
 
+@PageController( jspName = "Pay.jsp" )
 public class PayAction extends TemplateAction {
 
 	

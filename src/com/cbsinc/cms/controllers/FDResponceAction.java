@@ -1,7 +1,5 @@
 package com.cbsinc.cms.controllers;
 
-import java.io.IOException;
-
 /**
  * <p>
  * Title: Content Manager System
@@ -25,13 +23,11 @@ import java.io.IOException;
 
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Optional;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
@@ -41,6 +37,7 @@ import com.cbsinc.cms.PayStatus;
 import com.cbsinc.cms.QueryManager;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 
+//@PageController( jspName = "FDRespond.jsp" )
 public class FDResponceAction extends TemplateAction {
 
     static private Logger log = Logger.getLogger(CheckPaymentResult.class);

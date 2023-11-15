@@ -31,9 +31,11 @@ import org.apache.log4j.Logger;
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.CatalogListBean;
 import com.cbsinc.cms.ItemDescriptionBean;
+import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.PolicyFaced;
 import com.cbsinc.cms.faceds.ProductlistFaced;
 
+@PageController( jspName = "Policy.jsp" )
 public class PolicyAction implements IAction {
 
 	transient static private Logger log = Logger.getLogger(PolicyAction.class);

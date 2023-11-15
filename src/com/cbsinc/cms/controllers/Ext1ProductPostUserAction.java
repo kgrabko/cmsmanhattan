@@ -28,8 +28,10 @@ import javax.servlet.http.HttpSession;
 
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.PublisherBean;
+import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
 
+//@PageController( jspName = "Ext1ProductPostUser.jsp" )
 public class Ext1ProductPostUserAction implements IAction {
 
 	ProductPostAllFaced productPostAllFaced;

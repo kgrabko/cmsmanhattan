@@ -29,8 +29,10 @@ import javax.servlet.http.HttpSession;
 
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.OrderListBean;
+import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.OrderFaced;
 
+@PageController( jspName = "OrderList.jsp" )
 public class OrderListAction implements IAction {
 
 	OrderFaced orderFaced;

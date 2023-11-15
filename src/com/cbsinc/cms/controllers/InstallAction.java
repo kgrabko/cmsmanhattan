@@ -30,8 +30,10 @@ import javax.servlet.http.HttpSession;
 
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.CreateShopBean;
+import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 
+@PageController( jspName = "Install.jsp" )
 public class InstallAction implements IAction {
 
 	private HttpSession session;

@@ -27,8 +27,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.cbsinc.cms.AccountHistoryBean;
 import com.cbsinc.cms.AuthorizationPageBean;
+import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.OrderFaced;
 
+@PageController( jspName = "AccountHistory.jsp" )
 public abstract class AccountHistoryAction extends TemplateAction {
 
 

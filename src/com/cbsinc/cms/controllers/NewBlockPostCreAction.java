@@ -34,10 +34,12 @@ import com.cbsinc.cms.CatalogEditBean;
 import com.cbsinc.cms.CatalogListBean;
 import com.cbsinc.cms.ProductlistBean;
 import com.cbsinc.cms.PublisherBean;
+import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
 import com.cbsinc.cms.faceds.ProductlistFaced;
 
+@PageController( jspName = "NewsBlockPostCre.jsp" )
 public class NewBlockPostCreAction implements IAction {
 
 	private ProductPostAllFaced productPostAllFaced;

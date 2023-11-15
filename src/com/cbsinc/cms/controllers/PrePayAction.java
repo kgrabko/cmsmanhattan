@@ -31,8 +31,10 @@ import javax.servlet.http.HttpSession;
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.OrderBean;
 import com.cbsinc.cms.PrePayBean;
+import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 
+@PageController( jspName = "PrePay.jsp" )
 public class PrePayAction  extends TemplateAction {
 	
 	

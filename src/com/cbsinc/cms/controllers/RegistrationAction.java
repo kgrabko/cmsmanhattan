@@ -27,11 +27,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.cbsinc.cms.AuthorizationPageBean;
+import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.jms.controllers.AddUserToMailMessageBean;
 import com.cbsinc.cms.jms.controllers.MessageSender;
 import com.cbsinc.cms.jms.controllers.Message;
 
+@PageController( jspName = "RegPage.jsp" )
 public class RegistrationAction implements IAction {
 
 	HttpSession session;

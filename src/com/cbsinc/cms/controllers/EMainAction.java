@@ -25,6 +25,9 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cbsinc.cms.annotations.PageController;
+
+@PageController( jspName = "EMail.jsp" )
 public class EMainAction extends TemplateAction {
 
 	public EMainAction() {

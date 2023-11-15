@@ -43,6 +43,7 @@ import org.apache.tomcat.util.http.mapper.Mapper;
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.CatalogListBean;
 import com.cbsinc.cms.ProductlistBean;
+import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.faceds.PolicyFaced;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
@@ -51,6 +52,7 @@ import com.cbsinc.cms.jms.controllers.MessageSender;
 import com.cbsinc.cms.jms.controllers.Message;
 import com.cbsinc.cms.jms.controllers.SendMailMessageBean;
 
+@PageController( jspName = "Productlist.jsp" )
 public class ProductlistAction implements IAction {
 
 	private AuthorizationPageFaced authorizationPageFaced;
