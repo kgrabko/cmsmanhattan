@@ -510,7 +510,7 @@ public class ProductlistAction implements IAction {
 			// authorizationPageFaced.getCreateShopBean().addShopWithExtract_allLang(authorizationPageBeanId,request.getParameter("create_site_by_id"),servletContext);
 
 			if (authorizationPageBeanId.getUser_site().equals("-1")) {
-				HashMap messageMail = (HashMap) session.getAttribute("messageMail");
+				Message messageMail = new Message();
 				String sitePath = (String) request.getSession().getAttribute("site_path");
 				String shop = sitePath + File.separatorChar + "mail" + File.separatorChar + "newshop.txt";
 				String policy = sitePath + File.separatorChar + "mail" + File.separatorChar + "Policy.pdf";

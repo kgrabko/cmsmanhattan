@@ -4,6 +4,9 @@ import java.sql.*;
 
 import org.apache.log4j.Logger;
 
+import com.cbsinc.cms.annotations.PageModel;
+import com.cbsinc.cms.annotations.Scope;
+
 /**
  * <p>
  * Title: Content Manager System
@@ -25,6 +28,7 @@ import org.apache.log4j.Logger;
  * @version 1.0
  */
 
+@PageModel( Id="payBeanId" , scope=Scope.SESSION ) 
 public class PayBean extends com.cbsinc.cms.WebControls implements java.io.Serializable {
 
 	private static final long serialVersionUID = -5025445874531411579L;

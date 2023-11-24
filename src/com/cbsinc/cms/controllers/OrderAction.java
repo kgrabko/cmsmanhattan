@@ -141,8 +141,8 @@ public class OrderAction implements IAction {
 			throws Exception {
 
 		OrderBean orderBeanId;
-		Map messageMail;
-		AuthorizationPageBean AuthorizationPageBeanId;
+		//Map messageMail;
+		AuthorizationPageBean authorizationPageBeanId;
 		AccountHistoryBean accountHistoryBeanId;
 		HttpSession session;
 
@@ -156,20 +156,19 @@ public class OrderAction implements IAction {
 			orderFaced = ServiceLocator.getInstance().getOrderFaced();
 		if (authorizationPageFaced == null)
 			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
-		AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
+		authorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
 		accountHistoryBeanId = (AccountHistoryBean) session.getAttribute("accountHistoryBeanId");
 		orderBeanId = new OrderBean();
 		request.setAttribute("orderBeanId", orderBeanId);
 		orderBeanId = (OrderBean) request.getAttribute("orderBeanId");
-		messageMail = (Map) session.getAttribute("messageMail");
-		if (AuthorizationPageBeanId == null || accountHistoryBeanId == null || orderBeanId == null)
+		if (authorizationPageBeanId == null || accountHistoryBeanId == null || orderBeanId == null)
 			return;
 
 		request.setCharacterEncoding("UTF-8");
 
 		orderBeanId.isInternet = isInternet;
-		orderBeanId.setBalans(orderFaced.getBalans(AuthorizationPageBeanId.getIntUserID()));
-		orderBeanId.setUser_ID("" + AuthorizationPageBeanId.getIntUserID());
+		orderBeanId.setBalans(orderFaced.getBalans(authorizationPageBeanId.getIntUserID()));
+		orderBeanId.setUser_ID("" + authorizationPageBeanId.getIntUserID());
 
 		if (request.getParameter("offset") != null)
 			orderBeanId.setOffset(orderFaced.stringToInt(request.getParameter("offset")));
@@ -177,7 +176,7 @@ public class OrderAction implements IAction {
 		if (request.getParameter("create_order") != null) {
 			String create_order = request.getParameter("create_order");
 			if (create_order.compareTo("true") == 0)
-				orderFaced.createOrder(AuthorizationPageBeanId.getCurrency_id(), orderBeanId);
+				orderFaced.createOrder(authorizationPageBeanId.getCurrency_id(), orderBeanId);
 			// orderFaced.createOrder("1",orderBeanId );
 		}
 
@@ -186,22 +185,22 @@ public class OrderAction implements IAction {
 			if (!isNumber(request.getParameter("order_id")))
 				return;
 			orderBeanId.setOrder_id(request.getParameter("order_id"));
-			AuthorizationPageBeanId.setCurrentOrderId(Long.parseLong(orderBeanId.getOrder_id()));
+			authorizationPageBeanId.setCurrentOrderId(Long.parseLong(orderBeanId.getOrder_id()));
 		} else if (request.getParameter("account_history_id") != null) {
 			String account_history_id = request.getParameter("account_history_id");
 			if (!isNumber(account_history_id))
 				return;
 			String order_id = orderFaced.getOrderByAccount(account_history_id);
 			orderBeanId.setOrder_id(order_id);
-			AuthorizationPageBeanId.setCurrentOrderId(Long.parseLong(orderBeanId.getOrder_id()));
+			authorizationPageBeanId.setCurrentOrderId(Long.parseLong(orderBeanId.getOrder_id()));
 		} else if (orderBeanId.getOrder_id().length() == 0) {
 
-			if (AuthorizationPageBeanId.getCurrentOrderId() > 0) {
-				orderBeanId.setOrder_id("" + AuthorizationPageBeanId.getCurrentOrderId());
+			if (authorizationPageBeanId.getCurrentOrderId() > 0) {
+				orderBeanId.setOrder_id("" + authorizationPageBeanId.getCurrentOrderId());
 				orderFaced.getProducts(request, orderBeanId);
 			} else {
-				orderFaced.createOrder(AuthorizationPageBeanId.getCurrency_id(), orderBeanId);
-				AuthorizationPageBeanId.setCurrentOrderId(Long.parseLong(orderBeanId.getOrder_id()));
+				orderFaced.createOrder(authorizationPageBeanId.getCurrency_id(), orderBeanId);
+				authorizationPageBeanId.setCurrentOrderId(Long.parseLong(orderBeanId.getOrder_id()));
 
 			}
 		}
@@ -215,9 +214,9 @@ public class OrderAction implements IAction {
 
 				if (request.getParameter("position") != null) {
 
-					if (AuthorizationPageBeanId.getIntLevelUp() != 2
+					if (authorizationPageBeanId.getIntLevelUp() != 2
 							&& orderBeanId.getDeliverystatus_id().equals("1")) {
-						AuthorizationPageBeanId
+						authorizationPageBeanId
 								.setStrMessage("To make a new order you have to login again and use button exit.");
 					} else {
 						int quantity = 1;
@@ -225,7 +224,7 @@ public class OrderAction implements IAction {
 							quantity = Integer.parseInt(request.getParameter("quantity"));
 						String rezult = orderFaced.addPosition(request.getParameter("position"), quantity, orderBeanId);
 						if (rezult.compareTo("-1") == 0)
-							AuthorizationPageBeanId.setStrMessage(AuthorizationPageBeanId
+							authorizationPageBeanId.setStrMessage(authorizationPageBeanId
 									.getLocalization(servletContext).getString("order.badcurrency.text"));
 					}
 				}
@@ -234,9 +233,9 @@ public class OrderAction implements IAction {
 			if (orderBeanId.getAction().compareTo("del") == 0)
 				if (request.getParameter("position") != null) {
 
-					if (AuthorizationPageBeanId.getIntLevelUp() != 2
+					if (authorizationPageBeanId.getIntLevelUp() != 2
 							&& orderBeanId.getDeliverystatus_id().equals("1")) {
-						AuthorizationPageBeanId.setStrMessage(
+						authorizationPageBeanId.setStrMessage(
 								"You can not dot remove item because the order is in process stage delivery.");
 					} else
 						orderFaced.deleteOrder(request.getParameter("position"), orderBeanId);
@@ -246,31 +245,31 @@ public class OrderAction implements IAction {
 			if (orderBeanId.getAction().compareTo("status") == 0) {
 				float balans = orderBeanId.getBalans();
 				float order_end_amount = Float.parseFloat(orderBeanId.getend_amount());
-				long level_up = AuthorizationPageBeanId.getIntLevelUp();
+				long level_up = authorizationPageBeanId.getIntLevelUp();
 				if (level_up != 2 && 0 > balans - order_end_amount) {
-					AuthorizationPageBeanId.setStrMessage("You have less money for Payment of order  N "
+					authorizationPageBeanId.setStrMessage("You have less money for Payment of order  N "
 							+ orderBeanId.getOrder_id() + " , Please click link \"Pay\" that payment order .");
 					orderBeanId.setorder_paystatus("1");
 				} else {
 					int result = orderFaced.setSave(orderBeanId);
 					switch (result) {
 					case 5:
-						AuthorizationPageBeanId.setStrMessage("Please enter phone number.");
+						authorizationPageBeanId.setStrMessage("Please enter phone number.");
 						break;
 					case 6:
-						AuthorizationPageBeanId.setStrMessage("Please enter contact person.");
+						authorizationPageBeanId.setStrMessage("Please enter contact person.");
 						break;
 					}
 				}
 			}
 
 			if ((orderBeanId.getAction().compareTo("save") == 0
-					&& AuthorizationPageBeanId.getStrLogin().compareTo("user") != 0
+					&& authorizationPageBeanId.getStrLogin().compareTo("user") != 0
 					&& orderBeanId.getDeliverystatus_id().equals("0"))
 					|| (orderBeanId.getAction().compareTo("save") == 0
-							&& AuthorizationPageBeanId.getIntLevelUp() == 2)) {
+							&& authorizationPageBeanId.getIntLevelUp() == 2)) {
 
-				if (AuthorizationPageBeanId.getIntLevelUp() == 1)
+				if (authorizationPageBeanId.getIntLevelUp() == 1)
 					orderBeanId.setDeliverystatus_id("" + OrderDeliveryStatus.BILL_HAS_SENT_TO_CLIENT.getCode());
 
 				String user_os = "";
@@ -283,9 +282,9 @@ public class OrderAction implements IAction {
 					user_os = user_os.concat(header_name + "=" + header_value + "\n");
 				}
 
-				messageMail.clear();
-				messageMail.put("@FirstName", AuthorizationPageBeanId.getStrFirstName());
-				messageMail.put("@LastName", AuthorizationPageBeanId.getStrLastName());
+				Message messageMail = new Message();
+				messageMail.put("@FirstName", authorizationPageBeanId.getStrFirstName());
+				messageMail.put("@LastName", authorizationPageBeanId.getStrLastName());
 				messageMail.put("@NumberOfOrder", orderBeanId.getOrder_id());
 				messageMail.put("@ContactPerson", orderBeanId.getContact_person());
 				messageMail.put("@Balans", "" + orderBeanId.getBalans());
@@ -301,7 +300,7 @@ public class OrderAction implements IAction {
 				messageMail.put("@Currency", "" + orderBeanId.getcurrency_lable());
 				messageMail.put("@IPAddress", "" + request.getRemoteAddr());
 				messageMail.put("@HTTPHEAD", "" + user_os);
-				messageMail.put("@SiteId", AuthorizationPageBeanId.getSite_id());
+				messageMail.put("@SiteId", authorizationPageBeanId.getSite_id());
 
 				String sitePath = (String) request.getSession().getAttribute("site_path");
 				String shopOrder = sitePath + File.separatorChar + "mail" + File.separatorChar + "ShopOrder.txt";
@@ -311,10 +310,10 @@ public class OrderAction implements IAction {
 				System.out.println("path: " + shopOrder);
 
 				AuthorizationPageBean ownerShop = authorizationPageFaced
-						.getAuthorizationBeanOfRoleAdmin(AuthorizationPageBeanId.getSite_id());
+						.getAuthorizationBeanOfRoleAdmin(authorizationPageBeanId.getSite_id());
 				messageMail.put("@ShopEmail", ownerShop.getStrEMail());
 
-				if (AuthorizationPageBeanId.getSite_id().compareTo("2") == 0) {
+				if (authorizationPageBeanId.getSite_id().compareTo("2") == 0) {
 					orderFaced.setSaveWithOutDeductMoney(orderBeanId);
 				} else {
 					orderFaced.setSave(orderBeanId);
@@ -324,29 +323,29 @@ public class OrderAction implements IAction {
 				Message message = new Message();
 				message.put("to", ownerShop.getStrEMail());
 				message.put("subject",
-						AuthorizationPageBeanId.getLocalization(servletContext).getString("order.order_number.text"));
+						authorizationPageBeanId.getLocalization(servletContext).getString("order.order_number.text"));
 				message.put("pathmessage", shopOrder);
 				message.put("attachFile", attachFile);
 				message.put("fields", messageMail);
 				mqSender.send(message);
 
 				message = new Message();
-				message.put("to", AuthorizationPageBeanId.getStrEMail());
+				message.put("to", authorizationPageBeanId.getStrEMail());
 				message.put("mailfrom", ownerShop.getStrEMail());
 				message.put("subject",
-						AuthorizationPageBeanId.getLocalization(servletContext).getString("order.order_number.text"));
+						authorizationPageBeanId.getLocalization(servletContext).getString("order.order_number.text"));
 				message.put("pathmessage", clientOrder);
 				message.put("attachFile", attachFile);
 				message.put("fields", messageMail);
 				mqSender.send(message);
-				AuthorizationPageBeanId.setStrMessage("Order was not paid yet.");
+				authorizationPageBeanId.setStrMessage("Order was not paid yet.");
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("fdencrypting.jsp");
 				dispatcher.forward(request, response);
 			} else if (orderBeanId.getAction().compareTo("save") == 0
-					&& AuthorizationPageBeanId.getStrLogin().compareTo("user") == 0) {
-				AuthorizationPageBeanId.setStrMessage(
-						AuthorizationPageBeanId.getLocalization(servletContext).getString("order.forpay.text"));
+					&& authorizationPageBeanId.getStrLogin().compareTo("user") == 0) {
+				authorizationPageBeanId.setStrMessage(
+						authorizationPageBeanId.getLocalization(servletContext).getString("order.forpay.text"));
 			}
 
 		}
@@ -356,37 +355,37 @@ public class OrderAction implements IAction {
 		orderBeanId.setQuantity_product(orderFaced.getProductsListSize(request, orderBeanId));
 		orderBeanId.setSelect_country(orderFaced.getXMLDBList("Order.jsp?country_id", "country",
 				orderBeanId.getCountry_id(), "select country_id ,name from country   where  locale = '"
-						+ AuthorizationPageBeanId.getLocale() + "' "));
+						+ authorizationPageBeanId.getLocale() + "' "));
 		orderBeanId.setSelect_city(orderFaced.getXMLDBList("Order.jsp?city_id", "city", orderBeanId.getCity_id(),
 				"select  city_id , name  from  city where country_id =" + orderBeanId.getCountry_id()
-						+ " and locale = '" + AuthorizationPageBeanId.getLocale() + "' "));
+						+ " and locale = '" + authorizationPageBeanId.getLocale() + "' "));
 		orderBeanId.setSelect_paystatus(
 				orderFaced.getXMLDBList("Order.jsp?order_paystatus", "paystatus", orderBeanId.getorder_paystatus(),
 						"select  paystatus_id , lable  from  paystatus  where  active  = true"));
 		orderBeanId.setSelect_deliverystatus(orderFaced.getXMLDBList("Order.jsp?order_deliverystatus", "deliverystatus",
 				orderBeanId.getDeliverystatus_id(),
 				"select  deliverystatus_id , lable  from  deliverystatus  where  active  = true and lang = '"
-						+ AuthorizationPageBeanId.getLocale() + "' "));
+						+ authorizationPageBeanId.getLocale() + "' "));
 
 		if (orderBeanId.getCity_id().equals("0"))
-			orderBeanId.setCity_id(AuthorizationPageBeanId.getCity_id());
+			orderBeanId.setCity_id(authorizationPageBeanId.getCity_id());
 		if (orderBeanId.getCountry_id().equals("0"))
-			orderBeanId.setCountry_id(AuthorizationPageBeanId.getCountry_id());
+			orderBeanId.setCountry_id(authorizationPageBeanId.getCountry_id());
 		if (orderBeanId.getContact_person().length() == 0)
 			orderBeanId.setContact_person(
-					AuthorizationPageBeanId.getStrFirstName() + " " + AuthorizationPageBeanId.getStrLastName());
+					authorizationPageBeanId.getStrFirstName() + " " + authorizationPageBeanId.getStrLastName());
 		if (orderBeanId.getshipment_email().length() == 0)
-			orderBeanId.setshipment_email(AuthorizationPageBeanId.getStrEMail());
+			orderBeanId.setshipment_email(authorizationPageBeanId.getStrEMail());
 		if (orderBeanId.getshipment_phone().length() == 0)
-			orderBeanId.setshipment_phone(AuthorizationPageBeanId.getStrPhone());
+			orderBeanId.setshipment_phone(authorizationPageBeanId.getStrPhone());
 
 		orderBeanId.setSelect_menu_catalog(orderFaced.getMenuXMLDBList("Productlist.jsp?catalog_id", "menu",
-				AuthorizationPageBeanId.getCatalog_id(),
+				authorizationPageBeanId.getCatalog_id(),
 				"select catalog_id , lable , parent_id  from catalog   where  active = true and parent_id = 0 and site_id = "
-						+ AuthorizationPageBeanId.getSite_id() + " and lang_id = "
-						+ AuthorizationPageBeanId.getLang_id()
+						+ authorizationPageBeanId.getSite_id() + " and lang_id = "
+						+ authorizationPageBeanId.getLang_id()
 						+ " or parent_id in (select catalog_id   from catalog   where  active = true and site_id = "
-						+ AuthorizationPageBeanId.getSite_id() + "  and parent_id = 0 )"));
+						+ authorizationPageBeanId.getSite_id() + "  and parent_id = 0 )"));
 
 	}
 

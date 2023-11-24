@@ -3,6 +3,9 @@ package com.cbsinc.cms;
 import java.io.*;
 import org.apache.log4j.Logger;
 
+import com.cbsinc.cms.annotations.PageModel;
+import com.cbsinc.cms.annotations.Scope;
+
 /**
  * <p>
  * Title: Content Manager System
@@ -24,6 +27,7 @@ import org.apache.log4j.Logger;
  * @version 1.0
  */
 
+@PageModel( Id="publisherBeanId" , scope=Scope.SESSION ) 
 public class PublisherBean extends com.cbsinc.cms.WebControls implements java.io.Serializable {
 
 	private static final long serialVersionUID = -4418477184811109279L;

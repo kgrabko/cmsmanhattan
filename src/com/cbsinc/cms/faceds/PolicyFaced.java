@@ -24,7 +24,6 @@ import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
-
 import org.apache.log4j.Logger;
 
 import com.cbsinc.cms.AuthorizationPageBean;
@@ -35,12 +34,8 @@ import com.cbsinc.cms.QueryManager;
 import com.cbsinc.cms.controllers.Layout;
 import com.cbsinc.cms.exceptions.LocalException;
 
-public class PolicyFaced extends com.cbsinc.cms.WebControls implements
-		java.io.Serializable {
-	/**
-	 * 
-	 */
-	 private static final long serialVersionUID = -6657917721785944014L;
+
+public class PolicyFaced extends com.cbsinc.cms.WebControls {
 
 	/**
 	 * <p>
@@ -62,15 +57,10 @@ public class PolicyFaced extends com.cbsinc.cms.WebControls implements
 	 * @author Konstantin Grabko
 	 * @version 1.0
 	 */
-
-	
-
-	
-
 	
 	final static private Logger log = Logger.getLogger(PolicyFaced.class);
-	transient final ResourceBundle setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources");
-	transient final ResourceBundle sequences_rs = PropertyResourceBundle.getBundle("sequence");
+	final ResourceBundle setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources");
+	final ResourceBundle sequences_rs = PropertyResourceBundle.getBundle("sequence");
 	float fltEnd_amount = (float) 0.01 ;
 	
 	public PolicyFaced() 

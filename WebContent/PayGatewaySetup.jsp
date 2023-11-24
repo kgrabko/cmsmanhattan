@@ -2,7 +2,7 @@
 <%@ page errorPage="error.jsp" %>
 <jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <jsp:useBean id="payGatewayListBeanId" scope="session" class="com.cbsinc.cms.payGatewayListBeanId" />
-<jsp:useBean id="payGatewayBeanIdId" scope="session" class="com.cbsinc.cms.payGatewayBeanIdId" />
+<jsp:useBean id="payGatewayBeanId" scope="session" class="com.cbsinc.cms.payGatewayBeanIdId" />
 
 <%
   response.setHeader("Cache-Control","no-cache"); //HTTP 1.1

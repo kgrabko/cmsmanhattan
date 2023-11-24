@@ -6,6 +6,9 @@ import java.util.Locale;
 
 import org.apache.log4j.Logger;
 
+import com.cbsinc.cms.annotations.PageModel;
+import com.cbsinc.cms.annotations.Scope;
+
 /**
  * <p>
  * Title: Content Manager System
@@ -26,7 +29,7 @@ import org.apache.log4j.Logger;
  * @author Konstantin Grabko
  * @version 1.0
  */
-
+@PageModel( Id="orderListBeanId" , scope=Scope.SESSION ) 
 public class OrderListBean extends com.cbsinc.cms.WebControls implements java.io.Serializable {
 
 	private static final long serialVersionUID = 5492657921346633911L;

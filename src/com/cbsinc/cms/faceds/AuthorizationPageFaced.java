@@ -34,6 +34,7 @@ import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.CreateShopBean;
 import com.cbsinc.cms.GetValueTool;
 import com.cbsinc.cms.QueryManager;
+import com.cbsinc.cms.annotations.SingletonBean;
 import com.cbsinc.cms.controllers.SiteType;
 import com.cbsinc.cms.services.tomcat.AddAliase;
 import com.cbsinc.cms.services.tomcat.DomainRegister;
@@ -60,23 +61,20 @@ import com.cbsinc.cms.services.tomcat.DomainRegister;
  */
 
 
-public class AuthorizationPageFaced extends com.cbsinc.cms.WebControls implements
-		java.io.Serializable {
+public class AuthorizationPageFaced extends com.cbsinc.cms.WebControls  {
 
-	
-	private static final long serialVersionUID = -6909056318575957347L;
 	
 	final CreateShopBean  createShopBean = new CreateShopBean();
 //	sequences_rs = PropertyResourceBundle.getBundle("sequence");
-	transient final private ResourceBundle sequences_rs = PropertyResourceBundle.getBundle("sequence");
-	transient final private ResourceBundle setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources") ;
-	transient final private ResourceBundle session_scope = PropertyResourceBundle.getBundle("session_scope") ;
+	final private ResourceBundle sequences_rs = PropertyResourceBundle.getBundle("sequence");
+	final private ResourceBundle setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources") ;
+	final private ResourceBundle session_scope = PropertyResourceBundle.getBundle("session_scope") ;
 	
 	final ConcurrentHashMap controllerMap = new ConcurrentHashMap(1024);
 	final ConcurrentHashMap transformerMap = new ConcurrentHashMap(1024);
 	
-	transient final ResourceBundle actions_resources = PropertyResourceBundle.getBundle("web_actions");
-	transient final ResourceBundle xslt_resources = PropertyResourceBundle.getBundle("web_xslt");
+	final ResourceBundle actions_resources = PropertyResourceBundle.getBundle("web_actions");
+	final ResourceBundle xslt_resources = PropertyResourceBundle.getBundle("web_xslt");
 	
 	final Document doc = null ;
 	//transient ResourceBundle application_scope = null ;

@@ -30,13 +30,13 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.cbsinc.cms.QueryManager;
+import com.cbsinc.cms.annotations.SingletonBean;
 
 
-public class CreteriaFaced  implements java.io.Serializable {
+public class CreteriaFaced   {
 	
 
-	private static final long serialVersionUID = -22514501660649295L;
-	transient static private Logger log = Logger.getLogger(CreteriaFaced.class);
+	 static private Logger log = Logger.getLogger(CreteriaFaced.class);
 	
 	public void addCatalog(String site_id , String table_name , String link_id , String name ,  String label  ) 
 	{

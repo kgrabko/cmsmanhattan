@@ -137,7 +137,7 @@ public class DownloadServletByOdrder extends HttpServlet {
 			strDevice = "xml";
 		}
 
-		OperationAmountBeanId = (OperationAmountBean) request.getSession().getAttribute("OperationAmountBeanId");
+		OperationAmountBeanId = (OperationAmountBean) request.getSession().getAttribute("operationAmountBeanId");
 		AuthorizationPageBeanId = (AuthorizationPageBean) request.getSession().getAttribute("authorizationPageBeanId");
 
 		if (authorizationPageFaced == null)

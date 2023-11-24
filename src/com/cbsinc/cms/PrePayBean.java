@@ -1,5 +1,9 @@
 package com.cbsinc.cms;
 
+import com.cbsinc.cms.annotations.PageModel;
+import com.cbsinc.cms.annotations.Scope;
+
+@PageModel( Id="prePayBeanId" , scope=Scope.SESSION ) 
 public class PrePayBean extends com.cbsinc.cms.WebControls implements java.io.Serializable {
 
 	private static final long serialVersionUID = 6234842953899930459L;

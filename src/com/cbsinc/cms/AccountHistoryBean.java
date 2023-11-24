@@ -6,6 +6,8 @@ import java.text.NumberFormat;
 import com.cbsinc.cms.Currency;
 import com.cbsinc.cms.CurrencyHash;
 import com.cbsinc.cms.QueryManager;
+import com.cbsinc.cms.annotations.PageModel;
+import com.cbsinc.cms.annotations.Scope;
 
 import org.apache.log4j.Logger;
 
@@ -29,7 +31,7 @@ import org.apache.log4j.Logger;
  * @author Konstantin Grabko
  * @version 1.0
  */
-
+@PageModel( Id="accountHistoryBeanId" , scope=Scope.SESSION ) 
 public class AccountHistoryBean extends com.cbsinc.cms.WebControls implements java.io.Serializable {
 
 	private static final long serialVersionUID = -5645998100032237469L;

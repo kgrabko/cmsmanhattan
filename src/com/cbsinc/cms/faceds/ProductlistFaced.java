@@ -1,13 +1,11 @@
 package com.cbsinc.cms.faceds;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
-
 
 import org.apache.log4j.Logger;
 
@@ -40,20 +38,15 @@ import com.cbsinc.cms.controllers.SpecialCatalog;
  * @version 1.0
  */
 
-public class ProductlistFaced extends com.cbsinc.cms.WebControls implements
-		java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6384127888928704724L;
+public class ProductlistFaced extends com.cbsinc.cms.WebControls {
 
 	/**
 	 * 
 	 */
 	final static private Logger log = Logger.getLogger(ProductlistFaced.class);
 	
-	transient final ResourceBundle setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources" );
+	final ResourceBundle setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources" );
 	
 	private int limit_product_list =  10 ;
 	private int limit_blog_list =  20 ;

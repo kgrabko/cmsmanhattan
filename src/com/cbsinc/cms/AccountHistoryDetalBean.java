@@ -22,11 +22,11 @@
 package com.cbsinc.cms;
 
 import java.sql.SQLException;
-
-import com.cbsinc.cms.QueryManager;
-
 import org.apache.log4j.Logger;
+import com.cbsinc.cms.annotations.PageModel;
+import com.cbsinc.cms.annotations.Scope;
 
+@PageModel( Id="accountHistoryDetalBeanId" , scope=Scope.SESSION ) 
 public class AccountHistoryDetalBean extends com.cbsinc.cms.WebControls implements java.io.Serializable {
 
 	private static final long serialVersionUID = -8230325849058152562L;

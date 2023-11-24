@@ -32,12 +32,13 @@ import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.CreateShopBean;
 import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
+import com.cbsinc.cms.jms.controllers.Message;
 
 @PageController( jspName = "Install.jsp" )
 public class InstallAction implements IAction {
 
 	private HttpSession session;
-	private Map messageMail;
+	//private Message messageMail;
 	private AuthorizationPageBean authorizationPageBeanId;
 	private AuthorizationPageFaced authorizationPageFaced;
 	private CreateShopBean createShopBean = null;
@@ -55,7 +56,7 @@ public class InstallAction implements IAction {
 			throws Exception {
 		session = request.getSession();
 
-		messageMail = (Map) session.getAttribute("messageMail");
+
 		authorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
 		if (authorizationPageFaced == null)
 			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
@@ -73,7 +74,7 @@ public class InstallAction implements IAction {
 			throws Exception {
 
 		session = request.getSession();
-		messageMail = (Map) session.getAttribute("messageMail");
+
 		authorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
 		if (authorizationPageFaced == null)
 			authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
@@ -122,7 +123,7 @@ public class InstallAction implements IAction {
 
 		createShopBean.addSite(authorizationPageBeanId);
 
-		messageMail.clear();
+		Message messageMail = new Message();
 		messageMail.put("@FirstName", authorizationPageBeanId.getStrFirstName());
 		messageMail.put("@LastName", authorizationPageBeanId.getStrLastName());
 //		    messageMail.put("@NumberOfOrder", orderBeanId.getOrder_id()  ) ;

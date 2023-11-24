@@ -112,7 +112,6 @@ public class MerchantAction  implements IAction
 	{
 		
 		MerchantBean merchantBean = null ;
-		Map messageMail ;
 		AuthorizationPageBean authorizationPageBeanId ;
 		AccountHistoryBean accountHistoryBeanId ;
 		HttpSession session ;
@@ -128,7 +127,8 @@ public class MerchantAction  implements IAction
 		merchantBean = (MerchantBean) session.getAttribute("merchantBean") ;
 		
 		
-		messageMail = (Map)session.getAttribute("messageMail");
+
+		
 		if( authorizationPageBeanId == null || accountHistoryBeanId == null  || merchantBean == null  ) return ;
 		
 		
@@ -136,7 +136,7 @@ public class MerchantAction  implements IAction
 
 		mappingForm(request,  merchantBean) ;
 		
-		messageMail.clear();
+		Message messageMail = new Message();
 		messageMail.put("@FirstName", authorizationPageBeanId.getStrFirstName() ) ;
 		messageMail.put("@LastName", authorizationPageBeanId.getStrLastName() ) ;
 		messageMail.put("@CName",merchantBean.getcName()) ;

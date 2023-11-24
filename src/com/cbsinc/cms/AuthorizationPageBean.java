@@ -27,6 +27,8 @@ import javax.servlet.ServletContext;
 
 import org.apache.log4j.Logger;
 
+import com.cbsinc.cms.annotations.PageModel;
+import com.cbsinc.cms.annotations.Scope;
 import com.cbsinc.cms.controllers.ServiceLocator;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 
@@ -50,7 +52,7 @@ import com.cbsinc.cms.faceds.AuthorizationPageFaced;
  * @author Konstantin Grabko
  * @version 1.0
  */
-
+@PageModel( Id="authorizationPageBeanId" , scope=Scope.SESSION ) 
 public class AuthorizationPageBean implements java.io.Serializable {
 
 	private static final long serialVersionUID = -7953240488409859679L;

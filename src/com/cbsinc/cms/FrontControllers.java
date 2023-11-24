@@ -27,6 +27,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.PropertyResourceBundle;
@@ -52,11 +53,14 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.log4j.Logger;
 
+import com.cbsinc.cms.annotations.Singleton;
+import com.cbsinc.cms.annotations.SingletonBean;
 import com.cbsinc.cms.controllers.IAction;
 import com.cbsinc.cms.controllers.ProductlistAction;
 import com.cbsinc.cms.controllers.ServiceLocator;
 import com.cbsinc.cms.controllers.SiteRole;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
+import com.cbsinc.cms.faceds.CmsBeansFactoty;
 import com.cbsinc.cms.jms.controllers.MessageSender;
 import com.cbsinc.cms.jms.controllers.Message;
 import com.cbsinc.cms.jms.controllers.StoreCashMessageBean;
@@ -266,6 +270,21 @@ public class FrontControllers implements Filter, ITransformationService {
 					if (obj != null) {
 						if (response.isCommitted())
 							return;
+						
+						// Dependency injection by type 
+						for (Field f: obj.getClass().getDeclaredFields()) {
+								Singleton singleton = f.getAnnotation(Singleton.class);
+								if(singleton != null) 
+								{
+									String className = f.getType().getName() ;
+									//String className = obj.getClass().getName();
+									Object value = CmsBeansFactoty.getInstance().getBean(className);
+									f.setAccessible(true);
+									f.set(obj, value);
+								} 
+								
+							}
+						
 						if (((HttpServletRequest) request).getMethod().toUpperCase().compareTo("POST") == 0)
 							((IAction) obj).doPost((HttpServletRequest) request, (HttpServletResponse) response,
 									servletContext);

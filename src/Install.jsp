@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ page import="java.util.PropertyResourceBundle,java.util.ResourceBundle"%>
 <jsp:useBean id="authorizationPageBean" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
-<jsp:useBean id="OperationAmountBeanId" scope="session" class="com.cbsinc.cms.OperationAmountBean" />
+<jsp:useBean id="operationAmountBeanId" scope="session" class="com.cbsinc.cms.OperationAmountBean" />
 <jsp:useBean id="messageMail" scope="session" class="java.util.HashMap" type="java.util.HashMap"/>
 <jsp:setProperty name="authorizationPageBean" property="*" />
 <%

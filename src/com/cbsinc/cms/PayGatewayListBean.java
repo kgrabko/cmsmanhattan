@@ -27,6 +27,10 @@ import java.util.LinkedList;
 
 import org.apache.log4j.Logger;
 
+import com.cbsinc.cms.annotations.PageModel;
+import com.cbsinc.cms.annotations.Scope;
+
+@PageModel( Id="payGatewayListBeanId" , scope=Scope.SESSION ) 
 public class PayGatewayListBean implements Serializable {
 
 	private static final long serialVersionUID = -1197050877775233920L;

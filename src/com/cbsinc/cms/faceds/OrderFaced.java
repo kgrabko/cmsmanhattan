@@ -21,7 +21,6 @@ package com.cbsinc.cms.faceds;
  */
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
@@ -39,11 +38,9 @@ import com.cbsinc.cms.OrderListBean;
 import com.cbsinc.cms.PayStatus;
 import com.cbsinc.cms.QueryManager;
 
-public class OrderFaced extends com.cbsinc.cms.WebControls implements java.io.Serializable 
+
+public class OrderFaced extends com.cbsinc.cms.WebControls 
 {
-
-
-	transient private static final long serialVersionUID = 8216914184792733202L;
 
 	/**
 	 * <p>
@@ -66,9 +63,9 @@ public class OrderFaced extends com.cbsinc.cms.WebControls implements java.io.Se
 	 * @version 1.0
 	 */
 	
-	transient static private Logger log = Logger.getLogger(OrderFaced.class);
+	 static private Logger log = Logger.getLogger(OrderFaced.class);
 	
-	transient ResourceBundle sequences_rs = null ;
+	 ResourceBundle sequences_rs = null ;
 	//transient java.util.Calendar calendar;
 	//SimpleDateFormat formatter ;
 	

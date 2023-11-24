@@ -5,6 +5,9 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import org.apache.log4j.Logger;
 
+import com.cbsinc.cms.annotations.PageModel;
+import com.cbsinc.cms.annotations.Scope;
+
 /**
  * <p>
  * Title: Content Manager System
@@ -25,17 +28,11 @@ import org.apache.log4j.Logger;
  * @author Konstantin Grabko
  * @version 1.0
  */
-
+@PageModel( Id="operationAmountBeanId" , scope=Scope.SESSION ) 
 public class OperationAmountBean implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	transient private static final long serialVersionUID = -5629328315307393690L;
 
-	/**
-	 * 
-	 */
+	transient private static final long serialVersionUID = -5629328315307393690L;
 
 	transient static private Logger log = Logger.getLogger(OperationAmountBean.class);
 

@@ -85,7 +85,7 @@ public class SendPassword extends HttpServlet {
 					"site_path");
 			String passwordFile = sitePath + "\\mail\\password.txt";
 			String attachFile = sitePath + "\\mail\\info.txt";
-			HashMap messageMail = (HashMap) request.getSession().getAttribute(
+			Message messageMail = (Message) request.getSession().getAttribute(
 					"messageMail");
 
 			String email = request.getParameter("email");

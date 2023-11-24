@@ -21,20 +21,17 @@ package com.cbsinc.cms.faceds;
  */
 import java.io.File;
 import java.io.FilenameFilter;
-import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Vector;
 
-public class SearchFilesFaced implements Serializable
+
+public class SearchFilesFaced 
 {
 
-	/**
-	 * 
-	 */
-	transient private static final long serialVersionUID = 5454129837535120769L;
 
-	transient static Calendar  calendar  = null;
+
+	static Calendar  calendar  = null;
 	
 	public static FilenameFilter filenameFilter	= new FilenameFilter() 
     {

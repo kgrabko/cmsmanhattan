@@ -1,25 +1,19 @@
 package com.cbsinc.cms.faceds;
 
-import java.sql.*;
+import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
-import java.io.*;
-
-
 
 import org.apache.log4j.Logger;
 
-
 import com.cbsinc.cms.AuthorizationPageBean;
-import com.cbsinc.cms.ItemDescriptionBean;
 import com.cbsinc.cms.PostType;
-import com.cbsinc.cms.QueryManager;
 import com.cbsinc.cms.PublisherBean;
+import com.cbsinc.cms.QueryManager;
 
 /**
  * <p>
@@ -43,16 +37,11 @@ import com.cbsinc.cms.PublisherBean;
  */
 
 
-public class ProductPostAllFaced extends com.cbsinc.cms.WebControls implements
-		java.io.Serializable {
+public class ProductPostAllFaced extends com.cbsinc.cms.WebControls {
 
 	
-	private static final long serialVersionUID = 4142951782238438413L;
-	
-	transient final ResourceBundle sequences_rs = PropertyResourceBundle.getBundle("sequence");
-	transient final ResourceBundle setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources" );
-	//Calendar calendar ;
-
+	final ResourceBundle sequences_rs = PropertyResourceBundle.getBundle("sequence");
+	final ResourceBundle setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources" );
 	
 	public ProductPostAllFaced() 
 	{

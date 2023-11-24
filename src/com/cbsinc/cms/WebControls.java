@@ -1,14 +1,13 @@
 package com.cbsinc.cms;
 
-import java.io.Serializable;
 import java.sql.SQLException;
 import java.text.NumberFormat;
 
 import org.apache.log4j.Logger;
 
-public class WebControls implements Serializable {
+public class WebControls  {
 
-	private static final long serialVersionUID = 1583778363930770359L;
+
 	/**
 	 * <p>
 	 * Title: Content Manager System

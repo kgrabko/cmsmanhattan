@@ -52,7 +52,7 @@ public class ProductUserPostMusicAction implements IAction
 	CatalogAddBean catalogAddBeanId ;
 	AuthorizationPageBean authorizationPageBeanId ;
 	HttpSession session ;
-	Map messageMail ;
+
 	ProductPostAllFaced productPostAllFaced ;
 	String gen_code = "" ;
 	ProductlistBean  productlistBeanId ;
@@ -95,7 +95,7 @@ public class ProductUserPostMusicAction implements IAction
 		}
 		else productPostAllFaced.updateInformationWithCheck(publisherBeanId,authorizationPageBeanId);
 
-		messageMail.clear();
+		Message messageMail = new Message();
 		messageMail.put("@FirstName", authorizationPageBeanId.getStrFirstName() ) ;
 		messageMail.put("@LastName", authorizationPageBeanId.getStrLastName() ) ;
 		messageMail.put("@Site", authorizationPageBeanId.getSite_dir() ) ;
@@ -144,10 +144,10 @@ public class ProductUserPostMusicAction implements IAction
 		catalogEditBeanId = (CatalogEditBean)session.getAttribute("catalogEditBeanId");
 		catalogAddBeanId = (CatalogAddBean)session.getAttribute("catalogAddBeanId");
 		authorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("authorizationPageBeanId");
-		messageMail = (Map)session.getAttribute("messageMail");
+
 		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 		productlistBeanId = (ProductlistBean)session.getAttribute("ProductlistBeanId");
-		if(publisherBeanId == null || catalogListBeanId == null || catalogEditBeanId == null || catalogAddBeanId == null || authorizationPageBeanId == null || messageMail == null ||  productPostAllFaced == null ) return ;
+		if(publisherBeanId == null || catalogListBeanId == null || catalogEditBeanId == null || catalogAddBeanId == null || authorizationPageBeanId == null ||   productPostAllFaced == null ) return ;
 	
 		//if( resources == null )  resources = PropertyResourceBundle.getBundle("localization", response.getLocale());
 		if(notselected.length() == 0 ) notselected = authorizationPageBeanId.getLocalization(servletContext).getString("notselected") ;
@@ -157,8 +157,6 @@ public class ProductUserPostMusicAction implements IAction
 		response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 		
 //		 Start Novigator ---
-		
-		
 		
 		if( request.getParameter("parent_id") != null)
 		{

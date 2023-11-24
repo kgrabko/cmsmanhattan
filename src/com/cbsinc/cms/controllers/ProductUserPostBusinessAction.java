@@ -51,7 +51,7 @@ public class ProductUserPostBusinessAction implements IAction {
 	CatalogAddBean catalogAddBeanId;
 	AuthorizationPageBean authorizationPageBeanId;
 	HttpSession session;
-	Map messageMail;
+
 	ProductPostAllFaced productPostAllFaced;
 	String gen_code = "";
 	PublisherBean publisherBeanId;
@@ -104,7 +104,7 @@ public class ProductUserPostBusinessAction implements IAction {
 		} else
 			productPostAllFaced.updateInformationWithCheck(publisherBeanId, authorizationPageBeanId);
 
-		messageMail.clear();
+		Message messageMail = new Message();
 		messageMail.put("@FirstName", authorizationPageBeanId.getStrFirstName());
 		messageMail.put("@LastName", authorizationPageBeanId.getStrLastName());
 		messageMail.put("@Site", authorizationPageBeanId.getSite_dir());
@@ -233,13 +233,13 @@ public class ProductUserPostBusinessAction implements IAction {
 		catalogEditBeanId = (CatalogEditBean) session.getAttribute("catalogEditBeanId");
 		catalogAddBeanId = (CatalogAddBean) session.getAttribute("catalogAddBeanId");
 		authorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
-		messageMail = (Map) session.getAttribute("messageMail");
+
 		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 		if (notselected.length() == 0)
 			notselected = authorizationPageBeanId.getLocalization(servletContext).getString("notselected");
 
 		if (publisherBeanId == null || catalogListBeanId == null || catalogEditBeanId == null || catalogAddBeanId == null
-				|| authorizationPageBeanId == null || messageMail == null || productPostAllFaced == null) return;
+				|| authorizationPageBeanId == null ||  productPostAllFaced == null) return;
 
 		request.setCharacterEncoding("UTF-8");
 		response.setHeader("Cache-Control", "no-cache"); // HTTP 1.1

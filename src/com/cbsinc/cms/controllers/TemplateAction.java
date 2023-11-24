@@ -22,6 +22,7 @@ import com.cbsinc.cms.PayGatewayListBean;
 import com.cbsinc.cms.PrePayBean;
 import com.cbsinc.cms.PublisherBean;
 import com.cbsinc.cms.RequestFilter;
+import com.cbsinc.cms.jms.controllers.Message;
 
 public abstract class TemplateAction implements IAction {
 
@@ -64,8 +65,8 @@ public abstract class TemplateAction implements IAction {
 	public abstract void action(HttpServletRequest request , HttpServletResponse  response , ServletContext servletContextOpts) throws Exception ;
 
 	
-	public Map getMessageMail() {
-		return(Map) session.getAttribute("messageMail") ;
+	public Message getMessageMail() {
+		return new Message();
 	}
 
 

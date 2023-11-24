@@ -49,7 +49,7 @@ public class ProductUserPostVideoAction implements IAction {
 	CatalogAddBean catalogAddBeanId;
 	AuthorizationPageBean authorizationPageBeanId;
 	HttpSession session;
-	Map messageMail;
+	//Message messageMail;
 	ProductPostAllFaced productPostAllFaced;
 	String gen_code = "";
 	String notselected = "";
@@ -90,7 +90,7 @@ public class ProductUserPostVideoAction implements IAction {
 		} else
 			productPostAllFaced.updateInformationWithCheck(publisherBeanId, authorizationPageBeanId);
 
-		messageMail.clear();
+		Message messageMail = new Message();
 		messageMail.put("@FirstName", authorizationPageBeanId.getStrFirstName());
 		messageMail.put("@LastName", authorizationPageBeanId.getStrLastName());
 		messageMail.put("@Site", authorizationPageBeanId.getSite_dir());
@@ -135,7 +135,8 @@ public class ProductUserPostVideoAction implements IAction {
 		catalogEditBeanId = (CatalogEditBean) session.getAttribute("catalogEditBeanId");
 		catalogAddBeanId = (CatalogAddBean) session.getAttribute("catalogAddBeanId");
 		authorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
-		messageMail = (Map) session.getAttribute("messageMail");
+
+		Message messageMail = new Message();
 		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 		if (publisherBeanId == null || catalogListBeanId == null || catalogEditBeanId == null || catalogAddBeanId == null
 				|| authorizationPageBeanId == null || messageMail == null || productPostAllFaced == null) return;

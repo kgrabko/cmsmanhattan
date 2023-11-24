@@ -32,7 +32,7 @@ public class TestFiles  implements Serializable
 	/**
 	 * 
 	 */
-	transient private static final long serialVersionUID = 4824974619873268186L;
+	private static final long serialVersionUID = 4824974619873268186L;
 	public static FilenameFilter filenameFilter	= new FilenameFilter() 
     {
         public boolean accept(File dir, String name) 

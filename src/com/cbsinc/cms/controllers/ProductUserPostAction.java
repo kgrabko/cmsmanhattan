@@ -45,7 +45,7 @@ import com.cbsinc.cms.jms.controllers.SendMailMessageBean;
 public class ProductUserPostAction implements IAction 
 {
 
-	private Map messageMail ;
+
 	private ProductPostAllFaced productPostAllFaced ;
 	private String gen_code = "" ;
 	
@@ -60,9 +60,9 @@ public class ProductUserPostAction implements IAction
 		CatalogEditBean catalogEditBeanId  = (CatalogEditBean)session.getAttribute("catalogEditBeanId");
 		CatalogAddBean catalogAddBeanId  = (CatalogAddBean)session.getAttribute("catalogAddBeanId");
 		AuthorizationPageBean authorizationPageBeanId = (AuthorizationPageBean)session.getAttribute("authorizationPageBeanId");
-		messageMail = (Map)session.getAttribute("messageMail");
+
 		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
-		if(publisherBeanId == null || catalogListBeanId == null || catalogEditBeanId == null || catalogAddBeanId == null || authorizationPageBeanId == null || messageMail == null || productPostAllFaced == null ) return ;
+		if(publisherBeanId == null || catalogListBeanId == null || catalogEditBeanId == null || catalogAddBeanId == null || authorizationPageBeanId == null || productPostAllFaced == null ) return ;
 	
 
 		action( request,  response,  servletContext) ;
@@ -97,7 +97,7 @@ public class ProductUserPostAction implements IAction
 		}
 		else productPostAllFaced.updateInformationWithCheck(publisherBeanId,authorizationPageBeanId);
 
-		messageMail.clear();
+		Message messageMail = new Message();
 		messageMail.put("@FirstName", authorizationPageBeanId.getStrFirstName() ) ;
 		messageMail.put("@LastName", authorizationPageBeanId.getStrLastName() ) ;
 		messageMail.put("@Site", authorizationPageBeanId.getSite_dir() ) ;
@@ -132,9 +132,8 @@ public class ProductUserPostAction implements IAction
 		CatalogEditBean catalogEditBeanId  = (CatalogEditBean)session.getAttribute("catalogEditBeanId");
 		CatalogAddBean catalogAddBeanId = (CatalogAddBean)session.getAttribute("catalogAddBeanId");
 		AuthorizationPageBean authorizationPageBeanId  = (AuthorizationPageBean)session.getAttribute("authorizationPageBeanId");
-		messageMail = (Map)session.getAttribute("messageMail");
 		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
-		if(publisherBeanId == null || catalogListBeanId == null || catalogEditBeanId == null || catalogAddBeanId == null || authorizationPageBeanId == null || messageMail == null || productPostAllFaced == null ) return ;
+		if(publisherBeanId == null || catalogListBeanId == null || catalogEditBeanId == null || catalogAddBeanId == null || authorizationPageBeanId == null  || productPostAllFaced == null ) return ;
 	
 
 		ProductPostAllFaced productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();	
@@ -164,9 +163,8 @@ public class ProductUserPostAction implements IAction
 		CatalogEditBean catalogEditBeanId  = (CatalogEditBean)session.getAttribute("catalogEditBeanId");
 		CatalogAddBean catalogAddBeanId  = (CatalogAddBean)session.getAttribute("catalogAddBeanId");
 		AuthorizationPageBean authorizationPageBeanId  = (AuthorizationPageBean)session.getAttribute("authorizationPageBeanId");
-		messageMail = (Map)session.getAttribute("messageMail");
 		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
-		if(publisherBeanId == null || catalogListBeanId == null || catalogEditBeanId == null || catalogAddBeanId == null || authorizationPageBeanId == null || messageMail == null || productPostAllFaced == null ) return ;
+		if(publisherBeanId == null || catalogListBeanId == null || catalogEditBeanId == null || catalogAddBeanId == null || authorizationPageBeanId == null  || productPostAllFaced == null ) return ;
 	
 		request.setCharacterEncoding("UTF-8");
 		response.setHeader("Cache-Control","no-cache"); //HTTP 1.1

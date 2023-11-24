@@ -51,7 +51,7 @@ public class ProductUserPostTransportAction implements IAction {
 	CatalogAddBean catalogAddBeanId;
 	AuthorizationPageBean authorizationPageBeanId;
 	HttpSession session;
-	Map messageMail;
+	//Message messageMail;
 	ProductPostAllFaced productPostAllFaced;
 	String gen_code = "";
 	PublisherBean publisherBeanId;
@@ -103,6 +103,7 @@ public class ProductUserPostTransportAction implements IAction {
 		} else
 			productPostAllFaced.updateInformationWithCheck(publisherBeanId, authorizationPageBeanId);
 
+		Message messageMail = new Message();
 		messageMail.clear();
 		messageMail.put("@FirstName", authorizationPageBeanId.getStrFirstName());
 		messageMail.put("@LastName", authorizationPageBeanId.getStrLastName());
@@ -231,7 +232,7 @@ public class ProductUserPostTransportAction implements IAction {
 		catalogEditBeanId = (CatalogEditBean) session.getAttribute("catalogEditBeanId");
 		catalogAddBeanId = (CatalogAddBean) session.getAttribute("catalogAddBeanId");
 		authorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
-		messageMail = (Map) session.getAttribute("messageMail");
+		Message messageMail = new Message();
 		productPostAllFaced = ServiceLocator.getInstance().getProductPostAllFaced();
 		if (notselected.length() == 0)
 			notselected = authorizationPageBeanId.getLocalization(servletContext).getString("notselected");
