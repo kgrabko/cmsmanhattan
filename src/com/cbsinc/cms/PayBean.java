@@ -5,7 +5,9 @@ import java.sql.*;
 import org.apache.log4j.Logger;
 
 import com.cbsinc.cms.annotations.PageModel;
+import com.cbsinc.cms.annotations.PageXsltView;
 import com.cbsinc.cms.annotations.Scope;
+import com.cbsinc.cms.annotations.Type;
 
 /**
  * <p>
@@ -27,7 +29,7 @@ import com.cbsinc.cms.annotations.Scope;
  * @author Konstantin Grabko
  * @version 1.0
  */
-
+//@PageXsltView( xsltName="pay.xslt" , responseType=Type.JSON )
 @PageModel( Id="payBeanId" , scope=Scope.SESSION ) 
 public class PayBean extends com.cbsinc.cms.WebControls implements java.io.Serializable {
 
