@@ -23,6 +23,7 @@ package com.cbsinc.cms.controllers;
 
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,7 +34,6 @@ import com.cbsinc.cms.CatalogAddBean;
 import com.cbsinc.cms.CatalogEditBean;
 import com.cbsinc.cms.CatalogListBean;
 import com.cbsinc.cms.PublisherBean;
-import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
 

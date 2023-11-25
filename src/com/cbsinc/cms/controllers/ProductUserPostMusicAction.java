@@ -1,7 +1,5 @@
 package com.cbsinc.cms.controllers;
 
-import java.util.Map;
-
 /**
  * <p>
  * Title: Content Manager System
@@ -37,9 +35,8 @@ import com.cbsinc.cms.ProductlistBean;
 import com.cbsinc.cms.PublisherBean;
 import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
-import com.cbsinc.cms.faceds.ProductlistFaced;
-import com.cbsinc.cms.jms.controllers.MessageSender;
 import com.cbsinc.cms.jms.controllers.Message;
+import com.cbsinc.cms.jms.controllers.MessageSender;
 import com.cbsinc.cms.jms.controllers.SendMailMessageBean;
 
 @PageController( jspName = "ProductUserPostMusic.jsp" )

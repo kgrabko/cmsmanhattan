@@ -30,8 +30,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.cbsinc.cms.AuthorizationPageBean;
-import com.cbsinc.cms.CatalogAddBean;
-import com.cbsinc.cms.CatalogEditBean;
 import com.cbsinc.cms.CatalogListBean;
 import com.cbsinc.cms.PublisherBean;
 import com.cbsinc.cms.annotations.PageController;

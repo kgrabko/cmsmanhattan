@@ -1,9 +1,6 @@
 package com.cbsinc.cms.controllers;
 
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * <p>
@@ -32,7 +29,6 @@ import java.util.ResourceBundle;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.annotations.PageController;
