@@ -141,7 +141,7 @@ public class PayGatewayBean extends com.cbsinc.cms.WebControls implements java.i
 		buffquery.append("  where shop_id = ").append(shop_id);
 
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		try {
 			Adp.executeUpdate(buffquery.toString());
 			Adp.commit();
@@ -177,7 +177,7 @@ public class PayGatewayBean extends com.cbsinc.cms.WebControls implements java.i
 		buffquery.append(site_id).append(" )");
 
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		try {
 			Adp.executeUpdate(buffquery.toString());
 

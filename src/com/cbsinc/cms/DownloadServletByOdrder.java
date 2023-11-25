@@ -165,7 +165,7 @@ public class DownloadServletByOdrder extends HttpServlet {
 			if ("xml".compareTo(strDevice) == 0) {
 
 				QueryManager Adp = new QueryManager();
-				Adp.BeginTransaction();
+				Adp.beginTransaction();
 				String query = "select  product_id  , order_id from  basket where basket_id = " + basket_id;
 				try {
 					Adp.executeQuery(query);
@@ -363,7 +363,7 @@ public class DownloadServletByOdrder extends HttpServlet {
 
 	public void setPassiveRow(String soft_id) {
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String query = "UPDATE soft SET active = true  WHERE soft_id = " + soft_id;
 		try {
 			Adp.executeUpdate(query);
@@ -383,7 +383,7 @@ public class DownloadServletByOdrder extends HttpServlet {
 
 	public void setDeliveryStatus(long deliverystatus_id, String order_id) {
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 
 		String query = "UPDATE ORDERS SET deliverystatus_id = " + deliverystatus_id + "  WHERE ORDER_ID = " + order_id;
 

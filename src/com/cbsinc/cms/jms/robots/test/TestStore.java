@@ -109,7 +109,7 @@ public class TestStore
 		String query = "" ;
 		try 
 		{
-					Adp.BeginTransaction();
+					Adp.beginTransaction();
 					query = "insert into STORE_SESSION ( USER_ID ,  TYPE ,  CLASSBODY ,  ACTIVE ) "
 						+ " VALUES ( ? ,  ? ,  ? , ? )" ;
 					Map args = new HashMap();

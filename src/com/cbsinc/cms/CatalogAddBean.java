@@ -71,7 +71,7 @@ public class CatalogAddBean implements java.io.Serializable {
 
 	public void addCatalog(AuthorizationPageBean authorizationPageBeanId) {
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String query = "";
 		query = sequences_rs.getString("catalog");
 		// query = "SELECT NEXT VALUE FOR catalog_catalog_id_seq AS ID FROM

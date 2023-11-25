@@ -81,7 +81,7 @@ public interface IQueryManager {
 
 	public void commit();
 
-	public void BeginTransaction();
+	public void beginTransaction();
 
 	public ResourceBundle getResources_localization();
 

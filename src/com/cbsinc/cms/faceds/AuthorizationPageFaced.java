@@ -28,6 +28,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
+import org.perf4j.aop.Profiled;
 import org.w3c.dom.Document;
 
 import com.cbsinc.cms.AuthorizationPageBean;
@@ -64,6 +65,9 @@ import com.cbsinc.cms.services.tomcat.DomainRegister;
 public class AuthorizationPageFaced extends com.cbsinc.cms.WebControls  {
 
 	
+	final private static  String CLASS_NAME = "com.cbsinc.cms.faceds.AuthorizationPageFaced" ;
+	final static private Logger log = Logger.getLogger(AuthorizationPageFaced.class);
+	
 	final CreateShopBean  createShopBean = new CreateShopBean();
 //	sequences_rs = PropertyResourceBundle.getBundle("sequence");
 	final private ResourceBundle sequences_rs = PropertyResourceBundle.getBundle("sequence");
@@ -73,36 +77,17 @@ public class AuthorizationPageFaced extends com.cbsinc.cms.WebControls  {
 	final ConcurrentHashMap controllerMap = new ConcurrentHashMap(1024);
 	final ConcurrentHashMap transformerMap = new ConcurrentHashMap(1024);
 	
-	final ResourceBundle actions_resources = PropertyResourceBundle.getBundle("web_actions");
-	final ResourceBundle xslt_resources = PropertyResourceBundle.getBundle("web_xslt");
-	
+	final ResourceBundle actionsResources = PropertyResourceBundle.getBundle("web_actions");
+	final ResourceBundle xsltResources = PropertyResourceBundle.getBundle("web_xslt");
 	final Document doc = null ;
-	//transient ResourceBundle application_scope = null ;
-	
-//	public ResourceBundle getApplication_scope() {
-//		return application_scope;
-//	}
-//
-//	public void setApplication_scope(ResourceBundle application_scope) {
-//		this.application_scope = application_scope;
-//	}
+
 
 	public AuthorizationPageFaced() 
 	{
-		//if( sequences_rs == null )  sequences_rs = PropertyResourceBundle.getBundle("sequence");
-		//if( setup_resources == null ) setup_resources =  PropertyResourceBundle.getBundle("SetupApplicationResources");
-		//if( session_scope == null )  session_scope = PropertyResourceBundle.getBundle("session_scope");
-
-		//if( actions_resources == null )  actions_resources = PropertyResourceBundle.getBundle("web_actions");
-		//if( xslt_resources == null )  xslt_resources = PropertyResourceBundle.getBundle("web_xslt");
-		
-
 	}
 	
-	
 
-	final static private Logger log = Logger.getLogger(AuthorizationPageFaced.class);
-
+	@Profiled(logger = CLASS_NAME  , tag = "getCokieSessionId" , message = "HttpServletRequest: {$0} , HttpServletResponse: { $1 }  , getCokieSessionId: {@ retrun }"  )
 	final public String getCokieSessionId(final HttpServletRequest request, final HttpServletResponse response )
 	{
 		Cookie[] cookies =  request.getCookies();
@@ -121,6 +106,8 @@ public class AuthorizationPageFaced extends com.cbsinc.cms.WebControls  {
 		return httpSession.getId() ;
 	}
 
+	
+	@Profiled(logger = CLASS_NAME  , tag = "isCokieSessionIdExists" , message = "HttpServletRequest: {$0} , HttpServletResponse: { $1 }  , isCokieSessionIdExists: {@ retrun }"  )
 	final public boolean isCokieSessionIdExists(final HttpServletRequest request, final HttpServletResponse response )
 	{
 		boolean exists = false ;
@@ -139,73 +126,73 @@ public class AuthorizationPageFaced extends com.cbsinc.cms.WebControls  {
 		return exists ;
 	}
 	
-	final public boolean isLoginCorrect(final String i_strLogin, final String i_strPasswd , final AuthorizationPageBean authorizationBean, String idsession) {
-		QueryManager Adp = null;
+	
+	@Profiled(logger = CLASS_NAME , tag = "isLoginCorrect" , message = "login: {$0} , passwd: { $1 } , authorizationBean: { $2 } , , idsession: { $3 } , isLoginCorrect: {@ retrun }"  )
+	final public boolean isLoginCorrect(final String login, final String passwd , final AuthorizationPageBean authorizationBean, String idsession) {
+		QueryManager qm = null;
 		String query ="";
 		try {
-			if (i_strLogin == null || i_strLogin.length() == 0)	return false;
-			if (i_strPasswd == null || i_strPasswd.length() == 0)	return false;
+			if (login == null || login.length() == 0)	return false;
+			if (passwd == null || passwd.length() == 0)	return false;
 			
 			
-			Adp = new QueryManager();
-			Adp.BeginTransaction();
+			qm = new QueryManager();
+			qm.beginTransaction();
 			query = "SELECT user_id , login , passwd , first_name , last_name , e_mail , phone , mobil_phone,fax,icq,website,question,answer,levelup_cd ,bank_cd , company , country_id , city_id ,  currency_id  FROM tuser  where  login = '"
-					+ i_strLogin + "'   and  passwd = '" + i_strPasswd + "' and  site_id = " + authorizationBean.getSite_id() ;
-			Adp.executeQuery(query);
-			if (Adp.rows().size() == 1) {
-				authorizationBean.setIntUserID(  Long.parseLong((String) Adp.getValueAt(0, 0)));
-				authorizationBean.setStrLogin( (String) Adp.getValueAt(0, 1));
-				authorizationBean.setStrPasswd ((String) Adp.getValueAt(0, 2));
-				authorizationBean.setStrFirstName( (String) Adp.getValueAt(0, 3));
-				authorizationBean.setStrLastName((String) Adp.getValueAt(0, 4));
-				authorizationBean.setStrEMail((String) Adp.getValueAt(0, 5));
-				authorizationBean.setStrPhone((String) Adp.getValueAt(0, 6));
-				authorizationBean.setStrMPhone((String) Adp.getValueAt(0, 7));
-				authorizationBean.setStrFax((String) Adp.getValueAt(0, 8));
-				authorizationBean.setStrIcq((String) Adp.getValueAt(0, 9));
-				authorizationBean.setStrWebsite((String) Adp.getValueAt(0, 10));
-				authorizationBean.setStrQuestion((String) Adp.getValueAt(0, 11));
-				authorizationBean.setStrAnswer((String) Adp.getValueAt(0, 12));
-				authorizationBean.setIntLevelUp( Integer.parseInt((String) Adp.getValueAt(0, 13))) ;
-				authorizationBean.setStrCompany((String) Adp.getValueAt(0, 15));
-				authorizationBean.setCountry_id ((String) Adp.getValueAt(0, 16));
-				authorizationBean.setCity_id((String) Adp.getValueAt(0, 17));
-				authorizationBean.setCurrency_id( (String) Adp.getValueAt(0, 18));
+					+ login + "'   and  passwd = '" + passwd + "' and  site_id = " + authorizationBean.getSite_id() ;
+			qm.executeQuery(query);
+			if (qm.rows().size() == 1) {
+				authorizationBean.setIntUserID(  Long.parseLong((String) qm.getValueAt(0, 0)));
+				authorizationBean.setStrLogin( (String) qm.getValueAt(0, 1));
+				authorizationBean.setStrPasswd ((String) qm.getValueAt(0, 2));
+				authorizationBean.setStrFirstName( (String) qm.getValueAt(0, 3));
+				authorizationBean.setStrLastName((String) qm.getValueAt(0, 4));
+				authorizationBean.setStrEMail((String) qm.getValueAt(0, 5));
+				authorizationBean.setStrPhone((String) qm.getValueAt(0, 6));
+				authorizationBean.setStrMPhone((String) qm.getValueAt(0, 7));
+				authorizationBean.setStrFax((String) qm.getValueAt(0, 8));
+				authorizationBean.setStrIcq((String) qm.getValueAt(0, 9));
+				authorizationBean.setStrWebsite((String) qm.getValueAt(0, 10));
+				authorizationBean.setStrQuestion((String) qm.getValueAt(0, 11));
+				authorizationBean.setStrAnswer((String) qm.getValueAt(0, 12));
+				authorizationBean.setIntLevelUp( Integer.parseInt((String) qm.getValueAt(0, 13))) ;
+				authorizationBean.setStrCompany((String) qm.getValueAt(0, 15));
+				authorizationBean.setCountry_id ((String) qm.getValueAt(0, 16));
+				authorizationBean.setCity_id((String) qm.getValueAt(0, 17));
+				authorizationBean.setCurrency_id( (String) qm.getValueAt(0, 18));
 				authorizationBean.setIntLogined(1);
-				
-				
-				//query = "UPDATE tuser set idsession = '"+  authorizationBean.getId_session() +"'  where  (login = '" + i_strLogin + "' )  and  (passwd = '" + i_strPasswd	+ "') and  (site_id = " + authorizationBean.getSite_id() + ")";
 				query = "UPDATE tuser set idsession = '"+  idsession +"'  where  user_id =" + authorizationBean.getIntUserID() ;
 				
-				Adp.executeUpdate(query);
-				Adp.commit();
+				qm.executeUpdate(query);
+				qm.commit();
 				return true;
 			}
 			authorizationBean.setIntLogined(2);
 			return false;
 		} 
 		catch (SQLException ex) {
-			Adp.rollback();
+			qm.rollback();
 			log.error(query,ex);
 			return false;
 		}
 		catch (Exception ex) {
-			Adp.rollback();
+			qm.rollback();
 			log.error(ex);
 			return false;
 		}
 		finally 
 		{
-			if(Adp != null)	Adp.close();
+			if(qm != null)	qm.close();
 		}
 	}
 	
+	
+	@Profiled(logger = CLASS_NAME , tag = "getSiteIdByHost" , message = "host: {$0}  , getSiteIdByHost: {@ retrun }"  )
 	final public String getSiteIdByHost(final String host)
 	{
 		
 		String siteId = "2" ;
 		QueryManager Adp =  null ;
-		//String query = "select site_id  from site where site_dir = '" + host + "'" ;
 		String query = "select site_id  from site where host = '" + host + "' order by site_id DESC limit 1 " ;
 		try 
 		{
@@ -228,27 +215,18 @@ public class AuthorizationPageFaced extends com.cbsinc.cms.WebControls  {
 	  return siteId ;
 	}
 	
-	final void loadClassesSessionScopeFromBase(final HttpSession  session , final Integer user_id   ) 
+	
+	@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	final void loadClassesSessionScopeFromBase(final HttpSession  httpSession , final Integer userId   ) 
 	{
-		//HttpServletRequest servletRequest = 
-			//session.getServletContext().getNamedDispatcher("/").  
-		
-		QueryManager Adp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		String query = "" ;
 		String key = "";
-		//AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
 		try {
-		query = "select USER_ID , TYPE , CLASSBODY  from store_session WHERE  USER_ID = " + user_id ;
-		ResultSet rs  = Adp.executeQueryResultSet(query);
-		//ResultSet rs = ps.executeQuery("SELECT ENGINEERS FROM PERSONNEL");
-		//ResultSetMetaData metaData = rs.getMetaData();
-		//int columnCount = metaData.getColumnCount() ;
-		
-		//metaData.get
+		query = "select USER_ID , TYPE , CLASSBODY  from store_session WHERE  USER_ID = " + userId ;
+		ResultSet rs  = qm.executeQueryResultSet(query);
 		while (rs.next()) 
 		{
-			//Engineer eng = (Engineer)rs.getObject("CLASSBODY");
-			//System.out.println(eng.lastName + ", " + eng.firstName);
 			Enumeration enumeration = session_scope.getKeys();
 			while (enumeration.hasMoreElements()) 
 			{
@@ -257,10 +235,8 @@ public class AuthorizationPageFaced extends com.cbsinc.cms.WebControls  {
 				String typedb =  rs.getString("TYPE");
 				if(typedb  != null ) if(typedb.equals(type))
 				{
-					//System.out.println("type: " + metaData.getColumnType(3));
 					Object obj = rs.getObject("CLASSBODY") ;
-//					rs.get
-					session.setAttribute(key, obj);
+					httpSession.setAttribute(key, obj);
 					System.out.println("load key: " + key + " object: " + obj.getClass().getName()  );
 				}
 			}
@@ -274,22 +250,21 @@ public class AuthorizationPageFaced extends com.cbsinc.cms.WebControls  {
 		}
 		finally
 		{
-			if(Adp != null)	Adp.close();
+			if(qm != null)	qm.close();
 		}
 	}
 	
-	final public void clearCookieFromBD( final AuthorizationPageBean authorizationBean, final String cokie_session_id) {
+	
+	@Profiled(logger = CLASS_NAME , tag = "clearCookieFromBD" , message = "authorizationBean: {$0}  , cokieSessionId: {@1}"  )
+	final public void clearCookieFromBD( final AuthorizationPageBean authorizationBean, final String cokieSessionId) {
 		QueryManager Adp = null;
-		if(cokie_session_id == null) return ;
+		if(cokieSessionId == null) return ;
 		String query ="";
 		try 
 		{
-
 			Adp = new QueryManager();
-			Adp.BeginTransaction();
-			//query = "UPDATE tuser set idsession = '"+  authorizationBean.getId_session() +"'  where  (login = '" + i_strLogin + "' )  and  (passwd = '" + i_strPasswd	+ "') and  (site_id = " + authorizationBean.getSite_id() + ")";
-			//query = "UPDATE tuser set idsession = ''  where  user_id =" + authorizationBean.getIntUserID() ;
-			query = "DELETE  FROM  store_session WHERE  idsession_hash1 = " + getIdsessionHash1(cokie_session_id) + "  and idsession_hash2 = " +  getIdsessionHash2(cokie_session_id) + " and idsession_hash3 = " +  getIdsessionHash3(cokie_session_id) + " and idsession_hash4 = " +  getIdsessionHash4(cokie_session_id)  ;
+			Adp.beginTransaction();
+			query = "DELETE  FROM  store_session WHERE  idsession_hash1 = " + getIdsessionHash1(cokieSessionId) + "  and idsession_hash2 = " +  getIdsessionHash2(cokieSessionId) + " and idsession_hash3 = " +  getIdsessionHash3(cokieSessionId) + " and idsession_hash4 = " +  getIdsessionHash4(cokieSessionId)  ;
 			Adp.executeUpdate(query);
 			Adp.commit();
 			if(authorizationBean != null )authorizationBean.setIntLogined(2);
@@ -308,43 +283,39 @@ public class AuthorizationPageFaced extends com.cbsinc.cms.WebControls  {
 		}
 	}
 	
-	final public boolean isLoginCorrect(final String id_session , final AuthorizationPageBean authorizationBean) {
-		QueryManager Adp = null;
+	
+	@Profiled(logger = CLASS_NAME , tag = "isLoginCorrect" , message = "sessionId: {$0}  , authorizationBean: {@1}"  )
+	final public boolean isLoginCorrect(final String sessionId , final AuthorizationPageBean authorizationBean) {
+		QueryManager qm = null;
 		String query ="";
 		try {
-			if (id_session == null || id_session.length() == 0)	return false;
+			if (sessionId == null || sessionId.length() == 0)	return false;
 			
 			
-			Adp = new QueryManager();
-			// query = "SELECT user_id , login , passwd , first_name , last_name
-			// , e_mail , phone ,
-			// mobil_phone,fax,icq,website,question,answer,levelup_cd ,bank_cd ,
-			// company , country_id , city_id , currency_id FROM tuser where
-			// (login = '" + i_strLogin + "' ) and (passwd = '" + i_strPasswd +
-			// "')" ;
+			qm = new QueryManager();
 			query = "SELECT user_id , login , passwd , first_name , last_name , e_mail , phone , mobil_phone,fax,icq,website,question,answer,levelup_cd ,bank_cd , company , country_id , city_id ,  currency_id  FROM tuser  where  " +
-					" idsession = '" + id_session + "'" ;
+					" idsession = '" + sessionId + "'" ;
 			
-			Adp.executeQuery(query);
-			if (Adp.rows().size() == 1) {
-				authorizationBean.setIntUserID(  Integer.parseInt((String) Adp.getValueAt(0, 0)));
-				authorizationBean.setStrLogin( (String) Adp.getValueAt(0, 1));
-				authorizationBean.setStrPasswd ((String) Adp.getValueAt(0, 2));
-				authorizationBean.setStrFirstName( (String) Adp.getValueAt(0, 3));
-				authorizationBean.setStrLastName((String) Adp.getValueAt(0, 4));
-				authorizationBean.setStrEMail((String) Adp.getValueAt(0, 5));
-				authorizationBean.setStrPhone((String) Adp.getValueAt(0, 6));
-				authorizationBean.setStrMPhone((String) Adp.getValueAt(0, 7));
-				authorizationBean.setStrFax((String) Adp.getValueAt(0, 8));
-				authorizationBean.setStrIcq((String) Adp.getValueAt(0, 9));
-				authorizationBean.setStrWebsite((String) Adp.getValueAt(0, 10));
-				authorizationBean.setStrQuestion((String) Adp.getValueAt(0, 11));
-				authorizationBean.setStrAnswer((String) Adp.getValueAt(0, 12));
-				authorizationBean.setIntLevelUp( Integer.parseInt((String) Adp.getValueAt(0, 13))) ;
-				authorizationBean.setStrCompany((String) Adp.getValueAt(0, 15));
-				authorizationBean.setCountry_id ((String) Adp.getValueAt(0, 16));
-				authorizationBean.setCity_id((String) Adp.getValueAt(0, 17));
-				authorizationBean.setCurrency_id( (String) Adp.getValueAt(0, 18));
+			qm.executeQuery(query);
+			if (qm.rows().size() == 1) {
+				authorizationBean.setIntUserID(  Integer.parseInt((String) qm.getValueAt(0, 0)));
+				authorizationBean.setStrLogin( (String) qm.getValueAt(0, 1));
+				authorizationBean.setStrPasswd ((String) qm.getValueAt(0, 2));
+				authorizationBean.setStrFirstName( (String) qm.getValueAt(0, 3));
+				authorizationBean.setStrLastName((String) qm.getValueAt(0, 4));
+				authorizationBean.setStrEMail((String) qm.getValueAt(0, 5));
+				authorizationBean.setStrPhone((String) qm.getValueAt(0, 6));
+				authorizationBean.setStrMPhone((String) qm.getValueAt(0, 7));
+				authorizationBean.setStrFax((String) qm.getValueAt(0, 8));
+				authorizationBean.setStrIcq((String) qm.getValueAt(0, 9));
+				authorizationBean.setStrWebsite((String) qm.getValueAt(0, 10));
+				authorizationBean.setStrQuestion((String) qm.getValueAt(0, 11));
+				authorizationBean.setStrAnswer((String) qm.getValueAt(0, 12));
+				authorizationBean.setIntLevelUp( Integer.parseInt((String) qm.getValueAt(0, 13))) ;
+				authorizationBean.setStrCompany((String) qm.getValueAt(0, 15));
+				authorizationBean.setCountry_id ((String) qm.getValueAt(0, 16));
+				authorizationBean.setCity_id((String) qm.getValueAt(0, 17));
+				authorizationBean.setCurrency_id( (String) qm.getValueAt(0, 18));
 				authorizationBean.setIntLogined(1);
 
 				// Adp.close();
@@ -364,40 +335,40 @@ public class AuthorizationPageFaced extends com.cbsinc.cms.WebControls  {
 		}
 		finally 
 		{
-			if(Adp != null)	Adp.close();
+			if(qm != null)	qm.close();
 		}
 	}
 	
 	
-	
-	final public boolean isLoginFromCookie(final String id_session ,final HttpSession  session ,final  ServletContext  servletContext  , ResourceBundle session_scope  ) {
+	@Profiled(logger = CLASS_NAME , tag = "isLoginFromCookie" , message = "sessionId: {$0}  , httpSession: {@1} , servletContext: {@2} , sessionScope: {@3} , isLoginFromCookie: {@retrun}"  )
+	final public boolean isLoginFromCookie(final String sessionId ,final HttpSession  httpSession ,final  ServletContext  servletContext  , ResourceBundle sessionScope  ) {
 		boolean result = false ;
-		QueryManager Adp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		String query ="";
-		if(!session.isNew()) return session.isNew() ;
+		if(!httpSession.isNew()) return httpSession.isNew() ;
 		try {
-			if (id_session == null || id_session.length() == 0)	return false;
+			if (sessionId == null || sessionId.length() == 0)	return false;
 		
 			//StandardSession ss = (StandardSession)session ;
 			
 			String key = "";
-			query = "select USER_ID , TYPE , CLASSBODY  from store_session WHERE  USER_ID IN (SELECT user_id  FROM tuser where idsession = '" + id_session + "' ) " ;
-			ResultSet rs  = Adp.executeQueryResultSet(query);
+			query = "select USER_ID , TYPE , CLASSBODY  from store_session WHERE  USER_ID IN (SELECT user_id  FROM tuser where idsession = '" + sessionId + "' ) " ;
+			ResultSet rs  = qm.executeQueryResultSet(query);
 			while (rs.next()) 
 			{
 				result = true ;
-				Enumeration enumeration = session_scope.getKeys();
+				Enumeration enumeration = sessionScope.getKeys();
 				while (enumeration.hasMoreElements()) 
 				{
 					key = (String) enumeration.nextElement();
-					String type = session_scope.getString(key).trim();
+					String type = sessionScope.getString(key).trim();
 					String typedb =  rs.getString("TYPE");
 					if(typedb  != null ) if(typedb.equals(type))
 					{
 						Object obj = rs.getObject("CLASSBODY") ;
 						Object newobj =  createObject(type);
 						BeanUtils.copyProperties(newobj, obj);
-						session.setAttribute(key, newobj);
+						httpSession.setAttribute(key, newobj);
 						obj = null ;
 						//System.out.println("load key: " + key + " object: " + obj.getClass().getName()  );
 					}
@@ -416,27 +387,29 @@ public class AuthorizationPageFaced extends com.cbsinc.cms.WebControls  {
 		}
 		finally 
 		{
-			if(Adp != null)	Adp.close();
+			if(qm != null)	qm.close();
 		}
 		
 		return result;
 	}
 	
+	
+	@Profiled(logger = CLASS_NAME , tag = "getCookiesDir" , message = "servletContext: {$0}  , getCookiesDir: {@retrun}  "  )
 	final String  getCookiesDir(final ServletContext servletContext) 
 	{
 		return (String)servletContext.getAttribute("cookies_dir");
 	}
 	
-	
-	final public boolean isLoginFromCookieFromDir(final String id_session , final HttpSession  session , final ServletContext  servletContext  , final ResourceBundle session_scope  ) {
+	@Profiled(logger = CLASS_NAME , tag = "isLoginFromCookieFromDir" , message = "servletContext: {$0}  , getCookiesDir: {@retrun}  "  )
+	final public boolean isLoginFromCookieFromDir(final String sessionId , final HttpSession  httpSession , final ServletContext  servletContext  , final ResourceBundle sessionScope  ) {
 		boolean result = false ;
 		
 		
 		String path_dir =  getCookiesDir(servletContext);
-		if(!session.isNew()) return session.isNew() ;
+		if(!httpSession.isNew()) return httpSession.isNew() ;
 		try {
-			if (id_session == null || id_session.length() == 0)	return false;
-			String file_cookies = path_dir  +  File.separatorChar + id_session ;
+			if (sessionId == null || sessionId.length() == 0)	return false;
+			String file_cookies = path_dir  +  File.separatorChar + sessionId ;
 			File file = new File(file_cookies);
 			if(file.exists())
 			{
@@ -448,11 +421,11 @@ public class AuthorizationPageFaced extends com.cbsinc.cms.WebControls  {
 				{
 					String key = (String)iterator.next() ;
 					Object obj = map.get(key);
-					type = session_scope.getString(key).trim();
+					type = sessionScope.getString(key).trim();
 					Object newobj =  createObject(type);
 					if(newobj == null || obj == null) continue ; 
 					BeanUtils.copyProperties(newobj, obj);
-					session.setAttribute(key, obj);
+					httpSession.setAttribute(key, obj);
 					System.out.println("key " + key);
 					System.out.println("object_new " + newobj);
 					System.out.println("object " + obj);
@@ -473,62 +446,34 @@ public class AuthorizationPageFaced extends com.cbsinc.cms.WebControls  {
 		
 		return result;
 	}
-	
-	
-//	long getIdsessionHash1(String id_session )
-//	{
-//		String hash = id_session.substring(0, 10) ;
-//		return  hash.hashCode() ;
-//	}
-//
-//	long getIdsessionHash2(String id_session )
-//	{
-//		String hash = id_session.substring(10, 20) ;
-//		return  hash.hashCode() ;
-//	}
-//
-//	long getIdsessionHash3(String id_session )
-//	{
-//		String hash = id_session.substring(20, 30) ;
-//		return  hash.hashCode() ;
-//	}
-//
-//	long getIdsessionHash4(String id_session )
-//	{
-//		String hash = id_session.substring(30) ;
-//		if(hash.indexOf(".") != -1 )hash = hash.substring(0 ,hash.indexOf(".")) ;
-//		return  hash.hashCode() ;
-//	}
 
 	
-final	public boolean isLoginFromCookie_new(final String id_session , final HttpSession  session , final ResourceBundle session_scope  ) {
+	@Profiled(logger = CLASS_NAME , tag = "isLoginFromCookieNew" , message = "servletContext: {$0}  , getCookiesDir: {@retrun}  "  )	
+	final public boolean isLoginFromCookieNew(final String sessionId , final HttpSession  httpSession , final ResourceBundle sessionScope  ) {
 		boolean result = false ;
-		QueryManager Adp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		String query ="";
-		//if(!session.isNew()) return session.isNew() ;
 		try {
-			if (id_session == null || id_session.length() == 0)	return false;
-		
-			//StandardSession ss = (StandardSession)session ;
+			if (sessionId == null || sessionId.length() == 0)	return false;
 			
 			String key = "";
-			query = "select USER_ID , TYPE , CLASSBODY  from store_session WHERE  idsession_hash1 = " + getIdsessionHash1(id_session) + "  and idsession_hash2 = " +  getIdsessionHash2(id_session) + " and idsession_hash3 = " +  getIdsessionHash3(id_session) + " and idsession_hash4 = " +  getIdsessionHash4(id_session)  ;
-			ResultSet rs  = Adp.executeQueryResultSet(query);
+			query = "select USER_ID , TYPE , CLASSBODY  from store_session WHERE  idsession_hash1 = " + getIdsessionHash1(sessionId) + "  and idsession_hash2 = " +  getIdsessionHash2(sessionId) + " and idsession_hash3 = " +  getIdsessionHash3(sessionId) + " and idsession_hash4 = " +  getIdsessionHash4(sessionId)  ;
+			ResultSet rs  = qm.executeQueryResultSet(query);
 			while (rs.next()) 
 			{
 				result = true ;
-				Enumeration enumeration = session_scope.getKeys();
+				Enumeration enumeration = sessionScope.getKeys();
 				while (enumeration.hasMoreElements()) 
 				{
 					key = (String) enumeration.nextElement();
-					String type = session_scope.getString(key).trim();
+					String type = sessionScope.getString(key).trim();
 					String typedb =  rs.getString("TYPE");
 					if(typedb  != null ) if(typedb.equals(type))
 					{
 						Object obj = rs.getObject("CLASSBODY") ;
 						Object newobj =  createObject(type);
 						BeanUtils.copyProperties(newobj, obj);
-						session.setAttribute(key, newobj);
+						httpSession.setAttribute(key, newobj);
 						obj = null ;
 						//System.out.println("load key: " + key + " object: " + obj.getClass().getName()  );
 					}
@@ -547,46 +492,42 @@ final	public boolean isLoginFromCookie_new(final String id_session , final HttpS
 		}
 		finally 
 		{
-			if(Adp != null)	Adp.close();
+			if(qm != null)	qm.close();
 		}
 		
 		return result;
 	}
 	
 
-
-final	public boolean isLoginFromCookie_new1(final String id_session , final HttpSession  session , final ResourceBundle session_scope  ) {
+	@Profiled(logger = CLASS_NAME , tag = "isLoginFromCookieNew1" , message = "sessionId: {$0}  , httpSession: {@1} , sessionScope: {@2} , isLoginFromCookieNew1: {@retrun} "  )
+	final public boolean isLoginFromCookieNew1(final String sessionId , final HttpSession  httpSession , final ResourceBundle sessionScope  ) {
 	boolean result = false ;
-	QueryManager Adp = new QueryManager();
+	QueryManager qm = new QueryManager();
 	String query ="";
 	ByteArrayInputStream bais = null ;
 	ObjectInputStream ois = null ;
-	//if(!session.isNew()) return session.isNew() ;
-
 	
 	try {
-		if (id_session == null || id_session.length() == 0)	return false;
+		if (sessionId == null || sessionId.length() == 0)	return false;
 	
-		//StandardSession ss = (StandardSession)session ;
-		
 		String key = "";
-		query = "select USER_ID , TYPE , BCLASSBODY  from store_session WHERE  idsession_hash1 = " + getIdsessionHash1(id_session) + "  and idsession_hash2 = " +  getIdsessionHash2(id_session) + " and idsession_hash3 = " +  getIdsessionHash3(id_session) + " and idsession_hash4 = " +  getIdsessionHash4(id_session)  ;
-		ResultSet rs  = Adp.executeQueryResultSet(query);
+		query = "select USER_ID , TYPE , BCLASSBODY  from store_session WHERE  idsession_hash1 = " + getIdsessionHash1(sessionId) + "  and idsession_hash2 = " +  getIdsessionHash2(sessionId) + " and idsession_hash3 = " +  getIdsessionHash3(sessionId) + " and idsession_hash4 = " +  getIdsessionHash4(sessionId)  ;
+		ResultSet rs  = qm.executeQueryResultSet(query);
 		while (rs.next()) 
 		{
 			result = true ;
-			Enumeration enumeration = session_scope.getKeys();
+			Enumeration enumeration = sessionScope.getKeys();
 			while (enumeration.hasMoreElements()) 
 			{
 				key = (String) enumeration.nextElement();
-				String type = session_scope.getString(key).trim();
+				String type = sessionScope.getString(key).trim();
 				String typedb =  rs.getString("TYPE");
 				if(typedb  != null ) if(typedb.equals(type))
 				{
 					 bais = new ByteArrayInputStream(rs.getBytes("BCLASSBODY"));
 					 ois = new  ObjectInputStream(bais);
 					 Object obj = ois.readObject() ;
-					session.setAttribute(key, obj);
+					httpSession.setAttribute(key, obj);
 				}
 			}
 		}
@@ -610,40 +551,37 @@ final	public boolean isLoginFromCookie_new1(final String id_session , final Http
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(Adp != null)	Adp.close();
+		if(qm != null)	qm.close();
 	}
 	
 	return result;
 }
 
-final	public boolean loadOldSessionbyLogin(final String user_id , final HttpSession  session , final ResourceBundle session_scope  ) {
+	@Profiled(logger = CLASS_NAME , tag = "loadOldSessionbyLogin" , message = "userId: {$0}  , httpSession: {@1} , sessionScope: {@2} , loadOldSessionbyLogin: {@retrun} "  )
+	final public boolean loadOldSessionbyLogin(final String userId , final HttpSession  httpSession , final ResourceBundle sessionScope  ) {
 	boolean result = false ;
-	QueryManager Adp = new QueryManager();
+	QueryManager qm = new QueryManager();
 	String query ="";
-	//if(!session.isNew()) return session.isNew() ;
 	try {
-		if (user_id == null || user_id.length() == 0)	return false;
-	
-		//StandardSession ss = (StandardSession)session ;
-		
+		if (userId == null || userId.length() == 0)	return false;
 		String key = "";
-		query = "select USER_ID , TYPE , CLASSBODY  from store_session WHERE  USER_ID = " + user_id   ;
-		ResultSet rs  = Adp.executeQueryResultSet(query);
+		query = "select USER_ID , TYPE , CLASSBODY  from store_session WHERE  USER_ID = " + userId   ;
+		ResultSet rs  = qm.executeQueryResultSet(query);
 		while (rs.next()) 
 		{
 			result = true ;
-			Enumeration enumeration = session_scope.getKeys();
+			Enumeration enumeration = sessionScope.getKeys();
 			while (enumeration.hasMoreElements()) 
 			{
 				key = (String) enumeration.nextElement();
-				String type = session_scope.getString(key).trim();
+				String type = sessionScope.getString(key).trim();
 				String typedb =  rs.getString("TYPE");
 				if(typedb  != null ) if(typedb.equals(type))
 				{
 					Object obj = rs.getObject("CLASSBODY") ;
 					Object newobj =  createObject(type);
 					BeanUtils.copyProperties(newobj, obj);
-					session.setAttribute(key, newobj);
+					httpSession.setAttribute(key, newobj);
 					obj = null ;
 					//System.out.println("load key: " + key + " object: " + obj.getClass().getName()  );
 				}
@@ -662,12 +600,12 @@ final	public boolean loadOldSessionbyLogin(final String user_id , final HttpSess
 	}
 	finally 
 	{
-		if(Adp != null)	Adp.close();
+		if(qm != null)	qm.close();
 	}
 	
 	return result;
 }
-	
+	@Profiled(logger = CLASS_NAME , tag = "createObject" , message = "userId: {$0}  , createObject: {@retrun} "  )
 	final public Object createObject( final String className) {
 		Object obj = null;
 		try 
@@ -682,6 +620,7 @@ final	public boolean loadOldSessionbyLogin(final String user_id , final HttpSess
 		return obj;
 		}
 	
+	@Profiled(logger = CLASS_NAME , tag = "deserializeObject" , message = "fileName: {$0}  , deserializeObject: {@retrun} "  )
 	final public Map deserializeObject(final File fileName) {
 		
 		Map map = null ;
@@ -711,41 +650,35 @@ final	public boolean loadOldSessionbyLogin(final String user_id , final HttpSess
 		return map;
 		}
 	
-	 final public AuthorizationPageBean getAuthorizationBean(final String userId ) {
-		QueryManager Adp = null;
+	 
+	@Profiled(logger = CLASS_NAME , tag = "getAuthorizationBean" , message = "userId: {$0}  , getAuthorizationBean: {@retrun} "  )
+	final public AuthorizationPageBean getAuthorizationBean(final String userId ) {
+		QueryManager qm = null;
 		AuthorizationPageBean authorization = new AuthorizationPageBean();
 		String query ="";
 		try {
 			if (userId == null || userId.length() == 0)	return null;
-			
-			
-			Adp = new QueryManager();
-			// query = "SELECT user_id , login , passwd , first_name , last_name
-			// , e_mail , phone ,
-			// mobil_phone,fax,icq,website,question,answer,levelup_cd ,bank_cd ,
-			// company , country_id , city_id , currency_id FROM tuser where
-			// (login = '" + i_strLogin + "' ) and (passwd = '" + i_strPasswd +
-			// "')" ;
+			qm = new QueryManager();
 			query = "SELECT user_id , login , passwd , first_name , last_name , e_mail , phone , mobil_phone,fax,icq,website,question,answer,levelup_cd ,bank_cd , company , country_id , city_id ,  currency_id  " +
 					"FROM tuser  where  user_id = "	+ userId + "" ;
-			Adp.executeQuery(query);
-			if (Adp.rows().size() == 1) {
-				authorization.setIntUserID(  Integer.parseInt((String) Adp.getValueAt(0, 0)));
-				authorization.setStrLogin( (String) Adp.getValueAt(0, 1));
-				authorization.setStrPasswd ((String) Adp.getValueAt(0, 2));
-				authorization.setStrFirstName( (String) Adp.getValueAt(0, 3));
-				authorization.setStrLastName((String) Adp.getValueAt(0, 4));
-				authorization.setStrEMail((String) Adp.getValueAt(0, 5));
-				authorization.setStrPhone((String) Adp.getValueAt(0, 6));
-				authorization.setStrMPhone((String) Adp.getValueAt(0, 7));
-				authorization.setStrFax((String) Adp.getValueAt(0, 8));
-				authorization.setStrIcq((String) Adp.getValueAt(0, 9));
-				authorization.setStrWebsite((String) Adp.getValueAt(0, 10));
-				authorization.setIntLevelUp( Integer.parseInt((String) Adp.getValueAt(0, 13))) ;
-				authorization.setStrCompany((String) Adp.getValueAt(0, 15));
-				authorization.setCountry_id ((String) Adp.getValueAt(0, 16));
-				authorization.setCity_id((String) Adp.getValueAt(0, 17));
-				authorization.setCurrency_id( (String) Adp.getValueAt(0, 18));
+			qm.executeQuery(query);
+			if (qm.rows().size() == 1) {
+				authorization.setIntUserID(  Integer.parseInt((String) qm.getValueAt(0, 0)));
+				authorization.setStrLogin( (String) qm.getValueAt(0, 1));
+				authorization.setStrPasswd ((String) qm.getValueAt(0, 2));
+				authorization.setStrFirstName( (String) qm.getValueAt(0, 3));
+				authorization.setStrLastName((String) qm.getValueAt(0, 4));
+				authorization.setStrEMail((String) qm.getValueAt(0, 5));
+				authorization.setStrPhone((String) qm.getValueAt(0, 6));
+				authorization.setStrMPhone((String) qm.getValueAt(0, 7));
+				authorization.setStrFax((String) qm.getValueAt(0, 8));
+				authorization.setStrIcq((String) qm.getValueAt(0, 9));
+				authorization.setStrWebsite((String) qm.getValueAt(0, 10));
+				authorization.setIntLevelUp( Integer.parseInt((String) qm.getValueAt(0, 13))) ;
+				authorization.setStrCompany((String) qm.getValueAt(0, 15));
+				authorization.setCountry_id ((String) qm.getValueAt(0, 16));
+				authorization.setCity_id((String) qm.getValueAt(0, 17));
+				authorization.setCurrency_id( (String) qm.getValueAt(0, 18));
 				return authorization;
 			}
 			return authorization;
@@ -760,46 +693,39 @@ final	public boolean loadOldSessionbyLogin(final String user_id , final HttpSess
 		}
 		finally 
 		{
-			if(Adp != null)	Adp.close();
+			if(qm != null)	qm.close();
 		}
 	}
 
 	
+	@Profiled(logger = CLASS_NAME , tag = "getAuthorizationBeanOfRoleAdmin" , message = "siteId: {$0}  , getAuthorizationBeanOfRoleAdmin: {@retrun} "  )
 	final public AuthorizationPageBean getAuthorizationBeanOfRoleAdmin(final String siteId ) {
-		QueryManager Adp = null;
+		QueryManager qm = null;
 		AuthorizationPageBean authorization = new AuthorizationPageBean();
 		String query ="";
 		try {
 			if (siteId == null || siteId.length() == 0)	return null;
-			
-			
-			Adp = new QueryManager();
-			// query = "SELECT user_id , login , passwd , first_name , last_name
-			// , e_mail , phone ,
-			// mobil_phone,fax,icq,website,question,answer,levelup_cd ,bank_cd ,
-			// company , country_id , city_id , currency_id FROM tuser where
-			// (login = '" + i_strLogin + "' ) and (passwd = '" + i_strPasswd +
-			// "')" ;
+			qm = new QueryManager();
 			query = "SELECT user_id , login , passwd , first_name , last_name , e_mail , phone , mobil_phone,fax,icq,website,question,answer,levelup_cd ,bank_cd , company , country_id , city_id ,  currency_id  " +
 					"FROM tuser  where  levelup_cd = 2 and site_id = "	+ siteId + "" ;
-			Adp.executeQuery(query);
-			if (Adp.rows().size() == 1) {
-				authorization.setIntUserID(  Long.parseLong((String) Adp.getValueAt(0, 0)));
-				authorization.setStrLogin( (String) Adp.getValueAt(0, 1));
-				authorization.setStrPasswd ((String) Adp.getValueAt(0, 2));
-				authorization.setStrFirstName( (String) Adp.getValueAt(0, 3));
-				authorization.setStrLastName((String) Adp.getValueAt(0, 4));
-				authorization.setStrEMail((String) Adp.getValueAt(0, 5));
-				authorization.setStrPhone((String) Adp.getValueAt(0, 6));
-				authorization.setStrMPhone((String) Adp.getValueAt(0, 7));
-				authorization.setStrFax((String) Adp.getValueAt(0, 8));
-				authorization.setStrIcq((String) Adp.getValueAt(0, 9));
-				authorization.setStrWebsite((String) Adp.getValueAt(0, 10));
-				authorization.setIntLevelUp( Integer.parseInt((String) Adp.getValueAt(0, 13))) ;
-				authorization.setStrCompany((String) Adp.getValueAt(0, 15));
-				authorization.setCountry_id ((String) Adp.getValueAt(0, 16));
-				authorization.setCity_id((String) Adp.getValueAt(0, 17));
-				authorization.setCurrency_id( (String) Adp.getValueAt(0, 18));
+			qm.executeQuery(query);
+			if (qm.rows().size() == 1) {
+				authorization.setIntUserID(  Long.parseLong((String) qm.getValueAt(0, 0)));
+				authorization.setStrLogin( (String) qm.getValueAt(0, 1));
+				authorization.setStrPasswd ((String) qm.getValueAt(0, 2));
+				authorization.setStrFirstName( (String) qm.getValueAt(0, 3));
+				authorization.setStrLastName((String) qm.getValueAt(0, 4));
+				authorization.setStrEMail((String) qm.getValueAt(0, 5));
+				authorization.setStrPhone((String) qm.getValueAt(0, 6));
+				authorization.setStrMPhone((String) qm.getValueAt(0, 7));
+				authorization.setStrFax((String) qm.getValueAt(0, 8));
+				authorization.setStrIcq((String) qm.getValueAt(0, 9));
+				authorization.setStrWebsite((String) qm.getValueAt(0, 10));
+				authorization.setIntLevelUp( Integer.parseInt((String) qm.getValueAt(0, 13))) ;
+				authorization.setStrCompany((String) qm.getValueAt(0, 15));
+				authorization.setCountry_id ((String) qm.getValueAt(0, 16));
+				authorization.setCity_id((String) qm.getValueAt(0, 17));
+				authorization.setCurrency_id( (String) qm.getValueAt(0, 18));
 				return authorization;
 			}
 			return authorization;
@@ -814,46 +740,41 @@ final	public boolean loadOldSessionbyLogin(final String user_id , final HttpSess
 		}
 		finally 
 		{
-			if(Adp != null)	Adp.close();
+			if(qm != null)	qm.close();
 		}
 	}
 
 	
-final	public AuthorizationPageBean getFromMainSiteUserAuthorizationBean(final String login ) {
-		QueryManager Adp = null;
+	@Profiled(logger = CLASS_NAME , tag = "getFromMainSiteUserAuthorizationBean" , message = "login: {$0}  , getFromMainSiteUserAuthorizationBean: {@retrun} "  )	
+	final public AuthorizationPageBean getFromMainSiteUserAuthorizationBean(final String login ) {
+		QueryManager qm = null;
 		AuthorizationPageBean authorization = new AuthorizationPageBean();
 		String query ="";
 		try {
 			if (login == null || login.length() == 0)	return null;
 			
 			
-			Adp = new QueryManager();
-			// query = "SELECT user_id , login , passwd , first_name , last_name
-			// , e_mail , phone ,
-			// mobil_phone,fax,icq,website,question,answer,levelup_cd ,bank_cd ,
-			// company , country_id , city_id , currency_id FROM tuser where
-			// (login = '" + i_strLogin + "' ) and (passwd = '" + i_strPasswd +
-			// "')" ;
+			qm = new QueryManager();
 			query = "SELECT user_id , login , passwd , first_name , last_name , e_mail , phone , mobil_phone,fax,icq,website,question,answer,levelup_cd ,bank_cd , company , country_id , city_id ,  currency_id  " +
 					"FROM tuser  where  user_id = '" + login + "' and  site_id = " + SiteType.MAIN_SITE  ;
-			Adp.executeQuery(query);
-			if (Adp.rows().size() == 1) {
-				authorization.setIntUserID(  Long.parseLong((String) Adp.getValueAt(0, 0)));
-				authorization.setStrLogin( (String) Adp.getValueAt(0, 1));
-				authorization.setStrPasswd ((String) Adp.getValueAt(0, 2));
-				authorization.setStrFirstName( (String) Adp.getValueAt(0, 3));
-				authorization.setStrLastName((String) Adp.getValueAt(0, 4));
-				authorization.setStrEMail((String) Adp.getValueAt(0, 5));
-				authorization.setStrPhone((String) Adp.getValueAt(0, 6));
-				authorization.setStrMPhone((String) Adp.getValueAt(0, 7));
-				authorization.setStrFax((String) Adp.getValueAt(0, 8));
-				authorization.setStrIcq((String) Adp.getValueAt(0, 9));
-				authorization.setStrWebsite((String) Adp.getValueAt(0, 10));
-				authorization.setIntLevelUp( Integer.parseInt((String) Adp.getValueAt(0, 13))) ;
-				authorization.setStrCompany((String) Adp.getValueAt(0, 15));
-				authorization.setCountry_id ((String) Adp.getValueAt(0, 16));
-				authorization.setCity_id((String) Adp.getValueAt(0, 17));
-				authorization.setCurrency_id( (String) Adp.getValueAt(0, 18));
+			qm.executeQuery(query);
+			if (qm.rows().size() == 1) {
+				authorization.setIntUserID(  Long.parseLong((String) qm.getValueAt(0, 0)));
+				authorization.setStrLogin( (String) qm.getValueAt(0, 1));
+				authorization.setStrPasswd ((String) qm.getValueAt(0, 2));
+				authorization.setStrFirstName( (String) qm.getValueAt(0, 3));
+				authorization.setStrLastName((String) qm.getValueAt(0, 4));
+				authorization.setStrEMail((String) qm.getValueAt(0, 5));
+				authorization.setStrPhone((String) qm.getValueAt(0, 6));
+				authorization.setStrMPhone((String) qm.getValueAt(0, 7));
+				authorization.setStrFax((String) qm.getValueAt(0, 8));
+				authorization.setStrIcq((String) qm.getValueAt(0, 9));
+				authorization.setStrWebsite((String) qm.getValueAt(0, 10));
+				authorization.setIntLevelUp( Integer.parseInt((String) qm.getValueAt(0, 13))) ;
+				authorization.setStrCompany((String) qm.getValueAt(0, 15));
+				authorization.setCountry_id ((String) qm.getValueAt(0, 16));
+				authorization.setCity_id((String) qm.getValueAt(0, 17));
+				authorization.setCurrency_id( (String) qm.getValueAt(0, 18));
 				return authorization;
 			}
 			return authorization;
@@ -868,23 +789,23 @@ final	public AuthorizationPageBean getFromMainSiteUserAuthorizationBean(final St
 		}
 		finally 
 		{
-			if(Adp != null)	Adp.close();
+			if(qm != null)	qm.close();
 		}
 	}
 	
-	
+	@Profiled(logger = CLASS_NAME , tag = "getFromMainSiteUserId" , message = "login: {$0}  , getFromMainSiteUserId: {@retrun} "  )	
 	final public int getFromMainSiteUserId(final String login ) {
-		QueryManager Adp = null;
+		QueryManager qm = null;
 		String query ="";
 		try {
 			if (login == null || login.length() == 0)	return 0;
-			Adp = new QueryManager();
+			qm = new QueryManager();
 			query = "SELECT user_id , login , passwd , first_name , last_name , e_mail , phone , mobil_phone,fax,icq,website,question,answer,levelup_cd ,bank_cd , company , country_id , city_id ,  currency_id  " +
 					"FROM tuser  where  user_id = '" + login + "' and  site_id = " + SiteType.MAIN_SITE  ;
-			Adp.executeQuery(query);
-			if (Adp.rows().size() == 1) {
+			qm.executeQuery(query);
+			if (qm.rows().size() == 1) {
 				//authorization.setIntUserID(  Integer.parseInt((String) Adp.getValueAt(0, 0)));
-				return Integer.parseInt((String) Adp.getValueAt(0, 0));
+				return Integer.parseInt((String) qm.getValueAt(0, 0));
 			}
 			return 0;
 		} 
@@ -898,68 +819,72 @@ final	public AuthorizationPageBean getFromMainSiteUserAuthorizationBean(final St
 		}
 		finally 
 		{
-			if(Adp != null)	Adp.close();
+			if(qm != null)	qm.close();
 		}
 	}
 	
-	final public int isRegCorrect(final String i_strLogin, final String i_strPasswd,
-			final String i_strCPasswd,final String i_strFName,final String i_strLName,
-			final String i_strCompany,final String i_strEMail,final String i_strPhone,
-			final String i_strMPhone,final String i_strFax, final String i_strIcq,
-			final String i_strWebsite,final String i_strQuestion,final String i_strAnswer,
-			final String i_strBirthday,final String i_strCountry_id,final String i_strCity_id,
-			final String i_strCurrency_id ,final String cookie_session_id  , final AuthorizationPageBean authorizationBean) {
+	
+	
+	
+	@Profiled(logger = CLASS_NAME , tag = "isRegCorrect" , message = "login: {$0} , passwd: {$1} , cPasswd: {$2}  , firstName: {$3} , lastName: {$4} , companyName: {$5}, email: {$6} ,  phone: {$7}, mobilePhone: {$8} , faxNumber: {$9} , messageId: {$10} , websiteHost: {$11} , secureQuestion: {$12} ,  secureAnswer , {$13} birthday: {$14} , countryId: {$15} , cityId: {$16} , currencyId: {$17} , cookieSessionId: {$18} ,  authorizationBean {$19}  , isRegCorrect: {@retrun} "  )	
+	final public int isRegCorrect(final String login, final String passwd,
+			final String cPasswd,final String firstName,final String lastName,
+			final String companyName,final String email,final String phone,
+			final String mobilePhone,final String faxNumber, final String messageId,
+			final String websiteHost,final String secureQuestion,final String secureAnswer,
+			final String birthday,final String countryId,final String cityId,
+			final String currencyId ,final String cookieSessionId  , final AuthorizationPageBean authorizationBean) {
 
-		QueryManager Adp = null;
+		QueryManager qm = null;
 		String query = "";
 		try {
-			if (i_strLogin == null || i_strLogin.length() == 0)
+			if (login == null || login.length() == 0)
 				return 1;
-			if (i_strPasswd == null || i_strPasswd.length() == 0)
+			if (passwd == null || passwd.length() == 0)
 				return 2;
-			if (i_strPasswd.length() < 6)	return 12;
+			if (passwd.length() < 6)	return 12;
 			
-			if (i_strCPasswd == null || i_strPasswd.length() == 0)
+			if (cPasswd == null || passwd.length() == 0)
 				return 10;
-			if (i_strFName == null || i_strFName.length() == 0)
+			if (firstName == null || firstName.length() == 0)
 				return 3;
-			if (i_strLName == null || i_strLName.length() == 0)
+			if (lastName == null || lastName.length() == 0)
 				return 4;
-			if (i_strEMail == null || i_strEMail.length() == 0)
+			if (email == null || email.length() == 0)
 				return 5;
-			if (i_strCity_id == null || i_strCity_id.length() == 0  )
+			if (cityId == null || cityId.length() == 0  )
 				return 11;
-			if (i_strEMail.indexOf("@") == -1)
+			if (email.indexOf("@") == -1)
 				return 8;
-			if (i_strPasswd.compareTo(i_strCPasswd) != 0)
+			if (passwd.compareTo(cPasswd) != 0)
 				return 9;
-			if (!isEnglish(i_strLogin))	return 13;
+			if (!isEnglish(login))	return 13;
 			
-			Adp = new QueryManager();
-			Adp.BeginTransaction();
-			query = "SELECT user_id  FROM tuser where  (login = '" + i_strLogin	+ "' )  and  (passwd = '" + i_strPasswd + "' )";
-			Adp.executeQuery(query);
-			if (Adp.rows().size() != 0) {
-				authorizationBean.setIntUserID( Long.parseLong((String) Adp.getValueAt(0, 0))) ;
-				query = "update tuser set " + " login = '" + i_strLogin
-						+ "' , " + "  passwd = '" + i_strPasswd + "' , "
-						+ "  first_name = '" + i_strFName + "' , "
-						+ "  last_name = '" + i_strLName + "' , "
-						+ "  e_mail = '" + i_strEMail + "' , " + "  phone = '"
-						+ i_strPhone + "' , " + "  mobil_phone = '"
-						+ i_strMPhone + "' , " + "  fax = '" + i_strFax
-						+ "' , " + "  icq = '" + i_strIcq + "' , "
-						+ "  website = '" + i_strWebsite + "' , "
-						+ "  question = '" + i_strQuestion + "' , "
-						+ "  answer = '" + i_strAnswer + "' , "
-						+ "  company  = '" + i_strCompany + "' , "
-						+ "  country_id  = " + i_strCountry_id + " , "
-						+ "  city_id  = " + i_strCity_id + " , "
-						+ "  currency_id = " + i_strCurrency_id + " "
+			qm = new QueryManager();
+			qm.beginTransaction();
+			query = "SELECT user_id  FROM tuser where  (login = '" + login	+ "' )  and  (passwd = '" + passwd + "' )";
+			qm.executeQuery(query);
+			if (qm.rows().size() != 0) {
+				authorizationBean.setIntUserID( Long.parseLong((String) qm.getValueAt(0, 0))) ;
+				query = "update tuser set " + " login = '" + login
+						+ "' , " + "  passwd = '" + passwd + "' , "
+						+ "  first_name = '" + firstName + "' , "
+						+ "  last_name = '" + lastName + "' , "
+						+ "  e_mail = '" + email + "' , " + "  phone = '"
+						+ phone + "' , " + "  mobil_phone = '"
+						+ mobilePhone + "' , " + "  fax = '" + faxNumber
+						+ "' , " + "  icq = '" + messageId + "' , "
+						+ "  website = '" + websiteHost + "' , "
+						+ "  question = '" + secureQuestion + "' , "
+						+ "  answer = '" + secureAnswer + "' , "
+						+ "  company  = '" + companyName + "' , "
+						+ "  country_id  = " + countryId + " , "
+						+ "  city_id  = " + cityId + " , "
+						+ "  currency_id = " + currencyId + " "
 						+ "  where user_id = " + authorizationBean.getIntUserID();
-				Adp.executeUpdate(query);
+				qm.executeUpdate(query);
 				authorizationBean.setIntLogined(1);
-				Adp.commit();
+				qm.commit();
 				return 0;
 			}
 
@@ -968,96 +893,96 @@ final	public AuthorizationPageBean getFromMainSiteUserAuthorizationBean(final St
 			 * Adp.commit(); Adp.close(); return -1 ; }
 			 */
 
-			query = "SELECT user_id  FROM tuser  where login  = '" + i_strLogin	+ "'";
-			Adp.executeQuery(query);
-			if (Adp.rows().size() != 0) {
-				authorizationBean.setIntUserID(Long.parseLong((String) Adp.getValueAt(0, 0)));
+			query = "SELECT user_id  FROM tuser  where login  = '" + login	+ "'";
+			qm.executeQuery(query);
+			if (qm.rows().size() != 0) {
+				authorizationBean.setIntUserID(Long.parseLong((String) qm.getValueAt(0, 0)));
 				authorizationBean.setIntLogined(3);
 				authorizationBean.setIntUserID(0);
 				authorizationBean.setStrLogin("");
-				Adp.commit();
+				qm.commit();
 				return -1;
 			}
 
 
 			//query = "SELECT NEXT VALUE FOR tuser_user_id_seq  AS ID  FROM ONE_SEQUENCES";
 			query = sequences_rs.getString("tuser");
-			Adp.executeQuery(query);
-			authorizationBean.setIntUserID(Long.parseLong((String) Adp.getValueAt(0, 0)));
+			qm.executeQuery(query);
+			authorizationBean.setIntUserID(Long.parseLong((String) qm.getValueAt(0, 0)));
 
 			query = "insert into tuser ( user_id , login , passwd , first_name , last_name , e_mail , phone , mobil_phone,fax,icq,website,question,answer,acvive_session ,active ,regdate ,levelup_cd ,bank_cd , company , country_id , city_id , currency_id , site_id , idsession ) "
 				+ " values ( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) " ;
 
-			Map args = Adp.getArgs();
+			Map args = qm.getArgs();
 			args.put("user_id", authorizationBean.getIntUserID()) ;
-			args.put("login", i_strLogin) ;
-			args.put("passwd", i_strPasswd) ;
-			args.put("first_name", i_strFName) ;
-			args.put("last_name", i_strLName) ;
-			args.put("e_mail", i_strEMail) ;
-			args.put("phone", i_strPhone ) ;
-			args.put("mobil_phone", i_strMPhone ) ;
-			args.put("fax", i_strFax ) ;
-			args.put("icq", i_strIcq ) ;
-			args.put("website", i_strWebsite ) ;
-			args.put("question", i_strQuestion ) ;
-			args.put("answer", i_strAnswer ) ;
+			args.put("login", login) ;
+			args.put("passwd", passwd) ;
+			args.put("first_name", firstName) ;
+			args.put("last_name", lastName) ;
+			args.put("e_mail", email) ;
+			args.put("phone", phone ) ;
+			args.put("mobil_phone", mobilePhone ) ;
+			args.put("fax", faxNumber ) ;
+			args.put("icq", messageId ) ;
+			args.put("website", websiteHost ) ;
+			args.put("question", secureQuestion ) ;
+			args.put("answer", secureAnswer ) ;
 			args.put("acvive_session" ,  true )  ;
 			args.put("active" ,  true  ) ;
 			args.put("regdate" ,   new java.util.Date()) ;
 			args.put("levelup_cd" ,  1  );
 			args.put("bank_cd" ,  0 );
-			args.put("company" ,  i_strCompany ) ;
-			args.put("country_id" ,  Long.parseLong(i_strCountry_id) ) ;
-			args.put("city_id" ,  Long.parseLong(i_strCity_id) ) ;
-			args.put("currency_id" ,  Long.parseLong(i_strCurrency_id) ) ;
+			args.put("company" ,  companyName ) ;
+			args.put("country_id" ,  Long.parseLong(countryId) ) ;
+			args.put("city_id" ,  Long.parseLong(cityId) ) ;
+			args.put("currency_id" ,  Long.parseLong(currencyId) ) ;
 			args.put("site_id",  Long.parseLong(authorizationBean.getSite_id())) ; 
-			args.put("idsession",  cookie_session_id) ;
-			Adp.executeInsertWithArgs(query, args);
+			args.put("idsession",  cookieSessionId) ;
+			qm.executeInsertWithArgs(query, args);
 			
 			
 			//+ "  idsession = '" + cookie_session_id + "' , "
 			
 			//query = "SELECT NEXT VALUE FOR account_id_seq  AS ID  FROM ONE_SEQUENCES";
 			query = sequences_rs.getString("account");
-			Adp.executeQuery(query);
-			String account_id = (String) Adp.getValueAt(0, 0);
+			qm.executeQuery(query);
+			String account_id = (String) qm.getValueAt(0, 0);
 
 			query = "insert into account ( account_id , user_id , amount , curr , date_input ,  description ,  currency_id ) "
 				+ " values (  ? , ? , ? , ? , ? ,  ? ,  ?  ) " ;
 				
-			args = Adp.getArgs();
+			args = qm.getArgs();
 			args.put("account_id" ,   Long.parseLong(account_id)  );
 			args.put("user_id" ,  authorizationBean.getIntUserID()  );
 			args.put("amount" ,  0  );
 			args.put("curr" ,  3  );
 			args.put("date_input" ,  new java.util.Date() );
 			args.put("description" ,  " new_account "  );
-			args.put("currency_id" ,  Long.parseLong(i_strCurrency_id)  );
+			args.put("currency_id" ,  Long.parseLong(currencyId)  );
 			
-			Adp.executeInsertWithArgs(query, args);
+			qm.executeInsertWithArgs(query, args);
 			
 			authorizationBean.setIntLogined(1);
 			authorizationBean.setIntLevelUp(1);
-			Adp.commit();
+			qm.commit();
 			return 0;
 
 		 } 
 		 catch (SQLException ex) 
 		 {
 				log.error(query,ex);
-				Adp.rollback();
+				qm.rollback();
 				return -2;
 		}
 		catch (Exception ex) {
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 			return -2;
 		}
 
 		finally 
 		{
-			if(Adp != null)	Adp.close();
+			if(qm != null)	qm.close();
 		}
 
 	}
@@ -1067,7 +992,7 @@ final	public AuthorizationPageBean getFromMainSiteUserAuthorizationBean(final St
 	
 
 
-
+	@Profiled(logger = CLASS_NAME , tag = "getDateControl" , message = "name1: {$0}  , name2: {$1}  , name3: {$2} , query: {$3}, at: {$4}, to: {$5}, getDateControl: {$retrun} "  )	
 	final public String getDateControl(final String name1, final String name2, final String name3,
 			String query, int at, int to) {
 		return super.getDateControl(name1, name2, name3, query, at, to);
@@ -1077,20 +1002,20 @@ final	public AuthorizationPageBean getFromMainSiteUserAuthorizationBean(final St
 
 
 	
-
+	@Profiled(logger = CLASS_NAME , tag = "initSiteDir" , message = "site_id: {$0}  , authorizationBean: {$1} "  )	
 	final public void initSiteDir(final String site_id , final AuthorizationPageBean authorizationBean) {
 		String query = "select site_dir, subject_site , nick_site , company_name , host from site where site_id = "
 				+ site_id;
-		QueryManager Adp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		// Adp.BeginTransaction();
 		try {
-			Adp.executeQuery(query);
-			if (Adp.rows().size() != 0) {
-				authorizationBean.setSite_dir((String) Adp.getValueAt(0, 0)); // + " " +
-				authorizationBean.setSubject_site((String) Adp.getValueAt(0, 1));
-				authorizationBean.setNick_site((String) Adp.getValueAt(0, 2));
-				authorizationBean.setCompany_name((String) Adp.getValueAt(0, 3));
-				authorizationBean.setHost((String) Adp.getValueAt(0, 4));
+			qm.executeQuery(query);
+			if (qm.rows().size() != 0) {
+				authorizationBean.setSite_dir((String) qm.getValueAt(0, 0)); // + " " +
+				authorizationBean.setSubject_site((String) qm.getValueAt(0, 1));
+				authorizationBean.setNick_site((String) qm.getValueAt(0, 2));
+				authorizationBean.setCompany_name((String) qm.getValueAt(0, 3));
+				authorizationBean.setHost((String) qm.getValueAt(0, 4));
 			}
 		}
 		catch (SQLException ex) {
@@ -1101,7 +1026,7 @@ final	public AuthorizationPageBean getFromMainSiteUserAuthorizationBean(final St
 		}
 
 		finally {
-			Adp.close();
+			qm.close();
 		}
 
 	}
@@ -1111,18 +1036,18 @@ final	public AuthorizationPageBean getFromMainSiteUserAuthorizationBean(final St
 	
 
 	
-		
-	final public void initUserSite(final long user_id , final AuthorizationPageBean authorizationBean ) 
+	@Profiled(logger = CLASS_NAME , tag = "initSiteDir" , message = "site_id: {$0}  , authorizationBean: {$1} "  )		
+	final public void initUserSite(final long userId , final AuthorizationPageBean authorizationBean ) 
 	{
-		String query = "select site_id  from site where site.owner = " + user_id + " order by site.site_id desc ";
+		String query = "select site_id  from site where site.owner = " + userId + " order by site.site_id desc ";
 		
-		QueryManager Adp = new QueryManager();
+		QueryManager qm = new QueryManager();
 
 		try 
 		{
-			Adp.executeQuery(query);
-			if (Adp.rows().size() != 0) {
-				authorizationBean.setUser_site((String) Adp.getValueAt(0, 0)); // + " " +
+			qm.executeQuery(query);
+			if (qm.rows().size() != 0) {
+				authorizationBean.setUser_site((String) qm.getValueAt(0, 0)); // + " " +
 			}
 			else authorizationBean.setUser_site("-1") ;
 		}
@@ -1136,22 +1061,24 @@ final	public AuthorizationPageBean getFromMainSiteUserAuthorizationBean(final St
 		}
 
 		finally {
-			Adp.close();
+			qm.close();
 		}
 
 	}
 	
+	
+	@Profiled(logger = CLASS_NAME , tag = "getLengId" , message = "locale: {$0}  , getLengId: {$retrun} "  )		
 	final public int getLengId(final String locale) 
 	{
 		String leng_id = "-1" ;
 		String query = "select lang_id  from lang where lable = '" + locale + "'" ;
-		QueryManager Adp = new QueryManager();
+		QueryManager qm = new QueryManager();
 
 		try 
 		{
-			Adp.executeQuery(query);
-			if (Adp.rows().size() != 0) {
-				leng_id = (String) Adp.getValueAt(0, 0); // + " " +
+			qm.executeQuery(query);
+			if (qm.rows().size() != 0) {
+				leng_id = (String) qm.getValueAt(0, 0); // + " " +
 			}
 			
 		}
@@ -1165,30 +1092,32 @@ final	public AuthorizationPageBean getFromMainSiteUserAuthorizationBean(final St
 		}
 
 		finally {
-			Adp.close();
+			qm.close();
 		}
 		
 		return  Integer.parseInt(leng_id);
 	}
 	
-	final public void initPaySys_Shop_cd(final String site_id , final AuthorizationPageBean authorizationBean ) {
-		String query = "select  shop_cd from shop where site_id = " + site_id;
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+	
+	@Profiled(logger = CLASS_NAME , tag = "initPaySysShopCd" , message = "siteId: {$0}  , authorizationBean: {$1}  , initPaySysShopCd: {$retrun} "  )
+	final public void initPaySysShopCd(final String siteId , final AuthorizationPageBean authorizationBean ) {
+		String query = "select  shop_cd from shop where site_id = " + siteId;
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		try 
 		{
-			Adp.executeQuery(query);
+			qm.executeQuery(query);
 
-			if (Adp.rows().size() != 0) {
-				authorizationBean.setPaysys_shop_cd((String) Adp.getValueAt(0, 0));
+			if (qm.rows().size() != 0) {
+				authorizationBean.setPaysys_shop_cd((String) qm.getValueAt(0, 0));
 				if (authorizationBean.getPaysys_shop_cd() == null)
 					log.assertLog(false,
 							"ERROR: select shop_cd  from shop where site_id = "
-									+ site_id + " \n   shop_cd = null ");
+									+ siteId + " \n   shop_cd = null ");
 			} else
 				log.assertLog(false,
 						"ERROR: select shop_cd  from shop where site_id = "
-								+ site_id + " \n   shop_cd = null ");
+								+ siteId + " \n   shop_cd = null ");
 
 		} 
 		catch (SQLException ex) 
@@ -1201,7 +1130,7 @@ final	public AuthorizationPageBean getFromMainSiteUserAuthorizationBean(final St
 		}
 		finally 
 		{
-			Adp.close();
+			qm.close();
 		}
 
 	}
@@ -1210,24 +1139,18 @@ final	public AuthorizationPageBean getFromMainSiteUserAuthorizationBean(final St
 	
 	
 	
-	
+	@Profiled(logger = CLASS_NAME , tag = "getUserList" , message = "authorizationBean: {$0}  , getUserList: {$retrun} "  )
 	final public String getUserList( final AuthorizationPageBean authorizationBean ) {
 		StringBuffer table = new StringBuffer() ;
-		QueryManager Adp = null;
+		QueryManager qm = null;
 		String query ="";
 		
 		if(authorizationBean.getIntLevelUp() != 2 ) return "" ;
 		try {
-			Adp = new QueryManager();
-			// query = "SELECT user_id , login , passwd , first_name , last_name
-			// , e_mail , phone ,
-			// mobil_phone,fax,icq,website,question,answer,levelup_cd ,bank_cd ,
-			// company , country_id , city_id , currency_id FROM tuser where
-			// (login = '" + i_strLogin + "' ) and (passwd = '" + i_strPasswd +
-			// "')" ;
+			qm = new QueryManager();
 			query = "SELECT user_id , login , passwd , first_name , last_name , e_mail , phone , mobil_phone , regdate FROM tuser  where	site_id = " + authorizationBean.getSite_id() + "";
 			
-			Adp.executeQuery(query);
+			qm.executeQuery(query);
 			table.append("<table class=\"columns\">\n");
 			table.append("<tbody>\n");
 			
@@ -1245,44 +1168,44 @@ final	public AuthorizationPageBean getFromMainSiteUserAuthorizationBean(final St
 					+ "</TR>\n");
 
 			
-			for (int i = 0; Adp.rows().size() > i; i ++) {
+			for (int i = 0; qm.rows().size() > i; i ++) {
 				table.append("<tr>") ;
 				table.append("<td>"); 
-				table.append(Adp.getValueAt(i, 0));
+				table.append(qm.getValueAt(i, 0));
 				table.append("</td>");
 
 				table.append("<td>"); 
-				table.append(Adp.getValueAt(i, 1));
+				table.append(qm.getValueAt(i, 1));
 				table.append("</td>");
 
 				table.append("<td>"); 
-				table.append(Adp.getValueAt(i, 2));
+				table.append(qm.getValueAt(i, 2));
 				table.append("</td>");
 
 				table.append("<td>"); 
-				table.append(Adp.getValueAt(i, 3));
+				table.append(qm.getValueAt(i, 3));
 				table.append("</td>");
 
 
 				table.append("<td>"); 
-				table.append(Adp.getValueAt(i, 4));
+				table.append(qm.getValueAt(i, 4));
 				table.append("</td>");
 
 				table.append("<td>"); 
-				table.append("<a href='mailto:" +  Adp.getValueAt(i, 5) + " '  >" +  Adp.getValueAt(i, 5) + "</a>" );
+				table.append("<a href='mailto:" +  qm.getValueAt(i, 5) + " '  >" +  qm.getValueAt(i, 5) + "</a>" );
 				table.append("</td>");
 
 				table.append("<td>"); 
-				table.append(Adp.getValueAt(i, 6));
+				table.append(qm.getValueAt(i, 6));
 				table.append("</td>");
 
 				
 				table.append("<td>"); 
-				table.append(Adp.getValueAt(i, 7));
+				table.append(qm.getValueAt(i, 7));
 				table.append("</td>");
 
 				table.append("<td>"); 
-				table.append( ((String)Adp.getValueAt(i, 8)).substring(0,16));
+				table.append( ((String)qm.getValueAt(i, 8)).substring(0,16));
 				table.append("</td>");
 
 				
@@ -1300,29 +1223,25 @@ final	public AuthorizationPageBean getFromMainSiteUserAuthorizationBean(final St
 		}
 		finally 
 		{
-			if(Adp != null)	Adp.close();
+			if(qm != null)	qm.close();
 		}
 		
 	 return table.toString() ;
 	}
 	
+	
+	@Profiled(logger = CLASS_NAME , tag = "getUserListAll" , message = "authorizationBean: {$0}  , getUserListAll: {$retrun} "  )
 	final public String getUserListAll( final AuthorizationPageBean authorizationBean ) {
 		StringBuffer table = new StringBuffer() ;
-		QueryManager Adp = null;
+		QueryManager qm = null;
 		String query ="";
 		
 		if(authorizationBean.getIntLevelUp() != 2 ) return "" ;
 		try {
-			Adp = new QueryManager();
-			// query = "SELECT user_id , login , passwd , first_name , last_name
-			// , e_mail , phone ,
-			// mobil_phone,fax,icq,website,question,answer,levelup_cd ,bank_cd ,
-			// company , country_id , city_id , currency_id FROM tuser where
-			// (login = '" + i_strLogin + "' ) and (passwd = '" + i_strPasswd +
-			// "')" ;
+			qm = new QueryManager();
 			query = "SELECT user_id , login , passwd , first_name , last_name , e_mail , phone , mobil_phone , regdate , site_id FROM tuser " ;
 			
-			Adp.executeQuery(query);
+			qm.executeQuery(query);
 			table.append("<table class=\"columns\">\n");
 			table.append("<tbody>\n");
 			
@@ -1341,48 +1260,48 @@ final	public AuthorizationPageBean getFromMainSiteUserAuthorizationBean(final St
 					+ "</TR>\n");
 
 			
-			for (int i = 0; Adp.rows().size() > i; i ++) {
+			for (int i = 0; qm.rows().size() > i; i ++) {
 				table.append("<tr>") ;
 				table.append("<td>"); 
-				table.append(Adp.getValueAt(i, 0));
+				table.append(qm.getValueAt(i, 0));
 				table.append("</td>");
 
 				table.append("<td>"); 
-				table.append(Adp.getValueAt(i, 1));
+				table.append(qm.getValueAt(i, 1));
 				table.append("</td>");
 
 				table.append("<td>"); 
-				table.append(Adp.getValueAt(i, 2));
+				table.append(qm.getValueAt(i, 2));
 				table.append("</td>");
 
 				table.append("<td>"); 
-				table.append(Adp.getValueAt(i, 3));
+				table.append(qm.getValueAt(i, 3));
 				table.append("</td>");
 
 
 				table.append("<td>"); 
-				table.append(Adp.getValueAt(i, 4));
+				table.append(qm.getValueAt(i, 4));
 				table.append("</td>");
 
 				table.append("<td>"); 
-				table.append("<a href='mailto:" +  Adp.getValueAt(i, 5) + " '  >" +  Adp.getValueAt(i, 5) + "</a>" );
+				table.append("<a href='mailto:" +  qm.getValueAt(i, 5) + " '  >" +  qm.getValueAt(i, 5) + "</a>" );
 				table.append("</td>");
 
 				table.append("<td>"); 
-				table.append(Adp.getValueAt(i, 6));
+				table.append(qm.getValueAt(i, 6));
 				table.append("</td>");
 
 				
 				table.append("<td>"); 
-				table.append(Adp.getValueAt(i, 7));
+				table.append(qm.getValueAt(i, 7));
 				table.append("</td>");
 
 				table.append("<td>"); 
-				table.append( ((String)Adp.getValueAt(i, 8)).substring(0,16));
+				table.append( ((String)qm.getValueAt(i, 8)).substring(0,16));
 				table.append("</td>");
 
 				table.append("<td>"); 
-				table.append(Adp.getValueAt(i, 9));
+				table.append(qm.getValueAt(i, 9));
 				table.append("</td>");
 				
 				table.append("</tr>") ;
@@ -1399,76 +1318,78 @@ final	public AuthorizationPageBean getFromMainSiteUserAuthorizationBean(final St
 		}
 		finally 
 		{
-			if(Adp != null)	Adp.close();
+			if(qm != null)	qm.close();
 		}
 		
 	 return table.toString() ;
 	}
 	
-	final public boolean isNumber(final String tmp) {
-		if (tmp == null)
+	@Profiled(logger = CLASS_NAME , tag = "isNumber" , message = "number: {$0}  , isNumber: {$retrun} "  )
+	final public boolean isNumber(final String number) {
+		if (number == null)
 			return false;
 		String IntField = "0123456789.";
-		for (int i = 0; i < tmp.length(); i++) {
+		for (int i = 0; i < number.length(); i++) {
 
-			if (IntField.indexOf(tmp.charAt(i)) == -1) {
-				if (tmp.charAt(i) != '-' && i != 0)
+			if (IntField.indexOf(number.charAt(i)) == -1) {
+				if (number.charAt(i) != '-' && i != 0)
 					return false;
 			}
 		}
 		return true;
 	}
 
-	final public boolean isEnglish( String tmp) {
-		if (tmp == null)
+	@Profiled(logger = CLASS_NAME , tag = "isEnglish" , message = "word: {$0}  , isEnglish: {$retrun} "  )
+	final public boolean isEnglish( String word) {
+		if (word == null)
 			return false;
-		tmp = tmp.toLowerCase() ;
+		word = word.toLowerCase() ;
 		String IntField = "0123456789qwertyuiopasdfghjklzxcvbnm_-";
-		for (int i = 0; i < tmp.length(); i++) {
+		for (int i = 0; i < word.length(); i++) {
 
-			if (IntField.indexOf(tmp.charAt(i)) == -1) {
-				if (tmp.charAt(i) != '-' && i != 0)
+			if (IntField.indexOf(word.charAt(i)) == -1) {
+				if (word.charAt(i) != '-' && i != 0)
 					return false;
 			}
 		}
 		return true;
 	}
 
-	
-	public final void saveNewDomain(final String host , final String site_id  ) 
+	@Profiled(logger = CLASS_NAME , tag = "saveNewDomain" , message = "host: {$0} ,  siteId: {$0}  , saveNewDomain: {$retrun} "  )
+	public final void saveNewDomain(final String host , final String siteId  ) 
 	{
-		QueryManager Adp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		String query = "" ;
-		Adp.BeginTransaction();
+		qm.beginTransaction();
 		try {
-					query = "UPDATE site SET HOST = ?  where SITE_ID =  " + site_id ;
-					Map args = Adp.getArgs();
+					query = "UPDATE site SET HOST = ?  where SITE_ID =  " + siteId ;
+					Map args = qm.getArgs();
 					args.put("HOST" , host );
-					Adp.executeUpdateWithArgs(query, args);
-					Adp.commit() ;		
+					qm.executeUpdateWithArgs(query, args);
+					qm.commit() ;		
 		}
 		catch (Exception e) 
 		{
-			Adp.rollback();
+			qm.rollback();
 			log.error(e) ;
 		}
 		finally
 		{
-			if(Adp != null)	Adp.close();
+			if(qm != null)	qm.close();
 		}
 	}
 	
-	
-	final void saveClassesSessionScope(final HttpSession  session  ) 
+	@Profiled(logger = CLASS_NAME , tag = "saveClassesSessionScope" , message = "httpSession: {$0} , saveClassesSessionScope: {$retrun} "  )
+	final void saveClassesSessionScope(final HttpSession  httpSession  ) 
 	{
-		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
+		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) httpSession.getAttribute("authorizationPageBeanId");
 		if( AuthorizationPageBeanId == null ) return ;
 		//if( AuthorizationPageBeanId.getStrLogin().equals(SiteRole.GUEST)) return ;
 		//if( AuthorizationPageBeanId.getIntLevelUp() == 0 ) return ;
-		QueryManager Adp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		String query = "" ;
 		String key = "";
-		Adp.BeginTransaction();
+		qm.beginTransaction();
 		Enumeration enumeration;
 		String type = null ;
 		Object obj = null ;
@@ -1479,22 +1400,22 @@ final	public AuthorizationPageBean getFromMainSiteUserAuthorizationBean(final St
 			{
 				key = (String) enumeration.nextElement();
 				 type = session_scope.getString(key).trim();
-				 obj = session.getAttribute(key) ;
+				 obj = httpSession.getAttribute(key) ;
 				 if(obj == null ) continue ;
 				 
 				query = "select USER_ID from store_session WHERE USER_ID = " + AuthorizationPageBeanId.getIntUserID() + " AND TYPE = '" +type+ "'" ;
-				Adp.executeQuery(query);
+				qm.executeQuery(query);
 				
-				if (Adp.rows().size() != 0) 
+				if (qm.rows().size() != 0) 
 				{
 					query = "update store_session  set  USER_ID = ? , TYPE = ? , CLASSBODY = ? , " +
 					" ACTIVE = ? where USER_ID = " + AuthorizationPageBeanId.getIntUserID() + " AND TYPE = '" +type+ "'" ;
-					Map args = Adp.getArgs();
+					Map args = qm.getArgs();
 					args.put("USER_ID" , AuthorizationPageBeanId.getIntUserID()  );
 					args.put("TYPE" , type );
 					args.put("CLASSBODY" ,  obj);
 					args.put("ACTIVE" , true );
-					Adp.executeUpdateWithArgs(query, args);
+					qm.executeUpdateWithArgs(query, args);
 				
 				}
 				else
@@ -1502,78 +1423,77 @@ final	public AuthorizationPageBean getFromMainSiteUserAuthorizationBean(final St
 
 					query = "insert into store_session ( USER_ID ,  TYPE ,  CLASSBODY ,  ACTIVE ) "
 						+ " VALUES ( ? ,  ? ,  ? , ? )" ;
-					Map args = Adp.getArgs();
+					Map args = qm.getArgs();
 					args.put("USER_ID" , AuthorizationPageBeanId.getIntUserID()  );
 					args.put("TYPE" , type );
 					args.put("CLASSBODY" ,  obj);
 					args.put("ACTIVE" , true );
-					Adp.executeInsertWithArgs(query, args);
+					qm.executeInsertWithArgs(query, args);
 					
 				} 
 				
 				
 				//session.setAttribute(key,obj) ;
 			}
-			Adp.commit() ;		
+			qm.commit() ;		
 		}
 		catch (Exception e) 
 		{
-			Adp.rollback();
+			qm.rollback();
 			log.error(e) ;
 		}
 		finally
 		{
-			if(Adp != null)	Adp.close();
+			if(qm != null)	qm.close();
 		}
 	}
 	
-final	long getIdsessionHash1(final String id_session )
+	final	long getIdsessionHash1(final String sessionId )
 	{
-		String hash = id_session.substring(0, 10) ;
+		String hash = sessionId.substring(0, 10) ;
 		return  hash.hashCode() ;
 	}
 
-final	long getIdsessionHash2(final String id_session )
+	final	long getIdsessionHash2(final String sessionId )
 	{
-		String hash = id_session.substring(10, 20) ;
+		String hash = sessionId.substring(10, 20) ;
 		return  hash.hashCode() ;
 	}
 
-final	long getIdsessionHash3(final String id_session )
+	final	long getIdsessionHash3(final String sessionId )
 	{
-		String hash = id_session.substring(20, 30) ;
+		String hash = sessionId.substring(20, 30) ;
 		return  hash.hashCode() ;
 	}
 
-final	long getIdsessionHash4(final String id_session )
+	final	long getIdsessionHash4(final String sessionId )
 	{
-		String hash = id_session.substring(30) ;
+		String hash = sessionId.substring(30) ;
 		if(hash.indexOf(".") != -1 )hash = hash.substring(0 ,hash.indexOf(".")) ;
 		return  hash.hashCode() ;
 	}
 	
-final	public void saveClassesSessionScope_new(final HttpSession  session  ) 
+	@Profiled(logger = CLASS_NAME , tag = "saveClassesSessionScopeNew" , message = "httpSession: {$0} , saveClassesSessionScopeNew: {$retrun} "  )
+	final	public void saveClassesSessionScopeNew(final HttpSession  httpSession  ) 
 	{
-		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
+		AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) httpSession.getAttribute("authorizationPageBeanId");
 		if( AuthorizationPageBeanId == null ) return ;
-		//if( AuthorizationPageBeanId.getStrLogin().equals(SiteRole.GUEST)) return ;
-		//if( AuthorizationPageBeanId.getIntLevelUp() == 0 ) return ;
 		QueryManager Adp = new QueryManager();
 		String query = "" ;
 		String key = "";
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		Enumeration enumeration;
 		String type = null ;
 		Object obj = null ;
-		String cokie_session_id = (String) session.getAttribute("cokie_session_id");
-		session.removeAttribute(cokie_session_id);
+		String cokie_session_id = (String) httpSession.getAttribute("cokie_session_id");
+		httpSession.removeAttribute(cokie_session_id);
 		try {
 			enumeration = session_scope.getKeys();
 			while (enumeration.hasMoreElements()) 
 			{
 				key = (String) enumeration.nextElement();
 				 type = session_scope.getString(key).trim();
-				 obj = session.getAttribute(key) ;
+				 obj = httpSession.getAttribute(key) ;
 				 if(obj == null ) continue ;
 				 query = "select USER_ID  from store_session WHERE  idsession_hash1 = " + getIdsessionHash1(cokie_session_id) + "  and idsession_hash2 = " +  getIdsessionHash2(cokie_session_id) + " and idsession_hash3 = " +  getIdsessionHash3(cokie_session_id) + " and idsession_hash4 = " +  getIdsessionHash4(cokie_session_id) + " AND TYPE = '" +type+ "'" ;
 				//query = "select USER_ID from store_session WHERE USER_ID = " + AuthorizationPageBeanId.getIntUserID() + " AND TYPE = '" +type+ "'" ;
@@ -1625,29 +1545,29 @@ final	public void saveClassesSessionScope_new(final HttpSession  session  )
 		}
 	}
 	
-
-final	public void saveClassesSessionScope_new1(final HttpSession  session  ) 
-{
-	AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
+	@Profiled(logger = CLASS_NAME , tag = "saveClassesSessionScopeNew1" , message = "httpSession: {$0} , saveClassesSessionScopeNew1: {$retrun} "  )
+	final	public void saveClassesSessionScopeNew1(final HttpSession  httpSession  ) 
+	{
+	AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) httpSession.getAttribute("authorizationPageBeanId");
 	if( AuthorizationPageBeanId == null ) return ;
 	//if( AuthorizationPageBeanId.getStrLogin().equals(SiteRole.GUEST)) return ;
 	//if( AuthorizationPageBeanId.getIntLevelUp() == 0 ) return ;
 	QueryManager Adp = new QueryManager();
 	String query = "" ;
 	String key = "";
-	Adp.BeginTransaction();
+	Adp.beginTransaction();
 	Enumeration enumeration;
 	String type = null ;
 	Object obj = null ;
-	String cokie_session_id = (String) session.getAttribute("cokie_session_id");
-	session.removeAttribute(cokie_session_id);
+	String cokie_session_id = (String) httpSession.getAttribute("cokie_session_id");
+	httpSession.removeAttribute(cokie_session_id);
 	try {
 		enumeration = session_scope.getKeys();
 		while (enumeration.hasMoreElements()) 
 		{
 			key = (String) enumeration.nextElement();
 			 type = session_scope.getString(key).trim();
-			 obj = session.getAttribute(key) ;
+			 obj = httpSession.getAttribute(key) ;
 			 if(obj == null ) continue ;
 			 query = "select USER_ID  from store_session WHERE  idsession_hash1 = " + getIdsessionHash1(cokie_session_id) + "  and idsession_hash2 = " +  getIdsessionHash2(cokie_session_id) + " and idsession_hash3 = " +  getIdsessionHash3(cokie_session_id) + " and idsession_hash4 = " +  getIdsessionHash4(cokie_session_id) + " AND TYPE = '" +type+ "'" ;
 			//query = "select USER_ID from store_session WHERE USER_ID = " + AuthorizationPageBeanId.getIntUserID() + " AND TYPE = '" +type+ "'" ;
@@ -1699,110 +1619,107 @@ final	public void saveClassesSessionScope_new1(final HttpSession  session  )
 	}
 }
 
-
-final	public byte[] objectToBytes(final Object obj ) {
-	ByteArrayOutputStream baos = null ;
-	ObjectOutputStream oos = null ;
-	byte[] result = null ;
-	//if(!session.isNew()) return session.isNew() ;
-	try {
-	
-		baos = new ByteArrayOutputStream();
-		oos = new  ObjectOutputStream(baos);
-		oos.writeObject(obj) ;
-		result = baos.toByteArray() ;
+	@Profiled(logger = CLASS_NAME , tag = "objectToBytes" , message = "obj: {$0} , objectToBytes: {$retrun} "  )
+	final	public byte[] objectToBytes(final Object obj ) {
 		
-	} 
-	catch (Exception ex) {
-		log.error(ex);
-	}
-	finally 
-	{
+		ByteArrayOutputStream baos = null ;
+		ObjectOutputStream oos = null ;
+		byte[] result = null ;
+		//if(!session.isNew()) return session.isNew() ;
 		try {
-			if(baos != null ) baos.close();
-			if(oos != null ) oos.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
-	}
+			baos = new ByteArrayOutputStream();
+			oos = new  ObjectOutputStream(baos);
+			oos.writeObject(obj) ;
+			result = baos.toByteArray() ;
+			
+		} 
+		catch (Exception ex) {
+			log.error(ex);
+		}
+		finally 
+		{
+			try {
+				if(baos != null ) baos.close();
+				if(oos != null ) oos.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 	
 	return result;
 }
 	
-final	public void saveClassesSessionScopeByLogin(final HttpSession  session  ) 
-{
-	
-	
-	AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
+	@Profiled(logger = CLASS_NAME , tag = "saveClassesSessionScopeByLogin" , message = "httpSession: {$0} , saveClassesSessionScopeByLogin: {$retrun} "  )
+	final	public void saveClassesSessionScopeByLogin(final HttpSession  httpSession  ) 
+	{
+	AuthorizationPageBean AuthorizationPageBeanId = (AuthorizationPageBean) httpSession.getAttribute("authorizationPageBeanId");
 	if( AuthorizationPageBeanId == null ) return ;
-	//if( AuthorizationPageBeanId.getStrLogin().equals(SiteRole.GUEST)) return ;
-	//if( AuthorizationPageBeanId.getIntLevelUp() == 0 ) return ;
-	QueryManager Adp = new QueryManager();
-	//String user_id = AuthorizationPageBeanId.getIntUserID() ;
+	QueryManager qm = new QueryManager();
 	String query = "" ;
 	String key = "";
-	Adp.BeginTransaction();
+	qm.beginTransaction();
 	Enumeration enumeration;
 	String type = null ;
 	Object obj = null ;
-	String cokie_session_id = (String) session.getAttribute("cokie_session_id");
-	session.removeAttribute(cokie_session_id);
+	String cokie_session_id = (String) httpSession.getAttribute("cokie_session_id");
+	httpSession.removeAttribute(cokie_session_id);
 	try {
 		enumeration = session_scope.getKeys();
 		while (enumeration.hasMoreElements()) 
 		{
 			key = (String) enumeration.nextElement();
 			type = session_scope.getString(key).trim();
-			obj = session.getAttribute(key) ;
+			obj = httpSession.getAttribute(key) ;
 			if(obj == null ) continue ;
 			query = "select USER_ID  from store_session WHERE  USER_ID = " + AuthorizationPageBeanId.getIntUserID() + " AND TYPE = '" +type+ "'" ;
-			Adp.executeQuery(query);
+			qm.executeQuery(query);
 			
-			if (Adp.rows().size() > 0) 
+			if (qm.rows().size() > 0) 
 			{
 				query = "update store_session  set  USER_ID = ? , TYPE = ? , CLASSBODY = ? , " +
 				" ACTIVE = ? WHERE  USER_ID = " + AuthorizationPageBeanId.getIntUserID() + "  AND TYPE = '" +type+ "'" ;
-				Map args = Adp.getArgs();
+				Map args = qm.getArgs();
 				args.put("USER_ID" , AuthorizationPageBeanId.getIntUserID()  );
 				args.put("TYPE" , type );
 				args.put("CLASSBODY" ,  obj);
 				args.put("ACTIVE" , true );
-				Adp.executeUpdateWithArgs(query, args);
+				qm.executeUpdateWithArgs(query, args);
 			
 			}
 			else
 			{
 
 				query = "insert into store_session ( USER_ID ,  TYPE ,  CLASSBODY ,  ACTIVE  )  VALUES ( ? ,  ? ,  ? , ? )" ;
-				Map args = Adp.getArgs();
+				Map args = qm.getArgs();
 				args.put("USER_ID" , AuthorizationPageBeanId.getIntUserID()  );
 				args.put("TYPE" , type );
 				args.put("CLASSBODY" ,  obj);
 				args.put("ACTIVE" , true );
-				Adp.executeInsertWithArgs(query, args);
+				qm.executeInsertWithArgs(query, args);
 				
 			} 
 			
 			
 			//session.setAttribute(key,obj) ;
 		}
-		Adp.commit() ;		
+		qm.commit() ;		
 	}
 	catch (Exception e) 
 	{
-		Adp.rollback();
+		qm.rollback();
 		log.error(e) ;
 	}
 	finally
 	{
-		if(Adp != null)	Adp.close();
+		if(qm != null)	qm.close();
 	}
 }
 
-
-	final public void AddAliases(final ServletContextEvent sce) {
+	@Profiled(logger = CLASS_NAME , tag = "addAliases" , message = "sce: {$0} , addAliases: {$retrun} "  )
+	final public void addAliases(final ServletContextEvent sce) {
 		
 		 
 		//SELECT  LAST_DATE  FROM DOMAIN_PROC WHERE DOMAIN_PROC_ID = 0
@@ -1917,8 +1834,8 @@ final	public void saveClassesSessionScopeByLogin(final HttpSession  session  )
 		
 	}
 
-	
-	final public void PostToDNSServerAliases() {
+	@Profiled(logger = CLASS_NAME , tag = "postToDNSServerAliases" , message = "postToDNSServerAliases: {$retrun} "  )
+	final public void postToDNSServerAliases() {
 		
 		 
 		//SELECT  LAST_DATE  FROM DOMAIN_PROC WHERE DOMAIN_PROC_ID = 0
@@ -1998,12 +1915,13 @@ final	public void saveClassesSessionScopeByLogin(final HttpSession  session  )
 		
 	}
 	
-	final public void AddAliasesInFile() {
+	@Profiled(logger = CLASS_NAME , tag = "addAliasesInFile" , message = "addAliasesInFile: {$retrun} "  )
+	final public void addAliasesInFile() {
 		
 		 
 		//SELECT  LAST_DATE  FROM DOMAIN_PROC WHERE DOMAIN_PROC_ID = 0
 		
-		QueryManager Adp = null ;
+		QueryManager qm = null ;
 		AddAliase addAliase;
 		Document doc ;
 		String query = "select host  from site group by host" ;
@@ -2027,17 +1945,17 @@ final	public void saveClassesSessionScopeByLogin(final HttpSession  session  )
 
 		try 
 		{
-			Adp = new QueryManager();
-			if(Adp == null)return ; 
+			qm = new QueryManager();
+			if(qm == null)return ; 
 			
 			addAliase = new AddAliase();
 			doc = addAliase.loadConfig(file);
 			addAliase.RemoveAllAliase(doc, host) ;
 			
-			Adp.executeQuery(query);
-			for (int i = 0; Adp.rows().size() > i; i++) 
+			qm.executeQuery(query);
+			for (int i = 0; qm.rows().size() > i; i++) 
 			{
-				aliase =  Adp.getValueAt(i, 0);
+				aliase =  qm.getValueAt(i, 0);
 				int indexof = aliase.indexOf(".irr.bz");
 				//if(indexof != -1 && i < 280 && isAnsi(aliase) )
 				if(indexof != -1 && isAnsi(aliase) )
@@ -2060,90 +1978,74 @@ final	public void saveClassesSessionScopeByLogin(final HttpSession  session  )
 		}
 		finally
 		{
-			if(Adp != null )
+			if(qm != null )
 			{
-			Adp.close();
+			qm.close();
 			}
 		}
 	}
 	
-final	public boolean isAnsi(String tmp) {
-		if (tmp == null)
+	@Profiled(logger = CLASS_NAME , tag = "isAnsi" , message = "word: {$0} , isAnsi: {$retrun} "  )	
+	final	public boolean isAnsi(String word) {
+		if (word == null)
 			return false;
-		tmp = tmp.toLowerCase();
+		word = word.toLowerCase();
 		String IntField = "0123456789qwertyuiopasdfghjklzxcvbnm_-.";
-		for (int i = 0; i < tmp.length(); i++) {
+		for (int i = 0; i < word.length(); i++) {
 
-			if (IntField.indexOf(tmp.charAt(i)) == -1) {
-				if (tmp.charAt(i) != '-' && i != 0)
+			if (IntField.indexOf(word.charAt(i)) == -1) {
+				if (word.charAt(i) != '-' && i != 0)
 					return false;
 			}
 		}
 		return true;
 	}
 	
-final	public ResourceBundle getResources_cms_settings() {
+	final	public ResourceBundle getResources_cms_settings() {
 		return setup_resources;
 	}
 
 
-//	public void setResources_cms_settings(ResourceBundle resources_cms_settings) {
-//		this.setup_resources = resources_cms_settings;
-//	}
 
-final public Map getControllerMap() {
+	final public Map getControllerMap() {
 		return controllerMap;
 	}
 
-//	public void setControllerMap(HashMap controllerMap) {
-//		this.controllerMap = controllerMap;
-//	}
 
-final	public Map getTransformerMap() {
+
+	final	public Map getTransformerMap() {
 		return transformerMap;
 	}
 
-//	public void setTransformerMap(HashMap transformerMap) {
-//		this.transformerMap = transformerMap;
-//	}
 
-	final public ResourceBundle getActions_resources() {
-		return actions_resources;
+
+	final public ResourceBundle getActionsResources() {
+		return actionsResources;
 	}
 
-//	public void setActions_resources(ResourceBundle actions_resources) {
-//		this.actions_resources = actions_resources;
-//	}
 
-final	public ResourceBundle getXslt_resources() {
-		return xslt_resources;
+
+	final	public ResourceBundle getXsltResources() {
+		return xsltResources;
 	}
 
-//	public void setXslt_resources(ResourceBundle xslt_resources) {
-//		this.xslt_resources = xslt_resources;
-//	}
 
-final	public ResourceBundle getSession_scope() {
+
+	final	public ResourceBundle getSessionScope() {
 		return session_scope;
 	}
 
-//	public void setSession_scope(ResourceBundle session_scope) {
-//		this.session_scope = session_scope;
-//	}
 
-final	public ResourceBundle getSetup_resources() {
+
+	final	public ResourceBundle getSetupResources() {
 		return setup_resources;
 	}
 
-//	public void setSetup_resources(ResourceBundle setup_resources) {
-//		this.setup_resources = setup_resources;
-//	}
+
 
 	final public CreateShopBean getCreateShopBean() {
 		return createShopBean;
 	}
 
-//	public void setCreateShopBean(CreateShopBean createShopBean) {
-//		this.createShopBean = createShopBean;
-//	}
+
 }

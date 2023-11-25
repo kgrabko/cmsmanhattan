@@ -233,7 +233,7 @@ public class CalendarListBean extends com.cbsinc.cms.WebControls implements java
 
 	public void delete(String calendar_id) {
 		Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String query = "";
 		query = "delete FROM calendar WHERE site_id = " + site_id + " and calendar_id = " + calendar_id;
 		try {

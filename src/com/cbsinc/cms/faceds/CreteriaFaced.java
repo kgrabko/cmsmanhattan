@@ -28,6 +28,7 @@ import java.util.Map;
 
 
 import org.apache.log4j.Logger;
+import org.perf4j.aop.Profiled;
 
 import com.cbsinc.cms.QueryManager;
 import com.cbsinc.cms.annotations.SingletonBean;
@@ -36,52 +37,55 @@ import com.cbsinc.cms.annotations.SingletonBean;
 public class CreteriaFaced   {
 	
 
-	 static private Logger log = Logger.getLogger(CreteriaFaced.class);
+	 final private static Logger log = Logger.getLogger(CreteriaFaced.class);
+	 final private static  String CLASS_NAME = "com.cbsinc.cms.faceds.CreteriaFaced" ;
 	
-	public void addCatalog(String site_id , String table_name , String link_id , String name ,  String label  ) 
+	
+	 @Profiled(logger = CLASS_NAME , tag = "addCatalog" , message = "siteId: {$0}  , tableName: {@1} , linkId: {@2}, name: {@3}, label: {@4} "  )
+	 public void addCatalog(String siteId , String tableName , String linkId , String name ,  String label  ) 
 	{
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String query = "";
 		String creteria_id = "" ;
 		//query = "SELECT NEXT VALUE FOR " + table_name + "_" + table_name + "_id_seq  AS ID  FROM ONE_SEQUENCES";
-		query = "SELECT MAX(" + table_name + "_id ) + 1  as ID FROM "+table_name+"";
+		query = "SELECT MAX(" + tableName + "_id ) + 1  as ID FROM "+tableName+"";
 		
 		try 
 		{
 
-		Adp.executeQuery(query);
+		qm.executeQuery(query);
 		
-		creteria_id = Adp.getValueAt(0, 0);
+		creteria_id = qm.getValueAt(0, 0);
 
-		query = "insert into " + table_name + " (" + table_name + "_id , catalog_id , link_id , name , label , active ) "
+		query = "insert into " + tableName + " (" + tableName + "_id , catalog_id , link_id , name , label , active ) "
 				+ " values ( ? , ? , ? , ? , ? , ? ) " ;
 		 	
 			Map args = new HashMap();
-			args.put(table_name + "_id" , creteria_id  );
-			args.put("catalog_id" ,  site_id  );
-			args.put("link_id" ,  link_id  );
+			args.put(tableName + "_id" , creteria_id  );
+			args.put("catalog_id" ,  siteId  );
+			args.put("link_id" ,  linkId  );
 			args.put("name" ,  name );
 			args.put("label" ,  label );
 			args.put("active" ,  true );
-			Adp.executeInsertWithArgs(query, args);
-			Adp.commit();
+			qm.executeInsertWithArgs(query, args);
+			qm.commit();
 		
 		} 
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 		catch (Exception ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 
 		finally
         {
-    		Adp.close();        	
+    		qm.close();        	
         }  
 
 		return;
@@ -89,207 +93,205 @@ public class CreteriaFaced   {
 
 	
 
-	public void editCatalog(String table_name , String creteria_id , String name , String link_id  ) {
-
-		
+	 @Profiled(logger = CLASS_NAME , tag = "editCatalog" , message = "tableName: {$0}  , creteriaId: {@1} , name: {@2} , linkId: {@3} "  )
+	 public void editCatalog(String tableName , String creteriaId , String name , String linkId  ) {
 		 
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String query = "";
 
 
-		query = "update " + table_name + " set  name = ? , link_id = ?  where "+table_name.trim()+"_id = " + creteria_id   ;
+		query = "update " + tableName + " set  name = ? , link_id = ?  where "+tableName.trim()+"_id = " + creteriaId   ;
 
 		try 
 		{
 			HashMap args = new HashMap();
 			args.put("name" , name  );
-			args.put("link_id" , Long.valueOf(link_id)  );
-			Adp.executeUpdateWithArgs(query, args);
-			Adp.commit();
+			args.put("link_id" , Long.valueOf(linkId)  );
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adp.close();			
+			qm.close();			
 		}
 
 		return;
 	}
 
 	
-	public void editCreteriaLable1( String site_id , String label  ) {
+	 @Profiled(logger = CLASS_NAME , tag = "editCreteriaLable1" , message = "siteId: {$0}  , label: {@1}"  )
+	 public void editCreteriaLable1( String siteId , String label  ) {
 
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String query = "";
 
-		query = "update creteria1 set  label = ?  where CATALOG_ID = " + site_id   ;
+		query = "update creteria1 set  label = ?  where CATALOG_ID = " + siteId   ;
 
 		try 
 		{
 			HashMap args = new HashMap();
 			args.put("label" , label  );
-			Adp.executeUpdateWithArgs(query, args);
-			Adp.commit();
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adp.close();			
+			qm.close();			
 		}
 
 		return;
 	}
 	
-	public void editCreteriaLable2( String site_id , String label  ) {
+	 @Profiled(logger = CLASS_NAME , tag = "editCreteriaLable2" , message = "siteId: {$0}  , label: {@1}"  )
+	 public void editCreteriaLable2( String siteId , String label  ) {
 
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String query = "";
 
-		query = "update creteria2 set  label = ?  where CATALOG_ID = " + site_id   ;
+		query = "update creteria2 set  label = ?  where CATALOG_ID = " + siteId   ;
 
 		try 
 		{
 			HashMap args = new HashMap();
 			args.put("label" , label  );
-			Adp.executeUpdateWithArgs(query, args);
-			Adp.commit();
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adp.close();			
+			qm.close();			
 		}
 
 		return;
 	}
 	
 	
-	public void editCreteriaLable3( String site_id , String label  ) {
+	 @Profiled(logger = CLASS_NAME , tag = "editCreteriaLable3" , message = "siteId: {$0}  , label: {@1}"  )
+	 public void editCreteriaLable3( String siteId , String label  ) {
 
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
-		String query = "";
-
-		query = "update creteria3 set  label = ?  where CATALOG_ID = " + site_id   ;
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
+		String query =  "update creteria3 set  label = ?  where CATALOG_ID = " + siteId   ;
 
 		try 
 		{
 			HashMap args = new HashMap();
 			args.put("label" , label  );
-			Adp.executeUpdateWithArgs(query, args);
-			Adp.commit();
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adp.close();			
+			qm.close();			
 		}
 
 		return;
 	}
 	
 	
-	public void editCreteriaLable4( String site_id , String label  ) {
+	 @Profiled(logger = CLASS_NAME , tag = "editCreteriaLable4" , message = "siteId: {$0}  , label: {@1}"  )
+	 public void editCreteriaLable4( String siteId , String label  ) {
 
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
-		String query = "";
-
-		query = "update creteria4 set  label = ?  where CATALOG_ID = " + site_id   ;
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
+		String query =  "update creteria4 set  label = ?  where CATALOG_ID = " + siteId   ;
 
 		try 
 		{
 			HashMap args = new HashMap();
 			args.put("label" , label  );
-			Adp.executeUpdateWithArgs(query, args);
-			Adp.commit();
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adp.close();			
+			qm.close();			
 		}
 
 		return;
 	}
 	
 	
-	public void editCreteriaLable5( String site_id , String label  ) {
+	 @Profiled(logger = CLASS_NAME , tag = "editCreteriaLable5" , message = "siteId: {$0}  , label: {@1}"  )
+	 public void editCreteriaLable5( String siteId , String label  ) {
 
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
-		String query = "";
-
-		query = "update creteria5 set  label = ? where CATALOG_ID = " + site_id   ;
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
+		String query = "update creteria5 set  label = ? where CATALOG_ID = " + siteId   ;
 
 		try 
 		{
 			HashMap args = new HashMap();
 			args.put("label" , label  );
-			Adp.executeUpdateWithArgs(query, args);
-			Adp.commit();
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adp.close();			
+			qm.close();			
 		}
 
 		return;
@@ -297,68 +299,70 @@ public class CreteriaFaced   {
 	
 	
 	
-	public void editCreteriaLable6( String site_id , String label  ) {
+	 @Profiled(logger = CLASS_NAME , tag = "editCreteriaLable6" , message = "siteId: {$0}  , label: {@1}"  )
+	 public void editCreteriaLable6( String siteId , String label  ) {
 
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String query = "";
 
-		query = "update creteria6 set  label = ? where CATALOG_ID = " + site_id ;
+		query = "update creteria6 set  label = ? where CATALOG_ID = " + siteId ;
 
 		try 
 		{
 			HashMap args = new HashMap();
 			args.put("label" , label  );
-			Adp.executeUpdateWithArgs(query, args);
-			Adp.commit();
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adp.close();			
+			qm.close();			
 		}
 
 		return;
 	}
 	
 	
-	public void editCreteriaLable7( String site_id , String label  ) {
+	 @Profiled(logger = CLASS_NAME , tag = "editCreteriaLable7" , message = "siteId: {$0}  , label: {@1}"  )
+	 public void editCreteriaLable7( String siteId , String label  ) {
 
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String query = "";
 
-		query = "update creteria7 set  label = ? where CATALOG_ID = " + site_id ;
+		query = "update creteria7 set  label = ? where CATALOG_ID = " + siteId ;
 
 		try 
 		{
 			HashMap args = new HashMap();
 			args.put("label" , label  );
-			Adp.executeUpdateWithArgs(query, args);
-			Adp.commit();
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adp.close();			
+			qm.close();			
 		}
 
 		return;
@@ -366,311 +370,308 @@ public class CreteriaFaced   {
 	
 	
 	
-	public void editCreteriaLable8( String site_id , String label  ) {
+	 @Profiled(logger = CLASS_NAME , tag = "editCreteriaLable8" , message = "siteId: {$0}  , label: {@1}"  )
+	 public void editCreteriaLable8( String siteId , String label  ) {
 
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
-		String query = "";
-
-		query = "update creteria8 set  label = ? where CATALOG_ID = " + site_id ;
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
+		String query =  "update creteria8 set  label = ? where CATALOG_ID = " + siteId ;
 
 		try 
 		{
 			HashMap args = new HashMap();
 			args.put("label" , label  );
-			Adp.executeUpdateWithArgs(query, args);
-			Adp.commit();
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adp.close();			
+			qm.close();			
 		}
 
 		return;
 	}
 	
 	
-	public void editCreteriaLable9( String site_id , String label  ) {
+	 @Profiled(logger = CLASS_NAME , tag = "editCreteriaLable9" , message = "siteId: {$0}  , label: {@1}"  )
+	 public void editCreteriaLable9( String siteId , String label  ) {
 
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
-		String query = "";
-
-		query = "update creteria9 set  label = ? where CATALOG_ID = " + site_id ;
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
+		String query =  "update creteria9 set  label = ? where CATALOG_ID = " + siteId ;
 
 		try 
 		{
 			HashMap args = new HashMap();
 			args.put("label" , label  );
-			Adp.executeUpdateWithArgs(query, args);
-			Adp.commit();
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adp.close();			
+			qm.close();			
 		}
 
 		return;
 	}
 	
 	
-	public void editCreteriaLable10( String site_id , String label  ) {
+	 @Profiled(logger = CLASS_NAME , tag = "editCreteriaLable10" , message = "siteId: {$0}  , label: {@1}"  )
+	 public void editCreteriaLable10( String siteId , String label  ) {
 
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String query = "";
 
-		query = "update creteria10 set  label = ?  where CATALOG_ID = " + site_id ;
+		query = "update creteria10 set  label = ?  where CATALOG_ID = " + siteId ;
 
 		try 
 		{
 			HashMap args = new HashMap();
 			args.put("label" , label  );
-			Adp.executeUpdateWithArgs(query, args);
-			Adp.commit();
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adp.close();			
+			qm.close();			
 		}
 
 		return;
 	}
 	
-	public void editCreteria1( String creteria1_id , String name , String link_id   ) {
+	 @Profiled(logger = CLASS_NAME , tag = "editCreteria1" , message = "creteria1Id: {$0}  , name: {@1} , , linkId: {@2}"  )
+	 public void editCreteria1( String creteria1Id , String name , String linkId   ) {
 
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String query = "";
 
-		query = "update creteria1 set  name = ? , link_id = ?   where creteria1_id = " + creteria1_id   ;
+		query = "update creteria1 set  name = ? , link_id = ?   where creteria1_id = " + creteria1Id   ;
 
 		try 
 		{
 			HashMap args = new HashMap();
 			args.put("name" , name  );
-			args.put("link_id" , Long.valueOf(link_id)  );
-			Adp.executeUpdateWithArgs(query, args);
-			Adp.commit();
+			args.put("link_id" , Long.valueOf(linkId)  );
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adp.close();			
+			qm.close();			
 		}
 
 		return;
 	}
 	
 	
-	public void editCreteria2( String creteria2_id , String name , String link_id   ) {
+	 @Profiled(logger = CLASS_NAME , tag = "editCreteria2" , message = "creteria2Id: {$0}  , name: {@1} , linkId: {@2}"  )
+	 public void editCreteria2( String creteria2Id , String name , String linkId   ) {
 
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
-		String query = "";
-
-		query = "update creteria2 set  name = ? , link_id = ?   where creteria2_id = " + creteria2_id   ;
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
+		String query =  "update creteria2 set  name = ? , link_id = ?   where creteria2_id = " + creteria2Id   ;
 
 		try 
 		{
 			HashMap args = new HashMap();
 			args.put("name" , name  );
-			args.put("link_id" , Long.valueOf(link_id)  );
-			Adp.executeUpdateWithArgs(query, args);
-			Adp.commit();
+			args.put("link_id" , Long.valueOf(linkId)  );
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adp.close();			
+			qm.close();			
 		}
 
 		return;
 	}
 	
 	
-	public void editCreteria3( String creteria3_id , String name , String link_id   ) {
+	 @Profiled(logger = CLASS_NAME , tag = "editCreteria3" , message = "creteria3Id: {$0}  , name: {@1} , linkId: {@2} "  )
+	 public void editCreteria3( String creteria3Id , String name , String linkId   ) {
 
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String query = "";
 
-		query = "update creteria3 set  name = ? , link_id = ?   where creteria3_id = " + creteria3_id   ;
+		query = "update creteria3 set  name = ? , link_id = ?   where creteria3_id = " + creteria3Id   ;
 
 		try 
 		{
 			HashMap args = new HashMap();
 			args.put("name" , name  );
-			args.put("link_id" , Long.valueOf(link_id)  );
-			Adp.executeUpdateWithArgs(query, args);
-			Adp.commit();
+			args.put("link_id" , Long.valueOf(linkId)  );
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adp.close();			
+			qm.close();			
 		}
 
 		return;
 	}
 	
 	
-	public void editCreteria4( String creteria4_id , String name , String link_id   ) {
+	 @Profiled(logger = CLASS_NAME , tag = "editCreteria4" , message = "creteria4Id: {$0}  , name: {@1} , linkId: {@1} "  )
+	 public void editCreteria4( String creteria4Id , String name , String linkId   ) {
 
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
-		String query = "";
-
-		query = "update creteria4 set  name = ? , link_id = ?   where creteria4_id = " + creteria4_id   ;
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
+		String query  = "update creteria4 set  name = ? , link_id = ?   where creteria4_id = " + creteria4Id   ;
 
 		try 
 		{
 			HashMap args = new HashMap();
 			args.put("name" , name  );
-			args.put("link_id" , Long.valueOf(link_id)  );
-			Adp.executeUpdateWithArgs(query, args);
-			Adp.commit();
+			args.put("link_id" , Long.valueOf(linkId)  );
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adp.close();			
+			qm.close();			
 		}
 
 		return;
 	}
 	
 	
-	public void editCreteria5( String creteria5_id , String name , String link_id   ) {
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void editCreteria5( String creteria5Id , String name , String linkId   ) {
 
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
-		String query = "";
-
-		query = "update creteria5 set  name = ? , link_id = ?   where creteria5_id = " + creteria5_id   ;
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
+		String query = "update creteria5 set  name = ? , link_id = ?   where creteria5_id = " + creteria5Id   ;
 
 		try 
 		{
 			HashMap args = new HashMap();
 			args.put("name" , name  );
-			args.put("link_id" , Long.valueOf(link_id)  );
-			Adp.executeUpdateWithArgs(query, args);
-			Adp.commit();
+			args.put("link_id" , Long.valueOf(linkId)  );
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adp.close();			
+			qm.close();			
 		}
 
 		return;
 	}
 	
 	
-	public void editCreteria6( String creteria6_id , String name , String link_id   ) {
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void editCreteria6( String creteria6Id , String name , String linkId   ) {
 
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
-		String query = "";
-
-		query = "update creteria6 set  name = ? , link_id = ?   where creteria6_id = " + creteria6_id   ;
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
+		String query =  "update creteria6 set  name = ? , link_id = ?   where creteria6_id = " + creteria6Id   ;
 
 		try 
 		{
 			HashMap args = new HashMap();
 			args.put("name" , name  );
-			args.put("link_id" , Long.valueOf(link_id)  );
-			Adp.executeUpdateWithArgs(query, args);
-			Adp.commit();
+			args.put("link_id" , Long.valueOf(linkId)  );
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adp.close();			
+			qm.close();			
 		}
 
 		return;
@@ -678,140 +679,136 @@ public class CreteriaFaced   {
 	
 	
 	
-	public void editCreteria7( String creteria7_id , String name , String link_id   ) {
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void editCreteria7( String creteria7Id , String name , String linkId   ) {
 
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
-		String query = "";
-
-		query = "update creteria7 set  name = ? , link_id = ?   where creteria7_id = " + creteria7_id   ;
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
+		String query  = "update creteria7 set  name = ? , link_id = ?   where creteria7_id = " + creteria7Id   ;
 
 		try 
 		{
 			HashMap args = new HashMap();
 			args.put("name" , name  );
-			args.put("link_id" , Long.valueOf(link_id)  );
-			Adp.executeUpdateWithArgs(query, args);
-			Adp.commit();
+			args.put("link_id" , Long.valueOf(linkId)  );
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adp.close();			
+			qm.close();			
 		}
 
 		return;
 	}
 	
 	
-	public void editCreteria8(String creteria8_id , String name , String link_id   ) {
+	// @Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void editCreteria8(String creteria8Id , String name , String linkId   ) {
 
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
-		String query = "";
-
-		query = "update creteria8 set  name = ? , link_id = ?   where creteria8_id = " + creteria8_id   ;
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
+		String query  = "update creteria8 set  name = ? , link_id = ?   where creteria8_id = " + creteria8Id   ;
 
 		try 
 		{
 			HashMap args = new HashMap();
 			args.put("name" , name  );
-			args.put("link_id" , Long.valueOf(link_id)  );
-			Adp.executeUpdateWithArgs(query, args);
-			Adp.commit();
+			args.put("link_id" , Long.valueOf(linkId)  );
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adp.close();			
+			qm.close();			
 		}
 
 		return;
 	}
 	
 	
-	public void editCreteria9( String creteria9_id , String name , String link_id   ) {
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void editCreteria9( String creteria9Id , String name , String linkId   ) {
 
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
-		String query = "";
-
-		query = "update creteria9 set  name = ? , link_id = ?   where creteria9_id = " + creteria9_id   ;
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
+		String query =  "update creteria9 set  name = ? , link_id = ?   where creteria9_id = " + creteria9Id   ;
 
 		try 
 		{
 			HashMap args = new HashMap();
 			args.put("name" , name  );
-			args.put("link_id" , Long.valueOf(link_id)  );
-			Adp.executeUpdateWithArgs(query, args);
-			Adp.commit();
+			args.put("link_id" , Long.valueOf(linkId)  );
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adp.close();			
+			qm.close();			
 		}
 
 		return;
 	}
 	
 	
-	public void editCreteria10(String creteria10_id , String name , String link_id   ) {
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void editCreteria10(String creteria10Id , String name , String linkId   ) {
 
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
-		String query = "";
-
-		query = "update creteria10 set  name = ? , link_id = ?   where creteria10_id = " + creteria10_id   ;
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
+		String query = "update creteria10 set  name = ? , link_id = ?   where creteria10_id = " + creteria10Id   ;
 
 		try 
 		{
 			HashMap args = new HashMap();
 			args.put("name" , name  );
-			args.put("link_id" , Long.valueOf(link_id)  );
-			Adp.executeUpdateWithArgs(query, args);
-			Adp.commit();
+			args.put("link_id" , Long.valueOf(linkId)  );
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adp.close();			
+			qm.close();			
 		}
 
 		return;
@@ -820,7 +817,8 @@ public class CreteriaFaced   {
 	
 	
 	
-	public String getPartCriteria(String _criteriaId , boolean  isSpace )
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public String getPartCriteria(String _criteriaId , boolean  isSpace )
 	{
 		
 		try
@@ -842,14 +840,15 @@ public class CreteriaFaced   {
 	
 	
 	
-	public String getOneLabel(String query) {
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public String getOneLabel(String query) {
 		String name = "";
 		
-		QueryManager Adp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		try 
 		{
-			Adp.executeQuery(query);
-			if (Adp.rows().size() != 0)	name = (String) Adp.getValueAt(0, 0);
+			qm.executeQuery(query);
+			if (qm.rows().size() != 0)	name = (String) qm.getValueAt(0, 0);
 		}
 		catch (SQLException ex) {
 			log.error(query,ex);
@@ -860,21 +859,21 @@ public class CreteriaFaced   {
 		}
 		finally
 		{
-		Adp.close();
+		qm.close();
 		}
 		return name ;
 	}
 	
 
-	public void deleteCreteria1(String creteria1Id) 
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void deleteCreteria1(String creteria1Id) 
 	{
 		if(creteria1Id.startsWith("-") || creteria1Id.equals("0") ) return ;
-		QueryManager Adp = new QueryManager();
-		String query = "";
-		query = "delete FROM creteria1 WHERE  creteria1_ID = " + creteria1Id;
+		QueryManager qm = new QueryManager();
+		String query =  "delete FROM creteria1 WHERE  creteria1_ID = " + creteria1Id;
 		try 
 		{
-			Adp.executeUpdate(query);
+			qm.executeUpdate(query);
 		} 
 		catch (SQLException ex) 
 		{
@@ -886,21 +885,22 @@ public class CreteriaFaced   {
 		}
 		finally 
 		{
-			Adp.close();
+			qm.close();
 		}
 
 	}
 
 
-	public void deleteCreteria2(String creteria2Id) 
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void deleteCreteria2(String creteria2Id) 
 	{
 		if(creteria2Id.startsWith("-") || creteria2Id.equals("0") ) return ;
-		QueryManager Adp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		String query = "";
 		query = "delete FROM creteria2 WHERE  creteria2_ID = " + creteria2Id;
 		try 
 		{
-			Adp.executeUpdate(query);
+			qm.executeUpdate(query);
 		} 
 		catch (SQLException ex) 
 		{
@@ -912,21 +912,22 @@ public class CreteriaFaced   {
 		}
 		finally 
 		{
-			Adp.close();
+			qm.close();
 		}
 
 	}
 	
 	
-	public void deleteCreteria3(String creteria3Id) 
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void deleteCreteria3(String creteria3Id) 
 	{
 		if(creteria3Id.startsWith("-") || creteria3Id.equals("0") ) return ;
-		QueryManager Adp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		String query = "";
 		query = "delete FROM creteria3 WHERE  creteria3_ID = " + creteria3Id;
 		try 
 		{
-			Adp.executeUpdate(query);
+			qm.executeUpdate(query);
 		} 
 		catch (SQLException ex) 
 		{
@@ -938,19 +939,20 @@ public class CreteriaFaced   {
 		}
 		finally 
 		{
-			Adp.close();
+			qm.close();
 		}
 	}
 	
-	public void deleteCreteria4(String creteria4Id) 
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void deleteCreteria4(String creteria4Id) 
 	{
 		if(creteria4Id.startsWith("-") || creteria4Id.equals("0") ) return ;
-		QueryManager Adp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		String query = "";
 		query = "delete FROM creteria4 WHERE  creteria4_ID = " + creteria4Id;
 		try 
 		{
-			Adp.executeUpdate(query);
+			qm.executeUpdate(query);
 		} 
 		catch (SQLException ex) 
 		{
@@ -962,19 +964,20 @@ public class CreteriaFaced   {
 		}
 		finally 
 		{
-			Adp.close();
+			qm.close();
 		}
 	}
 	
-	public void deleteCreteria5(String creteria5Id) 
+	// @Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void deleteCreteria5(String creteria5Id) 
 	{
 		if(creteria5Id.startsWith("-") || creteria5Id.equals("0") ) return ;
-		QueryManager Adp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		String query = "";
 		query = "delete FROM creteria5 WHERE  creteria5_ID = " + creteria5Id;
 		try 
 		{
-			Adp.executeUpdate(query);
+			qm.executeUpdate(query);
 		} 
 		catch (SQLException ex) 
 		{
@@ -986,19 +989,20 @@ public class CreteriaFaced   {
 		}
 		finally 
 		{
-			Adp.close();
+			qm.close();
 		}
 	}
 	
-	public void deleteCreteria6(String creteria6Id) 
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void deleteCreteria6(String creteria6Id) 
 	{
 		if(creteria6Id.startsWith("-") || creteria6Id.equals("0") ) return ;
-		QueryManager Adp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		String query = "";
 		query = "delete FROM creteria6 WHERE  creteria6_ID = " + creteria6Id;
 		try 
 		{
-			Adp.executeUpdate(query);
+			qm.executeUpdate(query);
 		} 
 		catch (SQLException ex) 
 		{
@@ -1010,19 +1014,20 @@ public class CreteriaFaced   {
 		}
 		finally 
 		{
-			Adp.close();
+			qm.close();
 		}
 	}
 	
-	public void deleteCreteria7(String creteria7Id) 
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void deleteCreteria7(String creteria7Id) 
 	{
 		if(creteria7Id.startsWith("-") || creteria7Id.equals("0") ) return ;
-		QueryManager Adp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		String query = "";
 		query = "delete FROM creteria7 WHERE  creteria7_ID = " + creteria7Id;
 		try 
 		{
-			Adp.executeUpdate(query);
+			qm.executeUpdate(query);
 		} 
 		catch (SQLException ex) 
 		{
@@ -1034,20 +1039,20 @@ public class CreteriaFaced   {
 		}
 		finally 
 		{
-			Adp.close();
+			qm.close();
 		}
 	}
 
 
-	public void deleteCreteria8(String creteria8Id) 
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void deleteCreteria8(String creteria8Id) 
 	{
 		if(creteria8Id.startsWith("-") || creteria8Id.equals("0") ) return ;
-		QueryManager Adp = new QueryManager();
-		String query = "";
-		query = "delete FROM creteria8 WHERE  creteria8_ID = " + creteria8Id;
+		QueryManager qm = new QueryManager();
+		String query =  "delete FROM creteria8 WHERE  creteria8_ID = " + creteria8Id;
 		try 
 		{
-			Adp.executeUpdate(query);
+			qm.executeUpdate(query);
 		} 
 		catch (SQLException ex) 
 		{
@@ -1059,20 +1064,20 @@ public class CreteriaFaced   {
 		}
 		finally 
 		{
-			Adp.close();
+			qm.close();
 		}
 	}
 
 	
-	public void deleteCreteria9(String creteria9Id) 
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void deleteCreteria9(String creteria9Id) 
 	{
 		if(creteria9Id.startsWith("-") || creteria9Id.equals("0") ) return ;
-		QueryManager Adp = new QueryManager();
-		String query = "";
-		query = "delete FROM creteria9 WHERE  creteria9_ID = " + creteria9Id;
+		QueryManager qm = new QueryManager();
+		String query =  "delete FROM creteria9 WHERE  creteria9_ID = " + creteria9Id;
 		try 
 		{
-			Adp.executeUpdate(query);
+			qm.executeUpdate(query);
 		} 
 		catch (SQLException ex) 
 		{
@@ -1084,20 +1089,20 @@ public class CreteriaFaced   {
 		}
 		finally 
 		{
-			Adp.close();
+			qm.close();
 		}
 	}
 	
 	
-	public void deleteCreteria10(String creteria10Id) 
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void deleteCreteria10(String creteria10Id) 
 	{
 		if(creteria10Id.startsWith("-") || creteria10Id.equals("0") ) return ;
-		QueryManager Adp = new QueryManager();
-		String query = "";
-		query = "delete FROM creteria10 WHERE  creteria10_ID = " + creteria10Id;
+		QueryManager qm = new QueryManager();
+		String query =  "delete FROM creteria10 WHERE  creteria10_ID = " + creteria10Id;
 		try 
 		{
-			Adp.executeUpdate(query);
+			qm.executeUpdate(query);
 		} 
 		catch (SQLException ex) 
 		{
@@ -1109,14 +1114,15 @@ public class CreteriaFaced   {
 		}
 		finally 
 		{
-			Adp.close();
+			qm.close();
 		}
 	}
 	
-	public void addCreteria1(String site_id ,  String link_id , String name ,  String label  ) 
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void addCreteria1(String siteId ,  String linkI , String name ,  String label  ) 
 	{
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String query = "";
 		String creteria_id = "" ;
 		//query = "SELECT NEXT VALUE FOR " + table_name + "_" + table_name + "_id_seq  AS ID  FROM ONE_SEQUENCES";
@@ -1125,38 +1131,38 @@ public class CreteriaFaced   {
 		try 
 		{
 
-		Adp.executeQuery(query);
+		qm.executeQuery(query);
 		
-		creteria_id = Adp.getValueAt(0, 0);
+		creteria_id = qm.getValueAt(0, 0);
 
 		query = "insert into creteria1 (creteria1_ID , catalog_id , link_id , name , label , active ) "
 				+ " values ( ? , ? , ? , ? , ? , ? ) " ;
 		 	
 			Map args = new HashMap();
 			args.put("creteria1_ID" , creteria_id  );
-			args.put("catalog_id" ,  site_id  );
-			args.put("link_id" ,  link_id  );
+			args.put("catalog_id" ,  siteId  );
+			args.put("link_id" ,  linkI  );
 			args.put("name" ,  name );
 			args.put("label" ,  label );
 			args.put("active" ,  true );
-			Adp.executeInsertWithArgs(query, args);
-			Adp.commit();
+			qm.executeInsertWithArgs(query, args);
+			qm.commit();
 		
 		} 
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 		catch (Exception ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 
 		finally
         {
-    		Adp.close();        	
+    		qm.close();        	
         }  
 
 		return;
@@ -1164,10 +1170,11 @@ public class CreteriaFaced   {
 
 
 
-	public void addCreteria2(String site_id , String link_id , String name ,  String label  ) 
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void addCreteria2(String siteId , String linkId , String name ,  String label  ) 
 	{
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String query = "";
 		String creteria_id = "" ;
 		//query = "SELECT NEXT VALUE FOR " + table_name + "_" + table_name + "_id_seq  AS ID  FROM ONE_SEQUENCES";
@@ -1176,48 +1183,49 @@ public class CreteriaFaced   {
 		try 
 		{
 
-		Adp.executeQuery(query);
+		qm.executeQuery(query);
 		
-		creteria_id = Adp.getValueAt(0, 0);
+		creteria_id = qm.getValueAt(0, 0);
 
 		query = "insert into creteria2 (creteria2_id , catalog_id , link_id , name , label , active ) "
 				+ " values ( ? , ? , ? , ? , ? , ? ) " ;
 		 	
 			Map args = new HashMap();
 			args.put("creteria2_id" , creteria_id  );
-			args.put("catalog_id" ,  site_id  );
-			args.put("link_id" ,  link_id  );
+			args.put("catalog_id" ,  siteId  );
+			args.put("link_id" ,  linkId  );
 			args.put("name" ,  name );
 			args.put("label" ,  label );
 			args.put("active" ,  true );
-			Adp.executeInsertWithArgs(query, args);
-			Adp.commit();
+			qm.executeInsertWithArgs(query, args);
+			qm.commit();
 		
 		} 
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 		catch (Exception ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 
 		finally
         {
-    		Adp.close();        	
+    		qm.close();        	
         }  
 
 		return;
 	}
 
 
-	public void addCreteria3(String site_id , String link_id , String name ,  String label  ) 
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void addCreteria3(String siteId , String linkId , String name ,  String label  ) 
 	{
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String query = "";
 		String creteria_id = "" ;
 		//query = "SELECT NEXT VALUE FOR " + table_name + "_" + table_name + "_id_seq  AS ID  FROM ONE_SEQUENCES";
@@ -1226,47 +1234,48 @@ public class CreteriaFaced   {
 		try 
 		{
 
-		Adp.executeQuery(query);
+		qm.executeQuery(query);
 		
-		creteria_id = Adp.getValueAt(0, 0);
+		creteria_id = qm.getValueAt(0, 0);
 
 		query = "insert into creteria3 (creteria3_id , catalog_id , link_id , name , label , active ) "
 				+ " values ( ? , ? , ? , ? , ? , ? ) " ;
 		 	
 			Map args = new HashMap();
 			args.put("creteria3_id" , creteria_id  );
-			args.put("catalog_id" ,  site_id  );
-			args.put("link_id" ,  link_id  );
+			args.put("catalog_id" ,  siteId  );
+			args.put("link_id" ,  linkId  );
 			args.put("name" ,  name );
 			args.put("label" ,  label );
 			args.put("active" ,  true );
-			Adp.executeInsertWithArgs(query, args);
-			Adp.commit();
+			qm.executeInsertWithArgs(query, args);
+			qm.commit();
 		
 		} 
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 		catch (Exception ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 
 		finally
         {
-    		Adp.close();        	
+    		qm.close();        	
         }  
 
 		return;
 	}
 
-	public void addCreteria4(String site_id , String link_id , String name ,  String label  ) 
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void addCreteria4(String siteId , String linkId , String name ,  String label  ) 
 	{
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String query = "";
 		String creteria_id = "" ;
 		//query = "SELECT NEXT VALUE FOR " + table_name + "_" + table_name + "_id_seq  AS ID  FROM ONE_SEQUENCES";
@@ -1275,48 +1284,49 @@ public class CreteriaFaced   {
 		try 
 		{
 
-		Adp.executeQuery(query);
+		qm.executeQuery(query);
 		
-		creteria_id = Adp.getValueAt(0, 0);
+		creteria_id = qm.getValueAt(0, 0);
 
 		query = "insert into creteria4 ( creteria4_id , catalog_id , link_id , name , label , active ) "
 				+ " values ( ? , ? , ? , ? , ? , ? ) " ;
 		 	
 			Map args = new HashMap();
 			args.put("creteria4_id" , creteria_id  );
-			args.put("catalog_id" ,  site_id  );
-			args.put("link_id" ,  link_id  );
+			args.put("catalog_id" ,  siteId  );
+			args.put("link_id" ,  linkId  );
 			args.put("name" ,  name );
 			args.put("label" ,  label );
 			args.put("active" ,  true );
-			Adp.executeInsertWithArgs(query, args);
-			Adp.commit();
+			qm.executeInsertWithArgs(query, args);
+			qm.commit();
 		
 		} 
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 		catch (Exception ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 
 		finally
         {
-    		Adp.close();        	
+    		qm.close();        	
         }  
 
 		return;
 	}
 	
 	
-	public void addCreteria5(String site_id , String link_id , String name ,  String label  ) 
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void addCreteria5(String siteId , String linkId , String name ,  String label  ) 
 	{
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String query = "";
 		String creteria_id = "" ;
 		//query = "SELECT NEXT VALUE FOR " + table_name + "_" + table_name + "_id_seq  AS ID  FROM ONE_SEQUENCES";
@@ -1325,48 +1335,49 @@ public class CreteriaFaced   {
 		try 
 		{
 
-		Adp.executeQuery(query);
+		qm.executeQuery(query);
 		
-		creteria_id = Adp.getValueAt(0, 0);
+		creteria_id = qm.getValueAt(0, 0);
 
 		query = "insert into creteria5 (creteria5_id , catalog_id , link_id , name , label , active ) "
 				+ " values ( ? , ? , ? , ? , ? , ? ) " ;
 		 	
 			Map args = new HashMap();
 			args.put("creteria5_id" , creteria_id  );
-			args.put("catalog_id" ,  site_id  );
-			args.put("link_id" ,  link_id  );
+			args.put("catalog_id" ,  siteId  );
+			args.put("link_id" ,  linkId  );
 			args.put("name" ,  name );
 			args.put("label" ,  label );
 			args.put("active" ,  true );
-			Adp.executeInsertWithArgs(query, args);
-			Adp.commit();
+			qm.executeInsertWithArgs(query, args);
+			qm.commit();
 		
 		} 
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 		catch (Exception ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 
 		finally
         {
-    		Adp.close();        	
+    		qm.close();        	
         }  
 
 		return;
 	}
 	
 	
-	public void addCreteria6(String site_id , String link_id , String name ,  String label  ) 
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void addCreteria6(String siteId , String linkId , String name ,  String label  ) 
 	{
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String query = "";
 		String creteria_id = "" ;
 		//query = "SELECT NEXT VALUE FOR " + table_name + "_" + table_name + "_id_seq  AS ID  FROM ONE_SEQUENCES";
@@ -1375,48 +1386,49 @@ public class CreteriaFaced   {
 		try 
 		{
 
-		Adp.executeQuery(query);
+		qm.executeQuery(query);
 		
-		creteria_id = Adp.getValueAt(0, 0);
+		creteria_id = qm.getValueAt(0, 0);
 
 		query = "insert into creteria6 (creteria6_id , catalog_id , link_id , name , label , active ) "
 				+ " values ( ? , ? , ? , ? , ? , ? ) " ;
 		 	
 			Map args = new HashMap();
 			args.put("creteria6_id" , creteria_id  );
-			args.put("catalog_id" ,  site_id  );
-			args.put("link_id" ,  link_id  );
+			args.put("catalog_id" ,  siteId  );
+			args.put("link_id" ,  linkId  );
 			args.put("name" ,  name );
 			args.put("label" ,  label );
 			args.put("active" ,  true );
-			Adp.executeInsertWithArgs(query, args);
-			Adp.commit();
+			qm.executeInsertWithArgs(query, args);
+			qm.commit();
 		
 		} 
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 		catch (Exception ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 
 		finally
         {
-    		Adp.close();        	
+    		qm.close();        	
         }  
 
 		return;
 	}
 
 
-	public void addCreteria7(String site_id , String link_id , String name ,  String label  ) 
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void addCreteria7(String siteId , String linkId , String name ,  String label  ) 
 	{
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String query = "";
 		String creteria_id = "" ;
 		//query = "SELECT NEXT VALUE FOR " + table_name + "_" + table_name + "_id_seq  AS ID  FROM ONE_SEQUENCES";
@@ -1425,48 +1437,49 @@ public class CreteriaFaced   {
 		try 
 		{
 
-		Adp.executeQuery(query);
+		qm.executeQuery(query);
 		
-		creteria_id = Adp.getValueAt(0, 0);
+		creteria_id = qm.getValueAt(0, 0);
 
 		query = "insert into creteria7 (creteria7_id , catalog_id , link_id , name , label , active ) "
 				+ " values ( ? , ? , ? , ? , ? , ? ) " ;
 		 	
 			Map args = new HashMap();
 			args.put("creteria7_id" , creteria_id  );
-			args.put("catalog_id" ,  site_id  );
-			args.put("link_id" ,  link_id  );
+			args.put("catalog_id" ,  siteId  );
+			args.put("link_id" ,  linkId  );
 			args.put("name" ,  name );
 			args.put("label" ,  label );
 			args.put("active" ,  true );
-			Adp.executeInsertWithArgs(query, args);
-			Adp.commit();
+			qm.executeInsertWithArgs(query, args);
+			qm.commit();
 		
 		} 
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 		catch (Exception ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 
 		finally
         {
-    		Adp.close();        	
+    		qm.close();        	
         }  
 
 		return;
 	}
 
 
-	public void addCreteria8(String site_id , String link_id , String name ,  String label  ) 
+	 //@Profiled(logger = CLASS_NAME , tag = "loadClassesSessionScopeFromBase" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void addCreteria8(String siteId , String linkId , String name ,  String label  ) 
 	{
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String query = "";
 		String creteria_id = "" ;
 		//query = "SELECT NEXT VALUE FOR " + table_name + "_" + table_name + "_id_seq  AS ID  FROM ONE_SEQUENCES";
@@ -1475,38 +1488,38 @@ public class CreteriaFaced   {
 		try 
 		{
 
-		Adp.executeQuery(query);
+		qm.executeQuery(query);
 		
-		creteria_id = Adp.getValueAt(0, 0);
+		creteria_id = qm.getValueAt(0, 0);
 
 		query = "insert into creteria8 (creteria8_id , catalog_id , link_id , name , label , active ) "
 				+ " values ( ? , ? , ? , ? , ? , ? ) " ;
 		 	
 			Map args = new HashMap();
 			args.put("creteria8_id" , creteria_id  );
-			args.put("catalog_id" ,  site_id  );
-			args.put("link_id" ,  link_id  );
+			args.put("catalog_id" ,  siteId  );
+			args.put("link_id" ,  linkId  );
 			args.put("name" ,  name );
 			args.put("label" ,  label );
 			args.put("active" ,  true );
-			Adp.executeInsertWithArgs(query, args);
-			Adp.commit();
+			qm.executeInsertWithArgs(query, args);
+			qm.commit();
 		
 		} 
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 		catch (Exception ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 
 		finally
         {
-    		Adp.close();        	
+    		qm.close();        	
         }  
 
 		return;
@@ -1514,10 +1527,11 @@ public class CreteriaFaced   {
 
 
 	
-	public void addCreteria9(String site_id , String link_id , String name ,  String label  ) 
+	 //@Profiled(logger = CLASS_NAME , tag = "addCreteria9" , message = "httpSession: {$0}  , userId: {@1}"  )
+	 public void addCreteria9(String siteId , String linkId , String name ,  String label  ) 
 	{
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String query = "";
 		String creteria_id = "" ;
 		//query = "SELECT NEXT VALUE FOR " + table_name + "_" + table_name + "_id_seq  AS ID  FROM ONE_SEQUENCES";
@@ -1526,48 +1540,49 @@ public class CreteriaFaced   {
 		try 
 		{
 
-		Adp.executeQuery(query);
+		qm.executeQuery(query);
 		
-		creteria_id = Adp.getValueAt(0, 0);
+		creteria_id = qm.getValueAt(0, 0);
 
 		query = "insert into creteria9 (creteria9_id , catalog_id , link_id , name , label , active ) "
 				+ " values ( ? , ? , ? , ? , ? , ? ) " ;
 		 	
 			Map args = new HashMap();
 			args.put("creteria9_id" , creteria_id  );
-			args.put("catalog_id" ,  site_id  );
-			args.put("link_id" ,  link_id  );
+			args.put("catalog_id" ,  siteId  );
+			args.put("link_id" ,  linkId  );
 			args.put("name" ,  name );
 			args.put("label" ,  label );
 			args.put("active" ,  true );
-			Adp.executeInsertWithArgs(query, args);
-			Adp.commit();
+			qm.executeInsertWithArgs(query, args);
+			qm.commit();
 		
 		} 
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 		catch (Exception ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 
 		finally
         {
-    		Adp.close();        	
+    		qm.close();        	
         }  
 
 		return;
 	}
 	
 	
-	public void addCreteria10(String site_id , String link_id , String name ,  String label  ) 
+	 //@Profiled(logger = CLASS_NAME , tag = "addCreteria10" , message = "siteId: {$0}  , linkId: {@1} , name: {@1} , label: {@1} "  )
+	 public void addCreteria10(String siteId , String linkId , String name ,  String label  ) 
 	{
-		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String query = "";
 		String creteria_id = "" ;
 		//query = "SELECT NEXT VALUE FOR " + table_name + "_" + table_name + "_id_seq  AS ID  FROM ONE_SEQUENCES";
@@ -1576,38 +1591,38 @@ public class CreteriaFaced   {
 		try 
 		{
 
-		Adp.executeQuery(query);
+		qm.executeQuery(query);
 		
-		creteria_id = Adp.getValueAt(0, 0);
+		creteria_id = qm.getValueAt(0, 0);
 
 		query = "insert into creteria10 (creteria10_id , catalog_id , link_id , name , label , active ) "
 				+ " values ( ? , ? , ? , ? , ? , ? ) " ;
 		 	
 			Map args = new HashMap();
 			args.put("creteria10_id" , creteria_id  );
-			args.put("catalog_id" ,  site_id  );
-			args.put("link_id" ,  link_id  );
+			args.put("catalog_id" ,  siteId  );
+			args.put("link_id" ,  linkId  );
 			args.put("name" ,  name );
 			args.put("label" ,  label );
 			args.put("active" ,  true );
-			Adp.executeInsertWithArgs(query, args);
-			Adp.commit();
+			qm.executeInsertWithArgs(query, args);
+			qm.commit();
 		
 		} 
 		catch (SQLException ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 		catch (Exception ex) 
 		{
 			log.error(query,ex);
-			Adp.rollback() ;
+			qm.rollback() ;
 		}
 
 		finally
         {
-    		Adp.close();        	
+    		qm.close();        	
         }  
 
 		return;

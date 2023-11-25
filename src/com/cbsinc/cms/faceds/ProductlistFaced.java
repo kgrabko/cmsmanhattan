@@ -698,7 +698,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		if (strPosition_id == null || strPosition_id.length() == 0)
 			return strPosition_id;
 		QueryManager queryManager = new QueryManager();
-		queryManager.BeginTransaction();
+		queryManager.beginTransaction();
 		String query = "";
 		query = "update soft set active = ? where soft_id = " + strPosition_id;
 		try 
@@ -733,7 +733,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		if (strPosition_id == null || strPosition_id.length() == 0)
 			return strPosition_id;
 		QueryManager queryManager = new QueryManager();
-		queryManager.BeginTransaction();
+		queryManager.beginTransaction();
 		String query = "";
 		query = "update soft set color = ? where soft_id = " + strPosition_id;
 		try 
@@ -767,7 +767,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		
 		String query = "";
 		QueryManager Adptmp = new QueryManager();
-		Adptmp.BeginTransaction();
+		Adptmp.beginTransaction();
 		String strID = "";
 		try 
 		{

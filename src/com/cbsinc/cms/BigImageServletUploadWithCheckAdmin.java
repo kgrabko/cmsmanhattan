@@ -130,7 +130,7 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 
 	public int saveImgURL(String FileName, long user_id) {
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String strID = null;
 		String query = sequences_rs.getString("big_images");
 		// String query = "SELECT NEXT VALUE FOR big_images_big_images_id_seq AS ID FROM

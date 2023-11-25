@@ -72,7 +72,7 @@ public class PolicyFaced extends com.cbsinc.cms.WebControls {
 	
 	final public long incrementShowPage(final ItemDescriptionBean policyBean ) throws SQLException {
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		long statictic = 0 ;
 		String query = "SELECT STATISTIC_ID  FROM soft where soft_id = " + policyBean.getProduct_id() ;
 		try {
@@ -117,7 +117,7 @@ public class PolicyFaced extends com.cbsinc.cms.WebControls {
 		
 		try 
 		{
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		Adp.executeQuery(query);
 		
 		if (Adp.rows().size() > 0) 
@@ -314,7 +314,7 @@ public class PolicyFaced extends com.cbsinc.cms.WebControls {
 	
 	final public void setRatring1(final int bal , final String product_id )  {
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		long rating_summ = 0 ;
 		long rating_count = 0 ;
 		long midle_bal = 0 ;

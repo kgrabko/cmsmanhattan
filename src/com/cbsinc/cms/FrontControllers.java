@@ -124,21 +124,21 @@ public class FrontControllers implements Filter, ITransformationService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (!authorizationPageFaced.getSetup_resources().getString("begin_clear_memory").equals(""))
+		if (!authorizationPageFaced.getSetupResources().getString("begin_clear_memory").equals(""))
 			beginClearMemory = Float
-					.parseFloat(authorizationPageFaced.getSetup_resources().getString("begin_clear_memory").trim());
-		if (!authorizationPageFaced.getSetup_resources().getString("begin_reload_programm").equals(""))
+					.parseFloat(authorizationPageFaced.getSetupResources().getString("begin_clear_memory").trim());
+		if (!authorizationPageFaced.getSetupResources().getString("begin_reload_programm").equals(""))
 			beginReloadProgramm = Float
-					.parseFloat(authorizationPageFaced.getSetup_resources().getString("begin_reload_programm").trim());
-		if (!authorizationPageFaced.getSetup_resources().getString("cash_time_expired").equals(""))
+					.parseFloat(authorizationPageFaced.getSetupResources().getString("begin_reload_programm").trim());
+		if (!authorizationPageFaced.getSetupResources().getString("cash_time_expired").equals(""))
 			cash_time_expired = Long
-					.parseLong(authorizationPageFaced.getSetup_resources().getString("cash_time_expired").trim());
+					.parseLong(authorizationPageFaced.getSetupResources().getString("cash_time_expired").trim());
 
-		if (!authorizationPageFaced.getSetup_resources().getString("cookies_dir").equals(""))
-			setCookiesDir(servletContext, authorizationPageFaced.getSetup_resources().getString("cookies_dir").trim());
+		if (!authorizationPageFaced.getSetupResources().getString("cookies_dir").equals(""))
+			setCookiesDir(servletContext, authorizationPageFaced.getSetupResources().getString("cookies_dir").trim());
 
-		if (!authorizationPageFaced.getSetup_resources().getString("use_cookies").equals(""))
-			setUserCookies(servletContext, authorizationPageFaced.getSetup_resources().getString("use_cookies").trim());
+		if (!authorizationPageFaced.getSetupResources().getString("use_cookies").equals(""))
+			setUserCookies(servletContext, authorizationPageFaced.getSetupResources().getString("use_cookies").trim());
 
 	}
 
@@ -159,8 +159,8 @@ public class FrontControllers implements Filter, ITransformationService {
 			int index = path.lastIndexOf("/") + 1;
 			path = path.substring(index);
 
-			isTransformble = authorizationPageFaced.getXslt_resources().containsKey(path);
-			isActions = authorizationPageFaced.getActions_resources().containsKey(path);
+			isTransformble = authorizationPageFaced.getXsltResources().containsKey(path);
+			isActions = authorizationPageFaced.getActionsResources().containsKey(path);
 
 			if (hsession.getAttribute("authorizationPageBeanId") instanceof AuthorizationPageBean) {
 				authorizationPageBeanId = ((AuthorizationPageBean) hsession.getAttribute("authorizationPageBeanId"));
@@ -181,8 +181,8 @@ public class FrontControllers implements Filter, ITransformationService {
 //						System.out.println("session: " + session_id );
 				if (authorizationPageFaced.isCokieSessionIdExists((HttpServletRequest) request,
 						(HttpServletResponse) response)
-						&& authorizationPageFaced.isLoginFromCookie_new1(session_id, hsession,
-								authorizationPageFaced.getSession_scope()))
+						&& authorizationPageFaced.isLoginFromCookieNew1(session_id, hsession,
+								authorizationPageFaced.getSessionScope()))
 //						//if( authorizationPageFaced.isLoginFromCookieFromDir( session_id ,  hsession , servletContext , session_scope ) )
 				{
 					authorizationPageBeanId = ((AuthorizationPageBean) hsession
@@ -230,7 +230,7 @@ public class FrontControllers implements Filter, ITransformationService {
 			// String pathInfo = path + ".html";
 			String pathInfo = "";
 			if (authorizationPageBeanId.getStrLogin().equals("user")
-					&& authorizationPageFaced.getSetup_resources().getString("docash").equals("true")
+					&& authorizationPageFaced.getSetupResources().getString("docash").equals("true")
 					&& ((HttpServletRequest) request).getMethod().equals("GET")
 					&& ((HttpServletRequest) request).getParameter("site") == null) {
 				pathInfo = path + "_" + buildCashPageName((HttpServletRequest) request, path) + ".html";
@@ -258,7 +258,7 @@ public class FrontControllers implements Filter, ITransformationService {
 				if (isActions) {
 					Object obj = null;
 					if (!authorizationPageFaced.getControllerMap().containsKey(path)) {
-						String className = authorizationPageFaced.getActions_resources().getString(path);
+						String className = authorizationPageFaced.getActionsResources().getString(path);
 						obj = createObject(className);
 						if (obj == null)
 							throw new Exception("Class " + className + " is not found.");
@@ -305,11 +305,11 @@ public class FrontControllers implements Filter, ITransformationService {
 					if (!authorizationPageFaced.getTransformerMap().containsKey(authorizationPageBeanId.getSite_dir()
 							+ File.separatorChar + path + authorizationPageBeanId.getLocale())) {
 						String xslt_page_default = "xsl" + File.separatorChar + authorizationPageBeanId.getSite_dir()
-								+ File.separatorChar + authorizationPageFaced.getXslt_resources().getString(path);
+								+ File.separatorChar + authorizationPageFaced.getXsltResources().getString(path);
 						String xsltpath_default = filterConfig.getServletContext().getRealPath("/" + xslt_page_default);
 						String xslt_page = "xsl" + File.separatorChar + authorizationPageBeanId.getSite_dir()
 								+ File.separatorChar + authorizationPageBeanId.getLocale() + File.separatorChar
-								+ authorizationPageFaced.getXslt_resources().getString(path);
+								+ authorizationPageFaced.getXsltResources().getString(path);
 						String xsltpath = filterConfig.getServletContext().getRealPath("/" + xslt_page);
 						Source styleSource = null;
 						try {
@@ -374,7 +374,7 @@ public class FrontControllers implements Filter, ITransformationService {
 						// out.flush();
 
 						if (authorizationPageBeanId.getStrLogin().equals("user")
-								&& authorizationPageFaced.getSetup_resources().getString("docash").equals("true")
+								&& authorizationPageFaced.getSetupResources().getString("docash").equals("true")
 								&& ((HttpServletRequest) request).getMethod().equals("GET")
 								&& ((HttpServletRequest) request).getParameter("site") == null) {
 							MessageSender mqSender = new MessageSender(hsession, StoreCashMessageBean.messageQuery);
@@ -570,10 +570,10 @@ public class FrontControllers implements Filter, ITransformationService {
 		String key = "";
 		Enumeration enumeration;
 		try {
-			enumeration = authorizationPageFaced.getSession_scope().getKeys();
+			enumeration = authorizationPageFaced.getSessionScope().getKeys();
 			while (enumeration.hasMoreElements()) {
 				key = (String) enumeration.nextElement();
-				Object obj = createObject(authorizationPageFaced.getSession_scope().getString(key).trim());
+				Object obj = createObject(authorizationPageFaced.getSessionScope().getString(key).trim());
 				session.setAttribute(key, obj);
 			}
 		} catch (Exception e) {

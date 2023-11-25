@@ -26,7 +26,7 @@ public class FolderFaced  {
 	public String addFolder(final AuthorizationPageBean authorizationPageBeanId, final String name , String catalogParent_id ) 
 	{
 		QueryManager queryManager = new QueryManager();
-		queryManager.BeginTransaction();
+		queryManager.beginTransaction();
 		String query = "";
 		String catalog_id = "-1" ;
 		query = sequences_rs.getString("catalog");
@@ -73,7 +73,7 @@ public class FolderFaced  {
 	public void editFolder(final AuthorizationPageBean authorizationPageBeanId , final String name ) {
 
 		QueryManager queryManager = new QueryManager();
-		queryManager.BeginTransaction();
+		queryManager.beginTransaction();
 		String query = "";
 		query = "update catalog set  lable = ? , lang_id = ?  where catalog_id = " + authorizationPageBeanId.getCatalog_id() + " and site_id = " + authorizationPageBeanId.getSite_id()   ;
 

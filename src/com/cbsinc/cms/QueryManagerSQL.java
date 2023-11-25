@@ -1248,7 +1248,7 @@ import org.apache.log4j.Logger;
 
 		}
 
-		final public void BeginTransaction() {
+		final public void beginTransaction() {
 
 			try {
 				if (conn == null) throw new SQLException("BeginTransaction , Connention == null, query=" + Qtable);

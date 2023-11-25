@@ -59,7 +59,7 @@ public class Creteria_editBean implements java.io.Serializable  {
 		
 		 
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String query = "";
 
 

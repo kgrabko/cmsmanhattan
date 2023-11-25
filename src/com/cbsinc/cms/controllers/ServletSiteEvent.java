@@ -211,8 +211,8 @@ public class ServletSiteEvent extends HttpServlet implements HttpSessionListener
 		hsession.setAttribute("cokie_session_id", session_id);
 //		System.out.println("session: " + session_id );
 		if (authorizationPageFaced.isCokieSessionIdExists((HttpServletRequest) request, (HttpServletResponse) response)
-				&& authorizationPageFaced.isLoginFromCookie_new1(session_id, hsession,
-						authorizationPageFaced.getSession_scope()))
+				&& authorizationPageFaced.isLoginFromCookieNew1(session_id, hsession,
+						authorizationPageFaced.getSessionScope()))
 //		//if( authorizationPageFaced.isLoginFromCookieFromDir( session_id ,  hsession , servletContext , session_scope ) )
 		{
 			// authorizationPageBeanId = ((AuthorizationPageBean)
@@ -267,7 +267,7 @@ public class ServletSiteEvent extends HttpServlet implements HttpSessionListener
 				e.printStackTrace();
 			}
 			// authorizationPageFaced.saveClassesSessionScopeByLogin(httpSession) ;
-			authorizationPageFaced.saveClassesSessionScope_new1(httpSession);
+			authorizationPageFaced.saveClassesSessionScopeNew1(httpSession);
 		}
 
 		if (!(servletContext.getAttribute("userlist") instanceof Map))

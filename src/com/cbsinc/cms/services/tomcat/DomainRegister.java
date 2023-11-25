@@ -44,7 +44,7 @@ public class DomainRegister {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		authorizationPageFaced.PostToDNSServerAliases();
+		authorizationPageFaced.postToDNSServerAliases();
 	}
 	
 	public String getSiteIdByHost(String host)

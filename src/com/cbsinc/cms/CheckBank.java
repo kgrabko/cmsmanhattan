@@ -155,7 +155,7 @@ public class CheckBank implements java.io.Serializable {
 	synchronized public void parserRequest(String i_strNumerOrder, String i_strRezult, String i_strDecsription) {
 		System.out.println("Order: " + i_strNumerOrder + " Rezalt: " + i_strRezult + " " + i_strDecsription);
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String query = "";
 		try {
 			if (i_strRezult.compareTo("AS000") == 0) {

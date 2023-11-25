@@ -51,7 +51,7 @@ public class CreteriaEditBean implements java.io.Serializable {
 	public void editCatalog() {
 
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String query = "";
 
 		query = "update " + table_name + " set  name = ? , link_id = ?  where " + table_name.trim() + "_id = "

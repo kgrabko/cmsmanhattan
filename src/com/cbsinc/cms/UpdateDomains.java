@@ -52,7 +52,7 @@ public class UpdateDomains implements java.io.Serializable {
 				e.printStackTrace();
 			}
 
-			authorizationPageFaced.AddAliasesInFile();
+			authorizationPageFaced.addAliasesInFile();
 
 		}
 	};

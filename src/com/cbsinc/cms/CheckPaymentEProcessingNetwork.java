@@ -138,7 +138,7 @@ public class CheckPaymentEProcessingNetwork implements java.io.Serializable {
 
 		System.out.println("Order: " + i_strNumerOrder + " Rezalt: " + i_strRezult + " " + i_strDecsription);
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String query = "";
 		try {
 			if (Long.parseLong(i_strRezult) == PayStatus.SUCCESS) {
@@ -234,7 +234,7 @@ public class CheckPaymentEProcessingNetwork implements java.io.Serializable {
 		try {
 			query = "select add_amount , old_amount ,  date_input , rate , date_end , user_id , order_id from  account_hist where  id =  "
 					+ i_strAccountHistory_id;
-			Adp.BeginTransaction();
+			Adp.beginTransaction();
 			Adp.executeQuery(query);
 			if (Adp.rows().size() > 0) {
 				add_amount = new Double((String) Adp.getValueAt(0, 0)).doubleValue();

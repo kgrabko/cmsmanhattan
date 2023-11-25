@@ -1,6 +1,9 @@
 #
-# This is setting for GBS Controllers
+# This is setting for CMS Controllers 
 #
+#    !!!  It will generated dynamically via Maven install command in compile time
+#    Just use the annotation @PageController( jspName = "Order.jsp" ) .
+#    the file will packet in compile time in war file 
 #
 #
 ###### Actiom Mapping  #########

@@ -64,7 +64,7 @@ public class Creteria_addBean implements java.io.Serializable
 	public void addCatalog(String site_id) 
 	{
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String query = "";
 		//query = "SELECT NEXT VALUE FOR " + table_name + "_" + table_name + "_id_seq  AS ID  FROM ONE_SEQUENCES";
 		query = "SELECT MAX(" + table_name + "_id ) + 1  as ID FROM "+table_name+"";

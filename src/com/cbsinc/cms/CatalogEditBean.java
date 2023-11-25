@@ -60,7 +60,7 @@ public class CatalogEditBean implements java.io.Serializable {
 	public void editCatalog(AuthorizationPageBean authorizationPageBeanId) {
 
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String query = "";
 
 		// if(intLevelUp == 2 ) query = "SELECT \"soft\".\"soft_id\",

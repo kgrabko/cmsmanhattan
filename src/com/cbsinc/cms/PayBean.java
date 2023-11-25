@@ -190,7 +190,7 @@ public class PayBean extends com.cbsinc.cms.WebControls implements java.io.Seria
 		String query = "";
 		QueryManager Adp = new QueryManager();
 		try {
-			Adp.BeginTransaction();
+			Adp.beginTransaction();
 
 			query = "update orders  set paystatus_id = 2 where order_id = " + order_id;
 			Adp.executeUpdate(query);

@@ -210,7 +210,7 @@ public class ImageServletUpload extends HttpServlet {
 
 	public long saveImgURL(String FileName, long user_id) {
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String strID = null;
 		// String query = "SELECT NEXT VALUE FOR images_image_id_seq AS ID FROM
 		// ONE_SEQUENCES";

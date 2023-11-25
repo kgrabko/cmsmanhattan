@@ -79,7 +79,7 @@ public class OperationAmountBean implements java.io.Serializable {
 
 	public String setBuy(String soft_id, int intUserID, String order_id) {
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		float floRate = 1; // Curs
 		String strID;
 		String old_amount = "0";
@@ -179,7 +179,7 @@ public class OperationAmountBean implements java.io.Serializable {
 		String strID = "";
 		QueryManager Adp = new QueryManager();
 		try {
-			Adp.BeginTransaction();
+			Adp.beginTransaction();
 			double old_amount = 0;
 			String strCurrency_IDAccount = "0";
 			CurrencyHash currencyHash = CurrencyHash.getInstance();

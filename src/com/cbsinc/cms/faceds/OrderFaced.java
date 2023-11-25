@@ -78,7 +78,7 @@ public class OrderFaced extends com.cbsinc.cms.WebControls
 	
 	public String createOrder(final String user_currency_id , final OrderBean orderBean) throws Exception {
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		
 		String query = sequences_rs.getString("orders");
 		//String query = "SELECT NEXT VALUE FOR orders_order_id_seq  AS ID  FROM ONE_SEQUENCES";
@@ -133,7 +133,7 @@ public class OrderFaced extends com.cbsinc.cms.WebControls
 		if (basket_id == null || basket_id.length() == 0) return "";
 		if (orderBean.getorder_paystatus().compareTo("0") != 0)	return orderBean.getOrder_id();
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String query = "";
 		float fltProduct_amount = 0;
 		float fltOrder_amount = 0;
@@ -245,7 +245,7 @@ public class OrderFaced extends com.cbsinc.cms.WebControls
 		String basket_id = "";
 		String query = "";
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		float fltProduct_amount = 0;
 		float fltOrder_amount = 0;
 		float fltEnd_order_amount = 0;
@@ -337,7 +337,7 @@ public class OrderFaced extends com.cbsinc.cms.WebControls
 		if (strPosition_id == null || strPosition_id.length() == 0)
 			return strPosition_id;
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String query = "";
 		query = "update soft set order_id = null where soft_id = " + strPosition_id;
 		try {
@@ -369,7 +369,7 @@ public class OrderFaced extends com.cbsinc.cms.WebControls
 		String size = "0";
 
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String query = "";
 		query = "SELECT count( orders.order_id ) as size FROM orders "
 		//+ "RIGHT  JOIN basket  ON orders.order_id = basket.order_id "
@@ -413,7 +413,7 @@ public class OrderFaced extends com.cbsinc.cms.WebControls
 	final public String getOrderByAccount( final String account_history_id)	throws Exception {
 		String order_id = "0";
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String query = "";
 		query = "SELECT order_id  FROM account_hist WHERE account_hist.id = "+ account_history_id;
 
@@ -503,7 +503,7 @@ public class OrderFaced extends com.cbsinc.cms.WebControls
 			// if(shipment_zip == null || shipment_zip.length() == 0) return 10
 			// ;
 			
-			Adp.BeginTransaction();
+			Adp.beginTransaction();
 			
 			query = "update orders  set user_id =  ? , amount = ? , tax = ? , end_amount = ? , " +
 					" delivery_amount = ? , paystatus_id = ? , deliverystatus_id = ? , " +
@@ -625,7 +625,7 @@ public class OrderFaced extends com.cbsinc.cms.WebControls
 			// if(shipment_zip == null || shipment_zip.length() == 0) return 10
 			// ;
 			
-			Adp.BeginTransaction();
+			Adp.beginTransaction();
 			
 			query = "update orders  set user_id =  ? , amount = ? , tax = ? , end_amount = ? , " +
 					" delivery_amount = ? , paystatus_id = ? , deliverystatus_id = ? , " +
@@ -752,7 +752,7 @@ public class OrderFaced extends com.cbsinc.cms.WebControls
 			// if(shipment_zip == null || shipment_zip.length() == 0) return 10
 			// ;
 			
-			Adp.BeginTransaction();
+			Adp.beginTransaction();
 			
 			query = "update orders  set user_id =  ? , amount = ? , tax = ? , end_amount = ? , " +
 					" delivery_amount = ? , paystatus_id = ? , deliverystatus_id = ? , " +
@@ -890,7 +890,7 @@ public class OrderFaced extends com.cbsinc.cms.WebControls
 		boolean file_exist = false ;
 		StringBuffer table = new StringBuffer();
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String query = "";
 		query = "SELECT "
 		+ "orders.order_id,"
@@ -1613,7 +1613,7 @@ public void setStatusInrocess( String order_id	) throws Exception {
 	   String query = "" ; 
 	   QueryManager Adp = new QueryManager();
 	try {
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 
 		query = "update orders  set paystatus_id = 2 where order_id = " 	+ order_id;
 		Adp.executeUpdate(query);

@@ -154,7 +154,7 @@ public class FileServletUpload extends HttpServlet {
 
 	public long saveImgURL(String FileName, long user_id) {
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String strID = "-1";
 		String path;
 		// String query = "SELECT NEXT VALUE FOR file_id_seq AS ID FROM ONE_SEQUENCES";
@@ -712,7 +712,7 @@ public class FileServletUpload extends HttpServlet {
 	public int saveFileURL(String FileName, String path) {
 		PreparedStatement ps = null;
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String strID;
 		// String query = "SELECT NEXT VALUE FOR file_id_seq AS ID FROM ONE_SEQUENCES";
 		String query = sequences_rs.getString("file");

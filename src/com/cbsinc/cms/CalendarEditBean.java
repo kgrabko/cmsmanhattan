@@ -81,7 +81,7 @@ public class CalendarEditBean extends com.cbsinc.cms.WebControls implements java
 		calendar.set(Integer.parseInt(year_id), Integer.parseInt(mount_id) - 1, Integer.parseInt(day_id));
 		holddate = "" + calendar.getTimeInMillis();
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String query = "";
 
 		// if(intLevelUp == 2 ) query = "SELECT \"soft\".\"soft_id\",

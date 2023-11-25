@@ -623,7 +623,7 @@ public class CreateShopBean implements java.io.Serializable {
 				return;
 			}
 
-			dbAdaptor.BeginTransaction();
+			dbAdaptor.beginTransaction();
 			// query = "SELECT NEXT VALUE FOR site_site_id_seq AS ID FROM ONE_SEQUENCES";
 			query = sequences_rs.getString("site");
 			dbAdaptor.executeQuery(query);
@@ -2392,7 +2392,7 @@ public class CreateShopBean implements java.io.Serializable {
 				return;
 			}
 
-			dbAdaptor.BeginTransaction();
+			dbAdaptor.beginTransaction();
 			// query = "SELECT NEXT VALUE FOR site_site_id_seq AS ID FROM ONE_SEQUENCES";
 			query = sequences_rs.getString("site");
 			dbAdaptor.executeQuery(query);
@@ -4157,7 +4157,7 @@ public class CreateShopBean implements java.io.Serializable {
 		long intOwnerUserId = 0;
 		try {
 			dbAdaptor = new QueryManager();
-			dbAdaptor.BeginTransaction();
+			dbAdaptor.beginTransaction();
 			// query = "SELECT NEXT VALUE FOR site_site_id_seq AS ID FROM ONE_SEQUENCES";
 			query = sequences_rs.getString("site");
 			dbAdaptor.executeQuery(query);
@@ -5947,7 +5947,7 @@ public class CreateShopBean implements java.io.Serializable {
 		long intOwnerUserId = 0;
 		try {
 			dbAdaptor = new QueryManager();
-			dbAdaptor.BeginTransaction();
+			dbAdaptor.beginTransaction();
 			// query = "SELECT NEXT VALUE FOR site_site_id_seq AS ID FROM ONE_SEQUENCES";
 			query = sequences_rs.getString("site");
 			dbAdaptor.executeQuery(query);
@@ -8981,7 +8981,7 @@ public class CreateShopBean implements java.io.Serializable {
 		int user_id = 2;
 		try {
 			dbAdaptor = new QueryManager();
-			dbAdaptor.BeginTransaction();
+			dbAdaptor.beginTransaction();
 			// query = "SELECT NEXT VALUE FOR site_site_id_seq AS ID FROM ONE_SEQUENCES";
 			query = sequences_rs.getString("site");
 			dbAdaptor.executeQuery(query);
@@ -9778,7 +9778,7 @@ public class CreateShopBean implements java.io.Serializable {
 		long intOwnerUserId = 0;
 		try {
 			dbAdaptor = new QueryManager();
-			dbAdaptor.BeginTransaction();
+			dbAdaptor.beginTransaction();
 			// query = "SELECT NEXT VALUE FOR site_site_id_seq AS ID FROM ONE_SEQUENCES";
 			query = sequences_rs.getString("site");
 			dbAdaptor.executeQuery(query);
@@ -11008,7 +11008,7 @@ public class CreateShopBean implements java.io.Serializable {
 		String query = "";
 		try {
 			dbAdaptor = new QueryManager();
-			dbAdaptor.BeginTransaction();
+			dbAdaptor.beginTransaction();
 			// query = "SELECT NEXT VALUE FOR site_site_id_seq AS ID FROM ONE_SEQUENCES";
 			query = sequences_rs.getString("site");
 			dbAdaptor.executeQuery(query);
@@ -11737,7 +11737,7 @@ public class CreateShopBean implements java.io.Serializable {
 		String query = "";
 		try {
 			dbAdaptor = new QueryManager();
-			dbAdaptor.BeginTransaction();
+			dbAdaptor.beginTransaction();
 			query = sequences_rs.getString("site");
 
 			dbAdaptor.executeQuery(query);
@@ -11895,7 +11895,7 @@ public class CreateShopBean implements java.io.Serializable {
 		String query = "";
 		try {
 			dbAdaptor = new QueryManager();
-			dbAdaptor.BeginTransaction();
+			dbAdaptor.beginTransaction();
 			query = sequences_rs.getString("site");
 			dbAdaptor.executeQuery(query);
 			site_id = (String) dbAdaptor.getValueAt(0, 0);

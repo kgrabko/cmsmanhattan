@@ -228,7 +228,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls {
 	
 	final public String updateDescSoft(final PublisherBean publisherBeanId, final AuthorizationPageBean authorizationPageBeanId) throws UnsupportedEncodingException {
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String id = publisherBeanId.getSoft_id();
 		String query = "" ;
 		Map args = Adp.getArgs();
@@ -351,7 +351,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls {
 	
 	final public String updateRowWithParent(final String tree_id , final PublisherBean publisherBeanId , final AuthorizationPageBean authorizationPageBeanId) throws UnsupportedEncodingException {
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String id = publisherBeanId.getSoft_id();
 		String query = "" ;
 		Map args = Adp.getArgs();
@@ -562,7 +562,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls {
 			publisherBeanId.setStrSearch2(publisherBeanId.getStrSoftName2().substring(0, 1));
 		
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String strID = null;
 		//String query = "SELECT NEXT VALUE FOR soft_id_seq  AS ID  FROM ONE_SEQUENCES";
 		String query = "";
@@ -731,7 +731,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls {
 	final public String insertRowWithParent(final String tree_id , final PublisherBean publisherBeanId, final AuthorizationPageBean authorizationPageBeanId) throws UnsupportedEncodingException {
 		
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String strID = "";
 		//String query = "SELECT NEXT VALUE FOR soft_id_seq  AS ID  FROM ONE_SEQUENCES";
 		String query = sequences_rs.getString("soft");
@@ -909,7 +909,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls {
 	final public String saveInformationWithCheck(final PublisherBean publisherBeanId, final AuthorizationPageBean authorizationPageBeanId) throws UnsupportedEncodingException {
 
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String strID= "";
 		//String query = "SELECT NEXT VALUE FOR soft_id_seq  AS ID  FROM ONE_SEQUENCES";
 		String query = sequences_rs.getString("soft");
@@ -1068,7 +1068,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls {
 	
 	final public String updateInformationWithCheck(final PublisherBean publisherBeanId, final AuthorizationPageBean authorizationPageBeanId) throws UnsupportedEncodingException {
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String id = publisherBeanId.getSoft_id();
 		String query = "" ;
 		if (publisherBeanId.getSoft_id().compareTo("-1") == 0)	return "";
@@ -1726,7 +1726,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls {
 	
 	public long saveSmallImgURL(String fileName, long user_id) {
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String strID = null;
 		String query = sequences_rs.getString("images");
 		try 
@@ -1766,7 +1766,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls {
 		
 		QueryManager Adp = new QueryManager();
 		String path = "" ;
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String query = "select img_url from images where image_id = " + image_id ;
 		
 		try 
@@ -1798,7 +1798,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls {
 	
 	public long saveBigImgURL(String fileName, long user_id) {
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String strID = null ;
 		String query = sequences_rs.getString("big_images");
 		try 
@@ -1839,7 +1839,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls {
 	public String deleteBigImgURL(long big_images_id) {
 		QueryManager Adp = new QueryManager();
 		String path = "" ;
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String query = "select img_url from big_images where big_images_id = " + big_images_id ;
 		
 		try 
@@ -1871,7 +1871,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls {
 	public long saveFileURL(String fileName, long user_id) 
 	{
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String strID = "-1";
 		String path ;
 		String query = sequences_rs.getString("file");
@@ -1916,7 +1916,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls {
 	{
 		QueryManager Adp = new QueryManager();
 		String path = "" ;
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String query = "select path from file where file_id = " + file_id ;
 		
 		try 

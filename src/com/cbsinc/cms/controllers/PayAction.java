@@ -97,7 +97,7 @@ public class PayAction extends TemplateAction {
 		}
 		paysystem_id = null;
 
-		authorizationPageFaced.initPaySys_Shop_cd(authorizationPageBean.getSite_id(), authorizationPageBean);
+		authorizationPageFaced.initPaySysShopCd(authorizationPageBean.getSite_id(), authorizationPageBean);
 		payBeanId.setDescription(resources.getString("input_money"));
 		String user_os = "";
 		String header_name = "";

@@ -40,8 +40,8 @@ public class QueryManager implements IQueryManager {
 		// iQueryManager = new QueryManagerDS();
 	}
 
-	final public void BeginTransaction() {
-		iQueryManager.BeginTransaction();
+	final public void beginTransaction() {
+		iQueryManager.beginTransaction();
 	}
 
 	final public void close() {

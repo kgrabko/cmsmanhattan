@@ -965,7 +965,7 @@ public class QueryManagerHibernate implements java.io.Serializable, IQueryManage
 
 	}
 
-	final public void BeginTransaction() {
+	final public void beginTransaction() {
 
 		try {
 			if (session == null)

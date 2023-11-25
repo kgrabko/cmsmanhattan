@@ -55,7 +55,7 @@ public class Export {
 
 		QueryManager qm = null ;		
 		qm = new QueryManager();
-		qm.BeginTransaction();
+		qm.beginTransaction();
 		FileOutputStream   fs = new FileOutputStream("hsql." + new java.util.Date().getTime()) ;
 		String query = "";
 		StringBuilder buff = new StringBuilder();

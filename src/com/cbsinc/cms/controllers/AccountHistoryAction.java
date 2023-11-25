@@ -29,17 +29,21 @@ import com.cbsinc.cms.AccountHistoryBean;
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.OrderFaced;
+import org.perf4j.aop.Profiled ;
 
 @PageController( jspName = "AccountHistory.jsp" )
 public abstract class AccountHistoryAction extends TemplateAction {
 
 
+	private static final String CLASS_NAME = "com.cbsinc.cms.controllers.AccountHistoryAction" ;
+	
 	public AccountHistoryAction() {
 
 	}
 	
 
 	@Override
+	@Profiled(logger = CLASS_NAME , tag = "AccountHistoryAction" , message = "HttpServletRequest: {$0} , HttpServletResponse: { $1 } , ServletContext: { $2 } , actionResponse: {@ retrun }"  )
 	public  void action(HttpServletRequest request , HttpServletResponse  response , ServletContext servletContextOpts) 
 			throws Exception {
 		

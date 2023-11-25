@@ -96,7 +96,7 @@ public class FDResponceAction extends TemplateAction {
 
 		System.out.println("invoice Id: " + i_strNumerOrder + " Rezalt: " + i_strRezult + " " + i_strDecsription);
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String query = "";
 		i_strRezult = i_strRezult.trim();
 		try {

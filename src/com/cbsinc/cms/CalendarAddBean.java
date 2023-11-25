@@ -81,7 +81,7 @@ public class CalendarAddBean extends com.cbsinc.cms.WebControls implements java.
 		calendar.set(Integer.parseInt(year_id), Integer.parseInt(mount_id) - 1, Integer.parseInt(day_id));
 		holddate = "" + calendar.getTimeInMillis();
 		QueryManager Adp = new QueryManager();
-		Adp.BeginTransaction();
+		Adp.beginTransaction();
 		String query = "";
 		query = sequences_rs.getString("calendar");
 		// query = "SELECT NEXT VALUE FOR calendar_calendar_id_seq AS ID FROM
