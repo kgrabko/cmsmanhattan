@@ -35,7 +35,7 @@ import com.cbsinc.cms.jms.controllers.MessageSender;
 import com.cbsinc.cms.jms.controllers.Message;
 import com.cbsinc.cms.jms.controllers.SendMailMessageBean;
 
-@PageController( jspName = "Productlist.jsp" )
+@PageController( jspName = "Support.jsp" )
 public class SupportAction implements IAction {
 
 	AuthorizationPageFaced authorizationPageFaced;
