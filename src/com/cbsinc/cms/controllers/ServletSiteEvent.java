@@ -34,8 +34,6 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
-
-import javax.faces.context.FacesContext;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -54,6 +52,7 @@ import javax.servlet.http.HttpSessionListener;
 import org.apache.log4j.Logger;
 
 import com.cbsinc.cms.AuthorizationPageBean;
+import com.cbsinc.cms.RequestFilter;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 
 /*
@@ -199,11 +198,8 @@ public class ServletSiteEvent extends HttpServlet implements HttpSessionListener
 			e.printStackTrace();
 		}
 
-		FacesContext fc = FacesContext.getCurrentInstance();
-		if (fc == null)
-			return;
-		HttpServletRequest request = (HttpServletRequest) fc.getExternalContext().getRequest();
-		HttpServletResponse response = (HttpServletResponse) fc.getExternalContext().getResponse();
+		HttpServletRequest request = RequestFilter.getRequest() ;
+		HttpServletResponse response = RequestFilter.getResponse();
 		HttpSession hsession = se.getSession();
 
 		String session_id = authorizationPageFaced.getCokieSessionId((HttpServletRequest) request,
