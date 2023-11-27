@@ -7,7 +7,9 @@ import com.cbsinc.cms.Currency;
 import com.cbsinc.cms.CurrencyHash;
 import com.cbsinc.cms.QueryManager;
 import com.cbsinc.cms.annotations.PageModel;
+import com.cbsinc.cms.annotations.PageXsltView;
 import com.cbsinc.cms.annotations.Scope;
+import com.cbsinc.cms.annotations.Type;
 
 import org.apache.log4j.Logger;
 
@@ -31,6 +33,8 @@ import org.apache.log4j.Logger;
  * @author Konstantin Grabko
  * @version 1.0
  */
+
+//@PageXsltView( jspName = "AccountHistory.jsp" , xsltName="accounthistory.xsl" , responseType= Type.XML  )
 @PageModel( Id="accountHistoryBeanId" , scope=Scope.SESSION ) 
 public class AccountHistoryBean extends com.cbsinc.cms.WebControls implements java.io.Serializable {
 

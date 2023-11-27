@@ -29,7 +29,8 @@ import com.cbsinc.cms.annotations.Type;
  * @author Konstantin Grabko
  * @version 1.0
  */
-@PageXsltView( xsltName="pay.xsl" , responseType=Type.XML )
+
+@PageXsltView( jspName = "Pay.jsp" , xsltName="pay.xsl" , responseType= Type.XML  )
 @PageModel( Id="payBeanId" , scope=Scope.SESSION ) 
 public class PayBean extends com.cbsinc.cms.WebControls implements java.io.Serializable {
 

@@ -3,10 +3,39 @@
 <jsp:useBean id="accountHistoryDetalBeanId" scope="session" class="com.cbsinc.cms.AccountHistoryDetalBean" />
 <jsp:setProperty name="accountHistoryDetalBeanId" property="*" />
 <jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
-<%  request.setCharacterEncoding("UTF-8"); %>
+<%@page import="java.util.PropertyResourceBundle,java.util.ResourceBundle,java.io.*"%>
 
+<%
+response.setCharacterEncoding("UTF-8");
+response.setContentType("text/xml");
+String url ;
+String xsltUrl =  "http://" + request.getServerName() +  ":"+request.getServerPort() + request.getContextPath() + "/xsl/" +  authorizationPageBeanId.getSite_dir() + "/"  +  authorizationPageBeanId.getLocale() + "/" + "accounthistorydetal.xsl" ; 
+String xsltUrl_default = "http://" + request.getServerName() +  ":"+request.getServerPort() + request.getContextPath() + "/xsl/" +  authorizationPageBeanId.getSite_dir() + "/" + "accounthistorydetal.xsl" ; 
 
-<?xml version="1.0" encoding="UTF-8"?>
+String xsltpath =  "xsl/" +  authorizationPageBeanId.getSite_dir() + "/"  +  authorizationPageBeanId.getLocale() + "/" + "accounthistorydetal.xsl" ; 
+String xsltpath_default = "xsl/" +  authorizationPageBeanId.getSite_dir() + "/" + "policy.xsl" ; 
+
+xsltpath = request.getServletContext().getRealPath("/" +xsltpath);
+xsltpath_default = request.getServletContext().getRealPath("/" +xsltpath_default);
+
+try
+{
+	File file = new File(xsltpath) ;
+	if( file == null  || !file.exists() ) url = xsltUrl_default ;
+	else url = xsltUrl ;
+		 
+}
+ catch (Exception e) 
+{
+	 throw e ;
+}
+
+PrintWriter printWriter = response.getWriter();
+String tmp ="<?xml-stylesheet type=\"text/xsl\" href=\""+url+"\"?>" ;
+printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+printWriter.println(tmp);
+
+%>
 <document>
    <version>1.0</version>
    <name>GBS ltd.</name>
