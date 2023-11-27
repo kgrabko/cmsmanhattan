@@ -2,12 +2,39 @@
 <%@ page errorPage="error.jsp" %>
 <jsp:useBean id="prePayBeanId" scope="request" class="com.cbsinc.cms.PrePayBean" />
 <jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
+<%@page import="java.util.PropertyResourceBundle,java.util.ResourceBundle,java.io.*"%>
+
 <%
-  response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
-  response.setHeader("Pragma","no-cache"); //HTTP 1.0
-  response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+response.setCharacterEncoding("UTF-8");
+response.setContentType("text/xml");
+String url ;
+String xsltUrl =  "http://" + request.getServerName() +  ":"+request.getServerPort() + request.getContextPath() + "/xsl/" +  authorizationPageBeanId.getSite_dir() + "/"  +  authorizationPageBeanId.getLocale() + "/" + "prepay.xsl" ; 
+String xsltUrl_default = "http://" + request.getServerName() +  ":"+request.getServerPort() + request.getContextPath() + "/xsl/" +  authorizationPageBeanId.getSite_dir() + "/" + "prepay.xsl" ; 
+
+String xsltpath =  "xsl/" +  authorizationPageBeanId.getSite_dir() + "/"  +  authorizationPageBeanId.getLocale() + "/" + "prepay.xsl" ; 
+String xsltpath_default = "xsl/" +  authorizationPageBeanId.getSite_dir() + "/" + "prepay.xsl" ; 
+
+xsltpath = request.getServletContext().getRealPath("/" +xsltpath);
+xsltpath_default = request.getServletContext().getRealPath("/" +xsltpath_default);
+
+try
+{
+	File file = new File(xsltpath) ;
+	if( file == null  || !file.exists() ) url = xsltUrl_default ;
+	else url = xsltUrl ;
+		 
+}
+ catch (Exception e) 
+{
+	 throw e ;
+}
+
+PrintWriter printWriter = response.getWriter();
+String tmp ="<?xml-stylesheet type=\"text/xsl\" href=\""+url+"\"?>" ;
+printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+printWriter.println(tmp);
+
 %>
-<?xml version="1.0" encoding="UTF-8"?>
 <document>
    <version>1.0</version>
    <name>GBS ltd.</name>

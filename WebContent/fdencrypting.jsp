@@ -19,6 +19,7 @@
 </head>
 <body onload="document.forms['pay_form'].submit()">
 <%@ page import="java.util.Random" %>
+<%@ page import="java.lang.System" %>
 <%@ page import="javax.crypto.Mac" %>
 <%@ page import="javax.crypto.SecretKey" %>
 <%@ page import="javax.crypto.spec.SecretKeySpec" %>
