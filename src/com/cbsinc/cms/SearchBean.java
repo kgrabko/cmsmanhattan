@@ -240,8 +240,8 @@ public class SearchBean implements java.io.Serializable {
 				product_name = (String) tool.getValueAt(Adp, i, 1);
 				// strSoftURL = "downloadservlet?row=" + i + "&dev=html" ;;
 				// strSoftURL = "downloadservlet?row=" + i ;
-				/////////////// product_url = "Policy.jsp?row=" + i;
-				product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(Adp, i, 0);
+				/////////////// product_url = "ProductInfo.jsp?row=" + i;
+				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(Adp, i, 0);
 				// licy_byproductid
 
 				img_url = (String) tool.getValueAt(Adp, i, 13);
@@ -293,6 +293,7 @@ public class SearchBean implements java.io.Serializable {
 				table.append("<user_id>" + user1_id + "</user_id>\n");
 				// Referece to pruduct
 				table.append("<policy_url>" + product_url + "</policy_url>\n");
+				table.append("<item_info>" + product_url + "</item_info>\n");
 				table.append("<description>" + product_description + "</description>\n");
 				// table.append("<fulldescription>" + product_fulldescription +
 				// "</fulldescription>\n") ;
@@ -306,8 +307,8 @@ public class SearchBean implements java.io.Serializable {
 				table.append("</rigth>\n");
 
 				if (tool.getRowCount(Adp) > (i + 1)) {
-					/// product_url2 = "Policy.jsp?row=" + (i + 1);
-					product_url2 = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(Adp, i + 1, 0);
+					/// product_url2 = "ProductInfo.jsp?row=" + (i + 1);
+					product_url2 = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(Adp, i + 1, 0);
 
 					rows[i + 1][0] = (String) tool.getValueAt(Adp, i + 1, 0);
 					rows[i + 1][1] = tool.getValueAt(Adp, i + 1, 7) == null ? "" : tool.getValueAt(Adp, i + 1, 7);
@@ -337,6 +338,7 @@ public class SearchBean implements java.io.Serializable {
 					table.append("<user_id>" + user2_id + "</user_id>\n");
 					// Referece to pruduct
 					table.append("<policy_url>" + product_url2 + "</policy_url>\n");
+					table.append("<item_info>" + product_url + "</item_info>\n");
 					table.append("<description>" + product_description2 + "</description>\n");
 					// table.append("<fulldescription>" + product_fulldescription +
 					// "</fulldescription>\n") ;
@@ -391,8 +393,8 @@ public class SearchBean implements java.io.Serializable {
 				product_name = (String) tool.getValueAt(Adp, i, 1);
 				// strSoftURL = "downloadservlet?row=" + i + "&dev=html" ;;
 				// strSoftURL = "downloadservlet?row=" + i ;
-				///// product_url = "Policy.jsp?row=" + i;
-				product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(Adp, i, 0);
+				///// product_url = "ProductInfo.jsp?row=" + i;
+				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(Adp, i, 0);
 
 				img_url = (String) tool.getValueAt(Adp, i, 13);
 				if (img_url != null)
@@ -438,6 +440,7 @@ public class SearchBean implements java.io.Serializable {
 				table.append("<user_id>" + user1_id + "</user_id>\n");
 				// Referece to pruduct
 				table.append("<policy_url>" + product_url + "</policy_url>\n");
+				table.append("<item_info>" + product_url + "</item_info>\n");
 				table.append("<description>" + product_description + "</description>\n");
 				// table.append("<fulldescription>" + product_fulldescription +
 				// "</fulldescription>\n") ;
@@ -514,7 +517,7 @@ public class SearchBean implements java.io.Serializable {
 				rows[i][0] = (String) tool.getValueAt(tmpAdp, i, 0);
 				rows[i][1] = tool.getValueAt(tmpAdp, i, 7) == null ? "" : tool.getValueAt(tmpAdp, i, 7);
 				product_name = (String) tool.getValueAt(tmpAdp, i, 1);
-				product_url = "Policy.jsp?row=" + i;
+				product_url = "ProductInfo.jsp?row=" + i;
 
 				img_url = (String) tool.getValueAt(tmpAdp, i, 13);
 				if (img_url != null)
@@ -560,7 +563,7 @@ public class SearchBean implements java.io.Serializable {
 	 * for (int i = 0; tool.getRowCount(tmpAdp) > i; i++) { ext1_rows[i][0] =
 	 * (String) tool.getValueAt( tmpAdp,i, 0); ext1_rows[i][1] = tool.getValueAt(
 	 * tmpAdp,i, 7) == null ? "" : tool.getValueAt( tmpAdp,i, 7); product_name =
-	 * (String) tool.getValueAt( tmpAdp,i, 1); product_url = "Policy.jsp?co1_row=" +
+	 * (String) tool.getValueAt( tmpAdp,i, 1); product_url = "ProductInfo.jsp?co1_row=" +
 	 * i;
 	 * 
 	 * img_url = (String) tool.getValueAt( tmpAdp,i, 13); if (img_url != null)
@@ -631,8 +634,8 @@ public class SearchBean implements java.io.Serializable {
 				co1_rows[i][1] = tool.getValueAt(co1Adp, i, 7) == null ? "" : tool.getValueAt(co1Adp, i, 7);
 				product_name = (String) tool.getValueAt(co1Adp, i, 1);
 				String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt(co1Adp, i, 0);
-				// product_url = "Policy.jsp?co1_row=" + i;
-				product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(co1Adp, i, 0);
+				// product_url = "ProductInfo.jsp?co1_row=" + i;
+				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(co1Adp, i, 0);
 
 				product_iconurl = (String) tool.getValueAt(co1Adp, i, 13);
 				if (product_iconurl == null)
@@ -668,6 +671,7 @@ public class SearchBean implements java.io.Serializable {
 				table.append("<user_id>" + user1_id + "</user_id>\n");
 				// Referece to pruduct
 				table.append("<policy_url>" + product_url + "</policy_url>\n");
+				table.append("<item_info>" + product_url + "</item_info>\n");
 				table.append("<product_url>" + attache_file + "</product_url>\n");
 				table.append("<description>" + product_description + "</description>\n");
 				// table.append("<fulldescription>" + product_fulldescription +
@@ -741,8 +745,8 @@ public class SearchBean implements java.io.Serializable {
 				co2_rows[i][1] = tool.getValueAt(co2Adp, i, 7) == null ? "" : tool.getValueAt(co2Adp, i, 7);
 				product_name = (String) tool.getValueAt(co2Adp, i, 1);
 				String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt(co2Adp, i, 0);
-				// product_url = "Policy.jsp?co2_row=" + i;
-				product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(co2Adp, i, 0);
+				// product_url = "ProductInfo.jsp?co2_row=" + i;
+				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(co2Adp, i, 0);
 
 				product_iconurl = (String) tool.getValueAt(co2Adp, i, 13);
 				if (product_iconurl == null)
@@ -778,6 +782,7 @@ public class SearchBean implements java.io.Serializable {
 				table.append("<user_id>" + user1_id + "</user_id>\n");
 				// Referece to pruduct
 				table.append("<policy_url>" + product_url + "</policy_url>\n");
+				table.append("<item_info>" + product_url + "</item_info>\n");
 				table.append("<product_url>" + attache_file + "</product_url>\n");
 				table.append("<description>" + product_description + "</description>\n");
 				table.append("<amount>" + product_cost + "</amount>\n");

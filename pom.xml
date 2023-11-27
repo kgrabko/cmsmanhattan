@@ -292,22 +292,30 @@
 		<version>8.1-404.jdbc3</version>
 	</dependency>
 
-
+<!--
 <dependency>
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
     <version>5.1.45</version>
     <scope>runtime</scope>
 </dependency>
+-->
+<!--
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.33</version>
+</dependency>
+-->
 
  
-    <!--	 
+ 
    	 <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.11</version>
      </dependency>
-     -->
+
     	
    	 
    	<!-- com.cbsinc.cms.card -->

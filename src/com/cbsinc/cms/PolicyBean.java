@@ -712,8 +712,8 @@ public class PolicyBean  implements	java.io.Serializable {
 			ext_files_rows[i][1] = tool.getValueAt( extFilesAdp,i, 7) == null ? "" : tool.getValueAt( extFilesAdp,i, 7);
 			String  product_name = (String) tool.getValueAt( extFilesAdp,i, 1);
 			String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt( extFilesAdp,i, 0);
-			//product_url = "Policy.jsp?ext_files_row=" + i;
-			String product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt( extFilesAdp,i, 0);
+			//product_url = "ProductInfo.jsp?ext_files_row=" + i;
+			String product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt( extFilesAdp,i, 0);
 			
 			String product_iconurl = (String) tool.getValueAt( extFilesAdp,i, 13);
 			if (product_iconurl == null ) product_iconurl = "images/Folder.jpg";
@@ -748,6 +748,7 @@ public class PolicyBean  implements	java.io.Serializable {
 			table.append("<user_id>" + user1_id + "</user_id>\n");
 			// Referece to pruduct
 			table.append("<policy_url>" + product_url + "</policy_url>\n");
+			table.append("<item_info>" + product_url + "</item_info>\n");
 			table.append("<product_url>" + attache_file + "</product_url>\n");
 			table.append("<description>" + product_description	+ "</description>\n");
 			// table.append("<fulldescription>" + product_fulldescription +
@@ -845,8 +846,8 @@ public class PolicyBean  implements	java.io.Serializable {
 			//strSoftURL = "downloadservlet?row=" + i + "&dev=html" ;;
 			String attache_file = "downloadservletbyrowid?productid=" + (String)  tool.getValueAt(ext1Adp,i, 0);
 			//// strSoftURL = "downloadservlet?row=" + i ;
-			//product_url = "Policy.jsp?ext1_row=" + i;
-			String product_url = "Policy.jsp?policy_byproductid=" + (String)  tool.getValueAt(ext1Adp,i, 0);
+			//product_url = "ProductInfo.jsp?ext1_row=" + i;
+			String product_url = "ProductInfo.jsp?policy_byproductid=" + (String)  tool.getValueAt(ext1Adp,i, 0);
 	
 			String product_iconurl = (String)  tool.getValueAt(ext1Adp,i, 13);
 			if (product_iconurl == null ) product_iconurl = "images/Folder.jpg";
@@ -882,6 +883,7 @@ public class PolicyBean  implements	java.io.Serializable {
 			table.append("<user_id>" + user1_id + "</user_id>\n");
 			// Referece to pruduct
 			table.append("<policy_url>" + product_url + "</policy_url>\n");
+			table.append("<item_info>" + product_url + "</item_info>\n");
 			table.append("<product_url>" + attache_file + "</product_url>\n");
 			table.append("<description>" + product_description	+ "</description>\n");
 			// table.append("<fulldescription>" + product_fulldescription +
@@ -966,8 +968,8 @@ public class PolicyBean  implements	java.io.Serializable {
 			ext_tabs_rows[i][1] = tool.getValueAt( extTabsAdp,i, 7) == null ? "" : tool.getValueAt( extTabsAdp,i, 7);
 			String product_name = (String) tool.getValueAt( extTabsAdp,i, 1);
 			String attache_file = "downloadservletbyrowid?productid=" +  (String) tool.getValueAt( extTabsAdp,i, 0);
-			//product_url = "Policy.jsp?ext_tabls_row=" + i;
-			String product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt( extTabsAdp,i, 0);
+			//product_url = "ProductInfo.jsp?ext_tabls_row=" + i;
+			String product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt( extTabsAdp,i, 0);
 	
 			
 			String product_iconurl = (String) tool.getValueAt( extFilesAdp,i, 13);
@@ -1000,6 +1002,7 @@ public class PolicyBean  implements	java.io.Serializable {
 			table.append("<user_id>" + user1_id + "</user_id>\n");
 			// Referece to pruduct
 			table.append("<policy_url>" + product_url + "</policy_url>\n");
+			table.append("<item_info>" + product_url + "</item_info>\n");
 			table.append("<product_url>" + attache_file + "</product_url>\n");
 			table.append("<description>" + product_description	+ "</description>\n");
 			// table.append("<fulldescription>" + product_fulldescription +
@@ -1091,8 +1094,8 @@ public class PolicyBean  implements	java.io.Serializable {
 			
 			String product_name = (String)  tool.getValueAt(ext2Adp,i, 1);
 			String attache_file = "downloadservletbyrowid?productid=" + (String)  tool.getValueAt(ext2Adp,i, 0);
-			//product_url = "Policy.jsp?ext2_row=" + i;
-			String product_url = "Policy.jsp?policy_byproductid=" + (String)  tool.getValueAt(ext2Adp,i, 0);
+			//product_url = "ProductInfo.jsp?ext2_row=" + i;
+			String product_url = "ProductInfo.jsp?policy_byproductid=" + (String)  tool.getValueAt(ext2Adp,i, 0);
 	
 			
 			String product_iconurl = (String)  tool.getValueAt(ext2Adp,i, 13);
@@ -1123,6 +1126,7 @@ public class PolicyBean  implements	java.io.Serializable {
 			table.append("<user_id>" + user1_id + "</user_id>\n");
 			// Referece to pruduct
 			table.append("<policy_url>" + product_url + "</policy_url>\n");
+			table.append("<item_info>" + product_url + "</item_info>\n");
 			table.append("<product_url>" + attache_file + "</product_url>\n");
 			table.append("<description>" + product_description
 					+ "</description>\n");
@@ -1275,7 +1279,7 @@ public class PolicyBean  implements	java.io.Serializable {
 			blog_rows[i][0] = (String) tool.getValueAt( blogExtAdp,i, 0);
 			blog_rows[i][1] = tool.getValueAt( blogExtAdp,i, 7) == null ? "" : tool.getValueAt( blogExtAdp,i, 7);
 			String product_name = (String) tool.getValueAt( blogExtAdp,i, 1);
-			String product_url = "Policy.jsp?blog_row=" + i;
+			String product_url = "ProductInfo.jsp?blog_row=" + i;
 	
 			img_url = (String) tool.getValueAt( blogExtAdp,i, 13);
 			String product_iconurl = "" ;
@@ -1311,6 +1315,7 @@ public class PolicyBean  implements	java.io.Serializable {
 			table.append("<company>" + company + "</company>\n");
 			// Referece to pruduct
 			table.append("<policy_url>" + product_url + "</policy_url>\n");
+			table.append("<item_info>" + product_url + "</item_info>\n");
 			table.append("<description>" + product_description
 					+ "</description>\n");
 			// table.append("<fulldescription>" + product_fulldescription +
@@ -1350,8 +1355,8 @@ public class PolicyBean  implements	java.io.Serializable {
 			newsrows[i][1] =  tool.getValueAt(newsAdp,i, 7) == null ? "" : tool.getValueAt(newsAdp,i, 7);
 
 			String product_name = (String)  tool.getValueAt(newsAdp,i, 1);
-			///product_url = "Policy.jsp?news=" + i;
-			String product_url = "Policy.jsp?policy_byproductid=" + (String)  tool.getValueAt(newsAdp,i, 0);
+			///product_url = "ProductInfo.jsp?news=" + i;
+			String product_url = "ProductInfo.jsp?policy_byproductid=" + (String)  tool.getValueAt(newsAdp,i, 0);
 			
 			String  product_iconurl = (String)  tool.getValueAt(newsAdp,i, 13);
 			if (product_iconurl == null ) product_iconurl = "images/Folder.jpg";
@@ -1383,6 +1388,7 @@ public class PolicyBean  implements	java.io.Serializable {
 			table.append("<icon_type>"+  product_iconurl.substring(product_iconurl.indexOf(".") + 1 ) + "</icon_type>\n");
 			table.append("<user_id>" + user1_id + "</user_id>\n");
 			table.append("<policy_url>" + product_url + "</policy_url>\n");
+			table.append("<item_info>" + product_url + "</item_info>\n");
 			table.append("<description>" + product_description + "</description>\n");
 			table.append("<amount>" + product_cost + "</amount>\n");
 			table.append("<currency>\n");
@@ -1434,8 +1440,8 @@ public class PolicyBean  implements	java.io.Serializable {
 			bottom_rows[i][1] = tool.getValueAt( bottomAdp,i, 7) == null ? "" : tool.getValueAt( bottomAdp,i, 7);
 			product_name = (String) tool.getValueAt( bottomAdp,i, 1);
 			String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt( bottomAdp,i, 0);
-			//product_url = "Policy.jsp?co1_row=" + i;
-			product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt( bottomAdp,i, 0);
+			//product_url = "ProductInfo.jsp?co1_row=" + i;
+			product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt( bottomAdp,i, 0);
 			
 			product_iconurl = (String) tool.getValueAt( bottomAdp,i, 13);
 			if (product_iconurl == null ) product_iconurl = "images/Folder.jpg";
@@ -1467,6 +1473,7 @@ public class PolicyBean  implements	java.io.Serializable {
 			table.append("<user_id>" + user1_id + "</user_id>\n");
 			// Referece to pruduct
 			table.append("<policy_url>" + product_url + "</policy_url>\n");
+			table.append("<item_info>" + product_url + "</item_info>\n");
 			table.append("<product_url>" + attache_file + "</product_url>\n");
 			table.append("<description>" + product_description
 					+ "</description>\n");

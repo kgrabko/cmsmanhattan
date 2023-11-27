@@ -41,7 +41,7 @@ import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.ProductlistBean;
 import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
-import com.cbsinc.cms.faceds.PolicyFaced;
+import com.cbsinc.cms.faceds.ProductInfoFaced;
 import com.cbsinc.cms.faceds.ProductlistFaced;
 import com.cbsinc.cms.jms.controllers.Message;
 import com.cbsinc.cms.jms.controllers.MessageSender;
@@ -85,7 +85,7 @@ public class ProductlistAction implements IAction {
 			notselected = authorizationPageBeanId.getLocalization(servletContext).getString("notselected");
 
 		ProductlistFaced productlistFaced = ServiceLocator.getInstance().getProductlistFaced();
-		PolicyFaced policyFaced = ServiceLocator.getInstance().getPolicyFaced();
+		ProductInfoFaced policyFaced = ServiceLocator.getInstance().getPolicyFaced();
 		productlistBeanId = new ProductlistBean();
 		request.setAttribute("productlistBeanId", productlistBeanId);
 

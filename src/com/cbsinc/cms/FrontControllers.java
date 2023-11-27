@@ -898,7 +898,7 @@ public class FrontControllers implements Filter, ITransformationService {
 				// return Long.toString(buff.toString().hashCode());
 				return buff.toString();
 			}
-		} else if (path.equals("Policy.jsp")) {
+		} else if (path.equals("ProductInfo.jsp")) {
 			// return Long.toString(((HttpServletRequest)
 			// request).getQueryString().concat(request.getLocale().toString()).concat(authorizationPageBeanId.getSite_id()).hashCode());
 			return ((HttpServletRequest) request).getQueryString()

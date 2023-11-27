@@ -2,7 +2,7 @@ package com.cbsinc.cms.controllers;
 
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.faceds.OrderFaced;
-import com.cbsinc.cms.faceds.PolicyFaced;
+import com.cbsinc.cms.faceds.ProductInfoFaced;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
 import com.cbsinc.cms.faceds.ProductlistFaced;
 
@@ -12,14 +12,14 @@ public class ServiceLocator {
 	
 	private AuthorizationPageFaced authorizationPageFaced = null;
 	private OrderFaced orderFaced = null;
-	private PolicyFaced policyFaced = null;
+	private ProductInfoFaced policyFaced = null;
 	private ProductlistFaced productlistFaced = null;
 	private ProductPostAllFaced productPostAllFaced = null;
 
 	private ServiceLocator() {
 		authorizationPageFaced = new AuthorizationPageFaced() ;
 		orderFaced = new OrderFaced() ;
-		policyFaced = new PolicyFaced() ;
+		policyFaced = new ProductInfoFaced() ;
 		productlistFaced = new ProductlistFaced() ;
 		productPostAllFaced = new ProductPostAllFaced() ;
 	}
@@ -47,7 +47,7 @@ public class ServiceLocator {
 		return orderFaced;
 	}
 
-	public PolicyFaced getPolicyFaced() throws Exception {
+	public ProductInfoFaced getPolicyFaced() throws Exception {
 
 		return policyFaced;
 	}

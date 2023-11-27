@@ -269,7 +269,7 @@ public class ProductlistBean implements java.io.Serializable {
 				rows[i][1] = tool.getValueAt(Adp, i, 7) == null ? "" : tool.getValueAt(Adp, i, 7);
 
 				product_name = (String) tool.getValueAt(Adp, i, 1);
-				product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(Adp, i, 0);
+				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(Adp, i, 0);
 
 				img_url = (String) tool.getValueAt(Adp, i, 13);
 				if (img_url != null)
@@ -314,6 +314,7 @@ public class ProductlistBean implements java.io.Serializable {
 				table.append("<user_id>" + user1_id + "</user_id>\n");
 				// Referece to pruduct
 				table.append("<policy_url>" + product_url + "</policy_url>\n");
+				table.append("<item_info>" + product_url + "</item_info>\n");
 				table.append("<description>" + product_description + "</description>\n");
 				table.append("<amount>" + product_cost + "</amount>\n");
 				table.append("<currency>\n");
@@ -335,7 +336,7 @@ public class ProductlistBean implements java.io.Serializable {
 				table.append("</rigth>\n");
 
 				if (tool.getRowCount(Adp) > (i + 1)) {
-					product_url2 = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(Adp, i + 1, 0);
+					product_url2 = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(Adp, i + 1, 0);
 
 					rows[i + 1][0] = (String) tool.getValueAt(Adp, i + 1, 0);
 					rows[i + 1][1] = tool.getValueAt(Adp, i + 1, 7) == null ? "" : tool.getValueAt(Adp, i + 1, 7);
@@ -373,6 +374,7 @@ public class ProductlistBean implements java.io.Serializable {
 					table.append("<user_id>" + user2_id + "</user_id>\n");
 					// Referece to pruduct
 					table.append("<policy_url>" + product_url2 + "</policy_url>\n");
+					table.append("<item_info>" + product_url + "</item_info>\n");
 					table.append("<description>" + product_description2 + "</description>\n");
 					table.append("<amount>" + product_cost2 + "</amount>\n");
 					table.append("<currency>\n");
@@ -431,7 +433,7 @@ public class ProductlistBean implements java.io.Serializable {
 				rows[i][1] = tool.getValueAt(Adp, i, 7) == null ? "" : tool.getValueAt(Adp, i, 7);
 
 				product_name = (String) tool.getValueAt(Adp, i, 1);
-				product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(Adp, i, 0);
+				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(Adp, i, 0);
 
 				img_url = (String) tool.getValueAt(Adp, i, 13);
 				if (img_url != null)
@@ -556,7 +558,7 @@ public class ProductlistBean implements java.io.Serializable {
 				rows[i][0] = (String) tool.getValueAt(tmpAdp, i, 0);
 				rows[i][1] = tool.getValueAt(tmpAdp, i, 7) == null ? "" : tool.getValueAt(tmpAdp, i, 7);
 				product_name = (String) tool.getValueAt(tmpAdp, i, 1);
-				product_url = "Policy.jsp?row=" + i;
+				product_url = "ProductInfo.jsp?row=" + i;
 
 				img_url = (String) tool.getValueAt(tmpAdp, i, 13);
 				if (img_url != null)
@@ -633,7 +635,7 @@ public class ProductlistBean implements java.io.Serializable {
 				co1_rows[i][1] = tool.getValueAt(co1Adp, i, 7) == null ? "" : tool.getValueAt(co1Adp, i, 7);
 				product_name = (String) tool.getValueAt(co1Adp, i, 1);
 				String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt(co1Adp, i, 0);
-				product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(co1Adp, i, 0);
+				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(co1Adp, i, 0);
 
 				product_iconurl = (String) tool.getValueAt(co1Adp, i, 13);
 				if (product_iconurl == null)
@@ -705,7 +707,7 @@ public class ProductlistBean implements java.io.Serializable {
 				bottom_rows[i][1] = tool.getValueAt(bottomAdp, i, 7) == null ? "" : tool.getValueAt(bottomAdp, i, 7);
 				product_name = (String) tool.getValueAt(bottomAdp, i, 1);
 				String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt(bottomAdp, i, 0);
-				product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(bottomAdp, i, 0);
+				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(bottomAdp, i, 0);
 
 				product_iconurl = (String) tool.getValueAt(bottomAdp, i, 13);
 				if (product_iconurl == null)
@@ -812,7 +814,7 @@ public class ProductlistBean implements java.io.Serializable {
 				co2_rows[i][1] = tool.getValueAt(co2Adp, i, 7) == null ? "" : tool.getValueAt(co2Adp, i, 7);
 				product_name = (String) tool.getValueAt(co2Adp, i, 1);
 				String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt(co2Adp, i, 0);
-				product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(co2Adp, i, 0);
+				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(co2Adp, i, 0);
 
 				product_iconurl = (String) tool.getValueAt(co2Adp, i, 13);
 				if (product_iconurl == null)
@@ -925,7 +927,7 @@ public class ProductlistBean implements java.io.Serializable {
 				product_name = (String) tool.getValueAt(blogExtAdp, i, 1);
 				String parent = (String) tool.getValueAt(blogExtAdp, i, 22);
 				String parent_title = (String) tool.getValueAt(blogExtAdp, i, 23);
-				product_url = "Policy.jsp?policy_byproductid=" + parent;
+				product_url = "ProductInfo.jsp?policy_byproductid=" + parent;
 
 				img_url = (String) tool.getValueAt(blogExtAdp, i, 13);
 				if (img_url != null)
@@ -1000,7 +1002,7 @@ public class ProductlistBean implements java.io.Serializable {
 
 				product_name = (String) tool.getValueAt(newsAdp, i, 1);
 
-				product_url = "Policy.jsp?policy_byproductid=" + (String) tool.getValueAt(newsAdp, i, 0);
+				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(newsAdp, i, 0);
 
 				product_iconurl = (String) tool.getValueAt(newsAdp, i, 13);
 				if (product_iconurl == null)

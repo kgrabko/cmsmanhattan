@@ -52,7 +52,7 @@ import com.cbsinc.cms.AuthorizationPageBean;
  * 
  * @web.filter name="Policy" display-name="Name for Policy"
  *             description="Description for Policy"
- * @web.filter-mapping url-pattern="/Policy.jsp"
+ * @web.filter-mapping url-pattern="/ProductInfo.jsp"
  * @web.filter-init-param name="A parameter" value="A value"
  */
 public class PolicyFilter implements Filter {

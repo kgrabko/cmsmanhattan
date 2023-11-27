@@ -31,7 +31,7 @@ import javax.servlet.http.HttpSession;
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.SearchBean;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
-import com.cbsinc.cms.faceds.PolicyFaced;
+import com.cbsinc.cms.faceds.ProductInfoFaced;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
 import com.cbsinc.cms.faceds.ProductlistFaced;
 import com.cbsinc.cms.jms.controllers.Message;
@@ -73,7 +73,7 @@ public class SearchAction implements IAction {
 			notselected = authorizationPageBeanId.getLocalization(servletContext).getString("notselected");
 
 		ProductlistFaced productlistFaced = ServiceLocator.getInstance().getProductlistFaced();
-		PolicyFaced policyFaced = ServiceLocator.getInstance().getPolicyFaced();
+		ProductInfoFaced policyFaced = ServiceLocator.getInstance().getPolicyFaced();
 		searchBeanId = new SearchBean();
 		request.setAttribute("searchBeanId", searchBeanId);
 

@@ -170,7 +170,7 @@ public class CatalogEditorBean extends com.cbsinc.cms.WebControls {
 				strSoftName = (String) queryManager.getValueAt(i, 1);
 				// strSoftURL = "downloadservlet?row=" + i + "&dev=html" ;;
 				// strSoftURL = "downloadservlet?row=" + i ;
-				strSoftURL = "Policy.jsp?row=" + i;
+				strSoftURL = "ProductInfo.jsp?row=" + i;
 				img_url = (String) queryManager.getValueAt(i, 13);
 				if (img_url != null)
 					strImgURL = img_url;

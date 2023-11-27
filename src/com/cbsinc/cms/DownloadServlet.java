@@ -147,13 +147,13 @@ public class DownloadServlet extends HttpServlet {
 			}
 			if (file_id.length() == 0) {
 				AuthorizationPageBeanId.setStrMessage("?\uFFFD???\uFFFD ?\uFFFD????????.");
-				response.sendRedirect("Policy.jsp");
+				response.sendRedirect("ProductInfo.jsp");
 				return;
 			}
 			if (soft_id.length() == 0) {
 				AuthorizationPageBeanId
 						.setStrMessage("?\uFFFD???\uFFFD ?\uFFFD?????????? ???\uFFFD?????\uFFFD???\uFFFD??.");
-				response.sendRedirect("Policy.jsp");
+				response.sendRedirect("ProductInfo.jsp");
 				return;
 			}
 		}

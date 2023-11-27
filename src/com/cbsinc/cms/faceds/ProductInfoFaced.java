@@ -35,7 +35,7 @@ import com.cbsinc.cms.controllers.Layout;
 import com.cbsinc.cms.exceptions.LocalException;
 
 
-public class PolicyFaced extends com.cbsinc.cms.WebControls {
+public class ProductInfoFaced extends com.cbsinc.cms.WebControls {
 
 	/**
 	 * <p>
@@ -58,12 +58,12 @@ public class PolicyFaced extends com.cbsinc.cms.WebControls {
 	 * @version 1.0
 	 */
 	
-	final static private Logger log = Logger.getLogger(PolicyFaced.class);
+	final static private Logger log = Logger.getLogger(ProductInfoFaced.class);
 	final ResourceBundle setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources");
 	final ResourceBundle sequences_rs = PropertyResourceBundle.getBundle("sequence");
 	float fltEnd_amount = (float) 0.01 ;
 	
-	public PolicyFaced() 
+	public ProductInfoFaced() 
 	{
 		String amount = setup_resources.getString("pay_for_user_session") ;
 		fltEnd_amount =  Float.parseFloat(amount!=null?amount:"0"); 

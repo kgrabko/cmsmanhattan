@@ -123,7 +123,7 @@ public class DownloadServletByRowIdRederect extends HttpServlet {
 		if (strDevice != null) {
 			if (soft_id == null || soft_id.length() == 0) {
 				AuthorizationPageBeanId.setStrMessage("We are requied autorization on site for download files .");
-				response.sendRedirect("Policy.jsp");
+				response.sendRedirect("ProductInfo.jsp");
 				return;
 			}
 		}

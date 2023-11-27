@@ -32,14 +32,14 @@ import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.CatalogListBean;
 import com.cbsinc.cms.ItemDescriptionBean;
 import com.cbsinc.cms.annotations.PageController;
-import com.cbsinc.cms.faceds.PolicyFaced;
+import com.cbsinc.cms.faceds.ProductInfoFaced;
 import com.cbsinc.cms.faceds.ProductlistFaced;
 
 @PageController( jspName = "Policy.jsp" )
 public class PolicyAction implements IAction {
 
 	transient static private Logger log = Logger.getLogger(PolicyAction.class);
-	private PolicyFaced policyFaced = null;
+	private ProductInfoFaced policyFaced = null;
 	private ProductlistFaced productlistFaced = null;
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)

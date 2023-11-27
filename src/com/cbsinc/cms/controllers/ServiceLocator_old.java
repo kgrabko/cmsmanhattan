@@ -25,7 +25,7 @@ import javax.naming.NamingException;
 
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.faceds.OrderFaced;
-import com.cbsinc.cms.faceds.PolicyFaced;
+import com.cbsinc.cms.faceds.ProductInfoFaced;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
 import com.cbsinc.cms.faceds.ProductlistFaced;
 
@@ -40,7 +40,7 @@ public class ServiceLocator_old {
 			context = new InitialContext();
 			context.rebind("authorizationPageFaced", new AuthorizationPageFaced());
 			context.rebind("orderFaced", new OrderFaced());
-			context.rebind("policyFaced", new PolicyFaced());
+			context.rebind("policyFaced", new ProductInfoFaced());
 			context.rebind("productlistFaced", new ProductlistFaced());
 			context.rebind("productPostAllFaced", new ProductPostAllFaced());
 		} catch (NamingException ne) {
@@ -78,10 +78,10 @@ public class ServiceLocator_old {
 		return orderFaced;
 	}
 
-	public PolicyFaced getPolicyFaced() throws Exception {
-		PolicyFaced policyFaced = null;
+	public ProductInfoFaced getPolicyFaced() throws Exception {
+		ProductInfoFaced policyFaced = null;
 		try {
-			policyFaced = (PolicyFaced) context.lookup("policyFaced");
+			policyFaced = (ProductInfoFaced) context.lookup("policyFaced");
 		} catch (Exception ex) {
 			throw new Exception(ex);
 		}

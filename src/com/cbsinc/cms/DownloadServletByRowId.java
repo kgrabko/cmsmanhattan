@@ -124,7 +124,7 @@ public class DownloadServletByRowId extends HttpServlet {
 		if (strDevice != null) {
 			if (soft_id == null || soft_id.length() == 0) {
 				AuthorizationPageBeanId.setStrMessage(localization.getString("user_not_autorization"));
-				response.sendRedirect("Policy.jsp");
+				response.sendRedirect("ProductInfo.jsp");
 				return;
 			}
 		}

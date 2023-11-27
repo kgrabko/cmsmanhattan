@@ -148,7 +148,7 @@ public class ShopListBean implements java.io.Serializable {
 				product_name = (String) Adp.getValueAt(i, 1);
 				// strSoftURL = "downloadservlet?row=" + i + "&dev=html" ;;
 				// strSoftURL = "downloadservlet?row=" + i ;
-				product_url = "Policy.jsp?row=" + i;
+				product_url = "ProductInfo.jsp?row=" + i;
 
 				img_url = (String) Adp.getValueAt(i, 13);
 				if (img_url != null)
@@ -177,6 +177,7 @@ public class ShopListBean implements java.io.Serializable {
 				table.append("<image></image>\n");
 				// Referece to pruduct
 				table.append("<policy_url>" + product_url + "</policy_url>\n");
+				table.append("<item_info>" + product_url + "</item_info>\n");
 				table.append("<description>" + product_description + "</description>\n");
 				// table.append("<fulldescription>" + product_fulldescription +
 				// "</fulldescription>\n") ;
@@ -189,7 +190,7 @@ public class ShopListBean implements java.io.Serializable {
 				table.append("</rigth>\n");
 
 				if (Adp.rows().size() > (i + 1)) {
-					product_url2 = "Policy.jsp?row=" + (i + 1);
+					product_url2 = "ProductInfo.jsp?row=" + (i + 1);
 					rows[i + 1][0] = (String) Adp.getValueAt(i + 1, 0);
 					rows[i + 1][1] = Adp.getValueAt(i + 1, 7) == null ? "" : Adp.getValueAt(i + 1, 7);
 					// rows[i+1][1] = (String)Adp.getValueAt(i+1,7) ;
@@ -210,6 +211,7 @@ public class ShopListBean implements java.io.Serializable {
 					table.append("<icon>" + product_iconurl2 + "</icon>\n");
 					table.append("<image></image>\n");
 					table.append("<policy_url>" + product_url2 + "</policy_url>\n");
+					table.append("<item_info>" + product_url + "</item_info>\n");
 					table.append("<description>" + product_description2 + "</description>\n");
 					table.append("<amount>" + product_cost2 + "</amount>\n");
 					table.append("<currency>\n");

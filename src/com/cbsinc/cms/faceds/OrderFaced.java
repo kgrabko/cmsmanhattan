@@ -1061,6 +1061,7 @@ public class OrderFaced extends com.cbsinc.cms.WebControls
 		table.append("<icon>" + orderBean.getimg_url() + "</icon>\n");
 		table.append("<image></image>\n");
 		table.append("<policy_url>" + "" + "</policy_url>\n");
+		table.append("<item_info>" + "" + "</item_info>\n");
 		table.append("<description>" + product_description
 				+ "</description>\n");
 		table.append("<amount>" + product_cost + "</amount>\n");

@@ -203,7 +203,7 @@ public class XSLControlBean extends com.cbsinc.cms.WebControls implements java.i
 				strSoftName = (String) Adp.getValueAt(i, 1);
 				// strSoftURL = "downloadservlet?row=" + i + "&dev=html" ;;
 				// strSoftURL = "downloadservlet?row=" + i ;
-				strSoftURL = "Policy.jsp?row=" + i;
+				strSoftURL = "ProductInfo.jsp?row=" + i;
 				img_url = (String) Adp.getValueAt(i, 13);
 				if (img_url != null)
 					strImgURL = img_url;

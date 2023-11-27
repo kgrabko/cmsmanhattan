@@ -32,7 +32,7 @@ import com.cbsinc.cms.faceds.OrderFaced;
 import org.perf4j.aop.Profiled ;
 
 @PageController( jspName = "AccountHistory.jsp" )
-public abstract class AccountHistoryAction extends TemplateAction {
+public  class AccountHistoryAction extends TemplateAction {
 
 
 	private static final String CLASS_NAME = "com.cbsinc.cms.controllers.AccountHistoryAction" ;
