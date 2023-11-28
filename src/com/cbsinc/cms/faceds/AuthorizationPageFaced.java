@@ -101,7 +101,10 @@ public class AuthorizationPageFaced extends com.cbsinc.cms.WebControls  {
 			}
 		  }
 		}
-		HttpSession httpSession =  request.getSession() ;
+		
+		//HttpSession httpSession =  request.getSession() ;
+		HttpSession httpSession =  request.getSession(false);
+		if(httpSession == null ) return "";
 		response.addCookie(new Cookie("session_id",httpSession.getId()));
 		return httpSession.getId() ;
 	}
