@@ -50,7 +50,7 @@ public class CheckPaymentResult implements java.io.Serializable {
 
 		formatter = new SimpleDateFormat(null, Locale.getDefault());
 		if (setup_resources == null)
-			setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources");
+			setup_resources = PropertyResourceBundle.getBundle("appconfig");
 		delay = Long.parseLong(setup_resources.getString("checkpay.template").trim());
 
 		try {

@@ -53,7 +53,7 @@ public class SendMailAgent {
 	public SendMailAgent() {
 
 		resources = PropertyResourceBundle
-				.getBundle("SetupApplicationResources");
+				.getBundle("appconfig");
 		/*
 		 * sendmailagent.host=mail.qbix.ru sendmailagent.port=25
 		 * sendmailagent.mailfrom=Dmitry.Gurov@qbix.ru sendmailagent.delay=3000

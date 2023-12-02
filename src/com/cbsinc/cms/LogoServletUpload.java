@@ -99,7 +99,7 @@ public class LogoServletUpload extends HttpServlet {
 		if (sequences_rs == null)
 			sequences_rs = PropertyResourceBundle.getBundle("sequence");
 		if (setup_resources == null)
-			setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources");
+			setup_resources = PropertyResourceBundle.getBundle("appconfig");
 		if (!setup_resources.getString("limmit_logo_size").equals(""))
 			limmit_file_size = Integer.parseInt(setup_resources.getString("limmit_logo_size"));
 		servletContext = config.getServletContext();

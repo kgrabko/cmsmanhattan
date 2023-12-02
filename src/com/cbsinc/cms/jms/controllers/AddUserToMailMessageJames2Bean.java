@@ -28,7 +28,7 @@ public class AddUserToMailMessageJames2Bean extends AbstractMessageBean {
 	
 	public AddUserToMailMessageJames2Bean()
 	{
-		if( resources_cms_settings == null ) resources_cms_settings =  PropertyResourceBundle.getBundle("SetupApplicationResources");
+		if( resources_cms_settings == null ) resources_cms_settings =  PropertyResourceBundle.getBundle("appconfig");
 		    login = resources_cms_settings.getString("james_login").trim() ;
   		    password = resources_cms_settings.getString("james_password").trim() ;
   		    host = resources_cms_settings.getString("james_host").trim() ;

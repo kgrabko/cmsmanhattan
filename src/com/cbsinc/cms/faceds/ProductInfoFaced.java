@@ -59,7 +59,7 @@ public class ProductInfoFaced extends com.cbsinc.cms.WebControls {
 	 */
 	
 	final static private Logger log = Logger.getLogger(ProductInfoFaced.class);
-	final ResourceBundle setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources");
+	final ResourceBundle setup_resources = PropertyResourceBundle.getBundle("appconfig");
 	final ResourceBundle sequences_rs = PropertyResourceBundle.getBundle("sequence");
 	float fltEnd_amount = (float) 0.01 ;
 	

@@ -111,7 +111,7 @@ public class ImageServletUpload extends HttpServlet {
 		if (sequences_rs == null)
 			sequences_rs = PropertyResourceBundle.getBundle("sequence");
 		if (setup_resources == null)
-			setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources");
+			setup_resources = PropertyResourceBundle.getBundle("appconfig");
 
 		if (!setup_resources.getString("scale_image_heigth").equals(""))
 			scale_image_heigth = Integer.parseInt(setup_resources.getString("scale_image_heigth"));

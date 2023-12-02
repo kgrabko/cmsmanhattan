@@ -46,7 +46,7 @@ public class BottomListPostAction implements IAction {
 	public BottomListPostAction() {
 
 		if (setup_resources == null)
-			setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources");
+			setup_resources = PropertyResourceBundle.getBundle("appconfig");
 
 	}
 

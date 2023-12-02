@@ -101,7 +101,7 @@ public class UploadServletXSL extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
 		if (setup_resources == null)
-			setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources");
+			setup_resources = PropertyResourceBundle.getBundle("appconfig");
 		if (!setup_resources.getString("limmit_xsl_jar_size").equals(""))
 			limmit_file_size = Integer.parseInt(setup_resources.getString("limmit_xsl_jar_size"));
 		servletContext = config.getServletContext();

@@ -46,7 +46,7 @@ public class ProductlistFaced extends com.cbsinc.cms.WebControls {
 	 */
 	final static private Logger log = Logger.getLogger(ProductlistFaced.class);
 	
-	final ResourceBundle setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources" );
+	final ResourceBundle setup_resources = PropertyResourceBundle.getBundle("appconfig" );
 	
 	private int limit_product_list =  10 ;
 	private int limit_blog_list =  20 ;
@@ -63,7 +63,7 @@ public class ProductlistFaced extends com.cbsinc.cms.WebControls {
 	{
 		try
 		{
-//		if( setup_resources == null )  setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources" );
+//		if( setup_resources == null )  setup_resources = PropertyResourceBundle.getBundle("appconfig" );
 		//if( sequences_rs == null )  sequences_rs = PropertyResourceBundle.getBundle("sequence");
 		limit_product_list =  Integer.parseInt(setup_resources.getString("limit_product_list").trim()) ;
 		limit_blog_list =  Integer.parseInt(setup_resources.getString("limit_blog_list").trim()) ;
@@ -75,7 +75,7 @@ public class ProductlistFaced extends com.cbsinc.cms.WebControls {
 		}
 		catch (Exception e) 
 		{
-			log.error("You must add limits cretetia in file SetupApplicationResources.property" ,e);
+			log.error("You must add limits cretetia in file appconfig.property" ,e);
 		}
 	}
 

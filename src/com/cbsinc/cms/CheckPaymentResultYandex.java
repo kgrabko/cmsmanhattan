@@ -48,7 +48,7 @@ public class CheckPaymentResultYandex implements java.io.Serializable {
 	public CheckPaymentResultYandex() {
 
 		if (setup_resources == null)
-			setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources");
+			setup_resources = PropertyResourceBundle.getBundle("appconfig");
 		delay = Long.parseLong(setup_resources.getString("checkpay.yandex").trim());
 
 		try {

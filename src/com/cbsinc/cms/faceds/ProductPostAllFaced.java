@@ -41,7 +41,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls {
 
 	
 	final ResourceBundle sequences_rs = PropertyResourceBundle.getBundle("sequence");
-	final ResourceBundle setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources" );
+	final ResourceBundle setup_resources = PropertyResourceBundle.getBundle("appconfig" );
 	
 	public ProductPostAllFaced() 
 	{

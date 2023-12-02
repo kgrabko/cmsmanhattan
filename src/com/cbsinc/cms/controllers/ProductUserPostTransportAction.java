@@ -62,7 +62,7 @@ public class ProductUserPostTransportAction implements IAction {
 	public ProductUserPostTransportAction() {
 
 		if (setup_resources == null)
-			setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources");
+			setup_resources = PropertyResourceBundle.getBundle("appconfig");
 		is_criteria_by_catalog = setup_resources.getString("is_criteria_by_catalog").equals("true");
 
 	}

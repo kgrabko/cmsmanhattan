@@ -45,7 +45,7 @@ public class SendMailMessageBean extends AbstractMessageBean {
 	
 	public SendMailMessageBean()
 	{
-		if(resources == null) resources = PropertyResourceBundle.getBundle("SetupApplicationResources");
+		if(resources == null) resources = PropertyResourceBundle.getBundle("appconfig");
 		host = resources.getString("sendmailagent.host");
 		port = new Long(resources.getString("sendmailagent.port")).intValue();
 		mailfrom = resources.getString("sendmailagent.mailfrom");

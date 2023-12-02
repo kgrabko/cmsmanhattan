@@ -71,7 +71,7 @@ public class AuthorizationPageFaced extends com.cbsinc.cms.WebControls  {
 	final CreateShopBean  createShopBean = new CreateShopBean();
 //	sequences_rs = PropertyResourceBundle.getBundle("sequence");
 	final private ResourceBundle sequences_rs = PropertyResourceBundle.getBundle("sequence");
-	final private ResourceBundle setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources") ;
+	final private ResourceBundle setup_resources = PropertyResourceBundle.getBundle("appconfig") ;
 	final private ResourceBundle session_scope = PropertyResourceBundle.getBundle("session_scope") ;
 	
 	final ConcurrentHashMap controllerMap = new ConcurrentHashMap(1024);

@@ -106,7 +106,7 @@ public class BigImageServletUpload extends HttpServlet {
 		if (sequences_rs == null)
 			sequences_rs = PropertyResourceBundle.getBundle("sequence");
 		if (setup_resources == null)
-			setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources");
+			setup_resources = PropertyResourceBundle.getBundle("appconfig");
 		if (!setup_resources.getString("scale_bigimage_width").equals(""))
 			scale_bigimage_width = Integer.parseInt(setup_resources.getString("scale_bigimage_width"));
 		if (!setup_resources.getString("scale_bigimage_heigth").equals(""))

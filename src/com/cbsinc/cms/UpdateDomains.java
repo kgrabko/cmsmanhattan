@@ -63,7 +63,7 @@ public class UpdateDomains implements java.io.Serializable {
 
 	public void createDomainsInServerXmlFile() {
 		if (setup_resources == null)
-			setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources");
+			setup_resources = PropertyResourceBundle.getBundle("appconfig");
 		delay = Long.parseLong(setup_resources.getString("createdomains.delay").trim());
 		java.util.Timer timer = new java.util.Timer();
 		timer.scheduleAtFixedRate(t, 0, delay);

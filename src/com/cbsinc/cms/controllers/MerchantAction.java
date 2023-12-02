@@ -191,12 +191,12 @@ public class MerchantAction  implements IAction
 		MessageSender mqSender = new MessageSender( request.getSession(),SendMailMessageBean.messageQuery) ;
 		Message message = new Message();
 		message.put("to" , ownerShop.getStrEMail()  ) ;
-		message.put("subject" , "Merchant appication") ;
+		message.put("subject" , "Merchant application") ;
 		message.put("pathmessage" , merchant ) ;
 		message.put("fields" , messageMail ) ;
 		mqSender.send(message);
 
-		authorizationPageBeanId.setStrMessage(" - Appication was sent to manager.");
+		authorizationPageBeanId.setStrMessage(" - Application was sent to manager.");
 	}
 
 	

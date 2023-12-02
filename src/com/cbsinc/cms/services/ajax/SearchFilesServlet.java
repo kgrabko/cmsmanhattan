@@ -69,7 +69,7 @@ public class SearchFilesServlet extends HttpServlet {
 		response.setContentType("text/xml");
 		response.setHeader("Cache-Control", "no-cache");
 		response.setCharacterEncoding("UTF-8");
-		if( setup_resources == null )  setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources", response.getLocale());
+		if( setup_resources == null )  setup_resources = PropertyResourceBundle.getBundle("appconfig", response.getLocale());
 		if( localization == null )  localization = PropertyResourceBundle.getBundle("localization", response.getLocale());
 		//HttpSession session  = request.getSession(false);
 		HttpSession session  = request.getSession();
@@ -105,7 +105,7 @@ public class SearchFilesServlet extends HttpServlet {
 		response.setContentType("text/xml");
 		response.setHeader("Cache-Control", "no-cache");
 		response.setCharacterEncoding("UTF-8");
-		if( setup_resources == null )  setup_resources = PropertyResourceBundle.getBundle("SetupApplicationResources", response.getLocale());
+		if( setup_resources == null )  setup_resources = PropertyResourceBundle.getBundle("appconfig", response.getLocale());
 		if( localization == null )  localization = PropertyResourceBundle.getBundle("localization", response.getLocale());
 		//HttpSession session  = request.getSession(false);
 		HttpSession session  = request.getSession();
