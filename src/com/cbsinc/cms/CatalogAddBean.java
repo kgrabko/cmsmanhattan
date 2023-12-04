@@ -85,7 +85,7 @@ public class CatalogAddBean implements java.io.Serializable {
 
 			Map args = new HashMap();
 			args.put("catalog_id", Long.valueOf(catalog_id));
-			args.put("parent_id", Long.valueOf(authorizationPageBeanId.getCatalogParent_id()));
+			args.put("parent_id", authorizationPageBeanId.getCatalogParent_id());
 			args.put("site_id", Long.valueOf(authorizationPageBeanId.getSite_id()));
 			args.put("tax", 1);
 			args.put("lable", name);

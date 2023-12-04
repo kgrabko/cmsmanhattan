@@ -37,29 +37,29 @@ public class ProductlistBean implements java.io.Serializable {
 
 	public String[][] rows = new String[10][2];
 
-	public String[][] bottom_rows = new String[10][2];
+	public String[][] footerLinksListRows = new String[10][2];
 
 	public String[][] co1_rows = new String[10][2];
 
-	public String[][] co2_rows = new String[10][2];
+	public String[][] sponsoredBySellersRows = new String[10][2];
 
 	public String[][] blog_rows = new String[20][2];
 
-	public String[][] newsrows = new String[10][2];
+	public String[][] newArrivalRow = new String[10][2];
 
 	private transient GetValueTool tool = new GetValueTool();
 
 	public List allqueryAdp = new LinkedList();
 
-	public List Adp = new LinkedList();
+	public List productList = new LinkedList();
 
-	public List newsAdp = new LinkedList();
+	public List newArrivalItems = new LinkedList();
 
-	public List co1Adp = new LinkedList();
+	public List recommentedItems = new LinkedList();
 
-	public List co2Adp = new LinkedList();
+	public List sponsoredBySellers = new LinkedList();
 
-	public List bottomAdp = new LinkedList();
+	public List footerLinksList = new LinkedList();
 
 	private List tmpAdp = new LinkedList();
 
@@ -155,7 +155,7 @@ public class ProductlistBean implements java.io.Serializable {
 
 	private Integer pagecount_co1 = 0;
 
-	private Integer pagecount_co2 = 0;
+	private Integer pagecountSponsoredBySellers = 0;
 
 	private String query_productlist = "";
 
@@ -215,7 +215,7 @@ public class ProductlistBean implements java.io.Serializable {
 
 	public Boolean isInternet = true;
 
-	public List blogExtAdp = new LinkedList();
+	public List topItemReview = new LinkedList();
 
 	public ProductlistBean() {
 
@@ -224,7 +224,7 @@ public class ProductlistBean implements java.io.Serializable {
 	public String getProductsIdlist(int count) {
 		String productsId = "";
 		try {
-			rows = new String[tool.getRowCount(Adp)][2];
+			rows = new String[tool.getRowCount(productList)][2];
 			if (rows.length < count)
 				return "";
 			for (int i = 0; rows.length > i; i++) {
@@ -246,7 +246,7 @@ public class ProductlistBean implements java.io.Serializable {
 		if (strUser_id == null || strUser_id.length() == 0)
 			strUser_id = "0";
 
-		rows = new String[tool.getRowCount(Adp)][2];
+		rows = new String[tool.getRowCount(productList)][2];
 
 		StringBuffer table = new StringBuffer();
 		table.append("<list>\n");
@@ -262,45 +262,45 @@ public class ProductlistBean implements java.io.Serializable {
 				setPost_manager("PostManager.jsp");
 			else
 				setPost_manager("");
-			pagecount = tool.getRowCount(Adp);
+			pagecount = tool.getRowCount(productList);
 
-			for (int i = 0; tool.getRowCount(Adp) > i; i = i + 2) {
-				rows[i][0] = (String) tool.getValueAt(Adp, i, 0);
-				rows[i][1] = tool.getValueAt(Adp, i, 7) == null ? "" : tool.getValueAt(Adp, i, 7);
+			for (int i = 0; tool.getRowCount(productList) > i; i = i + 2) {
+				rows[i][0] = (String) tool.getValueAt(productList, i, 0);
+				rows[i][1] = tool.getValueAt(productList, i, 7) == null ? "" : tool.getValueAt(productList, i, 7);
 
-				product_name = (String) tool.getValueAt(Adp, i, 1);
-				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(Adp, i, 0);
+				product_name = (String) tool.getValueAt(productList, i, 1);
+				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(productList, i, 0);
 
-				img_url = (String) tool.getValueAt(Adp, i, 13);
+				img_url = (String) tool.getValueAt(productList, i, 13);
 				if (img_url != null)
 					product_iconurl = img_url;
 				else
 					product_iconurl = "images/Folder.jpg";
-				product_description = (String) tool.getValueAt(Adp, i, 2);
-				product_version = (String) tool.getValueAt(Adp, i, 3);
-				product_cost = (String) tool.getValueAt(Adp, i, 4);
-				currency_id = (String) tool.getValueAt(Adp, i, 5);
+				product_description = (String) tool.getValueAt(productList, i, 2);
+				product_version = (String) tool.getValueAt(productList, i, 3);
+				product_cost = (String) tool.getValueAt(productList, i, 4);
+				currency_id = (String) tool.getValueAt(productList, i, 5);
 
 				CurrencyHash currencyHash = CurrencyHash.getInstance();
 
 				currency_desc = currencyHash.getCurrency_decs(currency_id);
-				image_id = (String) tool.getValueAt(Adp, i, 12);
-				product_fulldescription = (String) tool.getValueAt(Adp, i, 14);
-				user1_id = (String) tool.getValueAt(Adp, i, 16);
+				image_id = (String) tool.getValueAt(productList, i, 12);
+				product_fulldescription = (String) tool.getValueAt(productList, i, 14);
+				user1_id = (String) tool.getValueAt(productList, i, 16);
 
-				type1_id = (String) tool.getValueAt(Adp, i, 8);
+				type1_id = (String) tool.getValueAt(productList, i, 8);
 
-				creteria1_name = (String) tool.getValueAt(Adp, i, 30);
-				creteria2_name = (String) tool.getValueAt(Adp, i, 31);
-				creteria3_name = (String) tool.getValueAt(Adp, i, 32);
-				creteria4_name = (String) tool.getValueAt(Adp, i, 33);
-				creteria5_name = (String) tool.getValueAt(Adp, i, 34);
-				creteria6_name = (String) tool.getValueAt(Adp, i, 35);
-				creteria7_name = (String) tool.getValueAt(Adp, i, 36);
-				creteria8_name = (String) tool.getValueAt(Adp, i, 37);
-				creteria9_name = (String) tool.getValueAt(Adp, i, 38);
-				creteria10_name = (String) tool.getValueAt(Adp, i, 39);
-				color = (String) tool.getValueAt(Adp, i, 40);
+				creteria1_name = (String) tool.getValueAt(productList, i, 30);
+				creteria2_name = (String) tool.getValueAt(productList, i, 31);
+				creteria3_name = (String) tool.getValueAt(productList, i, 32);
+				creteria4_name = (String) tool.getValueAt(productList, i, 33);
+				creteria5_name = (String) tool.getValueAt(productList, i, 34);
+				creteria6_name = (String) tool.getValueAt(productList, i, 35);
+				creteria7_name = (String) tool.getValueAt(productList, i, 36);
+				creteria8_name = (String) tool.getValueAt(productList, i, 37);
+				creteria9_name = (String) tool.getValueAt(productList, i, 38);
+				creteria10_name = (String) tool.getValueAt(productList, i, 39);
+				color = (String) tool.getValueAt(productList, i, 40);
 
 				table.append("<product>\n");
 
@@ -335,34 +335,34 @@ public class ProductlistBean implements java.io.Serializable {
 				table.append("<color>" + color + "</color>\n");
 				table.append("</rigth>\n");
 
-				if (tool.getRowCount(Adp) > (i + 1)) {
-					product_url2 = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(Adp, i + 1, 0);
+				if (tool.getRowCount(productList) > (i + 1)) {
+					product_url2 = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(productList, i + 1, 0);
 
-					rows[i + 1][0] = (String) tool.getValueAt(Adp, i + 1, 0);
-					rows[i + 1][1] = tool.getValueAt(Adp, i + 1, 7) == null ? "" : tool.getValueAt(Adp, i + 1, 7);
-					product_name2 = (String) tool.getValueAt(Adp, i + 1, 1);
-					img_url2 = (String) tool.getValueAt(Adp, i + 1, 13);
+					rows[i + 1][0] = (String) tool.getValueAt(productList, i + 1, 0);
+					rows[i + 1][1] = tool.getValueAt(productList, i + 1, 7) == null ? "" : tool.getValueAt(productList, i + 1, 7);
+					product_name2 = (String) tool.getValueAt(productList, i + 1, 1);
+					img_url2 = (String) tool.getValueAt(productList, i + 1, 13);
 					if (img_url2 != null)
 						product_iconurl2 = img_url2;
 					else
 						product_iconurl2 = "images/Folder.jpg";
-					product_description2 = (String) tool.getValueAt(Adp, i + 1, 2);
-					product_cost2 = (String) tool.getValueAt(Adp, i + 1, 4);
-					currency_id2 = (String) tool.getValueAt(Adp, i + 1, 5);
+					product_description2 = (String) tool.getValueAt(productList, i + 1, 2);
+					product_cost2 = (String) tool.getValueAt(productList, i + 1, 4);
+					currency_id2 = (String) tool.getValueAt(productList, i + 1, 5);
 					currency_desc2 = currencyHash.getCurrency_decs(currency_id2);
-					user2_id = (String) tool.getValueAt(Adp, i + 1, 16);
-					type2_id = (String) tool.getValueAt(Adp, i + 1, 8);
-					creteria1_name = (String) tool.getValueAt(Adp, i + 1, 30);
-					creteria2_name = (String) tool.getValueAt(Adp, i + 1, 31);
-					creteria3_name = (String) tool.getValueAt(Adp, i + 1, 32);
-					creteria4_name = (String) tool.getValueAt(Adp, i + 1, 33);
-					creteria5_name = (String) tool.getValueAt(Adp, i + 1, 34);
-					creteria6_name = (String) tool.getValueAt(Adp, i + 1, 35);
-					creteria7_name = (String) tool.getValueAt(Adp, i + 1, 36);
-					creteria8_name = (String) tool.getValueAt(Adp, i + 1, 37);
-					creteria9_name = (String) tool.getValueAt(Adp, i + 1, 38);
-					creteria10_name = (String) tool.getValueAt(Adp, i + 1, 39);
-					color = (String) tool.getValueAt(Adp, i + 1, 40);
+					user2_id = (String) tool.getValueAt(productList, i + 1, 16);
+					type2_id = (String) tool.getValueAt(productList, i + 1, 8);
+					creteria1_name = (String) tool.getValueAt(productList, i + 1, 30);
+					creteria2_name = (String) tool.getValueAt(productList, i + 1, 31);
+					creteria3_name = (String) tool.getValueAt(productList, i + 1, 32);
+					creteria4_name = (String) tool.getValueAt(productList, i + 1, 33);
+					creteria5_name = (String) tool.getValueAt(productList, i + 1, 34);
+					creteria6_name = (String) tool.getValueAt(productList, i + 1, 35);
+					creteria7_name = (String) tool.getValueAt(productList, i + 1, 36);
+					creteria8_name = (String) tool.getValueAt(productList, i + 1, 37);
+					creteria9_name = (String) tool.getValueAt(productList, i + 1, 38);
+					creteria10_name = (String) tool.getValueAt(productList, i + 1, 39);
+					color = (String) tool.getValueAt(productList, i + 1, 40);
 
 					table.append("<left>\n");
 					table.append("<product_id>" + rows[i + 1][0] + "</product_id>\n");
@@ -406,11 +406,10 @@ public class ProductlistBean implements java.io.Serializable {
 		return table.toString();
 	}
 
-	public String getProductSimpleList(String strUser_id, String site_id) {
-		if (strUser_id == null || strUser_id.length() == 0)
-			strUser_id = "0";
+	public String getProductSimpleList(long strUser_id, String site_id) {
 
-		rows = new String[tool.getRowCount(Adp)][2];
+
+		rows = new String[tool.getRowCount(productList)][2];
 
 		StringBuffer table = new StringBuffer();
 		table.append("<product_list>\n");
@@ -426,42 +425,42 @@ public class ProductlistBean implements java.io.Serializable {
 				setPost_manager("PostManager.jsp");
 			else
 				setPost_manager("");
-			pagecount = tool.getRowCount(Adp);
+			pagecount = tool.getRowCount(productList);
 
-			for (int i = 0; tool.getRowCount(Adp) > i; i++) {
-				rows[i][0] = (String) tool.getValueAt(Adp, i, 0);
-				rows[i][1] = tool.getValueAt(Adp, i, 7) == null ? "" : tool.getValueAt(Adp, i, 7);
+			for (int i = 0; tool.getRowCount(productList) > i; i++) {
+				rows[i][0] = (String) tool.getValueAt(productList, i, 0);
+				rows[i][1] = tool.getValueAt(productList, i, 7) == null ? "" : tool.getValueAt(productList, i, 7);
 
-				product_name = (String) tool.getValueAt(Adp, i, 1);
-				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(Adp, i, 0);
+				product_name = (String) tool.getValueAt(productList, i, 1);
+				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(productList, i, 0);
 
-				img_url = (String) tool.getValueAt(Adp, i, 13);
+				img_url = (String) tool.getValueAt(productList, i, 13);
 				if (img_url != null)
 					product_iconurl = img_url;
 				else
 					product_iconurl = "images/Folder.jpg";
-				product_description = (String) tool.getValueAt(Adp, i, 2);
-				product_version = (String) tool.getValueAt(Adp, i, 3);
-				product_cost = (String) tool.getValueAt(Adp, i, 4);
-				currency_id = (String) tool.getValueAt(Adp, i, 5);
+				product_description = (String) tool.getValueAt(productList, i, 2);
+				product_version = (String) tool.getValueAt(productList, i, 3);
+				product_cost = (String) tool.getValueAt(productList, i, 4);
+				currency_id = (String) tool.getValueAt(productList, i, 5);
 				CurrencyHash currencyHash = CurrencyHash.getInstance();
 				currency_desc = currencyHash.getCurrency_decs(currency_id);
-				image_id = (String) tool.getValueAt(Adp, i, 12);
-				product_fulldescription = (String) tool.getValueAt(Adp, i, 14);
-				user1_id = (String) tool.getValueAt(Adp, i, 16);
-				creteria1_name = (String) tool.getValueAt(Adp, i, 30);
-				creteria2_name = (String) tool.getValueAt(Adp, i, 31);
-				creteria3_name = (String) tool.getValueAt(Adp, i, 32);
-				creteria4_name = (String) tool.getValueAt(Adp, i, 33);
-				creteria5_name = (String) tool.getValueAt(Adp, i, 34);
-				creteria6_name = (String) tool.getValueAt(Adp, i, 35);
-				creteria7_name = (String) tool.getValueAt(Adp, i, 36);
-				creteria8_name = (String) tool.getValueAt(Adp, i, 37);
-				creteria9_name = (String) tool.getValueAt(Adp, i, 38);
-				creteria10_name = (String) tool.getValueAt(Adp, i, 39);
-				color = (String) tool.getValueAt(Adp, i, 40);
+				image_id = (String) tool.getValueAt(productList, i, 12);
+				product_fulldescription = (String) tool.getValueAt(productList, i, 14);
+				user1_id = (String) tool.getValueAt(productList, i, 16);
+				creteria1_name = (String) tool.getValueAt(productList, i, 30);
+				creteria2_name = (String) tool.getValueAt(productList, i, 31);
+				creteria3_name = (String) tool.getValueAt(productList, i, 32);
+				creteria4_name = (String) tool.getValueAt(productList, i, 33);
+				creteria5_name = (String) tool.getValueAt(productList, i, 34);
+				creteria6_name = (String) tool.getValueAt(productList, i, 35);
+				creteria7_name = (String) tool.getValueAt(productList, i, 36);
+				creteria8_name = (String) tool.getValueAt(productList, i, 37);
+				creteria9_name = (String) tool.getValueAt(productList, i, 38);
+				creteria10_name = (String) tool.getValueAt(productList, i, 39);
+				color = (String) tool.getValueAt(productList, i, 40);
 
-				type1_id = (String) tool.getValueAt(Adp, i, 8);
+				type1_id = (String) tool.getValueAt(productList, i, 8);
 
 				table.append("<product>\n");
 				table.append("<product_id>" + rows[i][0] + "</product_id>\n");
@@ -581,11 +580,12 @@ public class ProductlistBean implements java.io.Serializable {
 
 	}
 
+	@Deprecated
 	public String getCoOneProductlist(String strUser_id, String site_id) {
 		if (strUser_id == null || strUser_id.length() == 0)
 			strUser_id = "0";
 
-		co1_rows = new String[tool.getRowCount(co1Adp)][2];
+		co1_rows = new String[tool.getRowCount(recommentedItems)][2];
 
 		StringBuffer table = new StringBuffer();
 		table.append("<coproductlist1>\n");
@@ -628,35 +628,35 @@ public class ProductlistBean implements java.io.Serializable {
 				setPost_manager("PostManager.jsp");
 			else
 				setPost_manager("");
-			pagecount_co1 = tool.getRowCount(co1Adp);
+			pagecount_co1 = tool.getRowCount(recommentedItems);
 
-			for (int i = 0; tool.getRowCount(co1Adp) > i; i++) {
-				co1_rows[i][0] = (String) tool.getValueAt(co1Adp, i, 0);
-				co1_rows[i][1] = tool.getValueAt(co1Adp, i, 7) == null ? "" : tool.getValueAt(co1Adp, i, 7);
-				product_name = (String) tool.getValueAt(co1Adp, i, 1);
-				String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt(co1Adp, i, 0);
-				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(co1Adp, i, 0);
+			for (int i = 0; tool.getRowCount(recommentedItems) > i; i++) {
+				co1_rows[i][0] = (String) tool.getValueAt(recommentedItems, i, 0);
+				co1_rows[i][1] = tool.getValueAt(recommentedItems, i, 7) == null ? "" : tool.getValueAt(recommentedItems, i, 7);
+				product_name = (String) tool.getValueAt(recommentedItems, i, 1);
+				String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt(recommentedItems, i, 0);
+				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(recommentedItems, i, 0);
 
-				product_iconurl = (String) tool.getValueAt(co1Adp, i, 13);
+				product_iconurl = (String) tool.getValueAt(recommentedItems, i, 13);
 				if (product_iconurl == null)
 					product_iconurl = "images/Folder.jpg";
 
-				img_url = (String) tool.getValueAt(co1Adp, i, 15);
+				img_url = (String) tool.getValueAt(recommentedItems, i, 15);
 				if (img_url == null)
 					img_url = "images/Folder.jpg";
 				String file_exist1 = "";
 				if (co1_rows[i][1].length() > 0)
 					file_exist1 = "true";
 
-				product_description = (String) tool.getValueAt(co1Adp, i, 2);
-				product_version = (String) tool.getValueAt(co1Adp, i, 3);
-				product_cost = (String) tool.getValueAt(co1Adp, i, 4);
-				currency_id = (String) tool.getValueAt(co1Adp, i, 5);
+				product_description = (String) tool.getValueAt(recommentedItems, i, 2);
+				product_version = (String) tool.getValueAt(recommentedItems, i, 3);
+				product_cost = (String) tool.getValueAt(recommentedItems, i, 4);
+				currency_id = (String) tool.getValueAt(recommentedItems, i, 5);
 				CurrencyHash currencyHash = CurrencyHash.getInstance();
 				currency_desc = currencyHash.getCurrency_decs(currency_id);
-				image_id = (String) tool.getValueAt(co1Adp, i, 12);
-				product_fulldescription = (String) tool.getValueAt(co1Adp, i, 14);
-				user1_id = (String) tool.getValueAt(co1Adp, i, 16);
+				image_id = (String) tool.getValueAt(recommentedItems, i, 12);
+				product_fulldescription = (String) tool.getValueAt(recommentedItems, i, 14);
+				user1_id = (String) tool.getValueAt(recommentedItems, i, 16);
 
 				table.append("<coproduct1>\n");
 				table.append("<product_id>" + co1_rows[i][0] + "</product_id>\n");
@@ -688,11 +688,124 @@ public class ProductlistBean implements java.io.Serializable {
 		return table.toString();
 	}
 
+	
+	public String getRecommentedItems(long userId, String siteId) {
+
+
+		co1_rows = new String[tool.getRowCount(recommentedItems)][2];
+
+		StringBuffer table = new StringBuffer();
+		table.append("<recommentedItems>\n");
+		cururl = "Productlist.jsp?offset=" + offset; // + "&catalog_id=" +
+														// catalog_id +
+														// "&phonetype_id=" +
+														// phonetype_id +
+														// "&licence_id=" +
+														// licence_id ;
+		listup = "Productlist.jsp?offset=" + (offset + 10); // + "&catalog_id="
+															// + catalog_id +
+															// "&phonetype_id="
+															// + phonetype_id +
+															// "&licence_id=" +
+															// licence_id ;
+		if (offset - 10 < 0)
+			listdown = "Productlist.jsp?offset=0"; // &catalog_id=" +
+													// catalog_id +
+													// "&phonetype_id=" +
+													// phonetype_id +
+													// "&licence_id=" +
+													// licence_id ;
+		else
+			listdown = "Productlist.jsp?offset=" + (offset - 10); // +
+																	// "&catalog_id="
+																	// +
+																	// catalog_id
+																	// +
+																	// "&phonetype_id="
+																	// +
+																	// phonetype_id
+																	// +
+																	// "&licence_id="
+																	// +
+																	// licence_id
+																	// ;
+
+		try {
+			if (intLevelUp == 2)
+				setPost_manager("PostManager.jsp");
+			else
+				setPost_manager("");
+			pagecount_co1 = tool.getRowCount(recommentedItems);
+
+			for (int i = 0; tool.getRowCount(recommentedItems) > i; i++) {
+				co1_rows[i][0] = (String) tool.getValueAt(recommentedItems, i, 0);
+				co1_rows[i][1] = tool.getValueAt(recommentedItems, i, 7) == null ? "" : tool.getValueAt(recommentedItems, i, 7);
+				product_name = (String) tool.getValueAt(recommentedItems, i, 1);
+				String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt(recommentedItems, i, 0);
+				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(recommentedItems, i, 0);
+
+				product_iconurl = (String) tool.getValueAt(recommentedItems, i, 13);
+				if (product_iconurl == null)
+					product_iconurl = "images/Folder.jpg";
+
+				img_url = (String) tool.getValueAt(recommentedItems, i, 15);
+				if (img_url == null)
+					img_url = "images/Folder.jpg";
+				String file_exist1 = "";
+				if (co1_rows[i][1].length() > 0)
+					file_exist1 = "true";
+
+				product_description = (String) tool.getValueAt(recommentedItems, i, 2);
+				product_version = (String) tool.getValueAt(recommentedItems, i, 3);
+				product_cost = (String) tool.getValueAt(recommentedItems, i, 4);
+				currency_id = (String) tool.getValueAt(recommentedItems, i, 5);
+				CurrencyHash currencyHash = CurrencyHash.getInstance();
+				currency_desc = currencyHash.getCurrency_decs(currency_id);
+				image_id = (String) tool.getValueAt(recommentedItems, i, 12);
+				product_fulldescription = (String) tool.getValueAt(recommentedItems, i, 14);
+				user1_id = (String) tool.getValueAt(recommentedItems, i, 16);
+
+				table.append("<recommentedI>\n");
+				table.append("<productId>" + co1_rows[i][0] + "</productId>\n");
+				table.append("<rowId>" + i + "</rowId>\n");
+				table.append("<fileExist>" + file_exist1 + "</fileExist>\n");
+				table.append("<name>" + product_name + "</name>\n");
+				table.append("<icon>" + product_iconurl + "</icon>\n");
+				table.append("<image>" + img_url + "</image>\n");
+				table.append("<bigImageYype>" + img_url.substring(img_url.indexOf(".") + 1) + "</bigImageYype>\n");
+				table.append("<iconYype>" + product_iconurl.substring(product_iconurl.indexOf(".") + 1) + "</iconYype>\n");
+				table.append("<userId>" + user1_id + "</userId>\n");
+				// Referece to pruduct
+				table.append("<productInfoUrl>" + product_url + "</productInfoUrl>\n");
+				table.append("<attacheFile>" + attache_file + "</attacheFile>\n");
+				table.append("<description>" + product_description + "</description>\n");
+				table.append("<amount>" + product_cost + "</amount>\n");
+				table.append("<currency>\n");
+				table.append("<code>" + currency_cd + "</code>\n");
+				table.append("<description>dollar us</description>\n");
+				table.append("</currency>\n");
+				table.append("<version>" + currency_desc + "</version>\n");
+				table.append("</recommentedI>\n");
+			}
+			table.append("</recommentedItems>\n");
+		} catch (Exception ex) {
+			log.error(ex);
+		}
+		return table.toString();
+	}
+
+	/**
+	 *  Use method getFooterLinksList() 
+	 * @param strUser_id
+	 * @param site_id
+	 * @return
+	 */
+	@Deprecated
 	public String getBottomList(String strUser_id, String site_id) {
 		if (strUser_id == null || strUser_id.length() == 0)
 			strUser_id = "0";
 
-		bottom_rows = new String[tool.getRowCount(bottomAdp)][2];
+		footerLinksListRows = new String[tool.getRowCount(footerLinksList)][2];
 		StringBuffer table = new StringBuffer();
 		table.append("<bottomlist>\n");
 
@@ -702,36 +815,36 @@ public class ProductlistBean implements java.io.Serializable {
 			else
 				setPost_manager("");
 
-			for (int i = 0; tool.getRowCount(bottomAdp) > i; i++) {
-				bottom_rows[i][0] = (String) tool.getValueAt(bottomAdp, i, 0);
-				bottom_rows[i][1] = tool.getValueAt(bottomAdp, i, 7) == null ? "" : tool.getValueAt(bottomAdp, i, 7);
-				product_name = (String) tool.getValueAt(bottomAdp, i, 1);
-				String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt(bottomAdp, i, 0);
-				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(bottomAdp, i, 0);
+			for (int i = 0; tool.getRowCount(footerLinksList) > i; i++) {
+				footerLinksListRows[i][0] = (String) tool.getValueAt(footerLinksList, i, 0);
+				footerLinksListRows[i][1] = tool.getValueAt(footerLinksList, i, 7) == null ? "" : tool.getValueAt(footerLinksList, i, 7);
+				product_name = (String) tool.getValueAt(footerLinksList, i, 1);
+				String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt(footerLinksList, i, 0);
+				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(footerLinksList, i, 0);
 
-				product_iconurl = (String) tool.getValueAt(bottomAdp, i, 13);
+				product_iconurl = (String) tool.getValueAt(footerLinksList, i, 13);
 				if (product_iconurl == null)
 					product_iconurl = "images/Folder.jpg";
 
-				img_url = (String) tool.getValueAt(bottomAdp, i, 15);
+				img_url = (String) tool.getValueAt(footerLinksList, i, 15);
 				if (img_url == null)
 					img_url = "images/Folder.jpg";
 				String file_exist1 = "";
-				if (bottom_rows[i][1].length() > 0)
+				if (footerLinksListRows[i][1].length() > 0)
 					file_exist1 = "true";
 
-				product_description = (String) tool.getValueAt(bottomAdp, i, 2);
-				product_version = (String) tool.getValueAt(bottomAdp, i, 3);
-				product_cost = (String) tool.getValueAt(bottomAdp, i, 4);
-				currency_id = (String) tool.getValueAt(bottomAdp, i, 5);
+				product_description = (String) tool.getValueAt(footerLinksList, i, 2);
+				product_version = (String) tool.getValueAt(footerLinksList, i, 3);
+				product_cost = (String) tool.getValueAt(footerLinksList, i, 4);
+				currency_id = (String) tool.getValueAt(footerLinksList, i, 5);
 				CurrencyHash currencyHash = CurrencyHash.getInstance();
 				currency_desc = currencyHash.getCurrency_decs(currency_id);
-				image_id = (String) tool.getValueAt(bottomAdp, i, 12);
-				product_fulldescription = (String) tool.getValueAt(bottomAdp, i, 14);
-				user1_id = (String) tool.getValueAt(bottomAdp, i, 16);
+				image_id = (String) tool.getValueAt(footerLinksList, i, 12);
+				product_fulldescription = (String) tool.getValueAt(footerLinksList, i, 14);
+				user1_id = (String) tool.getValueAt(footerLinksList, i, 16);
 
 				table.append("<bottom>\n");
-				table.append("<product_id>" + bottom_rows[i][0] + "</product_id>\n");
+				table.append("<product_id>" + footerLinksListRows[i][0] + "</product_id>\n");
 				table.append("<row_id>" + i + "</row_id>\n");
 				table.append("<file_exist>" + file_exist1 + "</file_exist>\n");
 				table.append("<name>" + product_name + "</name>\n");
@@ -759,12 +872,94 @@ public class ProductlistBean implements java.io.Serializable {
 		}
 		return table.toString();
 	}
+	
+	    /**
+	     *  It displays footer list link on page button .
+	     * @param userId
+	     * @param siteId
+	     * @return
+	     */
+		public String getFooterLinksList(long  userId, String siteId) {
 
+			footerLinksListRows = new String[tool.getRowCount(footerLinksList)][2];
+			StringBuffer table = new StringBuffer();
+			table.append("<footerLinksList>\n");
+
+			try {
+				if (intLevelUp == 2)
+					setPost_manager("PostManager.jsp");
+				else
+					setPost_manager("");
+
+				for (int i = 0; tool.getRowCount(footerLinksList) > i; i++) {
+					footerLinksListRows[i][0] = (String) tool.getValueAt(footerLinksList, i, 0);
+					footerLinksListRows[i][1] = tool.getValueAt(footerLinksList, i, 7) == null ? "" : tool.getValueAt(footerLinksList, i, 7);
+					product_name = (String) tool.getValueAt(footerLinksList, i, 1);
+					String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt(footerLinksList, i, 0);
+					product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(footerLinksList, i, 0);
+
+					product_iconurl = (String) tool.getValueAt(footerLinksList, i, 13);
+					if (product_iconurl == null)
+						product_iconurl = "images/Folder.jpg";
+
+					img_url = (String) tool.getValueAt(footerLinksList, i, 15);
+					if (img_url == null)
+						img_url = "images/Folder.jpg";
+					String file_exist1 = "";
+					if (footerLinksListRows[i][1].length() > 0)
+						file_exist1 = "true";
+
+					product_description = (String) tool.getValueAt(footerLinksList, i, 2);
+					product_version = (String) tool.getValueAt(footerLinksList, i, 3);
+					product_cost = (String) tool.getValueAt(footerLinksList, i, 4);
+					currency_id = (String) tool.getValueAt(footerLinksList, i, 5);
+					CurrencyHash currencyHash = CurrencyHash.getInstance();
+					currency_desc = currencyHash.getCurrency_decs(currency_id);
+					image_id = (String) tool.getValueAt(footerLinksList, i, 12);
+					product_fulldescription = (String) tool.getValueAt(footerLinksList, i, 14);
+					user1_id = (String) tool.getValueAt(footerLinksList, i, 16);
+
+					table.append("<footerLink>\n");
+					table.append("<productId>" + footerLinksListRows[i][0] + "</productId>\n");
+					table.append("<rowId>" + i + "</rowId>\n");
+					table.append("<fileExist>" + file_exist1 + "</fileExist>\n");
+					table.append("<name>" + product_name + "</name>\n");
+					table.append("<icon>" + product_iconurl + "</icon>\n");
+					table.append("<image>" + img_url + "</image>\n");
+					table.append("<bigImageType>" + img_url.substring(img_url.indexOf(".") + 1) + "</bigImageType>\n");
+					table.append("<iconType>" + product_iconurl.substring(product_iconurl.indexOf(".") + 1) + "</iconType>\n");
+					table.append("<userId>" + user1_id + "</userId>\n");
+					// Referece to pruduct
+					table.append("<productInfoUrl>" + product_url + "</productInfoUrl>\n");
+					table.append("<attacheFile>" + attache_file + "</attacheFile>\n");
+					table.append("<description>" + product_description + "</description>\n");
+					table.append("<amount>" + product_cost + "</amount>\n");
+					table.append("<currency>\n");
+					table.append("<code>" + currency_cd + "</code>\n");
+					table.append("<description>dollar us</description>\n");
+					table.append("</currency>\n");
+					table.append("<version>" + currency_desc + "</version>\n");
+					table.append("</footerLink>\n");
+				}
+				table.append("</footerLinksList>\n");
+			} catch (Exception ex) {
+				log.error(ex);
+			}
+			return table.toString();
+		}
+
+	/**
+	 * Use sponsored tiems method getSponsoredBySellersItems
+	 * @param strUser_id
+	 * @param site_id
+	 * @return
+	 */
+	@Deprecated
 	public String getCoTwoProductlist(String strUser_id, String site_id) {
 		if (strUser_id == null || strUser_id.length() == 0)
 			strUser_id = "0";
 
-		co2_rows = new String[tool.getRowCount(co2Adp)][2];
+		sponsoredBySellersRows = new String[tool.getRowCount(sponsoredBySellers)][2];
 
 		StringBuffer table = new StringBuffer();
 		table.append("<coproductlist2>\n");
@@ -807,38 +1002,38 @@ public class ProductlistBean implements java.io.Serializable {
 				setPost_manager("PostManager.jsp");
 			else
 				setPost_manager("");
-			pagecount_co2 = tool.getRowCount(co2Adp);
+			pagecountSponsoredBySellers = tool.getRowCount(sponsoredBySellers);
 
-			for (int i = 0; tool.getRowCount(co2Adp) > i; i++) {
-				co2_rows[i][0] = (String) tool.getValueAt(co2Adp, i, 0);
-				co2_rows[i][1] = tool.getValueAt(co2Adp, i, 7) == null ? "" : tool.getValueAt(co2Adp, i, 7);
-				product_name = (String) tool.getValueAt(co2Adp, i, 1);
-				String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt(co2Adp, i, 0);
-				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(co2Adp, i, 0);
+			for (int i = 0; tool.getRowCount(sponsoredBySellers) > i; i++) {
+				sponsoredBySellersRows[i][0] = (String) tool.getValueAt(sponsoredBySellers, i, 0);
+				sponsoredBySellersRows[i][1] = tool.getValueAt(sponsoredBySellers, i, 7) == null ? "" : tool.getValueAt(sponsoredBySellers, i, 7);
+				product_name = (String) tool.getValueAt(sponsoredBySellers, i, 1);
+				String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt(sponsoredBySellers, i, 0);
+				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(sponsoredBySellers, i, 0);
 
-				product_iconurl = (String) tool.getValueAt(co2Adp, i, 13);
+				product_iconurl = (String) tool.getValueAt(sponsoredBySellers, i, 13);
 				if (product_iconurl == null)
 					product_iconurl = "images/Folder.jpg";
 
-				img_url = (String) tool.getValueAt(co2Adp, i, 15);
+				img_url = (String) tool.getValueAt(sponsoredBySellers, i, 15);
 				if (img_url == null)
 					img_url = "images/Folder.jpg";
 
 				String file_exist1 = "";
-				if (co2_rows[i][1].length() > 0)
+				if (sponsoredBySellersRows[i][1].length() > 0)
 					file_exist1 = "true";
 
-				product_description = (String) tool.getValueAt(co2Adp, i, 2);
-				product_version = (String) tool.getValueAt(co2Adp, i, 3);
-				product_cost = (String) tool.getValueAt(co2Adp, i, 4);
-				currency_id = (String) tool.getValueAt(co2Adp, i, 5);
+				product_description = (String) tool.getValueAt(sponsoredBySellers, i, 2);
+				product_version = (String) tool.getValueAt(sponsoredBySellers, i, 3);
+				product_cost = (String) tool.getValueAt(sponsoredBySellers, i, 4);
+				currency_id = (String) tool.getValueAt(sponsoredBySellers, i, 5);
 				CurrencyHash currencyHash = CurrencyHash.getInstance();
 				currency_desc = currencyHash.getCurrency_decs(currency_id);
-				image_id = (String) tool.getValueAt(co2Adp, i, 12);
-				product_fulldescription = (String) tool.getValueAt(co2Adp, i, 14);
-				user1_id = (String) tool.getValueAt(co2Adp, i, 16);
+				image_id = (String) tool.getValueAt(sponsoredBySellers, i, 12);
+				product_fulldescription = (String) tool.getValueAt(sponsoredBySellers, i, 14);
+				user1_id = (String) tool.getValueAt(sponsoredBySellers, i, 16);
 				table.append("<coproduct2>\n");
-				table.append("<product_id>" + co2_rows[i][0] + "</product_id>\n");
+				table.append("<product_id>" + sponsoredBySellersRows[i][0] + "</product_id>\n");
 				table.append("<row_id>" + i + "</row_id>\n");
 				table.append("<file_exist>" + file_exist1 + "</file_exist>\n");
 				table.append("<name>" + product_name + "</name>\n");
@@ -865,6 +1060,118 @@ public class ProductlistBean implements java.io.Serializable {
 		}
 		return table.toString();
 	}
+	
+	
+	/**
+	 * 
+	 * @param strUser_id
+	 * @param site_id
+	 * @return
+	 */
+	public String getSponsoredBySellersItems(String strUser_id, String site_id) {
+		if (strUser_id == null || strUser_id.length() == 0)
+			strUser_id = "0";
+
+		sponsoredBySellersRows = new String[tool.getRowCount(sponsoredBySellers)][2];
+
+		StringBuffer table = new StringBuffer();
+		table.append("<sponsoredBySellersItems>\n");
+		cururl = "Productlist.jsp?offset=" + offset; // + "&catalog_id=" +
+														// catalog_id +
+														// "&phonetype_id=" +
+														// phonetype_id +
+														// "&licence_id=" +
+														// licence_id ;
+		listup = "Productlist.jsp?offset=" + (offset + 10); // + "&catalog_id="
+															// + catalog_id +
+															// "&phonetype_id="
+															// + phonetype_id +
+															// "&licence_id=" +
+															// licence_id ;
+		if (offset - 10 < 0)
+			listdown = "Productlist.jsp?offset=0"; // &catalog_id=" +
+													// catalog_id +
+													// "&phonetype_id=" +
+													// phonetype_id +
+													// "&licence_id=" +
+													// licence_id ;
+		else
+			listdown = "Productlist.jsp?offset=" + (offset - 10); // +
+																	// "&catalog_id="
+																	// +
+																	// catalog_id
+																	// +
+																	// "&phonetype_id="
+																	// +
+																	// phonetype_id
+																	// +
+																	// "&licence_id="
+																	// +
+																	// licence_id
+																	// ;
+
+		try {
+			if (intLevelUp == 2)
+				setPost_manager("PostManager.jsp");
+			else
+				setPost_manager("");
+			pagecountSponsoredBySellers = tool.getRowCount(sponsoredBySellers);
+
+			for (int i = 0; tool.getRowCount(sponsoredBySellers) > i; i++) {
+				sponsoredBySellersRows[i][0] = (String) tool.getValueAt(sponsoredBySellers, i, 0);
+				sponsoredBySellersRows[i][1] = tool.getValueAt(sponsoredBySellers, i, 7) == null ? "" : tool.getValueAt(sponsoredBySellers, i, 7);
+				product_name = (String) tool.getValueAt(sponsoredBySellers, i, 1);
+				String attache_file = "downloadservletbyrowid?productid=" + (String) tool.getValueAt(sponsoredBySellers, i, 0);
+				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(sponsoredBySellers, i, 0);
+
+				product_iconurl = (String) tool.getValueAt(sponsoredBySellers, i, 13);
+				if (product_iconurl == null)
+					product_iconurl = "images/Folder.jpg";
+
+				img_url = (String) tool.getValueAt(sponsoredBySellers, i, 15);
+				if (img_url == null)
+					img_url = "images/Folder.jpg";
+
+				String file_exist1 = "";
+				if (sponsoredBySellersRows[i][1].length() > 0)
+					file_exist1 = "true";
+
+				product_description = (String) tool.getValueAt(sponsoredBySellers, i, 2);
+				product_version = (String) tool.getValueAt(sponsoredBySellers, i, 3);
+				product_cost = (String) tool.getValueAt(sponsoredBySellers, i, 4);
+				currency_id = (String) tool.getValueAt(sponsoredBySellers, i, 5);
+				CurrencyHash currencyHash = CurrencyHash.getInstance();
+				currency_desc = currencyHash.getCurrency_decs(currency_id);
+				image_id = (String) tool.getValueAt(sponsoredBySellers, i, 12);
+				product_fulldescription = (String) tool.getValueAt(sponsoredBySellers, i, 14);
+				user1_id = (String) tool.getValueAt(sponsoredBySellers, i, 16);
+				table.append("<sponsored>\n");
+				table.append("<productId>" + sponsoredBySellersRows[i][0] + "</productId>\n");
+				table.append("<rowId>" + i + "</rowId>\n");
+				table.append("<file_exist>" + file_exist1 + "</file_exist>\n");
+				table.append("<name>" + product_name + "</name>\n");
+				table.append("<icon>" + product_iconurl + "</icon>\n");
+				table.append("<image>" + img_url + "</image>\n");
+				table.append("<bigImageType>" + img_url.substring(img_url.indexOf(".") + 1) + "</bigImageType>\n");
+				table.append("<iconType>" + product_iconurl.substring(product_iconurl.indexOf(".") + 1) + "</iconType>\n");
+				table.append("<userId>" + user1_id + "</userId>\n");
+				table.append("<productInfoUrl>" + product_url + "</productInfoUrl>\n");
+				table.append("<attacheFile>" + attache_file + "</attacheFile>\n");
+				table.append("<description>" + product_description + "</description>\n");
+				table.append("<amount>" + product_cost + "</amount>\n");
+				table.append("<currency>\n");
+				table.append("<code>" + currency_cd + "</code>\n");
+				table.append("<description>dollar us</description>\n");
+				table.append("</currency>\n");
+				table.append("<version>" + currency_desc + "</version>\n");
+				table.append("</sponsored>\n");
+			}
+			table.append("</sponsoredBySellersItems>\n");
+		} catch (Exception ex) {
+			log.error(ex);
+		}
+		return table.toString();
+	}
 
 	/**
 	 * Extention info 2 for policy page
@@ -875,9 +1182,10 @@ public class ProductlistBean implements java.io.Serializable {
 	 * @return
 	 */
 
+	@Deprecated
 	public String getBlogTopProductlist(String site_id) {
 
-		blog_rows = new String[tool.getRowCount(blogExtAdp)][2];
+		blog_rows = new String[tool.getRowCount(topItemReview)][2];
 		StringBuilder table = new StringBuilder();
 		table.append("<product_blog_list>\n");
 		cururl = "Productlist.jsp?offset=" + offset; // + "&catalog_id=" +
@@ -920,16 +1228,16 @@ public class ProductlistBean implements java.io.Serializable {
 			else
 				setPost_manager("");
 
-			pagecount_blog = tool.getRowCount(blogExtAdp);
-			for (int i = 0; tool.getRowCount(blogExtAdp) > i; i++) {
-				blog_rows[i][0] = (String) tool.getValueAt(blogExtAdp, i, 0);
-				blog_rows[i][1] = tool.getValueAt(blogExtAdp, i, 7) == null ? "" : tool.getValueAt(blogExtAdp, i, 7);
-				product_name = (String) tool.getValueAt(blogExtAdp, i, 1);
-				String parent = (String) tool.getValueAt(blogExtAdp, i, 22);
-				String parent_title = (String) tool.getValueAt(blogExtAdp, i, 23);
+			pagecount_blog = tool.getRowCount(topItemReview);
+			for (int i = 0; tool.getRowCount(topItemReview) > i; i++) {
+				blog_rows[i][0] = (String) tool.getValueAt(topItemReview, i, 0);
+				blog_rows[i][1] = tool.getValueAt(topItemReview, i, 7) == null ? "" : tool.getValueAt(topItemReview, i, 7);
+				product_name = (String) tool.getValueAt(topItemReview, i, 1);
+				String parent = (String) tool.getValueAt(topItemReview, i, 22);
+				String parent_title = (String) tool.getValueAt(topItemReview, i, 23);
 				product_url = "ProductInfo.jsp?policy_byproductid=" + parent;
 
-				img_url = (String) tool.getValueAt(blogExtAdp, i, 13);
+				img_url = (String) tool.getValueAt(topItemReview, i, 13);
 				if (img_url != null)
 					product_iconurl = img_url;
 				else
@@ -939,21 +1247,21 @@ public class ProductlistBean implements java.io.Serializable {
 				if (blog_rows[i][1].length() > 0)
 					file_exist1 = "true";
 
-				product_description = (String) tool.getValueAt(blogExtAdp, i, 2);
-				product_version = (String) tool.getValueAt(blogExtAdp, i, 3);
-				product_cost = (String) tool.getValueAt(blogExtAdp, i, 4);
-				currency_id = (String) tool.getValueAt(blogExtAdp, i, 5);
+				product_description = (String) tool.getValueAt(topItemReview, i, 2);
+				product_version = (String) tool.getValueAt(topItemReview, i, 3);
+				product_cost = (String) tool.getValueAt(topItemReview, i, 4);
+				currency_id = (String) tool.getValueAt(topItemReview, i, 5);
 				CurrencyHash currencyHash = CurrencyHash.getInstance();
 				currency_desc = currencyHash.getCurrency_decs(currency_id);
-				image_id = (String) tool.getValueAt(blogExtAdp, i, 12);
-				product_fulldescription = (String) tool.getValueAt(blogExtAdp, i, 14);
-				user1_id = (String) tool.getValueAt(blogExtAdp, i, 16);
+				image_id = (String) tool.getValueAt(topItemReview, i, 12);
+				product_fulldescription = (String) tool.getValueAt(topItemReview, i, 14);
+				user1_id = (String) tool.getValueAt(topItemReview, i, 16);
 
-				String strCDate = (String) tool.getValueAt(blogExtAdp, i, 17);
-				String statistic = (String) tool.getValueAt(blogExtAdp, i, 18);
-				String firstName = (String) tool.getValueAt(blogExtAdp, i, 19);
-				String lastName = (String) tool.getValueAt(blogExtAdp, i, 20);
-				String company = (String) tool.getValueAt(blogExtAdp, i, 21);
+				String strCDate = (String) tool.getValueAt(topItemReview, i, 17);
+				String statistic = (String) tool.getValueAt(topItemReview, i, 18);
+				String firstName = (String) tool.getValueAt(topItemReview, i, 19);
+				String lastName = (String) tool.getValueAt(topItemReview, i, 20);
+				String company = (String) tool.getValueAt(topItemReview, i, 21);
 
 				table.append("<product_blog>\n");
 				table.append("<product_id>" + blog_rows[i][0] + "</product_id>\n");
@@ -987,47 +1295,174 @@ public class ProductlistBean implements java.io.Serializable {
 		return table.toString();
 	}
 
+	
+
+	/**
+	 * Collect top list of item review
+	 * @param site_id
+	 * @return
+	 */
+	public String getItemReviewTopList(String site_id) {
+
+		blog_rows = new String[tool.getRowCount(topItemReview)][2];
+		StringBuilder table = new StringBuilder();
+		table.append("<itemReviewTopList>\n");
+		cururl = "Productlist.jsp?offset=" + offset; // + "&catalog_id=" +
+														// catalog_id +
+														// "&phonetype_id=" +
+														// phonetype_id +
+														// "&licence_id=" +
+														// licence_id ;
+		listup = "Productlist.jsp?offset=" + (offset + 10); // + "&catalog_id="
+															// + catalog_id +
+															// "&phonetype_id="
+															// + phonetype_id +
+															// "&licence_id=" +
+															// licence_id ;
+		if (offset - 10 < 0)
+			listdown = "Productlist.jsp?offset=0"; // &catalog_id=" +
+													// catalog_id +
+													// "&phonetype_id=" +
+													// phonetype_id +
+													// "&licence_id=" +
+													// licence_id ;
+		else
+			listdown = "Productlist.jsp?offset=" + (offset - 10); // +
+																	// "&catalog_id="
+																	// +
+																	// catalog_id
+																	// +
+																	// "&phonetype_id="
+																	// +
+																	// phonetype_id
+																	// +
+																	// "&licence_id="
+																	// +
+																	// licence_id
+																	// ;
+
+		try {
+			if (intLevelUp == 2)
+				setPost_manager("PostManager.jsp");
+			else
+				setPost_manager("");
+
+			pagecount_blog = tool.getRowCount(topItemReview);
+			for (int i = 0; tool.getRowCount(topItemReview) > i; i++) {
+				blog_rows[i][0] = (String) tool.getValueAt(topItemReview, i, 0);
+				blog_rows[i][1] = tool.getValueAt(topItemReview, i, 7) == null ? "" : tool.getValueAt(topItemReview, i, 7);
+				product_name = (String) tool.getValueAt(topItemReview, i, 1);
+				String parent = (String) tool.getValueAt(topItemReview, i, 22);
+				String parent_title = (String) tool.getValueAt(topItemReview, i, 23);
+				product_url = "ProductInfo.jsp?policy_byproductid=" + parent;
+
+				img_url = (String) tool.getValueAt(topItemReview, i, 13);
+				if (img_url != null)
+					product_iconurl = img_url;
+				else
+					product_iconurl = "images/Folder.jpg";
+
+				String file_exist1 = "";
+				if (blog_rows[i][1].length() > 0)
+					file_exist1 = "true";
+
+				product_description = (String) tool.getValueAt(topItemReview, i, 2);
+				product_version = (String) tool.getValueAt(topItemReview, i, 3);
+				product_cost = (String) tool.getValueAt(topItemReview, i, 4);
+				currency_id = (String) tool.getValueAt(topItemReview, i, 5);
+				CurrencyHash currencyHash = CurrencyHash.getInstance();
+				currency_desc = currencyHash.getCurrency_decs(currency_id);
+				image_id = (String) tool.getValueAt(topItemReview, i, 12);
+				product_fulldescription = (String) tool.getValueAt(topItemReview, i, 14);
+				user1_id = (String) tool.getValueAt(topItemReview, i, 16);
+
+				String strCDate = (String) tool.getValueAt(topItemReview, i, 17);
+				String statistic = (String) tool.getValueAt(topItemReview, i, 18);
+				String firstName = (String) tool.getValueAt(topItemReview, i, 19);
+				String lastName = (String) tool.getValueAt(topItemReview, i, 20);
+				String company = (String) tool.getValueAt(topItemReview, i, 21);
+
+				table.append("<itemReview>\n");
+				table.append("<productId>" + blog_rows[i][0] + "</productId>\n");
+				table.append("<rowId>" + i + "</rowId>\n");
+				table.append("<fileExist>" + file_exist1 + "</fileExist>\n");
+				table.append("<name>" + product_name + "</name>\n");
+				table.append("<parentTitle>" + parent_title + "</parentTitle>\n");
+				table.append("<productReferenceId>" + parent + "</productReferenceId>\n");
+				table.append("<icon>" + product_iconurl + "</icon>\n");
+				table.append("<image></image>\n");
+				table.append("<userId>" + user1_id + "</userId>\n");
+				table.append("<author>" + firstName + " " + lastName + "</author>\n");
+				table.append("<company>" + company + "</company>\n");
+				table.append("<productInfoUrl>" + product_url + "</productInfoUrl>\n");
+				table.append("<description>" + product_description + "</description>\n");
+				table.append("<amount>" + product_cost + "</amount>\n");
+				table.append("<currency>\n");
+				table.append("<code>" + currency_cd + "</code>\n");
+				table.append("<description>dollar us</description>\n");
+				table.append("</currency>\n");
+				table.append("<version>" + currency_desc + "</version>\n");
+				table.append("<statistic>" + statistic + "</statistic>\n");
+				table.append("<cdate>" + strCDate + "</cdate>\n");
+				table.append("</itemReview>\n");
+			}
+			table.append("</itemReviewTopList>\n");
+		} catch (Exception ex) {
+			log.error(ex);
+		}
+
+		return table.toString();
+	}
+	
+	
+	/**
+	 * Use new method getNewArrivalItems();
+	 * @param strUser_id
+	 * @param site_id
+	 * @return
+	 */
+	@Deprecated
 	public String getNewslist(String strUser_id, String site_id) {
 		if (strUser_id == null || strUser_id.length() == 0)
 			strUser_id = "0";
 		// this.site_id = site_id;
-		newsrows = new String[tool.getRowCount(newsAdp)][2];
+		newArrivalRow = new String[tool.getRowCount(newArrivalItems)][2];
 		StringBuffer table = new StringBuffer();
 		table.append("<newslist>\n");
 
 		try {
-			for (int i = 0; tool.getRowCount(newsAdp) > i; i++) {
-				newsrows[i][0] = (String) tool.getValueAt(newsAdp, i, 0);
-				newsrows[i][1] = tool.getValueAt(newsAdp, i, 7) == null ? "" : tool.getValueAt(newsAdp, i, 7);
+			for (int i = 0; tool.getRowCount(newArrivalItems) > i; i++) {
+				newArrivalRow[i][0] = (String) tool.getValueAt(newArrivalItems, i, 0);
+				newArrivalRow[i][1] = tool.getValueAt(newArrivalItems, i, 7) == null ? "" : tool.getValueAt(newArrivalItems, i, 7);
 
-				product_name = (String) tool.getValueAt(newsAdp, i, 1);
+				product_name = (String) tool.getValueAt(newArrivalItems, i, 1);
 
-				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(newsAdp, i, 0);
+				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(newArrivalItems, i, 0);
 
-				product_iconurl = (String) tool.getValueAt(newsAdp, i, 13);
+				product_iconurl = (String) tool.getValueAt(newArrivalItems, i, 13);
 				if (product_iconurl == null)
 					product_iconurl = "images/Folder.jpg";
 
-				img_url = (String) tool.getValueAt(newsAdp, i, 15);
+				img_url = (String) tool.getValueAt(newArrivalItems, i, 15);
 				if (img_url == null)
 					img_url = "images/Folder.jpg";
 
 				String file_exist1 = "";
-				if (newsrows[i][1].length() > 0)
+				if (newArrivalRow[i][1].length() > 0)
 					file_exist1 = "true";
 
-				product_description = (String) tool.getValueAt(newsAdp, i, 2);
-				product_version = (String) tool.getValueAt(newsAdp, i, 3);
-				product_cost = (String) tool.getValueAt(newsAdp, i, 4);
-				currency_id = (String) tool.getValueAt(newsAdp, i, 5);
+				product_description = (String) tool.getValueAt(newArrivalItems, i, 2);
+				product_version = (String) tool.getValueAt(newArrivalItems, i, 3);
+				product_cost = (String) tool.getValueAt(newArrivalItems, i, 4);
+				currency_id = (String) tool.getValueAt(newArrivalItems, i, 5);
 				CurrencyHash currencyHash = CurrencyHash.getInstance();
 				currency_desc = currencyHash.getCurrency_decs(currency_id);
-				image_id = (String) tool.getValueAt(newsAdp, i, 12);
-				product_fulldescription = (String) tool.getValueAt(newsAdp, i, 14);
-				user1_id = (String) tool.getValueAt(newsAdp, i, 16);
+				image_id = (String) tool.getValueAt(newArrivalItems, i, 12);
+				product_fulldescription = (String) tool.getValueAt(newArrivalItems, i, 14);
+				user1_id = (String) tool.getValueAt(newArrivalItems, i, 16);
 
 				table.append("<news>\n");
-				table.append("<product_id>" + newsrows[i][0] + "</product_id>\n");
+				table.append("<product_id>" + newArrivalRow[i][0] + "</product_id>\n");
 				table.append("<row_id>" + i + "</row_id>\n");
 				table.append("<file_exist>" + file_exist1 + "</file_exist>\n");
 				table.append("<name>" + product_name + "</name>\n");
@@ -1048,6 +1483,78 @@ public class ProductlistBean implements java.io.Serializable {
 				table.append("</news>\n");
 			}
 			table.append("</newslist>\n");
+		} catch (Exception ex) {
+			log.error(ex);
+		}
+		return table.toString();
+	}
+	
+	
+	/**
+	 * List new Arrival Items
+	 * @param userId
+	 * @param siteId
+	 * @return
+	 */
+	public String getNewArrivalItems(long userId, String siteId) {
+
+		// this.site_id = site_id;
+		newArrivalRow = new String[tool.getRowCount(newArrivalItems)][2];
+		StringBuffer table = new StringBuffer();
+		table.append("<newArrivalItems>\n");
+
+		try {
+			for (int i = 0; tool.getRowCount(newArrivalItems) > i; i++) {
+				newArrivalRow[i][0] = (String) tool.getValueAt(newArrivalItems, i, 0);
+				newArrivalRow[i][1] = tool.getValueAt(newArrivalItems, i, 7) == null ? "" : tool.getValueAt(newArrivalItems, i, 7);
+
+				product_name = (String) tool.getValueAt(newArrivalItems, i, 1);
+
+				product_url = "ProductInfo.jsp?policy_byproductid=" + (String) tool.getValueAt(newArrivalItems, i, 0);
+
+				product_iconurl = (String) tool.getValueAt(newArrivalItems, i, 13);
+				if (product_iconurl == null)
+					product_iconurl = "images/Folder.jpg";
+
+				img_url = (String) tool.getValueAt(newArrivalItems, i, 15);
+				if (img_url == null)
+					img_url = "images/Folder.jpg";
+
+				String file_exist1 = "";
+				if (newArrivalRow[i][1].length() > 0)
+					file_exist1 = "true";
+
+				product_description = (String) tool.getValueAt(newArrivalItems, i, 2);
+				product_version = (String) tool.getValueAt(newArrivalItems, i, 3);
+				product_cost = (String) tool.getValueAt(newArrivalItems, i, 4);
+				currency_id = (String) tool.getValueAt(newArrivalItems, i, 5);
+				CurrencyHash currencyHash = CurrencyHash.getInstance();
+				currency_desc = currencyHash.getCurrency_decs(currency_id);
+				image_id = (String) tool.getValueAt(newArrivalItems, i, 12);
+				product_fulldescription = (String) tool.getValueAt(newArrivalItems, i, 14);
+				user1_id = (String) tool.getValueAt(newArrivalItems, i, 16);
+
+				table.append("<newArrival>\n");
+				table.append("<productId>" + newArrivalRow[i][0] + "</productId>\n");
+				table.append("<rowId>" + i + "</rowId>\n");
+				table.append("<fileExist>" + file_exist1 + "</fileExist>\n");
+				table.append("<name>" + product_name + "</name>\n");
+				table.append("<icon>" + product_iconurl + "</icon>\n");
+				table.append("<image>" + img_url + "</image>\n");
+				table.append("<bigImageType>" + img_url.substring(img_url.indexOf(".") + 1) + "</bigImageType>\n");
+				table.append("<iconType>" + product_iconurl.substring(product_iconurl.indexOf(".") + 1) + "</iconType>\n");
+				table.append("<userId>" + user1_id + "</userId>\n");
+				table.append("<productInfoUrl>" + product_url + "</productInfoUrl>\n");
+				table.append("<description>" + product_description + "</description>\n");
+				table.append("<amount>" + product_cost + "</amount>\n");
+				table.append("<currency>\n");
+				table.append("<code>" + currency_cd + "</code>\n");
+				table.append("<description>dollar us</description>\n");
+				table.append("</currency>\n");
+				table.append("<version>" + currency_desc + "</version>\n");
+				table.append("</newArrival>\n");
+			}
+			table.append("</newArrivalItems>\n");
 		} catch (Exception ex) {
 			log.error(ex);
 		}
@@ -1329,11 +1836,11 @@ public class ProductlistBean implements java.io.Serializable {
 	}
 
 	public int getPagecount_co2() {
-		return pagecount_co2;
+		return pagecountSponsoredBySellers;
 	}
 
 	public void setPagecount_co2(int pagecount_co2) {
-		this.pagecount_co2 = pagecount_co2;
+		this.pagecountSponsoredBySellers = pagecount_co2;
 	}
 
 	public String getUser1_id() {

@@ -35,8 +35,8 @@ import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.ProductInfoFaced;
 import com.cbsinc.cms.faceds.ProductlistFaced;
 
-@PageController( jspName = "ProductInfo.jsp" )
-public class ProductInfoAction implements IAction {
+@PageController( jspName = "ProductInfoMarketPlace.jsp" )
+public class ProductInfoMarketPlaceAction implements IAction {
 
 	transient static private Logger log = Logger.getLogger(PolicyAction.class);
 	private ProductInfoFaced policyFaced = null;
@@ -83,7 +83,7 @@ public class ProductInfoAction implements IAction {
 				return;
 			}
 
-			response.sendRedirect("Productlist.jsp?catalog_id=-2");
+			response.sendRedirect("ProductlistMarketPlace.jsp?catalog_id=-2");
 			return;
 		}
 
@@ -126,7 +126,7 @@ public class ProductInfoAction implements IAction {
 																										// policyBeanId)
 																										// ;
 			authorizationPageBeanId.setLastProductId(Long.parseLong(itemDescriptionBeanId.getParent_product_id()));
-			itemDescriptionBeanId.setBack_url("Productlist.jsp");
+			itemDescriptionBeanId.setBack_url("ProductlistMarketPlace.jsp");
 			itemDescriptionBeanId.setType_page("about");
 			itemDescriptionBeanId.setIntUserID(authorizationPageBeanId.getIntUserID());
 			itemDescriptionBeanId.setRating1_xml(policyFaced.getRatring1XML(itemDescriptionBeanId.getProduct_id()));
@@ -144,7 +144,7 @@ public class ProductInfoAction implements IAction {
 																											// policyBeanId)
 																											// ;
 			authorizationPageBeanId.setLastProductId(Long.parseLong(itemDescriptionBeanId.getParent_product_id()));
-			itemDescriptionBeanId.setBack_url("Productlist.jsp");
+			itemDescriptionBeanId.setBack_url("ProductlistMarketPlace.jsp");
 			itemDescriptionBeanId.setType_page("pay");
 			itemDescriptionBeanId.setIntUserID(authorizationPageBeanId.getIntUserID());
 			itemDescriptionBeanId.setRating1_xml(policyFaced.getRatring1XML(itemDescriptionBeanId.getProduct_id()));
@@ -159,9 +159,9 @@ public class ProductInfoAction implements IAction {
 		}
 
 		itemDescriptionBeanId.setSelectCatalogXMLUrlPath(
-				(new CatalogListBean(servletContext)).getCatalogXMLUrlPath("Productlist.jsp?catalog_id", "parent",
+				(new CatalogListBean(servletContext)).getCatalogXMLUrlPath("ProductlistMarketPlace.jsp?catalog_id", "parent",
 						authorizationPageBeanId.getCatalog_id(), authorizationPageBeanId));
-		itemDescriptionBeanId.setSelect_tree_catalog(productlistFaced.getTreeXMLDBList("Productlist.jsp?catalog_id", "catalog",
+		itemDescriptionBeanId.setSelect_tree_catalog(productlistFaced.getTreeXMLDBList("ProductlistMarketPlace.jsp?catalog_id", "catalog",
 				authorizationPageBeanId.getCatalog_id(),
 				"select catalog_id , lable   from catalog   where  active = true and site_id = "
 						+ authorizationPageBeanId.getSite_id() + " and parent_id = "
@@ -187,7 +187,7 @@ public class ProductInfoAction implements IAction {
 		itemDescriptionBeanId.footerLinksList = productlistFaced.getFooterLinksList( authorizationPageBeanId.getIntUserID(),
 				authorizationPageBeanId.getSite_id(), authorizationPageBeanId);
 
-		itemDescriptionBeanId.setSelect_menu_catalog(productlistFaced.getMenuXMLDBList("Productlist.jsp?catalog_id", "menu",
+		itemDescriptionBeanId.setSelect_menu_catalog(productlistFaced.getMenuXMLDBList("ProductlistMarketPlace.jsp?catalog_id", "menu",
 				authorizationPageBeanId.getCatalog_id(),
 				"select catalog_id , lable , parent_id  from catalog   where  active = true and parent_id = 0 and site_id = "
 						+ authorizationPageBeanId.getSite_id() + " and lang_id = "

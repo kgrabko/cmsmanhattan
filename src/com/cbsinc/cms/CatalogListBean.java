@@ -836,7 +836,7 @@ public class CatalogListBean implements java.io.Serializable, ApplicationContext
 		boolean doWhile = true;
 		StringBuffer path = new StringBuffer();
 		if (authorizationPageBeanId.getCatalog_id().length() > 0)
-			_parent_id = Long.parseLong(authorizationPageBeanId.getCatalogParent_id());
+			_parent_id = authorizationPageBeanId.getCatalogParent_id();
 		if (_parent_id == 0)
 			return lable_last;
 		String item = "";
@@ -892,7 +892,7 @@ public class CatalogListBean implements java.io.Serializable, ApplicationContext
 		boolean doWhile = true;
 		StringBuffer path = new StringBuffer();
 		if (authorizationPageBeanId.getCatalog_id().length() > 0)
-			_parent_id = Long.parseLong(authorizationPageBeanId.getCatalogParent_id());
+			_parent_id = authorizationPageBeanId.getCatalogParent_id();
 		if (_parent_id == 0)
 			return lable_last;
 		String item = "";
@@ -1127,11 +1127,11 @@ public class CatalogListBean implements java.io.Serializable, ApplicationContext
 	 * 
 	 * @param pagejsp
 	 * @param name
-	 * @param selected_cd
+	 * @param catalogReferenceId
 	 * @return
 	 */
 
-	public String getCatalogXMLUrlPath(String pagejsp, String name, String selected_cd, String catalog_id,
+	public String getCatalogXMLUrlPath(String pagejsp, String name, long catalogReferenceId, String catalog_id,
 			AuthorizationPageBean authorizationPageBeanId) {
 		queryManager = new QueryManager();
 		String query = "";
@@ -1161,7 +1161,7 @@ public class CatalogListBean implements java.io.Serializable, ApplicationContext
 		}
 
 		if (authorizationPageBeanId.getCatalog_id().length() > 0)
-			_parent_id = Long.parseLong(selected_cd);
+			_parent_id = catalogReferenceId;
 		if (_parent_id == 0)
 			return rowItem.toString();
 		// String item = "" ;
@@ -1181,7 +1181,7 @@ public class CatalogListBean implements java.io.Serializable, ApplicationContext
 					// lable + "</a>" ;
 					rowItem = new StringBuffer();
 					rowItem.append("<" + name + "-item>");
-					rowItem.append("<selected>" + selected_cd + "</selected>");
+					rowItem.append("<selected>" + catalogReferenceId + "</selected>");
 					rowItem.append("<item>" + lable + "</item>");
 					_parent_id = _parent_id == 0 ? -2 : _parent_id;
 					rowItem.append("<code>" + _parent_id + "</code>");
@@ -1196,7 +1196,7 @@ public class CatalogListBean implements java.io.Serializable, ApplicationContext
 
 			rowItem = new StringBuffer();
 			rowItem.append("<" + name + "-item>");
-			rowItem.append("<selected>" + selected_cd + "</selected>");
+			rowItem.append("<selected>" + catalogReferenceId + "</selected>");
 			rowItem.append("<item>" + lable_last + "</item>");
 			parent_id_last = parent_id_last == 0 ? -2 : parent_id_last;
 			rowItem.append("<code>" + parent_id_last + "</code>");

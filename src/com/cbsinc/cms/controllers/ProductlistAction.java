@@ -672,22 +672,22 @@ public class ProductlistAction implements IAction {
 		//// -- productlistBeanId.Adp = productlistFaced.getProductlist("" +
 		//// authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getSite_id(),
 		//// productlistBeanId ) ;
-		productlistBeanId.Adp = productlistFaced.getProductlist("" + authorizationPageBeanId.getIntUserID(),
+		productlistBeanId.productList = productlistFaced.getProductlist(authorizationPageBeanId.getIntUserID(),
 				authorizationPageBeanId.getSite_id(), Long.parseLong(authorizationPageBeanId.getCatalog_id()),
 				productlistBeanId, authorizationPageBeanId);
 		productlistFaced.getQuantityProducts(productlistBeanId);
-		productlistBeanId.co1Adp = productlistFaced.getCoOneProductlist("" + authorizationPageBeanId.getIntUserID(),
+		productlistBeanId.recommentedItems = productlistFaced.getCoOneProductlist(authorizationPageBeanId.getIntUserID(),
 				authorizationPageBeanId.getSite_id(), authorizationPageBeanId.getCatalog_id(), productlistBeanId,
 				authorizationPageBeanId);
-		productlistBeanId.co2Adp = productlistFaced.getCoTwoProductlist("" + authorizationPageBeanId.getIntUserID(),
+		productlistBeanId.sponsoredBySellers = productlistFaced.getCoTwoProductlist( authorizationPageBeanId.getIntUserID(),
 				authorizationPageBeanId.getSite_id(), authorizationPageBeanId.getCatalog_id(), productlistBeanId,
 				authorizationPageBeanId);
-		productlistBeanId.newsAdp = productlistFaced.getNewslist("" + authorizationPageBeanId.getIntUserID(),
+		productlistBeanId.newArrivalItems = productlistFaced.getNewslist(authorizationPageBeanId.getIntUserID(),
 				authorizationPageBeanId.getSite_id(), authorizationPageBeanId);
-		productlistBeanId.blogExtAdp = productlistFaced.getBlogTopProductlist(authorizationPageBeanId.getSite_id(),
+		productlistBeanId.topItemReview = productlistFaced.getBlogTopProductlist(authorizationPageBeanId.getSite_id(),
 				productlistBeanId, authorizationPageBeanId);
 
-		productlistBeanId.bottomAdp = productlistFaced.getBottomlist("" + authorizationPageBeanId.getIntUserID(),
+		productlistBeanId.footerLinksList = productlistFaced.getBottomlist(authorizationPageBeanId.getIntUserID(),
 				authorizationPageBeanId.getSite_id(), authorizationPageBeanId);
 
 		authorizationPageBeanId.setCatalogParent_id("" + productlistFaced.getCatalogParentId(authorizationPageBeanId));

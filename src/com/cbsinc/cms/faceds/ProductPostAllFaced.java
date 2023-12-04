@@ -2036,7 +2036,7 @@ public String getCatalogUrlPath(AuthorizationPageBean authorizationPageBeanId)
 	String lable_last = "" ;
 	boolean doWhile = true ;
 	StringBuffer path = new StringBuffer();
-	if( authorizationPageBeanId.getCatalog_id().length() > 0 ) _parent_id =  Long.parseLong(authorizationPageBeanId.getCatalogParent_id());
+	if( authorizationPageBeanId.getCatalog_id().length() > 0 ) _parent_id =  authorizationPageBeanId.getCatalogParent_id();
     if(_parent_id ==  0 ) return lable_last ;
     String item = "" ;
 	

@@ -95,15 +95,15 @@ printWriter.println(tmp);
 
 <%=  itemDescriptionBeanId.getRating1_xml() %>
 <%=  itemDescriptionBeanId.getSelect_currencies() %>
-<%=  itemDescriptionBeanId.getExtPolicyOneProductlist("" + authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getSite_id(),itemDescriptionBeanId.getProduct_id() ) %>
-<%=  itemDescriptionBeanId.getExtPolicyTwoProductlist("" + authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getSite_id(),itemDescriptionBeanId.getProduct_id() ) %>
+<%=itemDescriptionBeanId.getProductInfoColumnOne("" + authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getSite_id(),itemDescriptionBeanId.getProduct_id() )%>
+<%=itemDescriptionBeanId.getProductInfoColumnTwo("" + authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getSite_id(),itemDescriptionBeanId.getProduct_id() )%>
 
-<%=  itemDescriptionBeanId.getExtPolicyFilesProductlist("" + authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getSite_id(),itemDescriptionBeanId.getProduct_id() ) %>
-<%=  itemDescriptionBeanId.getExtPolicyTabsProductlist("" + authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getSite_id(),itemDescriptionBeanId.getProduct_id() ) %>
+<%=itemDescriptionBeanId.getProductInfoAttchedFiles("" + authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getSite_id(),itemDescriptionBeanId.getProduct_id() )%>
+<%=itemDescriptionBeanId.getProductInfoDescriptionTabs("" + authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getSite_id(),itemDescriptionBeanId.getProduct_id() )%>
 
-<%=  itemDescriptionBeanId.getBlogExtPolicyProductlist("" + authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getSite_id(),itemDescriptionBeanId.getProduct_id() ) %>
-<%=  itemDescriptionBeanId.getNewslist("" + authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getSite_id()) %>
-<%=  itemDescriptionBeanId.getBottomList("" + authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getSite_id()) %>
+<%=itemDescriptionBeanId.getProductInfoReviewMessages("" + authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getSite_id(),itemDescriptionBeanId.getProduct_id() )%>
+<%=itemDescriptionBeanId.getNewArrivalItems("" + authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getSite_id())%>
+<%=itemDescriptionBeanId.getFooterLinksList("" + authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getSite_id())%>
 
    <!-- ????????? ?????? ???????? ??? ??? ? ?   -->
    <empty_page_ext1><%=  itemDescriptionBeanId.getPagecount_ext1() == 0 %></empty_page_ext1>

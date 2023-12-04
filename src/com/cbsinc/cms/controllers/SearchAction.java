@@ -519,7 +519,7 @@ public class SearchAction implements IAction {
 				authorizationPageBeanId.getSite_id(), Long.parseLong(authorizationPageBeanId.getCatalog_id()),
 				searchBeanId, authorizationPageBeanId);
 		productlistFaced.getQuantitySearch(searchBeanId);
-		searchBeanId.co1Adp = productlistFaced.getCoOneSearchDirect("" + authorizationPageBeanId.getIntUserID(),
+		searchBeanId.co1Adp = productlistFaced.getCoOneSearchDirect(authorizationPageBeanId.getIntUserID(),
 				authorizationPageBeanId.getSite_id(), authorizationPageBeanId.getCatalog_id(), searchBeanId,
 				authorizationPageBeanId);
 		searchBeanId.co2Adp = productlistFaced.getCoTwoSearchDirect("" + authorizationPageBeanId.getIntUserID(),

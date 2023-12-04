@@ -169,25 +169,22 @@ public class PolicyAction implements IAction {
 				"select catalog_id , lable   from catalog   where  active = true and parent_id = "
 						+ authorizationPageBeanId.getCatalog_id()));
 		itemDescriptionBeanId.setSelect_currencies(
-				policyFaced.getXMLDBList("Policy.jsp", "currencies", itemDescriptionBeanId.getCurrency_cd(),
+				policyFaced.getXMLDBList("ProductInfo.jsp", "currencies", itemDescriptionBeanId.getCurrency_cd(),
 						"SELECT currency_cd , currency_desc  FROM currency  WHERE active = true"));
-		itemDescriptionBeanId.ext1Adp = productlistFaced.getExtPolicyOneProductlist("" + authorizationPageBeanId.getIntUserID(),
+		itemDescriptionBeanId.columnOne = productlistFaced.getProductInfoColumnOne( authorizationPageBeanId.getIntUserID(),
 				authorizationPageBeanId.getSite_id(), itemDescriptionBeanId.getParent_product_id(), itemDescriptionBeanId);
-		itemDescriptionBeanId.ext2Adp = productlistFaced.getExtPolicyTwoProductlist("" + authorizationPageBeanId.getIntUserID(),
+		itemDescriptionBeanId.columnTwo = productlistFaced.getProductInfoColumnTwo(authorizationPageBeanId.getIntUserID(),
 				authorizationPageBeanId.getSite_id(), itemDescriptionBeanId.getParent_product_id(), itemDescriptionBeanId);
-		itemDescriptionBeanId.extFilesAdp = productlistFaced.getExtPolicyFilesProductlist(
-				"" + authorizationPageBeanId.getIntUserID(), authorizationPageBeanId.getSite_id(),
+		itemDescriptionBeanId.attachedFiles = productlistFaced.getProductInfoAttchedFiles(authorizationPageBeanId.getIntUserID(), authorizationPageBeanId.getSite_id(),
 				itemDescriptionBeanId.getParent_product_id(), itemDescriptionBeanId);
-		itemDescriptionBeanId.extTabsAdp = productlistFaced.getExtPolicyTabsProductlist(
-				"" + authorizationPageBeanId.getIntUserID(), authorizationPageBeanId.getSite_id(),
+		itemDescriptionBeanId.descriptionTab = productlistFaced.getProductInfoDescriptionTabs( authorizationPageBeanId.getIntUserID(), authorizationPageBeanId.getSite_id(),
 				itemDescriptionBeanId.getParent_product_id(), itemDescriptionBeanId);
-		itemDescriptionBeanId.blogExtAdp = productlistFaced.getBlogExtPolicyProductlist(
-				"" + authorizationPageBeanId.getIntUserID(), authorizationPageBeanId.getSite_id(),
+		itemDescriptionBeanId.reviewMessages = productlistFaced.getProductInfoReviewMessages( authorizationPageBeanId.getIntUserID(), authorizationPageBeanId.getSite_id(),
 				itemDescriptionBeanId.getParent_product_id(), itemDescriptionBeanId);
 		// if( policyBeanId.getPortlettype_id() != Layout.PORTLET_TYPE_BOTTOM )
-		itemDescriptionBeanId.newsAdp = productlistFaced.getNewslist("" + authorizationPageBeanId.getIntUserID(),
+		itemDescriptionBeanId.newArrivalItems = productlistFaced.getNewArrivalItems( authorizationPageBeanId.getIntUserID(),
 				authorizationPageBeanId.getSite_id(), authorizationPageBeanId);
-		itemDescriptionBeanId.bottomAdp = productlistFaced.getBottomlist("" + authorizationPageBeanId.getIntUserID(),
+		itemDescriptionBeanId.footerLinksList = productlistFaced.getFooterLinksList( authorizationPageBeanId.getIntUserID(),
 				authorizationPageBeanId.getSite_id(), authorizationPageBeanId);
 
 		itemDescriptionBeanId.setSelect_menu_catalog(productlistFaced.getMenuXMLDBList("Productlist.jsp?catalog_id", "menu",

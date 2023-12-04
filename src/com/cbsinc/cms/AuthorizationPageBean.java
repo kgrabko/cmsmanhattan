@@ -157,7 +157,7 @@ public class AuthorizationPageBean implements java.io.Serializable {
 
 	private String catalog_id = "-2";
 
-	private String catalog_parent_id = "0";
+	private long catalog_parent_id = 0 ;
 
 	private Long offsetLastPage = Long.valueOf(0);
 
@@ -577,14 +577,18 @@ public class AuthorizationPageBean implements java.io.Serializable {
 		this.catalog_id = catalog_id;
 	}
 
-	public String getCatalogParent_id() {
+	public long getCatalogParent_id() {
 		return catalog_parent_id;
 	}
 
-	public void setCatalogParent_id(String catalog_parent_id) {
+	public void setCatalogParent_id(long catalog_parent_id) {
 		this.catalog_parent_id = catalog_parent_id;
 	}
 
+	public void setCatalogParent_id(String catalog_parent_id) {
+		this.catalog_parent_id = Long.valueOf(catalog_parent_id);
+	}
+	
 	public long getOffsetLastPage() {
 		return offsetLastPage;
 	}
@@ -778,12 +782,12 @@ public class AuthorizationPageBean implements java.io.Serializable {
 	}
 
 	@Deprecated
-	public String getCatalog_parent_id() {
+	public long getCatalog_parent_id() {
 		return catalog_parent_id;
 	}
 
 	@Deprecated
-	public void setCatalog_parent_id(String catalog_parent_id) {
+	public void setCatalog_parent_id(long catalog_parent_id) {
 		this.catalog_parent_id = catalog_parent_id;
 	}
 

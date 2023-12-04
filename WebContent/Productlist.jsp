@@ -88,7 +88,7 @@ printWriter.println(tmp);
 
 
 
-<%=  productlistBeanId.getProductSimpleList("" + authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getSite_id()) %>
+<%=  productlistBeanId.getProductSimpleList(authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getSite_id()) %>
 <%=  productlistBeanId.getCoOneProductlist("" + authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getSite_id()) %>
 <%=  productlistBeanId.getCoTwoProductlist("" + authorizationPageBeanId.getIntUserID(),authorizationPageBeanId.getSite_id()) %>
 <%=  productlistBeanId.getBlogTopProductlist(authorizationPageBeanId.getSite_id()) %>

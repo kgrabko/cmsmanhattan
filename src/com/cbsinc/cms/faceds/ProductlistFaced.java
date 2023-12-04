@@ -48,14 +48,14 @@ public class ProductlistFaced extends com.cbsinc.cms.WebControls {
 	
 	final ResourceBundle setup_resources = PropertyResourceBundle.getBundle("appconfig" );
 	
-	private int limit_product_list =  10 ;
-	private int limit_blog_list =  20 ;
-	private int limit_co_one_list =  20 ;
-	private int limit_bottom_list =  20 ;
-	private int limit_co_two_list =  20 ;
+	private int limitProductList =  10 ;
+	private int limitTopItemReviewList =  20 ;
+	private int limitRecommendedItemList =  20 ;
+	private int limitFooterLinksList =  20 ;
+	private int limitSponsoredByList =  20 ;
 	//private int limit_ext1_one_list =  20 ;
 	//private int limit_ext2_two_list =  20 ;
-	private int limit_news_list =  10 ;
+	private int limitNewArrvalList =  10 ;
 	transient final ResourceBundle sequences_rs = PropertyResourceBundle.getBundle("sequence");
 	
 	
@@ -65,13 +65,13 @@ public class ProductlistFaced extends com.cbsinc.cms.WebControls {
 		{
 //		if( setup_resources == null )  setup_resources = PropertyResourceBundle.getBundle("appconfig" );
 		//if( sequences_rs == null )  sequences_rs = PropertyResourceBundle.getBundle("sequence");
-		limit_product_list =  Integer.parseInt(setup_resources.getString("limit_product_list").trim()) ;
-		limit_blog_list =  Integer.parseInt(setup_resources.getString("limit_blog_list").trim()) ;
-		limit_co_one_list =  Integer.parseInt(setup_resources.getString("limit_co_one_list").trim()) ;
-		limit_co_two_list =  Integer.parseInt(setup_resources.getString("limit_co_two_list").trim()) ;
+		limitProductList =  Integer.parseInt(setup_resources.getString("limit_product_list").trim()) ;
+		limitTopItemReviewList =  Integer.parseInt(setup_resources.getString("limit_blog_list").trim()) ;
+		limitRecommendedItemList =  Integer.parseInt(setup_resources.getString("limit_co_one_list").trim()) ;
+		limitSponsoredByList =  Integer.parseInt(setup_resources.getString("limit_co_two_list").trim()) ;
 		///limit_ext1_one_list =  Integer.parseInt(setup_resources.getString("limit_ext1_one_list").trim()) ;
 		//limit_ext2_two_list =  Integer.parseInt(setup_resources.getString("limit_ext2_two_list").trim()) ;
-		limit_news_list =  Integer.parseInt(setup_resources.getString("limit_news_list").trim()) ;
+		limitNewArrvalList =  Integer.parseInt(setup_resources.getString("limit_news_list").trim()) ;
 		}
 		catch (Exception e) 
 		{
@@ -82,14 +82,14 @@ public class ProductlistFaced extends com.cbsinc.cms.WebControls {
 	
 	final public void getQuantityProducts( final ProductlistBean productlistBean) {
 		
-		QueryManager allqueryAdp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		productlistBean.setQuery_productlist( productlistBean.getQuery_productlist().substring(0, productlistBean.getQuery_productlist().indexOf("DESC")));
 		
 		try 
 		{
-			allqueryAdp.executeQuery(productlistBean.getQuery_productlist());
+			qm.executeQuery(productlistBean.getQuery_productlist());
 			//list =  Adp.executeQueryList(query_productlist, limit_product_list , productlistBean.getOffset());
-			productlistBean.setAllFoundProducts( "" + allqueryAdp.getRowCount()) ;
+			productlistBean.setAllFoundProducts( "" + qm.getRowCount()) ;
 		}
 		catch (SQLException ex) 
 		{
@@ -101,21 +101,21 @@ public class ProductlistFaced extends com.cbsinc.cms.WebControls {
 		}
 		finally
 		{
-			allqueryAdp.close();
+			qm.close();
 		}
 
 	}
 	
 final public void getQuantitySearch( final SearchBean productlistBean) {
 		
-		QueryManager allqueryAdp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		productlistBean.setQuery_productlist( productlistBean.getQuery_productlist().substring(0, productlistBean.getQuery_productlist().indexOf("DESC")));
 		
 		try 
 		{
-			allqueryAdp.executeQuery(productlistBean.getQuery_productlist());
+			qm.executeQuery(productlistBean.getQuery_productlist());
 			//list =  Adp.executeQueryList(query_productlist, limit_product_list , productlistBean.getOffset());
-			productlistBean.setAllFoundProducts( "" + allqueryAdp.getRowCount()) ;
+			productlistBean.setAllFoundProducts( "" + qm.getRowCount()) ;
 		}
 		catch (SQLException ex) 
 		{
@@ -127,7 +127,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		}
 		finally
 		{
-			allqueryAdp.close();
+			qm.close();
 		}
 
 	}
@@ -136,16 +136,16 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 	
 	
 	
-	final public List getProduct(final String _soft_id) throws SQLException {
+	final public List<?>  getProduct(final String productId) throws SQLException {
 
-		List list  = new LinkedList();
-		QueryManager tmpAdp = new QueryManager();
+		List<?> list  = new LinkedList<Object>();
+		QueryManager qm = new QueryManager();
 		String query = "";
 		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID  FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id  WHERE   soft.soft_id = "
-				+ _soft_id;
+				+ productId;
 		try 
 		{
-			 tmpAdp.executeQuery(query);
+			 qm.executeQuery(query);
 		}
 		catch (SQLException ex) 
 		{
@@ -157,32 +157,77 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		}
 		finally
 		{
-			tmpAdp.close();
+			qm.close();
 		}
 
 		return list;
 	}
 
-	final public List getCoOneProductlist(String strUser_id, final String site_id , final String catalog_id , final ProductlistBean productlistBean , final AuthorizationPageBean authorizationPageBean  ) {
-		if (strUser_id == null || strUser_id.length() == 0)
-			strUser_id = "0";
+	/**
+	 * Use getRecommentedItems
+	 * @param userId
+	 * @param siteId
+	 * @param catalogId
+	 * @param productlistBean
+	 * @param authorizationPageBean
+	 * @return
+	 */
+	@Deprecated
+	final public List<?>  getCoOneProductlist(long userId, final String siteId , final String catalogId , final ProductlistBean productlistBean , final AuthorizationPageBean authorizationPageBean  ) {
 
-		List list  = new LinkedList();
+		List<?> list  = new LinkedList<Object>();
+		QueryManager qm = new QueryManager();
+		String query = "";
+
+		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID   , soft.MIDLE_BAL1  " +
+				",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria10  " +  " , soft.COLOR " +
+				"   FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id  WHERE soft.catalog_id = "
+				+ catalogId
+				+ "  and   soft.tree_id IS NULL  and  soft.active = true  and   soft.portlettype_id = "+Layout.PORTLET_TYPE_LEFTTOP+"   and  soft.lang_id = " + authorizationPageBean.getLang_id()  +"  and   soft.site_id = "
+				+ siteId
+				+ "   ORDER BY soft.soft_id DESC " ; // limit " + limit_co_one_list + " offset 0" ;
+				//+ productlistBean.getOffset();
+		try
+		{
+			//list = co1Adp.executeQueryList(query);
+			list =  qm.executeQueryList(query, limitRecommendedItemList , 0);
+			
+		}
+		catch (SQLException ex) 
+		{
+		log.error(query,ex);
+		}
+		catch (Exception ex) 
+		{
+		log.error(ex);
+		}
+		finally
+		{
+  		 qm.close();
+		}
+
+		return list ;
+	}
+
+	
+	final public List<?>  getRecommentedItems(long  userId, final String siteId , final String catalogId , final ProductlistBean productlistBean , final AuthorizationPageBean authorizationPageBean  ) {
+
+		List<?> list  = new LinkedList<Object>();
 		QueryManager co1Adp = new QueryManager();
 		String query = "";
 
 		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID   , soft.MIDLE_BAL1  " +
 				",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria10  " +  " , soft.COLOR " +
 				"   FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id  WHERE soft.catalog_id = "
-				+ catalog_id
+				+ catalogId
 				+ "  and   soft.tree_id IS NULL  and  soft.active = true  and   soft.portlettype_id = "+Layout.PORTLET_TYPE_LEFTTOP+"   and  soft.lang_id = " + authorizationPageBean.getLang_id()  +"  and   soft.site_id = "
-				+ site_id
+				+ siteId
 				+ "   ORDER BY soft.soft_id DESC " ; // limit " + limit_co_one_list + " offset 0" ;
 				//+ productlistBean.getOffset();
 		try
 		{
 			//list = co1Adp.executeQueryList(query);
-			list =  co1Adp.executeQueryList(query, limit_co_one_list , 0);
+			list =  co1Adp.executeQueryList(query, limitRecommendedItemList , 0);
 			
 		}
 		catch (SQLException ex) 
@@ -200,14 +245,64 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 
 		return list ;
 	}
-
 	
-	final public List getBottomlist(String strUser_id, final String site_id ,   final AuthorizationPageBean authorizationPageBean  ) {
-		if (strUser_id == null || strUser_id.length() == 0)
-			strUser_id = "0";
+	
+	/**
+	 * It collect data to link to item or articles in footer 
+	 * Use method - getFooterLinksList
+	 * @param userId
+	 * @param siteId
+	 * @param authorizationPageBean
+	 * @return
+	 */
+	@Deprecated
+	final public List<?>  getBottomlist(long userId, final String siteId ,   final AuthorizationPageBean authorizationPageBean  ) {
+		List<?> list  = new LinkedList<Object>();
+		QueryManager qm = new QueryManager();
+		String query = "";
 
-		List list  = new LinkedList();
-		QueryManager bottomAdp = new QueryManager();
+		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID   , soft.MIDLE_BAL1  " +
+				",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria10 " +  " , soft.COLOR " +
+				"   FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id " +
+				" LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id " +
+				" LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id  " +
+				" WHERE  soft.active = true  and   soft.portlettype_id = "+Layout.PORTLET_TYPE_BOTTOM+"  and  soft.lang_id = " + authorizationPageBean.getLang_id()  +"  and   soft.site_id = "
+				+ siteId + "   ORDER BY soft.soft_id DESC " ; // limit " + limit_co_one_list + " offset 0" ;
+				//+ productlistBean.getOffset();
+		try
+		{
+			//list = co1Adp.executeQueryList(query);
+			list =  qm.executeQueryList(query, limitFooterLinksList , 0);
+			
+		}
+		catch (SQLException ex) 
+		{
+		log.error(query,ex);
+		}
+		catch (Exception ex) 
+		{
+		log.error(ex);
+		}
+		finally
+		{
+			qm.close();
+		}
+
+		return list ;
+	}
+	
+	
+	/**
+	 * * It collect data to link to item or articles in footer 
+	 * @param user_id
+	 * @param site_id
+	 * @param authorizationPageBean
+	 * @return
+	 */
+	final public List<?>  getFooterLinksList(long user_id, final String site_id ,   final AuthorizationPageBean authorizationPageBean  ) {
+
+		List<?> list  = new LinkedList<Object>();
+		QueryManager qm = new QueryManager();
 		String query = "";
 
 		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID   , soft.MIDLE_BAL1  " +
@@ -221,7 +316,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		try
 		{
 			//list = co1Adp.executeQueryList(query);
-			list =  bottomAdp.executeQueryList(query, limit_bottom_list , 0);
+			list =  qm.executeQueryList(query, limitFooterLinksList , 0);
 			
 		}
 		catch (SQLException ex) 
@@ -234,18 +329,26 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		}
 		finally
 		{
-			bottomAdp.close();
+			qm.close();
 		}
 
 		return list ;
 	}
 	
-	final public List getCoOneSearchDirect(String strUser_id, final String site_id , final String catalog_id , final SearchBean productlistBean , final AuthorizationPageBean authorizationPageBean  ) {
-		if (strUser_id == null || strUser_id.length() == 0)
-			strUser_id = "0";
+	/**
+	 * It should be renamed for recommented items scope 
+	 * @param user_id
+	 * @param site_id
+	 * @param catalog_id
+	 * @param productlistBean
+	 * @param authorizationPageBean
+	 * @return
+	 */
+	@Deprecated
+	final public List getCoOneSearchDirect(long user_id, final String site_id , final String catalog_id , final SearchBean productlistBean , final AuthorizationPageBean authorizationPageBean  ) {
 
-		List list  = new LinkedList();
-		QueryManager co1Adp = new QueryManager();
+		List<?> list  = new LinkedList<Object>();
+		QueryManager qm = new QueryManager();
 		String query = "";
 
 		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID   , soft.MIDLE_BAL1  " +
@@ -259,7 +362,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		try
 		{
 			//list = co1Adp.executeQueryList(query);
-			list =  co1Adp.executeQueryList(query, limit_co_one_list , 0);
+			list =  qm.executeQueryList(query, limitRecommendedItemList , 0);
 			
 		}
 		catch (SQLException ex) 
@@ -272,33 +375,42 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		}
 		finally
 		{
-  		 co1Adp.close();
+  		 qm.close();
 		}
 
 		return list ;
 	}
 	
-	final public List getCoTwoProductlist( String strUser_id, final String site_id , final String catalog_id , final ProductlistBean productlistBean , final  AuthorizationPageBean authorizationPageBean) {
-		if (strUser_id == null || strUser_id.length() == 0)
-			strUser_id = "0";
+	/**
+	 * Use method getSponsoredBySellersItems()
+	 * 
+	 * @param userId
+	 * @param siteId
+	 * @param catalogId
+	 * @param productlistBean
+	 * @param authorizationPageBean
+	 * @return
+	 */
+	@Deprecated
+	final public List getCoTwoProductlist( long userId, final String siteId , final String catalogId , final ProductlistBean productlistBean , final  AuthorizationPageBean authorizationPageBean) {
 
-		List list  = new LinkedList();
-		QueryManager co2Adp = new QueryManager();
+		List<?> list  = new LinkedList<Object>();
+		QueryManager qm = new QueryManager();
 		String query = "";
 
 		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID   , soft.MIDLE_BAL1  " +
 				",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria10  " +  " , soft.COLOR " +
 				"  FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id  WHERE soft.catalog_id = "
-				+ catalog_id
+				+ catalogId
 				+ " and   soft.tree_id IS NULL and  soft.active = true  and   soft.portlettype_id = "+Layout.PORTLET_TYPE_RIGHTTOP+" and soft.lang_id = " + authorizationPageBean.getLang_id()  +" and   soft.site_id = "
-				+ site_id
+				+ siteId
 				+ "   ORDER BY soft.soft_id DESC " ; //  limit " + limit_co_two_list + " offset 0 " ;
 				//+ productlistBean.getOffset();
 
 		try 
 		{
 			//list = co2Adp.executeQueryList(query);
-			list =  co2Adp.executeQueryList(query, limit_co_two_list , 0);
+			list =  qm.executeQueryList(query, limitSponsoredByList , 0);
 		}
 		catch (SQLException ex) 
 		{
@@ -310,19 +422,64 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		}
 		finally
 		{
-	  	 co2Adp.close();
+	  	 qm.close();
 		}
 
 		return list ;
 	}
 
+	final public List<?> getSponsoredBySellersItems( long userId, final String siteId , final String catalogId , final ProductlistBean productlistBean , final  AuthorizationPageBean authorizationPageBean) {
+
+		List<?> list  = new LinkedList<Object>();
+		QueryManager qm = new QueryManager();
+		String query = "";
+
+		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID   , soft.MIDLE_BAL1  " +
+				",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria10  " +  " , soft.COLOR " +
+				"  FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id  WHERE soft.catalog_id = "
+				+ catalogId
+				+ " and   soft.tree_id IS NULL and  soft.active = true  and   soft.portlettype_id = "+Layout.PORTLET_TYPE_RIGHTTOP+" and soft.lang_id = " + authorizationPageBean.getLang_id()  +" and   soft.site_id = "
+				+ siteId
+				+ "   ORDER BY soft.soft_id DESC " ; //  limit " + limit_co_two_list + " offset 0 " ;
+				//+ productlistBean.getOffset();
+
+		try 
+		{
+			//list = co2Adp.executeQueryList(query);
+			list =  qm.executeQueryList(query, limitSponsoredByList , 0);
+		}
+		catch (SQLException ex) 
+		{
+		log.error(query,ex);
+		}
+		catch (Exception ex) 
+		{
+		log.error(ex);
+		}
+		finally
+		{
+	  	 qm.close();
+		}
+
+		return list ;
+	}
 	
-	final public List getCoTwoSearchDirect( String strUser_id, final String site_id , final String catalog_id , final SearchBean productlistBean , final  AuthorizationPageBean authorizationPageBean) {
+	/**
+	 *  It should be renamed as getSponsoredBySellersItemsSearchDirect
+	 * @param strUser_id
+	 * @param site_id
+	 * @param catalog_id
+	 * @param productlistBean
+	 * @param authorizationPageBean
+	 * @return
+	 */
+	@Deprecated
+	final public List<?>  getCoTwoSearchDirect( String strUser_id, final String site_id , final String catalog_id , final SearchBean productlistBean , final  AuthorizationPageBean authorizationPageBean) {
 		if (strUser_id == null || strUser_id.length() == 0)
 			strUser_id = "0";
 
-		List list  = new LinkedList();
-		QueryManager co2Adp = new QueryManager();
+		List<?> list  = new LinkedList<Object>();
+		QueryManager qm = new QueryManager();
 		String query = "";
 
 		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID   , soft.MIDLE_BAL1  " +
@@ -337,7 +494,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		try 
 		{
 			//list = co2Adp.executeQueryList(query);
-			list =  co2Adp.executeQueryList(query, limit_co_two_list , 0);
+			list =  qm.executeQueryList(query, limitSponsoredByList , 0);
 		}
 		catch (SQLException ex) 
 		{
@@ -349,13 +506,14 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		}
 		finally
 		{
-	  	 co2Adp.close();
+	  	 qm.close();
 		}
 
 		return list ;
 	}
 	
 	/**
+	 * Use new method getProductInfoColumnOne
 	 * 
 	 * Extention info 1 for policy page
 	 * @param strUser_id
@@ -364,11 +522,12 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 	 * @return
 	 */
 
-	final public List getExtPolicyOneProductlist(String strUser_id, final String site_id, final	String tree_id , final ItemDescriptionBean productlistBean ) {
+	@Deprecated
+	final public List<?>  getExtPolicyOneProductlist(String strUser_id, final String site_id, final	String tree_id , final ItemDescriptionBean productlistBean ) {
 		if (strUser_id == null || strUser_id.length() == 0)	strUser_id = "0";
 		
-		List list  = new LinkedList();
-		QueryManager ext1Adp = new QueryManager();
+		List<?> list  = new LinkedList<Object>();
+		QueryManager qm = new QueryManager();
 		String query = "";
 		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID   , soft.MIDLE_BAL1  " +
 				",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name  as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9, creteria10.name as creteria10 " +  " , soft.COLOR " +
@@ -379,8 +538,8 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 				+ "   ORDER BY soft.soft_id DESC ";
 		try 
 		{
-			list = ext1Adp.executeQueryList(query);
-			productlistBean.setPagecount_ext1(ext1Adp.getRowCount());
+			list = qm.executeQueryList(query);
+			productlistBean.setPagecount_ext1(qm.getRowCount());
 			
 		}
 		catch (SQLException ex) 
@@ -393,13 +552,59 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		}
 		finally
 		{
-		 ext1Adp.close();
+		 qm.close();
+		}
+
+		return list;
+	}
+	
+	
+	/**
+	 *  It collects product info description for item to display on product info page .
+	 * 
+	 * @param userId
+	 * @param site_id
+	 * @param tree_id
+	 * @param productlistBean
+	 * @return
+	 */
+	final public List<?>  getProductInfoColumnOne(long userId, final String site_id, final	String tree_id , final ItemDescriptionBean productlistBean ) {
+		
+		List<?> list  = new LinkedList<Object>();
+		QueryManager qm = new QueryManager();
+		String query = "";
+		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID   , soft.MIDLE_BAL1  " +
+				",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name  as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9, creteria10.name as creteria10 " +  " , soft.COLOR " +
+				"   FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id  WHERE  soft.active = true  and   soft.portlettype_id = 1 and   soft.tree_id = "
+				+ tree_id
+				+ "    and   soft.site_id = "
+				+ site_id
+				+ "   ORDER BY soft.soft_id DESC ";
+		try 
+		{
+			list = qm.executeQueryList(query);
+			productlistBean.setPagecount_ext1(qm.getRowCount());
+			
+		}
+		catch (SQLException ex) 
+		{
+		log.error(query,ex);
+		}
+		catch (Exception ex) 
+		{
+		log.error(ex);
+		}
+		finally
+		{
+		 qm.close();
 		}
 
 		return list;
 	}
 
+
 	/**
+	 * It collects product info description for item to display on product info page .
 	 * Extention info 2 for policy page
 	 * limit_ext1_one_list
 	 * @param strUser_id
@@ -407,14 +612,15 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 	 * @param tree_id - Установить родителя для записи обязательно
 	 * @return
 	 */
-
-	final public List getExtPolicyTwoProductlist( String strUser_id, final String site_id,
+	
+	@Deprecated
+	final public List<?>  getExtPolicyTwoProductlist( String strUser_id, final String site_id,
 			final String tree_id , final ItemDescriptionBean productlistBean  ) {
 		if (strUser_id == null || strUser_id.length() == 0)		strUser_id = "0";
 
-		List list  = new LinkedList();
+		List<?> list  = new LinkedList<Object>();
 		
-		QueryManager ext2Adp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		String query = "";
 
 		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID   , soft.MIDLE_BAL1  " +
@@ -427,8 +633,8 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 
 		try 
 		{
-			list = ext2Adp.executeQueryList(query);
-			productlistBean.setPagecount_ext2(ext2Adp.getRowCount());
+			list = qm.executeQueryList(query);
+			productlistBean.setPagecount_ext2(qm.getRowCount());
 		} 
 		catch (SQLException ex) 
 		{
@@ -440,7 +646,54 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		}
 		finally
 		{
-		 ext2Adp.close();
+		 qm.close();
+		}
+
+		return list ;
+	}
+
+	
+	/**
+	 * It collects product info description for item to display on product info page .
+	 * 
+	 * @param userId
+	 * @param siteId
+	 * @param productReferenceId
+	 * @param productlistBean
+	 * @return
+	 */
+	final public List<?>  getProductInfoColumnTwo( long userId, final String siteId,
+			final String productReferenceId , final ItemDescriptionBean productlistBean  ) {
+
+		List<?> list  = new LinkedList<Object>();
+		
+		QueryManager qm = new QueryManager();
+		String query = "";
+
+		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID   , soft.MIDLE_BAL1  " +
+				",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria1  " +  " , soft.COLOR " +
+				"   FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id  WHERE   soft.active = true  and   soft.portlettype_id = 2 and   soft.tree_id = "
+				+ productReferenceId
+				+ "  and   soft.site_id = "
+				+ siteId
+				+ "   ORDER BY soft.soft_id DESC ";
+
+		try 
+		{
+			list = qm.executeQueryList(query);
+			productlistBean.setPagecount_ext2(qm.getRowCount());
+		} 
+		catch (SQLException ex) 
+		{
+		 log.error(query,ex);
+		}
+		catch (Exception ex) 
+		{
+		log.error(ex);
+		}
+		finally
+		{
+		 qm.close();
 		}
 
 		return list ;
@@ -449,35 +702,38 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 	
 
 	/**
+	 * Use new method getProductInfoAttchedFiles()
+	 * It collect files that belong to product on product info page
 	 * Extention info 2 for policy page
 	 * limit_ext1_one_list
 	 * @param strUser_id
 	 * @param site_id
-	 * @param tree_id - Установить родителя для записи обязательно
+	 * @param productReferenceId - Установить родителя для записи обязательно
 	 * @return
 	 */
 
-	final	public List getExtPolicyFilesProductlist(String strUser_id, final String site_id,
-			final String tree_id , final ItemDescriptionBean productlistBean  ) {
+	@Deprecated	
+	final public List<?>  getExtPolicyFilesProductlist(String strUser_id, final String site_id,
+			final String productReferenceId , final ItemDescriptionBean productlistBean  ) {
 		if (strUser_id == null || strUser_id.length() == 0)		strUser_id = "0";
 
-		List list  = new LinkedList();
+		List<?> list  = new LinkedList<Object>();
 		
-		QueryManager extFilesAdp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		String query = "";
 
 		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID   , soft.MIDLE_BAL1  " +
 				",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9, creteria10.name as creteria10 " +  " , soft.COLOR " +
 				"   FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id  WHERE   soft.active = true  and   soft.portlettype_id = 5 and   soft.tree_id = "
-				+ tree_id
+				+ productReferenceId
 				+ "  and   soft.site_id = "
 				+ site_id
 				+ "   ORDER BY soft.soft_id DESC ";
 
 		try 
 		{
-			list = extFilesAdp.executeQueryList(query);
-			productlistBean.setPagecount_ext_files(extFilesAdp.getRowCount());
+			list = qm.executeQueryList(query);
+			productlistBean.setPagecount_ext_files(qm.getRowCount());
 		} 
 		catch (SQLException ex) 
 		{
@@ -489,44 +745,93 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		}
 		finally
 		{
-			extFilesAdp.close();
+			qm.close();
 		}
 
 		return list ;
 	}
+		
+		
+	/**
+	 * 
+	 * It collect files that belong to product on product info page
+	 *  
+	 * @param userId
+	 * @param siteId
+	 * @param productReferenceId
+	 * @param productlistBean
+	 * @return
+	 */
+	final public List<?>  getProductInfoAttchedFiles(long userId, final String siteId,
+				final String productReferenceId , final ItemDescriptionBean productlistBean  ) {
 
+			List<?> list  = new LinkedList<Object>();
+			QueryManager qm = new QueryManager();
+			String query = "";
+
+			query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID   , soft.MIDLE_BAL1  " +
+					",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9, creteria10.name as creteria10 " +  " , soft.COLOR " +
+					"   FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id  WHERE   soft.active = true  and   soft.portlettype_id = 5 and   soft.tree_id = "
+					+ productReferenceId
+					+ "  and   soft.site_id = "
+					+ siteId
+					+ "   ORDER BY soft.soft_id DESC ";
+
+			try 
+			{
+				list = qm.executeQueryList(query);
+				productlistBean.setPagecount_ext_files(qm.getRowCount());
+			} 
+			catch (SQLException ex) 
+			{
+			 log.error(query,ex);
+			}
+			catch (Exception ex) 
+			{
+			log.error(ex);
+			}
+			finally
+			{
+				qm.close();
+			}
+
+			return list ;
+		}
+
+		//
 
 	
 	/**
+	 * Use new method  getProductInfoTabsDataList()
 	 * Extention info 2 for policy page
 	 * limit_ext1_one_list
 	 * @param strUser_id
 	 * @param site_id
-	 * @param tree_id - Установить родителя для записи обязательно
+	 * @param productReferenceId - Установить родителя для записи обязательно
 	 * @return
 	 */
-
-	final public List getExtPolicyTabsProductlist(String strUser_id, final String site_id,
-			final String tree_id , final ItemDescriptionBean productlistBean  ) {
+	
+		@Deprecated
+		final public List<?>  getExtPolicyTabsProductlist(String strUser_id, final String site_id,
+			final String productReferenceId , final ItemDescriptionBean productlistBean  ) {
 		if (strUser_id == null || strUser_id.length() == 0)		strUser_id = "0";
 
-		List list  = new LinkedList();
-		
-		QueryManager extTabsAdp = new QueryManager();
+		List<?> list  = new LinkedList<Object>();
+		QueryManager qm = new QueryManager();
 		String query = "";
 
 		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID   , soft.MIDLE_BAL1  " +
 				",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria10 " +  " , soft.COLOR " +
 				"   FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id  WHERE   soft.active = true  and   soft.portlettype_id = 4 and   soft.tree_id = "
-				+ tree_id
+				+ productReferenceId
 				+ "  and   soft.site_id = "
 				+ site_id
 				+ "   ORDER BY soft.soft_id DESC ";
 
 		try 
 		{
-			list = extTabsAdp.executeQueryList(query);
-			productlistBean.setPagecount_ext_tabs(extTabsAdp.getRowCount());
+			list = qm.executeQueryList(query);
+			productlistBean.setPagecount_ext_tabs(qm.getRowCount());
 		} 
 		catch (SQLException ex) 
 		{
@@ -538,45 +843,93 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		}
 		finally
 		{
-			extTabsAdp.close();
+			qm.close();
 		}
 
 		return list ;
 	}
 
 	
+
+	/**
+	 * It collect description data in tabs for project info page
+	 * Extention info 2 for policy page
+	 * limit_ext1_one_list
+	 * @param userId
+	 * @param siteId
+	 * @param productReferenceId - Установить родителя для записи обязательно
+	 * @return
+	 */
+
+	final public List<?>  getProductInfoDescriptionTabs(long userId, final String siteId,
+			final String productReferenceId , final ItemDescriptionBean productlistBean  ) {
+
+		List<?> list  = new LinkedList<Object>();
+		QueryManager qm = new QueryManager();
+		String query = "";
+
+		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID   , soft.MIDLE_BAL1  " +
+				",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria10 " +  " , soft.COLOR " +
+				"   FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id  WHERE   soft.active = true  and   soft.portlettype_id = 4 and   soft.tree_id = "
+				+ productReferenceId
+				+ "  and   soft.site_id = "
+				+ siteId
+				+ "   ORDER BY soft.soft_id DESC ";
+
+		try 
+		{
+			list = qm.executeQueryList(query);
+			productlistBean.setPagecount_ext_tabs(qm.getRowCount());
+		} 
+		catch (SQLException ex) 
+		{
+		 log.error(query,ex);
+		}
+		catch (Exception ex) 
+		{
+		log.error(ex);
+		}
+		finally
+		{
+			qm.close();
+		}
+
+		return list ;
+	}
 	
 	/**
+	 * Use new method getProductInfoReviewMessages()
+	 *  It collect review for product on project info page
 	 * Extention info 2 for policy page
 	 * 
 	 * @param strUser_id
 	 * @param site_id
-	 * @param tree_id - Установить родителя для записи обязательно
+	 * @param productReferenceId - Установить родителя для записи обязательно
 	 * @return
 	 * 
 	 * 
 	 * 
 	 */
-
+	@Deprecated
 	final public List getBlogExtPolicyProductlist( String strUser_id, final String site_id,
-			final String tree_id , final ItemDescriptionBean productlistBean  ) {
+			final String productReferenceId , final ItemDescriptionBean productlistBean  ) {
 		if (strUser_id == null || strUser_id.length() == 0)		strUser_id = "0";
 
-		List list  = new LinkedList();
+		List<?> list  = new LinkedList<Object>();
 		
-		QueryManager blogAdp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		String query = "";
 
 		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID , tuser.FIRST_NAME , tuser.LAST_NAME , tuser.COMPANY , soft.tree_id  FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN tuser  ON soft.user_id = tuser.user_id  WHERE   soft.active = true  and   soft.portlettype_id = 3 and   soft.tree_id = "
-				+ tree_id
+				+ productReferenceId
 				+ "  and   soft.site_id = "
 				+ site_id
 				+ "   ORDER BY soft.soft_id DESC ";
 
 		try 
 		{
-			list = blogAdp.executeQueryList(query);
-			productlistBean.setPagecount_blog(blogAdp.getRowCount());
+			list = qm.executeQueryList(query);
+			productlistBean.setPagecount_blog(qm.getRowCount());
 		} 
 		catch (SQLException ex) 
 		{
@@ -588,29 +941,76 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		}
 		finally
 		{
-		 blogAdp.close();
+		 qm.close();
 		}
 
 		return list ;
 	}
 
-
 	
 	/**
+	 *  It collect review for product on project info page
+	 *  
+	 * @param userId
+	 * @param siteId
+	 * @param productReferceId
+	 * @param productlistBean
+	 * @return
+	 */
+	final public List<?> getProductInfoReviewMessages( long userId, final String siteId,
+			final String productReferceId , final ItemDescriptionBean productlistBean  ) {
+
+		List<?> list  = new LinkedList<Object>();
+		QueryManager qm = new QueryManager();
+		String query = "";
+
+		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID , tuser.FIRST_NAME , tuser.LAST_NAME , tuser.COMPANY , soft.tree_id  FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN tuser  ON soft.user_id = tuser.user_id  WHERE   soft.active = true  and   soft.portlettype_id = 3 and   soft.tree_id = "
+				+ productReferceId
+				+ "  and   soft.site_id = "
+				+ siteId
+				+ "   ORDER BY soft.soft_id DESC ";
+
+		try 
+		{
+			list = qm.executeQueryList(query);
+			productlistBean.setPagecount_blog(qm.getRowCount());
+		} 
+		catch (SQLException ex) 
+		{
+		 log.error(query,ex);
+		}
+		catch (Exception ex) 
+		{
+		log.error(ex);
+		}
+		finally
+		{
+		 qm.close();
+		}
+
+		return list ;
+	}
+	
+	
+	
+	
+	/**
+	 * It collect top review for items some messages about it
 	 * Extention info 2 for policy page
+	 * Use new method  getTopItemsReview
 	 * 
 	 * @param strUser_id
-	 * @param site_id
+	 * @param siteId
 	 * @param tree_id - Установить родителя для записи обязательно
 	 * @return
 	 */
-
-	final public List getBlogTopProductlist(final String site_id,
+	@Deprecated
+	final public List<?>  getBlogTopProductlist(final String siteId,
 			final ProductlistBean productlistBean , final  AuthorizationPageBean authorizationPageBean ) {
 		
-		List list  = new LinkedList();
+		List<?> list  = new LinkedList<Object>();
 		
-		QueryManager blogAdp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		String query = "";
 
 		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID , tuser.FIRST_NAME , tuser.LAST_NAME , tuser.COMPANY , soft.tree_id  , soft_parent.name as soft_parent_name  " +
@@ -619,13 +1019,13 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 				"LEFT  JOIN file  ON soft.file_id = file.file_id " +
 				"LEFT  JOIN tuser  ON soft.user_id = tuser.user_id  " +
 				"LEFT  JOIN soft soft_parent  ON soft.tree_id = soft_parent.soft_id  " +
-				" WHERE   soft.active = true  and   soft.portlettype_id = 3 and soft.lang_id = " + authorizationPageBean.getLang_id()  +"  and soft.site_id = " + site_id
+				" WHERE   soft.active = true  and   soft.portlettype_id = 3 and soft.lang_id = " + authorizationPageBean.getLang_id()  +"  and soft.site_id = " + siteId
 				+ " ORDER BY soft.CDATE DESC " ; // limit  "  + limit_blog_list ;
 		try 
 		{
 			//list = blogAdp.executeQueryList(query);
-			list = blogAdp.executeQueryList(query,limit_blog_list,0 );
-			productlistBean.setPagecount_blog(blogAdp.getRowCount());
+			list = qm.executeQueryList(query,limitTopItemReviewList,0 );
+			productlistBean.setPagecount_blog(qm.getRowCount());
 		} 
 		catch (SQLException ex) 
 		{
@@ -637,30 +1037,81 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		}
 		finally
 		{
-		 blogAdp.close();
+		 qm.close();
 		}
 
 		return list ;
 	}
 
 	
-	final public List getNewslist(String strUser_id, final String site_id , final AuthorizationPageBean authorizationPageBean ) {
-		if (strUser_id == null || strUser_id.length() == 0)	strUser_id = "0";
-		//productlistBean.setSite_id(site_id);
-
-		List list  = new LinkedList();
+	/**
+	 *  It collect top review for items some messages about it
+	 * @param siteId
+	 * @param productlistBean
+	 * @param authorizationPageBean
+	 * @return
+	 */
+	final public List<?>  getTopItemsReview(final String siteId,
+			final ProductlistBean productlistBean , final  AuthorizationPageBean authorizationPageBean ) {
 		
-		QueryManager newsAdp = new QueryManager();
+		List<?> list  = new LinkedList<Object>();
+		QueryManager qm = new QueryManager();
+		String query = "";
+
+		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID , tuser.FIRST_NAME , tuser.LAST_NAME , tuser.COMPANY , soft.tree_id  , soft_parent.name as soft_parent_name  " +
+				"FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  " +
+				"LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  " +
+				"LEFT  JOIN file  ON soft.file_id = file.file_id " +
+				"LEFT  JOIN tuser  ON soft.user_id = tuser.user_id  " +
+				"LEFT  JOIN soft soft_parent  ON soft.tree_id = soft_parent.soft_id  " +
+				" WHERE   soft.active = true  and   soft.portlettype_id = 3 and soft.lang_id = " + authorizationPageBean.getLang_id()  +"  and soft.site_id = " + siteId
+				+ " ORDER BY soft.CDATE DESC " ; // limit  "  + limit_blog_list ;
+		try 
+		{
+			//list = blogAdp.executeQueryList(query);
+			list = qm.executeQueryList(query,limitTopItemReviewList,0 );
+			productlistBean.setPagecount_blog(qm.getRowCount());
+		} 
+		catch (SQLException ex) 
+		{
+		 log.error(query,ex);
+		}
+		catch (Exception ex) 
+		{
+		log.error(ex);
+		}
+		finally
+		{
+		 qm.close();
+		}
+
+		return list ;
+	}
+
+	
+	/**
+	 * It collect list of new arrival project for Product list page
+	 * @param userId
+	 * @param siteId
+	 * @param authorizationPageBean
+	 * @return
+	 */
+	@Deprecated
+	final public List<?>  getNewslist(long userId, final String siteId , final AuthorizationPageBean authorizationPageBean ) {
+		//productlistBean.setSite_id(site_id);
+		List<?> list  = new LinkedList<Object>();
+		
+		QueryManager qm = new QueryManager();
 		String query = "";
 		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID   , soft.MIDLE_BAL1  " +
 				",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7, creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria10  " +  " , soft.COLOR " +
 				" FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id  WHERE soft.catalog_id = -1 and  soft.active = true and soft.lang_id = " + authorizationPageBean.getLang_id()  +"  and soft.site_id = "
-				+ site_id
+				+ siteId
 				+ " ORDER BY soft.soft_id DESC " ; // limit " +  limit_news_list + " offset "	+ productlistBean.getOffset();
 		try 
 		{
 			//list = newsAdp.executeQueryList(query);
-			list = newsAdp.executeQueryList(query,limit_news_list,0);
+			list = qm.executeQueryList(query,limitNewArrvalList,0);
 		}
 		catch (SQLException ex) 
 		{
@@ -672,7 +1123,50 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		}
 		finally
 		{
-		 newsAdp.close();
+		 qm.close();
+		}
+
+		return list;
+	}
+
+	
+	/**
+	 * It collect list of new arrival project for Product list page
+	 * 
+	 * @param userId
+	 * @param siteId
+	 * @param authorizationPageBean
+	 * @return
+	 */
+	final public List<?>  getNewArrivalItems(long userId, final String siteId , final AuthorizationPageBean authorizationPageBean ) {
+
+		//productlistBean.setSite_id(site_id);
+
+		List<?> list  = new LinkedList<Object>();
+		
+		QueryManager qm = new QueryManager();
+		String query = "";
+		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID   , soft.MIDLE_BAL1  " +
+				",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7, creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria10  " +  " , soft.COLOR " +
+				" FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id  WHERE soft.catalog_id = -1 and  soft.active = true and soft.lang_id = " + authorizationPageBean.getLang_id()  +"  and soft.site_id = "
+				+ siteId
+				+ " ORDER BY soft.soft_id DESC " ; // limit " +  limit_news_list + " offset "	+ productlistBean.getOffset();
+		try 
+		{
+			//list = newsAdp.executeQueryList(query);
+			list = qm.executeQueryList(query,limitNewArrvalList,0);
+		}
+		catch (SQLException ex) 
+		{
+		 log.error(query,ex);
+		}
+		catch (Exception ex) 
+		{
+		log.error(ex);
+		}
+		finally
+		{
+		 qm.close();
 		}
 
 		return list;
@@ -697,31 +1191,31 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		// if( order_paystatus.compareTo("0") != 0) return strPosition_id ;
 		if (strPosition_id == null || strPosition_id.length() == 0)
 			return strPosition_id;
-		QueryManager queryManager = new QueryManager();
-		queryManager.beginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String query = "";
 		query = "update soft set active = ? where soft_id = " + strPosition_id;
 		try 
 		{
 			//Adptmp.executeUpdate(query);
-			Map args = queryManager.getArgs();
+			Map args = qm.getArgs();
 			args.put("active" , false );
-			queryManager.executeUpdateWithArgs(query, args);
-			queryManager.commit();
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			 log.error(query,ex);
-			 queryManager.rollback();
+			 qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			queryManager.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			queryManager.close();
+			qm.close();
 		}
 		return strPosition_id;
 	}
@@ -732,30 +1226,30 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		// if( order_paystatus.compareTo("0") != 0) return strPosition_id ;
 		if (strPosition_id == null || strPosition_id.length() == 0)
 			return strPosition_id;
-		QueryManager queryManager = new QueryManager();
-		queryManager.beginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String query = "";
 		query = "update soft set color = ? where soft_id = " + strPosition_id;
 		try 
 		{
-			Map args = queryManager.getArgs();
+			Map args = qm.getArgs();
 			args.put("color" , color );
-			queryManager.executeUpdateWithArgs(query, args);
-			queryManager.commit();
+			qm.executeUpdateWithArgs(query, args);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			 log.error(query,ex);
-			 queryManager.rollback();
+			 qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			queryManager.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			queryManager.close();
+			qm.close();
 		}
 		return strPosition_id;
 	}
@@ -766,52 +1260,50 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		if (strPosition_id == null || strPosition_id.length() == 0)	return strPosition_id;
 		
 		String query = "";
-		QueryManager Adptmp = new QueryManager();
-		Adptmp.beginTransaction();
+		QueryManager qm = new QueryManager();
+		qm.beginTransaction();
 		String strID = "";
 		try 
 		{
 			query = sequences_rs.getString("soft");
 			//query = "SELECT NEXT VALUE FOR soft_id_seq  AS ID  FROM ONE_SEQUENCES";
-			Adptmp.executeQuery(query);
-			strID = Adptmp.getValueAt(0, 0);
+			qm.executeQuery(query);
+			strID = qm.getValueAt(0, 0);
 			query = "update soft set soft_id = " + strID + " where soft_id = " + strPosition_id;
-			Adptmp.executeUpdate(query);
+			qm.executeUpdate(query);
 			query = "update soft set tree_id = " + strID + " where tree_id = " + strPosition_id;			
-			Adptmp.executeUpdate(query);
-			Adptmp.commit();
+			qm.executeUpdate(query);
+			qm.commit();
 		}
 		catch (SQLException ex) 
 		{
 			 log.error(query,ex);
-			 Adptmp.rollback();
+			 qm.rollback();
 		}
 		catch (Exception ex) 
 		{
 			log.error(ex);
-			Adptmp.rollback();
+			qm.rollback();
 		}
 		finally
 		{
-			Adptmp.close();
+			qm.close();
 		}
 		return strID;
 	}
 	
 	
 	
-	final public List getProductlist(String strUser_id, final String site_id , final long catalog_id , final  ProductlistBean productlistBean , final AuthorizationPageBean authorizationPageBean ) {
-			if (strUser_id == null || strUser_id.length() == 0)
-				strUser_id = "0";
-	
+	final public List getProductlist(long userId, final String siteId , final long catalogId , final  ProductlistBean productlistBean , final AuthorizationPageBean authorizationPageBean ) {
+
 			String query_productlist = "" ; 
 	        List list = new LinkedList();
-			QueryManager Adp = new QueryManager();
+			QueryManager qm = new QueryManager();
 			if (productlistBean.getSearchquery() == 0)
 			{
 	
 				
-				if(catalog_id ==SpecialCatalog.OUTPUT_PAGES_SORT_BY_VISIT_STATISTICS)
+				if(catalogId ==SpecialCatalog.OUTPUT_PAGES_SORT_BY_VISIT_STATISTICS)
 					// вывод наиболее посещаемых страниц
 					query_productlist = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID  , soft.MIDLE_BAL1  " +
 							",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria10 "  + " , soft.COLOR " +
@@ -819,20 +1311,20 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 							" and   soft.portlettype_id = 0 " +  
 							" and   soft.type_id = 3 " +  
 							" and   soft.catalog_id  <> -1 " +  
-					        " and    soft.site_id = " + site_id   
+					        " and    soft.site_id = " + siteId   
 							+ " ORDER BY soft.STATISTIC_ID DESC ";
 				
 	//			 вывод всех с служебных страниц				
-				else if(catalog_id == SpecialCatalog.FOR_EXTERNAL_PAGE)
+				else if(catalogId == SpecialCatalog.FOR_EXTERNAL_PAGE)
 					query_productlist = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID  , soft.MIDLE_BAL1  " +
 					",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name  as creteria6, creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria10 "  + " , soft.COLOR " +
 					" FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id  WHERE  soft.active = true  " +
 					" and   soft.catalog_id  =  " + SpecialCatalog.FOR_EXTERNAL_PAGE +  
-			        " and    soft.site_id = " + site_id   
+			        " and    soft.site_id = " + siteId   
 					+ " ORDER BY soft.soft_id DESC " ;
 				
 				// вывод всех с сортировкой по ID				
-				else if(catalog_id == SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID)
+				else if(catalogId == SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID)
 					query_productlist = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID , soft.MIDLE_BAL1  " +
 							",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria10  " +  " , soft.COLOR " +
 							"  FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id  WHERE  soft.active = true  " +
@@ -841,7 +1333,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 							" and   soft.catalog_id  = -2 " +
 							" and   soft.type_id  = 3 " +  
 							" and soft.lang_id = "	+ authorizationPageBean.getLang_id() + 
-					        " and    soft.site_id = " + site_id   
+					        " and    soft.site_id = " + siteId   
 							+ " ORDER BY soft.soft_id DESC ";
 				
 //				 показывать в новосном модуле				
@@ -857,17 +1349,17 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 */	
 				
 				//вывод новинок которые  ввел один пользователь из своего кабинета
-				else if(catalog_id == SpecialCatalog.OUTPUT_PAGES_NEW_USER_CONTENT_FOR_APROVEMENT_SORT_BY_DATE)
+				else if(catalogId == SpecialCatalog.OUTPUT_PAGES_NEW_USER_CONTENT_FOR_APROVEMENT_SORT_BY_DATE)
 					query_productlist = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID , soft.MIDLE_BAL1  " +
 							",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria10  " +  " , soft.COLOR " +
 							"  FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id  WHERE  soft.active = true  " +
 							" and  soft.portlettype_id = 0 " +  
 							" and   soft.catalog_id  <> -1 " +  
-					        " and soft.site_id = " + site_id +
-					        " and  soft.user_id= " + strUser_id 
+					        " and soft.site_id = " + siteId +
+					        " and  soft.user_id= " + userId 
 					        + " ORDER BY soft.CDATE DESC " ;
 				//вывод новинок
-				else if(catalog_id ==SpecialCatalog.OUTPUT_PAGES_SORT_BY_CREATED_DATE)
+				else if(catalogId ==SpecialCatalog.OUTPUT_PAGES_SORT_BY_CREATED_DATE)
 					// forum mess
 					query_productlist = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID , soft.MIDLE_BAL1  " +
 							",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria10  " +  " , soft.COLOR " +
@@ -876,18 +1368,18 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 							" and   soft.type_id = 3 " +  
 							" and   soft.catalog_id  <> -1 " +  
 							" and   soft.lang_id = "	+ authorizationPageBean.getLang_id() + 
-					        " and    soft.site_id = " + site_id   
+					        " and    soft.site_id = " + siteId   
 							+ " ORDER BY soft.CDATE DESC " ;
 	
 				//вывод всех по рейтингу
-				else  if(catalog_id ==SpecialCatalog.OUTPUT_PAGES_SORT_BY_RATING)
+				else  if(catalogId ==SpecialCatalog.OUTPUT_PAGES_SORT_BY_RATING)
 					// forum mess
 					query_productlist = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID , soft.MIDLE_BAL1  " +
 							",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria10 " +	 " , soft.COLOR " +					
 							"  FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id  WHERE  soft.active = true  " +
 							" and   soft.portlettype_id = 0 " +  
 							" and   soft.catalog_id  <> -1 " +  
-					        " and    soft.site_id = " + site_id   
+					        " and    soft.site_id = " + siteId   
 							+ " ORDER BY soft.MIDLE_BAL1 DESC " ;
 				
 				/////вывод всех по рейтингу
@@ -905,16 +1397,16 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 				*/
 				
 				
-				else if(catalog_id ==SpecialCatalog.OUTPUT_PAGES_AREA_FROM_USERSITE_TO_MAIN_SITE)
+				else if(catalogId ==SpecialCatalog.OUTPUT_PAGES_AREA_FROM_USERSITE_TO_MAIN_SITE)
 				// forum mess
 					query_productlist = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID  , soft.MIDLE_BAL1  " +
 						",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria10 " +  " , soft.COLOR " +
 						" FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id  WHERE soft.catalog_id = "
-						+ catalog_id
+						+ catalogId
 						+ " and  soft.active = true  and   soft.portlettype_id = 0 "  
 						+ "   ORDER BY soft.soft_id DESC " ; 
 	
-				else if(catalog_id ==SpecialCatalog.CONTENT_WAITING_FOR_APROVEMENT)
+				else if(catalogId ==SpecialCatalog.CONTENT_WAITING_FOR_APROVEMENT)
 				// posted message is for aprove admin 
 					query_productlist = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID  , soft.MIDLE_BAL1  " +
 							",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria10  " +  " , soft.COLOR " +
@@ -922,7 +1414,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 							" WHERE  soft.active = true  and   soft.portlettype_id = 0 and   soft.type_id = 1 "  
 							+ "   ORDER BY soft.soft_id DESC" ;
 	
-				else if(catalog_id ==SpecialCatalog.CONTENT_REJECTED_PUBLICATION)
+				else if(catalogId ==SpecialCatalog.CONTENT_REJECTED_PUBLICATION)
 					// posted message  is no aprove admin 
 					query_productlist = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID  , soft.MIDLE_BAL1  " +
 								",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name  as creteria3, creteria4.name as creteria4 , creteria5.name  as creteria5, creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria10 " +  " , soft.COLOR " +				
@@ -933,9 +1425,9 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 				else query_productlist = "SELECT DISTINCT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID  , soft.MIDLE_BAL1  " +
 						",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name  as creteria10 " +  " , soft.COLOR " +
 						"   FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id  WHERE " +
-						"( soft.catalog_id = "	+ catalog_id + " and soft.active = true  and   soft.portlettype_id = 0  and   soft.site_id = " + site_id + " ) " +
-						" or ( soft.catalog_id = "	+ catalog_id + " and  soft.active = true and   soft.portlettype_id = 0  and   soft.user_id = " + strUser_id + " ) " +
-						" or ( soft.catalog_id IN ( SELECT CATALOG_ID FROM catalog WHERE  PARENT_ID =  "	+ catalog_id + " and  soft.active = true and   soft.portlettype_id = 0  )) " +
+						"( soft.catalog_id = "	+ catalogId + " and soft.active = true  and   soft.portlettype_id = 0  and   soft.site_id = " + siteId + " ) " +
+						" or ( soft.catalog_id = "	+ catalogId + " and  soft.active = true and   soft.portlettype_id = 0  and   soft.user_id = " + userId + " ) " +
+						" or ( soft.catalog_id IN ( SELECT CATALOG_ID FROM catalog WHERE  PARENT_ID =  "	+ catalogId + " and  soft.active = true and   soft.portlettype_id = 0  )) " +
 							"  ORDER BY soft.soft_id DESC " ;
 				
 				/*
@@ -970,7 +1462,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 				query_productlist = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID  , soft.MIDLE_BAL1  " +
 						",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria10  " +  " , soft.COLOR " +
 						" FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id   WHERE  soft.site_id = "
-						+ site_id
+						+ siteId
 						+ " and   soft.active = true and ( soft.name LIKE '%"	+ wordWithSmallChar + "%' or soft.name LIKE '%"	+  wordWithBigChar + "%'  or soft.name LIKE '%"	+  productlistBean.getSearchValueArg().toLowerCase() + "%'  )" 
 						+ " ORDER BY soft.soft_id DESC " ;
 			}
@@ -978,14 +1470,14 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 				query_productlist = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b, soft.user_id  , soft.CDATE , soft.STATISTIC_ID  , soft.MIDLE_BAL1  " +
 						",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria10  " +  " , soft.COLOR " +
 						"   FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id   WHERE  soft.site_id = "
-						+ site_id
+						+ siteId
 						+ " and  soft.active = true and ( soft.search = '" + productlistBean.getSearchValueArg().toLowerCase() + "' or soft.search = '" + productlistBean.getSearchValueArg().toUpperCase() 
 						+ "' ) and soft.portlettype_id = 0   ORDER BY soft.soft_id DESC " ;
 			if (productlistBean.getSearchquery() == 3) {
 				query_productlist = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b ,  soft.user_id  , soft.CDATE , soft.STATISTIC_ID  , soft.MIDLE_BAL1  " +
 						",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name  as creteria10 " +  " , soft.COLOR " +
 						"   FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id   WHERE  soft.site_id = "
-						+ site_id
+						+ siteId
 						+ " and   soft.active = true and soft.cost >= 0   ";
 				if (authorizationPageBean.getCreteria1_id() != 0)
 					query_productlist = query_productlist + " and soft.creteria1_id = "
@@ -1032,7 +1524,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 				query_productlist = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b , soft.user_id  , soft.CDATE , soft.STATISTIC_ID  , soft.MIDLE_BAL1  " +
 						",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria1  " +  " , soft.COLOR " +
 						"  FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id    WHERE  soft.site_id = "
-						+ site_id
+						+ siteId
 						+ " and   soft.active = true  and soft.cost >= 0   ";
 				if (authorizationPageBean.getCreteria1_id() != 0)
 					query_productlist = query_productlist + " and soft.creteria1_id = "
@@ -1064,8 +1556,8 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 				if (authorizationPageBean.getCreteria10_id() != 0)
 					query_productlist = query_productlist + " and soft.creteria10_id = "
 							+ authorizationPageBean.getCreteria10_id();
-				if (catalog_id != 0)
-					query_productlist = query_productlist + " and soft.catalog_id = " + catalog_id;
+				if (catalogId != 0)
+					query_productlist = query_productlist + " and soft.catalog_id = " + catalogId;
 				if (authorizationPageBean.getYearfrom_id() != 0
 						&& authorizationPageBean.getMountfrom_id() != 0
 						&& authorizationPageBean.getDayfrom_id() != 0
@@ -1083,7 +1575,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 					// and calendar.holddate < " + toDate + " " ;
 					query_productlist = query_productlist
 							+ "  and soft.soft_id  NOT IN ( SELECT  soft.soft_id  FROM soft LEFT  JOIN calendar  ON soft.soft_id = calendar.soft_id WHERE  soft.site_id  = "
-							+ site_id
+							+ siteId
 							+ "  and   soft.active = true  and calendar.holddate >=  "
 							+ fromDate + " and calendar.holddate <=  " + toDate
 							+ " ) ";
@@ -1104,8 +1596,8 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 				query_productlist = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b ,  soft.user_id  , soft.CDATE , soft.STATISTIC_ID  , soft.MIDLE_BAL1  " +
 				",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria1  " +  " , soft.COLOR " +
 				"  FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id   WHERE  " +
-				"soft.site_id = "+ site_id+ " and  " +
-				"soft.catalog_id = "+ catalog_id + " and  " +
+				"soft.site_id = "+ siteId+ " and  " +
+				"soft.catalog_id = "+ catalogId + " and  " +
 				" soft.active = true " ;
 				//if (AuthorizationPageBean.getFromCost() > 0 || AuthorizationPageBean.getFromCost()  >  0  )	query_productlist = query_productlist +	" and   soft.cost > " + "";
 				if (authorizationPageBean.getFromCost().longValue() > 0 || authorizationPageBean.getFromCost().longValue()  >  0  )	query_productlist = query_productlist +	" and   soft.cost >= " + authorizationPageBean.getFromCost() ;
@@ -1160,7 +1652,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 				query_productlist = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b ,  soft.user_id  , soft.CDATE , soft.STATISTIC_ID  , soft.MIDLE_BAL1  " +
 				",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria1  " +  " , soft.COLOR " +
 				"   FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id   WHERE  " +
-				"soft.site_id = "+ site_id+ " and soft.portlettype_id = 0  and " +
+				"soft.site_id = "+ siteId+ " and soft.portlettype_id = 0  and " +
 				" soft.active = true " ; 
 				
 				if (  authorizationPageBean.getFromCost().longValue()   >  0  )	query_productlist = query_productlist +	" and   soft.cost >= " + authorizationPageBean.getFromCost() ; 
@@ -1224,7 +1716,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 				query_productlist = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b ,  soft.user_id  , soft.CDATE , soft.STATISTIC_ID  , soft.MIDLE_BAL1  " +
 				",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria1  " +  " , soft.COLOR " +
 				"   FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id   WHERE  " +
-				"soft.site_id = "+ site_id+ " and soft.portlettype_id = 0  and " +
+				"soft.site_id = "+ siteId+ " and soft.portlettype_id = 0  and " +
 				" soft.active = true and ( soft.description LIKE '%"	+ wordWithSmallChar + "%' or soft.description LIKE '%"	+  wordWithBigChar + "%'  or soft.description LIKE '%"	+  productlistBean.getSearchValueArg().toLowerCase() + "%'  )" ; 
 				
 				if (  authorizationPageBean.getFromCost().longValue()   >  0  )	query_productlist = query_productlist +	" and   soft.cost >= " + authorizationPageBean.getFromCost() ; 
@@ -1241,7 +1733,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 				query_productlist = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b ,  soft.user_id  , soft.CDATE , soft.STATISTIC_ID  , soft.MIDLE_BAL1  " +
 				",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria1  " +  " , soft.COLOR " +
 				"   FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id   WHERE  " +
-				"soft.site_id = "+ site_id+ " and soft.portlettype_id = 0  and " +
+				"soft.site_id = "+ siteId+ " and soft.portlettype_id = 0  and " +
 				" soft.active = true " ;
 	
 				//Number.this.
@@ -1301,7 +1793,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 				query_productlist = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url as img_url_s , soft.fulldescription , big_images.img_url as img_url_b ,  soft.user_id  , soft.CDATE , soft.STATISTIC_ID  , soft.MIDLE_BAL1  " +
 				",  soft.amount1 ,  soft.amount2 ,  soft.amount3 ,   soft.search2 ,  soft.name2 ,  soft.show_rating1 ,  soft.show_rating2 ,  soft.show_rating3 ,  soft.show_blog ,  soft.jsp_url , creteria1.name as creteria1 , creteria2.name as creteria2 , creteria3.name as creteria3 , creteria4.name as creteria4 , creteria5.name as creteria5 , creteria6.name as creteria6 , creteria7.name as creteria7 , creteria8.name as creteria8 , creteria9.name as creteria9 , creteria10.name as creteria1  " +  " , soft.COLOR " +
 				"  FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON  soft.file_id = file.file_id  LEFT  JOIN  creteria1  ON soft.creteria1_id  = creteria1.creteria1_id  LEFT  JOIN  creteria2  ON soft.creteria2_id  = creteria2.creteria2_id  LEFT  JOIN  creteria3  ON soft.creteria3_id  = creteria3.creteria3_id  LEFT  JOIN  creteria4  ON soft.creteria4_id  = creteria4.creteria4_id  LEFT  JOIN  creteria5  ON soft.creteria5_id  = creteria5.creteria5_id  LEFT  JOIN  creteria6  ON soft.creteria6_id  = creteria6.creteria6_id  LEFT  JOIN  creteria7  ON soft.creteria7_id  = creteria7.creteria7_id  LEFT  JOIN  creteria8  ON soft.creteria8_id  = creteria8.creteria8_id  LEFT  JOIN  creteria9  ON soft.creteria9_id  = creteria9.creteria9_id  LEFT  JOIN  creteria10  ON soft.creteria10_id  = creteria10.creteria10_id   WHERE  " +
-				"soft.site_id = "+ site_id+ " and soft.portlettype_id = 0  and  " +
+				"soft.site_id = "+ siteId+ " and soft.portlettype_id = 0  and  " +
 				" soft.active = true " ;
 				
 				if (authorizationPageBean.getCreteria1_id()!= 0)
@@ -1342,7 +1834,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 			
 			try 
 			{
-				list =  Adp.executeQueryList(query_productlist, limit_product_list , productlistBean.getOffset());
+				list =  qm.executeQueryList(query_productlist, limitProductList , productlistBean.getOffset());
 				productlistBean.setQuery_productlist(query_productlist) ;
 			}
 			catch (SQLException ex) 
@@ -1355,7 +1847,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 			}
 			finally
 			{
-			Adp.close();
+			qm.close();
 			}
 	
 			return list ;
@@ -1368,8 +1860,8 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 			strUser_id = "0";
 
 		String query_productlist = "" ; 
-        List list = new LinkedList();
-		QueryManager Adp = new QueryManager();
+		List<?> list  = new LinkedList<Object>();
+		QueryManager qm = new QueryManager();
 		if (productlistBean.getSearchquery() == 0)
 		{
 
@@ -1871,7 +2363,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		
 		try 
 		{
-			list =  Adp.executeQueryList(query_productlist, limit_product_list , productlistBean.getOffset());
+			list =  qm.executeQueryList(query_productlist, limitProductList , productlistBean.getOffset());
 			productlistBean.setQuery_productlist(query_productlist) ;
 		}
 		catch (SQLException ex) 
@@ -1884,7 +2376,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		}
 		finally
 		{
-		Adp.close();
+		qm.close();
 		}
 
 		return list ;
@@ -1897,11 +2389,11 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		String query = "SELECT  soft.name  FROM soft  WHERE soft.soft_id = "
 				+ product_id;
 
-		QueryManager Adptmp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		try 
 		{
-			Adptmp.executeQuery(query);
-			if (Adptmp.rows().size() != 0) name = (String) Adptmp.getValueAt(0, 0);
+			qm.executeQuery(query);
+			if (qm.rows().size() != 0) name = (String) qm.getValueAt(0, 0);
 		}
 		catch (SQLException ex) 
 		{
@@ -1913,7 +2405,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		}
 		finally
 		{
-			Adptmp.close();
+			qm.close();
 		}
 
 		return name;
@@ -1924,11 +2416,11 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		float cost = 0;
 		String query = "SELECT  soft.cost  FROM soft  WHERE soft.soft_id = " + product_id;
 
-		QueryManager Adptmp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		try 
 		{
-			Adptmp.executeQuery(query);
-			if (Adptmp.rows().size() > 0) cost = Float.parseFloat( Adptmp.getValueAt(0, 0));
+			qm.executeQuery(query);
+			if (qm.rows().size() > 0) cost = Float.parseFloat( qm.getValueAt(0, 0));
 		}
 		catch (SQLException ex) 
 		{
@@ -1940,7 +2432,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		}
 		finally
 		{
-			Adptmp.close();
+			qm.close();
 		}
 
 		return cost;
@@ -1952,11 +2444,11 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		String query = "SELECT  soft.catalog_id  FROM soft  WHERE soft.soft_id = "
 				+ product_id;
 
-		QueryManager Adptmp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		try 
 		{
-			Adptmp.executeQuery(query);
-			if (Adptmp.rows().size() != 0) name = (String) Adptmp.getValueAt(0, 0);
+			qm.executeQuery(query);
+			if (qm.rows().size() != 0) name = (String) qm.getValueAt(0, 0);
 		} 
 		catch (SQLException ex) 
 		{
@@ -1968,7 +2460,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		}
 		finally
 		{
-			Adptmp.close();
+			qm.close();
 		}
 		return name;
 	}
@@ -1983,11 +2475,11 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		String query = "SELECT  soft.user_id  FROM soft  WHERE soft.soft_id = "
 				+ product_id;
 
-		QueryManager Adptmp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		try {
-			Adptmp.executeQuery(query);
-			if (Adptmp.rows().size() != 0)
-				name = (String) Adptmp.getValueAt(0, 0);
+			qm.executeQuery(query);
+			if (qm.rows().size() != 0)
+				name = (String) qm.getValueAt(0, 0);
 		} 
 		catch (SQLException ex) 
 		{
@@ -1999,7 +2491,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		}
 		finally
 		{
-			Adptmp.close();
+			qm.close();
 		}
 		
 		
@@ -2017,11 +2509,11 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		String query = "SELECT  soft.site_id  FROM soft  WHERE soft.soft_id = "
 				+ product_id;
 
-		QueryManager Adptmp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		try {
-			Adptmp.executeQuery(query);
-			if (Adptmp.rows().size() != 0)
-				site_id = (String) Adptmp.getValueAt(0, 0);
+			qm.executeQuery(query);
+			if (qm.rows().size() != 0)
+				site_id = (String) qm.getValueAt(0, 0);
 		} 
 		catch (SQLException ex) 
 		{
@@ -2033,7 +2525,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		}
 		finally
 		{
-			Adptmp.close();
+			qm.close();
 		}
 		
 		
@@ -2059,17 +2551,17 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 	
 
 	final public long getCatalogParentId(final AuthorizationPageBean authorizationPageBeanId) {
-		QueryManager tmpAdp = new QueryManager();
+		QueryManager qm = new QueryManager();
 		String query = "";
 		long  _parent_id = 0 ;
 		try 
 		{
 			
 			query = "select a.catalog_id  from catalog a , catalog  b  where   b.parent_id = a.catalog_id  and b.catalog_id = " + authorizationPageBeanId.getCatalog_id()  ;
-			tmpAdp.executeQuery(query);
-				if ( tmpAdp.rows().size() > 0) 
+			qm.executeQuery(query);
+				if ( qm.rows().size() > 0) 
 				{
-				    if( ((String) tmpAdp.getValueAt(0, 0)).length() > 0 ) _parent_id =  Long.parseLong((String) tmpAdp.getValueAt(0, 0));
+				    if( ((String) qm.getValueAt(0, 0)).length() > 0 ) _parent_id =  Long.parseLong((String) qm.getValueAt(0, 0));
 				}
 		
 				authorizationPageBeanId.setCatalogParent_id( _parent_id < 0?"0":"" +_parent_id ) ;		
@@ -2084,7 +2576,7 @@ final public void getQuantitySearch( final SearchBean productlistBean) {
 		}
 		finally
 		{
-			tmpAdp.close();
+			qm.close();
 		}
 		
 		return _parent_id < 0?0:_parent_id  ;
