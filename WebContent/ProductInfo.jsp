@@ -36,7 +36,7 @@ printWriter.println(tmp);
 %>
 <document>
    <version>1.0</version>
-   <name>Policy</name>
+   <name>Product info</name>
 
    <title><%=  authorizationPageBeanId.getHost() %></title>
    <subject_site><%=  authorizationPageBeanId.getSubject_site() %></subject_site>
@@ -73,7 +73,7 @@ printWriter.println(tmp);
    
 
 <product>
-<page_url>http://<%= request.getServerName() %>:<%=request.getServerPort()%>/Policy.jsp?policy_byproductid=<jsp:getProperty name="itemDescriptionBeanId" property="product_id" /></page_url>
+<page_url>http://<%= request.getServerName() %>:<%=request.getServerPort()%>/ProductInfo.jsp?policy_byproductid=<jsp:getProperty name="itemDescriptionBeanId" property="product_id" /></page_url>
 <product_id><jsp:getProperty name="itemDescriptionBeanId" property="product_id" /></product_id>
 <name><jsp:getProperty name="itemDescriptionBeanId" property="productName" /></name>
 <file_exist><jsp:getProperty name="itemDescriptionBeanId" property="file_exist" /></file_exist>

@@ -117,7 +117,7 @@ return true ;
 </head>
 <jsp:useBean id="publisherBeanId" scope="session" class="com.cbsinc.cms.PublisherBean" />
 <jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
-<jsp:useBean id="itemDescriptionBeanId" scope="request" class="com.cbsinc.cms.itemDescriptionBeanId" />
+<jsp:useBean id="itemDescriptionBeanId" scope="request" class="com.cbsinc.cms.ItemDescriptionBean" />
 <%
 response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
 response.setHeader("Pragma","no-cache"); //HTTP 1.0
