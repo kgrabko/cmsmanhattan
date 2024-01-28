@@ -12,7 +12,7 @@
   response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
   request.setCharacterEncoding("UTF-8");
 %>
-
+<% // Old page So use SponsoredBySellersItemPostUser.jsp  %>
 <html>
 <head>
      <title>GBS Portal</title>

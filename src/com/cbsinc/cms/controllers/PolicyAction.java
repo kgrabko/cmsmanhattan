@@ -35,6 +35,9 @@ import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.ProductInfoFaced;
 import com.cbsinc.cms.faceds.ProductlistFaced;
 
+//Use a ProductInfoAction
+
+@Deprecated 
 @PageController( jspName = "Policy.jsp" )
 public class PolicyAction implements IAction {
 

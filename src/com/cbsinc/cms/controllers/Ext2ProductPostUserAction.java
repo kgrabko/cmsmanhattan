@@ -28,9 +28,12 @@ import javax.servlet.http.HttpSession;
 
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.PublisherBean;
+import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
 
-//@PageController( jspName = "Ext2ProductPost.jsp" )
+//Use a ProductInfoColumnTwoPostUserAction
+@Deprecated 
+@PageController( jspName = "Ext2ProductUserPost.jsp" )
 public class Ext2ProductPostUserAction implements IAction {
 
 	ProductPostAllFaced productPostAllFaced;
@@ -61,7 +64,7 @@ public class Ext2ProductPostUserAction implements IAction {
 		} else
 			productPostAllFaced.updateRowWithParent("" + authorizationPageBeanId.getLastProductId(), publisherBeanId,
 					authorizationPageBeanId);
-		response.sendRedirect("Policy.jsp?policy_byproductid=" + authorizationPageBeanId.getLastProductId());
+		response.sendRedirect("ProductInfo.jsp?policy_byproductid=" + authorizationPageBeanId.getLastProductId());
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)

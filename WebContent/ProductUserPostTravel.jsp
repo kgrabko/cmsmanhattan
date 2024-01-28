@@ -1005,7 +1005,7 @@ function parseMessages(responseXML)
 			    <div id='window_gencode' style="display:none;" >
                      <TABLE>
                      <TR><TD colspan="2" >Введите код из картинки  перед тем как нажать кнопку сохранить </TD></TR>
-                     <TR><TD><img alt="Картинка с генерированым номером" src="/gennumberservlet"  /></TD> <TD><input type="text" name="gen_number"></TD></TR>
+                     <TR><TD><img alt="Картинка с генерированым номером" src="gennumberservlet"  /></TD> <TD><input type="text" name="gen_number"></TD></TR>
                      <TR><TD colspan="2" ></TD></TR>
                      <TR><TD></TD> <TD><input type="button" name="button" value="Сохранить"  onclick="do_save()" > <input type="reset" value="Сброс"></TD></TR>
                      </TABLE>

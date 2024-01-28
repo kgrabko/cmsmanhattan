@@ -38,6 +38,9 @@ import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
 
+// Use a RecommentedItemPostAction
+
+@Deprecated 
 @PageController( jspName = "Co1ProductPost.jsp" )
 public class Co1ProductPostAction implements IAction {
 

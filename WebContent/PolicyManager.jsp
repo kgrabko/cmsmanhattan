@@ -109,7 +109,7 @@
 						<td colspan="2">&nbsp;</td>
                     </tr>
 					<tr>
-						<td width="500" align="left"><A HREF="BlogExtProductPost.jsp" ><img SRC="images/file.png" border="0" alt="Post Blog" ><%=authorizationPageBeanId.getLocalization(application).getString("leave_message_onpage")%> </A></td>
+						<td width="500" align="left"><A HREF="ProductReviewPost.jsp" ><img SRC="images/file.png" border="0" alt="Post Blog" ><%=authorizationPageBeanId.getLocalization(application).getString("leave_message_onpage")%> </A></td>
 					</tr>
 
 					<tr>

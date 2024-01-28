@@ -286,7 +286,7 @@ document.onmouseup=new Function("dragapproved=false");
        <!-- Navigation -->
         <div class="listingBar">
 	    <span class="next">
-                <a HREF = "Policy.jsp"  >
+                <a HREF = "ProductInfo.jsp"  >
 		<strong>
 			<%=authorizationPageBeanId.getLocalization(application).getString("back")%>
 		</strong>

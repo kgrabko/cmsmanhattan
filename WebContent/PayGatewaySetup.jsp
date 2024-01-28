@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
 <jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
-<jsp:useBean id="payGatewayListBeanId" scope="session" class="com.cbsinc.cms.payGatewayListBeanId" />
-<jsp:useBean id="payGatewayBeanId" scope="session" class="com.cbsinc.cms.payGatewayBeanIdId" />
+<jsp:useBean id="payGatewayListBeanId" scope="session" class="com.cbsinc.cms.PayGatewayListBean" />
+<jsp:useBean id="payGatewayBeanId" scope="session" class="com.cbsinc.cms.PayGatewayBean" />
 
 <%
   response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
@@ -14,19 +14,19 @@
   {
   int index =  payGatewayListBeanId.stringToInt(request.getParameter("row")) ;
   payGatewayListBeanId.setIndx_select(index);
-  payGatewayBeanIdId.setShop_id(payGatewayListBeanId.getpayGatewayBeanIdId(index).getShop_id());
-  payGatewayBeanIdId.setShop_cd(payGatewayListBeanId.getpayGatewayBeanIdId(index).getShop_cd());
-  payGatewayBeanIdId.setPasswd(payGatewayListBeanId.getpayGatewayBeanIdId(index).getPasswd());
-  payGatewayBeanIdId.setLogin(payGatewayListBeanId.getpayGatewayBeanIdId(index).getLogin());
-  payGatewayBeanIdId.setPay_gateway_id(payGatewayListBeanId.getpayGatewayBeanIdId(index).getPay_gateway_id());
-  payGatewayBeanIdId.setName_gateway(payGatewayListBeanId.getpayGatewayBeanIdId(index).getName_gateway());
+  payGatewayBeanId.setShop_id(payGatewayListBeanId.getPayGatewayBean(index).getShop_id());
+  payGatewayBeanId.setShop_cd(payGatewayListBeanId.getPayGatewayBean(index).getShop_cd());
+  payGatewayBeanId.setPasswd(payGatewayListBeanId.getPayGatewayBean(index).getPasswd());
+  payGatewayBeanId.setLogin(payGatewayListBeanId.getPayGatewayBean(index).getLogin());
+  payGatewayBeanId.setPay_gateway_id(payGatewayListBeanId.getPayGatewayBean(index).getPay_gateway_id());
+  payGatewayBeanId.setName_gateway(payGatewayListBeanId.getPayGatewayBean(index).getName_gateway());
   }
 
-  if (request.getParameter("pay_gateway_id")!= null )   payGatewayBeanIdId.setPay_gateway_id( request.getParameter("pay_gateway_id") );
-  if (request.getParameter("shop_cd")  != null){ payGatewayBeanIdId.setShop_cd( request.getParameter("shop_cd")) ; }
-  if (request.getParameter("login") != null ) {  payGatewayBeanIdId.setLogin( request.getParameter("login")); }
-  if (request.getParameter("passwd") != null ) {  payGatewayBeanIdId.setPasswd( request.getParameter("passwd") ); }
-  if (request.getParameter("retype_passwd") != null ) {  payGatewayBeanIdId.setRertype_passwd( request.getParameter("retype_passwd") ); }
+  if (request.getParameter("pay_gateway_id")!= null )   payGatewayBeanId.setPay_gateway_id( request.getParameter("pay_gateway_id") );
+  if (request.getParameter("shop_cd")  != null){ payGatewayBeanId.setShop_cd( request.getParameter("shop_cd")) ; }
+  if (request.getParameter("login") != null ) {  payGatewayBeanId.setLogin( request.getParameter("login")); }
+  if (request.getParameter("passwd") != null ) {  payGatewayBeanId.setPasswd( request.getParameter("passwd") ); }
+  if (request.getParameter("retype_passwd") != null ) {  payGatewayBeanId.setRertype_passwd( request.getParameter("retype_passwd") ); }
 
   if( authorizationPageBeanId.getIntLevelUp() != 2 ){
   authorizationPageBeanId.setStrMessage("You don't have access to add position , send mail to grabko@mail.ru for access") ;
@@ -35,16 +35,16 @@
 
   if(request.getMethod().toUpperCase().compareTo("POST") == 0)
   {
-  if(payGatewayBeanIdId.getShop_id().length() == 0 ) payGatewayBeanIdId.addShopBean(authorizationPageBeanId.getSite_id());
-  else payGatewayBeanIdId.saveShopBean();
+  if(payGatewayBeanId.getShop_id().length() == 0 ) payGatewayBeanId.addShopBean(authorizationPageBeanId.getSite_id());
+  else payGatewayBeanId.saveShopBean();
 
-  payGatewayBeanIdId.setShop_id("");
-  payGatewayBeanIdId.setShop_cd("");
-  payGatewayBeanIdId.setPasswd("");
-  payGatewayBeanIdId.setLogin("");
-  payGatewayBeanIdId.setPay_gateway_id("");
-  payGatewayBeanIdId.setName_gateway("");
-  payGatewayBeanIdId.setPay_url("");
+  payGatewayBeanId.setShop_id("");
+  payGatewayBeanId.setShop_cd("");
+  payGatewayBeanId.setPasswd("");
+  payGatewayBeanId.setLogin("");
+  payGatewayBeanId.setPay_gateway_id("");
+  payGatewayBeanId.setName_gateway("");
+  payGatewayBeanId.setPay_url("");
 
   response.sendRedirect(payGatewayListBeanId.getCururl());
   }
@@ -131,9 +131,9 @@
 		<div>        
 		<form method="post"  ACTION="PayGatewaySetup.jsp"  >
                      <TABLE>
-                     <TR><TD>Payment Gateway  :* </TD><TD><%=  payGatewayBeanIdId.getComboBox("pay_gateway_id", payGatewayBeanIdId.getPay_gateway_id() ,"SELECT pay_gateway_id , name_gateway  FROM pay_gateway  where active = true"  ) %></TD></TR>
-                     <TR><TD>Login:* </TD> <TD><input  name="login" size="20" value="<%= payGatewayBeanIdId.getLogin() %>" onBlur="checkEmpty(this.value)"  /></TD></TR>
-                     <TR><TD>Transaction Key:* </TD> <TD><input  name="passwd" size="20" value="<%= payGatewayBeanIdId.getPasswd() %>" /></TD></TR>
+                     <TR><TD>Payment Gateway  :* </TD><TD><%=  payGatewayBeanId.getComboBox("pay_gateway_id", payGatewayBeanId.getPay_gateway_id() ,"SELECT pay_gateway_id , name_gateway  FROM pay_gateway  where active = true"  ) %></TD></TR>
+                     <TR><TD>Login:* </TD> <TD><input  name="login" size="20" value="<%= payGatewayBeanId.getLogin() %>" onBlur="checkEmpty(this.value)"  /></TD></TR>
+                     <TR><TD>Transaction Key:* </TD> <TD><input  name="passwd" size="20" value="<%= payGatewayBeanId.getPasswd() %>" /></TD></TR>
                      <TR><TD></TD> <TD><input type="submit" name="Submit" value="Save"> <input type="reset" value="Reset"/></TD></TR>
                      </TABLE>
         </form>

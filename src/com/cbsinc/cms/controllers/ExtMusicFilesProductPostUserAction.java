@@ -63,7 +63,7 @@ public class ExtMusicFilesProductPostUserAction implements IAction {
 			productPostAllFaced.updateRowWithParent("" + authorizationPageBeanId.getLastProductId(), publisherBeanId,
 					authorizationPageBeanId);
 
-		response.sendRedirect("Policy.jsp?policy_byproductid=" + authorizationPageBeanId.getLastProductId());
+		response.sendRedirect("ProductInfo.jsp?policy_byproductid=" + authorizationPageBeanId.getLastProductId());
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)

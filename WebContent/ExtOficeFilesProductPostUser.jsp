@@ -246,7 +246,7 @@ document.onmouseup=new Function("dragapproved=false");
                      <TR><TD><%=authorizationPageBeanId.getLocalization(application).getString("attach_file")%>:* </TD> <TD><input  name="filename" disabled="disabled"  size="20" value="<%= publisherBeanId.getFilename() %>" ><input type="button" name="newfile" value="<%= authorizationPageBeanId.getLocalization(application).getString("new_file") %>" onclick="dwindow('NewFile.jsp')" ><input type="button" name="selectfile" value="<%= authorizationPageBeanId.getLocalization(application).getString("select_file") %>" onclick="dwindow('SelectFile.jsp')" ><input type="hidden"  name="file_id" size="20" value="<%= publisherBeanId.getFile_id() %>" ></TD></TR>
 
                      <TR><TD colspan="2" ><%=authorizationPageBeanId.getLocalization(application).getString("before_input_generator_code")%> </TD></TR>
-                     <TR><TD><img alt="<%= authorizationPageBeanId.getLocalization(application).getString("image_with_gen_numer") %>" src="/gennumberservlet"  /></TD> <TD><input type="text" name="gen_number"></TD></TR>
+                     <TR><TD><img alt="<%= authorizationPageBeanId.getLocalization(application).getString("image_with_gen_numer") %>" src="gennumberservlet"  /></TD> <TD><input type="text" name="gen_number"></TD></TR>
                      <TR><TD colspan="2" ></TD></TR>
                      <TR><TD></TD> <TD><input type="submit" name="Submit" value="<%= authorizationPageBeanId.getLocalization(application).getString("save") %>"> <input type="reset" value="<%= authorizationPageBeanId.getLocalization(application).getString("clear") %>"></TD></TR>
                      </TABLE>
@@ -268,7 +268,7 @@ document.onmouseup=new Function("dragapproved=false");
        <!-- Navigation -->
         <div class="listingBar">
 	    <span class="next">
-                <a HREF = "Policy.jsp"  >
+                <a HREF = "ProductInfo.jsp"  >
 		<strong>
 			<%=authorizationPageBeanId.getLocalization(application).getString("back")%>
 		</strong>

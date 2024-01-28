@@ -32,6 +32,9 @@ import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
 
+
+// use ProductInfoColumnTwoPostAction
+@Deprecated 
 @PageController( jspName = "Ext2ProductPost.jsp" )
 public class Ext2ProductPostAction implements IAction {
 
@@ -63,7 +66,7 @@ public class Ext2ProductPostAction implements IAction {
 		} else
 			productPostAllFaced.updateRowWithParent("" + authorizationPageBeanId.getLastProductId(), publisherBeanId,
 					authorizationPageBeanId);
-		response.sendRedirect("Policy.jsp?policy_byproductid=" + authorizationPageBeanId.getLastProductId());
+		response.sendRedirect("ProductInfo.jsp?policy_byproductid=" + authorizationPageBeanId.getLastProductId());
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)

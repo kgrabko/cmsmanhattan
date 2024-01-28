@@ -32,6 +32,8 @@ import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
 
+// use ProductInfoColumnOnePostAction
+@Deprecated 
 @PageController( jspName = "Ext1ProductPost.jsp" )
 public class Ext1ProductPostAction implements IAction {
 
@@ -66,7 +68,7 @@ public class Ext1ProductPostAction implements IAction {
 					authorizationPageBeanId);
 		// response.sendRedirect("Productlist.jsp?offset=" + 0 + "&catalog_id=" +
 		// authorizationPageBeanId.getCatalog_id() );
-		response.sendRedirect("Policy.jsp?policy_byproductid=" + authorizationPageBeanId.getLastProductId());
+		response.sendRedirect("ProductInfo.jsp?policy_byproductid=" + authorizationPageBeanId.getLastProductId());
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)

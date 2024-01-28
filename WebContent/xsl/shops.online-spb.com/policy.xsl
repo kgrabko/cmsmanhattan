@@ -999,7 +999,7 @@
 		  <DIV>
 		  <DIV>
 		  <div class="add_message">
-							<a href="BlogExtProductPost.jsp" >
+							<a href="ProductReviewPost.jsp" >
 							<DIV >
 								Add message		
 							</DIV>		

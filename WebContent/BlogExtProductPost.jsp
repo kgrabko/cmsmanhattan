@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
+<% // Old page So use ProductReviewPost.jsp  %>
 <html>
 <head>
      <title>GBS Portal</title>
@@ -7,7 +8,7 @@
 
 <script language="JavaScript">
 <!--
-
+// Old page it should be removed after sometime . It need to support old html designs 
 function select_file(){
 self.name  = 'UploadForm' ;
 var url = 'SelectFile.jsp' ;
@@ -185,7 +186,7 @@ request.setCharacterEncoding("UTF-8");
 		<div class="box">
 		  <div class="body">
 		    <div >
-                    <form method="post" name="postsoftform"  ACTION="BlogExtProductPost.jsp" onSubmit="return  IsFormOk()"  >
+                    <form method="post" name="postsoftform"  ACTION="ProductReviewPost.jsp" onSubmit="return  IsFormOk()"  >
 					<DIV style="background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left"  >
 					<font color='white' size='2' > &nbsp;&raquo; <%=authorizationPageBeanId.getLocalization(application).getString("title_form_post_info_on_forum")%> </font>
 					</DIV>
@@ -200,7 +201,7 @@ request.setCharacterEncoding("UTF-8");
                      <div>
                      <TABLE>
                      <TR><TD colspan="2" ><%=authorizationPageBeanId.getLocalization(application).getString("before_input_generator_code")%></TD></TR>
-                     <TR><TD><img alt="<%= authorizationPageBeanId.getLocalization(application).getString("before_input_generator_code") %>" src="/gennumberservlet"  /></TD> <TD><input type="text" name="gen_number"></TD></TR>
+                     <TR><TD><img alt="<%= authorizationPageBeanId.getLocalization(application).getString("before_input_generator_code") %>" src="gennumberservlet"  /></TD> <TD><input type="text" name="gen_number"></TD></TR>
                      <TR><TD colspan="2" ></TD></TR>
                      </TABLE>
 	 		         </div>

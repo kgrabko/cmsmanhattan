@@ -38,7 +38,10 @@ import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
 
-@PageController( jspName = "NewsBlockPostCre.jsp" )
+//Use a NewArrivalProductPostCreAction
+
+@Deprecated 
+@PageController( jspName = "NewsBlockPostCre.jsp" ) // new NewArrivalProductPostCre.jsp
 public class NewBlockPostCreAction implements IAction {
 
 	private ProductPostAllFaced productPostAllFaced;

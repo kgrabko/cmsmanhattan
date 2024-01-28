@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
-<jsp:useBean id="payGatewayListBeanId" scope="session" class="com.cbsinc.cms.payGatewayListBeanId" />
+<jsp:useBean id="payGatewayListBeanId" scope="session" class="com.cbsinc.cms.PayGatewayListBean" />
 <jsp:useBean id="authorizationPageBeanId" scope="session" class="com.cbsinc.cms.AuthorizationPageBean" />
 <jsp:setProperty name="payGatewayListBeanId" property="*" />
 

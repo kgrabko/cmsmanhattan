@@ -302,7 +302,7 @@ public class SearchAction implements IAction {
 					return;
 				}
 				if (request.getParameter("element").compareTo("co1") == 0) {
-					response.sendRedirect("Co1ProductPost.jsp?product_id=" + request.getParameter("product_id"));
+					response.sendRedirect("RecommentedItemPost.jsp?product_id=" + request.getParameter("product_id"));
 					return;
 				}
 				if (request.getParameter("element").compareTo("co2") == 0) {
@@ -331,7 +331,7 @@ public class SearchAction implements IAction {
 				}
 				if (request.getParameter("element").compareTo("blog") == 0) {
 					authorizationPageBeanId.setLastProductId(Long.parseLong(request.getParameter("product_parent_id")));
-					response.sendRedirect("BlogExtProductPost.jsp?product_id=" + request.getParameter("product_id"));
+					response.sendRedirect("ProductReviewPost.jsp?product_id=" + request.getParameter("product_id"));
 					return;
 				}
 

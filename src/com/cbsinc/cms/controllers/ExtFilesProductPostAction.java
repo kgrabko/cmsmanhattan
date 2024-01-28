@@ -31,7 +31,9 @@ import com.cbsinc.cms.PublisherBean;
 import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
 
-@PageController( jspName = "ExtFilesProductPost.jsp" )
+// use ProductInfoAttchedFilesPostAction
+@Deprecated 
+@PageController( jspName = "ExtFilesProductPost.jsp" ) // 
 public class ExtFilesProductPostAction implements IAction {
 
 	ProductPostAllFaced productPostAllFaced;
@@ -62,7 +64,7 @@ public class ExtFilesProductPostAction implements IAction {
 		} else
 			productPostAllFaced.updateRowWithParent("" + authorizationPageBeanId.getLastProductId(), publisherBeanId,
 					authorizationPageBeanId);
-		response.sendRedirect("Policy.jsp?policy_byproductid=" + authorizationPageBeanId.getLastProductId());
+		response.sendRedirect("ProductInfo.jsp?policy_byproductid=" + authorizationPageBeanId.getLastProductId());
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)

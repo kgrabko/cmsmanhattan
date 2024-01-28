@@ -286,19 +286,22 @@ public class BigImageServletUpload extends HttpServlet {
 		 */
 
 		if (contentType == null) {
-			System.out.println("content type is null");
+			printResult(out, "content type is null");
+			log.error(new Exception("content type is null"));
 			return;
 		}
 
 		int ind = contentType.indexOf("boundary=");
 		if (ind == -1) {
-			System.out.println("IND is less than 0");
+			printResult(out, "IND is less than 0");
+			log.error(new Exception("IND is less than 0"));
 			return;
 		}
 		String boundary = contentType.substring(ind + 9);
 
 		if (boundary == null) {
-			System.out.println("boundary is null");
+			printResult(out, "boundary is null");
+			log.error(new Exception("boundary is null"));
 			return;
 		}
 
@@ -310,14 +313,16 @@ public class BigImageServletUpload extends HttpServlet {
 		int size = 0;
 		outer: while (true) {
 			if (result <= 0) {
-				System.out.println("Error. Stream truncated");
+				printResult(out, "Error. Stream truncated");
+				log.error(new Exception("Error. Stream truncated"));
 				break;
 			}
 
 			String line = new String(buffer, 0, result);
 
 			if (!line.startsWith(boundaryString)) {
-				System.out.println("Error. multipart boundary missing.");
+				printResult(out, "Error. multipart boundary missing.");
+				log.error(new Exception("Error. multipart boundary missing."));
 				break;
 			}
 
@@ -327,7 +332,8 @@ public class BigImageServletUpload extends HttpServlet {
 
 			result = in.readLine(buffer, 0, BUFFER_SIZE);
 			if (result <= 0) {
-				System.out.println("Upload : may be end boundary which has no contents");
+				printResult(out, "Upload : may be end boundary which has no contents");
+				log.error(new Exception("Upload : may be end boundary which has no contents"));
 				break;
 			}
 
@@ -336,24 +342,28 @@ public class BigImageServletUpload extends HttpServlet {
 			String token = tokenizer.nextToken();
 			String upperToken = token.toUpperCase();
 			if (!upperToken.startsWith("CONTENT-DISPOSITION")) {
-				System.out.println("Format error. Content-Disposition expected.");
+				printResult(out, "Format error. Content-Disposition expected.");
+				log.error(new Exception("Format error. Content-Disposition expected."));
 				break;
 			}
 			String disposition = upperToken.substring(21);
 			if (!disposition.equals("FORM-DATA")) {
-				System.out.println("Sorry, I don't know how to handle [" + disposition + "] disposition.");
+				printResult(out, "Sorry, I don't know how to handle [" + disposition + "] disposition.");
+				log.error(new Exception("Sorry, I don't know how to handle [" + disposition + "] disposition."));
 				break;
 			}
 			if (tokenizer.hasMoreElements()) {
 				token = tokenizer.nextToken();
 			} else {
-				System.out.println("Format error. NAME expected.");
+				printResult(out, "Format error. NAME expected.");
+				log.error(new Exception("Format error. NAME expected."));
 				break;
 			}
 			int nameStart = token.indexOf("name=\"");
 			int nameEnd = token.indexOf("\"", nameStart + 7);
 			if (nameStart < 0 || nameEnd < 0) {
-				System.out.println("Format error. NAME expected.");
+				printResult(out, "Format error. NAME expected.");
+				log.error(new Exception("Format error. NAME expected."));
 				break;
 			}
 			String name = token.substring(nameStart + 6, nameEnd);
@@ -365,14 +375,16 @@ public class BigImageServletUpload extends HttpServlet {
 
 				fnStart = line.indexOf("filename=\"");
 				if (fnStart < 0) { // filename term missing
-					System.out.println("NO FILENAME given.");
+					printResult(out, "NO FILENAME given.");
+					log.error(new Exception("NO FILENAME given."));
 					result = in.readLine(buffer, 0, BUFFER_SIZE);
 					continue;
 				}
 
 				fnEnd = line.indexOf("\"", fnStart + 11);
 				if (fnEnd < 0) {
-					System.out.println("FILENAME is null.");
+					printResult(out, "FILENAME is null.");
+					log.error(new Exception("FILENAME is null."));
 				} else {
 					filename = line.substring(fnStart + 10, fnEnd);
 					int lastindex = -1;
@@ -387,20 +399,22 @@ public class BigImageServletUpload extends HttpServlet {
 
 				bs = cretareFileStream(filename);
 				if (bs == null) {
-					System.out.println("Error. FileOutputStream = null");
+					printResult(out, "Error. FileOutputStream = null");
+					log.error(new Exception("Error. FileOutputStream = null"));
 					break;
 				}
 				result = in.readLine(buffer, 0, BUFFER_SIZE);
 				if (result <= 0) {
-					System.out.println("Error. Stream truncated");
+					printResult(out, "Error. Stream truncated");
+					log.error(new Exception("Error. Stream truncated"));
 					break;
 				}
 				fileContentType = new String(buffer, 0, result);
 				if (fileContentType.toUpperCase().startsWith("CONTENT-TYPE:")) {
 					fileContentType = fileContentType.substring(13).trim();
 				} else {
-					System.out.println("what should I read here ??? - result = " + result + ", and read ["
-							+ new String(buffer, 0, result) + "]");
+					printResult(out, "what should I read here ??? - result = " + result + ", and read ["+ new String(buffer, 0, result) + "]");
+					log.error(new Exception("what should I read here ??? - result = " + result + ", and read ["+ new String(buffer, 0, result) + "]"));
 				}
 
 				try {

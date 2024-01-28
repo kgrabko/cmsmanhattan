@@ -286,7 +286,7 @@ request.setCharacterEncoding("UTF-8");
        <!-- Navigation -->
         <div class="listingBar">
 	    <span class="next">
-                <a HREF = "Policy.jsp"  >
+                <a HREF = "ProductInfo.jsp"  >
 		<strong>
 			<%=authorizationPageBeanId.getLocalization(application).getString("back")%>
 		</strong>

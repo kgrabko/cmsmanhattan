@@ -367,24 +367,40 @@ public class ProductlistMarketPlaceAction implements IAction {
 					return;
 				}
 				if (request.getParameter("element").compareTo("news") == 0) {
-					response.sendRedirect("NewsBlockPostCre.jsp?product_id=" + request.getParameter("product_id")
+					response.sendRedirect("NewArrivalProductPostCre.jsp?product_id=" + request.getParameter("product_id")
 							+ "&parent_id=" + authorizationPageBeanId.getCatalog_id());
 					return;
 				}
 				// if(request.getParameter("element").compareTo("news") == 0 )
 				// response.sendRedirect("ProductPost.jsp") ;
+				// @Deprecated - Co1ProductPost.js
 				if (request.getParameter("element").compareTo("co1") == 0) {
-					response.sendRedirect("Co1ProductPost.jsp?product_id=" + request.getParameter("product_id")
+					response.sendRedirect("RecommentedItemPost.jsp?product_id=" + request.getParameter("product_id")
 							+ "&parent_id=" + authorizationPageBeanId.getCatalog_id());
 					return;
 				}
+				if (request.getParameter("element").compareTo("recommentedItem") == 0) {
+					response.sendRedirect("RecommentedItemPost.jsp?product_id=" + request.getParameter("product_id")
+							+ "&parent_id=" + authorizationPageBeanId.getCatalog_id());
+					return;
+				}
+				// @Deprecated - Co1ProductPost.js use SponsoredBySellersItemPost.jsp
 				if (request.getParameter("element").compareTo("co2") == 0) {
-					response.sendRedirect("Co2ProductPost.jsp?product_id=" + request.getParameter("product_id")
+					response.sendRedirect("SponsoredBySellersItemPost.jsp?product_id=" + request.getParameter("product_id")
+							+ "&parent_id=" + authorizationPageBeanId.getCatalog_id());
+					return;
+				}
+				if (request.getParameter("element").compareTo("sponsoredBySellersItem") == 0) {
+					response.sendRedirect("SponsoredBySellersItemPost.jsp?product_id=" + request.getParameter("product_id")
 							+ "&parent_id=" + authorizationPageBeanId.getCatalog_id());
 					return;
 				}
 				if (request.getParameter("element").compareTo("bottom") == 0) {
 					response.sendRedirect("BottomListPost.jsp?product_id=" + request.getParameter("product_id"));
+					return;
+				}
+				if (request.getParameter("element").compareTo("footerLinksList") == 0) {
+					response.sendRedirect("FooterLinksListPost.jsp.jsp?product_id=" + request.getParameter("product_id"));
 					return;
 				}
 				if (request.getParameter("element").compareTo("ext1") == 0) {
@@ -409,15 +425,15 @@ public class ProductlistMarketPlaceAction implements IAction {
 				}
 				if (request.getParameter("element").compareTo("blog") == 0) {
 					authorizationPageBeanId.setLastProductId(Long.parseLong(request.getParameter("product_parent_id")));
-					response.sendRedirect("BlogExtProductPost.jsp?product_id=" + request.getParameter("product_id"));
+					response.sendRedirect("ProductReviewPost.jsp?product_id=" + request.getParameter("product_id"));
 					return;
 				}
 //		        	  {
 //		        		 policyFaced.mergePolicyBean(authorizationPageBeanId.getIntUserID(), request.getParameter("product_parent_id") , policyBeanId) ;
 //		        		 policyBeanId.setType_page("product_parent_id") ;
-//		        		 policyBeanId.setBack_url("Policy.jsp?policy_byproductid=" + request.getParameter("product_parent_id")) ;
+//		        		 policyBeanId.setBack_url("ProductInfo.jsp?policy_byproductid=" + request.getParameter("product_parent_id")) ;
 //		        		 policyBeanId.setIntUserID(authorizationPageBeanId.getIntUserID());
-//		        		 response.sendRedirect("BlogExtProductPost.jsp?product_id="+request.getParameter("product_id"));   
+//		        		 response.sendRedirect("ProductReviewPost.jsp?product_id="+request.getParameter("product_id"));   
 //		        		 return ;
 //		        	  }
 

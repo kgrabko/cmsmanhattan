@@ -6,9 +6,10 @@
 <%
 response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
 response.setHeader("Pragma","no-cache"); //HTTP 1.0
-response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+response.setDateHeader ("Expires", 0); //prevents caching at the proxy server // It is wrong page so use ProductInfoColumnTwoPost.jsp
 request.setCharacterEncoding("UTF-8");
 %>
+<% // Old page So use ProductInfoColumnTwoPost.jsp  %>
 <html>
 <head>
      <title>GBS Portal</title>
@@ -285,7 +286,7 @@ document.onmouseup=new Function("dragapproved=false");
        <!-- Navigation -->
         <div class="listingBar">
 	    <span class="next">
-                <a HREF = "Policy.jsp"  >
+                <a HREF = "ProductInfo.jsp"  >
 		<strong>
 			<%=authorizationPageBeanId.getLocalization(application).getString("back")%>
 		</strong>

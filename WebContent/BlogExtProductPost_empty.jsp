@@ -196,7 +196,7 @@ request.setCharacterEncoding("UTF-8");
 		    <div >
 
 
-                     <form method="post" name="postsoftform"  ACTION="BlogExtProductPost.jsp" onSubmit="return  IsFormOk()"  >
+                     <form method="post" name="postsoftform"  ACTION="ProductReviewPost.jsp" onSubmit="return  IsFormOk()"  >
                      <TABLE width="500" >
                      <TR><TD>Заголовок:* </TD><TD> <input  name="softname" size="40"  value="<%= publisherBeanId.getStrSoftName() %>" onBlur="checkEmpty(this.value)" >
                      <input type="hidden"  name="catalog_id"  value="<%= authorizationPageBeanId.getCatalog_id() %>"/></TR>

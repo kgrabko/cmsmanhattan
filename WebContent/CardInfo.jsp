@@ -36,7 +36,7 @@
 </div>
 <hr size="" class="netscape4">
 <div class="tabs">
-<A href="Productlist.jsp?catalog_id=-2" class="plain"><font size="2"><%=authorizationPageBeanId.getLocalization(application).getString("main_page")%></font></A><A href="Productlist.jsp?catalog_id=-10" class="plain"><font size="2"><%=authorizationPageBeanId.getLocalization(application).getString("populyar_page")%></font></A><a href="Policy.jsp?page=about" class="plain"><font size="2"><%=authorizationPageBeanId.getLocalization(application).getString("about_company")%></font></a><A href="Productlist.jsp?action=logoff" class="plain"><font size="2"><%=authorizationPageBeanId.getLocalization(application).getString("exit")%></font></A>
+<A href="Productlist.jsp?catalog_id=-2" class="plain"><font size="2"><%=authorizationPageBeanId.getLocalization(application).getString("main_page")%></font></A><A href="Productlist.jsp?catalog_id=-10" class="plain"><font size="2"><%=authorizationPageBeanId.getLocalization(application).getString("populyar_page")%></font></A><a href="ProductInfo.jsp?page=about" class="plain"><font size="2"><%=authorizationPageBeanId.getLocalization(application).getString("about_company")%></font></a><A href="Productlist.jsp?action=logoff" class="plain"><font size="2"><%=authorizationPageBeanId.getLocalization(application).getString("exit")%></font></A>
 </div>
 <div class="personalBar">
 <a href="Authorization.jsp"><img src="images/user.gif" alt="Link icon" title="Link icon" height="15" width="10" border="0">

@@ -852,7 +852,7 @@ function parseMessages(responseXML)
                      <TR><TD></TD> <TD><input  type="checkbox" name="show_rating1"  value="<%= publisherBeanId.getStrShow_ratimg1() %>"    <%= publisherBeanId.getStrShow_ratimg1_checked() %> > <%=authorizationPageBeanId.getLocalization(application).getString("open_rate")%></TD></TR>
                      <TR><TD></TD> <TD><input  type="checkbox" name="show_blog"  value="<%= publisherBeanId.getStrShow_forum() %>"  <%= publisherBeanId.getShow_forum_checked() %> > <%=authorizationPageBeanId.getLocalization(application).getString("open_blog")%></TD></TR>
                      <TR><TD colspan="2" ><%=authorizationPageBeanId.getLocalization(application).getString("before_input_generator_code")%> </TD></TR>
-                     <TR><TD><img alt="<%= authorizationPageBeanId.getLocalization(application).getString("image_with_gen_numer") %>" src="/gennumberservlet"  /></TD> <TD><input type="text" name="gen_number"></TD></TR>
+                     <TR><TD><img alt="<%= authorizationPageBeanId.getLocalization(application).getString("image_with_gen_numer") %>" src="gennumberservlet"  /></TD> <TD><input type="text" name="gen_number"></TD></TR>
                      <TR><TD colspan="2" ></TD></TR>
                     
                      <TR><TD></TD> <TD><input type="button" name="button" value="<%= authorizationPageBeanId.getLocalization(application).getString("save") %>"  onclick="do_save()" > <input type="reset" value="<%= authorizationPageBeanId.getLocalization(application).getString("clear") %>"></TD></TR>

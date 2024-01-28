@@ -36,6 +36,9 @@ import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
 
+//Use a FooterLinksListPostAction
+
+@Deprecated 
 @PageController( jspName = "BottomListPost.jsp" )
 public class BottomListPostAction implements IAction {
 

@@ -92,7 +92,7 @@
 
 
 					<tr>
-						<td width="500" align="left"><A HREF="Co1ProductPost.jsp" ><img SRC="images/file.png" border="0" alt="Post left" ><%=authorizationPageBeanId.getLocalization(application).getString("post_product_left_description")%> </A></td>
+						<td width="500" align="left"><A HREF="RecommentedItemPost.jsp" ><img SRC="images/file.png" border="0" alt="Post left" ><%=authorizationPageBeanId.getLocalization(application).getString("post_product_left_description")%> </A></td>
 					</tr>
 
 					<tr>
@@ -100,8 +100,9 @@
 					</tr>
 
 
+
 					<tr>
-						<td width="500" align="left"><A HREF="Co2ProductPost.jsp" ><img SRC="images/file.png" border="0" alt="Post right" ><%=authorizationPageBeanId.getLocalization(application).getString("post_product_right_description")%> </A></td>
+						<td width="500" align="left"><A HREF="SponsoredBySellersItemPost.jsp" ><img SRC="images/file.png" border="0" alt="Post right" ><%=authorizationPageBeanId.getLocalization(application).getString("post_product_right_description")%> </A></td>
 
 					</tr>
 
@@ -128,9 +129,24 @@
 						<td  colspan="2">&nbsp;</td>
 					</tr>
 					<tr>
-						<td width="500" align="left"><A HREF="NewLogo.jsp" ><img SRC="images/file.png" border="0" alt=" Закачать логотип  " > <%=authorizationPageBeanId.getLocalization(application).getString("upload_logo")%> </A></td>
+						<td width="500" align="left"><A HREF="NewLogo.jsp" ><img SRC="images/file.png" border="0" alt=" upload site logo" > <%=authorizationPageBeanId.getLocalization(application).getString("upload_logo")%> </A></td>
 
 					</tr>
+					<tr>
+						<td  colspan="2">&nbsp;</td>
+					</tr>
+					<tr>
+						<td width="500" align="left"><A HREF="DeployDesign.jsp?catalog_id=-3" ><img SRC="images/file.png" border="0" alt=" Change site design  " > Change site design  </A></td>
+
+					</tr>
+					<tr>
+						<td  colspan="2">&nbsp;</td>
+					</tr>
+					<tr>
+						<td width="500" align="left"><A HREF="SiteDesignPost.jsp?parent_id=-3" ><img SRC="images/file.png" border="0" alt="Upload new site design" >Upload new site design </A></td>
+					</tr>
+					
+					
 					<tr>
 						<td  colspan="2">&nbsp;</td>
 					</tr>
@@ -160,7 +176,7 @@
 					</tr>
  					
  					<tr>
-						<td width="500" align="left"><A HREF="BottomListPost.jsp" ><img SRC="images/file.png" border="0" alt="Make a bottom line" >Make a bottom line</A></td>
+						<td width="500" align="left"><A HREF="FooterLinksListPost.jsp" ><img SRC="images/file.png" border="0" alt="Make a bottom line" >Make a bottom line</A></td>
 					</tr>
 					<tr>
 						<td   height="500"  colspan="2">&nbsp;</td>

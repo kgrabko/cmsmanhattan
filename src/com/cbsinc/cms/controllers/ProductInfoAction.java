@@ -38,7 +38,7 @@ import com.cbsinc.cms.faceds.ProductlistFaced;
 @PageController( jspName = "ProductInfo.jsp" )
 public class ProductInfoAction implements IAction {
 
-	transient static private Logger log = Logger.getLogger(PolicyAction.class);
+	transient static private Logger log = Logger.getLogger(ProductInfoAction.class);
 	private ProductInfoFaced policyFaced = null;
 	private ProductlistFaced productlistFaced = null;
 
@@ -79,7 +79,7 @@ public class ProductInfoAction implements IAction {
 				itemDescriptionBeanId.setProduct_id(Long.toString(authorizationPageBeanId.getLastProductId()));
 				int rate = Integer.parseInt(request.getParameter("rate"));
 				policyFaced.setRatring1(rate, itemDescriptionBeanId.getProduct_id());
-				response.sendRedirect("Policy.jsp?policy_byproductid=" + itemDescriptionBeanId.getProduct_id());
+				response.sendRedirect("ProductInfo.jsp?policy_byproductid=" + itemDescriptionBeanId.getProduct_id());
 				return;
 			}
 
@@ -95,7 +95,7 @@ public class ProductInfoAction implements IAction {
 				&& isNumber(request.getParameter("policy_byproductid"))) {
 			policyFaced.mergePolicyBean(authorizationPageBeanId.getIntUserID(),
 					request.getParameter("policy_byproductid"), itemDescriptionBeanId);
-			itemDescriptionBeanId.setBack_url("Policy.jsp?policy_byproductid=" + itemDescriptionBeanId.getParent_product_id());
+			itemDescriptionBeanId.setBack_url("ProductInfo.jsp?policy_byproductid=" + itemDescriptionBeanId.getParent_product_id());
 			itemDescriptionBeanId.setType_page("policy_byproductid");
 			itemDescriptionBeanId.setIntUserID(authorizationPageBeanId.getIntUserID());
 			authorizationPageBeanId.setLastProductId(Long.parseLong(itemDescriptionBeanId.getParent_product_id()));
