@@ -5,12 +5,9 @@ services:
     # If you really want to use MySQL, uncomment the following line
     #image: mysql:8.0.27
     # image: cmsmanhattan/cmsone:last
-    command: '--default-authentication-plugin=mysql_native_password'
+    command: --init-file /data/application/init.sql
     volumes:
-      - db_data:/var/lib/mysql
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      #- ./init.sql:/docker-entrypoint-initdb.d/init.sql
-
+        - ./init.sql:/data/application/init.sql
     networks:
       network:
         ipv4_address: 10.5.0.5  
@@ -23,8 +20,31 @@ services:
     expose:
       - 3306
       - 33060
+
+#  db:
+#    image: msql:8.0
+#    #image: msql:5.7
+#    command: --init-file /data/application/nit.sql
+#    volumes:
+#        - ./init.sql:/data/application/nit.sql
+#        #- ./docker/images/sql-scripts:/docker-entrypoint-nitdb.d
+#    networks:
+#      network:
+#        ipv4_address: 10.5.0.5    
+#    restart: always
+#    environment:
+#        MYSQL_ROOT_USER: root
+#        MYSQL_ROOT_PASSWORD: grabfix
+#        MYSQL_DATABASE: cmsdb
+#        MYSQL_USER: root
+#        MYSQL_PASSWORD: grabfix
+#    expose:
+#      - 3306
+#      - 33060
+
+      
   cmsmanhattan:
-    image: cmsmanhattan/cmsone:0.0.6
+    image: cmsmanhattan/cmsone:0.0.8
     ports:
       - 80:8080
     restart: always
