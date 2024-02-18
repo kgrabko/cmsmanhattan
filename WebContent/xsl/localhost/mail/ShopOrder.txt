@@ -1,20 +1,14 @@
-Клент с именем  @FirstName @LastName сделал заказ  под номером @NumberOfOrder . 
-Было заказанно  @ProductCount номеров .
-Ваши коментарии по заказу :
-@CustomerCommentariy .
+To attention of the manager!!!
 
-По заказу мы будем контактировать с  @ContactPerson , т.к он указан в форме заказа .  
-Контакты  клиента телефон @Phone и факс @CustomerFax .
-Предупреждаем  что на момент создание заказа состояние счета  @Balans рублей .
+Client with the name @FirstName @LastName made No. @NumberOfOrder order. 
+Client made the order and the order is containing @ProductCount of items.
 
-Место нахождение получателя указано 
-страну @Contry
-город @City
-адрес @Address 
+Comments to the order: @CustomerCommentariy.
 
-Адрес электронной почты указан @CustomerEmail .
+Contact person: @ContactPerson 
+Contacts of the client: @Phone phone and @CustomerFax fax.
+E-mail of the client of @CustomerEmail.
 
-С Уважением Константин Грабко .
-тел: 8 (905) 277 22 88 .
-сайт www.grabko.com .
+Delivery address: @Contry, @City, @Address
+
 

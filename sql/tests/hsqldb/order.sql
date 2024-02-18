@@ -1,2 +1,1 @@
 INSERT INTO orders VALUES (23,2323,'2013-11-25 01:04:30',13,0,13,0,NULL,0,NULL,'2013-11-24 05:00:00',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0);
-INSERT INTO site VALUES (2,'www.siteforyou.irr.bz',2,1,'shops.online-spb.com','shops.online-spb.com','Ivan Ivanov','111-1234','','','','');

@@ -1,27 +1,10 @@
-Уважаемый  @FirstName @LastName !
+Dear @FirstName @LastName!
 
-Ваш заказ под номером @NumberOfOrder поступил в отдел продаж и менеджер уже обрабатывает его.
+Your order at the number @NumberOfOrder was placed successfully and will be processed soon.
 
-Заказ составляет: @ProductCount  файлов  на сумму @Amount @Currency. 
+The order consists of @ProductCount of line items for total amount of @Amount @Currency.
 
-Состояние вашего счета на момент заказа в нашем интернет магазине состовляет @Balans рублей .
-
-Ваши реквизиты:
-
-IP: @IPAddress
-
-Также Вы указали:
-
-Адрес получателя: @Contry, г. @City, @Address 
-Адрес электронной почты: @CustomerEmail .
-Телефон: @Phone .
-Факс: @CustomerFax .
-Контактное лицо: @ContactPerson .  
-Комментарии по заказу: @CustomerCommentariy .
-
-С Уважением, Константин Грабко .
-www.grabko.com .
-grabko@mail.ru .
-
-
+Yours faithfully, e-commerce shop administration.
+Link to http://www.@Login.irr.bz/Productlist.jsp shop? site = SiteId
+Contact e-mail @ShopEmail
 

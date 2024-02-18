@@ -36,6 +36,7 @@ import com.cbsinc.cms.CreateShopBean;
 import com.cbsinc.cms.GetValueTool;
 import com.cbsinc.cms.QueryManager;
 import com.cbsinc.cms.annotations.SingletonBean;
+import com.cbsinc.cms.controllers.LanguageEnum;
 import com.cbsinc.cms.controllers.SiteType;
 import com.cbsinc.cms.services.tomcat.AddAliase;
 import com.cbsinc.cms.services.tomcat.DomainRegister;
@@ -1073,7 +1074,7 @@ public class AuthorizationPageFaced extends com.cbsinc.cms.WebControls  {
 	@Profiled(logger = CLASS_NAME , tag = "getLengId" , message = "locale: {$0}  , getLengId: {$retrun} "  )		
 	final public int getLengId(final String locale) 
 	{
-		String leng_id = "-1" ;
+		String lang_id = LanguageEnum.EN.getStrId(); ;
 		String query = "select lang_id  from lang where lable = '" + locale + "'" ;
 		QueryManager qm = new QueryManager();
 
@@ -1081,7 +1082,7 @@ public class AuthorizationPageFaced extends com.cbsinc.cms.WebControls  {
 		{
 			qm.executeQuery(query);
 			if (qm.rows().size() != 0) {
-				leng_id = (String) qm.getValueAt(0, 0); // + " " +
+				lang_id = (String) qm.getValueAt(0, 0); // + " " +
 			}
 			
 		}
@@ -1098,7 +1099,7 @@ public class AuthorizationPageFaced extends com.cbsinc.cms.WebControls  {
 			qm.close();
 		}
 		
-		return  Integer.parseInt(leng_id);
+		return  Integer.parseInt(lang_id);
 	}
 	
 	

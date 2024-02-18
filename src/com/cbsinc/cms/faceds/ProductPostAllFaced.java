@@ -124,6 +124,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls {
 				publisherBeanId.setSerial_nubmer((String) Adp.getValueAt(0, 7));
 				publisherBeanId.setFile_id((String) Adp.getValueAt(0, 8));
 				authorizationPageBeanId.setCatalog_id((String) Adp.getValueAt(0, 9));
+				if(authorizationPageBeanId.getCatalogParent_id() == 0)
 				authorizationPageBeanId.setCatalogParent_id((String) Adp.getValueAt(0, 9));
 				//authorizationPageBeanId.setCatalog_parent_id(getCatalogParentId(authorizationPageBeanId)); // fixed for open editor in dir
 				publisherBeanId.setImage_id((String) Adp.getValueAt(0, 10));
@@ -165,6 +166,7 @@ public class ProductPostAllFaced extends com.cbsinc.cms.WebControls {
 			{
 				// add current catalog
 				publisherBeanId.setSoft_id("-1");
+				if(authorizationPageBeanId.getCatalogParent_id() == 0)
 				authorizationPageBeanId.setCatalogParent_id(authorizationPageBeanId.getCatalog_id());
 			}
 

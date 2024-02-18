@@ -1,410 +1,509 @@
 <?xml version='1.0' encoding='windows-1251' ?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"  xmlns:java="http://xml.apache.org/xslt/java" exclude-result-prefixes="java">
 <xsl:output method="html" indent="yes"/>
-<xsl:output encoding="windows-1251"/>
+<xsl:output encoding="UTF-8"/>
 <xsl:strip-space elements="*"/>
 
 
 <xsl:template match="/">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"  lang="en">
-
-<head>
-     <meta name="keywords" lang="de" content="Internet Shop, Shop , Mainframe , Business , Solution, Mainframe Solution , Mainframe Shop"/>
-     <meta name="keywords" lang="en-us" content="Internet Shop, Shop , Mainframe , Business , Solution, Mainframe Solution , Mainframe Shop"/>
-     <meta name="keywords" lang="en" content="Internet Shop, Shop , Mainframe , Business , Solution, Mainframe Solution , Mainframe Shop"/>
-     <meta name="keywords" lang="fr" content="Internet Shop, Shop , Mainframe , Business , Solution, Mainframe Solution , Mainframe Shop"/>
-     <meta name="description" content="++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"/>
-     <meta name="description" content="Internet Shop - Commercial product for JBoss and other higth performens  platform."/>
-     <meta name="author" content="Konstantin Grabko" />
-     <meta name="generator" content="Internet Shop Mainframe Business Solution"/>
-     <meta name="description" content="++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"/>
-     <meta http-equiv="cache-control" content="no-cache"/>
-     <meta http-equiv="pragma" content="no-cache"/>
-     <title>Ishop  - Grabko Konstantin </title>
-     <style type="text/css" media="screen"> @import url(style2.css);</style>
-
-
-   <SCRIPT language="JavaScript">
-   <![CDATA[
-   <!--
-
-   function search( char ) 
-    { 
-     document.forms[0].search_char.value = char ;
-     document.forms[0].search_value.value = '' ;
-     document.forms[0].searchquery.value = '2' ;
-     document.forms[0].submit();
-    }
-
-    function search_word() 
-    { 
-     document.forms[0].search_char.value = '' ;
-     document.forms[0].searchquery.value = '1' ;
-     document.forms[0].submit();
-    }
-
-
-    function search_cre() 
-    { 
-    document.forms[0].search_char.value = '' ;
-    document.forms[0].search_value.value = '' ;
-    document.forms[0].searchquery.value = '3' ;
-    }
-
-
-    function search_cre_bronirovanie() 
-    { 
-    document.forms[0].search_char.value = '' ;
-    document.forms[0].search_value.value = '' ;
-    document.forms[0].searchquery.value = '4' ;
-    }
-
-
-   // -->
-  ]]>
-  </SCRIPT>
-
-    
-</head>
-
-<body>
-
-<TABLE cellSpacing="0" cellPadding="0" width="100%"  border="1" rightmargin="0" leftmargin="0" topmargin="0" bordercolor="#ECEFF8" >
-<TR>
-<TD bgcolor="#ECEFF8" ></TD>
-<TD vAlign="top" Align="center" width="1010">
-
-
-<a class="skipnav" href="#documentContent">Skip to content</a>
-
-<div>
-
-     
-
-        <div class="top">
-
-<TABLE cellSpacing="0" cellPadding="10"  height="120"  width="100%" background="index.files/bg.jpg" border="0" rightmargin="0" leftmargin="0" topmargin="0">
-  <TBODY>
-  <TR>
-    <TD vAlign="top" Align="left"  width="20%">
-    </TD>
-    <TD vAlign="center" Align="right"  width="80%">
-
-              <form name="searchform"  action="Productlist.jsp" >
-		<br />
-                    <input id="search_value"  name="search_value" type="text"  size="20" alt="Поиск по имени товара"   title="Поиск по имени товара" tabindex="30001" ><xsl:attribute name="value"><xsl:value-of select="document/search_value"/></xsl:attribute></input>
-		    <input id="search_char"  name="search_char" type="hidden" ></input>
-		    <input id="searchquery"  name="searchquery" type="hidden" ></input>
-                    <input class="context searchButton"  type="button" size="20" value="Поиск"  tabindex="30002" onClick="return top.search_word();return true"   />
-              </form>
-
-</TD>
-  </TR>
-  </TBODY>
-</TABLE>
-        </div>
-        <hr size="" class="netscape4" />
-        <div class="tabs">
-           <a href="Productlist.jsp?catalog_id=-1" class="plain" ><font size="2"> Новости </font> </a>
-           <a href="Productlist.jsp?catalog_id=-2" class="plain" ><font size="2"> Главная страница </font> </a>
-           <A href="Authorization.jsp?Login=newuser" class="plain" > <font size="2">Регистрация клиента </font></A>
-           <a href="about.html" class="plain"><font size="2"> О компании </font></a>
-        </div>
-        <div class="personalBar">
-                <a href="webmail/index.jsp">
-                <img src="xsl/www.gvidons.com/img/user.gif" alt="Link icon" title="Link icon" height="15" width="10" border="0" />
-		Login is <xsl:value-of select="document/login"/>@online-spb.com
-	        </a>
-        </div>
-        <div class="pathBar">
-             <CENTER><font size="1" color="red"  >  После регистрации ваш почтовый ящик активируется на следующий день </font></CENTER>
-        </div>
-        <hr size="" class="netscape4" />
-    </div>
-<table class="columns">
-    <tbody>
-        <tr>
-            <td class="left">
-
-	  <!-- head for porlet login   --> 
-          <TABLE height="20" cellSpacing="4" cellPadding="0" width="159" background="index.files/bg11.gif" >
-              <TBODY>
-              <TR>
-                <TD vAlign="center" ><FONT color="white" ><B>Вход на саит</B></FONT>
-               </TD>
-              </TR>
-  	     </TBODY>
-  	   </TABLE>
-
-	  <!-- porlet login   --> 
-
-    <div class="box">
-        <div class="body">
-            <div class="odd">
-                <form action="Authorization.jsp"  method="post">
-                    <strong>Пользователь</strong> <br />
-                     <INPUT  title="Пользователь" tabindex="10001" SIZE="16" AUTOCOMPLETE="off" TYPE="TEXT" NAME="Login" >
-			<xsl:attribute name="value">
-				<xsl:value-of select="document/login"/>
-			</xsl:attribute>		
-        	     </INPUT>
-    
-                    <br />
-    
-                    <strong>Пароль</strong>
-		    <br />
-		    <INPUT title="Пароль" tabindex="10002"  SIZE="16" AUTOCOMPLETE="off" TYPE="PASSWORD" NAME="Passwd1" ></INPUT>
-                    <br />
-                    <br />
-    
-                    <input 
-                           type="submit" name="submit"
-                           value="Log in" tabindex="10003" />
-                </form>
-            </div>
-    
-            <div class="even"> 
-                <a href="">
-                   <img src="xsl/www.gvidons.com/img/user.gif" alt="Link icon" title="Link icon" height="15" width="10" border="0" />
-                   Выслать пароль по почте
-                </a>
-            </div>
-        </div>
-    </div>
-
-
-
-<div>
-         <TABLE height="20" cellSpacing="4" cellPadding="0" width="159" background="index.files/bg11.gif" >
-           <TBODY>
-            <TR>
-                <TD vAlign="center" ><FONT color="white" ><B>Прислать пароль</B></FONT>
-            </TD>
-            </TR>
-           </TBODY>
-         </TABLE>
-	<div class="box">
-	  <div class="body">
-	    <div class="even" align="left" >
-		<IMG border="0" height="20" name="Nindex_14_03" src="xsl/www.gvidons.com/img/user.gif" width="20"/>
-		 Если вы забыли пароль, то можете получить его по электронной почте, указав свой email, с которым вы зарегитрированны. 
-	    </div>
-    
-            <div class="even"> 
-                <form action="/sendpassword"  method="post">
-                     <INPUT  class="context" title="E-Mail"  SIZE="16" AUTOCOMPLETE="off" TYPE="TEXT" NAME="email" /><br/>
-                     <input  SIZE="12"  type="submit" name="submit"  value="Послать"  />
-               </form>
-            </div>
-
-	  </div>
-	</div>
-
-</div>
-
-
-
-
-
-
-            </td>
-
-            <td class="main">
-
-            <!-- News part -->
-
-<br/>
-    
-            <!-- News -->
-
-            <!-- News Iten start -->
-            <div class="box">
-
-                <div class="body">
-                    <div class="content">
-        
-                        <p>
-
-<!-- <p><center> <b> <xsl:value-of select="document/message"/></b></center> </p> -->
-
-<form method="post" ACTION="RegPage.jsp"  >
-	   <h1> <font size="3" > <b> Регистрация </b> </font>  - <font size="2" > <xsl:value-of select="document/message"/></font> </h1>
-<br/>
-<center>
-<table  cellSpacing="10" cellPadding="0" border="0"  >
-    <tbody>
-<TR><TD width="100"  >Логин :*</TD> <TD> <input size="40"  AUTOCOMPLETE="off" TYPE="TEXT" name="Login"  value="" ><xsl:attribute name="value"><xsl:value-of select="document/login"/></xsl:attribute></input></TD></TR>
-<TR><TD>Пароль  :* </TD> <TD> <input size="40" name="Passwd1" type="password"  ></input></TD></TR>
-<TR><TD>Повт. пароль*   :  </TD> <TD><input size="40" name="Passwd2" type="password" ></input></TD></TR>
-<TR><TD>Имя :*  </TD> <TD><input  size="40" AUTOCOMPLETE="off" TYPE="TEXT" name="FName"  value=""   ><xsl:attribute name="value"><xsl:value-of select="document/firstname"/></xsl:attribute></input></TD></TR>
-<TR><TD>Фамилия  : * </TD> <TD><input size="40" AUTOCOMPLETE="off" TYPE="TEXT"  name="LName"  value=""   ><xsl:attribute name="value"><xsl:value-of select="document/lastname"/></xsl:attribute></input></TD></TR>
-<TR><TD>Компания  :  </TD> <TD><input size="40" AUTOCOMPLETE="off" TYPE="TEXT"  name="Company" value=""><xsl:attribute name="value"><xsl:value-of select="document/company"/></xsl:attribute></input></TD></TR>
-
-                       <TR><TD>Страна</TD><TD ><SELECT NAME = "country_id" onChange="javascript:this.form.submit()" >
-		 	   <xsl:for-each select="document/country/country-item">
-
-
-				<OPTION>
-				<xsl:attribute name="value">
-					<xsl:value-of select="code"/>
-				</xsl:attribute>
-
-                               <xsl:if test="code = selected">
-                               <xsl:attribute name="SELECTED">SELECTED</xsl:attribute>
-                               </xsl:if>
-
-                                 <xsl:value-of select="item"/>
-   	          		</OPTION>
-			   </xsl:for-each>		
-                       </SELECT></TD></TR>
-
-                       <TR><TD>Город</TD><TD><SELECT NAME = "city_id">
-		 	   <xsl:for-each select="document/city/city-item">
-				<OPTION>
-				<xsl:attribute name="value">
-					<xsl:value-of select="code"/>
-				</xsl:attribute>
-                                <xsl:value-of select="item"/>
-   	          		</OPTION>
-			   </xsl:for-each>		
-                       </SELECT></TD> </TR>
-
-                    <TR><TD>Валюта</TD><TD><input size="40" AUTOCOMPLETE="off" TYPE="hidden"  name="currency_id" value="3" ></input>рубли</TD> </TR>
-
-<!--
-                       <TR><TD>Currency</TD><TD><SELECT NAME = "currency_id">
-		 	   <xsl:for-each select="document/currency/currency-item">
-				<OPTION>
-				<xsl:attribute name="value">
-					<xsl:value-of select="code"/>
-				</xsl:attribute>
-                                <xsl:value-of select="item"/>
-   	          		</OPTION>
-			   </xsl:for-each>		
-                       </SELECT></TD> </TR>
--->
-
-<TR><TD>Эл.почта  :*  </TD> <TD><input size="40" AUTOCOMPLETE="off" TYPE="TEXT"  name="EMail" value="" ><xsl:attribute name="value"><xsl:value-of select="document/email"/></xsl:attribute></input></TD></TR>
-<TR><TD>Телефон :  </TD> <TD><input size="40"  AUTOCOMPLETE="off" TYPE="TEXT"  name="Phone" value=""><xsl:attribute name="value"><xsl:value-of select="document/phone"/></xsl:attribute></input></TD></TR>
-<TR><TD>Сотовый :  </TD> <TD><input size="40"  AUTOCOMPLETE="off" TYPE="TEXT"  name="MPhone" value="" ><xsl:attribute name="value"><xsl:value-of select="document/mphone"/></xsl:attribute></input></TD></TR>
-<TR><TD>Факс    :  </TD> <TD><input size="40"  AUTOCOMPLETE="off" TYPE="TEXT" name="Fax" value="" ><xsl:attribute name="value"><xsl:value-of select="document/fax"/></xsl:attribute></input></TD></TR>
-<TR><TD>ICQ номер :  </TD> <TD><input size="40"  AUTOCOMPLETE="off" TYPE="TEXT"  name="Icq" value=""  ><xsl:attribute name="value"><xsl:value-of select="document/icq"/></xsl:attribute></input></TD></TR>
-<TR><TD>Ваш саит (URL) :  </TD> <TD><input size="40"  AUTOCOMPLETE="off" TYPE="TEXT"  name="Website" value="" ><xsl:attribute name="value"><xsl:value-of select="document/website"/></xsl:attribute></input></TD></TR>
- <input size="40"  AUTOCOMPLETE="off" TYPE="hidden"  name="site_id" value="" ><xsl:attribute name="value"><xsl:value-of select="document/site/site-item/selected"/></xsl:attribute></input>
-
-<TR><TD></TD> <TD></TD></TR>
-<TR><TD></TD> <TD></TD></TR>
-    </tbody>
-</table>
-</center>
-<table>
-    <tbody>
-	<TR><TD width="180"  ></TD>  <TD><input type="submit" name="Submit" value="Применить"></input></TD><TD></TD> <TD><input type="reset" value="Сброс"></input></TD><TD></TD> </TR>
-    </tbody>
-</table>
-
-</form>
-
-			
-			</p>
-    
-
-
-                        
-                    </div>
-
-                </div>
-                
-            </div>
-
-            <!-- News Iten end -->
-
-
-        <!-- Navigation -->
-        <div class="listingBar">
-	    <span class="next">
-                <a HREF = "#" onClick="javascript:history.back()"  >
-		<strong>	
-		назад
-		</strong>	
-	        </a>
-	    </span>
-	</div>
-
-
-          </td>
-
-          <td class="right">
-
-<div>
-         <TABLE height="20" cellSpacing="4" cellPadding="0" width="159" background="index.files/bg11.gif" >
-           <TBODY>
-            <TR>
-                <TD vAlign="center" ><FONT color="white" ><B>О регистрации</B></FONT>
-            </TD>
-            </TR>
-           </TBODY>
-         </TABLE>
-	<div class="box">
-	  <div class="body">
-	    <div class="even" align="left" >
-		<IMG border="0" height="20" name="Nindex_14_03" src="xsl/www.gvidons.com/img/user.gif" width="20"/>
-		 Регистрация нужна для оформления заказа и оплаты через интернет.
-                 <br/>
-                 <br/> " * " отмечены поля обязательные для заполнения.
-	    </div>
-	  </div>
-	</div>
-</div>
-         <TABLE height="20" cellSpacing="4" cellPadding="0" width="159" background="index.files/bg11.gif" >
-           <TBODY>
-            <TR>
-                <TD vAlign="center" ><FONT color="white" ><B>Оплатить заказ</B></FONT>
-            </TD>
-            </TR>
-           </TBODY>
-         </TABLE>
-	<div class="box">
-	  <div class="body">
-	    <div class="content even" align="left" ><br/>
-		<IMG border="0" height="20" name="Nindex_14_03" src="xsl/www.gvidons.com/img/user.gif" width="20"/>
-		Вы не можете перевести деньги в магазин для оплаты заказа, если вы не зарегистрированы <br/><br/>
-		<A><xsl:attribute name="HREF"><xsl:value-of select="document/to_pay"/></xsl:attribute><IMG border="0" height="20" name="Nindex_14_03" src="xsl/www.gvidons.com/img/credit-cards.jpg" width="130"></IMG><FONT size="2" color="#002a79"></FONT></A>
-	    </div>
-	  </div>
-	</div>
-
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-
-<hr size="" class="netscape4" />
-
-<div class="footer">
-
-
-<br />
-
-Internet shop. Copyright 2005 <A HREF="http://www.grabko.com">Grabko Business Solution</A> . Все права защищены.
-
-<hr size="" class="netscape4" />
-
-<strong class="netscape4">
-for user netscape 
-</strong>
+	<xsl:variable name="host" select="string(document/host)"/>	
+	<xsl:variable name="user_id" select="number(/document/owner_user_id)"/> 
+	<xsl:variable name="role" select="document/role_id"/> 
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="no-cache"/>
+ <title><xsl:value-of select="document/title"/></title>
  
-</div>
+     <LINK rel="stylesheet" type="text/css"><xsl:attribute name="href"><xsl:value-of select="concat('xsl/',$host,'/template.css')"/></xsl:attribute></LINK> 
+     <LINK rel="stylesheet" type="text/css"><xsl:attribute name="href"><xsl:value-of select="concat('xsl/',$host,'/constant.css')"/></xsl:attribute></LINK> 
+	 <SCRIPT type="text/javascript"><xsl:attribute name="src"><xsl:value-of select="concat('xsl/',$host,'/mootools.js')"/></xsl:attribute></SCRIPT>
+	 <SCRIPT type="text/javascript"><xsl:attribute name="src"><xsl:value-of select="concat('xsl/',$host,'/caption.js')"/></xsl:attribute></SCRIPT>
+	 <SCRIPT type="text/javascript"><xsl:attribute name="src"><xsl:value-of select="concat('xsl/',$host,'/caption.js')"/></xsl:attribute></SCRIPT>
+	 <link rel="stylesheet" type="text/css" media="screen"><xsl:attribute name="href"><xsl:value-of select="concat('xsl/',$host,'/menu.css')"/></xsl:attribute></link>
+	 <script type="text/javascript"><xsl:attribute name="src"><xsl:value-of select="concat('xsl/',$host,'/menu.js')"/></xsl:attribute></script>
 
-</TD>
-<TD bgcolor="#ECEFF8" ></TD>
-</TR>
-</TABLE>
+</HEAD>
+
+
+<body id="body">
+
+<div class="main" style="background-color: #E7E7DF">
+				<IMG alt="Logo"><xsl:attribute name="src"><xsl:value-of select="concat('xsl/',$host,'/images/logo.gif')"/></xsl:attribute></IMG>
+			
+			</div>
+	<div id="gradient">
+		<div class="main">
+			<div id="top">
+
+					<div id="topmenu">
+						<div class="module-topmenu">
+						
+						<!--  <ul class="menu-nav">  -->
+						<ul id="sddm" >
+						<li class="item53">
+						<a href="Productlist.jsp?catalog_id=-2">
+						<span>Home page</span>
+						</a>
+						</li>
+						<!-- 
+						<li class="item29">
+						<a href="Productlist.jsp?catalog_id=-6">
+						<span>New Arrivals</span>
+						</a>
+						</li>
+						
+						<LI class="item18">
+	  					<A href="Productlist.jsp?catalog_id=-10">
+	  					<SPAN>Popular</SPAN>
+	  					</A>
+	  					</LI>
+	  					 -->
+	  						  				 <xsl:for-each select="document/menu/menu-item">
+	  				   <xsl:variable name="rowNum" select="position()" /> 
+											       <xsl:if test="item != ''">
+													   <xsl:if test="code != '-1'">
+														   <xsl:if test="code != '-2'">
+																   <xsl:if test="code != '-3'">
+																         
+																	             <LI class="item17">
+																					  <A    onmouseout="mclosetime()" >
+																					  <xsl:attribute name="HREF"><xsl:value-of select="url"/></xsl:attribute>
+																					  <xsl:attribute name="onmouseover">mopen('m<xsl:value-of select="$rowNum"/>')</xsl:attribute>
+																					  <SPAN><xsl:value-of select="item"/></SPAN>
+																					  </A>
+																					  
+													    							<div  onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+													    								 <xsl:attribute name="id"><xsl:value-of select="concat('m',$rowNum)"/></xsl:attribute>	
+																					  
+																					  <xsl:for-each select="submenu-item">
+																					  <A ><xsl:attribute name="HREF"><xsl:value-of select="suburl"/></xsl:attribute>
+											           									<xsl:value-of select="subitem"/>
+													     							 </A>
+													     							 
+																					 </xsl:for-each>
+																					</div>
+																				  </LI>
+															 </xsl:if>
+												 		 </xsl:if>
+											 		 </xsl:if>
+										 		 </xsl:if>
+						</xsl:for-each>
+	  					
+
+
+						</ul>
+						</div>
+				</div>
+			</div>
+
+
+			    <DIV class="indent" >
+			    	<DIV class="moduletable">
+			     		<TABLE class="who_is_online" style="WIDTH: auto" align="right">
+			       			<TBODY>
+			        			<TR>
+			        				
+			          				<TD>
+			        				<xsl:if test="document/login != ''">   <!--  показывать если есть логин -->
+									<b>User </b> 
+									<a href="Authorization.jsp" class="user0">
+									<xsl:value-of select="document/login"/>
+									</a>
+									</xsl:if>
+			         				</TD>
+			        			</TR>
+			        		</TBODY>
+			        </TABLE>
+			 	</DIV>
+			 </DIV>
+	
+	
+
+			<div id="mid">
+				<div class="mid-left">
+					<div class="mid-right">
+					
+					  	<div id="search">
+							<div class="module-search">
+								<FORM name="searchform"  action="Productlist.jsp"  method="POST">
+								<div class="search">
+								<INPUT class="inputbox" 
+								id="search_value"  
+						   		name="search_value" 
+						   		type="text"  
+						   		size="20" 
+						   		alt="It is search by name goods"   
+						   		title="It is search by name goods">
+						   		<xsl:attribute name="value">
+						   		<xsl:value-of select="document/search_value"/>
+						   		</xsl:attribute>
+						   		</INPUT>
+						   	  	<INPUT  class="button" type="image" value="Search" onClick="return top.search_word();return true"><xsl:attribute name="src"><xsl:value-of select="concat('xsl/',$host,'/images/searchButton.gif')"/></xsl:attribute></INPUT>
+						      	</div>
+						     	<INPUT id="search_char"  name="search_char" type="hidden" ></INPUT>
+							  	<INPUT id="searchquery"  name="searchquery" type="hidden" ></INPUT>
+							  	<INPUT SIZE="0"  AUTOCOMPLETE="off" TYPE="HIDDEN" NAME="offset" VALUE="0"  ></INPUT> 
+						     	</FORM>					
+					        </div>
+						</div>
+			
+						
+					   <div id="breadcrumb">
+						   <div class="space">
+					       <span class="breadcrumbs pathway">
+					          <xsl:if test="document/role_id != 0">
+						      <xsl:if test="count(document/parent/parent-item) != 1">
+                                    
+                                      <a href="Productlist.jsp?catalog_id=-2" class="catalog" alt="To return back  to the top of Categorization" title="To return back  to the top of Categorization">
+                                        <U><font size="2" >All Categories</font></U>
+                                      </a>&#160; &#187; 
+								
+								        <xsl:for-each select="document/parent/parent-item">										
+											 <xsl:if test="code != '-2'">												
+												<A ><xsl:attribute name="HREF"><xsl:value-of select="url"/></xsl:attribute>
+											        <U><font size="2" > <xsl:value-of select="item"/></font> </U> 
+											    </A>&#160; &#187; 
+											 </xsl:if>													
+								        </xsl:for-each>
+								        
+						      </xsl:if>
+						      </xsl:if>
+						    
+					       </span>
+					       </div>
+					   </div>
+					   
+					 
+					</div>
+				</div>
+			</div>
+			
+			<div id="content">
+					<div class="width">
+					<div id="left">
+					<div class="module_menu">
+					<div class="first">
+					<div class="sec">
+							<h3>Forgot your password?</h3>
+								<div class="box-indent">
+								<div class="width">
+								<P  style="font-size: 12px; margin-bottom: 5px;padding-top:5px">
+								  To get password , Please  input your email in field for it.
+						        </P>												        
+							     <form action="/sendpassword"  method="post">													      	
+					                     <INPUT  class="inputbox" title="E-Mail"  AUTOCOMPLETE="off" TYPE="TEXT" NAME="email" /><br/>
+					                     <div style="padding-top: 5px; padding-left: 35px">
+					                     <input  class="button" type="submit" name="submit"  value="Send"/>
+					                     </div>
+					             </form>
+								</div>
+					</div>
+					</div>
+					</div>
+					</div>
+					
+					<!-- О регистрации -->
+			           
+			            <DIV class="module" style="margin-right:0px">
+			            <DIV class="first">
+			            <DIV class="sec">
+			            <DIV>
+			            <H3>About registration</H3>
+			            	<P class="text" style="padding:10px 20px 13px;">Registration is necessary for registration of the order and payment through the Internet.</P>
+		            		
+		            		<P class="text" style="padding:10px 20px 16px;">" * "required fields. </P>               
+					
+			            </DIV>
+			            </DIV>
+			            </DIV>
+			            </DIV>
+			</div>
+					<div id="right">
+					
+					
+								<div class="module_s2">
+								<div class="first">
+								<div class="sec">
+
+								<h3>Authorization</h3>
+								<div class="box-indent">
+								<div class="width">
+										
+										<FORM action="Authorization.jsp"  method="post" id="form-login" class="form-login">
+						                  <FIELDSET class="input">
+						                  <P id="form-login-username">
+						                  <LABEL for="modlgn_username">Login</LABEL>
+						                  <BR/>
+						                  
+						                  <INPUT id="modlgn_username" title=" User" class="inputbox" tabindex="10001"  AUTOCOMPLETE="off" TYPE="TEXT" NAME="Login" >
+														<xsl:attribute name="value">
+															<xsl:value-of select="document/login"/>
+														</xsl:attribute>		
+										  </INPUT> 
+										  </P>
+						                  
+						                  <P id="form-login-password">
+						                  <LABEL for="modlgn_passwd">Password</LABEL><BR/>
+						                  <INPUT class="inputbox" title="Password" id="modlgn_passwd" tabindex="10002" AUTOCOMPLETE="off" TYPE="PASSWORD" NAME="Passwd1" ></INPUT> 
+						                  </P>
+						                  
+						                  <div style="padding-left: 35px; padding-bottom: 5px;border: none; width: 100px">
+						                  	<INPUT class="button" type="submit" value="Enter" name="Submit"/> 
+						                  </div>
+						                  
+						                  </FIELDSET> 
+						                 </FORM>                  
+						                  
+						                  <UL class="log_list">
+						                  <LI>
+						                  <A href="Authorization.jsp?Login=newuser" style="COLOR: #072f3a">Forgot your password?
+						                  </A> 
+						                  </LI> 
+						                  <LI>
+						                  <A href="Authorization.jsp?Login=" style="COLOR: #072f3a">Registration
+						                  </A>
+						                  </LI>
+						                  </UL>
+											
+								</div>
+								</div>
+
+						</div>
+						</div>
+						</div>
+						
+			           
+			            <DIV class="module" style="margin-right:0px">
+			            <DIV class="first">
+			            <DIV class="sec">
+			            <DIV>
+			            <H3>Pay Order</H3>
+			          	<P class="text" style="padding:10px 20px 13px;">
+			          	 To pay order payment you must be already logged on this site
+			          	</P>
+		                <div style="padding:0px 20px 17px;">
+		                <A>
+		                
+		                <xsl:attribute name="HREF">
+		                <xsl:value-of select="document/to_pay"/>
+		                </xsl:attribute>
+		                
+						<IMG border="0" height="20" width="140">
+						<xsl:attribute name="src">
+						<xsl:value-of select="concat('xsl/',$host,'/images/credit-cards.jpg')"/>
+						</xsl:attribute>
+						</IMG> 
+						</A>               
+				      	</div>
+			            </DIV>
+			            </DIV>
+			            </DIV>
+			            </DIV>
+			            
+						
+						
+		
+						
+							
+							
+			
+</div>
+			
+<div id="container">
+<div class="comp-cont">
+		<table class="blog" cellpadding="0" cellspacing="0">
+			<tr>
+			<td valign="top">
+				<div class="article-bg">
+					<div class="article-left">
+						<div class="article-right">
+							<div class="width">
+							
+			        				<xsl:if test="document/message != ''">
+			        				<p align="center"> 			        				 >
+			        				<font color="red" >
+										<xsl:value-of select="document/message"/>
+									</font>
+									</p>
+									<br/>
+									<br/>
+									</xsl:if>
+									
+							<h3 style="padding-left: 40px; padding-bottom: 15px;color: #4C4B49; font-size: 20px">Registration</h3>
+                            
+								<DIV  class="registration">							
+										  <form method="post" ACTION="RegPage.jsp">
+												    <TABLE class="registration" cellSpacing="0" cellPadding="0" border="0">															    													
+														<TR><TD width="150px">Login:*</TD> <TD align="left"> <input size="60"  AUTOCOMPLETE="off" TYPE="TEXT" name="Login"><xsl:attribute name="value"><xsl:value-of select="document/login"/></xsl:attribute></input></TD></TR>
+														<TR><TD width="150px">Password:* </TD> <TD> <input size="60" name="Passwd1" type="password" id="password" ></input></TD></TR>
+														<TR><TD width="150px">Re-enter password*   :  </TD> <TD><input size="60" name="Passwd2" type="password" id="password"></input></TD></TR>
+														<TR><TD width="150px">First name:*  </TD> <TD><input  size="60" AUTOCOMPLETE="off" TYPE="TEXT" name="FName"><xsl:attribute name="value"><xsl:value-of select="document/firstname"/></xsl:attribute></input></TD></TR>
+														<TR><TD style="width: 150px">Last name:* </TD> <TD><input size="60" AUTOCOMPLETE="off" TYPE="TEXT"  name="LName"  value=""   ><xsl:attribute name="value"><xsl:value-of select="document/lastname"/></xsl:attribute></input></TD></TR>
+														<TR><TD width="150px">The company:* </TD> <TD><input size="60" AUTOCOMPLETE="off" TYPE="TEXT"  name="Company" value=""><xsl:attribute name="value"><xsl:value-of select="document/company"/></xsl:attribute></input></TD></TR>
+				                       					<TR><TD width="150px">Country:*</TD>
+				                       						<TD >
+				                       						<SELECT NAME = "country_id" onChange="doChangeCity('country_id', this.value)"  style="margin-bottom: 12px">
+													 	   	<xsl:for-each select="document/country/country-item">										
+															<OPTION>
+																<xsl:attribute name="value">
+																	<xsl:value-of select="code"/>
+																</xsl:attribute>
+											                    <xsl:if test="code = selected">
+											                   		 <xsl:attribute name="SELECTED">SELECTED</xsl:attribute>
+											                    </xsl:if>
+											                    <xsl:value-of select="item"/>
+											   	           </OPTION>
+														   </xsl:for-each>		
+											               </SELECT>
+											               </TD>
+											            </TR>
+											           
+											            <TR><TD width="150px">City:*</TD>
+											            	<TD>
+												                <SELECT NAME = "city_id">
+														 	    <xsl:for-each select="document/city/city-item">
+																 <OPTION>
+																	 <xsl:attribute name="value">
+																	    	<xsl:value-of select="code"/>
+																	 </xsl:attribute>
+																	  <xsl:if test="code = selected">
+											                   		 	<xsl:attribute name="SELECTED">SELECTED</xsl:attribute>
+											                    	  </xsl:if>
+													                 <xsl:value-of select="item"/>
+												   	          	 </OPTION>
+													   		   </xsl:for-each>
+													   		   </SELECT>
+												   		   </TD> 
+												   	   </TR>
+
+                    								   <TR><TD width="150px">Currency</TD><TD><input size="60" AUTOCOMPLETE="off" TYPE="hidden"  name="currency_id" value="1" ></input>dollars</TD> </TR>							
+														<TR><TD width="150px">E-Mail:*  </TD> <TD><input size="60" AUTOCOMPLETE="off" TYPE="TEXT"  name="EMail" value="" ><xsl:attribute name="value"><xsl:value-of select="document/email"/></xsl:attribute></input></TD></TR>
+														<TR><TD width="150px">Phone:</TD> <TD><input size="60"  AUTOCOMPLETE="off" TYPE="TEXT"  name="Phone" value=""><xsl:attribute name="value"><xsl:value-of select="document/phone"/></xsl:attribute></input></TD></TR>
+														<TR><TD width="150px">Cell:  </TD> <TD><input size="60"  AUTOCOMPLETE="off" TYPE="TEXT"  name="MPhone" value="" ><xsl:attribute name="value"><xsl:value-of select="document/mphone"/></xsl:attribute></input></TD></TR>
+														<TR><TD width="150px">Fax:  </TD> <TD><input size="60"  AUTOCOMPLETE="off" TYPE="TEXT" name="Fax" value="" ><xsl:attribute name="value"><xsl:value-of select="document/fax"/></xsl:attribute></input></TD></TR>
+														<TR><TD width="150px">Skype:  </TD> <TD><input size="60"  AUTOCOMPLETE="off" TYPE="TEXT"  name="Skype" value=""  ><xsl:attribute name="value"><xsl:value-of select="document/icq"/></xsl:attribute></input></TD></TR>
+														<TR><TD width="150px">Broker ID:  </TD> <TD><input size="60"  AUTOCOMPLETE="off" TYPE="TEXT"  name="Broker ID" value="" ><xsl:attribute name="value"><xsl:value-of select="document/website"/></xsl:attribute></input>
+															<input size="60"  AUTOCOMPLETE="off" TYPE="hidden"  name="site_id" value="" ><xsl:attribute name="value"><xsl:value-of select="document/site/site-item/selected"/></xsl:attribute></input>
+														</TD></TR>
+														<TR><TD width="150px"><img width="100px" alt="The picture with the generation number" src="/gennumberservlet"  /> </TD> <TD><input size="60"  AUTOCOMPLETE="off" TYPE="TEXT"  name="gen_number" value=""></input><br/>Enter the number in the image here</TD></TR>																
+														<TR><TD width="150px"></TD> <TD></TD></TR>
+														<TR  align="right">
+															<TD colspan="2" width="250px" align="center" class="regbut" style="padding-left: 150px; padding-bottom: 25px">	
+															
+																<DIV class="regbut" style="padding-top:10px">
+																	<table width="150px"><tr>
+																	<td width="100px">
+																		<input class="button" type="submit" name="Submit" value="OK"></input>	
+																	</td>
+																	<td>
+																	<input  class="button" type="reset" value="Clean"></input>
+																	</td></tr></table>
+																</DIV>																
+															</TD>															
+															
+														</TR>
+																
+														</TABLE>		
+														</form>						
+									 	                        
+	                        		</DIV>
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							     
+							<span class="article_separator"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+
+		
+	</table>
+
+</div>
+</div>
+				
+				
+				
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<DIV id="footer">
+		<DIV class="main">
+		<div class="space">
+<font color="black">Internet shop . Copyright 2010 
+		<A HREF="http://www.siteforyou.net"><font color="black">  FDIS Center Business Solutions Inc </font></A>.  All rights reserved
+</font>
+		</div>
+		</DIV>
+	</DIV>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter7171372 = new Ya.Metrika({id:7171372, enableAll: true});
+        } catch(e) { }
+    });
+    
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f);
+    } else { f(); }
+})(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="//mc.yandex.ru/watch/7171372" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-13064452-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- /Coogle Anal -->
 
 
 </body>
-</html>
+
+
+
+
+
+
+
+
+
+</HTML>
 </xsl:template>
-</xsl:stylesheet>
+</xsl:stylesheet><!-- Stylus Studio meta-information - (c) 2004-2006. Progress Software Corporation. All rights reserved.
+<metaInformation>
+<scenarios/><MapperMetaTag><MapperInfo srcSchemaPathIsRelative="yes" srcSchemaInterpretAsXML="no" destSchemaPath="" destSchemaRoot="" destSchemaPathIsRelative="yes" destSchemaInterpretAsXML="no"/><MapperBlockPosition></MapperBlockPosition><TemplateContext></TemplateContext><MapperFilter side="source"></MapperFilter></MapperMetaTag>
+</metaInformation>
+-->

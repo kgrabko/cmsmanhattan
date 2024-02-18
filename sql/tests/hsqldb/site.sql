@@ -1,0 +1,1 @@
+INSERT INTO site VALUES (2,'www.siteforyou.irr.bz',2,1,'shops.online-spb.com','shops.online-spb.com','Ivan Ivanov','111-1234','','','','');

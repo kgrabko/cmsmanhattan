@@ -1,0 +1,71 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:8.0
+    cap_add:
+      - SYS_NICE
+    networks:
+      network:
+        ipv4_address: 10.5.0.5    
+    restart: always
+    environment:
+      - MYSQL_DATABASE=cmsdb
+      - MYSQL_ROOT_PASSWORD=grabfix
+    ports:
+      - '3306:3306'
+    volumes:
+      - db:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 22181:2181
+  
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1   
+
+  cmsmanhattan:
+    image: cmsmanhattan/cmsone:0.0.8
+    ports:
+      - 80:8080
+    restart: always
+    environment:
+      NODE_ENV: production
+      DB_HOST: 10.5.0.5
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: grabfix
+      DB_NAME: cmsdb
+    networks:
+      network:
+        ipv4_address: 10.5.0.4   
+    links:
+      - db
+    volumes:
+      - ./:/src
+volumes:
+  db:
+    driver: local
+    
+    
+networks:
+  network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1     

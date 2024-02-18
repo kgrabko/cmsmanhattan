@@ -52,5 +52,11 @@ public interface SpecialCatalog {
 	public static long OUTPUT_PAGES_FROM_NEWS_CATALOG = -1;
 
 	public static long ROOT_CATALOG = 0;
+	
+	public static long HOME_PAGE_CATALOG = -2;
+	
+	public static long NEW_ARRIVALS_CATALOG = -1;
+	
+	public static long NEW_DESIGNS_CATALOG = -3;
 
 }

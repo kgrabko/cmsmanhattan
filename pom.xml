@@ -3,7 +3,7 @@
   
   <groupId>CMS-Manhattan</groupId>
   <artifactId>cms-manhattan-one</artifactId>
-  <version>0.0.7</version>
+  <version>0.0.9</version>
   <packaging>war</packaging>
   <name>cms</name>
   <description>CMS-Manhattan. It is xslt template CMS .  Author is Konstantin Grabko . konstantin.grabko@yahoo.com </description>

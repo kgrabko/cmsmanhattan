@@ -1,28 +1,27 @@
-Клент с именем  @FirstName @LastName c  заказом  под номером @NumberOfOrder . 
+The client with the name @FirstName @LastName have the order and number is @NumberOfOrder. 
 
-выбрал способ оплаты через платежныю систему  @PaySystem
+The client use a payment system  @PaySystem 
 
 IP: @IPAddress
-Сумма:  @Amount
-Валюта: @Currency
+Amount: @Amount
+Currency: @Currency
 
 
-Было заказано  @ProductCount номеров .
-Ваши комментарии по заказу :
-@CustomerCommentariy .
+@ProductCount of numbers was ordered.
+Your comments by request:
+@CustomerCommentariy.
 
-По заказу мы будем контактировать с  @ContactPerson , т.к он указан в форме заказа .  
-Контакты  клиента телефон @Phone и факс @CustomerFax .
-Предупреждаем  что на момент создание заказа состояние счета  @Balans рублей .
+By request you have to contact to @ContactPerson, so  it is specified in the order form.  
+Contacts of the client @Phone phone and @CustomerFax fax.
+Money on client account @Balans 
 
-Место нахождение получателя указано 
-страну @Contry
-город @City
-адрес @Address 
+The place finding of the receiver is specified 
+@Contry country
+@City city
+address @Address 
 
-Адрес электронной почты указан @CustomerEmail .
+The e-mail address is specified to @CustomerEmail.
 
-С Уважением Константин Грабко .
-тел: 8 (905) 277 22 88 .
-сайт www.grabko.com .
-
+Yours faithfully, internet shop team.
+www.@Login.irr.bz
+@Login@siteforyou.net

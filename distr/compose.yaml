@@ -15,7 +15,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=grabfix
       - MYSQL_DATABASE=cmsdb
-      - MYSQL_USER=root
+      - MYSQL_USER=cms
       - MYSQL_PASSWORD=grabfix
     expose:
       - 3306
@@ -44,7 +44,7 @@ services:
 
       
   cmsmanhattan:
-    image: cmsmanhattan/cmsone:0.0.8
+    image: cmsmanhattan/cmsone:0.0.9
     ports:
       - 80:8080
     restart: always

@@ -23,6 +23,7 @@ body {
     color: Black;
     margin: 0;
     padding: 0;
+    background:#fff url('images/1.gif'); background-attachment:fixed;
 /* These work in IE only, changes the look of the scrollbar + textareas */
     scrollbar-base-color: #DEE7EC;
     scrollbar-highlight-color: #DEE7EC;
@@ -304,6 +305,8 @@ div.searchBox {
 input.searchButton {
     font-size: 100% ! important;
     margin-bottom: 1px ! important;
+    vertical-align: middle;
+    width: 60px;
 }
 
 div.tabs {
@@ -513,10 +516,14 @@ div.title {
     font: bold 100% Verdana, Helvetica, Arial, sans-serif;
     display: block;
     margin: 0em 0em;
-    line-height: 0em;
+    line-height: 14px;
 
 }
 
+.productBox {
+	border-left: 1px solid #8CACBB; border-right: 1px solid #8CACBB;border-bottom: 1px solid #8CACBB;
+	vertical-align: top;
+}
 
 .description_big {
     /* The summary text describing the document */
@@ -535,7 +542,7 @@ div.title {
     color: Black;
     clear: both;
     float: none;
-    margin: 2em 0em;
+    
     padding: 0.5em 0em 1em 0em;
     text-align: center;
 }
@@ -554,7 +561,7 @@ a.skipnav {
 */
 
 input.standalone {
-    background: #DEE7EC url(linkOpaque.gif) 9px 1px no-repeat;
+    background: #DEE7EC url(images/linkOpaque.gif) 9px 1px no-repeat;
     color: Black;
     cursor: pointer;
     font-size: 80%;
@@ -565,7 +572,7 @@ input.standalone {
 }
 
 input.context {
-    background: White url(linkTransparent.gif) 9px 1px no-repeat;
+    background: White url(images/linkTransparent.gif) 9px 1px no-repeat;
     color: Black;
     cursor: pointer;
     font-size: 80%;
@@ -576,7 +583,7 @@ input.context {
 }
 
 input.destructive {
-    background: #FFCE7B url(linkTransparent.gif) 9px 1px no-repeat;
+    background: #FFCE7B url(images/linkTransparent.gif) 9px 1px no-repeat;
     border: 1px solid #FFA500;
     color: Black;
     cursor: pointer;
@@ -649,7 +656,7 @@ div.help {
 
 .required {
     /* Used in addition to class "label" on required elements */
-    background: url(required.gif) right no-repeat;
+    background: url(images/required.gif) right no-repeat;
 }
 
 span.card {
@@ -1022,9 +1029,46 @@ table.calendar td.todaynoevent {
     border: 2px solid #FFA500;
 }
 
+.buttons-line {
+	background: #DFE3EF; border-top: 1px solid #8CACBB; border-bottom: 1px solid #8CACBB;
+	padding-left: 10px;
+	padding-top: 3px; padding-bottom: 3px
+}
+
+.forum {background-image:url('images/f.jpg');height:20px; TEXT-ALIGN: left}
+
+.pagesTable td{text-align: center;}
+	
+.pagesLink A{margin: 3px; font-size: 11px;}
+
+div.scroll {
+	height : expression(parentNode.clientHeight > 300 ? "300px" : "auto");
+        max-height: 300px;
+        height: auto;
+}
 
 
 
+.drag{
+      position:relative;
+      cursor:hand
+      top: 120px;
+      left: 130px;
+	 }
+      #vunet{
+      background-color:#F4F4F4;
+      cursor:move;
+      width:600px;
+	 }
+.bacgraundTop {background-image: url('images/bg.jpg');}
 
+.bacgraundBoxTitle {background-image: url('images/bg11.gif'); height: 21px}
 
+.bacgraundBoxLeft {background-image: url('images/bgleft.gif');}
+
+.bacgraundLine {background-image: url('images/bgline.gif');}
+
+.bacgraundLine2 {background-image: url('images/bgline2.gif');}
+
+.bacgraundProductHead {background-image: url('images/positionhead.jpg');}
 /*  */

@@ -52,6 +52,8 @@ public class InstallAction implements IAction {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
 			throws Exception {
+		
+		
 		session = request.getSession();
 
 
@@ -65,6 +67,10 @@ public class InstallAction implements IAction {
 		authorizationPageBeanId.setSelect_country(authorizationPageFaced.getXMLDBList("Authorization.jsp?country_id",
 				"country", authorizationPageBeanId.getCountry_id(), "select country_id ,name from country"));
 		
+		
+		if ( authorizationPageBeanId.getIntUserID() == 1 ) {
+		createShopBean.addSiteMainSite_pg();
+		}
 
 	}
 

@@ -1,27 +1,22 @@
-Уважаемый  @FirstName @LastName !
+Dear @FirstName @LastName!
 
-Вы выбрали способ оплаты через платежную систему  @PaySystem.
-Менеджер ожидает от вас оплаты за заказ под номером @NumberOfOrder.
-Сумма платежа состовляет @Amount @Currency. 
+You use the @PaySystem payment system.
+You made the order @NumberOfOrder  and the order is containing @ProductCount of items.
+The payment amount is @Amount @Currency. 
 
-Ваши реквизиты:
+Your details below:
 
 IP: @IPAddress
 
-Также Вы указали:
+Also you specified:
 
-Адрес получателя: @Contry, г. @City, @Address 
-Адрес электронной почты: @CustomerEmail .
-Телефон: @Phone .
-Факс: @CustomerFax .
-Контактное лицо: @ContactPerson .  
-Комментарии по заказу: @CustomerCommentariy .
+Address of the receiver: @Contry, of @City, @Address 
+E-mail address: @CustomerEmail.
+Phone: @Phone.
+Fax: @CustomerFax.
+Contact person: @ContactPerson.  
+Comments by request: @CustomerCommentariy.
 
-С Уважением, Константин Грабко .
-www.grabko.com .
-grabko@mail.ru .
-
-
-
-
-
+Yours faithfully, internet shop team.
+www.@Login.irr.bz
+@Login@siteforyou.net

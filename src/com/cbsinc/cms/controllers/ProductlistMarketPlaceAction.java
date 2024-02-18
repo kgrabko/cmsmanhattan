@@ -66,7 +66,7 @@ public class ProductlistMarketPlaceAction implements IAction {
 		AuthorizationPageBean authorizationPageBeanId;
 		HttpSession session;
 		boolean is_criteria_by_catalog = false;
-		String notselected = "";
+		String creteria1NotSelected = "";
 		boolean isInternet = true;
 		ServiceLocator.getInstance().getProductPostAllFaced();
 		authorizationPageFaced = ServiceLocator.getInstance().getAuthorizationPageFaced();
@@ -81,8 +81,8 @@ public class ProductlistMarketPlaceAction implements IAction {
 		session = request.getSession();
 		authorizationPageBeanId = (AuthorizationPageBean) session.getAttribute("authorizationPageBeanId");
 
-		if (notselected.length() == 0)
-			notselected = authorizationPageBeanId.getLocalization(servletContext).getString("notselected");
+		if (creteria1NotSelected.length() == 0)
+			creteria1NotSelected = authorizationPageBeanId.getLocalization(servletContext).getString("notselected");
 
 		ProductlistFaced productlistFaced = ServiceLocator.getInstance().getProductlistFaced();
 		ProductInfoFaced policyFaced = ServiceLocator.getInstance().getPolicyFaced();
@@ -762,17 +762,17 @@ public class ProductlistMarketPlaceAction implements IAction {
 
 		productlistBeanId.setSelect_creteria1_id(productlistFaced.getXMLDBCriteriaListLocale(
 				"ProductlistMarketPlace.jsp?creteria1_id", "creteria1", "" + authorizationPageBeanId.getCreteria1_id(),
-				notselected, "select creteria1_id , name   from creteria1   where  active = true " + productlistBeanId
+				creteria1NotSelected, "select creteria1_id , name   from creteria1   where  active = true " + productlistBeanId
 						.getPartCriteria(authorizationPageBeanId.getSite_id(), is_criteria_by_catalog)));
 		productlistBeanId.setSelect_creteria2_id(productlistFaced.getXMLDBCriteriaListLocale("ProductlistMarketPlace.jsp?creteria2_id",
-						"creteria2", "" + authorizationPageBeanId.getCreteria2_id(), notselected,
+						"creteria2", "" + authorizationPageBeanId.getCreteria2_id(), creteria1NotSelected,
 						"select creteria2_id , name   from creteria2   where  active = true "
 								+ productlistBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(),
 										is_criteria_by_catalog)
 								+ " and ( link_id = 0 or link_id = " + authorizationPageBeanId.getCreteria1_id()
 								+ " ) "));
 		productlistBeanId.setSelect_creteria3_id(productlistFaced.getXMLDBCriteriaListLocale("ProductlistMarketPlace.jsp?creteria3_id",
-						"creteria3", "" + authorizationPageBeanId.getCreteria3_id(), notselected,
+						"creteria3", "" + authorizationPageBeanId.getCreteria3_id(), creteria1NotSelected,
 						"select creteria3_id , name   from creteria3   where  active = true "
 								+ productlistBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(),
 										is_criteria_by_catalog)
@@ -780,7 +780,7 @@ public class ProductlistMarketPlaceAction implements IAction {
 								+ " ) "));
 		productlistBeanId
 				.setSelect_creteria4_id(productlistFaced.getXMLDBCriteriaListLocale("ProductlistMarketPlace.jsp?creteria4_id",
-						"creteria4", "" + authorizationPageBeanId.getCreteria4_id(), notselected,
+						"creteria4", "" + authorizationPageBeanId.getCreteria4_id(), creteria1NotSelected,
 						"select creteria4_id , name   from creteria4   where  active = true "
 								+ productlistBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(),
 										is_criteria_by_catalog)
@@ -788,7 +788,7 @@ public class ProductlistMarketPlaceAction implements IAction {
 								+ " ) "));
 		productlistBeanId
 				.setSelect_creteria5_id(productlistFaced.getXMLDBCriteriaListLocale("ProductlistMarketPlace.jsp?creteria5_id",
-						"creteria5", "" + authorizationPageBeanId.getCreteria5_id(), notselected,
+						"creteria5", "" + authorizationPageBeanId.getCreteria5_id(), creteria1NotSelected,
 						"select creteria5_id , name   from creteria5   where  active = true "
 								+ productlistBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(),
 										is_criteria_by_catalog)
@@ -796,7 +796,7 @@ public class ProductlistMarketPlaceAction implements IAction {
 								+ " ) "));
 		productlistBeanId
 				.setSelect_creteria6_id(productlistFaced.getXMLDBCriteriaListLocale("ProductlistMarketPlace.jsp?creteria6_id",
-						"creteria6", "" + authorizationPageBeanId.getCreteria6_id(), notselected,
+						"creteria6", "" + authorizationPageBeanId.getCreteria6_id(), creteria1NotSelected,
 						"select creteria6_id , name   from creteria6   where  active = true "
 								+ productlistBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(),
 										is_criteria_by_catalog)
@@ -804,7 +804,7 @@ public class ProductlistMarketPlaceAction implements IAction {
 								+ " ) "));
 		productlistBeanId
 				.setSelect_creteria7_id(productlistFaced.getXMLDBCriteriaListLocale("ProductlistMarketPlace.jsp?creteria7_id",
-						"creteria7", "" + authorizationPageBeanId.getCreteria7_id(), notselected,
+						"creteria7", "" + authorizationPageBeanId.getCreteria7_id(), creteria1NotSelected,
 						"select creteria7_id , name   from creteria7   where  active = true "
 								+ productlistBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(),
 										is_criteria_by_catalog)
@@ -812,7 +812,7 @@ public class ProductlistMarketPlaceAction implements IAction {
 								+ " ) "));
 		productlistBeanId
 				.setSelect_creteria8_id(productlistFaced.getXMLDBCriteriaListLocale("ProductlistMarketPlace.jsp?creteria8_id",
-						"creteria8", "" + authorizationPageBeanId.getCreteria8_id(), notselected,
+						"creteria8", "" + authorizationPageBeanId.getCreteria8_id(), creteria1NotSelected,
 						"select creteria8_id , name   from creteria8   where  active = true "
 								+ productlistBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(),
 										is_criteria_by_catalog)
@@ -820,14 +820,14 @@ public class ProductlistMarketPlaceAction implements IAction {
 								+ " ) "));
 		productlistBeanId
 				.setSelect_creteria9_id(productlistFaced.getXMLDBCriteriaListLocale("ProductlistMarketPlace.jsp?creteria9_id",
-						"creteria9", "" + authorizationPageBeanId.getCreteria9_id(), notselected,
+						"creteria9", "" + authorizationPageBeanId.getCreteria9_id(), creteria1NotSelected,
 						"select creteria9_id , name   from creteria9   where  active = true "
 								+ productlistBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(),
 										is_criteria_by_catalog)
 								+ " and ( link_id = 0 or link_id = " + authorizationPageBeanId.getCreteria8_id()
 								+ " ) "));
 		productlistBeanId.setSelect_creteria10_id(productlistFaced.getXMLDBCriteriaListLocale("ProductlistMarketPlace.jsp?creteria10_id",
-						"creteria10", "" + authorizationPageBeanId.getCreteria10_id(), notselected,
+						"creteria10", "" + authorizationPageBeanId.getCreteria10_id(), creteria1NotSelected,
 						"select creteria10_id , name   from creteria10   where  active = true "
 								+ productlistBeanId.getPartCriteria(authorizationPageBeanId.getSite_id(),
 										is_criteria_by_catalog)

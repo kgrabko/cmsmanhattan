@@ -17,12 +17,14 @@ package com.cbsinc.cms.controllers;
  * Company: CENTER BUSINESS SOLUTIONS INC
  * </p>
  * 
+ * INSERT INTO site VALUES (2,'www.siteforyou.irr.bz',2,1,'shops.online-spb.com','shops.online-spb.com','John Smit','111-1234','','','','');
+ * 
  * @author Konstantin Grabko
  * @version 1.0
  */
 
 public interface SiteType {
 
-	final static String MAIN_SITE = "2";
+	final static String MAIN_SITE = "2";   // Market place or Primary Shop ID
 
 }
