@@ -1990,7 +1990,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_TOPBLOG_ON_MAINPAGE);
+			args.put("portlettype_id", Layout.REVIEW_MESSAGES);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 
 			dbAdaptor.executeInsertWithArgs(query, args);
@@ -2019,7 +2019,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_TOPBLOG_ON_MAINPAGE);
+			args.put("portlettype_id", Layout.REVIEW_MESSAGES);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -2059,7 +2059,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_LEFTTOP);
+			args.put("portlettype_id", Layout.RECOMMENDED_ITEMS_ON_MAIN_PAGE);
 			args.put("image_id", 10);
 			args.put("bigimage_id", 10);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
@@ -2101,7 +2101,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_RIGHTTOP);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
 			args.put("image_id", 10);
 			args.put("bigimage_id", 10);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
@@ -2141,7 +2141,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_RIGHTTOP);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -2179,7 +2179,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_LEFTTOP);
+			args.put("portlettype_id", Layout.RECOMMENDED_ITEMS_ON_MAIN_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -2217,7 +2217,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_RIGHTTOP);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -2255,7 +2255,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_RIGHTTOP);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -2279,7 +2279,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.FOR_EXTERNAL_PAGE);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PAGE_ABOUT_COMPANY);
+			args.put("portlettype_id", Layout.FILES_ON_PRODUCTINFO_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -3809,7 +3809,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_TOPBLOG_ON_MAINPAGE);
+			args.put("portlettype_id", Layout.REVIEW_MESSAGES);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 
 			dbAdaptor.executeInsertWithArgs(query, args);
@@ -3838,7 +3838,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_TOPBLOG_ON_MAINPAGE);
+			args.put("portlettype_id", Layout.REVIEW_MESSAGES);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -3878,7 +3878,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_LEFTTOP);
+			args.put("portlettype_id", Layout.RECOMMENDED_ITEMS_ON_MAIN_PAGE);
 			args.put("image_id", 10);
 			args.put("bigimage_id", 10);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
@@ -3920,7 +3920,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_RIGHTTOP);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
 			args.put("image_id", 10);
 			args.put("bigimage_id", 10);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
@@ -3960,7 +3960,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_RIGHTTOP);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -3998,7 +3998,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_LEFTTOP);
+			args.put("portlettype_id", Layout.RECOMMENDED_ITEMS_ON_MAIN_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -4036,7 +4036,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_RIGHTTOP);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -4074,7 +4074,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_RIGHTTOP);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -4098,7 +4098,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.FOR_EXTERNAL_PAGE);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PAGE_ABOUT_COMPANY);
+			args.put("portlettype_id", Layout.FILES_ON_PRODUCTINFO_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -5531,7 +5531,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("tree_id", Long.valueOf(tree_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_TOPBLOG_ON_MAINPAGE);
+			args.put("portlettype_id", Layout.REVIEW_MESSAGES);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 
 			dbAdaptor.executeInsertWithArgs(query, args);
@@ -5560,7 +5560,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("tree_id", Long.valueOf(tree_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_TOPBLOG_ON_MAINPAGE);
+			args.put("portlettype_id", Layout.REVIEW_MESSAGES);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -5599,7 +5599,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_LEFTTOP);
+			args.put("portlettype_id", Layout.RECOMMENDED_ITEMS_ON_MAIN_PAGE);
 			args.put("image_id", 10);
 			args.put("bigimage_id", 10);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
@@ -5640,7 +5640,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_RIGHTTOP);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
 			args.put("image_id", 10);
 			args.put("bigimage_id", 10);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
@@ -5679,7 +5679,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_RIGHTTOP);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -5716,7 +5716,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_LEFTTOP);
+			args.put("portlettype_id", Layout.RECOMMENDED_ITEMS_ON_MAIN_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -5753,7 +5753,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_RIGHTTOP);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -5790,7 +5790,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_RIGHTTOP);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -5814,7 +5814,7 @@ public class CreateShopBean implements java.io.Serializable {
 
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_BOTTOM);
+			args.put("portlettype_id", Layout.FOOTER_MESSAGES);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			args.put("catalog_id", -2);
 
@@ -5839,7 +5839,7 @@ public class CreateShopBean implements java.io.Serializable {
 
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_BOTTOM);
+			args.put("portlettype_id", Layout.FOOTER_MESSAGES);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			args.put("catalog_id", -2);
 			dbAdaptor.executeInsertWithArgs(query, args);
@@ -5863,7 +5863,7 @@ public class CreateShopBean implements java.io.Serializable {
 
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_BOTTOM);
+			args.put("portlettype_id", Layout.FOOTER_MESSAGES);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			args.put("catalog_id", -2);
 			dbAdaptor.executeInsertWithArgs(query, args);
@@ -5887,7 +5887,7 @@ public class CreateShopBean implements java.io.Serializable {
 
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_BOTTOM);
+			args.put("portlettype_id", Layout.FOOTER_MESSAGES);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			args.put("catalog_id", -2);
 			dbAdaptor.executeInsertWithArgs(query, args);
@@ -5911,7 +5911,7 @@ public class CreateShopBean implements java.io.Serializable {
 
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_BOTTOM);
+			args.put("portlettype_id", Layout.FOOTER_MESSAGES);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			args.put("catalog_id", -2);
 			dbAdaptor.executeInsertWithArgs(query, args);
@@ -7219,7 +7219,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_TOPBLOG_ON_MAINPAGE);
+			args.put("portlettype_id", Layout.REVIEW_MESSAGES);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 
 			dbAdaptor.executeInsertWithArgs(query, args);
@@ -7247,7 +7247,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_TOPBLOG_ON_MAINPAGE);
+			args.put("portlettype_id", Layout.REVIEW_MESSAGES);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -7286,7 +7286,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_LEFTTOP);
+			args.put("portlettype_id", Layout.RECOMMENDED_ITEMS_ON_MAIN_PAGE);
 			args.put("image_id", 10);
 			args.put("bigimage_id", 10);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
@@ -7327,7 +7327,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_RIGHTTOP);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
 			args.put("image_id", 10);
 			args.put("bigimage_id", 10);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
@@ -7366,7 +7366,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_RIGHTTOP);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -7403,7 +7403,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_LEFTTOP);
+			args.put("portlettype_id", Layout.RECOMMENDED_ITEMS_ON_MAIN_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -7440,7 +7440,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_RIGHTTOP);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -7477,7 +7477,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_RIGHTTOP);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -7501,7 +7501,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.FOR_EXTERNAL_PAGE);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PAGE_ABOUT_COMPANY);
+			args.put("portlettype_id", Layout.FILES_ON_PRODUCTINFO_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -8829,7 +8829,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_TOPBLOG_ON_MAINPAGE);
+			args.put("portlettype_id", Layout.REVIEW_MESSAGES);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 
 			dbAdaptor.executeInsertWithArgs(query, args);
@@ -8857,7 +8857,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_TOPBLOG_ON_MAINPAGE);
+			args.put("portlettype_id", Layout.REVIEW_MESSAGES);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -8896,7 +8896,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_LEFTTOP);
+			args.put("portlettype_id", Layout.RECOMMENDED_ITEMS_ON_MAIN_PAGE);
 			args.put("image_id", 10);
 			args.put("bigimage_id", 10);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
@@ -8937,7 +8937,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_RIGHTTOP);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
 			args.put("image_id", 10);
 			args.put("bigimage_id", 10);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
@@ -8976,7 +8976,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_RIGHTTOP);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -9013,7 +9013,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_LEFTTOP);
+			args.put("portlettype_id", Layout.RECOMMENDED_ITEMS_ON_MAIN_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -9050,7 +9050,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_RIGHTTOP);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -9087,7 +9087,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PORTLET_TYPE_RIGHTTOP);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -9111,7 +9111,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.FOR_EXTERNAL_PAGE);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PAGE_ABOUT_COMPANY);
+			args.put("portlettype_id", Layout.FILES_ON_PRODUCTINFO_PAGE);
 			args.put("lang_id", AuthorizationPageBeanId.getLang_id());
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -11227,19 +11227,19 @@ public class CreateShopBean implements java.io.Serializable {
 			dbAdaptor.executeQuery(query);
 			String soft_id = (String) dbAdaptor.getValueAt(0, 0);
 
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id  ) "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id , type_id ) "
 					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
 					+ "' , " + "'"
-					+ "<r>Demo item brief description .</r>"
+					+ "<r>Demo new item brief description .</r>"
 					+ "' , " + "'"
-					+ "<r>1.Demo item full  description ,</r>"
+					+ "<r>1.Demo new item full  description ,</r>"
 					+ "<r>Demo item full  description to replace with real text .</r>"
 					+ "<r> Test conext demo .</r>"
 					+ "<r> use admin mode to replace or delete the test  </r>"
 					+ "<r> Login as admin and password admin  </r>"
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
-					+ "' , " + "-1 , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " + SpecialCatalog.NEW_ARRIVALS_CATALOG +  " , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId()  + " , " + VisibilityEnum.YOUR_PAGE.getId() +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
 
@@ -11248,19 +11248,106 @@ public class CreateShopBean implements java.io.Serializable {
 			dbAdaptor.executeQuery(query);
 			soft_id = (String) dbAdaptor.getValueAt(0, 0);
 
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id  ) "
-					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id  , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 2  "
 					+ "' , " + "'"
-					+ "<r>Demo item brief description .</r>"
+					+ "<r>Demo new item brief description .</r>"
 					+ "' , " + "'"
-					+ "<r>1.Demo item full  description ,</r>"
+					+ "<r>1.Demo new item full  description ,</r>"
 					+ "<r>Demo item full  description to replace with real text .</r>"
 					+ "<r> Test conext demo .</r>"
 					+ "<r> use admin mode to replace or delete the test  </r>"
 					+ "<r> Login as admin and password admin  </r>"
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
-					+ "' , " + "-1 , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " + SpecialCatalog.NEW_ARRIVALS_CATALOG +  " , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId() + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
+
+			dbAdaptor.executeUpdate(query);
+			
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id  , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 3  "
+					+ "' , " + "'"
+					+ "<r>Demo new item brief description .</r>"
+					+ "' , " + "'"
+					+ "<r>1.Demo new item full  description ,</r>"
+					+ "<r>Demo item full  description to replace with real text .</r>"
+					+ "<r> Test conext demo .</r>"
+					+ "<r> use admin mode to replace or delete the test  </r>"
+					+ "<r> Login as admin and password admin  </r>"
+					+ "<r> then you will see button to edit or delete it </r>"
+					+ "<r> to add new item click manage button to get publish items web page </r>"
+					+ "' , " + SpecialCatalog.NEW_ARRIVALS_CATALOG + " , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId() + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
+
+			dbAdaptor.executeUpdate(query);
+
+			
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id  , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 4  "
+					+ "' , " + "'"
+					+ "<r>Demo new item brief description .</r>"
+					+ "' , " + "'"
+					+ "<r>1.Demo new item full  description ,</r>"
+					+ "<r>Demo item full  description to replace with real text .</r>"
+					+ "<r> Test conext demo .</r>"
+					+ "<r> use admin mode to replace or delete the test  </r>"
+					+ "<r> Login as admin and password admin  </r>"
+					+ "<r> then you will see button to edit or delete it </r>"
+					+ "<r> to add new item click manage button to get publish items web page </r>"
+					+ "' , " + SpecialCatalog.NEW_ARRIVALS_CATALOG + " , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId() + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
+
+			dbAdaptor.executeUpdate(query);
+
+			
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id  , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 5  "
+					+ "' , " + "'"
+					+ "<r>Demo new item brief description .</r>"
+					+ "' , " + "'"
+					+ "<r>1.Demo new item full  description ,</r>"
+					+ "<r>Demo item full  description to replace with real text .</r>"
+					+ "<r> Test conext demo .</r>"
+					+ "<r> use admin mode to replace or delete the test  </r>"
+					+ "<r> Login as admin and password admin  </r>"
+					+ "<r> then you will see button to edit or delete it </r>"
+					+ "<r> to add new item click manage button to get publish items web page </r>"
+					+ "' , " + SpecialCatalog.NEW_ARRIVALS_CATALOG + " , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId() + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
+
+			dbAdaptor.executeUpdate(query);
+
+			
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id  , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 6  "
+					+ "' , " + "'"
+					+ "<r>Demo new item brief description .</r>"
+					+ "' , " + "'"
+					+ "<r>1.Demo new item full  description ,</r>"
+					+ "<r>Demo item full  description to replace with real text .</r>"
+					+ "<r> Test conext demo .</r>"
+					+ "<r> use admin mode to replace or delete the test  </r>"
+					+ "<r> Login as admin and password admin  </r>"
+					+ "<r> then you will see button to edit or delete it </r>"
+					+ "<r> to add new item click manage button to get publish items web page </r>"
+					+ "' , "  + SpecialCatalog.HOME_PAGE_CATALOG   + " , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId() + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
 
@@ -11269,10 +11356,32 @@ public class CreateShopBean implements java.io.Serializable {
 			dbAdaptor.executeQuery(query);
 			soft_id = (String) dbAdaptor.getValueAt(0, 0);
 
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id  ) "
-					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id  , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 7  "
 					+ "' , " + "'"
-					+ "<r>Demo item brief description .</r>"
+					+ "<r>Demo new item brief description .</r>"
+					+ "' , " + "'"
+					+ "<r>1.Demo new item full  description ,</r>"
+					+ "<r>Demo item full  description to replace with real text .</r>"
+					+ "<r> Test conext demo .</r>"
+					+ "<r> use admin mode to replace or delete the test  </r>"
+					+ "<r> Login as admin and password admin  </r>"
+					+ "<r> then you will see button to edit or delete it </r>"
+					+ "<r> to add new item click manage button to get publish items web page </r>"
+					+ "' , " + SpecialCatalog.HOME_PAGE_CATALOG + " , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId() + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
+
+			dbAdaptor.executeUpdate(query);
+
+
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id  , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 8  "
+					+ "' , " + "'"
+					+ "<r>Demo new item brief description .</r>"
 					+ "' , " + "'"
 					+ "<r>1.Demo item full  description ,</r>"
 					+ "<r>Demo item full  description to replace with real text .</r>"
@@ -11281,7 +11390,7 @@ public class CreateShopBean implements java.io.Serializable {
 					+ "<r> Login as admin and password admin  </r>"
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
-					+ "' , " + "-1 , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " +  SpecialCatalog.HOME_PAGE_CATALOG + " , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId()  + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
 
@@ -11290,19 +11399,19 @@ public class CreateShopBean implements java.io.Serializable {
 			dbAdaptor.executeQuery(query);
 			soft_id = (String) dbAdaptor.getValueAt(0, 0);
 
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id  ) "
-					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 9  "
 					+ "' , " + "'"
-					+ "<r>Demo item brief description .</r>"
+					+ "<r>Demo new item brief description .</r>"
 					+ "' , " + "'"
-					+ "<r>1.Demo item full  description ,</r>"
+					+ "<r>1.Demo new item full  description ,</r>"
 					+ "<r>Demo item full  description to replace with real text .</r>"
 					+ "<r> Test conext demo .</r>"
 					+ "<r> use admin mode to replace or delete the test  </r>"
 					+ "<r> Login as admin and password admin  </r>"
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
-					+ "' , " + "-1 , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " + SpecialCatalog.HOME_PAGE_CATALOG + ", " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId()  + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
 
@@ -11311,19 +11420,19 @@ public class CreateShopBean implements java.io.Serializable {
 			dbAdaptor.executeQuery(query);
 			soft_id = (String) dbAdaptor.getValueAt(0, 0);
 
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id  ) "
-					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 10  "
 					+ "' , " + "'"
-					+ "<r>Demo item brief description .</r>"
+					+ "<r>Demo new item brief description .</r>"
 					+ "' , " + "'"
-					+ "<r>1.Demo item full  description ,</r>"
+					+ "<r>1.Demo new item full  description ,</r>"
 					+ "<r>Demo item full  description to replace with real text .</r>"
 					+ "<r> Test conext demo .</r>"
 					+ "<r> use admin mode to replace or delete the test  </r>"
 					+ "<r> Login as admin and password admin  </r>"
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
-					+ "' , " + "-1 , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " + SpecialCatalog.HOME_PAGE_CATALOG + " , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId() + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
 
@@ -11332,19 +11441,19 @@ public class CreateShopBean implements java.io.Serializable {
 			dbAdaptor.executeQuery(query);
 			soft_id = (String) dbAdaptor.getValueAt(0, 0);
 
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id  ) "
-					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id  , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 11  "
 					+ "' , " + "'"
-					+ "<r>Demo item brief description .</r>"
+					+ "<r>Demo new item brief description .</r>"
 					+ "' , " + "'"
-					+ "<r>1.Demo item full  description ,</r>"
+					+ "<r>1.Demo new item full  description ,</r>"
 					+ "<r>Demo item full  description to replace with real text .</r>"
 					+ "<r> Test conext demo .</r>"
 					+ "<r> use admin mode to replace or delete the test  </r>"
 					+ "<r> Login as admin and password admin  </r>"
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
-					+ "' , " + "-1 , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " + SpecialCatalog.NEW_ARRIVALS_CATALOG + " , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId() + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
 
@@ -11353,8 +11462,8 @@ public class CreateShopBean implements java.io.Serializable {
 			dbAdaptor.executeQuery(query);
 			soft_id = (String) dbAdaptor.getValueAt(0, 0);
 
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id ) "
-					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 12  "
 					+ "' , " + "'"
 					+ "<r>Demo item brief description .</r>"
 					+ "' , " + "'"
@@ -11365,7 +11474,7 @@ public class CreateShopBean implements java.io.Serializable {
 					+ "<r> Login as admin and password admin  </r>"
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
-					+ "' , " + "-2 , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " +  SpecialCatalog.HOME_PAGE_CATALOG + " , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId()  + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
 
@@ -11374,8 +11483,8 @@ public class CreateShopBean implements java.io.Serializable {
 			dbAdaptor.executeQuery(query);
 			soft_id = (String) dbAdaptor.getValueAt(0, 0);
 
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id  ) "
-					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 13  "
 					+ "' , " + "'"
 					+ "<r>Demo item brief description .</r>"
 					+ "' , " + "'"
@@ -11386,7 +11495,7 @@ public class CreateShopBean implements java.io.Serializable {
 					+ "<r> Login as admin and password admin  </r>"
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
-					+ "' , " + "-2 , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " + SpecialCatalog.HOME_PAGE_CATALOG  + " , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId() + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
 
@@ -11395,8 +11504,8 @@ public class CreateShopBean implements java.io.Serializable {
 			dbAdaptor.executeQuery(query);
 			soft_id = (String) dbAdaptor.getValueAt(0, 0);
 
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id  ) "
-					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id  , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 14  "
 					+ "' , " + "'"
 					+ "<r>Demo item brief description .</r>"
 					+ "' , " + "'"
@@ -11407,7 +11516,7 @@ public class CreateShopBean implements java.io.Serializable {
 					+ "<r> Login as admin and password admin  </r>"
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
-					+ "' , " + "-2 , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " + SpecialCatalog.HOME_PAGE_CATALOG   + " , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId() + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
 
@@ -11416,8 +11525,8 @@ public class CreateShopBean implements java.io.Serializable {
 			dbAdaptor.executeQuery(query);
 			soft_id = (String) dbAdaptor.getValueAt(0, 0);
 
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id  ) "
-					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , lang_id  , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 15  "
 					+ "' , " + "'"
 					+ "<r>Demo item brief description .</r>"
 					+ "' , " + "'"
@@ -11428,7 +11537,7 @@ public class CreateShopBean implements java.io.Serializable {
 					+ "<r> Login as admin and password admin  </r>"
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
-					+ "' , " + "-2 , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " + SpecialCatalog.HOME_PAGE_CATALOG  + " , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId() + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
 
@@ -11437,8 +11546,8 @@ public class CreateShopBean implements java.io.Serializable {
 			dbAdaptor.executeQuery(query);
 			soft_id = (String) dbAdaptor.getValueAt(0, 0);
 
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active  , lang_id ) "
-					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active  , lang_id , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 16  "
 					+ "' , " + "'"
 					+ "<r>Demo item brief description .</r>"
 					+ "' , " + "'"
@@ -11449,7 +11558,7 @@ public class CreateShopBean implements java.io.Serializable {
 					+ "<r> Login as admin and password admin  </r>"
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
-					+ "' , " + "-2 , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " + SpecialCatalog.HOME_PAGE_CATALOG  + " , " + "" + site_id + " , " + "" + "true" + " , " + LanguageEnum.EN.getId()  + " , " + VisibilityEnum.YOUR_PAGE.getId() +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
 
@@ -11458,8 +11567,8 @@ public class CreateShopBean implements java.io.Serializable {
 			dbAdaptor.executeQuery(query);
 			soft_id = (String) dbAdaptor.getValueAt(0, 0);
 
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , image_id , bigimage_id , lang_id   ) "
-					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , image_id , bigimage_id , lang_id  , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 17  "
 					+ "' , " + "'"
 					+ "<r>Demo item brief description .</r>"
 					+ "' , " + "'"
@@ -11470,8 +11579,8 @@ public class CreateShopBean implements java.io.Serializable {
 					+ "<r> Login as admin and password admin  </r>"
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
-					+ "' , " + "-2 , " + "" + site_id + " , " + "" + "true" + " , " + "0" + " , " + "10" + " , " + "10"
-					+ ""+ " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " + SpecialCatalog.HOME_PAGE_CATALOG  + " , " + "" + site_id + " , " + "" + "true" + " , " + Layout.REGULAR_ITEM + " , " + "10" + " , " + "10"
+					+ ""+ " , " + LanguageEnum.EN.getId()  + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
 
@@ -11480,8 +11589,8 @@ public class CreateShopBean implements java.io.Serializable {
 			dbAdaptor.executeQuery(query);
 			soft_id = (String) dbAdaptor.getValueAt(0, 0);
 
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , image_id , bigimage_id , lang_id   ) "
-					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , image_id , bigimage_id , lang_id , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 18  "
 					+ "' , " + "'"
 					+ "<r>Demo item brief description .</r>"
 					+ "' , " + "'"
@@ -11492,8 +11601,8 @@ public class CreateShopBean implements java.io.Serializable {
 					+ "<r> Login as admin and password admin  </r>"
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
-					+ "' , " + "-2 , " + "" + site_id + " , " + "" + "true" + " , " + "0" + " , " + "10" + " , " + "10"
-					+ ""+ " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " + SpecialCatalog.HOME_PAGE_CATALOG  + " , " + "" + site_id + " , " + "" + "true" + " , " + Layout.REGULAR_ITEM + " , " + "0" + " , " + "0"
+					+ ""+ " , " + LanguageEnum.EN.getId() + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
 
@@ -11502,19 +11611,19 @@ public class CreateShopBean implements java.io.Serializable {
 			dbAdaptor.executeQuery(query);
 			soft_id = (String) dbAdaptor.getValueAt(0, 0);
 
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id ) "
-					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 19  "
 					+ "' , " + "'"
-					+ "<r>Demo item brief description .</r>"
+					+ "<r>Demo item review brief description .</r>"
 					+ "' , " + "'"
-					+ "<r>1.Demo item full  description ,</r>"
+					+ "<r>1.Demo item review full  description ,</r>"
 					+ "<r>Demo item full  description to replace with real text .</r>"
 					+ "<r> Test conext demo .</r>"
 					+ "<r> use admin mode to replace or delete the test  </r>"
 					+ "<r> Login as admin and password admin  </r>"
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
-					+ "' , " + "-2 , " + "" + site_id + " , " + "" + "true" + " , " + "3" + " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " + SpecialCatalog.HOME_PAGE_CATALOG  + " , " + "" + site_id + " , " + "" + "true" + " , " + Layout.REVIEW_MESSAGES  + " , " + LanguageEnum.EN.getId() + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
 
@@ -11523,19 +11632,19 @@ public class CreateShopBean implements java.io.Serializable {
 			dbAdaptor.executeQuery(query);
 			soft_id = (String) dbAdaptor.getValueAt(0, 0);
 
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id ) "
-					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 20  "
 					+ "' , " + "'"
-					+ "<r>Demo item brief description .</r>"
+					+ "<r>Demo item review brief description .</r>"
 					+ "' , " + "'"
-					+ "<r>1.Demo item full  description ,</r>"
+					+ "<r>1.Demo item review full  description ,</r>"
 					+ "<r>Demo item full  description to replace with real text .</r>"
 					+ "<r> Test conext demo .</r>"
 					+ "<r> use admin mode to replace or delete the test  </r>"
 					+ "<r> Login as admin and password admin  </r>"
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
-					+ "' , " + "-2 , " + "" + site_id + " , " + "" + "true" + " , " + "3" + " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " + SpecialCatalog.HOME_PAGE_CATALOG  + " , " + "" + site_id + " , " + "" + "true" + " , " + Layout.REVIEW_MESSAGES  + " , " + LanguageEnum.EN.getId()  + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
 
@@ -11544,20 +11653,20 @@ public class CreateShopBean implements java.io.Serializable {
 			dbAdaptor.executeQuery(query);
 			soft_id = (String) dbAdaptor.getValueAt(0, 0);
 
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , image_id , bigimage_id , lang_id  ) "
-					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , image_id , bigimage_id , lang_id , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 21  "
 					+ "' , " + "'"
-					+ "<r>Demo item brief description .</r>"
+					+ "<r>Demo sponsored item brief description .</r>"
 					+ "' , " + "'"
-					+ "<r>1.Demo item full  description ,</r>"
+					+ "<r>1.Demo sponsored item full  description ,</r>"
 					+ "<r>Demo item full  description to replace with real text .</r>"
 					+ "<r> Test conext demo .</r>"
 					+ "<r> use admin mode to replace or delete the test  </r>"
 					+ "<r> Login as admin and password admin  </r>"
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
-					+ "' , " + "-2 , " + "" + site_id + " , " + "" + "true" + " , " + "1" + " , " + "10" + " , " + "10"
-					+ "" + " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " + SpecialCatalog.HOME_PAGE_CATALOG  + " , " + "" + site_id + " , " + "" + "true" + " , " + Layout.SPONSORED_ITEMS_ON_MAIN_PAGE + " , " + "10" + " , " + "10"
+					+ "" + " , " + LanguageEnum.EN.getId()  + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
 
@@ -11566,109 +11675,109 @@ public class CreateShopBean implements java.io.Serializable {
 			dbAdaptor.executeQuery(query);
 			soft_id = (String) dbAdaptor.getValueAt(0, 0);
 
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , image_id , bigimage_id , lang_id   ) "
-					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , image_id , bigimage_id , lang_id , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 22  "
 					+ "' , " + "'"
-					+ "<r>Demo item brief description .</r>"
+					+ "<r>Demo sponsored item brief description .</r>"
 					+ "' , " + "'"
-					+ "<r>1.Demo item full  description ,</r>"
+					+ "<r>1.Demo sponsored item full  description ,</r>"
 					+ "<r>Demo item full  description to replace with real text .</r>"
 					+ "<r> Test conext demo .</r>"
 					+ "<r> use admin mode to replace or delete the test  </r>"
 					+ "<r> Login as admin and password admin  </r>"
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
-					+ "' , " + "-2 , " + "" + site_id + " , " + "" + "true" + " , " + "2" + " , " + "10" + " , " + "10"
-					+ "" + " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " + SpecialCatalog.HOME_PAGE_CATALOG  + " , " + "" + site_id + " , " + "" + "true" + " , " + Layout.SPONSORED_ITEMS_ON_MAIN_PAGE + " , " + "10" + " , " + "10"
+					+ "" + " , " + LanguageEnum.EN.getId() + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
 
 			query = sequences_rs.getString("soft");
 			dbAdaptor.executeQuery(query);
 			soft_id = (String) dbAdaptor.getValueAt(0, 0);
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id  ) "
-					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 23  "
 					+ "' , " + "'"
-					+ "<r>Demo item brief description .</r>"
+					+ "<r>Demo sponsored item brief description .</r>"
 					+ "' , " + "'"
-					+ "<r>1.Demo item full  description ,</r>"
+					+ "<r>1.Demo sponsored item full  description ,</r>"
 					+ "<r>Demo item full  description to replace with real text .</r>"
 					+ "<r> Test conext demo .</r>"
 					+ "<r> use admin mode to replace or delete the test  </r>"
 					+ "<r> Login as admin and password admin  </r>"
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
-					+ "' , " + "-2 , " + "" + site_id + " , " + "" + "true" + " , " + "2" + " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " + SpecialCatalog.HOME_PAGE_CATALOG  + " , " + "" + site_id + " , " + "" + "true" + " , " + Layout.SPONSORED_ITEMS_ON_MAIN_PAGE + " , " + LanguageEnum.EN.getId()  + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
 
 			query = sequences_rs.getString("soft");
 			dbAdaptor.executeQuery(query);
 			soft_id = (String) dbAdaptor.getValueAt(0, 0);
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id  ) "
-					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id, type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 24  "
 					+ "' , " + "'"
-					+ "<r>Demo item brief description .</r>"
+					+ "<r>Demo recommended item brief description .</r>"
 					+ "' , " + "'"
-					+ "<r>1.Demo item full  description ,</r>"
+					+ "<r>1.Demo recommended item full  description ,</r>"
 					+ "<r>Demo item full  description to replace with real text .</r>"
 					+ "<r> Test conext demo .</r>"
 					+ "<r> use admin mode to replace or delete the test  </r>"
 					+ "<r> Login as admin and password admin  </r>"
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
-					+ "' , " + "-2 , " + "" + site_id + " , " + "" + "true" + " , " + "1"+ " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " + SpecialCatalog.HOME_PAGE_CATALOG  + " , " + "" + site_id + " , " + "" + "true" + " , " + Layout.RECOMMENDED_ITEMS_ON_MAIN_PAGE+ " , " + LanguageEnum.EN.getId() + " , " + VisibilityEnum.YOUR_PAGE.getId() +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
 
 			query = sequences_rs.getString("soft");
 			dbAdaptor.executeQuery(query);
 			soft_id = (String) dbAdaptor.getValueAt(0, 0);
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id  ) "
-					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 25  "
 					+ "' , " + "'"
-					+ "<r>Demo item brief description .</r>"
+					+ "<r>Demo recommended item brief description .</r>"
 					+ "' , " + "'"
-					+ "<r>1.Demo item full  description ,</r>"
+					+ "<r>1.Demo recommended item full  description ,</r>"
 					+ "<r>Demo item full  description to replace with real text .</r>"
 					+ "<r> Test conext demo .</r>"
 					+ "<r> use admin mode to replace or delete the test  </r>"
 					+ "<r> Login as admin and password admin  </r>"
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
-					+ "' , " + "-2 , " + ""
-					+ site_id + " , " + "" + "true" + " , " + "2" + " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " + SpecialCatalog.HOME_PAGE_CATALOG  + " , " + ""
+					+ site_id + " , " + "" + "true" + " , " + Layout.RECOMMENDED_ITEMS_ON_MAIN_PAGE + " , " + LanguageEnum.EN.getId()  + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
 
 			query = sequences_rs.getString("soft");
 			dbAdaptor.executeQuery(query);
 			soft_id = (String) dbAdaptor.getValueAt(0, 0);
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id  ) "
-					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 26  "
 					+ "' , " + "'"
-					+ "<r>Demo item brief description .</r>"
+					+ "<r>Demo recommended item brief description .</r>"
 					+ "' , " + "'"
-					+ "<r>1.Demo item full  description ,</r>"
+					+ "<r>1.Demo recommended item full  description ,</r>"
 					+ "<r>Demo item full  description to replace with real text .</r>"
 					+ "<r> Test conext demo .</r>"
 					+ "<r> use admin mode to replace or delete the test  </r>"
 					+ "<r> Login as admin and password admin  </r>"
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
-					+ "' , " + "-2 , " + "" + site_id + " , " + "" + "true" + " , " + "2"+ " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " + SpecialCatalog.HOME_PAGE_CATALOG  + " , " + "" + site_id + " , " + "" + "true" + " , " + Layout.RECOMMENDED_ITEMS_ON_MAIN_PAGE+ " , " + LanguageEnum.EN.getId()  + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
 			// Create About Page
 			query = sequences_rs.getString("soft");
 			dbAdaptor.executeQuery(query);
 			soft_id = (String) dbAdaptor.getValueAt(0, 0);
-			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id  ) "
-					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 1  "
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " Demo item 27  "
 					+ "' , " + "'"
-					+ "<r>Demo item brief description .</r>"
+					+ "<r>About company brief description .</r>"
 					+ "' , " + "'"
-					+ "<r>1.Demo item full  description ,</r>"
+					+ "<r>1.bout company full  description ,</r>"
 					+ "<r>Demo item full  description to replace with real text .</r>"
 					+ "<r> Test conext demo .</r>"
 					+ "<r> use admin mode to replace or delete the test  </r>"
@@ -11676,10 +11785,68 @@ public class CreateShopBean implements java.io.Serializable {
 					+ "<r> then you will see button to edit or delete it </r>"
 					+ "<r> to add new item click manage button to get publish items web page </r>"
 
-					+ "' , " + "-7 , "
-					+ "" + site_id + " , " + "" + "true" + " , " + "5" + " , " + LanguageEnum.EN.getId()  + " ) ; ";
+					+ "' , " + SpecialCatalog.OUTPUT_PAGES_SORT_BY_RATING + " , "+ "" + site_id + " , " + "" + "true" + " , " + Layout.FILES_ON_PRODUCTINFO_PAGE + " , " + LanguageEnum.EN.getId() + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
 
 			dbAdaptor.executeUpdate(query);
+			
+			// footer 
+			query = sequences_rs.getString("soft");
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " About company business  "
+					+ "' , " + "'"
+					+ "<r>Demo footer item brief description about company business .</r>"
+					+ "' , " + "'"
+					+ "<r>1.Demo footer item full  description about company business ,</r>"
+					+ "<r>Demo footer item full  description to replace with real text .</r>"
+					+ "<r> Test conext demo .</r>"
+					+ "<r> use admin mode to replace or delete the test  </r>"
+					+ "<r> Login as admin and password admin  </r>"
+					+ "<r> then you will see button to edit or delete it </r>"
+					+ "<r> to add new item click manage button to get publish items web page </r>"
+					+ "' , " + SpecialCatalog.HOME_PAGE_CATALOG  + " , " + "" + site_id + " , " + "" + "true" + " , " + +Layout.FOOTER_MESSAGES+ " , " + LanguageEnum.EN.getId()  + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
+
+			dbAdaptor.executeUpdate(query);
+
+			query = sequences_rs.getString("soft");
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " About company phone  "
+					+ "' , " + "'"
+					+ "<r>Demo footer item brief description about company phone .</r>"
+					+ "' , " + "'"
+					+ "<r>1.Demo footer item full  description about company  phone,</r>"
+					+ "<r>Demo footer item full  description to replace with real text .</r>"
+					+ "<r> Test conext demo .</r>"
+					+ "<r> use admin mode to replace or delete the test  </r>"
+					+ "<r> Login as admin and password admin  </r>"
+					+ "<r> then you will see button to edit or delete it </r>"
+					+ "<r> to add new item click manage button to get publish items web page </r>"
+					+ "' , " + SpecialCatalog.HOME_PAGE_CATALOG  + " , " + "" + site_id + " , " + "" + "true" + " , " + +Layout.FOOTER_MESSAGES+ " , " + LanguageEnum.EN.getId()  + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
+
+			dbAdaptor.executeUpdate(query);
+			
+			query = sequences_rs.getString("soft");
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id , type_id ) "
+					+ " values ( " + "" + soft_id + " , " + "'" + " About company contacts  "
+					+ "' , " + "'"
+					+ "<r>Demo footer item brief description about company contacts .</r>"
+					+ "' , " + "'"
+					+ "<r>1.Demo footer item full  description about company  contacts,</r>"
+					+ "<r>Demo footer item full  description to replace with real text .</r>"
+					+ "<r> Test conext demo .</r>"
+					+ "<r> use admin mode to replace or delete the test  </r>"
+					+ "<r> Login as admin and password admin  </r>"
+					+ "<r> then you will see button to edit or delete it </r>"
+					+ "<r> to add new item click manage button to get publish items web page </r>"
+					+ "' , " + SpecialCatalog.HOME_PAGE_CATALOG  + " , " + "" + site_id + " , " + "" + "true" + " , " + +Layout.FOOTER_MESSAGES+ " , " + LanguageEnum.EN.getId()  + " , " + VisibilityEnum.YOUR_PAGE.getId()  +"  ) ; ";
+
+			dbAdaptor.executeUpdate(query);
+
 
 			dbAdaptor.commit();
 			//cretareSiteDir(dufaultSite, site_dir);
@@ -12861,7 +13028,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("catalog_id", SpecialCatalog.FOR_EXTERNAL_PAGE);
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("active", true);
-			args.put("portlettype_id", Layout.PAGE_ABOUT_COMPANY);
+			args.put("portlettype_id", Layout.FILES_ON_PRODUCTINFO_PAGE);
 			dbAdaptor.executeInsertWithArgs(query, args);
 
 //			AuthorizationPageBeanId

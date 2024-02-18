@@ -3,7 +3,7 @@
   
   <groupId>CMS-Manhattan</groupId>
   <artifactId>cms-manhattan-one</artifactId>
-  <version>0.0.9</version>
+  <version>0.0.10</version>
   <packaging>war</packaging>
   <name>cms</name>
   <description>CMS-Manhattan. It is xslt template CMS .  Author is Konstantin Grabko . konstantin.grabko@yahoo.com </description>
@@ -63,7 +63,7 @@
           <artifactId>tomcat7-maven-plugin</artifactId>
           <version>2.2</version>
         </plugin>
-<!--
+
         <plugin>
             <groupId>com.spotify</groupId>
             <artifactId>dockerfile-maven-plugin</artifactId>
@@ -102,7 +102,7 @@
 			    </buildArgs>
 			  </configuration>
         </plugin>
-   -->
+
       <!--  It works before String boot compile phase  --> 
       <!--  https://www.youtube.com/watch?v=JJoBUdMJf1I-->
       <!-- https://sterl.org/2019/02/angular-spring-boot/ -->

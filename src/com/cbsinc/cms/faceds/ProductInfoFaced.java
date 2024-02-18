@@ -581,7 +581,7 @@ public class ProductInfoFaced extends com.cbsinc.cms.WebControls {
 		QueryManager Adp = new QueryManager();
 		String query = "";
 
-		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url , soft.fulldescription , big_images.img_url , soft.user_id  , soft.CDATE , soft.STATISTIC_ID , tuser.FIRST_NAME , tuser.LAST_NAME , tuser.COMPANY , soft.tree_id ,  show_blog , show_rating1 , show_rating2 , show_rating3 , jsp_url  FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON soft.file_id = file.file_id LEFT  JOIN tuser  ON soft.user_id = tuser.user_id  WHERE  soft.site_id = " + siteId  + " and soft.portlettype_id = " + Layout.PAGE_ABOUT_COMPANY ;
+		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url , soft.fulldescription , big_images.img_url , soft.user_id  , soft.CDATE , soft.STATISTIC_ID , tuser.FIRST_NAME , tuser.LAST_NAME , tuser.COMPANY , soft.tree_id ,  show_blog , show_rating1 , show_rating2 , show_rating3 , jsp_url  FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON soft.file_id = file.file_id LEFT  JOIN tuser  ON soft.user_id = tuser.user_id  WHERE  soft.site_id = " + siteId  + " and soft.portlettype_id = " + Layout.FILES_ON_PRODUCTINFO_PAGE ;
 
 		try 
 		{
@@ -929,7 +929,7 @@ public class ProductInfoFaced extends com.cbsinc.cms.WebControls {
 		QueryManager Adp = new QueryManager();
 		String query = "";
 		String product_id = "0" ;
-		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url , soft.fulldescription , big_images.img_url , soft.user_id  , soft.CDATE , soft.STATISTIC_ID , tuser.FIRST_NAME , tuser.LAST_NAME , tuser.COMPANY , soft.tree_id ,  show_blog , show_rating1 , show_rating2 , show_rating3 , jsp_url  FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON soft.file_id = file.file_id LEFT  JOIN tuser  ON soft.user_id = tuser.user_id  WHERE  soft.site_id = " + siteId  + " and soft.portlettype_id = " + Layout.PAGE_ABOUT_COMPANY ; 
+		query = "SELECT  soft.soft_id, soft.name,soft.description, soft.version, soft.cost, soft.currency, soft.serial_nubmer, file.file_id, soft.type_id, soft.active , soft.phonetype_id , soft.progname_id  , soft.image_id , images.img_url , soft.fulldescription , big_images.img_url , soft.user_id  , soft.CDATE , soft.STATISTIC_ID , tuser.FIRST_NAME , tuser.LAST_NAME , tuser.COMPANY , soft.tree_id ,  show_blog , show_rating1 , show_rating2 , show_rating3 , jsp_url  FROM soft LEFT  JOIN images ON soft.image_id = images.image_id  LEFT  JOIN big_images ON soft.bigimage_id = big_images.big_images_id  LEFT  JOIN file  ON soft.file_id = file.file_id LEFT  JOIN tuser  ON soft.user_id = tuser.user_id  WHERE  soft.site_id = " + siteId  + " and soft.portlettype_id = " + Layout.FILES_ON_PRODUCTINFO_PAGE ; 
 
 		try 
 		{
