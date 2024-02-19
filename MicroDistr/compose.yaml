@@ -3,6 +3,22 @@
 ## Monitoring URL - http://localhost:8761/
 ##
 services:
+
+  cms2servicediscovery:
+    image: cmsmanhattan/cms2servicediscovery:1.0.10
+    ports:
+      - 8761:8761
+    restart: always
+    environment:
+      - CMS_DB_JDBC_URL=jdbc:mysql://10.5.0.5:3306/cmsdb
+      - CMS_DB_USER=root
+      - CMS_DB_PASSWORD=grabfix
+      - CMS_DB_USE_SSL=false
+      - CMS_DB_AUTO_RECONECT=false
+    networks:
+      network:
+        ipv4_address: 10.5.0.9  
+         
   db:
     # We use a mariadb image which supports both amd64 & arm64 architecture
     image: mariadb:10.6.4-focal
@@ -69,7 +85,7 @@ services:
         ipv4_address: 10.5.0.4  
         
   cms2apigateway:
-    image: cmsmanhattan/cms2apigateway:1.0.2
+    image: cmsmanhattan/cms2apigateway:1.0.10
     ports:
       - 8989:8989
     restart: always
@@ -81,25 +97,10 @@ services:
       - CMS_DB_AUTO_RECONECT=false
     networks:
       network:
-        ipv4_address: 10.5.0.8
-        
-  cms2servicediscovery:
-    image: cmsmanhattan/cms2servicediscovery:1.0.1
-    ports:
-      - 8761:8761
-    restart: always
-    environment:
-      - CMS_DB_JDBC_URL=jdbc:mysql://10.5.0.5:3306/cmsdb
-      - CMS_DB_USER=root
-      - CMS_DB_PASSWORD=grabfix
-      - CMS_DB_USE_SSL=false
-      - CMS_DB_AUTO_RECONECT=false
-    networks:
-      network:
-        ipv4_address: 10.5.0.9          
-        
+        ipv4_address: 10.5.0.8  
+             
   cms2identityserver:
-    image: cmsmanhattan/cms2identityserver:1.0.1
+    image: cmsmanhattan/cms2identityserver:1.0.10
     ports:
       - 9898:9898
     restart: always
@@ -115,7 +116,7 @@ services:
         
         
   cms2configserver:
-    image: cmsmanhattan/cms2configserver:1.0.1
+    image: cmsmanhattan/cms2configserver:1.0.10
     ports:
       - 9196:9196
     restart: always
@@ -131,9 +132,10 @@ services:
         
         
   cms2catalog:
-    image: cmsmanhattan/cms2catalog:0.0.3
+    image: cmsmanhattan/cms2catalog:1.0.10
     ports:
-      - 9090:8080
+      - 8091:8091
+      - 8081:8081
     restart: always
     environment:
       - CMS_DB_JDBC_URL=jdbc:mysql://10.5.0.5:3306/cmsdb
@@ -147,9 +149,10 @@ services:
         
         
   cms2publisher:
-    image: cmsmanhattan/cms2publisher:0.0.3
+    image: cmsmanhattan/cms2publisher:1.0.10
     ports:
-      - 9091:8080
+      - 8092:8092
+      - 8082:8082
     restart: always
     environment:
       - CMS_DB_JDBC_URL=jdbc:mysql://10.5.0.5:3306/cmsdb
@@ -163,9 +166,10 @@ services:
         
         
   cms2orders:
-    image: cmsmanhattan/cms2orders:0.0.3
+    image: cmsmanhattan/cms2orders:1.0.10
     ports:
-      - 9092:8080
+       - 8093:8093
+       - 8083:8083
     restart: always
     environment:
       - CMS_DB_JDBC_URL=jdbc:mysql://10.5.0.5:3306/cmsdb
@@ -178,9 +182,10 @@ services:
         ipv4_address: 10.5.0.14   
         
   cms2payments:
-    image: cmsmanhattan/cms2payments:0.0.3
+    image: cmsmanhattan/cms2payments:1.0.10
     ports:
-      - 9093:8080
+       - 8094:8094
+       - 8084:8084
     restart: always
     environment:
       - CMS_DB_JDBC_URL=jdbc:mysql://10.5.0.5:3306/cmsdb
@@ -193,9 +198,10 @@ services:
         ipv4_address: 10.5.0.15                                          
         
   cms2fileserver:
-    image: cmsmanhattan/cms2fileserver:1.0.4
+    image: cmsmanhattan/cms2fileserver:1.0.10
     ports:
-      - 9094:8080
+      - 8095:8095
+      - 8085:8085
     restart: always
     environment:
       - CMS_DB_JDBC_URL=jdbc:mysql://10.5.0.5:3306/cmsdb
@@ -213,9 +219,13 @@ services:
     restart: always
     ports:
       - '6379:6379'
-    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    #command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    command: redis-server --save 20 1 --loglevel warning 
     volumes: 
-      - cache:/data     
+      - cache:/data 
+    networks:
+      network:
+        ipv4_address: 10.5.0.17       
         
 
 volumes:
