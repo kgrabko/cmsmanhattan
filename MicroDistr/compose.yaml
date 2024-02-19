@@ -1,0 +1,233 @@
+##
+## IN DEVELOPMENT 
+##
+##
+services:
+  db:
+    # We use a mariadb image which supports both amd64 & arm64 architecture
+    image: mariadb:10.6.4-focal
+    # If you really want to use MySQL, uncomment the following line
+    #image: mysql:8.0.27
+    # image: cmsmanhattan/cmsone:last
+    command: --init-file /data/application/init.sql
+    volumes:
+        - ./init.sql:/data/application/init.sql
+    networks:
+      network:
+        ipv4_address: 10.5.0.5  
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=grabfix
+      - MYSQL_DATABASE=cmsdb
+      - MYSQL_USER=cms
+      - MYSQL_PASSWORD=grabfix
+    expose:
+      - 3306
+      - 33060
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 22181:2181
+    networks:
+      network:
+        ipv4_address: 10.5.0.6     
+  
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 10.5.0.6:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://10.5.0.7:9092,PLAINTEXT_HOST://10.5.0.7:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      network:
+        ipv4_address: 10.5.0.7           
+      
+  cmsmanhattan:
+    image: cmsmanhattan/cmsone:0.0.10
+    ports:
+      - 80:8080
+    restart: always
+    environment:
+      - CMS_DB_JDBC_URL=jdbc:mysql://10.5.0.5:3306/cmsdb
+      - CMS_DB_USER=root
+      - CMS_DB_PASSWORD=grabfix
+      - CMS_DB_USE_SSL=false
+      - CMS_DB_AUTO_RECONECT=false
+    networks:
+      network:
+        ipv4_address: 10.5.0.4  
+        
+  cms2apigateway:
+    image: cmsmanhattan/cms2apigateway:1.0.2
+    ports:
+      - 8989:8989
+    restart: always
+    environment:
+      - CMS_DB_JDBC_URL=jdbc:mysql://10.5.0.5:3306/cmsdb
+      - CMS_DB_USER=root
+      - CMS_DB_PASSWORD=grabfix
+      - CMS_DB_USE_SSL=false
+      - CMS_DB_AUTO_RECONECT=false
+    networks:
+      network:
+        ipv4_address: 10.5.0.8
+        
+  cms2servicediscovery:
+    image: cmsmanhattan/cms2servicediscovery:1.0.1
+    ports:
+      - 8761:8761
+    restart: always
+    environment:
+      - CMS_DB_JDBC_URL=jdbc:mysql://10.5.0.5:3306/cmsdb
+      - CMS_DB_USER=root
+      - CMS_DB_PASSWORD=grabfix
+      - CMS_DB_USE_SSL=false
+      - CMS_DB_AUTO_RECONECT=false
+    networks:
+      network:
+        ipv4_address: 10.5.0.9          
+        
+  cms2identityserver:
+    image: cmsmanhattan/cms2identityserver:1.0.1
+    ports:
+      - 9898:9898
+    restart: always
+    environment:
+      - CMS_DB_JDBC_URL=jdbc:mysql://10.5.0.5:3306/cmsdb
+      - CMS_DB_USER=root
+      - CMS_DB_PASSWORD=grabfix
+      - CMS_DB_USE_SSL=false
+      - CMS_DB_AUTO_RECONECT=false
+    networks:
+      network:
+        ipv4_address: 10.5.0.10
+        
+        
+  cms2configserver:
+    image: cmsmanhattan/cms2configserver:1.0.1
+    ports:
+      - 9196:9196
+    restart: always
+    environment:
+      - CMS_DB_JDBC_URL=jdbc:mysql://10.5.0.5:3306/cmsdb
+      - CMS_DB_USER=root
+      - CMS_DB_PASSWORD=grabfix
+      - CMS_DB_USE_SSL=false
+      - CMS_DB_AUTO_RECONECT=false
+    networks:
+      network:
+        ipv4_address: 10.5.0.11
+        
+        
+  cms2catalog:
+    image: cmsmanhattan/cms2catalog:0.0.3
+    ports:
+      - 9090:8080
+    restart: always
+    environment:
+      - CMS_DB_JDBC_URL=jdbc:mysql://10.5.0.5:3306/cmsdb
+      - CMS_DB_USER=root
+      - CMS_DB_PASSWORD=grabfix
+      - CMS_DB_USE_SSL=false
+      - CMS_DB_AUTO_RECONECT=false
+    networks:
+      network:
+        ipv4_address: 10.5.0.12 
+        
+        
+  cms2publisher:
+    image: cmsmanhattan/cms2publisher:0.0.3
+    ports:
+      - 9091:8080
+    restart: always
+    environment:
+      - CMS_DB_JDBC_URL=jdbc:mysql://10.5.0.5:3306/cmsdb
+      - CMS_DB_USER=root
+      - CMS_DB_PASSWORD=grabfix
+      - CMS_DB_USE_SSL=false
+      - CMS_DB_AUTO_RECONECT=false
+    networks:
+      network:
+        ipv4_address: 10.5.0.13  
+        
+        
+  cms2orders:
+    image: cmsmanhattan/cms2orders:0.0.3
+    ports:
+      - 9092:8080
+    restart: always
+    environment:
+      - CMS_DB_JDBC_URL=jdbc:mysql://10.5.0.5:3306/cmsdb
+      - CMS_DB_USER=root
+      - CMS_DB_PASSWORD=grabfix
+      - CMS_DB_USE_SSL=false
+      - CMS_DB_AUTO_RECONECT=false
+    networks:
+      network:
+        ipv4_address: 10.5.0.14   
+        
+  cms2payments:
+    image: cmsmanhattan/cms2payments:0.0.3
+    ports:
+      - 9093:8080
+    restart: always
+    environment:
+      - CMS_DB_JDBC_URL=jdbc:mysql://10.5.0.5:3306/cmsdb
+      - CMS_DB_USER=root
+      - CMS_DB_PASSWORD=grabfix
+      - CMS_DB_USE_SSL=false
+      - CMS_DB_AUTO_RECONECT=false
+    networks:
+      network:
+        ipv4_address: 10.5.0.15                                          
+        
+  cms2fileserver:
+    image: cmsmanhattan/cms2fileserver:1.0.4
+    ports:
+      - 9094:8080
+    restart: always
+    environment:
+      - CMS_DB_JDBC_URL=jdbc:mysql://10.5.0.5:3306/cmsdb
+      - CMS_DB_USER=root
+      - CMS_DB_PASSWORD=grabfix
+      - CMS_DB_USE_SSL=false
+      - CMS_DB_AUTO_RECONECT=false
+    networks:
+      network:
+        ipv4_address: 10.5.0.16      
+        
+        
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes: 
+      - cache:/data     
+        
+
+volumes:
+  db_data:
+  cache:
+    driver: local
+  
+  
+networks:
+  network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1  
