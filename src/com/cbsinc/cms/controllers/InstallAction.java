@@ -69,7 +69,7 @@ public class InstallAction implements IAction {
 		
 		
 		if ( authorizationPageBeanId.getIntUserID() == 1 ) {
-		createShopBean.addSiteMainSite_pg();
+		createShopBean.addSiteMainSite_pg_v2();
 		}
 
 	}

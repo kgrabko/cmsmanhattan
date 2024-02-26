@@ -36,6 +36,7 @@ import org.apache.catalina.Service;
 import org.apache.catalina.core.StandardContext;
 import org.apache.catalina.core.StandardEngine;
 import org.apache.tomcat.util.http.mapper.Mapper;
+import org.apache.catalina.Engine ;
 
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.ProductlistBean;
@@ -561,6 +562,7 @@ public class ProductlistAction implements IAction {
 			Server server = (Server) mBeanServer.getAttribute(name, "managedResource");
 			Service[] services = server.findServices();
 			StandardEngine engine = (StandardEngine) services[0].getContainer();
+			//Engine engine = (StandardEngine) services[0].getContainer();
 			StandardContext context = (StandardContext) engine.findChild(engine.getDefaultHost())
 					.findChild(servletContext.getContextPath());
 			Mapper mapper = context.getMapper();

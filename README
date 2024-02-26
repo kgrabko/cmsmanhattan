@@ -8,8 +8,18 @@ Instaltion CMS.
 Any questions mail to: 
 Konstantin Grabko: konstantin.grabko@yahoo.com
 
+doker 
+install 
+docker-compose up --build
+uninstall
+docker compose down -v
+
+
 
 https://github.com/lff0305/springboot-lagency-struts-1/blob/master/main/pom.xml
+
+
+https://stackoverflow.com/questions/25797214/jetty-how-to-programmatically-configure-multiple-virtual-hosts
 
  
  

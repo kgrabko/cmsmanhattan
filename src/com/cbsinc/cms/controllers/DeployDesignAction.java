@@ -556,15 +556,14 @@ public class DeployDesignAction implements IAction {
 			authorizationPageBeanId.setUser_site(authorizationPageFaced.getCreateShopBean().getSite_id());
 
 			// get current tomcat server, engine and context objects
-			MBeanServer mBeanServer = MBeanServerFactory.findMBeanServer(null).get(0);
-			ObjectName name = new ObjectName("Catalina", "type", "Server");
-			Server server = (Server) mBeanServer.getAttribute(name, "managedResource");
-			Service[] services = server.findServices();
-			StandardEngine engine = (StandardEngine) services[0].getContainer();
-			StandardContext context = (StandardContext) engine.findChild(engine.getDefaultHost())
-					.findChild(servletContext.getContextPath());
-			Mapper mapper = context.getMapper();
-			mapper.addHostAlias(engine.getDefaultHost(), authorizationPageFaced.getCreateShopBean().getHost());
+			//MBeanServer mBeanServer = MBeanServerFactory.findMBeanServer(null).get(0);
+			//ObjectName name = new ObjectName("Catalina", "type", "Server");
+			//Server server = (Server) mBeanServer.getAttribute(name, "managedResource");
+			//Service[] services = server.findServices();
+			//StandardEngine engine = (StandardEngine) services[0].getContainer();
+			//StandardContext context = (StandardContext) engine.findChild(engine.getDefaultHost()).findChild(servletContext.getContextPath());
+			//Mapper mapper = context.getMapper();
+			//mapper.addHostAlias(engine.getDefaultHost(), authorizationPageFaced.getCreateShopBean().getHost());
 
 			// response.sendRedirect("Authorization.jsp?site_id=" +
 			// authorizationPageFaced.getCreateShopBean().getSite_id() + "&Login=" +

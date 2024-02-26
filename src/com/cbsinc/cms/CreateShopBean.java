@@ -10590,6 +10590,1940 @@ public class CreateShopBean implements java.io.Serializable {
 //		}
 //	}
 
+	public void addSiteMainSite_pg_v2() {
+		String file_name = "";
+		String file_path = "";
+		String query = "";
+		long intOwnerUserId = 0;
+		long user_id = 1;
+		try {
+			dbAdaptor = new QueryManager();
+			dbAdaptor.beginTransaction();
+			
+			query = "INSERT INTO country (COUNTRY_ID, TELCODE, NAME, FULLNAME, LANG_ID, LOCALE)"
+					+ " VALUES('1', '7', 'Russia', 'Russia', '2', 'EN') ; ";
+			dbAdaptor.executeUpdate(query);
+			
+			query = "INSERT INTO country (COUNTRY_ID, TELCODE, NAME, FULLNAME, LANG_ID, LOCALE)"
+					+ " VALUES('2', '1', 'USA', 'USA', '2', 'EN') ; ";
+			dbAdaptor.executeUpdate(query);
+			
+			query = "INSERT INTO country (COUNTRY_ID, TELCODE, NAME, FULLNAME, LANG_ID, LOCALE)"
+					+ " VALUES('3', '44', 'United Kingdom', 'United Kingdom', '2', 'EN') ; ";
+			dbAdaptor.executeUpdate(query);
+			
+			query = "INSERT INTO country (COUNTRY_ID, TELCODE, NAME, FULLNAME, LANG_ID, LOCALE)"
+					+ " VALUES('13', '1', 'Canada', 'Canada', '2', 'EN') ; ";
+			dbAdaptor.executeUpdate(query);
+			
+			query = "INSERT INTO country (COUNTRY_ID, TELCODE, NAME, FULLNAME, LANG_ID, LOCALE)"
+					+ " VALUES('20', '1', 'Australia', 'Australia', '2', 'EN') ; ";
+			dbAdaptor.executeUpdate(query);
+			
+			
+			query = "INSERT INTO city (CITY_ID, TELCODE, NAME, FULLNAME, COUNTRY_ID, LANG_ID, LOCALE)"
+					+ "VALUES('1', '812', 'St. Petersburg', 'St. Petersburg', '1', '2', 'EN'); ";
+			dbAdaptor.executeUpdate(query);
+			
+			query = "INSERT INTO city (CITY_ID, TELCODE, NAME, FULLNAME, COUNTRY_ID, LANG_ID, LOCALE)"
+					+ "VALUES('2', '95', 'Moscow', 'Moscow', '1', '2', 'EN'); ";
+			dbAdaptor.executeUpdate(query);
+			
+			query = "INSERT INTO city (CITY_ID, TELCODE, NAME, FULLNAME, COUNTRY_ID, LANG_ID, LOCALE)"
+					+ "VALUES('107', '22', 'York', 'York', '2', '2', 'EN'); ";
+			dbAdaptor.executeUpdate(query);
+			
+			query = "INSERT INTO city (CITY_ID, TELCODE, NAME, FULLNAME, COUNTRY_ID, LANG_ID, LOCALE)"
+					+ "VALUES('103', '22', 'London', 'London', '3', '2', 'EN'); ";
+			dbAdaptor.executeUpdate(query);
+			
+			query = "INSERT INTO city (CITY_ID, TELCODE, NAME, FULLNAME, COUNTRY_ID, LANG_ID, LOCALE)"
+					+ "VALUES('700', '61', 'Ottawa', 'Ottawa', '13', '2', 'EN'); ";
+			dbAdaptor.executeUpdate(query);
+			
+			query = "INSERT INTO city (CITY_ID, TELCODE, NAME, FULLNAME, COUNTRY_ID, LANG_ID, LOCALE)"
+					+ "VALUES('7001', '02', 'Canberra', 'Canberra', '20', '2', 'EN'); ";
+			dbAdaptor.executeUpdate(query);
+
+			site_id = SiteType.MAIN_SITE ;
+
+			query = "insert into site (site_id , owner , host , home_dir , site_dir , person , phone  , address , active ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ?  , ? , ? ) ; ";
+
+			// site_id , owner , host , home_dir , site_dir , person , phone , address ,
+			// active
+			HashMap args = new HashMap();
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("owner", Long.valueOf(user_id));
+			args.put("host", host);
+			args.put("home_dir", home_dir);
+			args.put("site_dir", site_dir);
+			args.put("person", person);
+			args.put("phone", phone);
+			args.put("address", address);
+			args.put("active", true);
+
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			/////////////// dbAdaptor.executeUpdate(query);
+			// add manager user
+			// query = "SELECT NEXT VALUE FOR tuser_user_id_seq AS ID FROM ONE_SEQUENCES";
+			query = sequences_rs.getString("tuser");
+			dbAdaptor.executeQuery(query);
+			long intUserID = Long.parseLong((String) dbAdaptor.getValueAt(0, 0));
+			intOwnerUserId = intUserID;
+
+			query = "insert into tuser ( user_id , login , passwd ,birthday,acvive_session ,active ,regdate ,levelup_cd ,bank_cd , currency_id , site_id , city_id , country_id, E_MAIL , COMPANY) "
+					+ " values (? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?, ? , ? ) ";
+
+			args = new HashMap();
+			args.put("user_id", intUserID);
+			args.put("login", login);
+			args.put("passwd", passwd);
+			args.put("birthday", new Date());
+			args.put("acvive_session", true);
+			args.put("active", true);
+			args.put("regdate", new Date());
+			args.put("levelup_cd", SiteRole.ADMINISTRATOR_ID);
+			args.put("bank_cd", 0);
+			args.put("currency_id", Long.valueOf(CurrencyEnum.USD.getId()));
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("city_id", Long.valueOf(city_id));
+			args.put("country_id", Long.valueOf(country_id));
+			args.put("E_MAIL", " your@mail");
+			args.put("COMPANY", " your company name ");
+
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			// query = "SELECT NEXT VALUE FOR account_id_seq AS ID FROM ONE_SEQUENCES";
+			query = sequences_rs.getString("account");
+
+			dbAdaptor.executeQuery(query);
+			account_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into account ( account_id, user_id , amount , curr , date_input ,  description ,  currency_id ) "
+					+ " values ( ? , ? , ? , ? , ? ,  ? ,  ?  )";
+
+			args = new HashMap();
+			args.put("account_id", Long.valueOf(account_id));
+			args.put("user_id", intUserID);
+			args.put("amount", Double.valueOf("0"));
+			args.put("curr", 3);
+			args.put("date_input", new Date());
+			args.put("description", " new_account ");
+			args.put("currency_id", Long.valueOf(CurrencyEnum.USD.getId()));
+
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			// add anonymouse user
+			query = sequences_rs.getString("tuser");
+			dbAdaptor.executeQuery(query);
+
+			intUserID = Long.parseLong((String) dbAdaptor.getValueAt(0, 0));
+
+			query = "insert into tuser ( user_id , login , passwd ,birthday,acvive_session ,active ,regdate ,levelup_cd ,bank_cd , currency_id , site_id , city_id , country_id) "
+					+ "values ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? )";
+
+			args = new HashMap();
+			args.put("user_id", intUserID);
+			args.put("login", SiteRole.GUEST);
+			args.put("passwd", SiteRole.GUEST_PASSWORD);
+			args.put("birthday", new Date());
+			args.put("acvive_session", true);
+			args.put("active", true);
+			args.put("regdate", new Date());
+			args.put("levelup_cd", SiteRole.GUEST_ROLE_ID);
+			args.put("bank_cd", 0);
+			args.put("currency_id", Long.valueOf(CurrencyEnum.USD.getId()));
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("city_id", Long.valueOf(city_id));
+			args.put("country_id", Long.valueOf(country_id));
+
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("account");
+			dbAdaptor.executeQuery(query);
+			account_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into account ( account_id , user_id , amount , curr , date_input ,  description ,  currency_id ) "
+					+ " values ( ? , ? , ? , ? , ? ,  ? ,  ? ) ; ";
+
+			args = new HashMap();
+			args.put("account_id", Long.valueOf(account_id));
+			args.put("user_id", intUserID);
+			args.put("amount", Double.valueOf("0"));
+			args.put("curr", 3);
+			args.put("date_input", new Date());
+			args.put("description", " new_account ");
+			args.put("currency_id", Long.valueOf(CurrencyEnum.USD.getId()));
+
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			// ==== end add users =========================
+
+			query = "insert into shop (shop_cd , owner_id , login , passwd ,  pay_gateway_id , site_id ,cdate ) "
+					+ " values ( ? , ? , ? , ? ,  ? , ? , ? ) ; ";
+
+			args = new HashMap();
+			args.put("shop_cd", 84473);
+			args.put("owner_id", intUserID);
+			args.put("login", "HCO-CENTE-406");
+			args.put("passwd", "91KiBFRtE8fF7VHc8tvr");
+			args.put("pay_gateway_id", 1);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("cdate", new Date());
+
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			
+			
+			query = "insert into lang (LANG_ID , LABLE , DESCRIPTION , ACTIVE ) " 
+			+ " values ( "+LanguageEnum.RU.getId()+" , '"+LanguageEnum.RU.getCode()+"' ,'" + LanguageEnum.RU.getDescr() + "' , " + "" + "true" + "  ) ; ";
+			dbAdaptor.executeUpdate(query);
+			
+			query = "insert into lang (LANG_ID , LABLE , DESCRIPTION , ACTIVE ) " 
+					+ " values ( "+LanguageEnum.EN.getId()+" , '"+LanguageEnum.EN.getCode()+"' ,'" + LanguageEnum.EN.getDescr() + "' , " + "" + "true" + "  ) ; ";
+			dbAdaptor.executeUpdate(query);
+
+			
+			
+			query = "insert into catalog (catalog_id , site_id , lable , active ,lang_id , parent_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ?  ) ";
+
+			args = new HashMap();
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_FROM_NEWS_CATALOG);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lable", "News");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("parent_id", SpecialCatalog.ROOT_CATALOG);
+
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = "insert into catalog (catalog_id , site_id , lable , active ,lang_id , parent_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ?  ) ; ";
+
+			args = new HashMap();
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lable", "Main page");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("parent_id", SpecialCatalog.ROOT_CATALOG);
+
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			String catalog_id = "";
+			String parent_catalog_id = "";
+			// query = "SELECT NEXT VALUE FOR catalog_catalog_id_seq AS ID FROM
+			// ONE_SEQUENCES";
+			query = sequences_rs.getString("catalog");
+			dbAdaptor.executeQuery(query);
+			catalog_id = dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into catalog (catalog_id , site_id , lable , active ,lang_id , parent_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ?  )";
+
+			args = new HashMap();
+			args.put("catalog_id", Long.valueOf(catalog_id));
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lable", "Selection1");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("parent_id", SpecialCatalog.ROOT_CATALOG);
+
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("catalog");
+			dbAdaptor.executeQuery(query);
+			parent_catalog_id = catalog_id;
+			catalog_id = dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into catalog (catalog_id , site_id , lable , active ,lang_id , parent_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? ) ";
+
+			args = new HashMap();
+			args.put("catalog_id", Long.valueOf(catalog_id));
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lable", "Sub selection1");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("parent_id", Long.valueOf(parent_catalog_id));
+
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("catalog");
+			dbAdaptor.executeQuery(query);
+			// parent_catalog_id = catalog_id ;
+			catalog_id = dbAdaptor.getValueAt(0, 0);
+			query = "insert into catalog (catalog_id , site_id , lable , active ,lang_id , parent_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? ) ";
+			args = new HashMap();
+			args.put("catalog_id", Long.valueOf(catalog_id));
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lable", "Sub selection11");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("parent_id", Long.valueOf(parent_catalog_id));
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("catalog");
+			dbAdaptor.executeQuery(query);
+			// parent_catalog_id = catalog_id ;
+			catalog_id = dbAdaptor.getValueAt(0, 0);
+			query = "insert into catalog (catalog_id , site_id , lable , active ,lang_id , parent_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? ) ";
+			args = new HashMap();
+			args.put("catalog_id", Long.valueOf(catalog_id));
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lable", "Sub selection111");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("parent_id", Long.valueOf(parent_catalog_id));
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("catalog");
+			dbAdaptor.executeQuery(query);
+			catalog_id = dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into catalog (catalog_id , site_id , lable , active ,lang_id , parent_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ?)";
+
+			args = new HashMap();
+			args.put("catalog_id", Long.valueOf(catalog_id));
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lable", "Selection2");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("parent_id", SpecialCatalog.ROOT_CATALOG);
+
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("catalog");
+			dbAdaptor.executeQuery(query);
+			parent_catalog_id = catalog_id;
+			catalog_id = dbAdaptor.getValueAt(0, 0);
+			query = "insert into catalog (catalog_id , site_id , lable , active ,lang_id , parent_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? ) ; ";
+
+			args = new HashMap();
+			args.put("catalog_id", Long.valueOf(catalog_id));
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lable", "Sub selection2");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("parent_id", Long.valueOf(parent_catalog_id));
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("catalog");
+			dbAdaptor.executeQuery(query);
+			// parent_catalog_id = catalog_id ;
+			catalog_id = dbAdaptor.getValueAt(0, 0);
+			query = "insert into catalog (catalog_id , site_id , lable , active ,lang_id , parent_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? ) ; ";
+
+			args = new HashMap();
+			args.put("catalog_id", Long.valueOf(catalog_id));
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lable", "Sub selection22");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("parent_id", Long.valueOf(parent_catalog_id));
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("catalog");
+			dbAdaptor.executeQuery(query);
+			// parent_catalog_id = catalog_id ;
+			catalog_id = dbAdaptor.getValueAt(0, 0);
+			query = "insert into catalog (catalog_id , site_id , lable , active ,lang_id , parent_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? ) ; ";
+
+			args = new HashMap();
+			args.put("catalog_id", Long.valueOf(catalog_id));
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lable", "Sub selection222");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("parent_id", Long.valueOf(parent_catalog_id));
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("catalog");
+			dbAdaptor.executeQuery(query);
+			catalog_id = dbAdaptor.getValueAt(0, 0);
+			query = "insert into catalog (catalog_id , site_id , lable , active ,lang_id , parent_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ?  )";
+
+			args = new HashMap();
+			args.put("catalog_id", Long.valueOf(catalog_id));
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lable", "Selection3");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("parent_id", SpecialCatalog.ROOT_CATALOG);
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("catalog");
+			dbAdaptor.executeQuery(query);
+			parent_catalog_id = catalog_id;
+			catalog_id = dbAdaptor.getValueAt(0, 0);
+			query = "insert into catalog (catalog_id , site_id , lable , active ,lang_id , parent_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? ) ; ";
+			args = new HashMap();
+			args.put("catalog_id", Long.valueOf(catalog_id));
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lable", "Sub selection3");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("parent_id", Long.valueOf(parent_catalog_id));
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("catalog");
+			dbAdaptor.executeQuery(query);
+			// parent_catalog_id = catalog_id ;
+			catalog_id = dbAdaptor.getValueAt(0, 0);
+			query = "insert into catalog (catalog_id , site_id , lable , active ,lang_id , parent_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? ) ; ";
+			args = new HashMap();
+			args.put("catalog_id", Long.valueOf(catalog_id));
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lable", "Sub selection33");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("parent_id", Long.valueOf(parent_catalog_id));
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("catalog");
+			dbAdaptor.executeQuery(query);
+			// parent_catalog_id = catalog_id ;
+			catalog_id = dbAdaptor.getValueAt(0, 0);
+			query = "insert into catalog (catalog_id , site_id , lable , active ,lang_id , parent_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? ) ; ";
+			args = new HashMap();
+			args.put("catalog_id", Long.valueOf(catalog_id));
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lable", "Sub selection333");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("parent_id", Long.valueOf(parent_catalog_id));
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("catalog");
+			dbAdaptor.executeQuery(query);
+			catalog_id = dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into catalog (catalog_id , site_id , lable , active ,lang_id , parent_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? ) ; ";
+
+			args = new HashMap();
+			args.put("catalog_id", Long.valueOf(catalog_id));
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lable", "Selection4");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("parent_id", SpecialCatalog.ROOT_CATALOG);
+
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("catalog");
+			dbAdaptor.executeQuery(query);
+			parent_catalog_id = catalog_id;
+			catalog_id = dbAdaptor.getValueAt(0, 0);
+			query = "insert into catalog (catalog_id , site_id , lable , active ,lang_id , parent_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? ) ; ";
+			args = new HashMap();
+			args.put("catalog_id", Long.valueOf(catalog_id));
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lable", "Sub selection4");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("parent_id", Long.valueOf(parent_catalog_id));
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("catalog");
+			dbAdaptor.executeQuery(query);
+			// parent_catalog_id = catalog_id ;
+			catalog_id = dbAdaptor.getValueAt(0, 0);
+			query = "insert into catalog (catalog_id , site_id , lable , active ,lang_id , parent_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? ) ; ";
+			args = new HashMap();
+			args.put("catalog_id", Long.valueOf(catalog_id));
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lable", "Sub selection44");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("parent_id", Long.valueOf(parent_catalog_id));
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("catalog");
+			dbAdaptor.executeQuery(query);
+			// parent_catalog_id = catalog_id ;
+			catalog_id = dbAdaptor.getValueAt(0, 0);
+			query = "insert into catalog (catalog_id , site_id , lable , active ,lang_id , parent_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? ) ; ";
+			args = new HashMap();
+			args.put("catalog_id", Long.valueOf(catalog_id));
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lable", "Sub selection444");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("parent_id", Long.valueOf(parent_catalog_id));
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			/**
+			 * query = sequences_rs.getString("catalog"); dbAdaptor.executeQuery(query);
+			 * catalog_id = dbAdaptor.getValueAt(0, 0); query = "insert into catalog
+			 * (catalog_id , site_id , lable , active ,lang_id , parent_id ) " + " values (
+			 * ? , ? , ? , ? , ? , ? ) "; args = new HashMap();
+			 * args.put("catalog_id",Long.valueOf(catalog_id) ); args.put("site_id",
+			 * Long.valueOf(site_id) ); args.put("lable","Selection5");
+			 * args.put("active",true ); args.put("lang_id",2 ); args.put("parent_id",
+			 * SpecialCatalog.ROOT_CATALOG ); dbAdaptor.executeInsertWithArgs(query, args);
+			 * 
+			 * 
+			 * query = sequences_rs.getString("catalog"); dbAdaptor.executeQuery(query);
+			 * parent_catalog_id = catalog_id ; catalog_id = dbAdaptor.getValueAt(0, 0);
+			 * query = "insert into catalog (catalog_id , site_id , lable , active ,lang_id
+			 * , parent_id ) " + " values ( ? , ? , ? , ? , ? , ? ) "; args = new HashMap();
+			 * args.put("catalog_id",Long.valueOf(catalog_id) ); args.put("site_id",
+			 * Long.valueOf(site_id) ); args.put("lable","Sub selection5");
+			 * args.put("active",true ); args.put("lang_id",2 ); args.put("parent_id",
+			 * Long.valueOf(parent_catalog_id) ); dbAdaptor.executeInsertWithArgs(query,
+			 * args);
+			 */
+
+			// UPDATE CRETERIA1 set CRETERIA1_ID = CRETERIA1_ID * -1 WHERE NAME = 'Not
+			// chosen'
+			// UPDATE CRETERIA2 set CRETERIA2_ID = CRETERIA2_ID * - 1 WHERE NAME = 'Not
+			// chosen'
+			// UPDATE CRETERIA3 set CRETERIA3_ID = CRETERIA3_ID * - 1 WHERE NAME = 'Not
+			// chosen'
+			// delete * FROM creteria2 where CRETERIA2_id < 0
+			String creteria_id = "";
+			query = "SELECT MIN(CRETERIA1_ID) - 1  as ID FROM creteria1";
+			dbAdaptor.executeQuery(query);
+			creteria_id = dbAdaptor.getValueAt(0, 0);
+			// creteria_id = "-".concat(creteria_id);
+			if(creteria_id.equals("")) creteria_id =  "0" ;
+			query = "INSERT INTO creteria1 (CRETERIA1_ID ,NAME ,ACTIVE ,LANG_ID ,LINK_ID ,CATALOG_ID ,LABEL ) "
+					+ "VALUES(? , ? , ? , ? , ? , ? , ? )";
+			args = new HashMap();
+			args.put("creteria1_id", Long.valueOf(creteria_id));
+			args.put("name", "Not chosen");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("link_id", 0);
+			args.put("catalog_id", Long.valueOf(site_id));
+			args.put("label", "Criterion1");
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = "SELECT MAX(CRETERIA1_ID) + 1  as ID FROM creteria1";
+			dbAdaptor.executeQuery(query);
+			creteria_id = dbAdaptor.getValueAt(0, 0);
+			if(creteria_id.equals("")) creteria_id =  "0" ;
+
+			query = "INSERT INTO creteria1 (CRETERIA1_ID ,NAME ,ACTIVE ,LANG_ID ,LINK_ID ,CATALOG_ID ,LABEL ) "
+					+ " VALUES(? , ? , ? , ? , ? , ? ,? )";
+			args = new HashMap();
+			args.put("creteria1_id", Long.valueOf(creteria_id));
+			args.put("name", "Test1");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("link_id", 0);
+			args.put("catalog_id", Long.valueOf(site_id));
+			args.put("label", "Criterion1");
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = "SELECT MAX(CRETERIA1_ID) + 1  as ID FROM creteria1";
+			dbAdaptor.executeQuery(query);
+			creteria_id = dbAdaptor.getValueAt(0, 0);
+			if(creteria_id.equals("")) creteria_id =  "0" ;
+
+			query = "INSERT INTO creteria1 (CRETERIA1_ID ,NAME ,ACTIVE ,LANG_ID ,LINK_ID ,CATALOG_ID ,LABEL ) "
+					+ " VALUES(? , ? ,? , ? , ? , ? , ? )";
+			args = new HashMap();
+			args.put("creteria1_id", Long.valueOf(creteria_id));
+			args.put("name", "Test2");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("link_id", 0);
+			args.put("catalog_id", Long.valueOf(site_id));
+			args.put("label", "Criterion1");
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = "SELECT MIN(CRETERIA2_ID) - 1  as ID FROM creteria2";
+			dbAdaptor.executeQuery(query);
+			creteria_id = dbAdaptor.getValueAt(0, 0);
+			// creteria_id = "-".concat(creteria_id);
+			if(creteria_id.equals("")) creteria_id =  "0" ;
+			
+			query = "INSERT INTO creteria2 (CRETERIA2_ID ,NAME ,ACTIVE ,LANG_ID ,LINK_ID ,CATALOG_ID ,LABEL ) "
+					+ " VALUES(? , ? , ? , ? , ? , ? , ? )";
+			args = new HashMap();
+			args.put("creteria2_id", Long.valueOf(creteria_id));
+			args.put("name", "Not chosen");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("link_id", 0);
+			args.put("catalog_id", Long.valueOf(site_id));
+			args.put("label", "Criterion2");
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = "SELECT MIN(CRETERIA3_ID) - 1  as ID FROM creteria3";
+			dbAdaptor.executeQuery(query);
+			creteria_id = dbAdaptor.getValueAt(0, 0);
+			// creteria_id = "-".concat(creteria_id);
+			if(creteria_id.equals("")) creteria_id =  "0" ;
+			
+			query = "INSERT INTO creteria3 (CRETERIA3_ID ,NAME ,ACTIVE ,LANG_ID ,LINK_ID ,CATALOG_ID ,LABEL ) "
+					+ " VALUES(? , ? , ? , ? , ? , ? , ?)";
+			args = new HashMap();
+			args.put("creteria3_id", Long.valueOf(creteria_id));
+			args.put("name", "Not chosen");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("link_id", 0);
+			args.put("catalog_id", Long.valueOf(site_id));
+			args.put("label", "Criterion3");
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = "SELECT MIN(CRETERIA4_ID) - 1  as ID FROM creteria4";
+			dbAdaptor.executeQuery(query);
+			creteria_id = dbAdaptor.getValueAt(0, 0);
+			// creteria_id = "-".concat(creteria_id);
+			if(creteria_id.equals("")) creteria_id =  "0" ;
+			query = "INSERT INTO creteria4 (CRETERIA4_ID ,NAME ,ACTIVE ,LANG_ID ,LINK_ID ,CATALOG_ID ,LABEL ) "
+					+ " VALUES( ? , ? , ? , ? , ? , ? , ? )";
+			args = new HashMap();
+			args.put("creteria4_id", Long.valueOf(creteria_id));
+			args.put("name", "Not chosen");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("link_id", 0);
+			args.put("catalog_id", Long.valueOf(site_id));
+			args.put("label", "Criterion4");
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = "SELECT MIN(CRETERIA5_ID) - 1  as ID FROM creteria5";
+			dbAdaptor.executeQuery(query);
+			creteria_id = dbAdaptor.getValueAt(0, 0);
+			if(creteria_id.equals("")) creteria_id =  "0" ;
+			// creteria_id = "-".concat(creteria_id);
+			query = "INSERT INTO creteria5 (CRETERIA5_ID ,NAME ,ACTIVE ,LANG_ID ,LINK_ID ,CATALOG_ID ,LABEL ) "
+					+ " VALUES( ? , ? , ? , ? , ? , ? , ? )";
+			args = new HashMap();
+			args.put("creteria5_id", Long.valueOf(creteria_id));
+			args.put("name", "Not chosen");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("link_id", 0);
+			args.put("catalog_id", Long.valueOf(site_id));
+			args.put("label", "Criterion5");
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = "SELECT MIN(CRETERIA6_ID) - 1  as ID FROM creteria6";
+			dbAdaptor.executeQuery(query);
+			creteria_id = dbAdaptor.getValueAt(0, 0);
+			if(creteria_id.equals("")) creteria_id =  "0" ;
+			// creteria_id = "-".concat(creteria_id);
+			query = "INSERT INTO creteria6 (CRETERIA6_ID ,NAME ,ACTIVE ,LANG_ID ,LINK_ID ,CATALOG_ID ,LABEL ) "
+					+ " VALUES( ? , ? , ? , ? , ? , ? , ? )";
+			args = new HashMap();
+			args.put("creteria6_id", Long.valueOf(creteria_id));
+			args.put("name", "Not chosen");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("link_id", 0);
+			args.put("catalog_id", Long.valueOf(site_id));
+			args.put("label", "Criterion6");
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = "SELECT MIN(CRETERIA7_ID) - 1  as ID FROM creteria7";
+			dbAdaptor.executeQuery(query);
+			creteria_id = dbAdaptor.getValueAt(0, 0);
+			// creteria_id = "-".concat(creteria_id);
+			if(creteria_id.equals("")) creteria_id =  "0" ;
+			query = "INSERT INTO creteria7 (CRETERIA7_ID ,NAME ,ACTIVE ,LANG_ID ,LINK_ID ,CATALOG_ID ,LABEL ) "
+					+ " VALUES( ? , ? , ? , ? , ? , ? , ? )";
+			args = new HashMap();
+			args.put("creteria7_id", Long.valueOf(creteria_id));
+			args.put("name", "Not chosen");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("link_id", 0);
+			args.put("catalog_id", Long.valueOf(site_id));
+			args.put("label", "Criterion7");
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = "SELECT MIN(CRETERIA8_ID) - 1  as ID FROM creteria8";
+			dbAdaptor.executeQuery(query);
+			creteria_id = dbAdaptor.getValueAt(0, 0);
+			// creteria_id = "-".concat(creteria_id);
+			if(creteria_id.equals("")) creteria_id =  "0" ;
+			query = "INSERT INTO creteria8 (CRETERIA8_ID ,NAME ,ACTIVE ,LANG_ID ,LINK_ID ,CATALOG_ID ,LABEL ) "
+					+ " VALUES( ? , ? , ? , ? , ? , ? , ? )";
+			args = new HashMap();
+			args.put("creteria8_id", Long.valueOf(creteria_id));
+			args.put("name", "Not chosen");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("link_id", 0);
+			args.put("catalog_id", Long.valueOf(site_id));
+			args.put("label", "Criterion8");
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = "SELECT MIN(CRETERIA9_ID) - 1  as ID FROM creteria9";
+			dbAdaptor.executeQuery(query);
+			creteria_id = dbAdaptor.getValueAt(0, 0);
+			// creteria_id = "-".concat(creteria_id);
+			if(creteria_id.equals("")) creteria_id =  "0" ;
+			query = "INSERT INTO creteria9 (CRETERIA9_ID ,NAME ,ACTIVE ,LANG_ID ,LINK_ID ,CATALOG_ID ,LABEL )  "
+					+ " VALUES( ? , ? , ? , ? , ? , ? , ? )";
+			args = new HashMap();
+			args.put("creteria9_id", Long.valueOf(creteria_id));
+			args.put("name", "Not chosen");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("link_id", 0);
+			args.put("catalog_id", Long.valueOf(site_id));
+			args.put("label", "Criterion9");
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = "SELECT MIN(CRETERIA10_ID) - 1  as ID FROM creteria10";
+			dbAdaptor.executeQuery(query);
+			creteria_id = dbAdaptor.getValueAt(0, 0);
+			// creteria_id = "-".concat(creteria_id);
+			if(creteria_id.equals("")) creteria_id =  "0" ;
+			query = "INSERT INTO creteria10 (CRETERIA10_ID ,NAME ,ACTIVE ,LANG_ID ,LINK_ID ,CATALOG_ID ,LABEL )  "
+					+ " VALUES( ? , ? , ? , ? , ? , ? , ? )";
+			args = new HashMap();
+			args.put("creteria10_id", Long.valueOf(creteria_id));
+			args.put("name", "Not chosen");
+			args.put("active", true);
+			args.put("lang_id", 2);
+			args.put("link_id", 0);
+			args.put("catalog_id", Long.valueOf(site_id));
+			args.put("label", "Criterion10");
+			dbAdaptor.executeInsertWithArgs(query, args);
+			
+			query = "INSERT INTO currency(currency_id, currency_cd, currency_desc, rate, active, currency_lable,  cursdate, changedate)  "
+					+ " VALUES (0, '0', 'Not selected', 0.0, true, 'UNKNOWN', NULL, NULL)";
+			dbAdaptor.executeUpdate(query);
+
+			query = "INSERT INTO currency(currency_id, currency_cd, currency_desc, rate, active, currency_lable,  cursdate, changedate)  "
+					+ " VALUES ("+CurrencyEnum.USD.getId()+", '"+CurrencyEnum.USD+"', '"+CurrencyEnum.USD.getDescr()+"', 36.0, true, '"+CurrencyEnum.USD+"', NULL, NULL)";
+			dbAdaptor.executeUpdate(query);
+
+			query = "INSERT INTO currency(currency_id, currency_cd, currency_desc, rate, active, currency_lable,  cursdate, changedate)  "
+					+ " VALUES ("+CurrencyEnum.EUR.getId()+", '"+CurrencyEnum.EUR+"', '"+CurrencyEnum.EUR.getDescr()+"', 45.0, true, '"+CurrencyEnum.EUR+"', NULL, NULL)";
+			dbAdaptor.executeUpdate(query);
+
+			query = "INSERT INTO currency(currency_id, currency_cd, currency_desc, rate, active, currency_lable,  cursdate, changedate)  "
+					+ " VALUES ("+CurrencyEnum.RUB.getId()+", '"+CurrencyEnum.RUB+"', '"+CurrencyEnum.RUB.getDescr()+"', 1.0, true, '"+CurrencyEnum.RUB+"', NULL, NULL)";
+			dbAdaptor.executeUpdate(query);
+			
+			query = "INSERT INTO currency(currency_id, currency_cd, currency_desc, rate, active, currency_lable,  cursdate, changedate)  "
+					+ " VALUES ("+CurrencyEnum.CNY.getId()+", '"+CurrencyEnum.CNY+"', '"+CurrencyEnum.CNY.getDescr()+"', 1.0, true, '"+CurrencyEnum.CNY+"', NULL, NULL)";
+			dbAdaptor.executeUpdate(query);
+
+			
+			query = "INSERT INTO currency(currency_id, currency_cd, currency_desc, rate, active, currency_lable,  cursdate, changedate)  "
+					+ " VALUES ("+CurrencyEnum.JPY.getId()+", '"+CurrencyEnum.JPY+"', '"+CurrencyEnum.JPY.getDescr()+"', 1.0, true, '"+CurrencyEnum.JPY+"', NULL, NULL)";
+			dbAdaptor.executeUpdate(query);
+
+			query = "INSERT INTO currency(currency_id, currency_cd, currency_desc, rate, active, currency_lable,  cursdate, changedate)  "
+					+ " VALUES ("+CurrencyEnum.TRY.getId()+", '"+CurrencyEnum.TRY+"', '"+CurrencyEnum.TRY.getDescr()+"', 1.0, true, '"+CurrencyEnum.TRY+"', NULL, NULL)";
+			dbAdaptor.executeUpdate(query);
+
+			
+			query = "INSERT INTO currency(currency_id, currency_cd, currency_desc, rate, active, currency_lable,  cursdate, changedate)  "
+					+ " VALUES ("+CurrencyEnum.MXN.getId()+", '"+CurrencyEnum.MXN+"', '"+CurrencyEnum.MXN.getDescr()+"', 1.0, true, '"+CurrencyEnum.MXN+"', NULL, NULL)";
+			dbAdaptor.executeUpdate(query);
+
+			
+			query = "INSERT INTO currency(currency_id, currency_cd, currency_desc, rate, active, currency_lable,  cursdate, changedate)  "
+					+ " VALUES ("+CurrencyEnum.CAD.getId()+", '"+CurrencyEnum.CAD+"', '"+CurrencyEnum.CAD.getDescr()+"', 1.0, true, '"+CurrencyEnum.CAD+"', NULL, NULL)";
+			dbAdaptor.executeUpdate(query);
+
+			
+			query = "INSERT INTO currency(currency_id, currency_cd, currency_desc, rate, active, currency_lable,  cursdate, changedate)  "
+					+ " VALUES ("+CurrencyEnum.GBP.getId()+", '"+CurrencyEnum.GBP+"', '"+CurrencyEnum.GBP.getDescr()+"', 1.0, true, '"+CurrencyEnum.GBP+"', NULL, NULL)";
+			dbAdaptor.executeUpdate(query);
+
+			
+			query = "INSERT INTO currency(currency_id, currency_cd, currency_desc, rate, active, currency_lable,  cursdate, changedate)  "
+					+ " VALUES ("+CurrencyEnum.BRL.getId()+", '"+CurrencyEnum.BRL+"', '"+CurrencyEnum.BRL.getDescr()+"', 1.0, true, '"+CurrencyEnum.BRL+"', NULL, NULL)";
+			dbAdaptor.executeUpdate(query);
+
+			
+			query = "INSERT INTO currency(currency_id, currency_cd, currency_desc, rate, active, currency_lable,  cursdate, changedate)  "
+					+ " VALUES ("+CurrencyEnum.INR.getId()+", '"+CurrencyEnum.INR+"', '"+CurrencyEnum.INR.getDescr()+"', 1.0, true, '"+CurrencyEnum.INR+"', NULL, NULL)";
+			dbAdaptor.executeUpdate(query);
+
+			
+			query = "INSERT INTO currency(currency_id, currency_cd, currency_desc, rate, active, currency_lable,  cursdate, changedate)  "
+					+ " VALUES ("+CurrencyEnum.BTC.getId()+", '"+CurrencyEnum.BTC+"', '"+CurrencyEnum.BTC.getDescr()+"', 1.0, true, '"+CurrencyEnum.BTC+"', NULL, NULL)";
+			dbAdaptor.executeUpdate(query);
+
+			
+			query = "INSERT INTO currency(currency_id, currency_cd, currency_desc, rate, active, currency_lable,  cursdate, changedate)  "
+					+ " VALUES ("+CurrencyEnum.LTC.getId()+", '"+CurrencyEnum.LTC+"', '"+CurrencyEnum.LTC.getDescr()+"', 1.0, true, '"+CurrencyEnum.LTC+"', NULL, NULL)";
+			dbAdaptor.executeUpdate(query);
+
+			query = "INSERT INTO currency(currency_id, currency_cd, currency_desc, rate, active, currency_lable,  cursdate, changedate)  "
+					+ " VALUES ("+CurrencyEnum.ETH.getId()+", '"+CurrencyEnum.ETH+"', '"+CurrencyEnum.ETH.getDescr()+"', 1.0, true, '"+CurrencyEnum.ETH+"', NULL, NULL)";
+			dbAdaptor.executeUpdate(query);
+
+			
+			query = "INSERT INTO currency(currency_id, currency_cd, currency_desc, rate, active, currency_lable,  cursdate, changedate)  "
+					+ " VALUES ("+CurrencyEnum.PYUSD.getId()+", '"+CurrencyEnum.PYUSD+"', '"+CurrencyEnum.PYUSD.getDescr()+"', 1.0, true, '"+CurrencyEnum.PYUSD+"', NULL, NULL)";
+			dbAdaptor.executeUpdate(query);
+
+			query = "INSERT INTO currency(currency_id, currency_cd, currency_desc, rate, active, currency_lable,  cursdate, changedate)  "
+					+ " VALUES ("+CurrencyEnum.CBDC.getId()+", '"+CurrencyEnum.CBDC+"', '"+CurrencyEnum.CBDC.getDescr()+"', 1.0, true, '"+CurrencyEnum.CBDC+"', NULL, NULL)";
+			dbAdaptor.executeUpdate(query);
+
+
+			query = "INSERT INTO typesoft(type_id, active, user_id, tax, type_lable, type_desc) VALUES ("+VisibilityEnum.DEFAUILT_MODE.getId()+", true, 1, 0.0, '"+VisibilityEnum.DEFAUILT_MODE.getDescr()+"', '" + VisibilityEnum.DEFAUILT_MODE.getDescr()+ "')";
+			dbAdaptor.executeUpdate(query);
+
+			query = "INSERT INTO typesoft(type_id, active, user_id, tax, type_lable, type_desc) VALUES ("+VisibilityEnum.HIDE.getId()+", true, 1, 0.0, '"+VisibilityEnum.HIDE.getDescr()+"', '"+VisibilityEnum.HIDE.getDescr()+"')";
+			dbAdaptor.executeUpdate(query);
+
+			query = "INSERT INTO typesoft(type_id, active, user_id, tax, type_lable, type_desc) VALUES ("+VisibilityEnum.MARKET_PLACE.getId()+", true, 1, 0.0, '"+VisibilityEnum.MARKET_PLACE.getDescr()+"', '"+VisibilityEnum.MARKET_PLACE.getDescr()+"')";
+			dbAdaptor.executeUpdate(query);
+
+			query = "INSERT INTO typesoft(type_id, active, user_id, tax, type_lable, type_desc) VALUES ("+VisibilityEnum.YOUR_PAGE.getId()+", true, 1, 0.0, '"+VisibilityEnum.YOUR_PAGE.getDescr()+"', '"+VisibilityEnum.YOUR_PAGE.getDescr()+"')";
+			dbAdaptor.executeUpdate(query);
+			
+
+
+			query = sequences_rs.getString("soft");
+			dbAdaptor.executeQuery(query);
+			String soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , lang_id , active ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? ) ; ";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "New arrivals section 1");
+			args.put("description", "<r> New arrivals section -  Search possibilities of Internet shop </r>");
+			args.put("fulldescription",
+					"<r> 1. For high-grade work CMS Business One, you need to adjust the expanded search in criteria </r>"
+							+ "<r> under the problems. It will allow your clients to find at once the necessary goods, the information or the document. </r>"
+							+ "<r> 2. It is not necessary to adjust search in the text, it works by default. </r>"
+							+ "<r> 3. (Only at registered users) it is not necessary to adjust search in the subject authority, it works by default. </r>"
+							+ "<r> the Instruction on adjustment of the expanded search on criteria </r>"
+							+ "<r> Our system provides 10 edited criteria and search in the price </r>"
+							+ "<r> Editing of criteria is made in the form of addition of the information module in subsection INSTALLATION of CRITERIA FOR SEARCH of THIS INFORMATION ON the SITE. </r>"
+							+ "<r> Criteria can be independent. For example: the Manufacturer, an engineering Kind, Colour - all these criteria are independent from each other. </r>"
+							+ "<r> And can be dependent on any criterion. For example: the Country-city-area. Here the criterion the Country - independent, criterion the City depends on criterion the Country, and criterion Area the City depends on criterion. </r>"
+							+ "<r> </r>"
+							+ "<r> Dependence of criterion which you change, is advanced by a horizontal pink strip. The changeable criterion depends on the criterion allocated with a pink strip. </r>"
+							+ "<r> the Step-by-step description of input of independent criterion: </r>"
+							+ "<r> we Will assume that we need to enter criterion the Manufacturer with its items. </r>"
+							+ "<r> 1. We allocate the necessary criterion with a pink strip, for example Kriterij1 </r>"
+							+ "<r> 2. We press the button to CHANGE. The form for change of Kriterija1 will open. </r>"
+							+ "<r> 3. In the top part of the form we change the name Kriterij1 on the Manufacturer and we press the button to CHANGE. Now our criterion on main page will be called the Manufacturer. </r>"
+							+ "<r> 4. In the bottom part of the form it is visible it is not chosen - this record is not edited and DOES NOT LEAVE. </r>"
+							+ "<r> 5. To add an item in criterion, we press the button to ADD. To opened form we write the necessary item, for example Proizvoditel1, and we press the button to SAVE. Other items it is got similarly. </r>"
+							+ "<r> For removal or editing of an item of criterion use respective buttons opposite to an item. </r>"
+							+ "<r> </r>" + "<r> Other independent criteria it is got similarly. Look items 1-5 </r>"
+							+ "<r> </r>" + "<r> the Step-by-step description of input of dependent criterion: </r>"
+							+ "<r> we Will assume that at us the independent criterion the Country with the items is already entered and we need to enter dependent criterion the City. </r>"
+							+ "<r> 1. We allocate with a pink strip criterion on which our criterion the City, in this case criterion the Country will depend. </r>"
+							+ "<r> Strana1 Is chosen in criterion the Country the necessary item, for example. </r>"
+							+ "<r> 2. Opposite to criterion the City we press the button to CHANGE. The form for criterion change will open. </r>"
+							+ "<r> 3. In the top part of the form we change the criterion name for the City and we press the button to CHANGE. </r>"
+							+ "<r> 4. We get the necessary items Gorod1-1, Gorod1-2 etc., corresponding to the chosen item Strana1. </r>"
+							+ "<r> If it is necessary to continue input of cities on other countries we come back to criterion the Country and we choose an item Strana2. </r>"
+							+ "<r> Further we pass to item 2 etc. </r>" + "<r> </r>"
+							+ "<r> If at you quantity of criteria less than ten the remained criteria can be hidden, by removal of the name of criterion. </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_FROM_NEWS_CATALOG);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lang_id", LanguageEnum.EN.getId());
+			args.put("active", true);
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , lang_id , active ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? ) ; ";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "New arrovals ");
+			args.put("description", "<r> Discussion of the goods, service, news </r>");
+			args.put("fulldescription", "<r>We have built in a forum ours CMS Business One. </r>"
+					+ "<r>For each information or news module the discussion system </r>"
+					+ "<r> the discussion System can be included or switched off for each concrete module. </r>"
+					+ "<r> All new messages gather in С‚РѕРї on main page for the review of fresh discussions </r>"
+					+ "<r> </r>"
+					+ "<r> forum Inclusion is made in the form of addition of the information or news module by an option choice to INCLUDE DISCUSSION. </r>"
+					+ "<r> By default the forum is switched off. </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_FROM_NEWS_CATALOG);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lang_id", LanguageEnum.EN.getId());
+			args.put("active", true);
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , lang_id , active ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? ) ; ";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "New arrovals 2");
+			args.put("description", "<r> News module of Internet shop </r>");
+			args.put("fulldescription", "<r>" + "We have established the news module in Internet shop </r>"
+					+ "<r> Novosnoj the module displays the text, a picture and addition date. </r>"
+					+ "<r> the Module of news appears on all pages in all sections. </r>"
+					+ "<r> your news does not remain not noticed where there would be no your client. </r>" + "<r> </r>"
+					+ "<r> the Instruction on addition of the news module: </r>"
+					+ "<r> 1. To come into MANAGEMENT of the SITE having pressed the button to UPDATE. </r>"
+					+ "<r> 2. To press to ADD the INFORMATION MODULE With SEARCH IN CRITERIA. </r>"
+					+ "<r> 3. We find subsection the FORM of ADDITION OR INFORMATION CHANGE. </r>"
+					+ "<r> 4. In the field HEADING we write heading. </r>"
+					+ "<r> 5. In the field CHOSEN SECTION we choose NEWS. </r>"
+					+ "<r> 6. In the field IN OTHER LANGUAGE FOR SEARCH of anything it is not necessary to enter HEADING. Is in working out. </r>"
+					+ "<r> 8. In the field the PRICE the price not to mark, keep a zero. </r>"
+					+ "<r> 9. In the field the BRIEF INFORMATION is written a brief information on news. </r>"
+					+ "<r> 11. In the field the DETAILED INFORMATION is written the detailed information of news. </r>"
+					+ "<r> 13. At an option choice to INCLUDE VOTING, your news has a voting. By default this option is switched off. </r>"
+					+ "<r> 14. At an option choice to INCLUDE DISCUSSION, your news has a forum. By default this option is switched off. </r>"
+					+ "<r> 15. In an option I APPROVE the significance should be established is published. </r>"
+					+ "<r> 16. Enter from a picture a code. </r>" + "<r> 17. Press the button to SAVE. </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_FROM_NEWS_CATALOG);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lang_id", LanguageEnum.EN.getId());
+			args.put("active", true);
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , lang_id , active ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? ) ; ";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Advertising");
+			args.put("description", "<r> Advertising place in Internet shop </r>");
+			args.put("fulldescription", "<r>"
+					+ "We have built in for you advertising blocks that you could sell the space in your Internet shop. </r>"
+					+ "<r> On the right and to the left of the central block advertising modules </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_FROM_NEWS_CATALOG);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lang_id", LanguageEnum.EN.getId());
+			args.put("active", true);
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , lang_id , active ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? ) ; ";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Internet shop");
+			args.put("description", "<r>Reference to your Internet shop </r>");
+			args.put("fulldescription",
+					"" + "<r> your Internet shop is accessible  by link http://www.siteforyou.com/Productlist.jsp?site="
+							+ site_id + "</r>" + "<r> also you can buy domain here </r>"
+							+ "<r> Save somewhere this information. </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_FROM_NEWS_CATALOG);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lang_id", LanguageEnum.EN.getId());
+			args.put("active", true);
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id ,type_id , site_id , lang_id , active ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ? )";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Information module");
+			args.put("description",
+					"<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>");
+			args.put("fulldescription", "<r> </r>"
+					+ "<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>"
+					+ "<r> the Instruction on addition of the information module: </r>"
+					+ "<r> 1. To come into MANAGEMENT of the SITE having pressed the button to UPDATE. </r>"
+					+ "<r> 2. To press (To add the information, the goods, news in the central module with search in criteria)  </r>"
+					+ "<r> 3. We find subsection ( Form for an institution or information change on a site ). </r>"
+					+ "<r> 4. In the field HEADING we will write heading. </r>"
+					+ "<r> 5. In the field CHOSEN SECTION you can chose a section  where is place of  information module.If section is not exist then add new section in (Form for catalogue construction ) for detail see creation catalog. </r>"
+					+ "<r> 6. In the field IN OTHER LANGUAGE FOR SEARCH of anything it is not necessary to enter HEADING. Is in working out. </r>"
+					+ "<r> 7. In the field PICTURE 1 it is given the chance to add the image on page with the short description. The image can be added in two methods: UPLOAD PICTURE 1 FOR SHORT - upload from the computer of the user, PICTURE 1 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 8. If you mark the price in the field the PRICE it is displayed. If the price is not necessary to you, keep a zero. </r>"
+					+ "<r> 9. In the field the BRIEF INFORMATION is written goods or service brief information. </r>"
+					+ "<r> 10. In the field PICTURE 2 it is given the chance to add the image on page with detailed description. The image can be added in two methods: UPLOAD PICTURE 2 FOR DETAILED - upload from the computer of the user, PICTURE 2 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 11. In the field the DETAILED INFORMATION is written the detailed information of the goods or service. </r>"
+					+ "<r> 12. In the field ATTACH the FILE you can to attach a file in two methods: UPLOAD the FILE - upload from the computer of the user to CHOOSE the FILE - to choose from present base. A file uploading in any format which supports your browser. The maximum size of a file. 1,5 Mb. </r>"
+					+ "<r> 13. At an option choice to INCLUDE VOTING, your information module has a voting. By default this option is switched off. </r>"
+					+ "<r> 14. At an option choice to INCLUDE DISCUSSION, your information module has a forum. By default this option is switched off. </r>"
+					+ "<r> 15. In an option I APPROVE, if choose it is published, the information module will be displayed only in the catalogue. If will choose to SHOW ON MAIN PAGE this module will be displayed both in the catalogue and on main page. </r>"
+					+ "<r> 16. Enter from a picture a code. </r>" + "<r> 17. Press the button to SAVE. </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
+			args.put("type_id", Layout.SOFTTYPE_SHOW_ON_MAIN_PAGE);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lang_id", LanguageEnum.EN.getId());
+			args.put("active", true);
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id ,type_id , site_id , lang_id , active ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ? )";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Information module");
+			args.put("description",
+					"<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>");
+			args.put("fulldescription", "<r> </r>"
+					+ "<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>"
+					+ "<r> the Instruction on addition of the information module: </r>"
+					+ "<r> 1. To come into MANAGEMENT of the SITE having pressed the button to UPDATE. </r>"
+					+ "<r> 2. To press (To add the information, the goods, news in the central module with search in criteria)  </r>"
+					+ "<r> 3. We find subsection ( Form for an institution or information change on a site ). </r>"
+					+ "<r> 4. In the field HEADING we will write heading. </r>"
+					+ "<r> 5. In the field CHOSEN SECTION you can chose a section  where is place of  information module.If section is not exist then add new section in (Form for catalogue construction ) for detail see creation catalog. </r>"
+					+ "<r> 6. In the field IN OTHER LANGUAGE FOR SEARCH of anything it is not necessary to enter HEADING. Is in working out. </r>"
+					+ "<r> 7. In the field PICTURE 1 it is given the chance to add the image on page with the short description. The image can be added in two methods: UPLOAD PICTURE 1 FOR SHORT - upload from the computer of the user, PICTURE 1 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 8. If you mark the price in the field the PRICE it is displayed. If the price is not necessary to you, keep a zero. </r>"
+					+ "<r> 9. In the field the BRIEF INFORMATION is written goods or service brief information. </r>"
+					+ "<r> 10. In the field PICTURE 2 it is given the chance to add the image on page with detailed description. The image can be added in two methods: UPLOAD PICTURE 2 FOR DETAILED - upload from the computer of the user, PICTURE 2 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 11. In the field the DETAILED INFORMATION is written the detailed information of the goods or service. </r>"
+					+ "<r> 12. In the field ATTACH the FILE you can to attach a file in two methods: UPLOAD the FILE - upload from the computer of the user to CHOOSE the FILE - to choose from present base. A file uploading in any format which supports your browser. The maximum size of a file. 1,5 Mb. </r>"
+					+ "<r> 13. At an option choice to INCLUDE VOTING, your information module has a voting. By default this option is switched off. </r>"
+					+ "<r> 14. At an option choice to INCLUDE DISCUSSION, your information module has a forum. By default this option is switched off. </r>"
+					+ "<r> 15. In an option I APPROVE, if choose it is published, the information module will be displayed only in the catalogue. If will choose to SHOW ON MAIN PAGE this module will be displayed both in the catalogue and on main page. </r>"
+					+ "<r> 16. Enter from a picture a code. </r>" + "<r> 17. Press the button to SAVE. </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
+			args.put("type_id", Layout.SOFTTYPE_SHOW_ON_MAIN_PAGE);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lang_id", LanguageEnum.EN.getId());
+			args.put("active", true);
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id ,type_id , site_id , lang_id , active ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ? )";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Information module");
+			args.put("description",
+					"<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>");
+			args.put("fulldescription", "<r> </r>"
+					+ "<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>"
+					+ "<r> the Instruction on addition of the information module: </r>"
+					+ "<r> 1. To come into MANAGEMENT of the SITE having pressed the button to UPDATE. </r>"
+					+ "<r> 2. To press (To add the information, the goods, news in the central module with search in criteria)  </r>"
+					+ "<r> 3. We find subsection ( Form for an institution or information change on a site ). </r>"
+					+ "<r> 4. In the field HEADING we will write heading. </r>"
+					+ "<r> 5. In the field CHOSEN SECTION you can chose a section  where is place of  information module.If section is not exist then add new section in (Form for catalogue construction ) for detail see creation catalog. </r>"
+					+ "<r> 6. In the field IN OTHER LANGUAGE FOR SEARCH of anything it is not necessary to enter HEADING. Is in working out. </r>"
+					+ "<r> 7. In the field PICTURE 1 it is given the chance to add the image on page with the short description. The image can be added in two methods: UPLOAD PICTURE 1 FOR SHORT - upload from the computer of the user, PICTURE 1 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 8. If you mark the price in the field the PRICE it is displayed. If the price is not necessary to you, keep a zero. </r>"
+					+ "<r> 9. In the field the BRIEF INFORMATION is written goods or service brief information. </r>"
+					+ "<r> 10. In the field PICTURE 2 it is given the chance to add the image on page with detailed description. The image can be added in two methods: UPLOAD PICTURE 2 FOR DETAILED - upload from the computer of the user, PICTURE 2 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 11. In the field the DETAILED INFORMATION is written the detailed information of the goods or service. </r>"
+					+ "<r> 12. In the field ATTACH the FILE you can to attach a file in two methods: UPLOAD the FILE - upload from the computer of the user to CHOOSE the FILE - to choose from present base. A file uploading in any format which supports your browser. The maximum size of a file. 1,5 Mb. </r>"
+					+ "<r> 13. At an option choice to INCLUDE VOTING, your information module has a voting. By default this option is switched off. </r>"
+					+ "<r> 14. At an option choice to INCLUDE DISCUSSION, your information module has a forum. By default this option is switched off. </r>"
+					+ "<r> 15. In an option I APPROVE, if choose it is published, the information module will be displayed only in the catalogue. If will choose to SHOW ON MAIN PAGE this module will be displayed both in the catalogue and on main page. </r>"
+					+ "<r> 16. Enter from a picture a code. </r>" + "<r> 17. Press the button to SAVE. </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
+			args.put("type_id", Layout.SOFTTYPE_SHOW_ON_MAIN_PAGE);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lang_id", LanguageEnum.EN.getId());
+			args.put("active", true);
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id ,type_id , site_id , lang_id , active ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ? )";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Information module");
+			args.put("description",
+					"<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>");
+			args.put("fulldescription", "<r> </r>"
+					+ "<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>"
+					+ "<r> the Instruction on addition of the information module: </r>"
+					+ "<r> 1. To come into MANAGEMENT of the SITE having pressed the button to UPDATE. </r>"
+					+ "<r> 2. To press (To add the information, the goods, news in the central module with search in criteria)  </r>"
+					+ "<r> 3. We find subsection ( Form for an institution or information change on a site ). </r>"
+					+ "<r> 4. In the field HEADING we will write heading. </r>"
+					+ "<r> 5. In the field CHOSEN SECTION you can chose a section  where is place of  information module.If section is not exist then add new section in (Form for catalogue construction ) for detail see creation catalog. </r>"
+					+ "<r> 6. In the field IN OTHER LANGUAGE FOR SEARCH of anything it is not necessary to enter HEADING. Is in working out. </r>"
+					+ "<r> 7. In the field PICTURE 1 it is given the chance to add the image on page with the short description. The image can be added in two methods: UPLOAD PICTURE 1 FOR SHORT - upload from the computer of the user, PICTURE 1 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 8. If you mark the price in the field the PRICE it is displayed. If the price is not necessary to you, keep a zero. </r>"
+					+ "<r> 9. In the field the BRIEF INFORMATION is written goods or service brief information. </r>"
+					+ "<r> 10. In the field PICTURE 2 it is given the chance to add the image on page with detailed description. The image can be added in two methods: UPLOAD PICTURE 2 FOR DETAILED - upload from the computer of the user, PICTURE 2 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 11. In the field the DETAILED INFORMATION is written the detailed information of the goods or service. </r>"
+					+ "<r> 12. In the field ATTACH the FILE you can to attach a file in two methods: UPLOAD the FILE - upload from the computer of the user to CHOOSE the FILE - to choose from present base. A file uploading in any format which supports your browser. The maximum size of a file. 1,5 Mb. </r>"
+					+ "<r> 13. At an option choice to INCLUDE VOTING, your information module has a voting. By default this option is switched off. </r>"
+					+ "<r> 14. At an option choice to INCLUDE DISCUSSION, your information module has a forum. By default this option is switched off. </r>"
+					+ "<r> 15. In an option I APPROVE, if choose it is published, the information module will be displayed only in the catalogue. If will choose to SHOW ON MAIN PAGE this module will be displayed both in the catalogue and on main page. </r>"
+					+ "<r> 16. Enter from a picture a code. </r>" + "<r> 17. Press the button to SAVE. </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
+			args.put("type_id", Layout.SOFTTYPE_SHOW_ON_MAIN_PAGE);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lang_id", LanguageEnum.EN.getId());
+			args.put("active", true);
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id ,type_id , site_id , lang_id , active ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ? )";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Information module");
+			args.put("description",
+					"<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>");
+			args.put("fulldescription", "<r> </r>"
+					+ "<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>"
+					+ "<r> the Instruction on addition of the information module: </r>"
+					+ "<r> 1. To come into MANAGEMENT of the SITE having pressed the button to UPDATE. </r>"
+					+ "<r> 2. To press (To add the information, the goods, news in the central module with search in criteria)  </r>"
+					+ "<r> 3. We find subsection ( Form for an institution or information change on a site ). </r>"
+					+ "<r> 4. In the field HEADING we will write heading. </r>"
+					+ "<r> 5. In the field CHOSEN SECTION you can chose a section  where is place of  information module.If section is not exist then add new section in (Form for catalogue construction ) for detail see creation catalog. </r>"
+					+ "<r> 6. In the field IN OTHER LANGUAGE FOR SEARCH of anything it is not necessary to enter HEADING. Is in working out. </r>"
+					+ "<r> 7. In the field PICTURE 1 it is given the chance to add the image on page with the short description. The image can be added in two methods: UPLOAD PICTURE 1 FOR SHORT - upload from the computer of the user, PICTURE 1 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 8. If you mark the price in the field the PRICE it is displayed. If the price is not necessary to you, keep a zero. </r>"
+					+ "<r> 9. In the field the BRIEF INFORMATION is written goods or service brief information. </r>"
+					+ "<r> 10. In the field PICTURE 2 it is given the chance to add the image on page with detailed description. The image can be added in two methods: UPLOAD PICTURE 2 FOR DETAILED - upload from the computer of the user, PICTURE 2 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 11. In the field the DETAILED INFORMATION is written the detailed information of the goods or service. </r>"
+					+ "<r> 12. In the field ATTACH the FILE you can to attach a file in two methods: UPLOAD the FILE - upload from the computer of the user to CHOOSE the FILE - to choose from present base. A file uploading in any format which supports your browser. The maximum size of a file. 1,5 Mb. </r>"
+					+ "<r> 13. At an option choice to INCLUDE VOTING, your information module has a voting. By default this option is switched off. </r>"
+					+ "<r> 14. At an option choice to INCLUDE DISCUSSION, your information module has a forum. By default this option is switched off. </r>"
+					+ "<r> 15. In an option I APPROVE, if choose it is published, the information module will be displayed only in the catalogue. If will choose to SHOW ON MAIN PAGE this module will be displayed both in the catalogue and on main page. </r>"
+					+ "<r> 16. Enter from a picture a code. </r>" + "<r> 17. Press the button to SAVE. </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
+			args.put("type_id", Layout.SOFTTYPE_SHOW_ON_MAIN_PAGE);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lang_id", LanguageEnum.EN.getId());
+			args.put("active", true);
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id ,type_id , site_id , lang_id , active ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ? )";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Information module");
+			args.put("description",
+					"<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>");
+			args.put("fulldescription", "<r> </r>"
+					+ "<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>"
+					+ "<r> the Instruction on addition of the information module: </r>"
+					+ "<r> 1. To come into MANAGEMENT of the SITE having pressed the button to UPDATE. </r>"
+					+ "<r> 2. To press (To add the information, the goods, news in the central module with search in criteria)  </r>"
+					+ "<r> 3. We find subsection ( Form for an institution or information change on a site ). </r>"
+					+ "<r> 4. In the field HEADING we will write heading. </r>"
+					+ "<r> 5. In the field CHOSEN SECTION you can chose a section  where is place of  information module.If section is not exist then add new section in (Form for catalogue construction ) for detail see creation catalog. </r>"
+					+ "<r> 6. In the field IN OTHER LANGUAGE FOR SEARCH of anything it is not necessary to enter HEADING. Is in working out. </r>"
+					+ "<r> 7. In the field PICTURE 1 it is given the chance to add the image on page with the short description. The image can be added in two methods: UPLOAD PICTURE 1 FOR SHORT - upload from the computer of the user, PICTURE 1 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 8. If you mark the price in the field the PRICE it is displayed. If the price is not necessary to you, keep a zero. </r>"
+					+ "<r> 9. In the field the BRIEF INFORMATION is written goods or service brief information. </r>"
+					+ "<r> 10. In the field PICTURE 2 it is given the chance to add the image on page with detailed description. The image can be added in two methods: UPLOAD PICTURE 2 FOR DETAILED - upload from the computer of the user, PICTURE 2 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 11. In the field the DETAILED INFORMATION is written the detailed information of the goods or service. </r>"
+					+ "<r> 12. In the field ATTACH the FILE you can to attach a file in two methods: UPLOAD the FILE - upload from the computer of the user to CHOOSE the FILE - to choose from present base. A file uploading in any format which supports your browser. The maximum size of a file. 1,5 Mb. </r>"
+					+ "<r> 13. At an option choice to INCLUDE VOTING, your information module has a voting. By default this option is switched off. </r>"
+					+ "<r> 14. At an option choice to INCLUDE DISCUSSION, your information module has a forum. By default this option is switched off. </r>"
+					+ "<r> 15. In an option I APPROVE, if choose it is published, the information module will be displayed only in the catalogue. If will choose to SHOW ON MAIN PAGE this module will be displayed both in the catalogue and on main page. </r>"
+					+ "<r> 16. Enter from a picture a code. </r>" + "<r> 17. Press the button to SAVE. </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
+			args.put("type_id", Layout.SOFTTYPE_SHOW_ON_MAIN_PAGE);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lang_id", LanguageEnum.EN.getId());
+			args.put("active", true);
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id ,type_id , site_id , lang_id , active ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ? )";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Information module");
+			args.put("description",
+					"<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>");
+			args.put("fulldescription", "<r> </r>"
+					+ "<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>"
+					+ "<r> the Instruction on addition of the information module: </r>"
+					+ "<r> 1. To come into MANAGEMENT of the SITE having pressed the button to UPDATE. </r>"
+					+ "<r> 2. To press (To add the information, the goods, news in the central module with search in criteria)  </r>"
+					+ "<r> 3. We find subsection ( Form for an institution or information change on a site ). </r>"
+					+ "<r> 4. In the field HEADING we will write heading. </r>"
+					+ "<r> 5. In the field CHOSEN SECTION you can chose a section  where is place of  information module.If section is not exist then add new section in (Form for catalogue construction ) for detail see creation catalog. </r>"
+					+ "<r> 6. In the field IN OTHER LANGUAGE FOR SEARCH of anything it is not necessary to enter HEADING. Is in working out. </r>"
+					+ "<r> 7. In the field PICTURE 1 it is given the chance to add the image on page with the short description. The image can be added in two methods: UPLOAD PICTURE 1 FOR SHORT - upload from the computer of the user, PICTURE 1 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 8. If you mark the price in the field the PRICE it is displayed. If the price is not necessary to you, keep a zero. </r>"
+					+ "<r> 9. In the field the BRIEF INFORMATION is written goods or service brief information. </r>"
+					+ "<r> 10. In the field PICTURE 2 it is given the chance to add the image on page with detailed description. The image can be added in two methods: UPLOAD PICTURE 2 FOR DETAILED - upload from the computer of the user, PICTURE 2 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 11. In the field the DETAILED INFORMATION is written the detailed information of the goods or service. </r>"
+					+ "<r> 12. In the field ATTACH the FILE you can to attach a file in two methods: UPLOAD the FILE - upload from the computer of the user to CHOOSE the FILE - to choose from present base. A file uploading in any format which supports your browser. The maximum size of a file. 1,5 Mb. </r>"
+					+ "<r> 13. At an option choice to INCLUDE VOTING, your information module has a voting. By default this option is switched off. </r>"
+					+ "<r> 14. At an option choice to INCLUDE DISCUSSION, your information module has a forum. By default this option is switched off. </r>"
+					+ "<r> 15. In an option I APPROVE, if choose it is published, the information module will be displayed only in the catalogue. If will choose to SHOW ON MAIN PAGE this module will be displayed both in the catalogue and on main page. </r>"
+					+ "<r> 16. Enter from a picture a code. </r>" + "<r> 17. Press the button to SAVE. </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
+			args.put("type_id", Layout.SOFTTYPE_SHOW_ON_MAIN_PAGE);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lang_id", LanguageEnum.EN.getId());
+			args.put("active", true);
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id ,type_id , site_id , lang_id , active ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ? )";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Information module");
+			args.put("description",
+					"<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>");
+			args.put("fulldescription", "<r> </r>"
+					+ "<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>"
+					+ "<r> the Instruction on addition of the information module: </r>"
+					+ "<r> 1. To come into MANAGEMENT of the SITE having pressed the button to UPDATE. </r>"
+					+ "<r> 2. To press (To add the information, the goods, news in the central module with search in criteria)  </r>"
+					+ "<r> 3. We find subsection ( Form for an institution or information change on a site ). </r>"
+					+ "<r> 4. In the field HEADING we will write heading. </r>"
+					+ "<r> 5. In the field CHOSEN SECTION you can chose a section  where is place of  information module.If section is not exist then add new section in (Form for catalogue construction ) for detail see creation catalog. </r>"
+					+ "<r> 6. In the field IN OTHER LANGUAGE FOR SEARCH of anything it is not necessary to enter HEADING. Is in working out. </r>"
+					+ "<r> 7. In the field PICTURE 1 it is given the chance to add the image on page with the short description. The image can be added in two methods: UPLOAD PICTURE 1 FOR SHORT - upload from the computer of the user, PICTURE 1 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 8. If you mark the price in the field the PRICE it is displayed. If the price is not necessary to you, keep a zero. </r>"
+					+ "<r> 9. In the field the BRIEF INFORMATION is written goods or service brief information. </r>"
+					+ "<r> 10. In the field PICTURE 2 it is given the chance to add the image on page with detailed description. The image can be added in two methods: UPLOAD PICTURE 2 FOR DETAILED - upload from the computer of the user, PICTURE 2 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 11. In the field the DETAILED INFORMATION is written the detailed information of the goods or service. </r>"
+					+ "<r> 12. In the field ATTACH the FILE you can to attach a file in two methods: UPLOAD the FILE - upload from the computer of the user to CHOOSE the FILE - to choose from present base. A file uploading in any format which supports your browser. The maximum size of a file. 1,5 Mb. </r>"
+					+ "<r> 13. At an option choice to INCLUDE VOTING, your information module has a voting. By default this option is switched off. </r>"
+					+ "<r> 14. At an option choice to INCLUDE DISCUSSION, your information module has a forum. By default this option is switched off. </r>"
+					+ "<r> 15. In an option I APPROVE, if choose it is published, the information module will be displayed only in the catalogue. If will choose to SHOW ON MAIN PAGE this module will be displayed both in the catalogue and on main page. </r>"
+					+ "<r> 16. Enter from a picture a code. </r>" + "<r> 17. Press the button to SAVE. </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
+			args.put("type_id", Layout.SOFTTYPE_SHOW_ON_MAIN_PAGE);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lang_id", LanguageEnum.EN.getId());
+			args.put("active", true);
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id ,type_id , site_id , lang_id , active ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ? )";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Information module");
+			args.put("description",
+					"<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>");
+			args.put("fulldescription", "<r> </r>"
+					+ "<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>"
+					+ "<r> the Instruction on addition of the information module: </r>"
+					+ "<r> 1. To come into MANAGEMENT of the SITE having pressed the button to UPDATE. </r>"
+					+ "<r> 2. To press (To add the information, the goods, news in the central module with search in criteria)  </r>"
+					+ "<r> 3. We find subsection ( Form for an institution or information change on a site ). </r>"
+					+ "<r> 4. In the field HEADING we will write heading. </r>"
+					+ "<r> 5. In the field CHOSEN SECTION you can chose a section  where is place of  information module.If section is not exist then add new section in (Form for catalogue construction ) for detail see creation catalog. </r>"
+					+ "<r> 6. In the field IN OTHER LANGUAGE FOR SEARCH of anything it is not necessary to enter HEADING. Is in working out. </r>"
+					+ "<r> 7. In the field PICTURE 1 it is given the chance to add the image on page with the short description. The image can be added in two methods: UPLOAD PICTURE 1 FOR SHORT - upload from the computer of the user, PICTURE 1 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 8. If you mark the price in the field the PRICE it is displayed. If the price is not necessary to you, keep a zero. </r>"
+					+ "<r> 9. In the field the BRIEF INFORMATION is written goods or service brief information. </r>"
+					+ "<r> 10. In the field PICTURE 2 it is given the chance to add the image on page with detailed description. The image can be added in two methods: UPLOAD PICTURE 2 FOR DETAILED - upload from the computer of the user, PICTURE 2 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 11. In the field the DETAILED INFORMATION is written the detailed information of the goods or service. </r>"
+					+ "<r> 12. In the field ATTACH the FILE you can to attach a file in two methods: UPLOAD the FILE - upload from the computer of the user to CHOOSE the FILE - to choose from present base. A file uploading in any format which supports your browser. The maximum size of a file. 1,5 Mb. </r>"
+					+ "<r> 13. At an option choice to INCLUDE VOTING, your information module has a voting. By default this option is switched off. </r>"
+					+ "<r> 14. At an option choice to INCLUDE DISCUSSION, your information module has a forum. By default this option is switched off. </r>"
+					+ "<r> 15. In an option I APPROVE, if choose it is published, the information module will be displayed only in the catalogue. If will choose to SHOW ON MAIN PAGE this module will be displayed both in the catalogue and on main page. </r>"
+					+ "<r> 16. Enter from a picture a code. </r>" + "<r> 17. Press the button to SAVE. </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
+			args.put("type_id", Layout.SOFTTYPE_SHOW_ON_MAIN_PAGE);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lang_id", LanguageEnum.EN.getId());
+			args.put("active", true);
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id ,type_id , site_id , lang_id , active ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ? )";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Information module");
+			args.put("description",
+					"<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>");
+			args.put("fulldescription", "<r> </r>"
+					+ "<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>"
+					+ "<r> the Instruction on addition of the information module: </r>"
+					+ "<r> 1. To come into MANAGEMENT of the SITE having pressed the button to UPDATE. </r>"
+					+ "<r> 2. To press (To add the information, the goods, news in the central module with search in criteria)  </r>"
+					+ "<r> 3. We find subsection ( Form for an institution or information change on a site ). </r>"
+					+ "<r> 4. In the field HEADING we will write heading. </r>"
+					+ "<r> 5. In the field CHOSEN SECTION you can chose a section  where is place of  information module.If section is not exist then add new section in (Form for catalogue construction ) for detail see creation catalog. </r>"
+					+ "<r> 6. In the field IN OTHER LANGUAGE FOR SEARCH of anything it is not necessary to enter HEADING. Is in working out. </r>"
+					+ "<r> 7. In the field PICTURE 1 it is given the chance to add the image on page with the short description. The image can be added in two methods: UPLOAD PICTURE 1 FOR SHORT - upload from the computer of the user, PICTURE 1 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 8. If you mark the price in the field the PRICE it is displayed. If the price is not necessary to you, keep a zero. </r>"
+					+ "<r> 9. In the field the BRIEF INFORMATION is written goods or service brief information. </r>"
+					+ "<r> 10. In the field PICTURE 2 it is given the chance to add the image on page with detailed description. The image can be added in two methods: UPLOAD PICTURE 2 FOR DETAILED - upload from the computer of the user, PICTURE 2 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 11. In the field the DETAILED INFORMATION is written the detailed information of the goods or service. </r>"
+					+ "<r> 12. In the field ATTACH the FILE you can to attach a file in two methods: UPLOAD the FILE - upload from the computer of the user to CHOOSE the FILE - to choose from present base. A file uploading in any format which supports your browser. The maximum size of a file. 1,5 Mb. </r>"
+					+ "<r> 13. At an option choice to INCLUDE VOTING, your information module has a voting. By default this option is switched off. </r>"
+					+ "<r> 14. At an option choice to INCLUDE DISCUSSION, your information module has a forum. By default this option is switched off. </r>"
+					+ "<r> 15. In an option I APPROVE, if choose it is published, the information module will be displayed only in the catalogue. If will choose to SHOW ON MAIN PAGE this module will be displayed both in the catalogue and on main page. </r>"
+					+ "<r> 16. Enter from a picture a code. </r>" + "<r> 17. Press the button to SAVE. </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
+			args.put("type_id", Layout.SOFTTYPE_SHOW_ON_MAIN_PAGE);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("lang_id", LanguageEnum.EN.getId());
+			args.put("active", true);
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			/*
+			 * query = sequences_rs.getString("soft");
+			 * 
+			 * dbAdaptor.executeQuery(query); soft_id = (String) dbAdaptor.getValueAt(0, 0);
+			 * 
+			 * query =
+			 * "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active ) "
+			 * + " values ( ? , ? , ? , ? , ? , ? , ? )";
+			 * 
+			 * args = new HashMap(); args.put("soft_id",Long.valueOf(soft_id) );
+			 * args.put("name", " РљСЂРёС‚РµСЂРёРё РґР»СЏ РїРѕРёСЃРєР°  " ); args.put(
+			 * "description","<r> РљР°Рє РёР·Р�?РµРЅРёС‚СЊ РєСЂРёС‚РµСЂРёРё РґР»СЏ РїРѕРёСЃРєР° Р�?РѕРµРіРѕ РёРЅС„РѕР�?Р°С†РёРѕРЅРЅРѕРіРѕ Р�?РѕРґСѓР»СЏ </r>"
+			 * ); args.put("fulldescription","<r>" +
+			 * "  Р�РЅС„РѕСЂР�?Р°С†РёРѕРЅРЅС‹Р№ Р�?РѕРґСѓР»СЊ РґР»СЏ РіР»Р°РІРЅРѕР№ СЃС‚СЂР°РЅРёС†С‹ 1."
+			 * + "</r>" +
+			 * "<r> Р’Р°Р�? РЅСѓР¶РЅРѕ РёР·Р�?РµРЅРёС‚СЊ СЃРѕРґРµСЂР¶Р°РЅРёРµ СЌС‚РѕРіРѕ Р�?РѕРґСѓР»СЏ РЅР° СЃРІРѕРµ  </r>"
+			 * +
+			 * "<r> РґР»СЏ СЌС‚РѕРіРѕ РІС‹ РґРѕР»Р¶РЅС‹ РІРѕР№С‚Рё РЅР° СЃР°РёС‚ РїРѕРґ СЃРѕРёР�? РїР°СЂРѕР»РµР�?  </r>"
+			 * +
+			 * "<r> Сѓ РІР°СЃ РїРѕСЏРІСЏС‚СЊСЃСЏ РєРЅРѕРїРєРё: СѓРґР°Р»РёС‚СЊ,СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ ,РѕР±РЅРѕРІРёС‚СЊ(С‚РѕРµСЃС‚СЊ РґРѕР±Р°РІРёС‚СЊ РЅРѕРІС‹Р№ Р�?РѕРґСѓР»СЊ). </r>"
+			 * +
+			 * "<r> РџСЂРё РёР·Р�?РµРЅРµРЅРёРµ РёРЅС„РѕСЂР�?Р°С†РёРѕРЅРЅРѕРіРѕ Р�?РѕРґСѓР»СЏ РІС‹ Р�?РѕР¶РµС‚Рµ РїРѕР»РѕР¶РёС‚СЊ РµРіРѕ РґСЂСѓРіРѕР№ СЂР°Р·РґРµР» .</r>"
+			 * +
+			 * "<r> Р Р°Р·РґРµР»С‹ РІС‹ С‚Р°РєР¶Рµ Р�?РѕР¶РµС‚Рµ СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ : РґРѕР±Р°РІР»СЏС‚СЊ , СѓРґР°Р»СЏС‚СЊ , РёР·Р�?РµРЅСЏС‚СЊ .</r>"
+			 * +
+			 * "<r> РўР°РєР¶Рµ РІС‹ Р�?РѕР¶РµС‚Рµ РёР�?РµРЅРёС‚СЊ РєСЂРёС‚РµСЂРёРё РґР»СЏ РїРѕРёРєР° РёРЅС„РѕСЂР�?Р°С†РёРѕРЅРЅРѕРіРѕ Р�?РѕРґСѓР»СЏ </r>"
+			 * +
+			 * "<r> РґР»СЏ СЌС‚РѕРіРѕ РґРѕР»Р¶РЅС‹ РёР·Р�?РµРЅРёС‚СЊ РєСЂРёС‚РµСЂРёРё РЅР° С„РѕСЂР�?Рµ РёР·Р�?РµРЅРµРЅРёСЏ РёРЅС„РѕСЂР�?Р°С†РёРё. </r>"
+			 * ); args.put("catalog_id",SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID );
+			 * args.put("type_id", Layout.SOFTTYPE_SHOW_ON_MAIN_PAGE ); args.put("site_id",
+			 * Long.valueOf(site_id) ); args.put("active", true );
+			 * dbAdaptor.executeInsertWithArgs(query, args);
+			 */
+
+			/**
+			 * query = sequences_rs.getString("soft");
+			 * 
+			 * dbAdaptor.executeQuery(query); soft_id = (String) dbAdaptor.getValueAt(0, 0);
+			 * 
+			 * query = "insert into soft (soft_id , name , description , fulldescription
+			 * ,catalog_id , site_id , active ) " + " values ( ? , ? , ? , ? , ? , ? , ? )";
+			 * 
+			 * args = new HashMap(); args.put("soft_id",Long.valueOf(soft_id) );
+			 * args.put("name", " РџРѕСЃС‚СЂРѕРµРЅРёРµ РєР°С‚Р°Р»РѕРіР°" );
+			 * args.put("description","<r> Р”РѕР±Р°РІР»РµРЅРёРµ, СЂРµРґР°РєС‚РёСЂРѕРЅРёРµ,
+			 * СѓРґР°Р»РµРЅРёРµ СЂР°Р·РґРµР»РѕРІ</r>"); args.put("fulldescription","<r></r>"
+			 * + "<r> </r>" + "<r> </r>" + "<r> </r>" + "<r> </r>" + "<r> </r>" + "<r> </r>"
+			 * + "<r> </r>" );
+			 * //args.put("catalog_id",SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID );
+			 * args.put("catalog_id",SpecialCatalog.OUTPUT_PAGES_FROM_NEWS_CATALOG );
+			 * args.put("type_id", Layout.SOFTTYPE_SHOW_ON_MAIN_PAGE ); args.put("site_id",
+			 * Long.valueOf(site_id) ); args.put("active", true );
+			 * dbAdaptor.executeInsertWithArgs(query, args);
+			 */
+
+			/*
+			 * query = sequences_rs.getString("soft");
+			 * 
+			 * dbAdaptor.executeQuery(query); soft_id = (String) dbAdaptor.getValueAt(0, 0);
+			 * 
+			 * query =
+			 * "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active ) "
+			 * + " values ( ? , ? , ? , ? , ? , ? , ? )";
+			 * 
+			 * args = new HashMap(); args.put("soft_id",Long.valueOf(soft_id) );
+			 * args.put("name", " РџРѕРёСЃРє РїРѕ С‚РµРєСЃС‚Сѓ  " ); args.put(
+			 * "description","<r> РњР°РіР°Р·РёРЅ РїРѕРґРґРµСЂР¶РёРІР°РµС‚ РїРѕРёСЃРєР° РїРѕ Р·Р°РіРѕР»РѕРІРєСѓ РїРѕР»СѓР»СЏ </r>"
+			 * ); args.put("fulldescription","<r>" +
+			 * "  Р�РЅС„РѕСЂР�?Р°С†РёРѕРЅРЅС‹Р№ Р�?РѕРґСѓР»СЊ РґР»СЏ РіР»Р°РІРЅРѕР№ СЃС‚СЂР°РЅРёС†С‹ 1."
+			 * + "</r>" +
+			 * "<r> Р’Р°Р�? РЅСѓР¶РЅРѕ РёР·Р�?РµРЅРёС‚СЊ СЃРѕРґРµСЂР¶Р°РЅРёРµ СЌС‚РѕРіРѕ Р�?РѕРґСѓР»СЏ РЅР° СЃРІРѕРµ  </r>"
+			 * +
+			 * "<r> РґР»СЏ СЌС‚РѕРіРѕ РІС‹ РґРѕР»Р¶РЅС‹ РІРѕР№С‚Рё РЅР° СЃР°РёС‚ РїРѕРґ СЃРѕРёР�? РїР°СЂРѕР»РµР�?  </r>"
+			 * +
+			 * "<r> Сѓ РІР°СЃ РїРѕСЏРІСЏС‚СЊСЃСЏ РєРЅРѕРїРєРё: СѓРґР°Р»РёС‚СЊ,СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ ,РѕР±РЅРѕРІРёС‚СЊ(С‚РѕРµСЃС‚СЊ РґРѕР±Р°РІРёС‚СЊ РЅРѕРІС‹Р№ Р�?РѕРґСѓР»СЊ). </r>"
+			 * +
+			 * "<r> РџСЂРё РёР·Р�?РµРЅРµРЅРёРµ РёРЅС„РѕСЂР�?Р°С†РёРѕРЅРЅРѕРіРѕ Р�?РѕРґСѓР»СЏ РІС‹ Р�?РѕР¶РµС‚Рµ РїРѕР»РѕР¶РёС‚СЊ РµРіРѕ РґСЂСѓРіРѕР№ СЂР°Р·РґРµР» .</r>"
+			 * +
+			 * "<r> Р Р°Р·РґРµР»С‹ РІС‹ С‚Р°РєР¶Рµ Р�?РѕР¶РµС‚Рµ СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ : РґРѕР±Р°РІР»СЏС‚СЊ , СѓРґР°Р»СЏС‚СЊ , РёР·Р�?РµРЅСЏС‚СЊ .</r>"
+			 * +
+			 * "<r> РўР°РєР¶Рµ РІС‹ Р�?РѕР¶РµС‚Рµ РёР�?РµРЅРёС‚СЊ РєСЂРёС‚РµСЂРёРё РґР»СЏ РїРѕРёРєР° РёРЅС„РѕСЂР�?Р°С†РёРѕРЅРЅРѕРіРѕ Р�?РѕРґСѓР»СЏ </r>"
+			 * +
+			 * "<r> РґР»СЏ СЌС‚РѕРіРѕ РґРѕР»Р¶РЅС‹ РёР·Р�?РµРЅРёС‚СЊ РєСЂРёС‚РµСЂРёРё РЅР° С„РѕСЂР�?Рµ РёР·Р�?РµРЅРµРЅРёСЏ РёРЅС„РѕСЂР�?Р°С†РёРё. </r>"
+			 * ); args.put("type_id", Layout.SOFTTYPE_SHOW_ON_MAIN_PAGE );
+			 * args.put("catalog_id",SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID );
+			 * args.put("site_id", Long.valueOf(site_id) ); args.put("active", true );
+			 * dbAdaptor.executeInsertWithArgs(query, args);
+			 * 
+			 * 
+			 * query = sequences_rs.getString("soft");
+			 * 
+			 * dbAdaptor.executeQuery(query); soft_id = (String) dbAdaptor.getValueAt(0, 0);
+			 * 
+			 * query =
+			 * "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active ) "
+			 * + " values ( ? , ? , ? , ? , ? , ? , ? )";
+			 * 
+			 * args = new HashMap(); args.put("soft_id",Long.valueOf(soft_id) );
+			 * args.put("name", " РЈ РІР°СЃ РµСЃС‚СЊ Р¤РѕСЂСѓР�? !  " ); args.put(
+			 * "description","<r> РњР°РіР°Р·РёРЅ РїРѕРґРґРµСЂР¶РёРІР°РµС‚  СЃРёСЃС‚РµР�?Сѓ РѕР±СЃСѓР¶РґРµРЅРёСЏ РёРЅС„РѕСЂР�?Р°С†РёРѕРЅРЅРѕРіРѕ Р�?РѕРґСѓР»СЏ </r>"
+			 * ); args.put("fulldescription","<r>" +
+			 * "  Р�РЅС„РѕСЂР�?Р°С†РёРѕРЅРЅС‹Р№ Р�?РѕРґСѓР»СЊ РґР»СЏ РіР»Р°РІРЅРѕР№ СЃС‚СЂР°РЅРёС†С‹ 1."
+			 * + "</r>" +
+			 * "<r> Р’Р°Р�? РЅСѓР¶РЅРѕ РёР·Р�?РµРЅРёС‚СЊ СЃРѕРґРµСЂР¶Р°РЅРёРµ СЌС‚РѕРіРѕ Р�?РѕРґСѓР»СЏ РЅР° СЃРІРѕРµ  </r>"
+			 * +
+			 * "<r> РґР»СЏ СЌС‚РѕРіРѕ РІС‹ РґРѕР»Р¶РЅС‹ РІРѕР№С‚Рё РЅР° СЃР°РёС‚ РїРѕРґ СЃРѕРёР�? РїР°СЂРѕР»РµР�?  </r>"
+			 * +
+			 * "<r> Сѓ РІР°СЃ РїРѕСЏРІСЏС‚СЊСЃСЏ РєРЅРѕРїРєРё: СѓРґР°Р»РёС‚СЊ,СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ ,РѕР±РЅРѕРІРёС‚СЊ(С‚РѕРµСЃС‚СЊ РґРѕР±Р°РІРёС‚СЊ РЅРѕРІС‹Р№ Р�?РѕРґСѓР»СЊ). </r>"
+			 * +
+			 * "<r> РџСЂРё РёР·Р�?РµРЅРµРЅРёРµ РёРЅС„РѕСЂР�?Р°С†РёРѕРЅРЅРѕРіРѕ Р�?РѕРґСѓР»СЏ РІС‹ Р�?РѕР¶РµС‚Рµ РїРѕР»РѕР¶РёС‚СЊ РµРіРѕ РґСЂСѓРіРѕР№ СЂР°Р·РґРµР» .</r>"
+			 * +
+			 * "<r> Р Р°Р·РґРµР»С‹ РІС‹ С‚Р°РєР¶Рµ Р�?РѕР¶РµС‚Рµ СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ : РґРѕР±Р°РІР»СЏС‚СЊ , СѓРґР°Р»СЏС‚СЊ , РёР·Р�?РµРЅСЏС‚СЊ .</r>"
+			 * +
+			 * "<r> РўР°РєР¶Рµ РІС‹ Р�?РѕР¶РµС‚Рµ РёР�?РµРЅРёС‚СЊ РєСЂРёС‚РµСЂРёРё РґР»СЏ РїРѕРёРєР° РёРЅС„РѕСЂР�?Р°С†РёРѕРЅРЅРѕРіРѕ Р�?РѕРґСѓР»СЏ </r>"
+			 * +
+			 * "<r> РґР»СЏ СЌС‚РѕРіРѕ РґРѕР»Р¶РЅС‹ РёР·Р�?РµРЅРёС‚СЊ РєСЂРёС‚РµСЂРёРё РЅР° С„РѕСЂР�?Рµ РёР·Р�?РµРЅРµРЅРёСЏ РёРЅС„РѕСЂР�?Р°С†РёРё. </r>"
+			 * ); args.put("catalog_id",SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID );
+			 * args.put("type_id",Layout.SOFTTYPE_SHOW_ON_MAIN_PAGE ); args.put("site_id",
+			 * Long.valueOf(site_id) ); args.put("active", true );
+			 * dbAdaptor.executeInsertWithArgs(query, args);
+			 * 
+			 * query = sequences_rs.getString("soft");
+			 * 
+			 * dbAdaptor.executeQuery(query); soft_id = (String) dbAdaptor.getValueAt(0, 0);
+			 * 
+			 * query =
+			 * "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , image_id , bigimage_id  ) "
+			 * + " values ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ?  )"; args = new HashMap();
+			 * args.put("soft_id",Long.valueOf(soft_id) ); args.put("name",
+			 * " РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ   " ); args.put(
+			 * "description","<r> Р’С‹ Р�?РѕР¶РµС‚Рµ СѓС‚Р°РЅРѕРІРёС‚СЊ РґРѕ 21 РєР°СЂС‚РёРЅРєРё РґР»СЏ РѕРґРЅРѕРіРѕ РёРЅС„РѕСЂР�?Р°С†РёРѕРЅРЅРѕРіРѕ Р�?РѕРґСѓР»СЏ РєР°Рє  РѕРїРёСЃР°РЅРёСЏ С‚РѕРІР°СЂР° РёР»Рё РЅРѕРІРѕСЃС‚Рё </r>"
+			 * ); args.put("fulldescription","<r>" +
+			 * "  Р�РЅС„РѕСЂР�?Р°С†РёРѕРЅРЅС‹Р№ Р�?РѕРґСѓР»СЊ РґР»СЏ РіР»Р°РІРЅРѕР№ СЃС‚СЂР°РЅРёС†С‹ 1."
+			 * + "</r>" +
+			 * "<r> Р’Р°Р�? РЅСѓР¶РЅРѕ РёР·Р�?РµРЅРёС‚СЊ СЃРѕРґРµСЂР¶Р°РЅРёРµ СЌС‚РѕРіРѕ Р�?РѕРґСѓР»СЏ РЅР° СЃРІРѕРµ  </r>"
+			 * +
+			 * "<r> РґР»СЏ СЌС‚РѕРіРѕ РІС‹ РґРѕР»Р¶РЅС‹ РІРѕР№С‚Рё РЅР° СЃР°РёС‚ РїРѕРґ СЃРѕРёР�? РїР°СЂРѕР»РµР�?  </r>"
+			 * +
+			 * "<r> Сѓ РІР°СЃ РїРѕСЏРІСЏС‚СЊСЃСЏ РєРЅРѕРїРєРё: СѓРґР°Р»РёС‚СЊ,СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ ,РѕР±РЅРѕРІРёС‚СЊ(С‚РѕРµСЃС‚СЊ РґРѕР±Р°РІРёС‚СЊ РЅРѕРІС‹Р№ Р�?РѕРґСѓР»СЊ). </r>"
+			 * +
+			 * "<r> РџСЂРё РёР·Р�?РµРЅРµРЅРёРµ РёРЅС„РѕСЂР�?Р°С†РёРѕРЅРЅРѕРіРѕ Р�?РѕРґСѓР»СЏ РІС‹ Р�?РѕР¶РµС‚Рµ РїРѕР»РѕР¶РёС‚СЊ РµРіРѕ РґСЂСѓРіРѕР№ СЂР°Р·РґРµР» .</r>"
+			 * +
+			 * "<r> Р Р°Р·РґРµР»С‹ РІС‹ С‚Р°РєР¶Рµ Р�?РѕР¶РµС‚Рµ СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ : РґРѕР±Р°РІР»СЏС‚СЊ , СѓРґР°Р»СЏС‚СЊ , РёР·Р�?РµРЅСЏС‚СЊ .</r>"
+			 * +
+			 * "<r> РўР°РєР¶Рµ РІС‹ Р�?РѕР¶РµС‚Рµ РёР�?РµРЅРёС‚СЊ РєСЂРёС‚РµСЂРёРё РґР»СЏ РїРѕРёРєР° РёРЅС„РѕСЂР�?Р°С†РёРѕРЅРЅРѕРіРѕ Р�?РѕРґСѓР»СЏ </r>"
+			 * +
+			 * "<r> РґР»СЏ СЌС‚РѕРіРѕ РґРѕР»Р¶РЅС‹ РёР·Р�?РµРЅРёС‚СЊ РєСЂРёС‚РµСЂРёРё РЅР° С„РѕСЂР�?Рµ РёР·Р�?РµРЅРµРЅРёСЏ РёРЅС„РѕСЂР�?Р°С†РёРё. </r>"
+			 * ); args.put("catalog_id",SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID );
+			 * args.put("type_id", Layout.SOFTTYPE_SHOW_ON_MAIN_PAGE ); args.put("site_id",
+			 * Long.valueOf(site_id) ); args.put("active", true );
+			 * args.put("portlettype_id", Layout.PORTLET_TYPE_CENTER ); args.put("image_id",
+			 * 10 ); args.put("bigimage_id", 10 ); dbAdaptor.executeInsertWithArgs(query,
+			 * args);
+			 * 
+			 */
+
+			String tree_id = soft_id;
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , tree_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? ) ";
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", " Item review section 1 ");
+			args.put("description", "<r> Item review section - You can talk about  goods or news and a price of sheet on your forum.</r>");
+			args.put("fulldescription", "<r>" + "  The information module for main page 1." + "</r>"
+					+ "<r> You need to change the contents of this module to place here  your information. </r>"
+					+ "<r> For this you should enter on site under  your the password  </r>"
+					+ "<r> So you can observe buttons:  remove, edit, update (To add the new module). </r>"
+					+ "<r> In during  change of the informational unit you can put its other section .</r>"
+					+ "<r> You also can edit ,  add, delete this section name. </r>"
+					+ "<r> Also you can change parameters  criteria for search of  information  unit </r>"
+					+ "<r> For this purpose should change criteria on the form of change of the information with title (Installation of criteria for information search on a site ). </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("tree_id", Long.valueOf(tree_id));
+			args.put("active", true);
+			args.put("portlettype_id", Layout.REVIEW_MESSAGES);
+			args.put("lang_id", LanguageEnum.EN.getId());
+
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , tree_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id ) "
+					+ " values (? , ? , ? , ? , ? , ? , ? , ? , ? , ? ) ";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Item review section 2 ");
+			args.put("description", "<r>Item review section - Thanks from Center Business Solutions Ltd  that  you using  this CMS .</r>");
+			args.put("fulldescription", "<r> The information module for main page 1.</r>"
+					+ "<r> You need to change the contents of this module to place here  your information. </r>"
+					+ "<r> For this you should enter on site under  your the password  </r>"
+					+ "<r> So you can observe buttons:  remove, edit, update (To add the new module). </r>"
+					+ "<r> In during  change of the informational unit you can put its other section .</r>"
+					+ "<r> You also can edit ,  add, delete this section name. </r>"
+					+ "<r> Also you can change parameters  criteria for search of  information  unit </r>"
+					+ "<r> For this purpose should change criteria on the form of change of the information with title (Installation of criteria for information search on a site ). </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("tree_id", Long.valueOf(tree_id));
+			args.put("active", true);
+			args.put("portlettype_id", Layout.REVIEW_MESSAGES);
+			args.put("lang_id", LanguageEnum.EN.getId());
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , image_id , bigimage_id , lang_id  ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? )";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Information module");
+			args.put("description",
+					"<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>");
+			args.put("fulldescription", "<r> </r>"
+					+ "<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>"
+					+ "<r> the Instruction on addition of the information module: </r>"
+					+ "<r> 1. To come into MANAGEMENT of the SITE having pressed the button to UPDATE. </r>"
+					+ "<r> 2. To press (To add the information, the goods, news in the central module with search in criteria)  </r>"
+					+ "<r> 3. We find subsection ( Form for an institution or information change on a site ). </r>"
+					+ "<r> 4. In the field HEADING we will write heading. </r>"
+					+ "<r> 5. In the field CHOSEN SECTION you can chose a section  where is place of  information module.If section is not exist then add new section in (Form for catalogue construction ) for detail see creation catalog. </r>"
+					+ "<r> 6. In the field IN OTHER LANGUAGE FOR SEARCH of anything it is not necessary to enter HEADING. Is in working out. </r>"
+					+ "<r> 7. In the field PICTURE 1 it is given the chance to add the image on page with the short description. The image can be added in two methods: UPLOAD PICTURE 1 FOR SHORT - upload from the computer of the user, PICTURE 1 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 8. If you mark the price in the field the PRICE it is displayed. If the price is not necessary to you, keep a zero. </r>"
+					+ "<r> 9. In the field the BRIEF INFORMATION is written goods or service brief information. </r>"
+					+ "<r> 10. In the field PICTURE 2 it is given the chance to add the image on page with detailed description. The image can be added in two methods: UPLOAD PICTURE 2 FOR DETAILED - upload from the computer of the user, PICTURE 2 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 11. In the field the DETAILED INFORMATION is written the detailed information of the goods or service. </r>"
+					+ "<r> 12. In the field ATTACH the FILE you can to attach a file in two methods: UPLOAD the FILE - upload from the computer of the user to CHOOSE the FILE - to choose from present base. A file uploading in any format which supports your browser. The maximum size of a file. 1,5 Mb. </r>"
+					+ "<r> 13. At an option choice to INCLUDE VOTING, your information module has a voting. By default this option is switched off. </r>"
+					+ "<r> 14. At an option choice to INCLUDE DISCUSSION, your information module has a forum. By default this option is switched off. </r>"
+					+ "<r> 15. In an option I APPROVE, if choose it is published, the information module will be displayed only in the catalogue. If will choose to SHOW ON MAIN PAGE this module will be displayed both in the catalogue and on main page. </r>"
+					+ "<r> 16. Enter from a picture a code. </r>" + "<r> 17. Press the button to SAVE. </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("active", true);
+			args.put("portlettype_id", Layout.RECOMMENDED_ITEMS_ON_MAIN_PAGE);
+			args.put("image_id", 10);
+			args.put("bigimage_id", 10);
+			args.put("lang_id", LanguageEnum.EN.getId());
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("soft");
+
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , image_id , bigimage_id , lang_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? ) ";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Information module");
+			args.put("description",
+					"<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>");
+			args.put("fulldescription", "<r> </r>"
+					+ "<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>"
+					+ "<r> the Instruction on addition of the information module: </r>"
+					+ "<r> 1. To come into MANAGEMENT of the SITE having pressed the button to UPDATE. </r>"
+					+ "<r> 2. To press (To add the information, the goods, news in the central module with search in criteria)  </r>"
+					+ "<r> 3. We find subsection ( Form for an institution or information change on a site ). </r>"
+					+ "<r> 4. In the field HEADING we will write heading. </r>"
+					+ "<r> 5. In the field CHOSEN SECTION you can chose a section  where is place of  information module.If section is not exist then add new section in (Form for catalogue construction ) for detail see creation catalog. </r>"
+					+ "<r> 6. In the field IN OTHER LANGUAGE FOR SEARCH of anything it is not necessary to enter HEADING. Is in working out. </r>"
+					+ "<r> 7. In the field PICTURE 1 it is given the chance to add the image on page with the short description. The image can be added in two methods: UPLOAD PICTURE 1 FOR SHORT - upload from the computer of the user, PICTURE 1 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 8. If you mark the price in the field the PRICE it is displayed. If the price is not necessary to you, keep a zero. </r>"
+					+ "<r> 9. In the field the BRIEF INFORMATION is written goods or service brief information. </r>"
+					+ "<r> 10. In the field PICTURE 2 it is given the chance to add the image on page with detailed description. The image can be added in two methods: UPLOAD PICTURE 2 FOR DETAILED - upload from the computer of the user, PICTURE 2 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 11. In the field the DETAILED INFORMATION is written the detailed information of the goods or service. </r>"
+					+ "<r> 12. In the field ATTACH the FILE you can to attach a file in two methods: UPLOAD the FILE - upload from the computer of the user to CHOOSE the FILE - to choose from present base. A file uploading in any format which supports your browser. The maximum size of a file. 1,5 Mb. </r>"
+					+ "<r> 13. At an option choice to INCLUDE VOTING, your information module has a voting. By default this option is switched off. </r>"
+					+ "<r> 14. At an option choice to INCLUDE DISCUSSION, your information module has a forum. By default this option is switched off. </r>"
+					+ "<r> 15. In an option I APPROVE, if choose it is published, the information module will be displayed only in the catalogue. If will choose to SHOW ON MAIN PAGE this module will be displayed both in the catalogue and on main page. </r>"
+					+ "<r> 16. Enter from a picture a code. </r>" + "<r> 17. Press the button to SAVE. </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("active", true);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
+			args.put("image_id", 10);
+			args.put("bigimage_id", 10);
+			args.put("lang_id", LanguageEnum.EN.getId());
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("soft");
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id  ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ? ) ; ";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Information module");
+			args.put("description",
+					"<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>");
+			args.put("fulldescription", "<r> </r>"
+					+ "<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>"
+					+ "<r> the Instruction on addition of the information module: </r>"
+					+ "<r> 1. To come into MANAGEMENT of the SITE having pressed the button to UPDATE. </r>"
+					+ "<r> 2. To press (To add the information, the goods, news in the central module with search in criteria)  </r>"
+					+ "<r> 3. We find subsection ( Form for an institution or information change on a site ). </r>"
+					+ "<r> 4. In the field HEADING we will write heading. </r>"
+					+ "<r> 5. In the field CHOSEN SECTION you can chose a section  where is place of  information module.If section is not exist then add new section in (Form for catalogue construction ) for detail see creation catalog. </r>"
+					+ "<r> 6. In the field IN OTHER LANGUAGE FOR SEARCH of anything it is not necessary to enter HEADING. Is in working out. </r>"
+					+ "<r> 7. In the field PICTURE 1 it is given the chance to add the image on page with the short description. The image can be added in two methods: UPLOAD PICTURE 1 FOR SHORT - upload from the computer of the user, PICTURE 1 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 8. If you mark the price in the field the PRICE it is displayed. If the price is not necessary to you, keep a zero. </r>"
+					+ "<r> 9. In the field the BRIEF INFORMATION is written goods or service brief information. </r>"
+					+ "<r> 10. In the field PICTURE 2 it is given the chance to add the image on page with detailed description. The image can be added in two methods: UPLOAD PICTURE 2 FOR DETAILED - upload from the computer of the user, PICTURE 2 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 11. In the field the DETAILED INFORMATION is written the detailed information of the goods or service. </r>"
+					+ "<r> 12. In the field ATTACH the FILE you can to attach a file in two methods: UPLOAD the FILE - upload from the computer of the user to CHOOSE the FILE - to choose from present base. A file uploading in any format which supports your browser. The maximum size of a file. 1,5 Mb. </r>"
+					+ "<r> 13. At an option choice to INCLUDE VOTING, your information module has a voting. By default this option is switched off. </r>"
+					+ "<r> 14. At an option choice to INCLUDE DISCUSSION, your information module has a forum. By default this option is switched off. </r>"
+					+ "<r> 15. In an option I APPROVE, if choose it is published, the information module will be displayed only in the catalogue. If will choose to SHOW ON MAIN PAGE this module will be displayed both in the catalogue and on main page. </r>"
+					+ "<r> 16. Enter from a picture a code. </r>" + "<r> 17. Press the button to SAVE. </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("active", true);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
+			args.put("lang_id", LanguageEnum.EN.getId());
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("soft");
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id  ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ? )";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Information module");
+			args.put("description",
+					"<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>");
+			args.put("fulldescription", "<r> </r>"
+					+ "<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>"
+					+ "<r> the Instruction on addition of the information module: </r>"
+					+ "<r> 1. To come into MANAGEMENT of the SITE having pressed the button to UPDATE. </r>"
+					+ "<r> 2. To press (To add the information, the goods, news in the central module with search in criteria)  </r>"
+					+ "<r> 3. We find subsection ( Form for an institution or information change on a site ). </r>"
+					+ "<r> 4. In the field HEADING we will write heading. </r>"
+					+ "<r> 5. In the field CHOSEN SECTION you can chose a section  where is place of  information module.If section is not exist then add new section in (Form for catalogue construction ) for detail see creation catalog. </r>"
+					+ "<r> 6. In the field IN OTHER LANGUAGE FOR SEARCH of anything it is not necessary to enter HEADING. Is in working out. </r>"
+					+ "<r> 7. In the field PICTURE 1 it is given the chance to add the image on page with the short description. The image can be added in two methods: UPLOAD PICTURE 1 FOR SHORT - upload from the computer of the user, PICTURE 1 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 8. If you mark the price in the field the PRICE it is displayed. If the price is not necessary to you, keep a zero. </r>"
+					+ "<r> 9. In the field the BRIEF INFORMATION is written goods or service brief information. </r>"
+					+ "<r> 10. In the field PICTURE 2 it is given the chance to add the image on page with detailed description. The image can be added in two methods: UPLOAD PICTURE 2 FOR DETAILED - upload from the computer of the user, PICTURE 2 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 11. In the field the DETAILED INFORMATION is written the detailed information of the goods or service. </r>"
+					+ "<r> 12. In the field ATTACH the FILE you can to attach a file in two methods: UPLOAD the FILE - upload from the computer of the user to CHOOSE the FILE - to choose from present base. A file uploading in any format which supports your browser. The maximum size of a file. 1,5 Mb. </r>"
+					+ "<r> 13. At an option choice to INCLUDE VOTING, your information module has a voting. By default this option is switched off. </r>"
+					+ "<r> 14. At an option choice to INCLUDE DISCUSSION, your information module has a forum. By default this option is switched off. </r>"
+					+ "<r> 15. In an option I APPROVE, if choose it is published, the information module will be displayed only in the catalogue. If will choose to SHOW ON MAIN PAGE this module will be displayed both in the catalogue and on main page. </r>"
+					+ "<r> 16. Enter from a picture a code. </r>" + "<r> 17. Press the button to SAVE. </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("active", true);
+			args.put("portlettype_id", Layout.RECOMMENDED_ITEMS_ON_MAIN_PAGE);
+			args.put("lang_id", LanguageEnum.EN.getId());
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("soft");
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ? )";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Information module");
+			args.put("description",
+					"<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>");
+			args.put("fulldescription", "<r> </r>"
+					+ "<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>"
+					+ "<r> the Instruction on addition of the information module: </r>"
+					+ "<r> 1. To come into MANAGEMENT of the SITE having pressed the button to UPDATE. </r>"
+					+ "<r> 2. To press (To add the information, the goods, news in the central module with search in criteria)  </r>"
+					+ "<r> 3. We find subsection ( Form for an institution or information change on a site ). </r>"
+					+ "<r> 4. In the field HEADING we will write heading. </r>"
+					+ "<r> 5. In the field CHOSEN SECTION you can chose a section  where is place of  information module.If section is not exist then add new section in (Form for catalogue construction ) for detail see creation catalog. </r>"
+					+ "<r> 6. In the field IN OTHER LANGUAGE FOR SEARCH of anything it is not necessary to enter HEADING. Is in working out. </r>"
+					+ "<r> 7. In the field PICTURE 1 it is given the chance to add the image on page with the short description. The image can be added in two methods: UPLOAD PICTURE 1 FOR SHORT - upload from the computer of the user, PICTURE 1 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 8. If you mark the price in the field the PRICE it is displayed. If the price is not necessary to you, keep a zero. </r>"
+					+ "<r> 9. In the field the BRIEF INFORMATION is written goods or service brief information. </r>"
+					+ "<r> 10. In the field PICTURE 2 it is given the chance to add the image on page with detailed description. The image can be added in two methods: UPLOAD PICTURE 2 FOR DETAILED - upload from the computer of the user, PICTURE 2 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 11. In the field the DETAILED INFORMATION is written the detailed information of the goods or service. </r>"
+					+ "<r> 12. In the field ATTACH the FILE you can to attach a file in two methods: UPLOAD the FILE - upload from the computer of the user to CHOOSE the FILE - to choose from present base. A file uploading in any format which supports your browser. The maximum size of a file. 1,5 Mb. </r>"
+					+ "<r> 13. At an option choice to INCLUDE VOTING, your information module has a voting. By default this option is switched off. </r>"
+					+ "<r> 14. At an option choice to INCLUDE DISCUSSION, your information module has a forum. By default this option is switched off. </r>"
+					+ "<r> 15. In an option I APPROVE, if choose it is published, the information module will be displayed only in the catalogue. If will choose to SHOW ON MAIN PAGE this module will be displayed both in the catalogue and on main page. </r>"
+					+ "<r> 16. Enter from a picture a code. </r>" + "<r> 17. Press the button to SAVE. </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("active", true);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
+			args.put("lang_id", LanguageEnum.EN.getId());
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			query = sequences_rs.getString("soft");
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+			query = "insert into soft (soft_id , name , description , fulldescription ,catalog_id , site_id , active , portlettype_id , lang_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ? )";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Information module");
+			args.put("description",
+					"<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>");
+			args.put("fulldescription", "<r> </r>"
+					+ "<r> In the information module  you can  place  the text, to place  images on forms with short and detailed description  and attach files, to set a price, and also to include voting or a forum for each concrete information module. </r>"
+					+ "<r> the Instruction on addition of the information module: </r>"
+					+ "<r> 1. To come into MANAGEMENT of the SITE having pressed the button to UPDATE. </r>"
+					+ "<r> 2. To press (To add the information, the goods, news in the central module with search in criteria)  </r>"
+					+ "<r> 3. We find subsection ( Form for an institution or information change on a site ). </r>"
+					+ "<r> 4. In the field HEADING we will write heading. </r>"
+					+ "<r> 5. In the field CHOSEN SECTION you can chose a section  where is place of  information module.If section is not exist then add new section in (Form for catalogue construction ) for detail see creation catalog. </r>"
+					+ "<r> 6. In the field IN OTHER LANGUAGE FOR SEARCH of anything it is not necessary to enter HEADING. Is in working out. </r>"
+					+ "<r> 7. In the field PICTURE 1 it is given the chance to add the image on page with the short description. The image can be added in two methods: UPLOAD PICTURE 1 FOR SHORT - upload from the computer of the user, PICTURE 1 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 8. If you mark the price in the field the PRICE it is displayed. If the price is not necessary to you, keep a zero. </r>"
+					+ "<r> 9. In the field the BRIEF INFORMATION is written goods or service brief information. </r>"
+					+ "<r> 10. In the field PICTURE 2 it is given the chance to add the image on page with detailed description. The image can be added in two methods: UPLOAD PICTURE 2 FOR DETAILED - upload from the computer of the user, PICTURE 2 FROM BASE - to choose from present base. The image uploading in any formats which are supported by your browser. The maximum size of the image 1,5 Mb. </r>"
+					+ "<r> 11. In the field the DETAILED INFORMATION is written the detailed information of the goods or service. </r>"
+					+ "<r> 12. In the field ATTACH the FILE you can to attach a file in two methods: UPLOAD the FILE - upload from the computer of the user to CHOOSE the FILE - to choose from present base. A file uploading in any format which supports your browser. The maximum size of a file. 1,5 Mb. </r>"
+					+ "<r> 13. At an option choice to INCLUDE VOTING, your information module has a voting. By default this option is switched off. </r>"
+					+ "<r> 14. At an option choice to INCLUDE DISCUSSION, your information module has a forum. By default this option is switched off. </r>"
+					+ "<r> 15. In an option I APPROVE, if choose it is published, the information module will be displayed only in the catalogue. If will choose to SHOW ON MAIN PAGE this module will be displayed both in the catalogue and on main page. </r>"
+					+ "<r> 16. Enter from a picture a code. </r>" + "<r> 17. Press the button to SAVE. </r>");
+			args.put("catalog_id", SpecialCatalog.OUTPUT_PAGES_SORT_BY_SOFT_ID);
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("active", true);
+			args.put("portlettype_id", Layout.SPONSORED_ITEMS_ON_MAIN_PAGE);
+			args.put("lang_id", LanguageEnum.EN.getId());
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+//			AuthorizationPageBeanId
+//			Create About Page
+			query = sequences_rs.getString("soft");
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+			query = "insert into soft (soft_id , name , description , fulldescription , site_id , active , portlettype_id , lang_id , catalog_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ? )";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", " About company  ");
+			args.put("description", "<r> About company.</r>");
+			args.put("fulldescription",
+					"<r>" + " Name of company: your company name <r> Phone"
+							+ " +1(xxx)yyy-xx-xx  </r>" + "<r> Fax: "
+							+ " +1(xxx)yyy-xx-xx </r>" + "<r> EMail: "
+							+ " your@mail </r>");
+
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("active", true);
+			args.put("portlettype_id", Layout.FOOTER_MESSAGES);
+			args.put("lang_id", LanguageEnum.EN.getId());
+			args.put("catalog_id", -2);
+
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+//			AuthorizationPageBeanId
+//			Create About Page
+			query = sequences_rs.getString("soft");
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+			query = "insert into soft (soft_id , name , description , fulldescription , site_id , active , portlettype_id , lang_id , catalog_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ?)";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", " Delivery ");
+			args.put("description", "<r> Delivery.</r>");
+			args.put("fulldescription", "<r>" + " Delivery from your company name</r>"
+					+ "<r> Payment perform by way  translation of money resources on the company score through payment systems or through bank by direct payment </r>"
+					+ "<r> Account Web Money: 1111222333444 </r>" + "<r> Account Yandex Money: 333442234455 </r>"
+					+ "<r> Bank Of Test ltd  ...... </r>");
+
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("active", true);
+			args.put("portlettype_id", Layout.FOOTER_MESSAGES);
+			args.put("lang_id", LanguageEnum.EN.getId());
+			args.put("catalog_id", -2);
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+//			AuthorizationPageBeanId
+//			Create About Page
+			query = sequences_rs.getString("soft");
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+			query = "insert into soft (soft_id , name , description , fulldescription , site_id , active , portlettype_id , lang_id , catalog_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ?  )";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Return policy");
+			args.put("description", "<r> How can I return item.</r>");
+			args.put("fulldescription", "<r>" + " Order payment your company name </r>"
+					+ "<r> Payment perform by way  translation of money resources on the company score through payment systems or through bank by direct payment </r>"
+					+ "<r> Account Web Money: 1111222333444 </r>" + "<r> Account Yandex Money: 333442234455 </r>"
+					+ "<r> Bank Of Test ltd  ...... </r>");
+
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("active", true);
+			args.put("portlettype_id", Layout.FOOTER_MESSAGES);
+			args.put("lang_id", LanguageEnum.EN.getId());
+			args.put("catalog_id", -2);
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+//			AuthorizationPageBeanId
+//			Create About Page
+			query = sequences_rs.getString("soft");
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+			query = "insert into soft (soft_id , name , description , fulldescription , site_id , active , portlettype_id , lang_id , catalog_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ?  )";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Contacts us");
+			args.put("description", "<r> Contacts us.</r>");
+			args.put("fulldescription", "<r>" + " Contacts us your company name </r>"
+					+ "<r> Payment perform by way  translation of money resources on the company score through payment systems or through bank by direct payment </r>"
+					+ "<r> Account Web Money: 1111222333444 </r>" + "<r> Account Yandex Money: 333442234455 </r>"
+					+ "<r> Bank Of Test ltd  ...... </r>");
+
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("active", true);
+			args.put("portlettype_id", Layout.FOOTER_MESSAGES);
+			args.put("lang_id", LanguageEnum.EN.getId());
+			args.put("catalog_id", -2);
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+//			AuthorizationPageBeanId
+//			Create About Page
+			query = sequences_rs.getString("soft");
+			dbAdaptor.executeQuery(query);
+			soft_id = (String) dbAdaptor.getValueAt(0, 0);
+			query = "insert into soft (soft_id , name , description , fulldescription , site_id , active , portlettype_id , lang_id , catalog_id ) "
+					+ " values ( ? , ? , ? , ? , ? , ? , ? , ? , ? )";
+
+			args = new HashMap();
+			args.put("soft_id", Long.valueOf(soft_id));
+			args.put("name", "Careers");
+			args.put("description", "<r> Careers.</r>");
+			args.put("fulldescription", "<r>" + " Careers with your company name </r>"
+					+ "<r> Payment perform by way  translation of money resources on the company score through payment systems or through bank by direct payment </r>"
+					+ "<r> Account Web Money: 1111222333444 </r>" + "<r> Account Yandex Money: 333442234455 </r>"
+					+ "<r> Bank Of Test ltd  ...... </r>");
+
+			args.put("site_id", Long.valueOf(site_id));
+			args.put("active", true);
+			args.put("portlettype_id", Layout.FOOTER_MESSAGES);
+			args.put("lang_id", LanguageEnum.EN.getId());
+			args.put("catalog_id", -2);
+			dbAdaptor.executeInsertWithArgs(query, args);
+
+			dbAdaptor.commit();
+
+
+		} catch (Exception ex) {
+			log.debug(ex);
+			log.error(ex);
+			dbAdaptor.rollback();
+		} finally {
+			try {
+				if (dbAdaptor != null) {
+					if (dbAdaptor.getCurrentConnection().isClosed())
+						dbAdaptor.close();
+				}
+			} catch (SQLException ex1) {
+				log.error(ex1);
+			}
+		}
+	}
+	
+	@Deprecated
 	public void addSiteMainSite_pg() {
 
 		String query = "";
@@ -11871,7 +13805,7 @@ public class CreateShopBean implements java.io.Serializable {
 
 	}
 
-	public void addSite(AuthorizationPageBean AuthorizationPageBeanId) {
+	public void addSite(AuthorizationPageBean authorizationPageBeanId) {
 		String file_name = "";
 		String file_path = "";
 		String query = "";
@@ -11891,15 +13825,15 @@ public class CreateShopBean implements java.io.Serializable {
 			// active
 			HashMap args = new HashMap();
 			args.put("site_id", Long.valueOf(site_id));
-			args.put("owner", Long.valueOf(AuthorizationPageBeanId.getIntUserID()));
+			args.put("owner", Long.valueOf(authorizationPageBeanId.getIntUserID()));
 			args.put("host", "localhost");
 			args.put("home_dir", "localhost");
 			args.put("site_dir", "localhost");
 			args.put("person",
-					AuthorizationPageBeanId.getStrFirstName() + " " + AuthorizationPageBeanId.getStrLastName());
-			args.put("phone", AuthorizationPageBeanId.getStrPhone());
-			args.put("address", AuthorizationPageBeanId.getStrCountry() + ", " + AuthorizationPageBeanId.getStrCity()
-					+ ", " + AuthorizationPageBeanId.getAddress());
+					authorizationPageBeanId.getStrFirstName() + " " + authorizationPageBeanId.getStrLastName());
+			args.put("phone", authorizationPageBeanId.getStrPhone());
+			args.put("address", authorizationPageBeanId.getStrCountry() + ", " + authorizationPageBeanId.getStrCity()
+					+ ", " + authorizationPageBeanId.getAddress());
 			args.put("active", true);
 
 			dbAdaptor.executeInsertWithArgs(query, args);
@@ -11915,15 +13849,15 @@ public class CreateShopBean implements java.io.Serializable {
 			// active
 			args = new HashMap();
 			args.put("site_id", Long.valueOf(site_id));
-			args.put("owner", Long.valueOf(AuthorizationPageBeanId.getIntUserID()));
-			args.put("host", AuthorizationPageBeanId.getStrWebsite());
-			args.put("home_dir", AuthorizationPageBeanId.getStrWebsite());
-			args.put("site_dir", AuthorizationPageBeanId.getStrWebsite());
+			args.put("owner", Long.valueOf(authorizationPageBeanId.getIntUserID()));
+			args.put("host", authorizationPageBeanId.getStrWebsite());
+			args.put("home_dir", authorizationPageBeanId.getStrWebsite());
+			args.put("site_dir", authorizationPageBeanId.getStrWebsite());
 			args.put("person",
-					AuthorizationPageBeanId.getStrFirstName() + " " + AuthorizationPageBeanId.getStrLastName());
-			args.put("phone", AuthorizationPageBeanId.getStrPhone());
-			args.put("address", AuthorizationPageBeanId.getStrCountry() + ", " + AuthorizationPageBeanId.getStrCity()
-					+ ", " + AuthorizationPageBeanId.getAddress());
+					authorizationPageBeanId.getStrFirstName() + " " + authorizationPageBeanId.getStrLastName());
+			args.put("phone", authorizationPageBeanId.getStrPhone());
+			args.put("address", authorizationPageBeanId.getStrCountry() + ", " + authorizationPageBeanId.getStrCity()
+					+ ", " + authorizationPageBeanId.getAddress());
 			args.put("active", true);
 
 			dbAdaptor.executeInsertWithArgs(query, args);
@@ -11941,20 +13875,20 @@ public class CreateShopBean implements java.io.Serializable {
 
 			args = new HashMap();
 			args.put("user_id", intUserID);
-			args.put("login", AuthorizationPageBeanId.getStrLogin());
-			args.put("passwd", AuthorizationPageBeanId.getStrPasswd());
+			args.put("login", authorizationPageBeanId.getStrLogin());
+			args.put("passwd", authorizationPageBeanId.getStrPasswd());
 			args.put("birthday", new Date());
 			args.put("acvive_session", true);
 			args.put("active", true);
 			args.put("regdate", new Date());
 			args.put("levelup_cd", SiteRole.ADMINISTRATOR_ROLE_ID);
 			args.put("bank_cd", 0);
-			args.put("currency_id", Long.valueOf(AuthorizationPageBeanId.getCountry_id()));
+			args.put("currency_id", Long.valueOf(authorizationPageBeanId.getCountry_id()));
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("city_id", Long.valueOf(city_id));
 			args.put("country_id", Long.valueOf(country_id));
-			args.put("E_MAIL", AuthorizationPageBeanId.getStrEMail());
-			args.put("COMPANY", AuthorizationPageBeanId.getStrCompany());
+			args.put("E_MAIL", authorizationPageBeanId.getStrEMail());
+			args.put("COMPANY", authorizationPageBeanId.getStrCompany());
 
 			dbAdaptor.executeInsertWithArgs(query, args);
 
@@ -11974,7 +13908,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("curr", 3);
 			args.put("date_input", new Date());
 			args.put("description", " new_account ");
-			args.put("currency_id", Long.valueOf(AuthorizationPageBeanId.getCountry_id()));
+			args.put("currency_id", Long.valueOf(authorizationPageBeanId.getCountry_id()));
 			args.put("complete", true);
 
 			dbAdaptor.executeInsertWithArgs(query, args);
@@ -11998,7 +13932,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("regdate", new Date());
 			args.put("levelup_cd", SiteRole.GUEST_ROLE_ID);
 			args.put("bank_cd", 0);
-			args.put("currency_id", Long.valueOf(AuthorizationPageBeanId.getCountry_id()));
+			args.put("currency_id", Long.valueOf(authorizationPageBeanId.getCountry_id()));
 			args.put("site_id", Long.valueOf(site_id));
 			args.put("city_id", Long.valueOf(city_id));
 			args.put("country_id", Long.valueOf(country_id));
@@ -12019,7 +13953,7 @@ public class CreateShopBean implements java.io.Serializable {
 			args.put("curr", 3);
 			args.put("date_input", new Date());
 			args.put("description", " new_account ");
-			args.put("currency_id", Long.valueOf(AuthorizationPageBeanId.getCountry_id()));
+			args.put("currency_id", Long.valueOf(authorizationPageBeanId.getCountry_id()));
 			args.put("complete", true);
 
 			dbAdaptor.executeInsertWithArgs(query, args);
@@ -13065,7 +14999,7 @@ public class CreateShopBean implements java.io.Serializable {
 //			dbAdaptor.commit();
 //			cretareSiteDirWithExtract(file_name, file_path, site_dir);
 			dbAdaptor.commit();
-			cretareSiteDir(AuthorizationPageBeanId.getStrWebsite(), AuthorizationPageBeanId.getStrWebsite());
+			cretareSiteDir(authorizationPageBeanId.getStrWebsite(), authorizationPageBeanId.getStrWebsite());
 
 		} catch (Exception ex) {
 			log.debug(ex);
@@ -13812,6 +15746,46 @@ public class CreateShopBean implements java.io.Serializable {
 			dbAdaptor.commit();
 			cretareSiteDir(dufaultSite, site_dir);
 
+		} catch (Exception ex) {
+			log.debug(ex);
+			log.error(ex);
+			dbAdaptor.rollback();
+		} finally {
+			try {
+				if (dbAdaptor != null) {
+					if (dbAdaptor.getCurrentConnection().isClosed())
+						dbAdaptor.close();
+				}
+			} catch (SQLException ex1) {
+				log.error(ex1);
+			}
+		}
+	}
+	
+	
+	public void updateDesignSite(AuthorizationPageBean authorizationPageBeanId) {
+
+		String query = "";
+		try {
+
+			int number = 0 ;
+			site_dir = authorizationPageBeanId. getSite_dir();
+			String[] site_dir_arr =   site_dir.split("-");
+			if(site_dir_arr.length > 0 ) {
+				number =  Integer. parseInt(site_dir_arr[1]) ;
+				site_dir = site_dir_arr[0] + "_"  + ++number ;
+			}
+			else site_dir = site_dir + "_"  + ++number ;
+			cretareSiteDir(dufaultSite, site_dir);
+			
+			dbAdaptor = new QueryManager();
+			dbAdaptor.beginTransaction();
+			query =  "update site set site_dir "+ site_dir + " where site_id = " + authorizationPageBeanId.getSite_id() + " ;" ;
+			dbAdaptor.executeUpdate(query);
+			dbAdaptor.commit();
+			
+			authorizationPageBeanId.setSite_dir(site_dir) ;
+			
 		} catch (Exception ex) {
 			log.debug(ex);
 			log.error(ex);

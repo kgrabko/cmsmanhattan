@@ -1771,7 +1771,7 @@
 														</xsl:for-each>
 													</a>
 													<br/>
-													<a><xsl:attribute name="href">Productlist.jsp?create_site_by_id=<xsl:value-of select="document/product_list/product[$position]/product_id"/></xsl:attribute>To create shop</a><br/>
+													<a><xsl:attribute name="href">DeployDesign.jsp?create_site_by_id=<xsl:value-of select="document/product_list/product[$position]/product_id"/></xsl:attribute>To create shop</a><br/>
 																							<br />
 												</td>
 											</tr>
