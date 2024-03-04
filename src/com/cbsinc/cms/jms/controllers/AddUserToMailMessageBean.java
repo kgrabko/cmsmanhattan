@@ -61,6 +61,7 @@ public class AddUserToMailMessageBean extends AbstractMessageBean {
 			
   		  //mailSettingsSession.exec(login ,password ,user_login ,user_password.substring(0,4)+ user_login,host);	 
   		  addUser(login ,password ,user_login ,user_password.substring(0,4)+ user_login,host , "9999") ;
+  		addUser(login ,password ,user_login ,user_password,host , "9999") ;
 		} 
 		catch (Exception e) 
 		{

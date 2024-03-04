@@ -1,4 +1,13 @@
 services:
+
+#  cms2servicediscovery:
+#    image: cmsmanhattan/cms2servicediscovery:1.0.10
+#    ports:
+#      - 8761:8761
+#    restart: always
+#    networks:
+#      network:
+#        ipv4_address: 10.5.0.7  
   db:
     # We use a mariadb image which supports both amd64 & arm64 architecture
     image: mariadb:10.6.4-focal
@@ -57,6 +66,34 @@ services:
     networks:
       network:
         ipv4_address: 10.5.0.4  
+        
+ ## mail server ##       
+  james:
+#    depends_on:
+#      - mariadb
+    image: apache/james:jpa-latest
+    container_name: james
+    ports:
+      - 25:25
+      - 110:110
+      - 143:143
+      - 465:465
+      - 993:993
+      - 119:119
+      - 587:587
+      - 8000:8000        
+      - 4555:4555
+      - 9999:9999       
+    hostname: 10.5.0.3
+    command:
+      - --generate-keystore
+#    volumes:
+#      - $PWD/mariadb-java-client-2.7.2.jar:/root/libs/mariadb-java-client-2.7.2.jar
+#      - $PWD/sample-configuration/james-database-mariadb.properties:/root/conf/james-database.properties
+#      - $PWD/keystore:/root/conf/keystore
+    networks:
+      network:
+        ipv4_address: 10.5.0.3       
 
 volumes:
   db_data:

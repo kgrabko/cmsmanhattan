@@ -227,6 +227,16 @@ services:
       network:
         ipv4_address: 10.5.0.17       
         
+        
+#  s3:
+#    image: registry.scality.com/cloudserver/cloudserver:8.7.25
+#    container_name: s3.docker.test
+#    environment:
+#      - SCALITY_ACCESS_KEY_ID=accessKey1
+#      - SCALITY_SECRET_ACCESS_KEY=secretKey1
+#      - S3BACKEND=mem
+#      - LOG_LEVEL=trace
+#      - REMOTE_MANAGEMENT_DISABLE=1        
 
 volumes:
   db_data:
