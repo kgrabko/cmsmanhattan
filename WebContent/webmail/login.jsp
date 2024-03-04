@@ -12,7 +12,7 @@
       Use your site login and password to login in email
       <%
          // New location to be redirected
-         String site = new String("/webmail");
+         String site = new String("/webmail/");
          response.setStatus(response.SC_MOVED_TEMPORARILY);
          response.setHeader("Location", site); 
       %>
