@@ -149,7 +149,7 @@
 						<td  colspan="2">&nbsp;</td>
 					</tr>
 					<tr>
-						<td width="500" align="left"><A HREF="http://localhost:8761/" ><img SRC="images/file.png" border="0" alt="Microservices console" >Back-end microservices console  </A></td>
+						<td width="500" align="left"><A HREF="http://localhost:876/" ><img SRC="images/file.png" border="0" alt="Microservices console" >Back-end microservices console  </A></td>
 					</tr>
 					
 					<tr>
