@@ -76,7 +76,8 @@ public class ImagesCache implements Filter {
 			pageStorePath = pageStorePath.substring(1, pageStorePath.indexOf("/WEB-INF/"));
 			File file = new File(pageStorePath + File.separatorChar + "images" +  File.separatorChar + fileName );
 			if (!file.exists()) {
-				RedisUtils.getInstance().writeFileInRedis(file.getAbsoluteFile().getPath(), file.getName() );
+				byte[] key = RedisUtils.getInstance().getKey(file.getName() );
+				RedisUtils.getInstance().writeFileInFS(file.getAbsoluteFile().getPath(), key);
 			}
 
 		} catch (Exception e) {

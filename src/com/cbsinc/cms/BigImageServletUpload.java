@@ -479,7 +479,7 @@ public class BigImageServletUpload extends HttpServlet {
 						if (scale_bigimage_width > 0 && scale_bigimage_heigth > 0)
 							scaleImage(scale_bigimage_width, scale_bigimage_heigth, createdFile);
 					}
-					RedisUtils.getInstance().writeFileInRedis(createdFile.getAbsoluteFile().getPath(), createdFile.getAbsoluteFile().getName() );
+					RedisUtils.getInstance().writeFileInRedis(createdFile.getAbsoluteFile().getPath(), createdFile.getName() );
 
 				}
 				result = in.readLine(buffer, 0, BUFFER_SIZE);
@@ -529,7 +529,7 @@ public class BigImageServletUpload extends HttpServlet {
 		printResult(out, map);
 		isExistCheckImage = false;
 		out.close();
-		RedisUtils.getInstance().writeFileInRedis(createdFile.getAbsoluteFile().getPath(), createdFile.getAbsoluteFile().getName() );
+		RedisUtils.getInstance().writeFileInRedis(createdFile.getAbsoluteFile().getPath(), createdFile.getName() );
 
 	}
 

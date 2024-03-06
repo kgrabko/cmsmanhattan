@@ -68,8 +68,8 @@ public class RedisUtils {
 
 	}
 	
-	public byte[] getKey(String fileURL) {
-		byte[] key = fileURL.getBytes();
+	public byte[] getKey(String fileNameAsStoreKey) {
+		byte[] key = fileNameAsStoreKey.getBytes();
 		return key;
 
 	}
@@ -85,9 +85,15 @@ public class RedisUtils {
 		try {
 			jedis = jedisPool.getResource();
 			byte[] bytes = Files.readAllBytes(new File(fileURL).toPath());
-			System.out.println(
-					"Setting bytes of length:" + bytes.length + " got from file " + fileURL + "in redis.");
+			log.info("Setting bytes of length:" + bytes.length + " got from file " + fileURL + "in redis.");
 			byte[] key = getKey(fileNameAsStoreKey);
+			if(bytes == null || bytes.length == 0 || key == null || key.length == 0 ) 
+			{
+				Exception ex = new Exception("Setting bytes of length:" + bytes.length + " got from file " + fileURL + "in redis. Key = " + new String(key) ) ;
+				log.error(ex.getMessage(), ex);
+				throw ex ;
+				
+			}
 			jedis.set(key, bytes);
 
 		} catch (Exception ex) {
@@ -161,7 +167,15 @@ public class RedisUtils {
 		try {
 			jedis = jedisPool.getResource();
 			retrievedBytes = jedis.get(key);
-			System.out.println("Saving data in file " + fileURL);
+			if(retrievedBytes == null || retrievedBytes.length == 0 || key == null || key.length == 0 ) 
+			{
+				Exception ex = new Exception("Retrieved bytes of length:" + retrievedBytes.length + " got from file " + fileURL + "in redis. Key = " + new String(key) ) ;
+				log.error(ex.getMessage(), ex);
+				throw ex ;
+				
+			}
+
+			System.out.println("Saving data in file " + fileURL +  " key = " + new String(key));
 			Files.write(Paths.get(fileURL), retrievedBytes);
 		} catch (Exception ex) {
 			log.error(ex.getMessage(), ex);

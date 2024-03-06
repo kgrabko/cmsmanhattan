@@ -54,7 +54,7 @@
       <filter-name>XmltoJson</filter-name>
       <url-pattern>*.json</url-pattern>
     </filter-mapping>
-   -->
+   
    
     <filter-mapping>
       <filter-name>BigImagesCache</filter-name>
@@ -70,7 +70,7 @@
       <filter-name>FilesCache</filter-name>
       <url-pattern>/files/*</url-pattern>
     </filter-mapping>
-  
+  -->
     
  <!--   <listener>
     <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
