@@ -380,7 +380,7 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 					System.out.println("finally Upload : size = " + size);
 					appendValue(map, name, filename, fileContentType, size);
 					saveFile();
-					RedisUtils.getInstance().writeFileInRedis(createdFile.getAbsoluteFile().getPath(), createdFile.getAbsoluteFile().getName() );
+					RedisUtils.getInstance().writeFileInRedis(createdFile.getAbsoluteFile().getPath(), createdFile.getName() );
 				}
 				result = in.readLine(buffer, 0, BUFFER_SIZE);
 				System.out.println("what should I read here? - result = " + result + ", and read ["
@@ -417,7 +417,7 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 		saveFile();
 		printResult(out, map);
 		out.close();
-		RedisUtils.getInstance().writeFileInRedis(createdFile.getAbsoluteFile().getPath(), createdFile.getAbsoluteFile().getName() );
+		RedisUtils.getInstance().writeFileInRedis(createdFile.getAbsoluteFile().getPath(), createdFile.getName() );
 
 	}
 

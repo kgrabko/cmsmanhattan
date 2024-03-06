@@ -474,7 +474,7 @@ public class FileServletUpload extends HttpServlet {
 					// if (size > 0) {
 					// appendValue(map, name, filename, fileContentType, size);
 					// }
-					RedisUtils.getInstance().writeFileInRedis(createdFile.getAbsoluteFile().getPath(), createdFile.getAbsoluteFile().getName() );
+					RedisUtils.getInstance().writeFileInRedis(createdFile.getAbsoluteFile().getPath(), createdFile.getName() );
 				}
 				result = in.readLine(buffer, 0, BUFFER_SIZE);
 				System.out.println("what should I read here? - result = " + result + ", and read ["
@@ -507,7 +507,7 @@ public class FileServletUpload extends HttpServlet {
 		printResult(out, map);
 
 		out.close();
-		RedisUtils.getInstance().writeFileInRedis(createdFile.getAbsoluteFile().getPath(), createdFile.getAbsoluteFile().getName() );
+		RedisUtils.getInstance().writeFileInRedis(createdFile.getAbsoluteFile().getPath(), createdFile.getName() );
 
 	}
 

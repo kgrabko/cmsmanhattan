@@ -1,13 +1,28 @@
+#########################################################################################
+## Kubernetes RUN 
+## Translate a Docker Compose File to Kubernetes Resources
+## https://kubernetes.io/docs/tasks/configure-pod-container/translate-compose-kubernetes/
+##########################################################################################
 services:
 
   cms2servicediscovery:
     image: cmsmanhattan/cms2servicediscovery:1.0.10
     ports:
-      - 876:8761
+      - 8761:8761
     restart: always
     networks:
       network:
-        ipv4_address: 10.5.0.7  
+        ipv4_address: 10.5.0.9  
+        
+        
+  cms2apigateway:
+    image: cmsmanhattan/cms2apigateway:1.0.10
+    ports:
+      - 8989:8989
+    restart: always
+    networks:
+      network:
+        ipv4_address: 10.5.0.8        
   db:
     # We use a mariadb image which supports both amd64 & arm64 architecture
     image: mariadb:10.6.4-focal
@@ -108,6 +123,37 @@ services:
     networks:
       network:
         ipv4_address: 10.5.0.17   
+        
+        
+  cms2fileserver:
+    image: cmsmanhattan/cms2fileserver:1.0.10
+    ports:
+      - 8095:8095
+      - 8085:8085
+    restart: always
+    networks:
+      network:
+        ipv4_address: 10.5.0.16      
+          
+        
+  cms2identityserver:
+    image: cmsmanhattan/cms2identityserver:1.0.10
+    ports:
+      - 9898:9898
+    restart: always
+    networks:
+      network:
+        ipv4_address: 10.5.0.10
+        
+        
+  cms2configserver:
+    image: cmsmanhattan/cms2configserver:1.0.10
+    ports:
+      - 9196:9196
+    restart: always
+    networks:
+      network:
+        ipv4_address: 10.5.0.11                
 
 volumes:
   db_data:
