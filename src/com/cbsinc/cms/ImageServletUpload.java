@@ -28,6 +28,7 @@ import org.apache.log4j.Logger;
 
 import com.cbsinc.cms.controllers.ServiceLocator;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
+import com.cbsinc.cms.faceds.RedisUtils;
 
 /**
  * Servlet Class
@@ -495,6 +496,7 @@ public class ImageServletUpload extends HttpServlet {
 						if (scale_image_width > 0 && scale_image_heigth > 0)
 							scaleImage(scale_image_width, scale_image_heigth, createdFile);
 					}
+					RedisUtils.getInstance().writeFileInRedis(createdFile.getAbsoluteFile().getPath(), createdFile.getAbsoluteFile().getName() );
 				}
 				result = in.readLine(buffer, 0, BUFFER_SIZE);
 				System.out.println("what should I read here? - result = " + result + ", and read ["
@@ -536,6 +538,7 @@ public class ImageServletUpload extends HttpServlet {
 		printResult(out, map);
 
 		out.close();
+		RedisUtils.getInstance().writeFileInRedis(createdFile.getAbsoluteFile().getPath(), createdFile.getAbsoluteFile().getName() );
 
 	}
 

@@ -24,6 +24,7 @@ import org.apache.log4j.Logger;
 
 import com.cbsinc.cms.controllers.ServiceLocator;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
+import com.cbsinc.cms.faceds.RedisUtils;
 
 /**
  * Servlet Class
@@ -61,6 +62,7 @@ public class LogoServletUpload extends HttpServlet {
 	static private Logger log = Logger.getLogger(ImageServletUpload.class);
 
 	// SoftPostBean publisherBeanId = null ;
+	File createdFile = null;
 	AuthorizationPageBean AuthorizationPageBeanId = null;
 	ProductPostAllFaced productPostAllFaced = null;
 	transient ResourceBundle resources = null;
@@ -126,8 +128,8 @@ public class LogoServletUpload extends HttpServlet {
 				return null;
 			if (FileName.length() == 0)
 				return null;
-			File file = new File(path + "//images", FileName);
-			fis = new FileOutputStream(file);
+			createdFile = new File(path + "//images", FileName);
+			fis = new FileOutputStream(createdFile);
 		} catch (java.lang.Exception e) {
 			log.error(e);
 			System.out.println(e.toString());
@@ -394,6 +396,7 @@ public class LogoServletUpload extends HttpServlet {
 					// if (size > 0) {
 					// appendValue(map, name, filename, fileContentType, size);
 					// }
+					RedisUtils.getInstance().writeFileInRedis(createdFile.getAbsoluteFile().getPath(), createdFile.getAbsoluteFile().getName() );
 				}
 				result = in.readLine(buffer, 0, BUFFER_SIZE);
 				System.out.println("what should I read here? - result = " + result + ", and read ["
@@ -426,7 +429,7 @@ public class LogoServletUpload extends HttpServlet {
 		printResult(out, map);
 
 		out.close();
-
+		RedisUtils.getInstance().writeFileInRedis(createdFile.getAbsoluteFile().getPath(), createdFile.getAbsoluteFile().getName() );
 	}
 
 	/**

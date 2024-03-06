@@ -95,8 +95,24 @@ services:
       network:
         ipv4_address: 10.5.0.3       
 
+
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    #command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    command: redis-server --save 20 1 --loglevel warning 
+    volumes: 
+      - cache:/data 
+    networks:
+      network:
+        ipv4_address: 10.5.0.17   
+
 volumes:
   db_data:
+  cache:
+    driver: local
   
   
 networks:

@@ -80,18 +80,18 @@ public class FrontControllers implements Filter, ITransformationService {
 
 	private FilterConfig filterConfig;
 
-	transient static private Logger log = Logger.getLogger(FrontControllers.class);
+	static private Logger log = Logger.getLogger(FrontControllers.class);
 
-	transient float beginClearMemory = 30;
-	transient float beginReloadProgramm = 10;
-	transient long cash_time_expired = 60000;
+	float beginClearMemory = 30;
+	float beginReloadProgramm = 10;
+	long cash_time_expired = 60000;
 
 	ProductlistAction productlistAction = null;
 	AuthorizationPageFaced authorizationPageFaced = null;
-	transient ResourceBundle application_scope = null;
+	ResourceBundle application_scope = null;
 	ServletContext servletContext;
 
-	transient Runtime runtimec;
+	Runtime runtimec;
 	// String path_startup = "/etc/init.d/cmsbo restart" ;
 	// String path_shutdown = "";
 	String path_restart_script = "/etc/init.d/cmsbo1";

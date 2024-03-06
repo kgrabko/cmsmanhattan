@@ -46,6 +46,7 @@ import org.apache.log4j.Logger;
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.controllers.ServiceLocator;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
+import com.cbsinc.cms.faceds.RedisUtils;
 
 /**
  * Servlet Class
@@ -70,6 +71,7 @@ public class FileServletUpload extends HttpServlet {
 	static private Logger log = Logger.getLogger(FileServletUpload.class);
 
 	// SoftPostBean publisherBeanId = null ;
+	File createdFile = null;
 	AuthorizationPageBean AuthorizationPageBeanId = null;
 	PublisherBean publisherBeanId = new PublisherBean();
 	ProductPostAllFaced productPostAllFaced = null;
@@ -143,8 +145,8 @@ public class FileServletUpload extends HttpServlet {
 			// ,FileName);
 			String path = this.getClass().getResource("").getPath();
 			path = path.substring(0, path.indexOf("/WEB-INF/"));
-			File file = new File(path + "//files", FileName);
-			fis = new FileOutputStream(file);
+			createdFile = new File(path + "//files", FileName);
+			fis = new FileOutputStream(createdFile);
 		} catch (java.lang.Exception e) {
 			log.error(e);
 			System.out.println(e.toString());
@@ -472,6 +474,7 @@ public class FileServletUpload extends HttpServlet {
 					// if (size > 0) {
 					// appendValue(map, name, filename, fileContentType, size);
 					// }
+					RedisUtils.getInstance().writeFileInRedis(createdFile.getAbsoluteFile().getPath(), createdFile.getAbsoluteFile().getName() );
 				}
 				result = in.readLine(buffer, 0, BUFFER_SIZE);
 				System.out.println("what should I read here? - result = " + result + ", and read ["
@@ -504,6 +507,7 @@ public class FileServletUpload extends HttpServlet {
 		printResult(out, map);
 
 		out.close();
+		RedisUtils.getInstance().writeFileInRedis(createdFile.getAbsoluteFile().getPath(), createdFile.getAbsoluteFile().getName() );
 
 	}
 

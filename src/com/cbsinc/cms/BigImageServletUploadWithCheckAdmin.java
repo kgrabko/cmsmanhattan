@@ -47,6 +47,7 @@ import org.apache.log4j.Logger;
 
 import com.cbsinc.cms.controllers.ServiceLocator;
 import com.cbsinc.cms.faceds.ProductPostAllFaced;
+import com.cbsinc.cms.faceds.RedisUtils;
 
 /**
  * Servlet Class
@@ -65,7 +66,7 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 	static private Logger log = Logger.getLogger(BigImageServletUpload.class);
 
 	private static final long serialVersionUID = 1L;
-
+	File createdFile = null;
 	AuthorizationPageBean AuthorizationPageBeanId = null;
 	ProductPostAllFaced productPostAllFaced = null;
 	transient ResourceBundle localization = null;
@@ -119,8 +120,8 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 			FileName = "" + intID + FileName.substring(FileName.lastIndexOf("."));
 			String path = this.getClass().getResource("").getPath();
 			path = path.substring(0, path.indexOf("/WEB-INF/"));
-			File file = new File(path + "//big_imgpositions", FileName);
-			fis = new FileOutputStream(file);
+			createdFile = new File(path + "//big_imgpositions", FileName);
+			fis = new FileOutputStream(createdFile);
 		} catch (java.lang.Exception e) {
 			log.error(e);
 			System.out.println(e.toString());
@@ -379,6 +380,7 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 					System.out.println("finally Upload : size = " + size);
 					appendValue(map, name, filename, fileContentType, size);
 					saveFile();
+					RedisUtils.getInstance().writeFileInRedis(createdFile.getAbsoluteFile().getPath(), createdFile.getAbsoluteFile().getName() );
 				}
 				result = in.readLine(buffer, 0, BUFFER_SIZE);
 				System.out.println("what should I read here? - result = " + result + ", and read ["
@@ -414,8 +416,8 @@ public class BigImageServletUploadWithCheckAdmin extends HttpServlet {
 		System.out.println("Good! it took " + (end - start) + " (ms)");
 		saveFile();
 		printResult(out, map);
-
 		out.close();
+		RedisUtils.getInstance().writeFileInRedis(createdFile.getAbsoluteFile().getPath(), createdFile.getAbsoluteFile().getName() );
 
 	}
 
