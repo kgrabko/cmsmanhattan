@@ -26,6 +26,16 @@ import java.net.*;
 import java.util.*;
 import java.io.*;
 
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+
+import org.springframework.web.client.RestTemplate;
+
+import com.cbsinc.cms.services.james.client.user.CreateUserRequest;
+import org.springframework.http.HttpHeaders ;
+import org.springframework.http.HttpEntity ;
+import com.cbsinc.cms.services.james.client.domain.ResponseUsers ;
+
 public class AddUserInMail
 {
 
@@ -98,7 +108,7 @@ public class AddUserInMail
 	 
  }	
 	
-public  void main(String args[])
+public  void main1(String args[])
 {
  System.out.println("* Socket Mail Server *");
    
@@ -248,6 +258,79 @@ public  void main(String args[])
     return result ;
 }
 
+static void addUser( String userName , String password )
+{
+	RestTemplate restTemplate = new RestTemplate();
+	String endPoint = "http://localhost:8000//users/{user}";
+	CreateUserRequest createUserRequest = new CreateUserRequest(password) ;
+	HttpHeaders headers = new HttpHeaders();
+	headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+	headers.setContentType(MediaType.APPLICATION_JSON);
+
+    Map<String, String> vars = new HashMap<>();
+    vars.put("user", userName);
+    HttpEntity<CreateUserRequest> request = new HttpEntity<>(createUserRequest, headers);
+    restTemplate.put(endPoint , request  , vars );	
+
+}
+
+static void addDomain( String host  )
+{
+	RestTemplate restTemplate = new RestTemplate();
+	String endPoint = "http://localhost:8000/domains/{host}";
+	HttpHeaders headers = new HttpHeaders();
+	headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+	headers.setContentType(MediaType.APPLICATION_JSON);
+
+    Map<String, String> vars = new HashMap<>();
+    vars.put("host", host);
+    HttpEntity<CreateUserRequest> request = new HttpEntity<>( headers);
+    restTemplate.put(endPoint , request  , vars );	
+
+}
+
+static List<String>  getDomains()
+{
+	RestTemplate restTemplate = new RestTemplate();
+	String endPoint = "http://localhost:8000//domains";
+	HttpHeaders headers = new HttpHeaders();
+	headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+	headers.setContentType(MediaType.APPLICATION_JSON);
+
+    HttpEntity<CreateUserRequest> request = new HttpEntity<>( headers);
+	ResponseEntity<String[]> response = restTemplate.getForEntity(endPoint, String[].class , request);
+	return Arrays.asList(response.getBody()); 
+
+}
+
+
+static List<ResponseUsers>  getUsers()
+{
+	RestTemplate restTemplate = new RestTemplate();
+	String endPoint = "http://localhost:8000//users";
+	HttpHeaders headers = new HttpHeaders();
+	headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+	headers.setContentType(MediaType.APPLICATION_JSON);
+
+    HttpEntity<CreateUserRequest> request = new HttpEntity<>( headers);
+	ResponseEntity<ResponseUsers[]> response = restTemplate.getForEntity(endPoint, ResponseUsers[].class , request);
+	return Arrays.asList(response.getBody()); 
+
+}
+
+
+public static void main(String[] args) {
+	
+	//addUser( "guest@cmsmanhattan.com" , "guest" ) ;
+	//addDomain( "cmsmanhattan2.com"  ) ;
+	 //List<String> list =  getDomains() ;
+	 List<ResponseUsers> list =  getUsers() ;
+	 for(ResponseUsers row : list ) 
+	 {
+		 System.out.println(row);
+	 }
+	
+}
 
 
 }

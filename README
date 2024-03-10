@@ -15,7 +15,13 @@ docker-compose up --build
 uninstall
 docker compose down -v
 
+curl -XPUT http://localhost:8000/users/support -d '{"password":"support"}' -H "Content-Type: application/json"
+curl -XGET http://localhost:8000/users
+http://localhost:8000/domains/{host}
+https://www.baeldung.com/rest-template
 
+docker exec james_run java -jar /root/james-cli.jar AddDomain domain.tld
+docker exec james_run java -jar /root/james-cli.jar AddUser user@domain.tld secretPassword
 
 https://github.com/lff0305/springboot-lagency-struts-1/blob/master/main/pom.xml
 
