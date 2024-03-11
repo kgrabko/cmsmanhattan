@@ -29,7 +29,7 @@ import javax.servlet.http.HttpSession;
 import com.cbsinc.cms.AuthorizationPageBean;
 import com.cbsinc.cms.annotations.PageController;
 import com.cbsinc.cms.faceds.AuthorizationPageFaced;
-import com.cbsinc.cms.jms.controllers.AddUserToMailMessageBean;
+import com.cbsinc.cms.jms.controllers.AddUserToMailMessageJamesBean;
 import com.cbsinc.cms.jms.controllers.MessageSender;
 import com.cbsinc.cms.jms.controllers.Message;
 
@@ -64,10 +64,11 @@ public class RegistrationAction implements IAction {
 		if (rezalt_reg == 0) {
 
 			if (authorizationPageFaced.getResources_cms_settings().getString("james_register").contains("true")) {
-				MessageSender mqSender = new MessageSender(request.getSession(), AddUserToMailMessageBean.messageQuery);
+				MessageSender mqSender = new MessageSender(request.getSession(), AddUserToMailMessageJamesBean.messageQuery);
 				Message message = new Message();
 				message.put("user_login", authorizationPageBeanId.getStrLogin());
 				message.put("user_password", authorizationPageBeanId.getStrPasswd());
+				message.put("user_domain", authorizationPageBeanId.getHost());
 				mqSender.send(message);
 			}
 

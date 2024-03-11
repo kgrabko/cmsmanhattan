@@ -6,10 +6,12 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
+import com.cbsinc.cms.services.james.client.domain.faceds.DomainApiClient;
+import com.cbsinc.cms.services.james.client.user.faceds.UserApiClient;
 import com.cbsinc.cms.services.mailserver.AddUserInMail;
 
 
-public class AddUserToMailMessageJames3Bean extends AbstractMessageBean {
+public class AddUserToMailMessageJamesBean extends AbstractMessageBean {
 
 
 
@@ -19,14 +21,14 @@ public class AddUserToMailMessageJames3Bean extends AbstractMessageBean {
 	
 	static public String messageQuery = "mq_adduser_to_mail" ;
 	
-	transient private ResourceBundle resources_cms_settings = null ;
+	private ResourceBundle resources_cms_settings = null ;
 	
 	private String  login ; 
 	private String  password ;
 	private String  host ;
 
 	
-	public AddUserToMailMessageJames3Bean()
+	public AddUserToMailMessageJamesBean()
 	{
 		if( resources_cms_settings == null ) resources_cms_settings =  PropertyResourceBundle.getBundle("appconfig");
 		    login = resources_cms_settings.getString("james_login").trim() ;
@@ -46,14 +48,26 @@ public class AddUserToMailMessageJames3Bean extends AbstractMessageBean {
 
 		String user_login = "" ;
 		String user_password = "" ;
+		String user_domain = "" ;
 		if( message.get("user_login") instanceof  String ) user_login = (String) message.get("user_login") ;
+		if( message.get("user_domain") instanceof  String ) user_domain = (String) message.get("user_domain") ;
 		if( message.get("user_password") instanceof  String ) user_password = (String) message.get("user_password") ;
 		
 		try 
 		{
 			
-  		  AddUserInMail mailSettingsSession = new AddUserInMail();
-  		  mailSettingsSession.exec(login ,password ,user_login ,user_password.substring(0,4)+ user_login,host);	   
+			//UserApiClient.getInstanse().existUser(user_login + "@" + user_domain ) ;
+			
+			if(DomainApiClient.getInstanse().existDomain(user_domain) ) 
+			{
+				UserApiClient.getInstanse().addUser(user_login + "@" + user_domain , user_password) ;
+			}
+			else 
+			{
+				DomainApiClient.getInstanse().addDomain(user_domain);
+				UserApiClient.getInstanse().addUser(user_login + "@" + user_domain , user_password) ;
+			}
+
 		} 
 		catch (Exception e) 
 		{
@@ -64,5 +78,23 @@ public class AddUserToMailMessageJames3Bean extends AbstractMessageBean {
 		
 	}
 	
+	
+	public static void main(String[] args) throws Exception {
+		
+		String user_login = "gust11" ;
+		String user_password = "gust11" ;
+		String user_domain = "cmsmanhattan3.com" ;
+		
+		if(DomainApiClient.getInstanse().existDomain(user_domain) ) 
+		{
+			UserApiClient.getInstanse().addUser(user_login + "@" + user_domain , user_password) ;
+		}
+		else 
+		{
+			DomainApiClient.getInstanse().addDomain(user_domain);
+			UserApiClient.getInstanse().addUser(user_login + "@" + user_domain , user_password) ;
+		}
+		
+	}
 
 }
