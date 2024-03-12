@@ -32,6 +32,16 @@ public class OpenIAIClient {
 	private String  openip_port ;
 	private String  openip_protocol ;
 	
+
+	// help customer find items and buy item , sales man
+	private String openip_salesman_model = "gpt-3.5-turbo" ;
+	// chat to site technical question and navigation
+	private String  openip_tech_support_model = "gpt-3.5-turbo" ;
+	// manager assistant
+	private String  openip_manager_model = "gpt-3.5-turbo" ;
+	// chat to product suppliers and shipping and delivery questions and accept pricing
+	private String  openip_marketingman_model = "gpt-3.5-turbo"  ; 
+	
 	
 	private OpenIAIClient() 
 	{
@@ -40,6 +50,11 @@ public class OpenIAIClient {
 		openip_host = resources_cms_settings.getString("openip_host").trim() ;
 		openip_port = resources_cms_settings.getString("openip_port").trim() ;
 		openip_protocol  = resources_cms_settings.getString("openip_protocol").trim() ;
+		
+		openip_salesman_model  = resources_cms_settings.getString("openip_salesman_model").trim() ;
+		openip_tech_support_model  = resources_cms_settings.getString("openip_tech_support_model").trim() ;
+		openip_manager_model  = resources_cms_settings.getString("openip_manager_model").trim() ;
+		openip_marketingman_model  = resources_cms_settings.getString("openip_marketingman_model").trim() ;
 	}
 	
 	
@@ -49,7 +64,7 @@ public class OpenIAIClient {
 	}
 	
 	
-	public ResponseAISearch OpenIASearch(String searchText ) {
+	public ResponseAISearch OpenIASearch(String searchText  ) {
 		RestTemplate restTemplate = RestTemplateConfig.getRestTemplate();
 		//String endPoint = openip_protocol + "://" + openip_host + ":" + openip_port + "/v1/embeddings";
 		String endPoint = openip_protocol + "://" + openip_host + "/v1/embeddings";
@@ -68,7 +83,7 @@ public class OpenIAIClient {
 	}
 	
 	
-	public ChatbotMessageResponse OpenIAChatBot(String question , String previousQuestion) {
+	public ChatbotMessageResponse OpenIAChatBot(String question , String previousQuestion , String iaModel) {
 		RestTemplate restTemplate = RestTemplateConfig.getRestTemplate();
 		//String endPoint = openip_protocol + "://" + openip_host + ":" + openip_port + "/v1/embeddings";
 		String endPoint = openip_protocol + "://" + openip_host + "/v1/chat/completions";
@@ -83,12 +98,29 @@ public class OpenIAIClient {
 		
 		Message[] messages = new Message[] { new Message("system" ,question  ) , new Message("user" , previousQuestion )  } ;
 		charbotMessageRequest.setMessages(messages) ;
-		charbotMessageRequest.setModel("gpt-3.5-turbo") ;
+		charbotMessageRequest.setModel(iaModel) ;
 		
 		
 		HttpEntity<CharbotMessageRequest> request = new HttpEntity<>(charbotMessageRequest,headers);
 		ChatbotMessageResponse responseRenameUsers = restTemplate.postForObject(endPoint, request,ChatbotMessageResponse.class);
 		return responseRenameUsers;
+	}
+	
+	public ChatbotMessageResponse OpenIAChatBotManager(String question , String previousQuestion) {
+		return OpenIAChatBot( question ,  previousQuestion ,  openip_manager_model) ;
+	}
+	
+	
+	public ChatbotMessageResponse OpenIAChatBotSalesMan(String question , String previousQuestion) {
+		return OpenIAChatBot( question ,  previousQuestion ,  openip_salesman_model) ;
+	}
+
+	public ChatbotMessageResponse OpenIAChatBotMarketingMan(String question , String previousQuestion) {
+		return OpenIAChatBot( question ,  previousQuestion ,  openip_marketingman_model) ;
+	}
+	
+	public ChatbotMessageResponse OpenIAChatBotTechSupport(String question , String previousQuestion) {
+		return OpenIAChatBot( question ,  previousQuestion ,  openip_tech_support_model) ;
 	}
 	
 	
@@ -104,7 +136,7 @@ public class OpenIAIClient {
 		 * System.out.println("text: " + test ) ;
 		 */
 		
-		ChatbotMessageResponse chatbotMessageResponse =  getInstanse().OpenIAChatBot(" I like meat " , "I'm looking for a book on cooking traditional Italian pasta dishes." ) ; 
+		ChatbotMessageResponse chatbotMessageResponse =  getInstanse().OpenIAChatBot(" I like meat " , "I'm looking for a book on cooking traditional Italian pasta dishes.", getInstanse().openip_manager_model ) ; 
 		Choice[]  choices = chatbotMessageResponse.getChoices() ;
 		 for( Choice choice : choices )  {
 			 Message message = choice.getMessage();
