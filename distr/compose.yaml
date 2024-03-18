@@ -154,6 +154,26 @@ services:
     networks:
       network:
         ipv4_address: 10.5.0.11                
+        
+  cms2ai:
+    image: cmsmanhattan/cms2ai:1.0.10
+    ports:
+      - 8096:8080
+      - 8086:8443
+    restart: always
+    environment:
+      - CMS_DB_JDBC_URL=jdbc:mysql://10.5.0.5:3306/cmsdb
+      - CMS_DB_USER=root
+      - CMS_DB_PASSWORD=grabfix
+      - CMS_DB_JDBC_DRIVER=com.mysql.jdbc.Driver
+      - OPEN_AI_KEY=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
+      - IA_MODEL_MANAGER=gpt-3.5-turbo
+      - IA_MODEL_SALESMAN=gpt-3.5-turbo
+      - IA_MODEL_MARKETMAN=gpt-3.5-turbo
+      - IA_MODEL_TECH_SUPPORT=gpt-3.5-turbo
+    networks:
+      network:
+        ipv4_address: 10.5.0.17            
 
 volumes:
   db_data:
