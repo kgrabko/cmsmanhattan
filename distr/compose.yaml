@@ -173,7 +173,7 @@ services:
       - IA_MODEL_TECH_SUPPORT=gpt-3.5-turbo
     networks:
       network:
-        ipv4_address: 10.5.0.17            
+        ipv4_address: 10.5.0.20            
 
 volumes:
   db_data:
