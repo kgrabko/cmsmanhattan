@@ -224,8 +224,8 @@ services:
   cms2ai:
     image: cmsmanhattan/cms2ai:1.0.10
     ports:
-      - 8080:8096
-      - 8443:8086
+      - 8096:8080
+      - 8086:8443
     restart: always
     environment:
       - CMS_DB_JDBC_URL=jdbc:mysql://10.5.0.5:3306/cmsdb
