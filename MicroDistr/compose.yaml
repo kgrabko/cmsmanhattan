@@ -95,6 +95,7 @@ services:
       - CMS_DB_PASSWORD=grabfix
       - CMS_DB_USE_SSL=false
       - CMS_DB_AUTO_RECONECT=false
+      - CMS_DB_JDBC_DRIVER=com.mysql.jdbc.Driver      
     networks:
       network:
         ipv4_address: 10.5.0.8  
@@ -110,6 +111,7 @@ services:
       - CMS_DB_PASSWORD=grabfix
       - CMS_DB_USE_SSL=false
       - CMS_DB_AUTO_RECONECT=false
+      - CMS_DB_JDBC_DRIVER=com.mysql.jdbc.Driver      
     networks:
       network:
         ipv4_address: 10.5.0.10
@@ -126,6 +128,7 @@ services:
       - CMS_DB_PASSWORD=grabfix
       - CMS_DB_USE_SSL=false
       - CMS_DB_AUTO_RECONECT=false
+      - CMS_DB_JDBC_DRIVER=com.mysql.jdbc.Driver      
     networks:
       network:
         ipv4_address: 10.5.0.11
@@ -143,6 +146,7 @@ services:
       - CMS_DB_PASSWORD=grabfix
       - CMS_DB_USE_SSL=false
       - CMS_DB_AUTO_RECONECT=false
+      - CMS_DB_JDBC_DRIVER=com.mysql.jdbc.Driver      
     networks:
       network:
         ipv4_address: 10.5.0.12 
@@ -160,6 +164,7 @@ services:
       - CMS_DB_PASSWORD=grabfix
       - CMS_DB_USE_SSL=false
       - CMS_DB_AUTO_RECONECT=false
+      - CMS_DB_JDBC_DRIVER=com.mysql.jdbc.Driver      
     networks:
       network:
         ipv4_address: 10.5.0.13  
@@ -177,6 +182,7 @@ services:
       - CMS_DB_PASSWORD=grabfix
       - CMS_DB_USE_SSL=false
       - CMS_DB_AUTO_RECONECT=false
+      - CMS_DB_JDBC_DRIVER=com.mysql.jdbc.Driver      
     networks:
       network:
         ipv4_address: 10.5.0.14   
@@ -193,6 +199,7 @@ services:
       - CMS_DB_PASSWORD=grabfix
       - CMS_DB_USE_SSL=false
       - CMS_DB_AUTO_RECONECT=false
+      - CMS_DB_JDBC_DRIVER=com.mysql.jdbc.Driver      
     networks:
       network:
         ipv4_address: 10.5.0.15                                          
@@ -209,6 +216,7 @@ services:
       - CMS_DB_PASSWORD=grabfix
       - CMS_DB_USE_SSL=false
       - CMS_DB_AUTO_RECONECT=false
+      - CMS_DB_JDBC_DRIVER=com.mysql.jdbc.Driver      
     networks:
       network:
         ipv4_address: 10.5.0.16      
@@ -216,15 +224,19 @@ services:
   cms2ai:
     image: cmsmanhattan/cms2ai:1.0.10
     ports:
-      - 8096:8096
-      - 8086:8086
+      - 8080:8096
+      - 8443:8086
     restart: always
     environment:
       - CMS_DB_JDBC_URL=jdbc:mysql://10.5.0.5:3306/cmsdb
       - CMS_DB_USER=root
       - CMS_DB_PASSWORD=grabfix
-      - CMS_DB_USE_SSL=false
-      - CMS_DB_AUTO_RECONECT=false
+      - CMS_DB_JDBC_DRIVER=com.mysql.jdbc.Driver
+      - OPEN_AI_KEY=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
+      - IA_MODEL_MANAGER=gpt-3.5-turbo
+      - IA_MODEL_SALESMAN=gpt-3.5-turbo
+      - IA_MODEL_MARKETMAN=gpt-3.5-turbo
+      - IA_MODEL_TECH_SUPPORT=gpt-3.5-turbo
     networks:
       network:
         ipv4_address: 10.5.0.17      
@@ -241,6 +253,7 @@ services:
       - CMS_DB_PASSWORD=grabfix
       - CMS_DB_USE_SSL=false
       - CMS_DB_AUTO_RECONECT=false
+      - CMS_DB_JDBC_DRIVER=com.mysql.jdbc.Driver          
     networks:
       network:
         ipv4_address: 10.5.0.18      
@@ -258,6 +271,7 @@ services:
       - CMS_DB_PASSWORD=grabfix
       - CMS_DB_USE_SSL=false
       - CMS_DB_AUTO_RECONECT=false
+      - CMS_DB_JDBC_DRIVER=com.mysql.jdbc.Driver          
     networks:
       network:
         ipv4_address: 10.5.0.19      
