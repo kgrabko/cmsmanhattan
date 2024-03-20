@@ -33,3 +33,12 @@ https://github.com/apache/james-project/blob/master/server/apps/jpa-app/README.a
 https://raw.githubusercontent.com/apache/james-project/master/server/apps/jpa-app/docker-compose.yml 
  
  
+ WENMAIL ADMIN API
+ http://localhost:8087/actuator/swagger-ui/index.html#/
+ 
+ OPEN AI
+ http://localhost:8096/index.html
+  OPEN AI API
+ http://localhost:8086/actuator/swagger-ui/index.html
+ 
+ 
