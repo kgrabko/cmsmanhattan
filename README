@@ -24,6 +24,7 @@ docker exec james_run java -jar /root/james-cli.jar AddDomain domain.tld
 docker exec james_run java -jar /root/james-cli.jar AddUser user@domain.tld secretPassword
 
 https://github.com/lff0305/springboot-lagency-struts-1/blob/master/main/pom.xml
+sss
 
 
 https://stackoverflow.com/questions/25797214/jetty-how-to-programmatically-configure-multiple-virtual-hosts
